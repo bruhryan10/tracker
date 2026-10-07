@@ -44,8 +44,9 @@ details .card{background:var(--bg)}
 #tab-info th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
 #tab-info tr:last-child td{border-bottom:0}
 #tab-info td:first-child{font-weight:600}
-div.tabs{display:grid;grid-template-columns:repeat(4,1fr)}
+div.tabs{display:grid;grid-template-columns:repeat(5,1fr)}
 div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
+@media (max-width:700px){div.tabs{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:520px){div.tabs button{font-size:12px;padding:10px 2px}}
 #prices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #prices .card{padding:16px 12px}
@@ -97,6 +98,41 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 .addrow{display:flex;gap:6px;margin-top:10px}
 .addrow button{margin:0;white-space:nowrap}
 .bkt{width:100%;box-sizing:border-box;font:12px monospace;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)}
+.seg button .pill{margin:0;pointer-events:none}
+#qtFRar button,#qtFTyp button{background:var(--card)}
+#qtFRar button:not(.on) .pill,#qtFTyp button:not(.on) .pill{opacity:.5}
+#qtFRar button.on,#qtFTyp button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+#qtDrop th,#qtDrop td{padding:4px 6px;text-align:left}
+#qtDrop th:nth-child(n+2),#qtDrop td:nth-child(n+2){text-align:right}
+#qtDrop{width:100%;border-collapse:collapse}
+.arGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
+#arLy{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:14px}
+#arLy .box{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;width:min(560px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden}
+#arLy .hd{padding:12px 14px;border-bottom:1px solid var(--bd)}
+#arLy .hd strong{display:block;font-size:15px;overflow-wrap:anywhere}
+#arLy .hd .sub{font-size:12px;color:var(--mut);margin-top:2px}
+#arLy .bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+#arLy .bar button{font:inherit;font-size:12px;font-weight:600;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:4px 10px;cursor:pointer}
+#arLy .bar button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+#arLy pre{margin:0;padding:14px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:14px;line-height:1.5}
+.artabs{display:flex;gap:6px;margin:10px 0 4px}
+.artabs button{font:inherit;font-size:13px;font-weight:600;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:5px 14px;cursor:pointer}
+.artabs button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.arc{background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden;min-width:0}
+.arm{position:relative;aspect-ratio:1;background:#000}
+.arm img,.arm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arm .cvb{position:absolute;left:6px;bottom:6px;font-size:10px;font-weight:700;background:rgba(0,0,0,.65);color:#fff;border-radius:6px;padding:1px 6px;z-index:2}
+.arb{padding:8px 10px 10px}
+.arb strong{display:block;font-size:14px;overflow-wrap:anywhere}
+.arb .sub{font-size:12px;color:var(--mut);margin:2px 0 6px;overflow-wrap:anywhere}
+.arb .lk{display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
+.arb .lk a,.arb .lk button{font:inherit;font-size:12px;font-weight:600;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:3px 9px;text-decoration:none;cursor:pointer}
+.arb .lk a:hover,.arb .lk button:hover{border-color:var(--ac);color:var(--ac)}
+.arb .lk .cvfs{background:var(--ac);border-color:var(--ac);color:#fff}
+.arb .lk .cvfs:hover{color:#fff;opacity:.85}
+#arFs{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center}
+#arFs video,#arFs img{max-width:100%;max-height:100%;object-fit:contain}
+#arFs .x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:14px;font-size:14px;font-weight:700;color:#fff;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:6px 12px;cursor:pointer}
 .armed{background:var(--neg)!important;color:#fff!important;border-color:var(--neg)!important}
 button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius:6px;background:var(--card);color:var(--tx);cursor:pointer}
 
@@ -140,7 +176,10 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .rt.none{background:transparent;color:var(--mut);border:1.5px dashed var(--bd);padding:0 7px}
 .rt.none::before{display:none}
 #tab-pass,#tab-event{max-width:860px;margin:0 auto}
-#tab-notes{max-width:860px;margin:0 auto}
+#tab-profile{max-width:860px;margin:0 auto}
+#tab-profile h2{margin:0 0 2px}
+#tab-profile h3{margin:18px 0 8px;font-size:16px}
+.top button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
 #notesText{width:100%;box-sizing:border-box;min-height:60vh;resize:vertical;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx)}
 #buyList{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
 @media (max-width:700px){#buyList{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -187,6 +226,102 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .chk{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--tx);margin:8px 0 2px;cursor:pointer}
 .chk input{width:22px;height:22px;padding:0;margin:0;flex:none}
 .r-exclusive{background:linear-gradient(135deg,#6a665f,#4a4742);color:#fff}
+#tab-gempic{max-width:860px;margin:0 auto}
+#gpTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#gpTop .card{padding:12px 8px;text-align:center}
+#gpTop .lbl{font-size:12px;font-weight:600;min-height:2.6em;margin-bottom:4px}
+#gpTop .val{font-size:clamp(20px,6vw,34px);font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+#gpTop .note{font-size:11px;min-height:1.4em}
+#gpCtl input#gpCost{font-size:20px;font-weight:600}
+#gpCtl .steps{margin-top:12px;align-items:stretch}
+#gpCtl .steps button{padding:12px 0;font-size:16px}
+#gpAmt{flex:1;min-width:0;width:0;margin:0;padding:4px 2px;font-size:15px;text-align:center}
+#gpExp{width:100%;border-collapse:collapse}
+#gpExp th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
+#gpExp td{padding:6px 4px;border-top:1px solid var(--bd);font-size:14px}
+#gpExp th:nth-child(n+2),#gpExp td:nth-child(n+2){text-align:right}
+#gpExp td:first-child,#gpExp td:last-child{font-weight:600}
+#gpBtns{display:flex;gap:8px;flex-wrap:wrap}
+#gpBtns button{margin:12px 0 0}
+#tab-quest{max-width:860px;margin:0 auto}
+#qtTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+#qtTop .card{padding:12px 8px;text-align:center}
+#qtTop .lbl{font-size:12px;font-weight:600;min-height:2.6em;margin-bottom:4px}
+#qtTop .val{font-size:clamp(20px,6vw,34px);font-weight:700;line-height:1.15;overflow-wrap:anywhere}
+#qtTop .note{font-size:11px;min-height:1.4em}
+#qtCtl .seg{margin:6px 0 10px}
+#qtCtl .steps{margin-top:12px;align-items:stretch}
+#qtCtl .steps button{padding:12px 0;font-size:16px}
+#qtAmt{flex:1;min-width:0;width:0;margin:0;padding:4px 2px;font-size:15px;text-align:center}
+#qtExp{width:100%;border-collapse:collapse}
+#qtExp th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
+#qtExp td{padding:6px 4px;border-top:1px solid var(--bd);font-size:14px}
+#qtExp th:nth-child(n+2),#qtExp td:nth-child(n+2){text-align:right}
+#qtExp td:first-child{font-weight:600}
+#qtBtns{display:flex;gap:8px;flex-wrap:wrap}
+#qtBtns button{margin:12px 0 0}
+
+/* ---- motion & polish ---- */
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.7)}}
+@keyframes bump{0%{transform:scale(1)}35%{transform:scale(1.09)}100%{transform:scale(1)}}
+@keyframes gradmove{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes shine{to{background-position:200% center}}
+*{scrollbar-width:thin;scrollbar-color:var(--bd) transparent}
+body{background:radial-gradient(900px 380px at 50% -80px,color-mix(in srgb,var(--ac) 12%,transparent),transparent) no-repeat,var(--bg)}
+.top h1{background:linear-gradient(90deg,var(--tx) 0%,var(--ac) 50%,var(--tx) 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 8s linear infinite}
+h2::before{content:"";display:inline-block;width:3px;height:.95em;margin-right:8px;border-radius:2px;background:var(--ac);vertical-align:-.1em}
+#app>[id^="tab-"]{animation:fadeUp .32s ease backwards}
+#login{animation:pop .5s ease backwards}
+:is(#inputs,#inv,#prices)>.card{animation:pop .4s ease backwards}
+:is(#inputs,#inv,#prices)>.card:nth-child(2){animation-delay:.04s}
+:is(#inputs,#inv,#prices)>.card:nth-child(3){animation-delay:.08s}
+:is(#inputs,#inv,#prices)>.card:nth-child(4){animation-delay:.12s}
+:is(#inputs,#inv,#prices)>.card:nth-child(5){animation-delay:.16s}
+:is(#inputs,#inv,#prices)>.card:nth-child(6){animation-delay:.2s}
+:is(#inputs,#inv,#prices)>.card:nth-child(7){animation-delay:.24s}
+:is(#inputs,#inv,#prices)>.card:nth-child(8){animation-delay:.28s}
+:is(#inputs,#inv,#prices)>.card:nth-child(9){animation-delay:.32s}
+.card{transition:box-shadow .2s ease,border-color .2s ease}
+#outputs .card,#gpTop .card,#qtTop .card{border-top:3px solid var(--ac)}
+@media (hover:hover){
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.10);border-color:color-mix(in srgb,var(--ac) 45%,var(--bd))}
+button:hover{border-color:var(--ac)}
+.rt:hover{filter:brightness(1.2)}
+.arc:hover{box-shadow:0 6px 20px rgba(0,0,0,.18);border-color:var(--ac)}
+.arc:hover .arm img{transform:scale(1.07)}
+}
+button{transition:background .15s,color .15s,border-color .15s,transform .12s ease,box-shadow .15s}
+button:active{transform:scale(.96)}
+.tabs button.on,.top button.on{box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
+input,select,textarea{transition:border-color .15s,box-shadow .15s}
+input:not([type=checkbox]):focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 22%,transparent)}
+summary{list-style:none;transition:color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"\25B8";display:inline-block;margin-right:8px;transition:transform .2s ease}
+details[open]>summary::before{transform:rotate(90deg)}
+summary:hover{color:var(--tx)}
+details[open]>:not(summary){animation:fade .25s ease}
+.pill{transition:filter .15s}
+.r-epic{background-size:200% 200%;animation:gradmove 7s ease infinite}
+.arm{overflow:hidden}
+.arm img{transition:transform .45s ease}
+.arc{transition:box-shadow .2s,border-color .2s;animation:pop .35s ease backwards}
+.arc:nth-child(2){animation-delay:.03s}.arc:nth-child(3){animation-delay:.06s}.arc:nth-child(4){animation-delay:.09s}
+.arc:nth-child(5){animation-delay:.12s}.arc:nth-child(6){animation-delay:.15s}.arc:nth-child(7){animation-delay:.18s}.arc:nth-child(8){animation-delay:.21s}
+#arLy,#arFs{animation:fade .18s ease}
+#arLy .box{animation:pop .22s ease}
+.val.bump,.big.bump{animation:bump .4s ease;transform-origin:left center}
+#outputs .val.bump,#gpTop .val.bump,#qtTop .val.bump{transform-origin:center}
+#tab-info td,#gpExp td,#qtExp td,#ulOdds td,#passOdds td,#evOdds td{transition:background .15s}
+#tab-info tr:hover td,#gpExp tr:hover td,#qtExp tr:hover td,#ulOdds tr:hover td,#passOdds tr:hover td,#evOdds tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+#sync::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--pos);margin-right:6px;vertical-align:1px;transition:background .2s}
+#sync:empty::before{display:none}
+#sync.busy::before{background:var(--ac);animation:pulse 1s ease-in-out infinite}
+#sync.bad::before{background:var(--neg)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.01ms!important}}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -198,8 +333,8 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 </div>
 
 <div id="app" hidden>
-<div class="top"><h1>Soundmap Helper</h1><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="signOut">Sign out</button></div></div>
-<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbBuys">Purchases</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbInfo">Wiki</button><button type="button" id="tbNotes">Notes</button></div>
+<div class="top"><h1>Soundmap Helper</h1><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="tbProfile">Profile</button><button type="button" id="signOut">Sign out</button></div></div>
+<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbGempic">Gempic Tracker</button><button type="button" id="tbQuest">Quest Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbBuys">Purchases</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbInfo">Wiki</button><button type="button" id="tbArtist">Artist Overview</button></div>
 <div id="tab-shiny">
 
 <h2>Inputs</h2>
@@ -237,6 +372,65 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="setAdd" type="button" style="margin:0">Add set</button><button class="small" id="setRen" type="button" style="margin:0">Rename current</button><button class="small" id="setDel" type="button" style="margin:0">Delete current</button></div>
 </details>
 <datalist id="holderDL"></datalist>
+</div>
+
+<div id="tab-gempic" hidden>
+<div class="grid" id="gpTop">
+<div class="card"><div class="lbl">Gems spent since last gempic</div><div class="val" id="gpGems">0</div><div class="note" id="gpGemsNote"></div></div>
+<div class="card"><div class="lbl">Times gem box rolled</div><div class="val" id="gpRolls">0</div><div class="note" id="gpRollsNote"></div></div>
+<div class="card"><div class="lbl">Odds of a gempic next roll</div><div class="val" id="gpOdds">0.4%</div><div class="note" id="gpOddsNote"></div></div>
+</div>
+<h2>Roll</h2>
+<div class="card" id="gpCtl">
+<label for="gpCost">Gems spent per roll (this box)</label>
+<input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 500">
+<label class="chk"><input type="checkbox" id="gpReroll"> Reroll (second chance on every roll)</label>
+<div class="note" id="gpRrNote"></div>
+<div class="steps"><button type="button" id="gpUndo" aria-label="Undo rolls">&minus; Undo</button><button type="button" id="gpRoll" style="flex:3" aria-label="Add rolls">+ Roll</button><input id="gpAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of rolls to add or undo"></div>
+<div class="note">Each roll adds the gem cost above to the total, so you can change the cost between boxes without changing earlier rolls.</div>
+</div>
+<div id="gpBtns"><button class="small" id="gpHit" type="button">Got a gempic! Save and reset</button><button class="small" id="gpReset" type="button">Reset without saving</button></div>
+<h2>Average to get 1 gempic</h2>
+<div class="card"><div class="note" id="gpExpNote" style="margin:0 0 6px"></div><table id="gpExp"></table></div>
+<details id="gpHistBox"><summary id="gpHistSum">History</summary><div class="note" id="gpAvg" style="margin:0 0 6px"></div><div id="gpHist"></div></details>
+</div>
+
+<div id="tab-quest" hidden>
+<div class="grid" id="qtTop">
+<div class="card"><div class="lbl">Quests since last pull</div><div class="val" id="qtQuests">0</div><div class="note" id="qtQuestsNote"></div></div>
+<div class="card"><div class="lbl">Odds of a pull next quest</div><div class="val" id="qtOdds">0.225%</div><div class="note" id="qtOddsNote"></div></div>
+<div class="card"><div class="lbl">Chance of at least one so far</div><div class="val" id="qtSoFar">0%</div><div class="note" id="qtSoFarNote"></div></div>
+</div>
+<h2>Quest</h2>
+<div class="card" id="qtCtl">
+<label class="chk"><input type="checkbox" id="qtReroll"> Reroll (second chance on every quest)</label>
+<div class="note" id="qtRrNote"></div>
+<table id="qtDrop" style="margin:8px 0"></table>
+<div class="steps"><button type="button" id="qtUndo" aria-label="Undo quests">&minus; Undo</button><button type="button" id="qtAdd" style="flex:3" aria-label="Add quests">+ Quest</button><input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add or undo"></div>
+<div class="note" id="qtLog"></div>
+</div>
+<div id="qtBtns"><button class="small" id="qtHit" type="button">Got a pull!</button><button class="small" id="qtReset" type="button">Reset without saving</button></div>
+<div class="card" id="qtForm" hidden>
+<div class="lbl" id="qtFormTitle" style="margin:0 0 6px">Log your pull</div>
+<label for="qtArtist">What you pulled</label><input id="qtArtist" type="text" placeholder="Artist name" autocomplete="off" style="margin-bottom:8px"><input id="qtSong" type="text" placeholder="Song name" autocomplete="off">
+<div class="lbl" style="margin:8px 0 0">Type</div>
+<div class="seg" id="qtFTyp"><button type="button" data-t="s"><span class="pill r r-shiny">Shiny</span></button><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
+<div class="note" style="margin:0 0 6px">Saving a shiny keeps your quest count going. Epic or lyric resets it.</div>
+<div id="qtEpBox" hidden>
+<div class="lbl" style="margin:8px 0 0">Epic style</div>
+<div class="seg" id="qtFNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
+<div id="qtNumBox" hidden><label for="qtFNum">Epic #</label><input id="qtFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
+</div>
+<div class="lbl" style="margin:8px 0 0">Rarity</div>
+<div class="seg" id="qtFRar"><button type="button" data-q="c"><span class="pill r r-common">Common</span></button><button type="button" data-q="u"><span class="pill r r-uncommon">Uncommon</span></button><button type="button" data-q="r"><span class="pill r r-rare">Rare</span></button></div>
+<label for="qtFN">Quests it took</label><input id="qtFN" type="number" min="0" step="1" inputmode="numeric" placeholder="Quests it took">
+<label for="qtTB" style="margin-top:8px">Artist quest count (before &rarr; after)</label>
+<div style="display:flex;gap:8px;align-items:center"><input id="qtTB" type="number" min="0" step="1" inputmode="numeric" placeholder="Before"><span>&rarr;</span><input id="qtTA" type="number" min="0" step="1" inputmode="numeric" placeholder="After"></div>
+<div class="note" style="margin:4px 0 0">After fills in as before + quests, but you can edit both (for example if rerolls count differently).</div>
+<div style="display:flex;gap:8px;margin-top:10px"><button class="small" id="qtFSave" type="button">Save</button><button class="small" id="qtFCancel" type="button">Cancel</button></div>
+</div>
+<details id="qtExpBox"><summary>Average quests to get one</summary><table id="qtExp"></table></details>
+<details id="qtHistBox"><summary id="qtHistSum">History</summary><div class="note" id="qtAvg" style="margin:0 0 6px"></div><div id="qtHist"></div></details>
 </div>
 
 <div id="tab-pass" hidden>
@@ -292,7 +486,39 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 <div class="addrow"><input id="newBuy" placeholder="New purchase title (e.g. Any Epic purchase)"><button type="button" id="addBuy">Add purchase</button></div>
 </div>
 
-<div id="tab-notes" hidden>
+<div id="tab-artist" hidden>
+<details id="arSetup"><summary>Spotify setup</summary>
+<label for="arCid">Client ID</label><input id="arCid" type="text" autocomplete="off" spellcheck="false">
+<label for="arSec" style="margin-top:8px">Client secret</label><input id="arSec" type="password" autocomplete="off">
+<label for="arEx" style="margin-top:8px">Exclude words (comma separated)</label><input id="arEx" type="text" spellcheck="false">
+<label for="arCap" style="margin-top:8px">Max new releases to fetch per Load (0 = no limit)</label><input id="arCap" type="number" min="0" step="1" inputmode="numeric">
+<label class="chk"><input type="checkbox" id="arSkip"> Skip releases whose album name has an excluded word (saves requests)</label>
+<div class="note">Each new release costs one Spotify request. When the limit is reached the page stops, shows what it has, and the next Load continues from the saved releases for free.</div>
+<div class="note">Saved only in this browser. A song whose title or album name contains an excluded word is left out of the epic list.</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="arSave" type="button">Save</button><button class="small" id="arClr" type="button">Clear Canvas cache</button><button class="small" id="arClrS" type="button">Clear song cache</button><button class="small" id="arClrL" type="button">Re-check for new releases</button><button class="small" id="arClrW" type="button" title="Only if you are sure Spotify's wait is over">Clear saved wait</button></div>
+<div class="note" id="arUsage"></div>
+</details>
+<div class="addrow"><input id="arId" placeholder="Spotify artist ID or link" autocomplete="off" spellcheck="false"><button type="button" id="arGo">Load</button></div>
+<div class="note" id="arWait" hidden style="color:var(--neg);font-weight:600"></div>
+<div class="note" id="arMsg"></div>
+<div id="arHead"></div>
+<div class="note" id="arNote"></div>
+<div class="arGrid" id="arGrid"></div>
+</div>
+
+<div id="tab-profile" hidden>
+<h2>Profile</h2>
+<div class="note" id="profWho"></div>
+<h3>Account</h3>
+<details id="pwBox" class="card" style="padding:10px 12px">
+<summary style="cursor:pointer;font-weight:600">Change password</summary>
+<label for="pwOld" style="margin-top:10px">Current password</label><input id="pwOld" type="password" autocomplete="current-password">
+<label for="pwNew" style="margin-top:8px">New password</label><input id="pwNew" type="password" autocomplete="new-password">
+<label for="pwNew2" style="margin-top:8px">Confirm new password</label><input id="pwNew2" type="password" autocomplete="new-password">
+<button type="button" id="pwGo" class="small">Change password</button>
+<div class="note" id="pwMsg"></div>
+</details>
+<h3>Notes</h3>
 <textarea id="notesText" placeholder="Write notes here..." spellcheck="true"></textarea>
 <div class="note" id="notesMsg"></div>
 </div>
@@ -361,7 +587,7 @@ const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorag
 
 /* ---------- save status ---------- */
 let inflight=0,hadErr=false;
-function setStatus(t,bad){const el=$("sync");el.textContent=t;el.className=bad?"bad":""}
+function setStatus(t,bad){const el=$("sync");el.textContent=t;el.className=(bad?"bad":"")+(t==="Saving..."||t==="Loading..."?" busy":"")}
 async function track(p){
   if(!inflight)hadErr=false;
   inflight++;setStatus("Saving...");
@@ -705,20 +931,23 @@ $("zIn").onclick=()=>{zoom+=0.1;applyZoom()};
 applyZoom();
 const MAP_URL="https://smartistguesser.github.io/soundmap-artist-guesser/";
 function showTab(n){
-  const ids={shiny:"tbShiny",epic:"tbEpic",pass:"tbPass",event:"tbEvent",buys:"tbBuys",notes:"tbNotes",map:"tbMap",info:"tbInfo"};
+  const ids={shiny:"tbShiny",epic:"tbEpic",gempic:"tbGempic",quest:"tbQuest",pass:"tbPass",event:"tbEvent",buys:"tbBuys",profile:"tbProfile",map:"tbMap",info:"tbInfo",artist:"tbArtist"};
   Object.keys(ids).forEach(x=>{$("tab-"+x).hidden=n!==x;$(ids[x]).classList.toggle("on",n===x)});
-  $("bk").hidden=n==="map"||n==="info"||n==="pass"||n==="event"||n==="buys"||n==="notes";
+  $("bk").hidden=n==="map"||n==="info"||n==="gempic"||n==="quest"||n==="pass"||n==="event"||n==="buys"||n==="profile"||n==="artist";
   if(n==="map"&&!$("mapFrame").getAttribute("src"))$("mapFrame").src=MAP_URL;
   LS("tracker.tab",n);
 }
 $("tbShiny").onclick=()=>showTab("shiny");
 $("tbEpic").onclick=()=>showTab("epic");
+$("tbGempic").onclick=()=>showTab("gempic");
+$("tbQuest").onclick=()=>showTab("quest");
 $("tbPass").onclick=()=>showTab("pass");
 $("tbEvent").onclick=()=>showTab("event");
 $("tbBuys").onclick=()=>showTab("buys");
-$("tbNotes").onclick=()=>showTab("notes");
+$("tbProfile").onclick=()=>showTab("profile");
 $("tbMap").onclick=()=>showTab("map");
 $("tbInfo").onclick=()=>showTab("info");
+$("tbArtist").onclick=()=>showTab("artist");
 const det=$("more");
 det.open=LS("tracker.more")==="1";
 det.addEventListener("toggle",()=>LS("tracker.more",det.open?"1":"0"));
@@ -777,6 +1006,8 @@ async function loadAll(quiet){
   calc();renderLog();renderSets();renderEpics();renderMeta();
   await loadPass();
   await loadEvent();
+  await loadGempic();
+  await loadQuest();
   await loadBuys();
   await loadNotes();
   if(!quiet)setStatus("Saved");
@@ -921,6 +1152,577 @@ $("evHist").addEventListener("click",ev2=>{
   ask("Delete this history entry?",()=>{ev.history.splice(i,1);saveEvent();renderEvent()});
 });
 
+/* ---------- gempic tracker ---------- */
+const GP=0.004;
+const gpNum=v=>Math.max(0,Math.floor(Number(v))||0);
+const gpP=x=>x?1-(1-GP)*(1-GP):GP;
+const gpPct=(p,d)=>Number((p*100).toFixed(d))+"%";
+function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,start:+d.start||0,r:Array.isArray(d.r)?d.r.map(e=>({c:gpNum(e&&e.c),x:e&&e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr)})):[]}}
+let gp=gpNorm(),gpDB=true,gpT=null;
+const gpSum=()=>({n:gp.r.length,gems:gp.r.reduce((a,e)=>a+e.c,0),rr:gp.r.filter(e=>e.x).length});
+function renderGempic(){
+  const q=gpSum(),next=gpP(gp.reroll);
+  let miss=1;gp.r.forEach(e=>miss*=1-gpP(e.x));
+  $("gpGems").textContent=nfmt(q.gems);
+  $("gpRolls").textContent=nfmt(q.n);
+  $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?q.rr+" of these with reroll":"";
+  $("gpOdds").textContent=gpPct(next,3);
+  $("gpOddsNote").textContent=q.n?"Chance of at least one so far: "+gpPct(1-miss,1):"About 1 in "+Math.round(1/next)+" rolls";
+  $("gpRrNote").textContent=gp.reroll?"Reroll is on: each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll. The gem cost stays the same.":"Each roll has a "+gpPct(GP,1)+" chance of a gempic.";
+  const ex=1/next;
+  $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+": about "+nfmt(Math.round(ex))+" rolls per gempic.";
+  $("gpExp").innerHTML="<tr><th>Box</th><th>Pulls</th><th>Gems</th></tr>"+[5,10,20,30,40,50,60].map(c=>`<tr><td>${c} gem artist</td><td>${nfmt(Math.round(ex))}</td><td>${nfmt(Math.round(ex*c))}</td></tr>`).join("");
+  if(document.activeElement!==$("gpCost"))$("gpCost").value=gp.cost||"";
+  $("gpReroll").checked=gp.reroll;
+  $("gpHistSum").textContent="History"+(gp.history.length?" ("+gp.history.length+")":"");
+  const H=gp.history;
+  $("gpAvg").textContent=H.length?"Average per gempic: "+nfmt(Math.round(H.reduce((a,h)=>a+h.rolls,0)/H.length))+" rolls, "+nfmt(Math.round(H.reduce((a,h)=>a+h.gems,0)/H.length))+" gems":"No gempics saved yet.";
+  $("gpHist").innerHTML=H.map((h,i)=>`<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="hrow"><span>Rolls</span><b>${nfmt(h.rolls)}</b></div><div class="hrow"><span>Gems spent</span><b>${nfmt(h.gems)}</b></div>${h.rr?`<div class="hrow"><span>Rolls with reroll</span><b>${nfmt(h.rr)}</b></div>`:""}</div>`).join("");
+}
+function saveGempic(){
+  clearTimeout(gpT);dirty.delete("gp");
+  LS("tracker.gempic",JSON.stringify(gp));
+  if(gpDB)track(sb.from("pass_state").upsert({id:5,data:gp},{onConflict:"user_id,id"}));
+}
+function schedGempic(){dirty.add("gp");clearTimeout(gpT);gpT=setTimeout(saveGempic,500)}
+async function loadGempic(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",5).maybeSingle();
+    if(r.error)gpDB=false;else{gpDB=true;d=r.data&&r.data.data}
+  }catch(e){gpDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.gempic")||"null")}catch(e){}
+  if(!gpDB)d=local;
+  else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:5,data:gpNorm(local)},{onConflict:"user_id,id"}))}
+  gp=gpNorm(d);renderGempic();
+}
+$("gpAmt").value=LS("tracker.step.gempic")||"1";
+const gpAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("gpAmt").value))||1));
+$("gpAmt").addEventListener("change",()=>{const v=gpAmt();$("gpAmt").value=v;LS("tracker.step.gempic",String(v))});
+$("gpCost").addEventListener("input",()=>{gp.cost=gpNum($("gpCost").value);schedGempic()});
+$("gpReroll").addEventListener("change",()=>{gp.reroll=$("gpReroll").checked;saveGempic();renderGempic()});
+$("gpRoll").onclick=()=>{
+  const n=gpAmt();if(!gp.start)gp.start=Date.now();
+  for(let i=0;i<n;i++)gp.r.push({c:gp.cost,x:gp.reroll?1:0});
+  saveGempic();renderGempic();
+};
+$("gpUndo").onclick=()=>{
+  const n=Math.min(gpAmt(),gp.r.length);if(!n)return;
+  gp.r.splice(gp.r.length-n,n);
+  if(!gp.r.length)gp.start=0;
+  saveGempic();renderGempic();
+};
+$("gpHit").onclick=()=>{
+  if(!gp.r.length)return;
+  ask("Save this gempic to history and reset the counters?",()=>{
+    const q=gpSum(),e={t:Date.now(),start:gp.start,rolls:q.n,gems:q.gems,rr:q.rr};
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,history:[e,...gp.history]});
+    saveGempic();renderGempic();
+  });
+};
+$("gpReset").onclick=()=>{
+  if(!gp.r.length)return;
+  ask("Reset the counters without saving to history?",()=>{
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,history:gp.history});
+    saveGempic();renderGempic();
+  });
+};
+$("gpHist").addEventListener("click",e2=>{
+  const b=e2.target.closest("button[data-hdel]");if(!b)return;
+  const i=+b.dataset.hdel;
+  ask("Delete this history entry?",()=>{gp.history.splice(i,1);saveGempic();renderGempic()});
+});
+renderGempic();
+
+/* ---------- artist overview ---------- */
+const AR={tok:"",exp:0,q:[],busy:0,warned:0,io:null};
+const arCfg=()=>{try{return JSON.parse(LS("tracker.spotify")||"{}")}catch(e){return{}}};
+let arC={};try{arC=JSON.parse(LS("tracker.canvas")||"{}")}catch(e){}
+const arSaveC=()=>LS("tracker.canvas",JSON.stringify(arC));
+const arId=v=>{v=(v||"").trim();const m=v.match(/artist\/([A-Za-z0-9]{22})/)||v.match(/spotify:artist:([A-Za-z0-9]{22})/)||v.match(/^([A-Za-z0-9]{22})$/);return m?m[1]:""};
+const arKey=t=>t.toLowerCase().replace(/\s*[\(\[][^)\]]*remaster[^)\]]*[\)\]]/g,"").replace(/\s+-\s+(\d{4}\s+)?(digital\s+)?remaster(ed)?(\s+\d{4})?(\s+version)?\s*$/,"").replace(/[^\p{L}\p{N}]+/gu," ").trim();
+const arEx=()=>{const w=(LS("tracker.arEx")||"live, remix, remixes").split(",").map(x=>x.trim()).filter(Boolean);return w.length?new RegExp("(^|[^\\p{L}\\p{N}])("+w.map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")).join("|")+")(?![\\p{L}\\p{N}])","iu"):null};
+async function arToken(){
+  if(AR.tok&&Date.now()<AR.exp)return AR.tok;
+  const c=arCfg();if(!c.id||!c.sec)throw new Error("Add your Spotify client ID and secret under Spotify setup first.");
+  const r=await fetch("https://accounts.spotify.com/api/token",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded",Authorization:"Basic "+btoa(c.id+":"+c.sec)},body:"grant_type=client_credentials"});
+  if(!r.ok)throw new Error("Spotify rejected the client ID or secret ("+r.status+").");
+  const j=await r.json();AR.tok=j.access_token;AR.exp=Date.now()+(j.expires_in-60)*1000;return AR.tok;
+}
+const arCap=()=>{const v=LS("tracker.arCap");return v===null||v===""?40:Math.max(0,Math.floor(+v)||0)};
+const AR_GAP=300,AR_WORKERS=1,ARABORT=new Error("stopped"),AR_UNTIL="tracker.arUntil";
+AR.nextAt=+LS(AR_UNTIL)||0;AR.gen=0;AR.owner=0;
+const arSleep=ms=>new Promise(z=>setTimeout(z,ms));
+function arCount(){
+  if(AR.tick)return;
+  AR.tick=setInterval(()=>{
+    const n=Math.ceil((AR.nextAt-Date.now())/1000),m=$("arMsg");
+    if(n<=0){clearInterval(AR.tick);AR.tick=0;return}
+    m.textContent="Spotify is rate limiting. Resuming in "+n+"s...";
+  },400);
+}
+function arBtn(){const b=$("arGo");b.textContent=AR.loading?"Stop":AR.stopped?"Resume":"Load"}
+function arStop(){
+  const t=$("arMsg").textContent;AR.stopNote=/^(Loading|Finding)/.test(t)?t:"";
+  AR.stopped=1;AR.gen++;
+  if(AR.tick){clearInterval(AR.tick);AR.tick=0}
+  $("arMsg").textContent="Stopping...";
+}
+const arStopMsg=()=>"Stopped"+(AR.stopNote?" ("+AR.stopNote.replace(/\.\.\./,":")+")":"")+". Everything loaded so far is saved. Press Resume to continue.";
+const arHuman=ms=>{const m=Math.round(ms/60000);if(m<2)return Math.max(1,Math.round(ms/1000))+" seconds";if(m<120)return m+" minutes";return "about "+Math.round(m/60)+" hours"};
+function arCnt(){
+  try{
+    const d=new Date().toDateString();let o=JSON.parse(LS("tracker.arReq")||"{}");
+    if(o.d!==d)o={d,n:0};o.n++;LS("tracker.arReq",JSON.stringify(o));arUsage();
+  }catch(e){}
+}
+const arWhen=t=>new Date(t).toLocaleString(undefined,{weekday:"short",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
+function arWaitNote(){
+  const w=$("arWait");if(!w)return;
+  const left=(AR.nextAt||0)-Date.now();
+  if(left>180000){w.hidden=false;w.textContent="Spotify quota hold: expected reset around "+arWhen(AR.nextAt)+" (in "+arHuman(left)+"). Nothing will be sent to Spotify until then. This time is an estimate, and Spotify may keep the quota longer."}
+  else{w.hidden=true;w.textContent=""}
+}
+setInterval(()=>{arWaitNote()},30000);
+function arUsage(){
+  arWaitNote();
+  try{const o=JSON.parse(LS("tracker.arReq")||"{}"),el=$("arUsage");
+    const left=(AR.nextAt||0)-Date.now();
+    if(el)el.textContent="Spotify requests sent by this page today: "+(o.d===new Date().toDateString()?o.n:0)+" (Spotify's quota is per developer account and the limit isn't published)."+(left>5000?" Holding off for "+arHuman(left)+" more, until "+new Date(AR.nextAt).toLocaleTimeString()+".":"")}catch(e){}
+}
+function arQuotaErr(ms,known){
+  const e=new Error("Spotify's request quota for your developer account is used up (QUOTA_EXCEEDED). "+(known?"Spotify said to wait "+arHuman(ms)+".":"I couldn't read how long, so I'll hold off for "+arHuman(ms)+".")+" Nothing more will be sent until then.");
+  e.message+=" Expected reset around "+arWhen(Date.now()+ms)+".";
+  e.quota=true;arWaitNote();return e;
+}
+function arBudgetErr(cap){const e=new Error("Stopped at your limit of "+cap+" new releases per Load, to protect your Spotify quota.");e.quota=true;return e}
+async function arGet(path,gen){
+  const chk=()=>{if(gen!==undefined&&gen!==AR.gen)throw ARABORT};
+  chk();
+  const left=(AR.nextAt||0)-Date.now();
+  if(left>180000)throw arQuotaErr(left,true);
+  const t=await arToken();chk();
+  for(let a=0;a<3;a++){
+    /* pace requests: one starts at most every AR_GAP ms across all workers */
+    const now=Date.now(),at=Math.max(now,AR.nextAt||0);AR.nextAt=at+AR_GAP;
+    while(Date.now()<at){chk();await arSleep(Math.min(250,at-Date.now()))}
+    chk();
+    const r=await fetch("https://api.spotify.com/v1"+path,{headers:{Authorization:"Bearer "+t}});
+    arCnt();
+    if(r.status===429){
+      let body="";try{body=await r.clone().text()}catch(e){}
+      const ra=(+r.headers.get("Retry-After"))||0,quota=/QUOTA_EXCEEDED/i.test(body);
+      if(quota||ra>180){
+        const ms=ra?ra*1000+300:30*60000;
+        AR.nextAt=Math.max(AR.nextAt||0,Date.now()+ms);LS(AR_UNTIL,String(AR.nextAt));
+        arUsage();throw arQuotaErr(ms,!!ra);
+      }
+      const w=(ra||Math.pow(2,a+2))*1000+300;
+      AR.nextAt=Math.max(AR.nextAt||0,Date.now()+w);LS(AR_UNTIL,String(AR.nextAt));
+      arCount();continue}
+    if(!r.ok)throw new Error("Spotify error "+r.status+" ("+path.split("?")[0]+")");
+    return r.json();
+  }
+  throw new Error("Spotify kept rate limiting. Wait a few minutes and press Resume. Albums already loaded are saved, so it will pick up where it left off.");
+}
+/* album cache: full album details never change, so keep them (compact) and only re-ask Spotify for new releases */
+const AC_KEY="tracker.arAlbums";
+let AC=new Map();
+try{const o=JSON.parse(LS(AC_KEY)||"[]");AC=new Map(o)}catch(e){}
+function acSave(){
+  let arr=[...AC.entries()];
+  for(let k=0;k<8;k++){
+    try{localStorage.setItem(AC_KEY,JSON.stringify(arr));return}catch(e){}
+    arr=arr.slice(Math.ceil(arr.length/4));AC=new Map(arr);
+  }
+}
+const acPack=al=>({n:al.name,d:al.release_date,i:(al.images[1]||al.images[0]||{}).url||"",t:al.tracks.items.map(t=>[t.id,t.name,t.duration_ms||0,t.artists.map(x=>[x.id,x.name])])});
+const acOpen=(id,c)=>({id,name:c.n,release_date:c.d,images:c.i?[{url:c.i}]:[],tracks:{items:c.t.map(t=>({id:t[0],name:t[1],duration_ms:t[2],artists:t[3].map(x=>({id:x[0],name:x[1]}))}))}});
+const AL_KEY="tracker.arLists",AA_KEY="tracker.arArtists";
+function alGet(k,stale){try{const o=JSON.parse(LS(AL_KEY)||"{}")[k];return o&&(stale||Date.now()-o.t<6048e5)?o.ids:null}catch(e){return null}}
+function alPut(k,ids){try{const o=JSON.parse(LS(AL_KEY)||"{}");o[k]={t:Date.now(),ids};const ks=Object.keys(o);if(ks.length>20)ks.sort((x,y)=>o[x].t-o[y].t).slice(0,ks.length-20).forEach(x=>delete o[x]);localStorage.setItem(AL_KEY,JSON.stringify(o))}catch(e){}}
+function aaGet(id){try{return JSON.parse(LS(AA_KEY)||"{}")[id]||null}catch(e){return null}}
+function aaPut(a){try{const o=JSON.parse(LS(AA_KEY)||"{}");o[a.id]={id:a.id,name:a.name,images:(a.images||[]).slice(0,2).map(x=>({url:x.url}))};const ks=Object.keys(o);if(ks.length>30)delete o[ks[0]];localStorage.setItem(AA_KEY,JSON.stringify(o))}catch(e){}}
+/* cacheOnly: never call Spotify; use whatever is saved (even if old) and count what's missing */
+async function arCollect(id,groups,label,msg,gen,cacheOnly){
+  const lk=id+"|"+groups;let albums=alGet(lk);
+  if(!albums&&cacheOnly)albums=alGet(lk,true);
+  if(!albums&&cacheOnly){const e=new Error("Nothing is saved for this artist yet, so there's nothing to show without asking Spotify.");e.nosave=true;throw e}
+  if(!albums){
+    albums=[];
+    for(let off=0;;off+=10){const j=await arGet(`/artists/${id}/albums?include_groups=${groups}&limit=10&offset=${off}`,gen);albums.push(...j.items.map(x=>({id:x.id,n:x.name})));msg.textContent="Finding "+label+"... "+albums.length;if(!j.next||!j.items.length)break}
+    alPut(lk,albums);
+  }
+  const full=[];let done=0,ni=0,hit=0,fresh=0,missing=0,skipped=0;
+  const skipRx=LS("tracker.arSkip")!=="0"?arEx():null,cap=arCap();
+  const one=async a=>{
+    const c=AC.get(a.id);
+    if(c){full.push(acOpen(a.id,c));hit++}
+    else if(skipRx&&a.n&&skipRx.test(a.n)){skipped++}
+    else if(cacheOnly){missing++}
+    else{
+      if(cap&&AR.fresh>=cap)throw arBudgetErr(cap);AR.fresh++;
+      const al=await arGet("/albums/"+a.id,gen);
+      let n=al.tracks.next;
+      while(n){const k=await arGet(n.replace("https://api.spotify.com/v1",""),gen);al.tracks.items.push(...k.items);n=k.next}
+      AC.delete(a.id);AC.set(a.id,acPack(al));fresh++;
+      full.push(al);
+    }
+    done++;if(!cacheOnly)msg.textContent="Loading "+label+"... "+done+" of "+albums.length+" releases"+(hit?" ("+hit+" from cache)":"");
+  };
+  let dead=0;
+  try{await Promise.all(Array.from({length:cacheOnly?1:AR_WORKERS},async()=>{while(!dead&&ni<albums.length){try{await one(albums[ni++])}catch(e){dead=1;throw e}}}))}
+  finally{if(fresh)acSave()}
+  full.missing=missing;full.total=albums.length;full.skipped=skipped;
+  return full;
+}
+/* main = artist is the first credited name; feat = credited, but not first */
+function arBuild(full,id){
+  const rx=arEx(),sm=new Map(),sf=new Map(),se=new Map(),st={ex:0,dup:0};
+  const all=full.slice().sort((x,y)=>x.release_date.localeCompare(y.release_date));
+  for(const al of all)for(const t of al.tracks.items){
+    if(!t.artists.some(x=>x.id===id))continue;
+    const isMain=t.artists[0]&&t.artists[0].id===id;
+    if(rx){
+      const mt=rx.exec(t.name),ma=mt?null:rx.exec(al.name);
+      if(mt||ma){
+        st.ex++;const ek=arKey(t.name)+"|"+arKey(al.name)+"|"+(isMain?"m":"f");
+        if(!se.has(ek))se.set(ek,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",main:isMain,album:al.name,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||"",why:'"'+(mt||ma)[2]+'" in the '+(mt?"song title":"album name")});
+        continue;
+      }
+    }
+    const seen=isMain?sm:sf,k=arKey(t.name)+(isMain?"":"|"+arKey(t.artists[0]?t.artists[0].name:""));
+    if(seen.has(k)){st.dup++;continue}
+    seen.set(k,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",album:al.name,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||""});
+  }
+  const byNew=(x,y)=>y.date.localeCompare(x.date);
+  return{main:[...sm.values()].sort(byNew),feat:[...sf.values()].sort(byNew),exl:[...se.values()].sort(byNew),ex:st.ex,dup:st.dup};
+}
+function arRender(){
+  const D=AR.d,tab=AR.tab,list=tab==="feat"?D.feat:tab==="exl"?D.exl:D.main,a=D.a;
+  $("arTabs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.t===tab));
+  $("arCount").textContent=(tab==="exl"?list.length+" left out by your excluded words (not in the Songs or Featured lists)":list.length+(tab==="feat"?" featured songs":" pullable epics")+" \u00b7 "+D.ex+" left out by excluded words \u00b7 "+D.dup+" duplicate titles merged")+((tab==="feat"||tab==="exl")&&!D.featDone?" \u00b7 featured releases still loading":"");
+  AR.q=[];if(AR.io)AR.io.disconnect();
+  AR.byId={};list.forEach(t=>AR.byId[t.id]=t);
+  $("arGrid").innerHTML=list.map(t=>`<div class="arc" data-id="${esc(t.id)}"><div class="arm">${t.img?`<img src="${esc(t.img)}" alt="" loading="lazy">`:""}</div><div class="arb"><strong>${esc(t.name)}</strong><div class="sub">${(tab==="feat"||(tab==="exl"&&!t.main))&&t.by?esc(t.by)+" &middot; ":""}${esc(t.album)}${t.year?" &middot; "+esc(t.year):""}${tab==="exl"&&t.why?"<br>Matched "+esc(t.why):""}</div><div class="lk"><a href="https://open.spotify.com/track/${esc(t.id)}" target="_blank" rel="noopener">Spotify</a><button type="button" class="lyr">Lyrics</button></div></div></div>`).join("");
+  AR.io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){AR.io.unobserve(e.target);arQueue(e.target)}}),{rootMargin:"200px"});
+  $("arGrid").querySelectorAll(".arc").forEach(el=>AR.io.observe(el));
+}
+const arPartialMsg=(e,full)=>(e.message||"")+" Showing the "+(full.total-full.missing)+" of "+full.total+" releases that are already saved"+(full.missing?" ("+full.missing+" not loaded yet)":"")+". Press Load again later to fetch the rest.";
+async function arFeat(){
+  const D=AR.d;if(!D||D.featDone||AR.loading)return;
+  const gen=AR.gen,msg=$("arMsg");
+  AR.loading=1;AR.stopped=0;AR.stoppedFeat=0;AR.fresh=0;D.featBusy=1;arBtn();
+  let note="";
+  try{
+    let more;
+    try{more=await arCollect(D.id,"appears_on","featured releases",msg,gen)}
+    catch(e){
+      if(e&&e.quota&&AR.gen===gen){more=await arCollect(D.id,"appears_on","featured releases",msg,gen,true);note=arPartialMsg(e,more)}
+      else throw e;
+    }
+    if(AR.d!==D)return;
+    D.base=D.base||D.full;D.full=D.base.concat(more);
+    if(more.skipped)note=(note?note+" ":"")+"Skipped "+more.skipped+" featured releases with an excluded word in the album name to save requests.";
+    const b=arBuild(D.full,D.id);D.main=b.main;D.feat=b.feat;D.exl=b.exl;D.ex=b.ex;D.dup=b.dup;D.featDone=more.missing?0:1;msg.textContent=note;
+    AR.stopped=0;
+  }catch(e){
+    if(AR.d===D){AR.stopped=1;AR.stoppedFeat=1;msg.textContent=e===ARABORT?arStopMsg():(e.nosave?"Spotify's quota is used up and no featured releases are saved yet. Try again later.":(e.message||"Something went wrong."))}
+  }
+  D.featBusy=0;AR.loading=0;arBtn();
+  if(AR.d===D)arRender();
+}
+async function arLoad(){
+  const id=arId($("arId").value),msg=$("arMsg");
+  if(!id){msg.textContent="Paste a Spotify artist ID or artist link.";return}
+  const c=arCfg();if(!c.id||!c.sec){msg.textContent="Add your Spotify client ID and secret under Spotify setup first.";$("arSetup").open=true;return}
+  const wait=(AR.nextAt||0)-Date.now();
+  $("arHead").innerHTML="";$("arGrid").innerHTML="";$("arNote").textContent="";AR.q=[];AR.warned=0;AR.d=null;
+  if(AR.io)AR.io.disconnect();
+  LS("tracker.artistId",id);
+  AR.gen++;const gen=AR.gen;AR.owner=gen;
+  AR.loading=1;AR.stopped=0;AR.stoppedFeat=0;AR.fresh=0;arBtn();
+  if(wait>2000&&wait<=180000)arCount();
+  let note="";
+  try{
+    msg.textContent="Loading artist...";
+    let a,full;
+    try{
+      a=aaGet(id)||await arGet("/artists/"+id,gen);
+      if(a)aaPut(a);
+      if(!a)throw arQuotaErr(wait,true);
+      full=await arCollect(id,"album,single","releases",msg,gen);
+    }catch(e){
+      if(e&&e.quota&&AR.gen===gen){
+        a=aaGet(id);if(!a){const e2=new Error(e.message+" Nothing is saved for this artist yet, so there's nothing to show.");throw e2}
+        try{full=await arCollect(id,"album,single","releases",msg,gen,true)}
+        catch(e3){if(e3&&e3.nosave)throw new Error(e.message+" Nothing is saved for this artist yet, so there's nothing to show.");throw e3}
+        note=arPartialMsg(e,full);
+      }else throw e;
+    }
+    const b=arBuild(full,id);
+    if(full.skipped)note=(note?note+" ":"")+"Skipped "+full.skipped+" releases with an excluded word in the album name to save requests.";
+    AR.d={id,a,full,main:b.main,feat:b.feat,exl:b.exl,ex:b.ex,dup:b.dup,featDone:0,featBusy:0};AR.tab="main";
+    msg.textContent=note;
+    $("arHead").innerHTML=`<div class="card" style="display:flex;gap:12px;align-items:center;margin-top:10px">${a.images&&a.images[0]?`<img src="${esc(a.images[a.images.length>1?1:0].url)}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover">`:""}<div><strong>${esc(a.name)}</strong><div class="note" id="arCount" style="margin:2px 0 0"></div></div></div><div class="artabs" id="arTabs"><button type="button" data-t="main">Songs</button><button type="button" data-t="feat">Featured on</button><button type="button" data-t="exl">Excluded</button></div>`;
+    $("arTabs").onclick=e=>{const t=e.target.closest("button");if(!t||AR.tab===t.dataset.t)return;AR.tab=t.dataset.t;arRender();if(AR.tab==="feat"||AR.tab==="exl")arFeat()};
+    $("arGrid").onclick=e=>{
+      const b=e.target.closest("button.lyr");if(b){const c=b.closest(".arc");if(c)arLyr(c.dataset.id)}};
+    arRender();
+  }catch(e){
+    if(AR.owner===gen){AR.stopped=1;msg.textContent=e===ARABORT?arStopMsg():(e.message||"Something went wrong.")}
+    else return;
+  }
+  if(AR.owner===gen){AR.loading=0;arBtn()}
+}
+const arStrip=n=>n.replace(/\s*[\(\[][^)\]]*[\)\]]/g,"").replace(/\s+-\s+.*$/,"").trim();
+async function arJ(u){const r=await fetch(u);if(r.status===404)return null;if(!r.ok)throw new Error("status "+r.status);return r.json()}
+async function arFindLyrics(t){
+  const q=o=>Object.entries(o).filter(e=>e[1]).map(e=>e[0]+"="+encodeURIComponent(e[1])).join("&");
+  const artist=t.by||(AR.d&&AR.d.a.name)||"";let j=null,err=null;
+  try{
+    j=await arJ("https://lrclib.net/api/get?"+q({track_name:t.name,artist_name:artist,album_name:t.album,duration:t.dur}));
+    if(!j){
+      for(const n of [t.name,arStrip(t.name)].filter((x,i,a)=>x&&a.indexOf(x)===i)){
+        const l=await arJ("https://lrclib.net/api/search?"+q({track_name:n,artist_name:artist}));
+        if(l&&l.length){
+          const pool=l.filter(x=>x.syncedLyrics||x.plainLyrics||x.instrumental).sort((x,y)=>Math.abs((x.duration||0)-t.dur)-Math.abs((y.duration||0)-t.dur));
+          if(pool.length&&(!t.dur||Math.abs((pool[0].duration||0)-t.dur)<=5)){j=pool[0];break}
+        }
+      }
+    }
+  }catch(e){err=e}
+  if(j){if(j.instrumental)return{inst:1};if(j.syncedLyrics||j.plainLyrics)return{synced:j.syncedLyrics||"",plain:j.plainLyrics||"",src:"LRCLIB"}}
+  try{
+    const o=await arJ("https://api.lyrics.ovh/v1/"+encodeURIComponent(artist)+"/"+encodeURIComponent(arStrip(t.name)));
+    if(o&&o.lyrics)return{synced:"",plain:o.lyrics.trim(),src:"lyrics.ovh"};
+  }catch(e){err=err||e}
+  if(err)throw err;
+  return null;
+}
+async function arLyr(id){
+  const t=AR.byId&&AR.byId[id];if(!t)return;
+  const old=$("arLy");if(old)old.remove();
+  const o=document.createElement("div");o.id="arLy";
+  const close=()=>{document.removeEventListener("keydown",kd);o.remove()};
+  const kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
+  o.onclick=e=>{if(e.target===o)close()};
+  const box=document.createElement("div");box.className="box";
+  const hd=document.createElement("div");hd.className="hd";
+  const h=document.createElement("strong");h.textContent=t.name;
+  const sub=document.createElement("div");sub.className="sub";sub.textContent=(t.by?t.by+" \u00b7 ":"")+t.album;
+  const bar=document.createElement("div");bar.className="bar";
+  hd.append(h,sub,bar);
+  const pre=document.createElement("pre");pre.textContent="Looking for lyrics...";
+  box.append(hd,pre);o.appendChild(box);document.body.appendChild(o);
+  const mk=(txt,fn)=>{const b=document.createElement("button");b.type="button";b.textContent=txt;b.onclick=fn;bar.appendChild(b);return b};
+  AR.ly=AR.ly||{};
+  let d;
+  try{d=id in AR.ly?AR.ly[id]:(AR.ly[id]=await arFindLyrics(t))}
+  catch(e){pre.textContent="Couldn't reach the lyrics sites ("+(e.message||"error")+"). They may be blocking requests from this page.";mk("Close",close);return}
+  if(!document.body.contains(o))return;
+  if(!d||d.inst){pre.textContent=d&&d.inst?"This song is listed as instrumental.":"No lyrics found for this song.";mk("Close",close);return}
+  const plain=d.plain||d.synced.replace(/^\s*(\[\d+:\d+(?:[.:]\d+)?\]\s*)+/gm,"").trim();
+  let mode="plain";
+  const show=()=>{pre.textContent=mode==="lrc"?d.synced:plain;if(bp)bp.classList.toggle("on",mode==="plain");if(bl)bl.classList.toggle("on",mode==="lrc")};
+  let bp=null,bl=null;
+  if(d.synced){bp=mk("Plain",()=>{mode="plain";show()});bl=mk("Synced (LRC)",()=>{mode="lrc";show()})}
+  const cp=mk("Copy",()=>{try{navigator.clipboard.writeText(pre.textContent);cp.textContent="Copied";setTimeout(()=>cp.textContent="Copy",1200)}catch(e){}});
+  mk("Close",close);
+  const src=document.createElement("span");src.className="sub";src.style.alignSelf="center";src.textContent="via "+d.src;bar.appendChild(src);
+  show();
+}
+function arQueue(el){const id=el.dataset.id;if(id in arC){arShow(el,arC[id]);return}AR.q.push(el);arPump()}
+function arPump(){while(AR.busy<2&&AR.q.length){const el=AR.q.shift();AR.busy++;arCanvas(el).finally(()=>{AR.busy--;arPump()})}}
+async function arCanvas(el){
+  const id=el.dataset.id;
+  try{
+    const r=await fetch("https://www.canvasdownloader.com/canvas?link="+encodeURIComponent("https://open.spotify.com/track/"+id));
+    if(!r.ok&&r.status!==404)throw new Error("status "+r.status);
+    const m=r.ok?(await r.text()).match(/https:\/\/canvaz\.scdn\.co\/[^\s"'<>)\]]+/):null;
+    arC[id]=m?m[0]:"";arSaveC();arShow(el,arC[id]);
+  }catch(e){
+    if(!AR.warned){AR.warned=1;$("arNote").textContent="Couldn't load Canvas videos inline (the Canvas site probably blocks other pages). Songs show their cover; tap Canvas on a song to open it."}
+  }
+}
+function arShow(el,url){
+  if(!url)return;
+  const box=el.querySelector(".arm");
+  const lk=el.querySelector(".lk");
+  if(lk&&!lk.querySelector(".cvfs")){const fb=document.createElement("button");fb.type="button";fb.className="cvfs";fb.textContent="Full size";fb.onclick=()=>arFull(url);lk.appendChild(fb)}
+  if(/\.(jpe?g|png)(\?|$)/i.test(url)){const im=box.querySelector("img");if(im)im.src=url;return}
+  const v=document.createElement("video");
+  v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.setAttribute("playsinline","");
+  v.onerror=()=>v.remove();
+  v.src=url;box.appendChild(v);
+  const b=document.createElement("span");b.className="cvb";b.textContent="Canvas";box.appendChild(b);
+  v.play().catch(()=>{});
+}
+function arFull(url){
+  const o=document.createElement("div");o.id="arFs";
+  const close=()=>{document.removeEventListener("keydown",kd);o.remove()};
+  const kd=e=>{if(e.key==="Escape")close()};
+  document.addEventListener("keydown",kd);
+  const m=/\.(jpe?g|png)(\?|$)/i.test(url)?document.createElement("img"):document.createElement("video");
+  if(m.tagName==="VIDEO"){m.loop=true;m.autoplay=true;m.controls=true;m.playsInline=true;m.muted=true}
+  m.src=url;
+  const x=document.createElement("button");x.className="x";x.type="button";x.textContent="Close";x.onclick=close;
+  o.onclick=e=>{if(e.target===o)close()};
+  o.append(m,x);document.body.appendChild(o);
+  if(m.play)m.play().catch(()=>{});
+}
+$("arSave").onclick=()=>{
+  LS("tracker.spotify",JSON.stringify({id:$("arCid").value.trim(),sec:$("arSec").value.trim()}));
+  LS("tracker.arEx",$("arEx").value);LS("tracker.arCap",String(Math.max(0,Math.floor(+$("arCap").value)||0)));LS("tracker.arSkip",$("arSkip").checked?"1":"0");AR.tok="";$("arMsg").textContent="Saved.";
+};
+$("arClrW").onclick=()=>{AR.nextAt=0;try{localStorage.removeItem(AR_UNTIL)}catch(e){}$("arMsg").textContent="Saved wait cleared. If Spotify's quota is still used up, the next request will be refused again."};
+arUsage();
+$("arClrS").onclick=()=>{AC=new Map();try{localStorage.removeItem(AC_KEY);localStorage.removeItem(AL_KEY)}catch(e){}$("arMsg").textContent="Song cache cleared."};
+$("arClrL").onclick=()=>{try{localStorage.removeItem(AL_KEY)}catch(e){}$("arMsg").textContent="Release lists cleared. The next Load re-checks Spotify for new releases; saved songs stay cached."};
+$("arClr").onclick=()=>{arC={};arSaveC();$("arMsg").textContent="Canvas cache cleared."};
+const arGoClick=()=>{if(AR.loading){arStop();return}if(AR.stopped&&AR.stoppedFeat&&AR.d){arFeat();return}arLoad()};
+$("arGo").onclick=arGoClick;
+$("arId").addEventListener("input",()=>{if(!AR.loading){AR.stopped=0;AR.stoppedFeat=0;arBtn()}});
+$("arId").addEventListener("keydown",e=>{if(e.key==="Enter")arGoClick()});
+(function(){const c=arCfg();$("arCid").value=c.id||"";$("arSec").value=c.sec||"";$("arEx").value=LS("tracker.arEx")||"live, remix, remixes";$("arCap").value=arCap();$("arSkip").checked=LS("tracker.arSkip")!=="0";$("arId").value=LS("tracker.artistId")||"";if(!c.id||!c.sec)$("arSetup").open=true})();
+
+/* ---------- quest tracker ---------- */
+const QK=["c","u","r"];
+const QO={c:["Common",0.00225,0.002,0.00667],u:["Uncommon",0.00056,0.0004,0.00125],r:["Rare",0.000225,0.00022,0.0005]};
+const QD=[["Epic",1,"epic"],["Lyric",2,"lyrics"],["Shiny",3,"shiny"]];
+const QR={c:"common",u:"uncommon",r:"rare"};
+const QT={s:["Shiny","shiny"],e:["Epic","epic"],l:["Lyric","lyrics"]};
+const qtTitle=h=>h.song&&h.artist?h.song+" \u2013 "+h.artist:(h.song||h.artist||h.name||"");
+const qpill=(cls,label)=>`<span class="pill r r-${cls}">${label}</span>`;
+const qPullLbl=()=>"Pull "+qpill("epic","Epic")+qpill("lyrics","Lyric");
+/* one quest rolls every listed odds; the rarity is whichever one hits */
+const qtTot=i=>[].concat(i).reduce((a,j)=>a+QK.reduce((b,k)=>b+QO[k][j],0),0);
+const qtPd=(i,x)=>{const p=qtTot(i);return x?1-(1-p)*(1-p):p};
+const PULL=[1,2]; /* a pull = epic or lyric */
+const qtP=x=>qtPd(PULL,x);
+const qtPct=p=>Number((p*100).toFixed(4))+"%";
+const qtN=v=>Math.max(0,Math.floor(+v||0));
+function qtNorm(d){d=d||{};return{reroll:!!d.reroll,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
+let qt=qtNorm(),qtDB=true;
+function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
+function renderQuest(){
+  const q=qtSum(),next=qtP(qt.reroll);
+  let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x));
+  $("qtQuests").textContent=nfmt(q.n);
+  const last=qt.history.find(h=>h.typ!=="s");
+  $("qtQuestsNote").textContent=last?"Last pull: "+fmtD(last.t):"No pull logged yet";
+  $("qtOdds").textContent=qtPct(next);
+  $("qtOddsNote").textContent="About 1 in "+nfmt(Math.round(1/next))+" quests";
+  $("qtSoFar").textContent=Number(((1-miss)*100).toFixed(1))+"%";
+  $("qtSoFarNote").textContent=q.n?"Across all quests logged":"";
+  $("qtReroll").checked=qt.reroll;
+  $("qtRrNote").textContent=qt.reroll?"Reroll is on: each quest gets two chances, so "+qtPct(next)+" for an epic or lyric per quest.":"Each quest has a "+qtPct(next)+" chance of an epic or lyric (a pull).";
+  $("qtDrop").innerHTML="<tr><th>Per quest</th>"+QK.map(k=>"<th>"+qpill(QR[k],QO[k][0])+"</th>").join("")+"<th>Total</th></tr>"+QD.map(([n,i,c])=>`<tr><td>${qpill(c,n)}</td>${QK.map(k=>`<td>${qtPct(qt.reroll?1-(1-QO[k][i])*(1-QO[k][i]):QO[k][i])}</td>`).join("")}<td>${qtPct(qtPd(i,qt.reroll))}</td></tr>`).join("")+`<tr style="font-weight:600"><td>${qPullLbl()}</td>${QK.map(k=>{const p=QO[k][1]+QO[k][2];return `<td>${qtPct(qt.reroll?1-(1-p)*(1-p):p)}</td>`}).join("")}<td>${qtPct(qtP(qt.reroll))}</td></tr>`;
+  $("qtLog").textContent=q.n?"Logged: "+q.n+" quests"+(q.rr?" ("+q.rr+" with reroll)":""):"";
+  $("qtExp").innerHTML="<tr><th>Drop</th><th>Odds</th><th>Avg quests</th><th>With reroll</th></tr>"+[[qPullLbl(),PULL],[qpill("epic","Epic"),1],[qpill("lyrics","Lyric"),2],[qpill("shiny","Shiny"),3]].map(([n,i])=>`<tr><td>${n}</td><td>${qtPct(qtPd(i,0))}</td><td>${nfmt(Math.round(1/qtPd(i,0)))}</td><td>${nfmt(Math.round(1/qtPd(i,1)))}</td></tr>`).join("");
+  const H=qt.history;
+  $("qtHistSum").textContent="History"+(H.length?" ("+H.length+")":"");
+  const HP=H.filter(h=>h.typ!=="s"),HS=H.length-HP.length;
+  $("qtAvg").textContent=(HP.length?"Average per epic/lyric: "+nfmt(Math.round(HP.reduce((a,h)=>a+h.n,0)/HP.length))+" quests":"No pulls saved yet.")+(HS?" \u00b7 "+HS+" shiny":"");
+  $("qtHist").innerHTML=H.map((h,i)=>`<div class="card" style="margin-top:8px"><div class="eph"><div class="ehl"><strong>${qtTitle(h)?esc(qtTitle(h)):(h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t))}</strong>${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]):""}${h.rar?qpill(QR[h.rar],QO[h.rar][0]):""}</div><span style="display:flex;gap:6px"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>${qtTitle(h)?`<div class="hrow"><span>Saved</span><b>${fmtD(h.t)}</b></div>`:""}${h.ta?`<div class="hrow"><span>Artist quest count</span><b>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</b></div>`:""}${h.nb==="n"?`<div class="hrow"><span>Epic #</span><b>${h.num?"#"+nfmt(h.num):"Numbered"}</b></div>`:h.nb==="l"?`<div class="hrow"><span>Epic style</span><b>Numberless</b></div>`:""}<div class="hrow"><span>Quests</span><b>${nfmt(h.n)}</b></div>${h.rr?`<div class="hrow"><span>Quests with reroll</span><b>${nfmt(h.rr)}</b></div>`:""}</div>`).join("");
+}
+function saveQuest(){
+  LS("tracker.quest",JSON.stringify(qt));
+  if(qtDB)track(sb.from("pass_state").upsert({id:6,data:qt},{onConflict:"user_id,id"}));
+}
+async function loadQuest(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",6).maybeSingle();
+    if(r.error)qtDB=false;else{qtDB=true;d=r.data&&r.data.data}
+  }catch(e){qtDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.quest")||"null")}catch(e){}
+  if(!qtDB)d=local;
+  else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:6,data:qtNorm(local)},{onConflict:"user_id,id"}))}
+  qt=qtNorm(d);renderQuest();
+}
+$("qtAmt").value=LS("tracker.step.quest")||"1";
+const qtAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("qtAmt").value))||1));
+$("qtAmt").addEventListener("change",()=>{const v=qtAmt();$("qtAmt").value=v;LS("tracker.step.quest",String(v))});
+$("qtReroll").addEventListener("change",()=>{qt.reroll=$("qtReroll").checked;saveQuest();renderQuest()});
+$("qtAdd").onclick=()=>{
+  const n=qtAmt();if(!qt.start)qt.start=Date.now();
+  for(let i=0;i<n;i++)qt.r.push({x:qt.reroll?1:0});
+  saveQuest();renderQuest();
+};
+$("qtUndo").onclick=()=>{
+  const n=Math.min(qtAmt(),qt.r.length);if(!n)return;
+  qt.r.splice(qt.r.length-n,n);
+  if(!qt.r.length)qt.start=0;
+  saveQuest();renderQuest();
+};
+let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false;
+function qtAutoTA(){
+  if(qtTAman)return;
+  const n=Math.max(0,Math.floor(Number($("qtFN").value))||0),tb=Math.max(0,Math.floor(Number($("qtTB").value))||0);
+  $("qtTA").value=tb+Math.max(0,n-qt.cnt);
+}
+$("qtFN").addEventListener("input",qtAutoTA);
+$("qtTB").addEventListener("input",qtAutoTA);
+$("qtTA").addEventListener("input",()=>{qtTAman=true});
+function qtSyncEp(){
+  $("qtEpBox").hidden=qtFTyp!=="e";
+  $("qtNumBox").hidden=qtFTyp!=="e"||qtFNb!=="n";
+  [...$("qtFNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===qtFNb));
+}
+function qtOpenForm(i){
+  qtEdit=i;const h=i>=0?qt.history[i]:null;
+  $("qtFormTitle").textContent=h?"Edit pull":"Log your pull";
+  $("qtArtist").value=h?(h.artist||(h.song?"":h.name)):"";
+  $("qtSong").value=h?h.song:"";
+  qtFNb=h?h.nb:"";
+  $("qtFNum").value=h&&h.num?h.num:"";
+  qtTAman=!!h;
+  $("qtTB").value=h?(h.ta?h.tb:""):qt.total;
+  $("qtTA").value=h?(h.ta||""):"";
+  qtFRar=h?h.rar:"";
+  qtFTyp=h?h.typ:"";
+  [...$("qtFTyp").children].forEach(b=>b.classList.toggle("on",b.dataset.t===qtFTyp));
+  qtSyncEp();
+  $("qtFN").value=h?h.n:(qt.r.length||"");
+  qtAutoTA();
+  [...$("qtFRar").children].forEach(b=>b.classList.toggle("on",b.dataset.q===qtFRar));
+  $("qtForm").hidden=false;$("qtForm").scrollIntoView({block:"nearest",behavior:"smooth"});$("qtArtist").focus();
+}
+const qtCloseForm=()=>{$("qtForm").hidden=true;qtEdit=-1};
+$("qtHit").onclick=()=>qtOpenForm(-1);
+$("qtFRar").addEventListener("click",e2=>{const b=e2.target.closest("button[data-q]");if(!b)return;qtFRar=qtFRar===b.dataset.q?"":b.dataset.q;[...$("qtFRar").children].forEach(x=>x.classList.toggle("on",x.dataset.q===qtFRar))});
+$("qtFTyp").addEventListener("click",e2=>{const b=e2.target.closest("button[data-t]");if(!b)return;qtFTyp=qtFTyp===b.dataset.t?"":b.dataset.t;[...$("qtFTyp").children].forEach(x=>x.classList.toggle("on",x.dataset.t===qtFTyp));qtSyncEp()});
+$("qtFNb").addEventListener("click",e2=>{const b=e2.target.closest("button[data-n]");if(!b)return;qtFNb=qtFNb===b.dataset.n?"":b.dataset.n;qtSyncEp()});
+$("qtFCancel").onclick=qtCloseForm;
+$("qtFSave").onclick=()=>{
+  const artist=$("qtArtist").value.trim().slice(0,120),song=$("qtSong").value.trim().slice(0,120),nb=qtFTyp==="e"?qtFNb:"",num=nb==="n"?Math.max(0,Math.floor(Number($("qtFNum").value))||0):0,n=Math.max(0,Math.floor(Number($("qtFN").value))||0);
+  const tb=qtN($("qtTB").value),ta=$("qtTA").value===""?(tb?tb+Math.max(0,n-(qtEdit>=0?0:qt.cnt)):0):qtN($("qtTA").value);
+  if(qtEdit>=0){
+    const h=qt.history[qtEdit];if(h){h.name="";h.artist=artist;h.song=song;h.nb=nb;h.num=num;h.rar=qtFRar;h.typ=qtFTyp;h.n=n;h.tb=tb;h.ta=ta;if(qtEdit===0&&ta)qt.total=ta}
+  }else{
+    const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta};
+    if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.total=ta;qt.cnt=n} /* shiny: log it but keep the quest count going */
+    else qt=qtNorm({reroll:qt.reroll,total:ta||qt.total,cnt:0,history:[e,...qt.history]});
+  }
+  qtCloseForm();saveQuest();renderQuest();
+};
+$("qtReset").onclick=()=>{
+  if(!qt.r.length)return;
+  ask("Reset the counters without saving to history?",()=>{
+    qt=qtNorm({reroll:qt.reroll,total:qt.total,cnt:0,history:qt.history});
+    saveQuest();renderQuest();
+  });
+};
+$("qtHist").addEventListener("click",e2=>{
+  const ed=e2.target.closest("button[data-hedit]");
+  if(ed){qtOpenForm(+ed.dataset.hedit);return}
+  const b=e2.target.closest("button[data-hdel]");if(!b)return;
+  const i=+b.dataset.hdel;
+  ask("Delete this history entry?",()=>{qt.history.splice(i,1);saveQuest();renderQuest()});
+});
+renderQuest();
+
 /* ---------- purchases ---------- */
 const bnorm=d=>{d=d||{};return{items:Array.isArray(d.items)?d.items.map(x=>({id:String(x.id||Date.now()+Math.random()),title:String(x.title||""),t:+x.t||0,fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):[{k:"Seller",v:""},{k:"Cost",v:""}]})):[]}};
 let buys=bnorm(),buyDB=true,bq="",buyT=null;
@@ -1055,7 +1857,7 @@ $("bkImport").onclick=()=>{
 let chan=null,rTimer=null;
 function busy(){
   const a=document.activeElement;
-  const typing=!!(a&&/^(INPUT|TEXTAREA)$/.test(a.tagName)&&a.type!=="checkbox"&&a.type!=="radio"&&a.closest&&a.closest("#tab-pass,#tab-event"));
+  const typing=!!(a&&/^(INPUT|TEXTAREA)$/.test(a.tagName)&&a.type!=="checkbox"&&a.type!=="radio"&&a.closest&&a.closest("#tab-pass,#tab-event,#tab-gempic,#tab-quest,#tab-artist"));
   return inflight>0||dirty.size>0||pend!==null||typing||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList,#notesText"));
 }
 function scheduleRefresh(ms){clearTimeout(rTimer);rTimer=setTimeout(doRefresh,ms||500)}
@@ -1074,6 +1876,47 @@ document.addEventListener("visibilitychange",()=>{if(!document.hidden)scheduleRe
 window.addEventListener("focus",()=>scheduleRefresh(200));
 window.addEventListener("online",()=>scheduleRefresh(200));
 
+/* ---------- number tweens: values count up/down and bump when they change ---------- */
+(function(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const re=/^(-?)(\$?)(-?)(\d[\d,]*(?:\.\d+)?)(%?)$/,SEL=".val,.big",last=new Map(),SKIP="#epicList,#holderList,#buyList,#arGrid,#hist,#notesText";
+  const key=el=>{const c=el.closest(".card"),l=c&&c.querySelector(".lbl,.nm");return(el.id||(c&&c.parentElement&&c.parentElement.id)||"")+"|"+(l?l.textContent.trim():"")};
+  function run(el){
+    if(!el.isConnected)return;
+    const t=el.textContent.trim();
+    if(t===el._wrote||t===el._fin)return;
+    cancelAnimationFrame(el._raf);
+    el._fin=t;
+    const m=re.exec(t);if(!m)return;
+    const to=((m[1]||m[3])?-1:1)*parseFloat(m[4].replace(/,/g,"")),dec=(m[4].split(".")[1]||"").length,k=key(el);
+    const from=last.has(k)?last.get(k):null;last.set(k,to);
+    if(from===null||from===to)return;
+    const f=v=>{const a=Math.abs(v).toLocaleString("en-US",{minimumFractionDigits:dec,maximumFractionDigits:dec});return(m[1]&&v<0?"-":"")+m[2]+(!m[1]&&v<0?"-":"")+a+m[5]};
+    const w=s=>{el._wrote=s;el.textContent=s};
+    el.classList.remove("bump");void el.offsetWidth;el.classList.add("bump");
+    el.addEventListener("animationend",()=>el.classList.remove("bump"),{once:true});
+    const t0=performance.now(),D=550;
+    const step=now=>{
+      const p=Math.min(1,(now-t0)/D);
+      if(p<1){w(f(from+(to-from)*(1-Math.pow(1-p,3))));el._raf=requestAnimationFrame(step)}
+      else w(t);
+    };
+    el._raf=requestAnimationFrame(step);
+  }
+  const pend=new Set();let sched=0;
+  const flush=()=>{sched=0;const a=[...pend];pend.clear();a.forEach(run)};
+  const add=n=>{if(n.nodeType!==1)return;if(n.matches(SEL))pend.add(n);n.querySelectorAll(SEL).forEach(x=>pend.add(x))};
+  new MutationObserver(ms=>{
+    for(const m of ms){
+      const tg=m.target,el=tg.nodeType===1?tg:tg.parentElement;
+      if(!el||el.closest(SKIP))continue;
+      if(m.type==="childList")m.addedNodes.forEach(add);
+      const v=el.closest(SEL);if(v)pend.add(v);
+    }
+    if(pend.size&&!sched){sched=1;requestAnimationFrame(flush)}
+  }).observe(document.body,{childList:true,subtree:true,characterData:true});
+})();
+
 /* ---------- login ---------- */
 function showLogin(){
   $("app").hidden=true;$("login").hidden=false;$("lgPass").value="";
@@ -1085,16 +1928,16 @@ async function checkUser(){
     const uid=data&&data.session&&data.session.user&&data.session.user.id;
     if(!uid)return;
     const em=data.session.user.email||"";
-    $("who").textContent=em.split("@")[0];
+    $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];
     const prev=LS("tracker.uid");
-    if(prev&&prev!==uid)["pass","event","buys","notes","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
+    if(prev&&prev!==uid)["pass","event","gempic","quest","buys","notes","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
   }catch(e){}
 }
 async function enter(){
   await checkUser();
   $("login").hidden=true;$("app").hidden=false;
-  showTab(LS("tracker.tab")||"shiny");setView("epic");
+  {let t0=LS("tracker.tab")||"shiny";if(t0==="notes")t0="profile";showTab(t0)}setView("epic");
   calc();renderLog();
   await loadAll();
   subscribe();
@@ -1117,6 +1960,30 @@ async function doLogin(){
 }
 $("lgGo").onclick=doLogin;
 $("lgPass").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
+async function changePw(){
+  const m=$("pwMsg"),o=$("pwOld").value,n=$("pwNew").value,n2=$("pwNew2").value;
+  m.style.color="";
+  const bad=t=>{m.style.color="var(--neg)";m.textContent=t};
+  if(!o||!n||!n2){bad("Fill in all three boxes.");return}
+  if(n!==n2){bad("The new passwords don't match.");return}
+  if(n.length<6){bad("The new password needs at least 6 characters.");return}
+  if(n===o){bad("The new password is the same as the current one.");return}
+  $("pwGo").disabled=true;m.textContent="Changing...";
+  try{
+    const {data}=await sb.auth.getSession();
+    const em=data&&data.session&&data.session.user&&data.session.user.email;
+    if(!em){bad("You're not signed in. Sign in again first.");$("pwGo").disabled=false;return}
+    const chk=await sb.auth.signInWithPassword({email:em,password:o});
+    if(chk.error){bad("The current password is wrong.");$("pwGo").disabled=false;return}
+    const {error}=await sb.auth.updateUser({password:n});
+    if(error){bad(error.message);$("pwGo").disabled=false;return}
+    $("pwOld").value=$("pwNew").value=$("pwNew2").value="";
+    m.style.color="var(--pos)";m.textContent="Password changed. Use the new one next time you sign in.";
+  }catch(e){bad(e.message||"Something went wrong.")}
+  $("pwGo").disabled=false;
+}
+$("pwGo").onclick=changePw;
+$("pwNew2").addEventListener("keydown",e=>{if(e.key==="Enter")changePw()});
 $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);chan=null}await sb.auth.signOut();location.reload()};
 (async()=>{
   const {data}=await sb.auth.getSession();
