@@ -27,20 +27,51 @@ details .card{background:var(--bg)}
 #inputs{grid-template-columns:repeat(3,minmax(0,1fr))}
 #inputs input{font-size:16px;padding:8px 6px;min-width:0}
 #inputs label{font-size:11px}
-#prices{grid-template-columns:repeat(3,minmax(0,1fr))}
-#prices input{font-size:16px;padding:8px 6px;min-width:0}
-#prices label{font-size:11px}
+#setBar{flex-wrap:wrap}
+#setBar button{flex:0 1 auto;padding:7px 14px;font-size:13px}
+#setMgr{margin-top:12px}
+#setMgr input{margin-bottom:8px}
+#inv,#invOut{grid-template-columns:repeat(3,minmax(0,1fr))}
+#inv input{font-size:16px;padding:8px 6px;min-width:0}
+#inv label{font-size:11px}
+#invOut .val{font-size:clamp(15px,4.2vw,22px)}
+#tab-info{max-width:860px;margin:0 auto}
+#tab-info table{width:100%;border-collapse:collapse}
+#tab-info th,#tab-info td{padding:4px 8px;text-align:left;border-bottom:1px solid var(--bd);font-size:13px}
+#tab-info h2{margin:12px 0 6px}
+#tab-info .card{padding:8px 12px}
+#tab-info th{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+#tab-info tr:last-child td{border-bottom:0}
+#tab-info td:first-child{font-weight:600}
+.tabs{flex-wrap:wrap}
+.tabs button{flex:1 1 auto;min-width:96px}
+#prices{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#prices .card{padding:16px 12px}
+#prices label{font-size:13px;margin-bottom:10px;text-align:center}
+#prices input{font-size:clamp(20px,5vw,30px);font-weight:600;text-align:center;padding:16px 6px;min-width:0}
 #outputs{grid-template-columns:1fr 1fr;gap:12px}
 #outputs .card{padding:16px 12px;text-align:center;min-height:76px;display:flex;flex-direction:column;justify-content:center}
 #outputs .lbl{font-size:13px;margin-bottom:6px}
 #outputs .val{font-size:clamp(20px,4.5vw,28px)}
 .steps{display:flex;gap:6px;margin-top:6px}
 .steps button{flex:1;margin:0;padding:8px 0;font-size:18px;line-height:1;font-weight:600}
+.steps .sb{flex:3;display:flex;gap:6px;min-width:0}
+.steps .sb button{padding:11px 0;font-size:22px}
+#tab-shiny .stepin{flex:1;min-width:0;width:0;box-sizing:border-box;margin:0;padding:4px 2px;font-size:13px;text-align:center}
 .steps button:active{background:var(--ac);color:var(--bg)}
 .log{list-style:none;margin:0;padding:0;max-height:320px;overflow-y:auto}
-.log li{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--bd);font-size:14px}
-.log .when{color:var(--mut);font-size:12px;white-space:nowrap}
-.log .chg{font-weight:600;white-space:nowrap}
+.log li{display:block;padding:12px 0;border-top:1px solid var(--bd);font-size:16px}
+.log .nm{font-weight:600;font-size:16px}
+.log .dl{font-size:14px;margin-left:8px}
+.rgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin-top:8px}
+.rgrid.w{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.rc{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px 12px;min-width:0}
+.rc .nm{font-size:13px;font-weight:600;color:var(--mut)}
+.rc .chg{font-size:17px;font-weight:600;margin-top:4px;overflow-wrap:anywhere}
+.rc .when{margin-top:4px;color:var(--mut);font-size:12px}
+.rc .dl{margin-left:8px;font-size:14px;font-weight:600;white-space:nowrap}
+.log .when{color:var(--mut);font-size:12px;margin-top:2px}
+.log .chg{font-weight:600;font-size:20px;margin-top:4px}
 .empty{color:var(--mut);font-size:14px;padding:6px 0}
 .small{margin-top:10px;padding:6px 10px;font-size:12px}
 [hidden]{display:none!important}
@@ -50,8 +81,10 @@ details .card{background:var(--bg)}
 .tabs button.on,.seg button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
 #epicList,#holderList{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
 @media (max-width:700px){#epicList,#holderList{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.eph{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:4px}
-.eph strong{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.eph{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:4px 6px;margin-bottom:4px}
+.ehl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0}
+.eph strong{min-width:0;white-space:normal;overflow-wrap:anywhere}
+.eph .lbl{align-self:center}
 .x{margin:0!important;padding:2px 8px!important;font-size:12px}
 .slot{display:flex;align-items:center;gap:8px;margin-top:6px}
 .slot span{color:var(--mut);font-size:12px;width:26px;flex:none}
@@ -75,6 +108,80 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #login button{width:100%;margin-top:4px;background:var(--ac);color:var(--bg);border-color:var(--ac);font-size:16px;padding:10px}
 .err{color:var(--neg);font-size:13px;min-height:18px;margin-top:8px}
 .bkt{width:100%;box-sizing:border-box;font:12px monospace;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)}
+
+/* wiki genre + rarity pills */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:1px 9px 1px 7px;border-radius:999px;font-weight:600;font-size:12px;line-height:1.3;text-transform:none;letter-spacing:0;white-space:nowrap;margin:1px 3px 1px 0;border:1.5px solid transparent}
+.pill::before{content:"";flex:none;width:1.05em;height:1.05em;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.pill.g{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3v11.3A3.5 3.5 0 1 0 11 17.5V8h6V3z'/%3E%3C/svg%3E")}
+.pill.r{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l8 7-8 13L4 9z'/%3E%3C/svg%3E")}
+.g-pop{background:#0b1f4d;color:#3b82f6}
+.g-hiphop{background:#4a2208;color:#f08a3c}
+.g-indie{background:#1f4a33;color:#5fd68a}
+.g-kpop{background:#5a5a14;color:#f5f53c}
+.g-rock{background:#5a1f6b;color:#e038e0}
+.g-rnb{background:#1a4a4a;color:#4fd6c4}
+.g-latin{background:#e8532a;color:#fff}
+.g-country{background:#28401f;color:#7ed957}
+.g-metal{background:#000;color:#fff}
+.g-electronic{background:#3d0808;color:#e02828}
+.g-classical{background:#3a3a3a;color:#bdbdbd}
+.r-common{background:#1a3a1a;color:#3ddc5a}
+.r-uncommon{background:#2a1a4a;color:#8b3cf0}
+.r-rare{background:#4a2a10;color:#f08a2c}
+.r-shiny{background:#14144a;color:#fff}
+.r-epic{background:linear-gradient(135deg,#c06ad8,#e88ab0 55%,#f0b090);color:#fff}
+.r-radiant{background:linear-gradient(#1e1e33,#1e1e33) padding-box,linear-gradient(135deg,#3b5bff,#2ecc71,#e0a030,#8a2be2) border-box;color:#fff;box-shadow:0 0 10px rgba(110,80,255,.45)}
+.r-moment{background:#000;color:#fff;box-shadow:0 0 10px rgba(255,255,255,.35)}
+.r-lyrics{background:#2b2118;color:#f0d8b0;box-shadow:0 0 10px rgba(240,200,140,.35)}
+.rt{cursor:pointer;margin:0!important;flex:none;font-size:11px;padding:0 7px 0 5px;gap:3px;font-family:inherit}
+.rt.none{background:transparent;color:var(--mut);border:1.5px dashed var(--bd);padding:0 7px}
+.rt.none::before{display:none}
+#tab-pass,#tab-event{max-width:860px;margin:0 auto}
+#buyList{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+@media (max-width:700px){#buyList{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:460px){#buyList{grid-template-columns:1fr}}
+.bt{font-weight:600;font-size:15px!important;padding:6px 8px!important;min-width:0}
+.bh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;margin-bottom:6px}
+.fld{display:grid;grid-template-columns:2fr 3fr;gap:6px;margin-top:6px}
+.fld input{font-size:14px;padding:6px;min-width:0}
+.fld .fk{color:var(--mut)}
+#passOdds,#evOdds{width:100%;border-collapse:collapse}
+#passOdds td,#evOdds td{padding:6px 4px;border-bottom:1px solid var(--bd);font-size:14px}
+#passOdds tr:last-child td,#evOdds tr:last-child td{border-bottom:0}
+#passOdds td:last-child,#evOdds td:last-child{text-align:right;font-weight:600}
+#passGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#evGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:520px){#passGrid,#evGrid{grid-template-columns:1fr}}
+#evTotals,#ulTotals{display:flex;flex-direction:column}
+#evTotals .lbl,#ulTotals .lbl{font-size:16px;font-weight:600;margin:0}
+#evTotals .big,#ulTotals .big{font-size:44px;font-weight:700;line-height:1.1;margin:6px 0 14px}
+#evTotals .big:last-of-type,#ulTotals .big:last-of-type{margin-bottom:0}
+#ulOdds{width:100%;border-collapse:collapse}
+#ulOdds th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
+#ulOdds td{padding:5px 4px;border-top:1px solid var(--bd);font-size:13px}
+#ulOdds th:nth-child(n+2),#ulOdds td:nth-child(n+2){text-align:right}
+#ulOdds td:last-child{font-weight:600}
+#ulGrid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.ue{padding:8px 10px}
+.ue.on{border-color:var(--ac)}
+.ue .lbl{margin-bottom:4px}
+.ue select{width:100%;box-sizing:border-box;font-size:14px;padding:8px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)}
+.pc .nm{font-size:13px;font-weight:600;color:var(--mut);display:flex;justify-content:space-between;gap:8px}
+.pc .val{font-size:34px;margin:6px 0 2px}
+.pc .obs{font-size:12px;color:var(--mut);margin-bottom:6px}
+.passTop{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:10px}
+.hrow{display:flex;justify-content:space-between;gap:8px;padding:4px 0;font-size:14px;border-top:1px solid var(--bd)}
+#passHist .eph,#evHist .eph{margin-bottom:6px}
+#gemBox{display:flex;flex-direction:column}
+#gemBox[hidden]{display:none}
+#gemBox .lbl{font-size:16px;font-weight:600;margin-bottom:0}
+#gemVal{font-size:64px;font-weight:700;line-height:1.1;margin:10px 0 14px}
+#gemBox .note{margin-top:auto}
+#oddsBox .lbl{margin-bottom:2px}
+.addrow button.on,.steps button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.chk{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--tx);margin:8px 0 2px;cursor:pointer}
+.chk input{width:22px;height:22px;padding:0;margin:0;flex:none}
+.r-exclusive{background:linear-gradient(135deg,#6a665f,#4a4742);color:#fff}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -87,7 +194,7 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 
 <div id="app" hidden>
 <div class="top"><h1>Tracker</h1><div class="r"><span id="sync"></span><button type="button" id="signOut">Sign out</button></div></div>
-<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbMap">Artist Guesser</button></div>
+<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbBuys">Purchases</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbInfo">Wiki</button></div>
 <div id="tab-shiny">
 
 <h2>Inputs</h2>
@@ -98,10 +205,13 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 <details id="more"><summary>Inventory &amp; Totals</summary>
 <div class="grid" id="inv"></div>
 <div class="grid" id="invOut" style="margin-top:10px"></div>
-<h2 style="margin:16px 0 8px">Prices</h2>
+</details>
+<details id="priceBox"><summary>Prices</summary>
 <div class="grid" id="prices"></div>
 </details>
 <details id="histBox"><summary id="histSum">History</summary>
+<div id="reportBody"></div>
+<h2 style="margin:16px 0 0">All changes</h2>
 <ul class="log" id="hist"></ul>
 <button class="small" id="clearLog" type="button">Clear history</button>
 </details>
@@ -109,13 +219,72 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 
 </div>
 <div id="tab-epic" hidden>
+<div class="seg" id="setBar"></div>
 <div class="note" id="epSum"></div>
 <input id="epSearch" type="search" placeholder="Search epic or holder..." style="margin-top:8px">
-<div class="seg"><button type="button" id="vEpic">By Epic</button><button type="button" id="vHolder">By Holder</button></div>
+<div class="seg" id="nfBar"><button type="button" data-nf="num" class="on">Numbered</button><button type="button" data-nf="nl">Numberless</button></div>
+<div class="seg" id="viewBar"><button type="button" id="vEpic">By Epic</button><button type="button" id="vHolder">By Holder</button></div>
 <div id="epicList"></div>
 <div id="holderList" hidden></div>
-<div class="addrow"><input id="newEpic" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button></div>
+<div class="addrow"><input id="newEpic" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button><button type="button" id="addNL">Add numberless</button></div>
+<details id="setMgr"><summary>Manage sets</summary>
+<input id="setName" placeholder="Set name">
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="setAdd" type="button" style="margin:0">Add set</button><button class="small" id="setRen" type="button" style="margin:0">Rename current</button><button class="small" id="setDel" type="button" style="margin:0">Delete current</button></div>
+</details>
 <datalist id="holderDL"></datalist>
+</div>
+
+<div id="tab-pass" hidden>
+<div style="display:flex;gap:22px;flex-wrap:wrap"><label class="chk" style="margin-top:0"><input type="checkbox" id="passPlus"> I have Plus</label><label class="chk" style="margin-top:0"><input type="checkbox" id="passUltra"> I have Ultra Pass</label></div>
+<div class="seg" id="passSub" hidden><button type="button" data-sub="reg" class="on">Regular</button><button type="button" data-sub="ultra">Ultra</button></div>
+<div id="passReg">
+<div class="passTop">
+<div class="card" id="gemBox" hidden>
+<div class="lbl">Gems gained</div>
+<div class="val" id="gemVal">0</div>
+<div class="note">+10 gems each time an item is added</div>
+</div>
+<div class="card" id="oddsBox"><div class="lbl">Odds</div><table id="passOdds"></table></div>
+</div>
+<h2>Tracker</h2>
+<div class="grid" id="passGrid"></div>
+<div class="note" id="passTot"></div>
+</div>
+<div id="passUl" hidden>
+<div class="passTop">
+<div class="card" id="ulTotals">
+<div class="lbl">Total coins</div><div class="val big" id="ulCoins">0</div>
+<div class="lbl">Total gems</div><div class="val big" id="ulGems">0</div>
+</div>
+<div class="card"><div class="lbl">Odds</div><table id="ulOdds"></table></div>
+</div>
+<h2 id="ulHead">Entries</h2>
+<div class="grid" id="ulGrid"></div>
+</div>
+<button class="small" id="passReset" type="button">Reset &amp; save to history</button>
+<details id="passHistBox"><summary id="passHistSum">History</summary><div id="passHist"></div></details>
+</div>
+
+<div id="tab-event" hidden>
+<div class="passTop">
+<div class="card" id="evTotals">
+<div class="lbl">Total coins</div><div class="val big" id="evCoins">0</div>
+<div class="lbl">Total gems</div><div class="val big" id="evGems">0</div>
+</div>
+<div class="card" id="evOddsBox"><div class="lbl">Odds</div><table id="evOdds"></table></div>
+</div>
+<h2>Tracker</h2>
+<div class="grid" id="evGrid"></div>
+<div class="note" id="evTot"></div>
+<button class="small" id="evReset" type="button">Reset &amp; save to history</button>
+<details id="evHistBox"><summary id="evHistSum">History</summary><div id="evHist"></div></details>
+</div>
+
+<div id="tab-buys" hidden>
+<div class="note" id="buySum"></div>
+<input id="buySearch" type="search" placeholder="Search purchases..." style="margin-top:8px">
+<div id="buyList"></div>
+<div class="addrow"><input id="newBuy" placeholder="New purchase title (e.g. Any Epic purchase)"><button type="button" id="addBuy">Add purchase</button></div>
 </div>
 
 <div id="tab-map" hidden>
@@ -124,6 +293,41 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 <a id="mapOpen" href="https://smartistguesser.github.io/soundmap-artist-guesser/" target="_blank" rel="noopener">Open in new tab</a></div>
 <div id="mapWrap" style="height:max(480px,calc(100vh - 180px));overflow:hidden;border:1px solid var(--bd);border-radius:10px;background:#fff">
 <iframe id="mapFrame" title="Artist Guesser" allow="autoplay; fullscreen; clipboard-write" allowfullscreen loading="lazy" style="width:calc(100% / var(--z,1));height:calc(max(480px,100vh - 180px) / var(--z,1));border:0;transform:scale(var(--z,1));transform-origin:0 0"></iframe>
+</div>
+</div>
+
+<div id="tab-info" hidden>
+<h2>Quest rates</h2>
+<div class="card">
+<table>
+<tr><th>Rarity</th><th><span class="pill r r-epic">Epic</span></th><th><span class="pill r r-lyrics">Lyric</span></th><th><span class="pill r r-shiny">Shiny</span></th></tr>
+<tr><td><span class="pill r r-common">Common</span></td><td>0.225%</td><td>0.2%</td><td>0.667%</td></tr>
+<tr><td><span class="pill r r-uncommon">Uncommon</span></td><td>0.056%</td><td>0.04%</td><td>0.125%</td></tr>
+<tr><td><span class="pill r r-rare">Rare</span></td><td>0.0225%</td><td>0.022%</td><td>0.05%</td></tr>
+</table>
+<div class="note" style="margin-top:6px;font-size:15px;color:var(--tx)"><strong>Gem Epic rate:</strong> 0.4% <span style="font-size:12px;color:var(--mut)">(can be pulled during cooldown)</span></div>
+</div>
+
+<h2>Epic / Lyric map drop pool</h2>
+<div class="card">
+<table>
+<tr><th>Genre</th><th>Artists included</th></tr>
+<tr><td><span class="pill g g-hiphop">Hip-hop</span><span class="pill g g-pop">Pop</span><span class="pill g g-rock">Rock</span></td><td>Top 1500 artists</td></tr>
+<tr><td><span class="pill g g-indie">Indie</span></td><td>Top 1000 artists</td></tr>
+<tr><td><span class="pill g g-kpop">K-pop</span></td><td>Top 750 artists</td></tr>
+<tr><td><span class="pill g g-rnb">R&amp;B</span><span class="pill g g-electronic">Electronic</span><span class="pill g g-classical">Other</span></td><td>Top 500 artists</td></tr>
+</table>
+</div>
+
+<h2>Quest eligibility</h2>
+<div class="card">
+<div class="note" style="margin:0 0 8px">Which artists will drop epics/lyrics, or numberless epics and no lyrics. If an artist is within the top number listed for its genre, it will drop numberless epics.</div>
+<table>
+<tr><th>Genre</th><th>Numberless epics</th></tr>
+<tr><td><span class="pill g g-hiphop">Hip-hop</span><span class="pill g g-pop">Pop</span><span class="pill g g-rock">Rock</span></td><td>Top 350</td></tr>
+<tr><td><span class="pill g g-indie">Indie</span></td><td>Top 250</td></tr>
+<tr><td><span class="pill g g-rnb">R&amp;B</span><span class="pill g g-electronic">Electronic</span><span class="pill g g-classical">Other</span></td><td>Top 150</td></tr>
+</table>
 </div>
 </div>
 
@@ -161,15 +365,14 @@ async function track(p){
 
 /* ---------- shiny tracker ---------- */
 const fields=[
-["bought","Shinies Bought","bought"],["twoToOne","2:1 Shinies","two_to_one"],["oneOne","1:1 Shinies","one_one"],
+["bought","Shinies Bought","bought"],["costEach","Cost per shiny bought ($)","cost_each"],["twoToOne","2:1 Shinies","two_to_one"],["oneOne","1:1 Shinies","one_one"],
 ["commons","Commons Sold","commons"],["uncommons","Uncommons Sold","uncommons"],["rares","Rares Sold","rares"],
 ["misc","Misc. Sold (List Price, $)","misc"],["start","Start date","start_date"],
 ["oneOnePrice","1:1 + amount ($ each)","one_one_price"],["commonPrice","Common price ($)","common_price"],
-["uncommonPrice","Uncommon price ($)","uncommon_price"],["rarePrice","Rare price ($)","rare_price"],
-["costEach","Cost per shiny bought ($)","cost_each"],["keptBack","Shinies kept back","kept_back"]
+["uncommonPrice","Uncommon price ($)","uncommon_price"],["rarePrice","Rare price ($)","rare_price"]
 ];
-const PRICE=new Set(["oneOnePrice","commonPrice","uncommonPrice","rarePrice","costEach","keptBack"]);
-const hostOf=k=>PRICE.has(k)?"prices":(k==="bought"||k==="start")?"inv":"inputs";
+const PRICE=new Set(["oneOnePrice","commonPrice","uncommonPrice","rarePrice","costEach"]);
+const hostOf=k=>k==="costEach"?"inv":PRICE.has(k)?"prices":(k==="bought"||k==="start")?"inv":"inputs";
 const short=n=>n>=1000&&n%1000===0?(n/1000)+"k":Number(n).toLocaleString("en-US");
 function updateLabels(){
   const set=(k,txt)=>{const el=document.querySelector('label[for="'+k+'"]');if(el)el.textContent=txt};
@@ -180,7 +383,7 @@ function updateLabels(){
 }
 const col=Object.fromEntries(fields.map(f=>[f[0],f[2]]));
 const labelOf=k=>(fields.find(f=>f[0]===k)||[0,k])[1];
-let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"2026-04-11",oneOnePrice:1000,commonPrice:4000,uncommonPrice:6000,rarePrice:8000,costEach:1250,keptBack:1};
+let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"2026-04-11",oneOnePrice:1000,commonPrice:4000,uncommonPrice:6000,rarePrice:8000,costEach:1250};
 const committed={},els={};
 const num=k=>Number(s[k])||0;
 const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
@@ -216,22 +419,40 @@ fields.forEach(([k,l])=>{
   const el=d.querySelector("input");els[k]=el;
   el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k)});
   el.addEventListener("change",()=>{logChange(k,committed[k],s[k]);committed[k]=s[k]});
-  if(k!=="start"&&(!PRICE.has(k)||k==="keptBack")){
+  if(k!=="start"&&!PRICE.has(k)){
     const row=document.createElement("div");row.className="steps";
+    const sb2=document.createElement("div");sb2.className="sb";
+    const amt=document.createElement("input");
+    amt.type="number";amt.min="1";amt.step="1";amt.className="stepin";amt.setAttribute("inputmode","numeric");
+    amt.setAttribute("aria-label","Amount to add or subtract for "+k);
+    amt.value=LS("tracker.step."+k)||"1";
+    amt.addEventListener("change",()=>{
+      const v=Math.max(1,Math.floor(Number(amt.value))||1);amt.value=v;LS("tracker.step."+k,String(v));
+    });
     [["+",1],["\u2212",-1]].forEach(([txt,dlt])=>{
       const b=document.createElement("button");b.type="button";b.textContent=txt;
-      b.onclick=()=>{const o=num(k);s[k]=Math.max(0,o+dlt);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o)};
-      row.appendChild(b);
+      b.setAttribute("aria-label",(dlt>0?"Add to ":"Subtract from ")+k);
+      b.onclick=()=>{
+        const n=Math.max(1,Math.floor(Number(amt.value))||1);
+        const o=num(k);s[k]=Math.max(0,o+dlt*n);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o);
+      };
+      sb2.appendChild(b);
     });
+    row.appendChild(sb2);row.appendChild(amt);
     d.appendChild(row);
   }
 });
+function results(st){
+  const n=k=>Number(st[k])||0;
+  const remaining=n("bought")-n("commons")-n("uncommons")-n("rares")+n("twoToOne")-1;
+  const profit11=n("oneOne")*n("oneOnePrice");
+  const sold=n("commons")*n("commonPrice")+n("uncommons")*n("uncommonPrice")+n("rares")*n("rarePrice")+n("misc");
+  const total=profit11+sold,cost=n("bought")*n("costEach"),net=total-cost;
+  return {remaining,profit11,sold,total,cost,net};
+}
 function calc(){
   updateLabels();
-  const remaining=num("bought")-num("commons")-num("uncommons")-num("rares")+num("twoToOne")-num("keptBack");
-  const profit11=num("oneOne")*num("oneOnePrice");
-  const sold=num("commons")*num("commonPrice")+num("uncommons")*num("uncommonPrice")+num("rares")*num("rarePrice")+num("misc");
-  const total=profit11+sold,cost=num("bought")*num("costEach"),net=total-cost;
+  const {remaining,profit11,sold,total,cost,net}=results(s);
   const st=new Date((s.start||"2026-04-11")+"T00:00:00");
   const now=new Date();now.setHours(0,0,0,0);
   const days=Math.max(1,Math.round((now-st)/864e5)+1);
@@ -244,13 +465,43 @@ function calc(){
 
 /* ---------- history log ---------- */
 let log=[],pend=null,pendTimer=null;
+function renderReport(){
+  const since=Date.now()-864e5;
+  const ents=log.filter(e=>e.t>=since).slice().reverse();
+  const by={};
+  ents.forEach(e=>{const b=by[e.k]=by[e.k]||{from:e.from,to:e.to,n:0};b.to=e.to;b.n++});
+  const keys=fields.map(f=>f[0]).filter(k=>by[k]&&String(by[k].from)!==String(by[k].to));
+  const body=$("reportBody");
+  if(!keys.length){body.innerHTML='<h2 style="margin:4px 0 0">Daily report, last 24 hours</h2><div class="empty">'+(ents.length?"No net changes in the last 24 hours.":"No changes in the last 24 hours.")+'</div>';return}
+  const sg=d=>d>0?"+":d<0?"-":"";
+  const money=v=>(v<0?"-":"")+"$"+Math.abs(Math.round(v)).toLocaleString("en-US");
+  const plain=v=>Number(v).toLocaleString("en-US");
+  const dl=(d,txt)=>d?`<span class="dl ${d>0?"pos":"neg"}">${sg(d)}${txt}</span>`:"";
+  const name=k=>k==="oneOne"?"1:1 + "+short(num("oneOnePrice")):labelOf(k);
+  const rows=keys.map(k=>{
+    const b=by[k],d=Number(b.to)-Number(b.from),ok=b.from!==""&&b.to!==""&&!isNaN(d);
+    return `<div class="rc"><div class="nm">${esc(name(k))}</div><div class="chg"><span>${esc(b.from)} \u2192 ${esc(b.to)}</span>${ok?dl(d,plain(Math.abs(d))):""}</div></div>`;
+  }).join("");
+  const st0=Object.assign({},s);keys.forEach(k=>{st0[k]=by[k].from});
+  const r0=results(st0),r1=results(s);
+  const eff=[["Net Gain",r0.net,r1.net,true],["Shinies Remaining",r0.remaining,r1.remaining,false]]
+    .filter(x=>x[1]!==x[2])
+    .map(([l,a,b,m])=>{
+      const f=m?money:plain,d=b-a;
+      return `<div class="rc"><div class="nm">${l}</div><div class="chg"><span>${f(a)} \u2192 ${f(b)}</span>${dl(d,f(Math.abs(d)))}</div></div>`;
+    }).join("");
+  body.innerHTML=`<h2 style="margin:4px 0 0">Daily report, last 24 hours (${keys.length} changed)</h2><div class="rgrid">${rows}</div><h2 style="margin:14px 0 0">Effect on totals</h2><div class="rgrid w">${eff||'<div class="empty">No effect on totals.</div>'}</div>`;
+}
 function renderLog(){
+  renderReport();
   $("histSum").textContent="History ("+log.length+")";
   const ul=$("hist");
   if(!log.length){ul.innerHTML='<li class="empty">No changes logged yet.</li>';return}
   ul.innerHTML=log.map(e=>{
     const d=new Date(e.t).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
-    return `<li><div><div>${esc(labelOf(e.k))}</div><div class="when">${d}</div></div><div class="chg">${esc(e.from)} \u2192 ${esc(e.to)}</div></li>`;
+    const df=Number(e.to)-Number(e.from);
+    const delta=(e.from!==""&&e.to!==""&&!isNaN(df)&&df!==0)?`<span class="dl ${df>0?"pos":"neg"}">${df>0?"+":""}${df.toLocaleString("en-US")}</span>`:"";
+    return `<li><div class="nm">${esc(labelOf(e.k))}</div><div class="chg">${esc(e.from)} \u2192 ${esc(e.to)}${delta}</div><div class="when">${d}</div></li>`;
   }).join("");
 }
 function logChange(k,from,to){
@@ -279,37 +530,59 @@ $("clearLog").onclick=()=>ask("Clear the history log?",async()=>{
 });
 
 /* ---------- epic tracker ---------- */
-let epics=[],eq="";
+let epics=[],allEpics=[],sets=[],curSet=null,eq="";
+const RAR=["common","uncommon","rare"],RLBL={common:"Common",uncommon:"Uncommon",rare:"Rare"};
+let rarityDB=true,numDB=true,nf=LS("tracker.nf")==="nl"?"nl":"num",curView="epic";
+const nlLS=()=>{try{return JSON.parse(LS("tracker.numberless")||"{}")}catch(e){return {}}};
+const nlSave=(e)=>{const m=nlLS();if(e.numberless)m[e.id]=1;else delete m[e.id];LS("tracker.numberless",JSON.stringify(m))};
+const eLabel=(e,j)=>e.numberless?e.name:e.name+" #"+(j+1);
+const rarLS=()=>{try{return JSON.parse(LS("tracker.rarity")||"{}")}catch(e){return {}}};
+function rarTag(r){return r?`<button type="button" class="pill r rt r-${r}" data-act="rar" title="Change rarity">${RLBL[r]}</button>`:`<button type="button" class="pill rt none" data-act="rar" title="Set rarity">Rarity</button>`}
 const sk=n=>n.toLowerCase().replace(/[^a-z0-9]/g,"");
-const sortEpics=()=>epics.sort((a,b)=>sk(a.name)<sk(b.name)?-1:sk(a.name)>sk(b.name)?1:a.id-b.id);
+const cmp=(a,b)=>sk(a.name)<sk(b.name)?-1:sk(a.name)>sk(b.name)?1:a.id-b.id;
+function applySet(){epics=allEpics.filter(e=>e.set_id===curSet).sort(cmp)}
+function renderSets(){
+  $("setBar").innerHTML=sets.map(x=>`<button type="button" data-set="${x.id}" class="${x.id===curSet?"on":""}">${esc(x.name)}</button>`).join("");
+  const cur=sets.find(x=>x.id===curSet);
+  $("setName").placeholder=cur?"New name or new set name (current: "+cur.name+")":"Set name";
+}
+function switchSet(id){
+  curSet=id;LS("tracker.set",String(id));applySet();eq="";$("epSearch").value="";
+  renderSets();renderEpics();renderMeta();
+}
 function holderMap(){
   const m={};
-  epics.forEach(e=>e.holders.forEach((h,i)=>{h=h.trim();if(!h)return;const k=h.toLowerCase();(m[k]=m[k]||{n:h,items:[]}).items.push(e.name+" #"+(i+1))}));
+  epics.forEach(e=>{if(e.numberless)return;e.holders.forEach((h,i)=>{h=h.trim();if(!h)return;const k=h.toLowerCase();(m[k]=m[k]||{n:h,items:[]}).items.push(e.name+" #"+(i+1))})});
   return Object.values(m).sort((a,b)=>b.items.length-a.items.length||a.n.localeCompare(b.n));
 }
+const got=e=>e.holders.some(h=>h.trim());
 function matches(e){
+  if(nf==="num"&&e.numberless)return false;if(nf==="nl"&&!e.numberless)return false;
   if(!eq)return true;const t=eq.toLowerCase();
-  return e.name.toLowerCase().includes(t)||e.holders.some(h=>h.toLowerCase().includes(t));
+  return e.name.toLowerCase().includes(t)||(!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
 }
 function renderEpics(){
   const t=eq.toLowerCase();
   const list=epics.map((e,i)=>[e,i]).filter(([e])=>matches(e));
   $("epicList").innerHTML=list.map(([e,i])=>`<div class="card ep" data-i="${i}">
-<div class="eph"><strong title="${esc(e.name)}"${e.name.length>20?` style="font-size:${e.name.length>26?12:14}px"`:""}>${esc(e.name)}</strong><button type="button" class="x" data-act="del" aria-label="Delete epic">\u2715</button></div>
-${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}
-<div class="steps"><button type="button" data-act="add">+ slot</button><button type="button" data-act="rem">\u2212 slot</button></div></div>`).join("")||'<div class="empty">No matches.</div>';
+<div class="eph"><div class="ehl"><strong title="${esc(e.name)}"${e.name.length>20?` style="font-size:${e.name.length>30?11:12}px"`:""}>${esc(e.name)}</strong>${rarTag(e.rarity)}</div><button type="button" class="x" data-act="del" aria-label="Delete epic">\u2715</button></div>
+${e.numberless?`<label class="chk"><input type="checkbox" data-act="chk"${got(e)?" checked":""}> Obtained</label>`:`${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}
+<div class="steps"><button type="button" data-act="add">+ slot</button><button type="button" data-act="rem">\u2212 slot</button></div>`}</div>`).join("")||'<div class="empty">No matches.</div>';
 }
 function renderMeta(){
   const hm=holderMap();
-  let known=0,unk=0;epics.forEach(e=>e.holders.forEach(h=>h.trim()?known++:unk++));
-  $("epSum").textContent=`${epics.length} epics \u00b7 ${known} known holders \u00b7 ${unk} unknown slots \u00b7 ${hm.length} users`;
+  let known=0,unk=0,nn=0,ng=0;epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}e.holders.forEach(h=>h.trim()?known++:unk++)});
+  const curS=sets.find(x=>x.id===curSet);
+  $("epSum").textContent=`${curS?curS.name+": ":""}${epics.length} epics${nn?` (${epics.length-nn} numbered, ${nn} numberless)`:""} \u00b7 ${known} known holders \u00b7 ${unk} unknown slots \u00b7 ${hm.length} users${nn?` \u00b7 ${ng}/${nn} numberless obtained`:""}`;
   $("holderDL").innerHTML=hm.map(h=>`<option value="${esc(h.n)}">`).join("");
   const t=eq.toLowerCase();
   const hl=hm.filter(h=>!t||h.n.toLowerCase().includes(t)||h.items.some(x=>x.toLowerCase().includes(t)));
   $("holderList").innerHTML=hl.map(h=>`<div class="card"><div class="eph"><strong title="${esc(h.n)}">${esc(h.n)}</strong><span class="lbl" style="margin:0">${h.items.length}</span></div>${h.items.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`).join("")||'<div class="empty">No matches.</div>';
 }
 function setView(v){
-  $("epicList").hidden=v!=="epic";$("holderList").hidden=v!=="holder";
+  curView=v;const nl=nf==="nl";
+  $("epicList").hidden=nl?false:v!=="epic";$("holderList").hidden=nl?true:v!=="holder";
+  $("viewBar").hidden=nl;$("nfBar").hidden=false;
   $("vEpic").classList.toggle("on",v==="epic");$("vHolder").classList.toggle("on",v==="holder");
 }
 const slotTimers={};
@@ -323,15 +596,30 @@ function schedSlot(e,j){
 }
 const epicList=$("epicList");
 epicList.addEventListener("input",ev=>{
-  const inp=ev.target.closest("input");if(!inp)return;
+  const inp=ev.target.closest("input");if(!inp||inp.type==="checkbox")return;
   const e=epics[+inp.closest(".ep").dataset.i],j=+inp.dataset.j;
   e.holders[j]=inp.value;schedSlot(e,j);
 });
-epicList.addEventListener("change",renderMeta);
+epicList.addEventListener("change",ev=>{
+  const c=ev.target.closest('input[type="checkbox"]');
+  if(!c){renderMeta();return}
+  const e=epics[+c.closest(".ep").dataset.i],n=e.holders.length,v=c.checked?"1":"";
+  e.holders=[v];
+  track(sb.from("epic_slots").upsert({epic_id:e.id,slot:1,holder:v}));
+  if(n>1)track(sb.from("epic_slots").delete().eq("epic_id",e.id).gt("slot",1));
+  renderMeta();
+});
 epicList.addEventListener("click",ev=>{
   const b=ev.target.closest("button");if(!b)return;
   const e=epics[+b.closest(".ep").dataset.i],a=b.dataset.act;
   const done=()=>{renderEpics();renderMeta()};
+  if(a==="rar"){
+    const nx=RAR[RAR.indexOf(e.rarity)+1]||null;
+    e.rarity=nx;done();
+    if(rarityDB)track(sb.from("epics").update({rarity:nx}).eq("id",e.id));
+    else{const m=rarLS();if(nx)m[e.id]=nx;else delete m[e.id];LS("tracker.rarity",JSON.stringify(m))}
+    return;
+  }
   if(a==="add"){
     e.holders.push("");done();
     track(sb.from("epic_slots").upsert({epic_id:e.id,slot:e.holders.length,holder:""},{ignoreDuplicates:true}));
@@ -339,26 +627,60 @@ epicList.addEventListener("click",ev=>{
     if(e.holders.length<=1)return;
     const n=e.holders.length,last=e.holders[n-1];
     const go=()=>{e.holders.pop();done();track(sb.from("epic_slots").delete().eq("epic_id",e.id).eq("slot",n))};
-    if(last.trim())ask("Remove slot #"+n+" ("+last+")?",go);else go();
+    if(last.trim())ask(e.numberless?"Remove holder ("+last+")?":"Remove slot #"+n+" ("+last+")?",go);else go();
   }else if(a==="del"){
     ask("Delete epic \u201c"+e.name+"\u201d?",()=>{
-      epics.splice(epics.indexOf(e),1);done();
+      allEpics.splice(allEpics.indexOf(e),1);applySet();done();
       track(sb.from("epics").delete().eq("id",e.id));
     });
   }
 });
 $("epSearch").addEventListener("input",ev=>{eq=ev.target.value.trim();renderEpics();renderMeta()});
+function setNF(v){nf=v;LS("tracker.nf",v);setView(curView);[...$("nfBar").children].forEach(x=>x.classList.toggle("on",x.dataset.nf===v))}
+setNF(nf);
+$("nfBar").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;setNF(b.dataset.nf);renderEpics()});
 $("vEpic").onclick=()=>setView("epic");
 $("vHolder").onclick=()=>setView("holder");
-$("addEpic").onclick=async()=>{
+async function addEpicNew(newNL){
   const n=$("newEpic").value.trim();if(!n)return;
-  const r=await track(sb.from("epics").insert({name:n}).select("id").single());
+  let useNum=numDB;
+  let r=await track(sb.from("epics").insert({name:n,set_id:curSet,...(newNL&&numDB?{numberless:true}:{})}).select("id").single());
+  if((!r||!r.data)&&newNL&&numDB){numDB=false;useNum=false;r=await track(sb.from("epics").insert({name:n,set_id:curSet}).select("id").single())}
   if(!r||!r.data)return;
   await track(sb.from("epic_slots").insert({epic_id:r.data.id,slot:1,holder:""}));
-  epics.push({id:r.data.id,name:n,holders:[""]});sortEpics();
+  const ne={id:r.data.id,set_id:curSet,name:n,rarity:null,numberless:newNL,holders:[""]};
+  allEpics.push(ne);if(newNL&&!useNum)nlSave(ne);setNF(newNL?"nl":"num");applySet();
   $("newEpic").value="";eq=n;$("epSearch").value=n;setView("epic");renderEpics();renderMeta();
-};
+}
+$("addEpic").onclick=()=>addEpicNew(false);
+$("addNL").onclick=()=>addEpicNew(true);
 $("newEpic").addEventListener("keydown",ev=>{if(ev.key==="Enter")$("addEpic").click()});
+
+/* sets */
+$("setBar").addEventListener("click",ev=>{const b=ev.target.closest("button");if(b)switchSet(+b.dataset.set)});
+$("setAdd").onclick=async()=>{
+  const name=$("setName").value.trim();if(!name)return;
+  const pos=sets.reduce((m,x)=>Math.max(m,x.position),-1)+1;
+  const r=await track(sb.from("epic_sets").insert({name:name,position:pos}).select("*").single());
+  if(!r||!r.data)return;
+  sets.push(r.data);
+  $("setName").value="";switchSet(r.data.id);
+};
+$("setRen").onclick=async()=>{
+  const name=$("setName").value.trim(),cur=sets.find(x=>x.id===curSet);if(!name||!cur)return;
+  const r=await track(sb.from("epic_sets").update({name:name}).eq("id",cur.id));
+  if(r){cur.name=name;$("setName").value="";renderSets();renderMeta()}
+};
+$("setDel").onclick=()=>{
+  const cur=sets.find(x=>x.id===curSet);if(!cur)return;
+  if(sets.length<=1){setStatus("You need at least one set.",true);return}
+  ask("Delete set \u201c"+cur.name+"\u201d and all of its epics?",async()=>{
+    const r=await track(sb.from("epic_sets").delete().eq("id",cur.id));
+    if(!r)return;
+    sets=sets.filter(x=>x.id!==cur.id);allEpics=allEpics.filter(e=>e.set_id!==cur.id);
+    switchSet(sets[0].id);
+  });
+};
 
 /* ---------- tabs ---------- */
 let zoom=Number(LS("tracker.zoom"))||0.8;
@@ -373,48 +695,282 @@ $("zIn").onclick=()=>{zoom+=0.1;applyZoom()};
 applyZoom();
 const MAP_URL="https://smartistguesser.github.io/soundmap-artist-guesser/";
 function showTab(n){
-  const ids={shiny:"tbShiny",epic:"tbEpic",map:"tbMap"};
+  const ids={shiny:"tbShiny",epic:"tbEpic",pass:"tbPass",event:"tbEvent",buys:"tbBuys",map:"tbMap",info:"tbInfo"};
   Object.keys(ids).forEach(x=>{$("tab-"+x).hidden=n!==x;$(ids[x]).classList.toggle("on",n===x)});
-  $("bk").hidden=n==="map";
+  $("bk").hidden=n==="map"||n==="info"||n==="pass"||n==="event"||n==="buys";
   if(n==="map"&&!$("mapFrame").getAttribute("src"))$("mapFrame").src=MAP_URL;
   LS("tracker.tab",n);
 }
 $("tbShiny").onclick=()=>showTab("shiny");
 $("tbEpic").onclick=()=>showTab("epic");
+$("tbPass").onclick=()=>showTab("pass");
+$("tbEvent").onclick=()=>showTab("event");
+$("tbBuys").onclick=()=>showTab("buys");
 $("tbMap").onclick=()=>showTab("map");
+$("tbInfo").onclick=()=>showTab("info");
 const det=$("more");
 det.open=LS("tracker.more")==="1";
 det.addEventListener("toggle",()=>LS("tracker.more",det.open?"1":"0"));
+const pdet=$("priceBox");
+pdet.open=LS("tracker.prices")==="1";
+pdet.addEventListener("toggle",()=>LS("tracker.prices",pdet.open?"1":"0"));
 
 /* ---------- load from database ---------- */
+async function fetchAll(table){
+  let out=[],from=0;
+  for(;;){
+    let q=sb.from(table).select("*");
+    q=table==="epic_slots"?q.order("epic_id").order("slot"):q.order("id");
+    const r=await q.range(from,from+999);
+    if(r.error)return r;
+    out=out.concat(r.data);
+    if(r.data.length<1000)break;
+    from+=1000;
+  }
+  return {data:out};
+}
 async function loadAll(quiet){
   if(!quiet)setStatus("Loading...");
-  const [st,lg,ep,sl]=await Promise.all([
+  const [st,lg,ss,ep,sl]=await Promise.all([
     sb.from("shiny_state").select("*").eq("id",1).maybeSingle(),
-    sb.from("shiny_log").select("*").order("at",{ascending:false}).limit(200),
-    sb.from("epics").select("*"),
-    sb.from("epic_slots").select("*")
+    sb.from("shiny_log").select("*").order("at",{ascending:false}).limit(500),
+    sb.from("epic_sets").select("*").order("position").order("id"),
+    fetchAll("epics"),
+    fetchAll("epic_slots")
   ]);
-  const err=st.error||lg.error||ep.error||sl.error;
+  const err=st.error||lg.error||ss.error||ep.error||sl.error;
   if(err){setStatus("Load failed: "+err.message,true);return false}
   if(!st.data)await sb.from("shiny_state").insert({id:1});
   const r=st.data||{};
-  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"2026-04-11",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250,keptBack:r.kept_back??1};
+  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"2026-04-11",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
   fields.forEach(([k])=>{els[k].value=s[k];committed[k]=s[k]});
   log=lg.data.map(x=>({id:x.id,t:Date.parse(x.at),k:x.field,from:x.old_value,to:x.new_value}));
   const bySlot={};
   sl.data.forEach(x=>{(bySlot[x.epic_id]=bySlot[x.epic_id]||[])[x.slot-1]=x.holder});
-  epics=ep.data.map(e=>({id:e.id,name:e.name,holders:Array.from(bySlot[e.id]||[""],h=>h||"")}));
-  sortEpics();
-  calc();renderLog();renderEpics();renderMeta();
+  sets=ss.data;
+  if(!sets.length){
+    const ins=await sb.from("epic_sets").insert({name:"Set 1",position:0}).select("*").single();
+    if(ins.data)sets=[ins.data];
+  }
+  rarityDB=!ep.data.length||ep.data.some(e=>"rarity"in e);
+  const rm=rarityDB?{}:rarLS();
+  numDB=!ep.data.length||ep.data.some(e=>"numberless"in e);
+  const nm=numDB?{}:nlLS();
+  allEpics=ep.data.map(e=>({id:e.id,set_id:e.set_id,name:e.name,rarity:RAR.includes(rarityDB?e.rarity:rm[e.id])?(rarityDB?e.rarity:rm[e.id]):null,numberless:numDB?!!e.numberless:!!nm[e.id],holders:Array.from(bySlot[e.id]||[""],h=>h||"")}));
+  if(!sets.some(x=>x.id===curSet)){
+    const saved=Number(LS("tracker.set"));
+    const pick=sets.find(x=>x.id===saved)||sets[0];
+    curSet=pick?pick.id:null;
+  }
+  applySet();
+  calc();renderLog();renderSets();renderEpics();renderMeta();
+  await loadPass();
+  await loadEvent();
+  await loadBuys();
   if(!quiet)setStatus("Saved");
   return true;
 }
 
+/* ---------- pass tracker ---------- */
+const PASS=[["srand","Shiny Box (Random Artist)",50],["schoose","Shiny Box (Choose Artist)",45],["nlepic","Random Numberless Epic",3],["nepic","Numbered Epic",2]];
+const PLUS_GEMS=10;
+let pass={plus:false,ultra:false,gems:0,c:{},u:[],start:0,history:[]},passDB=true,psub=LS("tracker.psub")==="ultra"?"ultra":"reg";
+const passCnt=c=>{const o={};PASS.forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
+const ULT=[["u10k","10k Coins",24.5,10000,0],["u20k","20k Coins",32.5,20000,0],["g20","20 Gems",22,0,20],["nepic","Random Numbered Epic",5,0,0],["u40k","40k Coins",3,40000,0],["g40","40 Gems",2,0,40],["u100k","100k Coins",0.5,100000,0],["g100","100 Gems",0.5,0,100],["sbox","Shiny Artist Box (Boosted Odds)",0.6,0,0],["t150","Top 150 Random Artist Epic",0.3,0,0],["gemb","Gem Rate Boost",3,0,0],["genb","Genre Drop Boost",3,0,0],["mapb","Map Boost",3,0,0]];
+const ULN=25,ULK=new Set(ULT.map(x=>x[0]));
+const ulNorm=u=>{const a=Array.from({length:ULN},(_,i)=>ULK.has(u&&u[i])?u[i]:"");return a};
+const ulSum=u=>{const r={coins:0,gems:0,n:0,c:{}};ULT.forEach(x=>r.c[x[0]]=0);u.forEach(k=>{if(!k)return;const x=ULT.find(y=>y[0]===k);r.c[k]++;r.coins+=x[3];r.gems+=x[4];r.n++});return r};
+function passNorm(d){d=d||{};return{plus:!!d.plus,ultra:!!d.ultra,gems:Math.max(0,parseInt(d.gems)||0),c:passCnt(d.c),u:ulNorm(d.u),start:+d.start||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,plus:!!h.plus,gems:Math.max(0,parseInt(h.gems)||0),c:passCnt(h.c),u:Array.isArray(h.u)&&h.u.some(Boolean)?ulNorm(h.u):null})):[]}}
+const fmtD=t=>new Date(t).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+pass=passNorm();
+function renderPass(){
+  $("passPlus").checked=pass.plus;$("gemBox").hidden=!pass.plus;
+  $("gemVal").textContent=pass.gems;
+  $("passOdds").innerHTML=PASS.map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}%</td></tr>`).join("");
+  const tot=PASS.reduce((a,[k])=>a+pass.c[k],0);
+  $("passGrid").innerHTML=PASS.map(([k,n,o])=>`<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}%</span></div><div class="val">${pass.c[k]}</div><div class="obs">${tot?(pass.c[k]/tot*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`).join("");
+  $("passTot").textContent="Total: "+tot;
+  renderUltra();
+  $("passHistSum").textContent="History"+(pass.history.length?" ("+pass.history.length+")":"");
+  $("passHist").innerHTML=pass.history.map((h,i)=>{
+    const total=PASS.reduce((a,[k])=>a+h.c[k],0);
+    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${PASS.map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${total}</b></div>${h.plus?`<div class="hrow"><span>Gems gained</span><b>${h.gems}</b></div>`:""}${h.u?(()=>{const q=ulSum(h.u);return `<div class="hrow" style="font-weight:600"><span>Ultra pass</span><span>${q.n}/${ULN}</span></div>`+ULT.filter(x=>q.c[x[0]]).map(x=>`<div class="hrow"><span>${esc(x[1])}</span><b>${q.c[x[0]]}</b></div>`).join("")+`<div class="hrow"><span>Ultra coins</span><b>${nfmt(q.coins)}</b></div><div class="hrow"><span>Ultra gems</span><b>${nfmt(q.gems)}</b></div>`})():""}</div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+}
+function renderUltra(){
+  $("passUltra").checked=pass.ultra;
+  if(!pass.ultra&&psub==="ultra")psub="reg";
+  $("passSub").hidden=!pass.ultra;
+  [...$("passSub").children].forEach(b=>b.classList.toggle("on",b.dataset.sub===psub));
+  $("passReg").hidden=psub==="ultra";$("passUl").hidden=psub!=="ultra";
+  const q=ulSum(pass.u);
+  $("ulCoins").textContent=nfmt(q.coins);$("ulGems").textContent=nfmt(q.gems);
+  $("ulHead").textContent="Entries ("+q.n+"/"+ULN+")";
+  $("ulOdds").innerHTML="<tr><th>Item</th><th>Odds</th><th>Got</th></tr>"+ULT.map(x=>`<tr><td>${esc(x[1])}</td><td>${x[2]}%</td><td>${q.c[x[0]]}</td></tr>`).join("");
+  $("ulGrid").innerHTML=pass.u.map((k,i)=>`<div class="card ue${k?" on":""}"><div class="lbl">Entry ${i+1}</div><select data-i="${i}"><option value="">\u2014</option>${ULT.map(x=>`<option value="${x[0]}"${x[0]===k?" selected":""}>${esc(x[1])}</option>`).join("")}</select></div>`).join("");
+}
+function savePass(){
+  LS("tracker.pass",JSON.stringify(pass));
+  if(passDB)track(sb.from("pass_state").upsert({id:1,data:pass}));
+}
+async function loadPass(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",1).maybeSingle();
+    if(r.error)passDB=false;else{passDB=true;d=r.data&&r.data.data}
+  }catch(e){passDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.pass")||"null")}catch(e){}
+  if(!passDB)d=local;
+  else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:1,data:passNorm(local)}))}
+  pass=passNorm(d);renderPass();
+}
+$("passUltra").onchange=e=>{pass.ultra=e.target.checked;if(!pass.ultra)psub="reg";LS("tracker.psub",psub);savePass();renderPass()};
+$("passSub").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;psub=b.dataset.sub;LS("tracker.psub",psub);renderUltra()});
+$("ulGrid").addEventListener("change",ev=>{
+  const sel=ev.target.closest("select");if(!sel)return;
+  if(!pass.start)pass.start=Date.now();
+  pass.u[+sel.dataset.i]=sel.value;savePass();renderPass();
+});
+$("passPlus").onchange=e=>{pass.plus=e.target.checked;savePass();renderPass()};
+$("passGrid").addEventListener("click",ev=>{
+  const b=ev.target.closest("button");if(!b)return;
+  const k=b.dataset.k,d=+b.dataset.d;
+  if(d<0&&pass.c[k]<=0)return;
+  if(!pass.start)pass.start=Date.now();
+  pass.c[k]+=d;
+  if(pass.plus)pass.gems=Math.max(0,pass.gems+d*PLUS_GEMS);
+  savePass();renderPass();
+});
+$("passReset").onclick=()=>{
+  const tot=PASS.reduce((a,[k])=>a+pass.c[k],0);
+  const un=pass.u.some(Boolean);
+  if(!tot&&!pass.gems&&!un)return;
+  ask("Save the current counts to history and reset them?",()=>{
+    const e={t:Date.now(),start:pass.start,plus:pass.plus,gems:pass.gems,c:{...pass.c},u:un?[...pass.u]:null};
+    pass=passNorm({plus:pass.plus,ultra:pass.ultra,start:0,history:[e,...pass.history]});savePass();renderPass();
+  });
+};
+$("passHist").addEventListener("click",ev=>{
+  const b=ev.target.closest("button[data-hdel]");if(!b)return;
+  const i=+b.dataset.hdel;
+  ask("Delete this history entry?",()=>{pass.history.splice(i,1);savePass();renderPass()});
+});
+
+/* ---------- event tracker ---------- */
+const EVT=[["c20k","20,000 Coins","3%",{coins:20000}],["g100","100 Gems","0.02%",{gems:100}],["c100k","100,000 Coins","0.01%",{coins:100000}]];
+const evCnt=c=>{const o={};EVT.forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
+const evSum=c=>EVT.reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0);a.gems+=c[k]*(v.gems||0);a.n+=c[k];return a},{coins:0,gems:0,n:0});
+function evNorm(d){d=d||{};return{c:evCnt(d.c),start:+d.start||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(h.c)})):[]}}
+let ev=evNorm(),evDB=true;
+const nfmt=n=>n.toLocaleString();
+function renderEvent(){
+  const t=evSum(ev.c);
+  $("evCoins").textContent=nfmt(t.coins);$("evGems").textContent=nfmt(t.gems);
+  $("evOdds").innerHTML=EVT.map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}</td></tr>`).join("");
+  $("evGrid").innerHTML=EVT.map(([k,n,o])=>`<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}</span></div><div class="val">${ev.c[k]}</div><div class="obs">${t.n?(ev.c[k]/t.n*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`).join("");
+  $("evTot").textContent="Total: "+t.n;
+  $("evHistSum").textContent="History"+(ev.history.length?" ("+ev.history.length+")":"");
+  $("evHist").innerHTML=ev.history.map((h,i)=>{
+    const x=evSum(h.c);
+    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${EVT.map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${x.n}</b></div><div class="hrow"><span>Total coins</span><b>${nfmt(x.coins)}</b></div><div class="hrow"><span>Total gems</span><b>${nfmt(x.gems)}</b></div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+}
+function saveEvent(){
+  LS("tracker.event",JSON.stringify(ev));
+  if(evDB)track(sb.from("pass_state").upsert({id:2,data:ev}));
+}
+async function loadEvent(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",2).maybeSingle();
+    if(r.error)evDB=false;else{evDB=true;d=r.data&&r.data.data}
+  }catch(e){evDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.event")||"null")}catch(e){}
+  if(!evDB)d=local;
+  else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:2,data:evNorm(local)}))}
+  ev=evNorm(d);renderEvent();
+}
+$("evGrid").addEventListener("click",ev2=>{
+  const b=ev2.target.closest("button");if(!b)return;
+  const k=b.dataset.k,d=+b.dataset.d;
+  if(d<0&&ev.c[k]<=0)return;
+  if(!ev.start)ev.start=Date.now();
+  ev.c[k]+=d;
+  saveEvent();renderEvent();
+});
+$("evReset").onclick=()=>{
+  if(!evSum(ev.c).n)return;
+  ask("Save the current counts to history and reset them?",()=>{
+    const e={t:Date.now(),start:ev.start,c:{...ev.c}};
+    ev=evNorm({start:0,history:[e,...ev.history]});saveEvent();renderEvent();
+  });
+};
+$("evHist").addEventListener("click",ev2=>{
+  const b=ev2.target.closest("button[data-hdel]");if(!b)return;
+  const i=+b.dataset.hdel;
+  ask("Delete this history entry?",()=>{ev.history.splice(i,1);saveEvent();renderEvent()});
+});
+
+/* ---------- purchases ---------- */
+const bnorm=d=>{d=d||{};return{items:Array.isArray(d.items)?d.items.map(x=>({id:String(x.id||Date.now()+Math.random()),title:String(x.title||""),t:+x.t||0,fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):[{k:"Seller",v:""},{k:"Cost",v:""}]})):[]}};
+let buys=bnorm(),buyDB=true,bq="",buyT=null;
+const bnum=v=>{const n=parseFloat(String(v).replace(/[^0-9.\-]/g,""));return isNaN(n)?0:n};
+function renderBuySum(){
+  const n=buys.items.length;let tot=0;
+  buys.items.forEach(b=>b.fields.forEach(f=>{if(f.k.trim().toLowerCase()==="cost")tot+=bnum(f.v)}));
+  $("buySum").textContent=n+" purchase"+(n===1?"":"s")+" \u00b7 total cost "+nfmt(tot);
+}
+function renderBuys(){
+  const q=bq.toLowerCase();
+  const list=buys.items.map((b,i)=>[b,i]).filter(([b])=>!q||b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
+  $("buyList").innerHTML=list.map(([b,i])=>`<div class="card by" data-i="${i}"><div class="bh"><input class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><button type="button" class="x" data-act="del" aria-label="Delete purchase">\u2715</button></div>${b.fields.map((f,j)=>`<div class="fld"><input class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div></div>`).join("")||'<div class="empty">No purchases.</div>';
+  renderBuySum();
+}
+function saveBuys(){
+  LS("tracker.buys",JSON.stringify(buys));
+  if(buyDB)track(sb.from("pass_state").upsert({id:3,data:buys}));
+}
+function schedBuy(){dirty.add("buy");clearTimeout(buyT);buyT=setTimeout(()=>{dirty.delete("buy");saveBuys()},600)}
+async function loadBuys(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",3).maybeSingle();
+    if(r.error)buyDB=false;else{buyDB=true;d=r.data&&r.data.data}
+  }catch(e){buyDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.buys")||"null")}catch(e){}
+  if(!buyDB)d=local;
+  else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:3,data:bnorm(local)}))}
+  buys=bnorm(d);renderBuys();
+}
+$("buyList").addEventListener("input",e2=>{
+  const inp=e2.target.closest("input");if(!inp)return;
+  const b=buys.items[+inp.closest(".by").dataset.i],f=inp.dataset.f;
+  if(f==="t")b.title=inp.value;else{const fl=b.fields[+inp.dataset.j];fl[f]=inp.value}
+  schedBuy();renderBuySum();
+});
+$("buyList").addEventListener("click",e2=>{
+  const btn=e2.target.closest("button");if(!btn)return;
+  const b=buys.items[+btn.closest(".by").dataset.i],a=btn.dataset.act;
+  if(a==="add"){b.fields.push({k:"",v:""});saveBuys();renderBuys()}
+  else if(a==="rem"){
+    if(b.fields.length<=1)return;
+    const last=b.fields[b.fields.length-1];
+    const go=()=>{b.fields.pop();saveBuys();renderBuys()};
+    if(last.k.trim()||last.v.trim())ask("Remove the last field ("+(last.k||"unnamed")+")?",go);else go();
+  }else if(a==="del"){
+    ask("Delete \u201c"+(b.title||"this purchase")+"\u201d?",()=>{buys.items.splice(buys.items.indexOf(b),1);saveBuys();renderBuys()});
+  }
+});
+$("buySearch").addEventListener("input",e2=>{bq=e2.target.value.trim();renderBuys()});
+$("addBuy").onclick=()=>{
+  const n=$("newBuy").value.trim();if(!n)return;
+  buys.items.unshift({id:String(Date.now()),title:n,t:Date.now(),fields:[{k:"Seller",v:""},{k:"Cost",v:""}]});
+  $("newBuy").value="";bq="";$("buySearch").value="";saveBuys();renderBuys();
+};
+$("newBuy").addEventListener("keydown",e2=>{if(e2.key==="Enter")$("addBuy").click()});
+
 /* ---------- import / export ---------- */
 function exportObj(){
-  return {v:1,shiny:{bought:s.bought,twoToOne:s.twoToOne,oneOne:s.oneOne,commons:s.commons,uncommons:s.uncommons,rares:s.rares,misc:s.misc,start:s.start,oneOnePrice:s.oneOnePrice,commonPrice:s.commonPrice,uncommonPrice:s.uncommonPrice,rarePrice:s.rarePrice,costEach:s.costEach,keptBack:s.keptBack},
-    log:log.map(e=>({t:e.t,k:e.k,from:e.from,to:e.to})),epics:epics.map(e=>({name:e.name,holders:e.holders}))};
+  return {v:2,shiny:{bought:s.bought,twoToOne:s.twoToOne,oneOne:s.oneOne,commons:s.commons,uncommons:s.uncommons,rares:s.rares,misc:s.misc,start:s.start,oneOnePrice:s.oneOnePrice,commonPrice:s.commonPrice,uncommonPrice:s.uncommonPrice,rarePrice:s.rarePrice,costEach:s.costEach},
+    log:log.map(e=>({t:e.t,k:e.k,from:e.from,to:e.to})),sets:sets.map(x=>({name:x.name,epics:allEpics.filter(e=>e.set_id===x.id).sort(cmp).map(e=>({name:e.name,rarity:e.rarity||undefined,numberless:e.numberless||undefined,holders:e.holders}))}))};
 }
 $("bkExport").onclick=()=>{
   const el=$("bkText");el.value=JSON.stringify(exportObj());el.focus();el.select();
@@ -424,11 +980,12 @@ $("bkExport").onclick=()=>{
 $("bkImport").onclick=()=>{
   let o;
   try{o=JSON.parse($("bkText").value)}catch(e){$("bkMsg").textContent="That is not valid exported data.";return}
-  if(!o||!Array.isArray(o.epics)||!o.shiny){$("bkMsg").textContent="That does not look like exported tracker data.";return}
+  const setsIn=o&&o.shiny?(Array.isArray(o.sets)?o.sets:(Array.isArray(o.epics)?[{name:"Set 1",epics:o.epics}]:null)):null;
+  if(!setsIn||!setsIn.length){$("bkMsg").textContent="That does not look like exported tracker data.";return}
   ask("Replace everything in the database with this data?",async()=>{
     const msg=$("bkMsg");msg.textContent="Importing...";
     const sh=o.shiny,n=v=>Number(v)||0,pr=(v,d)=>v===undefined?d:n(v);
-    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),start_date:sh.start||"2026-04-11",one_one_price:pr(sh.oneOnePrice,1000),common_price:pr(sh.commonPrice,4000),uncommon_price:pr(sh.uncommonPrice,6000),rare_price:pr(sh.rarePrice,8000),cost_each:pr(sh.costEach,1250),kept_back:pr(sh.keptBack,1),updated_at:new Date().toISOString()}));
+    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),start_date:sh.start||"2026-04-11",one_one_price:pr(sh.oneOnePrice,1000),common_price:pr(sh.commonPrice,4000),uncommon_price:pr(sh.uncommonPrice,6000),rare_price:pr(sh.rarePrice,8000),cost_each:pr(sh.costEach,1250),updated_at:new Date().toISOString()}));
     if(!r){msg.textContent="Import failed at the numbers step.";return}
     r=await track(sb.from("shiny_log").delete().gt("id",0));
     if(!r){msg.textContent="Import failed clearing the log.";return}
@@ -437,20 +994,24 @@ $("bkImport").onclick=()=>{
       r=await track(sb.from("shiny_log").insert(lg.slice(i,i+200)));
       if(!r){msg.textContent="Import failed writing the log.";return}
     }
-    r=await track(sb.from("epics").delete().gt("id",0));
+    r=await track(sb.from("epic_sets").delete().gt("id",0));
     if(!r){msg.textContent="Import failed clearing epics.";return}
-    if(o.epics.length){
-      r=await track(sb.from("epics").insert(o.epics.map(e=>({name:String(e.name)}))).select("id,name"));
-      if(!r||!r.data){msg.textContent="Import failed writing epics.";return}
-      const slots=[];
-      r.data.forEach((row,i)=>(o.epics[i].holders||[""]).forEach((h,j)=>slots.push({epic_id:row.id,slot:j+1,holder:String(h||"")})));
-      for(let i=0;i<slots.length;i+=200){
-        const q=await track(sb.from("epic_slots").insert(slots.slice(i,i+200)));
-        if(!q){msg.textContent="Import failed writing holders.";return}
-      }
+    const sr=await track(sb.from("epic_sets").insert(setsIn.map((x,i)=>({name:String(x.name||"Set "+(i+1)),position:i}))).select("id,name"));
+    if(!sr||!sr.data){msg.textContent="Import failed writing sets.";return}
+    const slots=[];let total=0;
+    for(let si=0;si<setsIn.length;si++){
+      const eps=setsIn[si].epics||[];if(!eps.length)continue;
+      const er=await track(sb.from("epics").insert(eps.map(e=>({name:String(e.name),set_id:sr.data[si].id,...(rarityDB&&RAR.includes(e.rarity)?{rarity:e.rarity}:{}),...(numDB&&e.numberless?{numberless:true}:{})}))).select("id,name"));
+      if(!er||!er.data){msg.textContent="Import failed writing epics.";return}
+      total+=eps.length;
+      er.data.forEach((row,i)=>(eps[i].holders||[""]).forEach((h,j)=>slots.push({epic_id:row.id,slot:j+1,holder:String(h||"")})));
+    }
+    for(let i=0;i<slots.length;i+=200){
+      const q=await track(sb.from("epic_slots").insert(slots.slice(i,i+200)));
+      if(!q){msg.textContent="Import failed writing holders.";return}
     }
     await loadAll();
-    msg.textContent="Import finished: "+o.epics.length+" epics.";
+    msg.textContent="Import finished: "+setsIn.length+" set(s), "+total+" epics.";
   });
 };
 
@@ -458,7 +1019,7 @@ $("bkImport").onclick=()=>{
 let chan=null,rTimer=null;
 function busy(){
   const a=document.activeElement;
-  return inflight>0||dirty.size>0||pend!==null||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList"));
+  return inflight>0||dirty.size>0||pend!==null||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList"));
 }
 function scheduleRefresh(ms){clearTimeout(rTimer);rTimer=setTimeout(doRefresh,ms||500)}
 async function doRefresh(){
@@ -469,7 +1030,7 @@ async function doRefresh(){
 function subscribe(){
   if(chan)return;
   chan=sb.channel("tracker-sync");
-  ["shiny_state","shiny_log","epics","epic_slots"].forEach(tb=>chan.on("postgres_changes",{event:"*",schema:"public",table:tb},()=>scheduleRefresh(500)));
+  ["shiny_state","shiny_log","epic_sets","epics","epic_slots"].forEach(tb=>chan.on("postgres_changes",{event:"*",schema:"public",table:tb},()=>scheduleRefresh(500)));
   chan.subscribe();
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)scheduleRefresh(200)});
