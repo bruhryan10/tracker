@@ -27,6 +27,9 @@ details .card{background:var(--bg)}
 #inputs{grid-template-columns:repeat(3,minmax(0,1fr))}
 #inputs input{font-size:16px;padding:8px 6px;min-width:0}
 #inputs label{font-size:11px}
+#prices{grid-template-columns:repeat(3,minmax(0,1fr))}
+#prices input{font-size:16px;padding:8px 6px;min-width:0}
+#prices label{font-size:11px}
 #outputs{grid-template-columns:1fr 1fr;gap:12px}
 #outputs .card{padding:16px 12px;text-align:center;min-height:76px;display:flex;flex-direction:column;justify-content:center}
 #outputs .lbl{font-size:13px;margin-bottom:6px}
@@ -95,6 +98,8 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 <details id="more"><summary>Inventory &amp; Totals</summary>
 <div class="grid" id="inv"></div>
 <div class="grid" id="invOut" style="margin-top:10px"></div>
+<h2 style="margin:16px 0 8px">Prices</h2>
+<div class="grid" id="prices"></div>
 </details>
 <details id="histBox"><summary id="histSum">History</summary>
 <ul class="log" id="hist"></ul>
@@ -156,13 +161,26 @@ async function track(p){
 
 /* ---------- shiny tracker ---------- */
 const fields=[
-["bought","Shinies Bought","bought"],["twoToOne","2:1 Shinies","two_to_one"],["oneOne","1:1 + 1000 Shinies","one_one"],
-["commons","Commons Sold (4k per)","commons"],["uncommons","Uncommon Sold (6k per)","uncommons"],["rares","Rare Sold (8k per)","rares"],
-["misc","Misc. Sold (List Price, $)","misc"],["start","Start date","start_date"]
+["bought","Shinies Bought","bought"],["twoToOne","2:1 Shinies","two_to_one"],["oneOne","1:1 Shinies","one_one"],
+["commons","Commons Sold","commons"],["uncommons","Uncommons Sold","uncommons"],["rares","Rares Sold","rares"],
+["misc","Misc. Sold (List Price, $)","misc"],["start","Start date","start_date"],
+["oneOnePrice","1:1 + amount ($ each)","one_one_price"],["commonPrice","Common price ($)","common_price"],
+["uncommonPrice","Uncommon price ($)","uncommon_price"],["rarePrice","Rare price ($)","rare_price"],
+["costEach","Cost per shiny bought ($)","cost_each"],["keptBack","Shinies kept back","kept_back"]
 ];
+const PRICE=new Set(["oneOnePrice","commonPrice","uncommonPrice","rarePrice","costEach","keptBack"]);
+const hostOf=k=>PRICE.has(k)?"prices":(k==="bought"||k==="start")?"inv":"inputs";
+const short=n=>n>=1000&&n%1000===0?(n/1000)+"k":Number(n).toLocaleString("en-US");
+function updateLabels(){
+  const set=(k,txt)=>{const el=document.querySelector('label[for="'+k+'"]');if(el)el.textContent=txt};
+  set("oneOne","1:1 + "+short(num("oneOnePrice"))+" Shinies");
+  set("commons","Commons Sold ("+short(num("commonPrice"))+" per)");
+  set("uncommons","Uncommon Sold ("+short(num("uncommonPrice"))+" per)");
+  set("rares","Rare Sold ("+short(num("rarePrice"))+" per)");
+}
 const col=Object.fromEntries(fields.map(f=>[f[0],f[2]]));
 const labelOf=k=>(fields.find(f=>f[0]===k)||[0,k])[1];
-let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"2026-04-11"};
+let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"2026-04-11",oneOnePrice:1000,commonPrice:4000,uncommonPrice:6000,rarePrice:8000,costEach:1250,keptBack:1};
 const committed={},els={};
 const num=k=>Number(s[k])||0;
 const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
@@ -191,14 +209,14 @@ async function flushDelta(k){
   if(u&&!pendDelta[k]){s[k]=nv;els[k].value=nv;committed[k]=nv;calc()}
 }
 fields.forEach(([k,l])=>{
-  const host=$(k==="bought"||k==="start"?"inv":"inputs");
+  const host=$(hostOf(k));
   const d=document.createElement("div");d.className="card";
   d.innerHTML=`<label for="${k}">${l}</label><input id="${k}" type="${k==="start"?"date":"number"}" inputmode="numeric">`;
   host.appendChild(d);
   const el=d.querySelector("input");els[k]=el;
   el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k)});
   el.addEventListener("change",()=>{logChange(k,committed[k],s[k]);committed[k]=s[k]});
-  if(k!=="start"){
+  if(k!=="start"&&(!PRICE.has(k)||k==="keptBack")){
     const row=document.createElement("div");row.className="steps";
     [["+",1],["\u2212",-1]].forEach(([txt,dlt])=>{
       const b=document.createElement("button");b.type="button";b.textContent=txt;
@@ -209,10 +227,11 @@ fields.forEach(([k,l])=>{
   }
 });
 function calc(){
-  const remaining=num("bought")-num("commons")-num("uncommons")-num("rares")+num("twoToOne")-1;
-  const profit11=num("oneOne")*1000;
-  const sold=num("commons")*4000+num("uncommons")*6000+num("rares")*8000+num("misc");
-  const total=profit11+sold,cost=num("bought")*1250,net=total-cost;
+  updateLabels();
+  const remaining=num("bought")-num("commons")-num("uncommons")-num("rares")+num("twoToOne")-num("keptBack");
+  const profit11=num("oneOne")*num("oneOnePrice");
+  const sold=num("commons")*num("commonPrice")+num("uncommons")*num("uncommonPrice")+num("rares")*num("rarePrice")+num("misc");
+  const total=profit11+sold,cost=num("bought")*num("costEach"),net=total-cost;
   const st=new Date((s.start||"2026-04-11")+"T00:00:00");
   const now=new Date();now.setHours(0,0,0,0);
   const days=Math.max(1,Math.round((now-st)/864e5)+1);
@@ -380,7 +399,7 @@ async function loadAll(quiet){
   if(err){setStatus("Load failed: "+err.message,true);return false}
   if(!st.data)await sb.from("shiny_state").insert({id:1});
   const r=st.data||{};
-  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"2026-04-11"};
+  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"2026-04-11",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250,keptBack:r.kept_back??1};
   fields.forEach(([k])=>{els[k].value=s[k];committed[k]=s[k]});
   log=lg.data.map(x=>({id:x.id,t:Date.parse(x.at),k:x.field,from:x.old_value,to:x.new_value}));
   const bySlot={};
@@ -394,7 +413,7 @@ async function loadAll(quiet){
 
 /* ---------- import / export ---------- */
 function exportObj(){
-  return {v:1,shiny:{bought:s.bought,twoToOne:s.twoToOne,oneOne:s.oneOne,commons:s.commons,uncommons:s.uncommons,rares:s.rares,misc:s.misc,start:s.start},
+  return {v:1,shiny:{bought:s.bought,twoToOne:s.twoToOne,oneOne:s.oneOne,commons:s.commons,uncommons:s.uncommons,rares:s.rares,misc:s.misc,start:s.start,oneOnePrice:s.oneOnePrice,commonPrice:s.commonPrice,uncommonPrice:s.uncommonPrice,rarePrice:s.rarePrice,costEach:s.costEach,keptBack:s.keptBack},
     log:log.map(e=>({t:e.t,k:e.k,from:e.from,to:e.to})),epics:epics.map(e=>({name:e.name,holders:e.holders}))};
 }
 $("bkExport").onclick=()=>{
@@ -408,8 +427,8 @@ $("bkImport").onclick=()=>{
   if(!o||!Array.isArray(o.epics)||!o.shiny){$("bkMsg").textContent="That does not look like exported tracker data.";return}
   ask("Replace everything in the database with this data?",async()=>{
     const msg=$("bkMsg");msg.textContent="Importing...";
-    const sh=o.shiny,n=v=>Number(v)||0;
-    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),start_date:sh.start||"2026-04-11",updated_at:new Date().toISOString()}));
+    const sh=o.shiny,n=v=>Number(v)||0,pr=(v,d)=>v===undefined?d:n(v);
+    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),start_date:sh.start||"2026-04-11",one_one_price:pr(sh.oneOnePrice,1000),common_price:pr(sh.commonPrice,4000),uncommon_price:pr(sh.uncommonPrice,6000),rare_price:pr(sh.rarePrice,8000),cost_each:pr(sh.costEach,1250),kept_back:pr(sh.keptBack,1),updated_at:new Date().toISOString()}));
     if(!r){msg.textContent="Import failed at the numbers step.";return}
     r=await track(sb.from("shiny_log").delete().gt("id",0));
     if(!r){msg.textContent="Import failed clearing the log.";return}
