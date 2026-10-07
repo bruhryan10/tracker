@@ -105,6 +105,20 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 #qtDrop th,#qtDrop td{padding:4px 6px;text-align:left}
 #qtDrop th:nth-child(n+2),#qtDrop td:nth-child(n+2){text-align:right}
 #qtDrop{width:100%;border-collapse:collapse}
+@media (max-width:520px){
+#qtDrop,#qtExp{table-layout:fixed;width:100%}
+#qtDrop th,#qtDrop td{padding:4px 1px;font-size:11px;white-space:nowrap}
+#qtDrop th:first-child,#qtDrop td:first-child{width:21%;white-space:normal}
+#qtDrop th:nth-child(n+2),#qtDrop td:nth-child(n+2){width:19.75%}
+#qtExp th,#qtExp td{padding:5px 2px;font-size:12px;letter-spacing:0}
+#qtExp th:first-child,#qtExp td:first-child{width:31%}
+#qtExp th:nth-child(2),#qtExp td:nth-child(2){width:27%;white-space:nowrap}
+#qtExp th:nth-child(n+3),#qtExp td:nth-child(n+3){width:21%}
+#qtDrop .pill,#qtExp .pill{font-size:10px;padding:1px 5px;margin:1px 2px 1px 0}
+#qtDrop th .pill{font-size:9px;padding:1px 3px;margin:0}
+#qtDrop .pill::before,#qtExp .pill::before{display:none}
+}
+}
 .arGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
 #arLy{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:14px}
 #arLy .box{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;width:min(560px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden}
@@ -141,6 +155,12 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .top .r{display:flex;align-items:center;gap:10px}
 .top button{margin:0;padding:6px 10px;font-size:13px}
 #who{font-size:13px;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top button{white-space:nowrap}
+@media (max-width:520px){
+.top{flex-wrap:wrap;gap:6px 10px}
+.top .r{flex:1 1 100%;min-width:0}
+#who{flex:1 1 auto;min-width:0;max-width:none}
+}
 #sync{font-size:12px;color:var(--mut)}#sync.bad{color:var(--neg)}
 #login{max-width:340px;margin:12vh auto 0}
 #login input{margin-bottom:10px}
@@ -180,10 +200,55 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #tab-profile h2{margin:0 0 2px}
 #tab-profile h3{margin:18px 0 8px;font-size:16px}
 .top button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
-#notesText{width:100%;box-sizing:border-box;min-height:60vh;resize:vertical;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--card);color:var(--tx)}
-#buyList{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
-@media (max-width:700px){#buyList{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:460px){#buyList{grid-template-columns:1fr}}
+#notesText{width:100%;box-sizing:border-box;min-height:60vh;overflow:auto;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;padding:12px;border:1px solid var(--bd);border-radius:0 0 10px 10px;background:var(--card);color:var(--tx);overflow-wrap:anywhere;outline:none}
+#notesText:focus{border-color:var(--ac)}
+#notesText:empty::before{content:attr(data-ph);color:var(--mut);pointer-events:none}
+#notesText h3{font-size:20px;line-height:1.25;margin:.7em 0 .25em}
+#notesText h3:first-child{margin-top:0}
+#notesText ul,#notesText ol{margin:.3em 0;padding-left:1.5em}
+.nbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px;border:1px solid var(--bd);border-bottom:0;border-radius:10px 10px 0 0;background:var(--card)}
+.nbar button{margin:0;min-width:34px;height:32px;padding:0 9px;font-size:14px;line-height:1}
+.nbar button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
+.nbar .nsw{min-width:0;width:22px;height:22px;padding:0;border-radius:50%;border:2px solid var(--bd)}
+.nbar .nsep{width:1px;height:20px;background:var(--bd);margin:0 2px}
+#tab-buys{max-width:1000px;margin:0 auto}
+#buyList,#soldList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+#buyList .mk.open,#soldList .mk.open,#buyList .empty,#soldList .empty{grid-column:1/-1}
+@media (max-width:640px){#buyList,#soldList{grid-template-columns:1fr}}
+.mk{padding:0!important;overflow:hidden}
+.mkh{display:grid;grid-template-columns:auto minmax(0,1fr) auto 14px;gap:10px;align-items:center;padding:10px 12px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mkh:hover{background:color-mix(in srgb,var(--ac) 7%,transparent)}
+.mkh:focus-visible{outline:2px solid var(--ac);outline-offset:-2px}
+.mkh .pill{margin:0}
+.mkt{font-weight:600;font-size:15px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
+.mks{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mkc{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mkv{color:var(--mut);transition:transform .15s;font-size:12px;text-align:center}
+.mk.open .mkv{transform:rotate(90deg)}
+.mkb{display:none;padding:2px 12px 12px;border-top:1px solid var(--bd)}
+.mk.open .mkb{display:block}
+.mkb .bt{width:100%;margin-top:10px}
+.mkrow{display:flex;gap:6px;margin-top:8px;align-items:center}
+.mkrow input{flex:1;min-width:0;font-size:15px;padding:7px 8px}
+.mkrow select{flex:none;font-size:14px;padding:7px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);max-width:42%}
+.mkrow button{margin:0;white-space:nowrap}
+@media (max-width:520px){.mkrow{flex-wrap:wrap}.mkrow input{flex:1 1 100%}.mkrow select{flex:1 1 0;max-width:none}}
+.mkf,.mkcats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.mkcats{margin:10px 0 2px}
+.mkf button,.mkcats button{margin:0;padding:2px 8px 2px 3px;border-radius:999px;background:transparent;border:2px solid transparent;display:inline-flex;align-items:center;gap:6px;font-size:12px;cursor:pointer}
+.mkf button.all{padding:2px 12px;font-weight:600;color:var(--tx)}
+.mkcats button{padding:2px}
+.mkf button .pill,.mkcats button .pill{margin:0;pointer-events:none;opacity:.55}
+.mkf button.on,.mkcats button.on{border-color:var(--ac);background:var(--card)}
+.mkf button.on .pill,.mkcats button.on .pill{opacity:1}
+.mkn{color:var(--mut);font-weight:600;pointer-events:none}
+.mkdel{margin-top:10px!important}
+.r-other{background:#3a3a3a;color:#bdbdbd}
+#mkSeg{margin:0 0 10px}
+#mkSum{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:6px}
+#mkSum .card{padding:12px 8px;text-align:center;border-top:3px solid var(--ac)}
+#mkSum .lbl{font-size:12px;font-weight:600;margin-bottom:4px}
+#mkSum .val{font-size:clamp(13px,3.7vw,26px);font-weight:700;line-height:1.15;white-space:nowrap}
 .bt{font-weight:600;font-size:15px!important;padding:6px 8px!important;min-width:0}
 .bh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;margin-bottom:6px}
 .fld{display:grid;grid-template-columns:2fr 3fr;gap:6px;margin-top:6px}
@@ -334,7 +399,7 @@ details[open]>:not(summary){animation:fade .25s ease}
 
 <div id="app" hidden>
 <div class="top"><h1>Soundmap Helper</h1><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="tbProfile">Profile</button><button type="button" id="signOut">Sign out</button></div></div>
-<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbGempic">Gempic Tracker</button><button type="button" id="tbQuest">Quest Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbBuys">Purchases</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbInfo">Wiki</button><button type="button" id="tbArtist">Artist Overview</button></div>
+<div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbGempic">Gempic Tracker</button><button type="button" id="tbQuest">Quest Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbBuys">Market</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbInfo">Wiki</button><button type="button" id="tbArtist">Artist Overview</button></div>
 <div id="tab-shiny">
 
 <h2>Inputs</h2>
@@ -404,6 +469,7 @@ details[open]>:not(summary){animation:fade .25s ease}
 <h2>Quest</h2>
 <div class="card" id="qtCtl">
 <label class="chk"><input type="checkbox" id="qtReroll"> Reroll (second chance on every quest)</label>
+<label class="chk"><input type="checkbox" id="qtExLy"> Exclude lyrics from calculations</label>
 <div class="note" id="qtRrNote"></div>
 <table id="qtDrop" style="margin:8px 0"></table>
 <div class="steps"><button type="button" id="qtUndo" aria-label="Undo quests">&minus; Undo</button><button type="button" id="qtAdd" style="flex:3" aria-label="Add quests">+ Quest</button><input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add or undo"></div>
@@ -480,10 +546,26 @@ details[open]>:not(summary){animation:fade .25s ease}
 </div>
 
 <div id="tab-buys" hidden>
+<div class="seg" id="mkSeg"><button type="button" data-m="buy">Purchases</button><button type="button" data-m="sold">Sold</button></div>
+<div class="grid" id="mkSum">
+<div class="card"><div class="lbl">Spent</div><div class="val" id="mkSpent">0</div></div>
+<div class="card"><div class="lbl">Earned</div><div class="val" id="mkEarned">0</div></div>
+<div class="card"><div class="lbl">Net</div><div class="val" id="mkNet">0</div></div>
+</div>
+<div id="mkBuy">
+<div class="addrow"><input id="newBuy" placeholder="New purchase title"><button type="button" id="addBuy">Add purchase</button></div>
+<div class="mkrow"><input id="buySearch" type="search" placeholder="Search purchases..."><select id="buySort" aria-label="Sort"></select><button class="small" id="buyToggle" type="button" style="margin:0">Expand all</button></div>
+<div class="mkf" id="buyBar"></div>
 <div class="note" id="buySum"></div>
-<input id="buySearch" type="search" placeholder="Search purchases..." style="margin-top:8px">
 <div id="buyList"></div>
-<div class="addrow"><input id="newBuy" placeholder="New purchase title (e.g. Any Epic purchase)"><button type="button" id="addBuy">Add purchase</button></div>
+</div>
+<div id="mkSold" hidden>
+<div class="addrow"><input id="newSold" placeholder="New sold item title"><button type="button" id="addSold">Add sold item</button></div>
+<div class="mkrow"><input id="soldSearch" type="search" placeholder="Search sold items..."><select id="soldSort" aria-label="Sort"></select><button class="small" id="soldToggle" type="button" style="margin:0">Expand all</button></div>
+<div class="mkf" id="soldBar"></div>
+<div class="note" id="soldSum"></div>
+<div id="soldList"></div>
+</div>
 </div>
 
 <div id="tab-artist" hidden>
@@ -519,7 +601,24 @@ details[open]>:not(summary){animation:fade .25s ease}
 <div class="note" id="pwMsg"></div>
 </details>
 <h3>Notes</h3>
-<textarea id="notesText" placeholder="Write notes here..." spellcheck="true"></textarea>
+<div class="nbar" id="nbar" role="toolbar" aria-label="Text formatting">
+<button type="button" data-c="bold" title="Bold (Ctrl+B)" aria-label="Bold"><b>B</b></button>
+<button type="button" data-c="italic" title="Italic (Ctrl+I)" aria-label="Italic"><i>I</i></button>
+<button type="button" data-c="underline" title="Underline (Ctrl+U)" aria-label="Underline"><u>U</u></button>
+<button type="button" data-c="title" title="Title" aria-label="Title">Title</button>
+<button type="button" data-c="list" title="Bulleted list" aria-label="Bulleted list">&bull; List</button>
+<span class="nsep"></span>
+<button type="button" class="nsw" data-col="#e5484d" style="background:#e5484d" title="Red" aria-label="Red text"></button>
+<button type="button" class="nsw" data-col="#f08a2c" style="background:#f08a2c" title="Orange" aria-label="Orange text"></button>
+<button type="button" class="nsw" data-col="#d4a017" style="background:#d4a017" title="Gold" aria-label="Gold text"></button>
+<button type="button" class="nsw" data-col="#2fb85a" style="background:#2fb85a" title="Green" aria-label="Green text"></button>
+<button type="button" class="nsw" data-col="#3b82f6" style="background:#3b82f6" title="Blue" aria-label="Blue text"></button>
+<button type="button" class="nsw" data-col="#a06ae0" style="background:#a06ae0" title="Purple" aria-label="Purple text"></button>
+<span class="nsep"></span>
+<button type="button" data-c="mark" title="Highlight" aria-label="Highlight">Mark</button>
+<button type="button" data-c="clear" title="Clear bold, color and highlight" aria-label="Clear text formatting">Clear</button>
+</div>
+<div id="notesText" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Notes" data-ph="Write notes here..." spellcheck="true"></div>
 <div class="note" id="notesMsg"></div>
 </div>
 
@@ -1594,36 +1693,37 @@ const QR={c:"common",u:"uncommon",r:"rare"};
 const QT={s:["Shiny","shiny"],e:["Epic","epic"],l:["Lyric","lyrics"]};
 const qtTitle=h=>h.song&&h.artist?h.song+" \u2013 "+h.artist:(h.song||h.artist||h.name||"");
 const qpill=(cls,label)=>`<span class="pill r r-${cls}">${label}</span>`;
-const qPullLbl=()=>"Pull "+qpill("epic","Epic")+qpill("lyrics","Lyric");
+const qPullLbl=()=>"Pull "+qpill("epic","Epic")+(qt.exLy?"":qpill("lyrics","Lyric"));
 /* one quest rolls every listed odds; the rarity is whichever one hits */
 const qtTot=i=>[].concat(i).reduce((a,j)=>a+QK.reduce((b,k)=>b+QO[k][j],0),0);
 const qtPd=(i,x)=>{const p=qtTot(i);return x?1-(1-p)*(1-p):p};
-const PULL=[1,2]; /* a pull = epic or lyric */
-const qtP=x=>qtPd(PULL,x);
+/* a pull = epic or lyric; with "exclude lyrics" on, only epics count */
+const qtPullIdx=()=>qt.exLy?[1]:[1,2];
+const qtP=x=>qtPd(qtPullIdx(),x);
 const qtPct=p=>Number((p*100).toFixed(4))+"%";
 const qtN=v=>Math.max(0,Math.floor(+v||0));
-function qtNorm(d){d=d||{};return{reroll:!!d.reroll,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
+function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
 let qt=qtNorm(),qtDB=true;
 function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
 function renderQuest(){
   const q=qtSum(),next=qtP(qt.reroll);
   let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x));
   $("qtQuests").textContent=nfmt(q.n);
-  const last=qt.history.find(h=>h.typ!=="s");
+  const last=qt.history.find(h=>h.typ!=="s"&&!(qt.exLy&&h.typ==="l"));
   $("qtQuestsNote").textContent=last?"Last pull: "+fmtD(last.t):"No pull logged yet";
   $("qtOdds").textContent=qtPct(next);
   $("qtOddsNote").textContent="About 1 in "+nfmt(Math.round(1/next))+" quests";
   $("qtSoFar").textContent=Number(((1-miss)*100).toFixed(1))+"%";
   $("qtSoFarNote").textContent=q.n?"Across all quests logged":"";
-  $("qtReroll").checked=qt.reroll;
-  $("qtRrNote").textContent=qt.reroll?"Reroll is on: each quest gets two chances, so "+qtPct(next)+" for an epic or lyric per quest.":"Each quest has a "+qtPct(next)+" chance of an epic or lyric (a pull).";
-  $("qtDrop").innerHTML="<tr><th>Per quest</th>"+QK.map(k=>"<th>"+qpill(QR[k],QO[k][0])+"</th>").join("")+"<th>Total</th></tr>"+QD.map(([n,i,c])=>`<tr><td>${qpill(c,n)}</td>${QK.map(k=>`<td>${qtPct(qt.reroll?1-(1-QO[k][i])*(1-QO[k][i]):QO[k][i])}</td>`).join("")}<td>${qtPct(qtPd(i,qt.reroll))}</td></tr>`).join("")+`<tr style="font-weight:600"><td>${qPullLbl()}</td>${QK.map(k=>{const p=QO[k][1]+QO[k][2];return `<td>${qtPct(qt.reroll?1-(1-p)*(1-p):p)}</td>`}).join("")}<td>${qtPct(qtP(qt.reroll))}</td></tr>`;
+  $("qtReroll").checked=qt.reroll;$("qtExLy").checked=qt.exLy;
+  $("qtRrNote").textContent=qt.reroll?"Reroll is on: each quest gets two chances, so "+qtPct(next)+" for "+(qt.exLy?"an epic":"an epic or lyric")+" per quest.":"Each quest has a "+qtPct(next)+" chance of "+(qt.exLy?"an epic (lyrics excluded).":"an epic or lyric (a pull).");
+  $("qtDrop").innerHTML="<tr><th>Per quest</th>"+QK.map(k=>"<th>"+qpill(QR[k],QO[k][0])+"</th>").join("")+"<th>Total</th></tr>"+QD.filter(d=>!(qt.exLy&&d[1]===2)).map(([n,i,c])=>`<tr><td>${qpill(c,n)}</td>${QK.map(k=>`<td>${qtPct(qt.reroll?1-(1-QO[k][i])*(1-QO[k][i]):QO[k][i])}</td>`).join("")}<td>${qtPct(qtPd(i,qt.reroll))}</td></tr>`).join("")+`<tr style="font-weight:600"><td>${qPullLbl()}</td>${QK.map(k=>{const p=QO[k][1]+(qt.exLy?0:QO[k][2]);return `<td>${qtPct(qt.reroll?1-(1-p)*(1-p):p)}</td>`}).join("")}<td>${qtPct(qtP(qt.reroll))}</td></tr>`;
   $("qtLog").textContent=q.n?"Logged: "+q.n+" quests"+(q.rr?" ("+q.rr+" with reroll)":""):"";
-  $("qtExp").innerHTML="<tr><th>Drop</th><th>Odds</th><th>Avg quests</th><th>With reroll</th></tr>"+[[qPullLbl(),PULL],[qpill("epic","Epic"),1],[qpill("lyrics","Lyric"),2],[qpill("shiny","Shiny"),3]].map(([n,i])=>`<tr><td>${n}</td><td>${qtPct(qtPd(i,0))}</td><td>${nfmt(Math.round(1/qtPd(i,0)))}</td><td>${nfmt(Math.round(1/qtPd(i,1)))}</td></tr>`).join("");
+  $("qtExp").innerHTML="<tr><th>Drop</th><th>Odds</th><th>Avg quests</th><th>With reroll</th></tr>"+[[qPullLbl(),qtPullIdx()],[qpill("epic","Epic"),1],[qpill("lyrics","Lyric"),2],[qpill("shiny","Shiny"),3]].filter(r=>!(qt.exLy&&r[1]===2)).map(([n,i])=>`<tr><td>${n}</td><td>${qtPct(qtPd(i,0))}</td><td>${nfmt(Math.round(1/qtPd(i,0)))}</td><td>${nfmt(Math.round(1/qtPd(i,1)))}</td></tr>`).join("");
   const H=qt.history;
   $("qtHistSum").textContent="History"+(H.length?" ("+H.length+")":"");
-  const HP=H.filter(h=>h.typ!=="s"),HS=H.length-HP.length;
-  $("qtAvg").textContent=(HP.length?"Average per epic/lyric: "+nfmt(Math.round(HP.reduce((a,h)=>a+h.n,0)/HP.length))+" quests":"No pulls saved yet.")+(HS?" \u00b7 "+HS+" shiny":"");
+  const HP=H.filter(h=>h.typ!=="s"&&!(qt.exLy&&h.typ==="l")),HS=H.filter(h=>h.typ==="s").length;
+  $("qtAvg").textContent=(HP.length?"Average per "+(qt.exLy?"epic":"epic/lyric")+": "+nfmt(Math.round(HP.reduce((a,h)=>a+h.n,0)/HP.length))+" quests":"No pulls saved yet.")+(HS?" \u00b7 "+HS+" shiny":"");
   $("qtHist").innerHTML=H.map((h,i)=>`<div class="card" style="margin-top:8px"><div class="eph"><div class="ehl"><strong>${qtTitle(h)?esc(qtTitle(h)):(h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t))}</strong>${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]):""}${h.rar?qpill(QR[h.rar],QO[h.rar][0]):""}</div><span style="display:flex;gap:6px"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>${qtTitle(h)?`<div class="hrow"><span>Saved</span><b>${fmtD(h.t)}</b></div>`:""}${h.ta?`<div class="hrow"><span>Artist quest count</span><b>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</b></div>`:""}${h.nb==="n"?`<div class="hrow"><span>Epic #</span><b>${h.num?"#"+nfmt(h.num):"Numbered"}</b></div>`:h.nb==="l"?`<div class="hrow"><span>Epic style</span><b>Numberless</b></div>`:""}<div class="hrow"><span>Quests</span><b>${nfmt(h.n)}</b></div>${h.rr?`<div class="hrow"><span>Quests with reroll</span><b>${nfmt(h.rr)}</b></div>`:""}</div>`).join("");
 }
 function saveQuest(){
@@ -1645,6 +1745,7 @@ $("qtAmt").value=LS("tracker.step.quest")||"1";
 const qtAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("qtAmt").value))||1));
 $("qtAmt").addEventListener("change",()=>{const v=qtAmt();$("qtAmt").value=v;LS("tracker.step.quest",String(v))});
 $("qtReroll").addEventListener("change",()=>{qt.reroll=$("qtReroll").checked;saveQuest();renderQuest()});
+$("qtExLy").addEventListener("change",()=>{qt.exLy=$("qtExLy").checked;saveQuest();renderQuest()});
 $("qtAdd").onclick=()=>{
   const n=qtAmt();if(!qt.start)qt.start=Date.now();
   for(let i=0;i<n;i++)qt.r.push({x:qt.reroll?1:0});
@@ -1703,14 +1804,14 @@ $("qtFSave").onclick=()=>{
   }else{
     const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta};
     if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.total=ta;qt.cnt=n} /* shiny: log it but keep the quest count going */
-    else qt=qtNorm({reroll:qt.reroll,total:ta||qt.total,cnt:0,history:[e,...qt.history]});
+    else qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:ta||qt.total,cnt:0,history:[e,...qt.history]});
   }
   qtCloseForm();saveQuest();renderQuest();
 };
 $("qtReset").onclick=()=>{
   if(!qt.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    qt=qtNorm({reroll:qt.reroll,total:qt.total,cnt:0,history:qt.history});
+    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:qt.total,cnt:0,history:qt.history});
     saveQuest();renderQuest();
   });
 };
@@ -1724,20 +1825,70 @@ $("qtHist").addEventListener("click",e2=>{
 renderQuest();
 
 /* ---------- purchases ---------- */
-const bnorm=d=>{d=d||{};return{items:Array.isArray(d.items)?d.items.map(x=>({id:String(x.id||Date.now()+Math.random()),title:String(x.title||""),t:+x.t||0,fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):[{k:"Seller",v:""},{k:"Cost",v:""}]})):[]}};
-let buys=bnorm(),buyDB=true,bq="",buyT=null;
-const bnum=v=>{const n=parseFloat(String(v).replace(/[^0-9.\-]/g,""));return isNaN(n)?0:n};
-function renderBuySum(){
-  const n=buys.items.length;let tot=0;
-  buys.items.forEach(b=>b.fields.forEach(f=>{if(f.k.trim().toLowerCase()==="cost")tot+=bnum(f.v)}));
-  $("buySum").textContent=n+" purchase"+(n===1?"":"s")+" \u00b7 total cost "+nfmt(tot);
+/* ---------- market: purchases + sold items (both stored in one saved record) ---------- */
+const MCAT=[["epic","Epic","epic"],["lyric","Lyric","lyrics"],["shiny","Shiny","shiny"],["moment","Moment","moment"],["other","Other","other"]];
+const mcat=c=>MCAT.find(x=>x[0]===c)||MCAT[4];
+/* first guess for items saved before categories existed; editable on each item */
+const mcatGuess=t=>/lyric/i.test(t)?"lyric":/shiny/i.test(t)?"shiny":/moment/i.test(t)?"moment":/epic|#\s*\d/i.test(t)?"epic":"other";
+const MK={
+  buy:{key:"items",list:"buyList",sum:"buySum",search:"buySearch",sort:"buySort",bar:"buyBar",tog:"buyToggle",inp:"newBuy",add:"addBuy",noun:"purchase",nounP:"purchases",total:"total cost",amt:["cost"],who:["seller"],def:()=>[{k:"Seller",v:""},{k:"Cost",v:""}],q:"",f:"all",o:"new",open:new Set()},
+  sold:{key:"sold",list:"soldList",sum:"soldSum",search:"soldSearch",sort:"soldSort",bar:"soldBar",tog:"soldToggle",inp:"newSold",add:"addSold",noun:"sold item",nounP:"sold items",total:"total earned",amt:["price","sold for","sale price"],who:["buyer"],def:()=>[{k:"Buyer",v:""},{k:"Price",v:""}],q:"",f:"all",o:"new",open:new Set()}
+};
+const MSORT=[["new","Newest first"],["old","Oldest first"],["hi","Amount: high to low"],["lo","Amount: low to high"],["az","Title A\u2013Z"]];
+const bitems=(a,def)=>Array.isArray(a)?a.map(x=>{const title=String(x.title||"");return{id:String(x.id||Date.now()+Math.random()),title:title,t:+x.t||0,cat:MCAT.some(c=>c[0]===x.cat)?x.cat:mcatGuess(title),fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):def()}}):[];
+const bnorm=d=>{d=d||{};return{items:bitems(d.items,MK.buy.def),sold:bitems(d.sold,MK.sold.def)}};
+let buys=bnorm(),buyDB=true,buyT=null,mkMode=LS("tracker.mk")==="sold"?"sold":"buy";
+/* use only the first amount in the field, ignoring "#1"-style numbers, so notes like "12 + Bocchi #1" don't add digits */
+const bnum=v=>{const m=String(v).replace(/#\s*\d+/g,"").match(/-?\$?\s*\d[\d,]*(?:\.\d+)?|-?\.\d+/);if(!m)return 0;const n=parseFloat(m[0].replace(/[^0-9.\-]/g,""));return isNaN(n)?0:n};
+const mkAmt=(k,b)=>{let t=0;b.fields.forEach(f=>{if(MK[k].amt.includes(f.k.trim().toLowerCase()))t+=bnum(f.v)});return t};
+const mkWho=(k,b)=>{const f=b.fields.find(f=>MK[k].who.includes(f.k.trim().toLowerCase()));return f?f.v.trim():""};
+const mkTotal=k=>buys[MK[k].key].reduce((a,b)=>a+mkAmt(k,b),0);
+/* items for one list after the search, category filter and sort; each keeps its real index */
+function mkView(k){
+  const M=MK[k],q=M.q.toLowerCase();
+  let list=buys[M.key].map((b,i)=>[b,i]);
+  if(q)list=list.filter(([b])=>b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
+  if(M.f!=="all")list=list.filter(([b])=>b.cat===M.f);
+  if(M.o==="old")list.reverse();
+  else if(M.o==="hi")list.sort((x,y)=>mkAmt(k,y[0])-mkAmt(k,x[0]));
+  else if(M.o==="lo")list.sort((x,y)=>mkAmt(k,x[0])-mkAmt(k,y[0]));
+  else if(M.o==="az")list.sort((x,y)=>x[0].title.localeCompare(y[0].title,undefined,{sensitivity:"base",numeric:true}));
+  return list;
 }
-function renderBuys(){
-  const q=bq.toLowerCase();
-  const list=buys.items.map((b,i)=>[b,i]).filter(([b])=>!q||b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
-  $("buyList").innerHTML=list.map(([b,i])=>`<div class="card by" data-i="${i}"><div class="bh"><input class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><button type="button" class="x" data-act="del" aria-label="Delete purchase">\u2715</button></div>${b.fields.map((f,j)=>`<div class="fld"><input class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div></div>`).join("")||'<div class="empty">No purchases.</div>';
+function mkNote(k){
+  const M=MK[k],all=buys[M.key],v=mkView(k),n=all.length;
+  const filtered=v.length!==n;
+  const tot=v.reduce((a,[b])=>a+mkAmt(k,b),0);
+  $(M.sum).textContent=filtered?"Showing "+v.length+" of "+n+" \u00b7 "+M.total+" "+nfmt(tot):n+" "+(n===1?M.noun:M.nounP)+" \u00b7 "+M.total+" "+nfmt(tot);
+}
+function renderBuySum(){
+  const sp=mkTotal("buy"),ea=mkTotal("sold"),net=ea-sp;
+  mkNote("buy");mkNote("sold");
+  $("mkSpent").textContent=nfmt(sp);$("mkEarned").textContent=nfmt(ea);
+  $("mkNet").textContent=(net<0?"-":"")+nfmt(Math.abs(net));
+  $("mkNet").classList.toggle("pos",net>0);$("mkNet").classList.toggle("neg",net<0);
+}
+const mkPill=c=>`<span class="pill r r-${mcat(c)[2]}">${mcat(c)[1]}</span>`;
+const mkHead=(k,b)=>{const a=mkAmt(k,b),w=mkWho(k,b);return mkPill(b.cat)+`<div style="min-width:0"><div class="mkt">${esc(b.title)||"Untitled"}</div>${w?`<div class="mks">${esc(w)}</div>`:""}</div><div class="mkc">${a?nfmt(a):"\u2014"}</div><span class="mkv" aria-hidden="true">\u25B8</span>`};
+function renderMk(k){
+  const M=MK[k],arr=buys[M.key],v=mkView(k);
+  /* filter chips with counts (counts ignore the category filter but respect search) */
+  const q=M.q.toLowerCase();
+  const base=arr.filter(b=>!q||b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
+  $(M.bar).innerHTML=`<button type="button" class="all${M.f==="all"?" on":""}" data-f="all">All <span class="mkn">${base.length}</span></button>`+MCAT.map(c=>{const n=base.filter(b=>b.cat===c[0]).length;return n||M.f===c[0]?`<button type="button" class="${M.f===c[0]?"on":""}" data-f="${c[0]}"><span class="pill r r-${c[2]}">${c[1]}</span><span class="mkn">${n}</span></button>`:""}).join("");
+  $(M.sort).innerHTML=MSORT.map(o=>`<option value="${o[0]}"${M.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
+  $(M.list).innerHTML=v.map(([b,i])=>{const open=M.open.has(b.id);return `<div class="card by mk${open?" open":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${open}">${mkHead(k,b)}</div><div class="mkb"><input class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><div class="mkcats" role="group" aria-label="Category">${MCAT.map(c=>`<button type="button" data-act="cat" data-c="${c[0]}" class="${b.cat===c[0]?"on":""}"><span class="pill r r-${c[2]}">${c[1]}</span></button>`).join("")}</div>${b.fields.map((f,j)=>`<div class="fld"><input class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div><button type="button" class="small mkdel" data-act="del" aria-label="Delete ${M.noun}">Delete ${M.noun}</button></div></div>`}).join("")||'<div class="empty">'+(arr.length?"Nothing matches your search or filter.":"No "+M.nounP+" yet.")+'</div>';
+  $(M.tog).textContent=v.length&&v.every(([b])=>M.open.has(b.id))?"Collapse all":"Expand all";
+  $(M.tog).hidden=!v.length;
   renderBuySum();
 }
+function renderBuys(){renderMk("buy");renderMk("sold");mkShow(mkMode)}
+function mkShow(m){
+  mkMode=m;LS("tracker.mk",m);
+  $("mkBuy").hidden=m!=="buy";$("mkSold").hidden=m!=="sold";
+  [...$("mkSeg").children].forEach(b=>b.classList.toggle("on",b.dataset.m===m));
+}
+$("mkSeg").addEventListener("click",e2=>{const b=e2.target.closest("button[data-m]");if(b)mkShow(b.dataset.m)});
 function saveBuys(){
   LS("tracker.buys",JSON.stringify(buys));
   if(buyDB)track(sb.from("pass_state").upsert({id:3,data:buys},{onConflict:"user_id,id"}));
@@ -1754,38 +1905,101 @@ async function loadBuys(){
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:3,data:bnorm(local)},{onConflict:"user_id,id"}))}
   buys=bnorm(d);renderBuys();
 }
-$("buyList").addEventListener("input",e2=>{
-  const inp=e2.target.closest("input");if(!inp)return;
-  const b=buys.items[+inp.closest(".by").dataset.i],f=inp.dataset.f;
-  if(f==="t")b.title=inp.value;else{const fl=b.fields[+inp.dataset.j];fl[f]=inp.value}
-  schedBuy();renderBuySum();
+Object.keys(MK).forEach(k=>{
+  const M=MK[k];
+  const toggleRow=card=>{
+    const b=buys[M.key][+card.dataset.i],open=!card.classList.contains("open");
+    card.classList.toggle("open",open);card.querySelector(".mkh").setAttribute("aria-expanded",open);
+    if(open)M.open.add(b.id);else M.open.delete(b.id);
+    const v=mkView(k);$(M.tog).textContent=v.length&&v.every(([x])=>M.open.has(x.id))?"Collapse all":"Expand all";
+  };
+  $(M.list).addEventListener("input",e2=>{
+    const inp=e2.target.closest("input");if(!inp)return;
+    const card=inp.closest(".by"),b=buys[M.key][+card.dataset.i],f=inp.dataset.f;
+    if(f==="t")b.title=inp.value;else{const fl=b.fields[+inp.dataset.j];fl[f]=inp.value}
+    card.querySelector(".mkh").innerHTML=mkHead(k,b);
+    schedBuy();renderBuySum();
+  });
+  $(M.list).addEventListener("click",e2=>{
+    const btn=e2.target.closest("button");
+    if(!btn){const h=e2.target.closest(".mkh");if(h)toggleRow(h.closest(".by"));return}
+    const arr=buys[M.key],b=arr[+btn.closest(".by").dataset.i],a=btn.dataset.act;
+    if(a==="cat"){b.cat=btn.dataset.c;saveBuys();renderMk(k)}
+    else if(a==="add"){b.fields.push({k:"",v:""});saveBuys();renderMk(k)}
+    else if(a==="rem"){
+      if(b.fields.length<=1)return;
+      const last=b.fields[b.fields.length-1];
+      const go=()=>{b.fields.pop();saveBuys();renderMk(k)};
+      if(last.k.trim()||last.v.trim())ask("Remove the last field ("+(last.k||"unnamed")+")?",go);else go();
+    }else if(a==="del"){
+      ask("Delete \u201c"+(b.title||"this "+M.noun)+"\u201d?",()=>{arr.splice(arr.indexOf(b),1);M.open.delete(b.id);saveBuys();renderMk(k)});
+    }
+  });
+  $(M.list).addEventListener("keydown",e2=>{
+    const h=e2.target.closest(".mkh");
+    if(h&&e2.target===h&&(e2.key==="Enter"||e2.key===" ")){e2.preventDefault();toggleRow(h.closest(".by"))}
+  });
+  $(M.bar).addEventListener("click",e2=>{const b=e2.target.closest("button[data-f]");if(!b)return;M.f=b.dataset.f;renderMk(k)});
+  $(M.sort).addEventListener("change",()=>{M.o=$(M.sort).value;renderMk(k)});
+  $(M.tog).onclick=()=>{
+    const v=mkView(k),all=v.every(([b])=>M.open.has(b.id));
+    v.forEach(([b])=>all?M.open.delete(b.id):M.open.add(b.id));renderMk(k);
+  };
+  $(M.search).addEventListener("input",e2=>{M.q=e2.target.value.trim();renderMk(k)});
+  $(M.add).onclick=()=>{
+    const n=$(M.inp).value.trim();if(!n)return;
+    const it={id:String(Date.now()),title:n,t:Date.now(),cat:mcatGuess(n),fields:M.def()};
+    buys[M.key].unshift(it);M.open.add(it.id);
+    $(M.inp).value="";M.q="";$(M.search).value="";
+    if(M.f!=="all"&&M.f!==it.cat)M.f="all";
+    saveBuys();renderMk(k);
+  };
+  $(M.inp).addEventListener("keydown",e2=>{if(e2.key==="Enter")$(M.add).click()});
 });
-$("buyList").addEventListener("click",e2=>{
-  const btn=e2.target.closest("button");if(!btn)return;
-  const b=buys.items[+btn.closest(".by").dataset.i],a=btn.dataset.act;
-  if(a==="add"){b.fields.push({k:"",v:""});saveBuys();renderBuys()}
-  else if(a==="rem"){
-    if(b.fields.length<=1)return;
-    const last=b.fields[b.fields.length-1];
-    const go=()=>{b.fields.pop();saveBuys();renderBuys()};
-    if(last.k.trim()||last.v.trim())ask("Remove the last field ("+(last.k||"unnamed")+")?",go);else go();
-  }else if(a==="del"){
-    ask("Delete \u201c"+(b.title||"this purchase")+"\u201d?",()=>{buys.items.splice(buys.items.indexOf(b),1);saveBuys();renderBuys()});
-  }
-});
-$("buySearch").addEventListener("input",e2=>{bq=e2.target.value.trim();renderBuys()});
-$("addBuy").onclick=()=>{
-  const n=$("newBuy").value.trim();if(!n)return;
-  buys.items.unshift({id:String(Date.now()),title:n,t:Date.now(),fields:[{k:"Seller",v:""},{k:"Cost",v:""}]});
-  $("newBuy").value="";bq="";$("buySearch").value="";saveBuys();renderBuys();
-};
-$("newBuy").addEventListener("keydown",e2=>{if(e2.key==="Enter")$("addBuy").click()});
 
-/* ---------- notes ---------- */
-let notes="",notesDB=true,notesT=null;
+/* ---------- notes (small rich text: bold, italic, underline, title, list, colors, highlight) ---------- */
+let notes="",notesHtml="",notesDB=true,notesT=null;
+const NOTE_OK=new Set(["B","STRONG","I","EM","U","H3","UL","OL","LI","DIV","P","BR","SPAN","FONT"]),NOTE_DROP=new Set(["SCRIPT","STYLE","IFRAME","OBJECT","EMBED","TEMPLATE","NOSCRIPT"]);
+const NOTE_COL=/^(#[0-9a-f]{3,8}|rgba?\([\d\s,.%]+\))$/i;
+/* keep only simple formatting; everything else (attributes, scripts, links) is removed */
+function noteClean(html){
+  const t=document.createElement("template");t.innerHTML=html;
+  const out=document.createElement("div");
+  (function walk(src,dst){
+    src.childNodes.forEach(n=>{
+      if(n.nodeType===3){dst.appendChild(document.createTextNode(n.nodeValue));return}
+      if(n.nodeType!==1||NOTE_DROP.has(n.tagName))return;
+      if(!NOTE_OK.has(n.tagName)){walk(n,dst);return}
+      if(n.tagName==="SPAN"||n.tagName==="FONT"){
+        const c=n.tagName==="FONT"?(n.getAttribute("color")||""):n.style.color,bg=n.tagName==="SPAN"?n.style.backgroundColor:"";
+        const el=document.createElement("span");
+        if(c&&NOTE_COL.test(c.trim()))el.style.color=c.trim();
+        if(bg&&NOTE_COL.test(bg.trim()))el.style.backgroundColor=bg.trim();
+        if(n.tagName==="SPAN"){
+          if(/^(bold|[6-9]00)$/.test(n.style.fontWeight))el.style.fontWeight="bold";
+          if(n.style.fontStyle==="italic")el.style.fontStyle="italic";
+          if(/underline/.test(n.style.textDecorationLine||n.style.textDecoration))el.style.textDecoration="underline";
+        }
+        if(el.getAttribute("style")){walk(n,el);dst.appendChild(el)}else walk(n,dst);
+        return;
+      }
+      const el=document.createElement(n.tagName);
+      walk(n,el);dst.appendChild(el);
+    });
+  })(t.content,out);
+  return out.innerHTML;
+}
+const noteEsc=x=>x.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const notePlainToHtml=t=>noteEsc(t).replace(/\r?\n/g,"<br>");
+function noteSnapshot(){
+  const el=$("notesText");
+  if(!el.textContent.trim()&&!el.querySelector("li,h3"))el.innerHTML="";
+  notesHtml=noteClean(el.innerHTML);
+  notes=el.innerText.replace(/\u00a0/g," ");
+}
 function saveNotes(){
-  LS("tracker.notes",notes);
-  if(notesDB)track(sb.from("pass_state").upsert({id:4,data:{text:notes}},{onConflict:"user_id,id"}));
+  LS("tracker.notes",notes);LS("tracker.notesHtml",notesHtml);
+  if(notesDB)track(sb.from("pass_state").upsert({id:4,data:{text:notes,html:notesHtml}},{onConflict:"user_id,id"}));
 }
 function schedNotes(){dirty.add("notes");clearTimeout(notesT);notesT=setTimeout(()=>{dirty.delete("notes");saveNotes()},600)}
 async function loadNotes(){
@@ -1794,16 +2008,49 @@ async function loadNotes(){
     const r=await sb.from("pass_state").select("data").eq("id",4).maybeSingle();
     if(r.error)notesDB=false;else{notesDB=true;d=r.data&&r.data.data}
   }catch(e){notesDB=false}
-  const local=LS("tracker.notes");
-  let t=d&&typeof d.text==="string"?d.text:null;
-  if(!notesDB)t=local||"";
-  else if(t===null&&local){t=local;track(sb.from("pass_state").upsert({id:4,data:{text:local}},{onConflict:"user_id,id"}))}
+  const local=LS("tracker.notes"),localHtml=LS("tracker.notesHtml");
+  let t=d&&typeof d.text==="string"?d.text:null,h=d&&typeof d.html==="string"?d.html:null;
+  if(!notesDB){t=local||"";h=localHtml}
+  else if(t===null&&local){t=local;h=localHtml;track(sb.from("pass_state").upsert({id:4,data:{text:local,html:localHtml||notePlainToHtml(local)}},{onConflict:"user_id,id"}))}
   notes=t||"";
-  $("notesText").value=notes;
+  /* older notes were plain text: show them as-is until formatting is used */
+  $("notesText").innerHTML=h!==null&&h!==undefined?noteClean(h):notePlainToHtml(notes);
+  notesHtml=noteClean($("notesText").innerHTML);
   $("notesMsg").textContent=notesDB?"":"Not syncing to the database. Saved on this device only.";
 }
-$("notesText").addEventListener("input",e2=>{notes=e2.target.value;schedNotes()});
-$("notesText").addEventListener("blur",()=>{if(dirty.has("notes")){clearTimeout(notesT);dirty.delete("notes");saveNotes()}});
+const noteEl=$("notesText");
+noteEl.addEventListener("input",()=>{noteSnapshot();schedNotes()});
+noteEl.addEventListener("blur",()=>{if(dirty.has("notes")){clearTimeout(notesT);dirty.delete("notes");saveNotes()}});
+/* paste as plain text so copied pages don't bring their own fonts and colors */
+noteEl.addEventListener("paste",e2=>{
+  e2.preventDefault();
+  const t=(e2.clipboardData||window.clipboardData).getData("text/plain");
+  document.execCommand("insertText",false,t);
+});
+function noteCmd(c,v){
+  if(document.activeElement!==noteEl)noteEl.focus();
+  try{document.execCommand("styleWithCSS",false,c==="color"||c==="mark")}catch(e){}
+  if(c==="title"){const on=/^h3$/i.test(document.queryCommandValue("formatBlock")||"");document.execCommand("formatBlock",false,on?"<div>":"<h3>")}
+  else if(c==="list")document.execCommand("insertUnorderedList");
+  else if(c==="mark")document.execCommand("hiliteColor",false,"rgba(245,205,10,.4)");
+  else if(c==="clear"){document.execCommand("removeFormat");if(/^h3$/i.test(document.queryCommandValue("formatBlock")||""))document.execCommand("formatBlock",false,"<div>")}
+  else if(c==="color")document.execCommand("foreColor",false,v);
+  else document.execCommand(c);
+  noteSnapshot();schedNotes();noteState();
+}
+function noteState(){
+  const sel=document.getSelection();
+  if(!sel||!sel.anchorNode||!noteEl.contains(sel.anchorNode))return;
+  const on={bold:0,italic:0,underline:0,list:0,title:0};
+  try{on.bold=document.queryCommandState("bold");on.italic=document.queryCommandState("italic");on.underline=document.queryCommandState("underline");on.list=document.queryCommandState("insertUnorderedList");on.title=/^h3$/i.test(document.queryCommandValue("formatBlock")||"")}catch(e){}
+  $("nbar").querySelectorAll("button[data-c]").forEach(b=>b.classList.toggle("on",!!on[b.dataset.c]));
+}
+$("nbar").addEventListener("mousedown",e2=>{if(e2.target.closest("button"))e2.preventDefault()});
+$("nbar").addEventListener("click",e2=>{
+  const b=e2.target.closest("button");if(!b)return;
+  if(b.dataset.col)noteCmd("color",b.dataset.col);else noteCmd(b.dataset.c);
+});
+document.addEventListener("selectionchange",noteState);
 
 /* ---------- import / export ---------- */
 function exportObj(){
@@ -1858,7 +2105,7 @@ let chan=null,rTimer=null;
 function busy(){
   const a=document.activeElement;
   const typing=!!(a&&/^(INPUT|TEXTAREA)$/.test(a.tagName)&&a.type!=="checkbox"&&a.type!=="radio"&&a.closest&&a.closest("#tab-pass,#tab-event,#tab-gempic,#tab-quest,#tab-artist"));
-  return inflight>0||dirty.size>0||pend!==null||typing||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList,#notesText"));
+  return inflight>0||dirty.size>0||pend!==null||typing||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList,#soldList,#notesText"));
 }
 function scheduleRefresh(ms){clearTimeout(rTimer);rTimer=setTimeout(doRefresh,ms||500)}
 async function doRefresh(){
@@ -1879,7 +2126,7 @@ window.addEventListener("online",()=>scheduleRefresh(200));
 /* ---------- number tweens: values count up/down and bump when they change ---------- */
 (function(){
   if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
-  const re=/^(-?)(\$?)(-?)(\d[\d,]*(?:\.\d+)?)(%?)$/,SEL=".val,.big",last=new Map(),SKIP="#epicList,#holderList,#buyList,#arGrid,#hist,#notesText";
+  const re=/^(-?)(\$?)(-?)(\d[\d,]*(?:\.\d+)?)(%?)$/,SEL=".val,.big",last=new Map(),SKIP="#epicList,#holderList,#buyList,#soldList,#arGrid,#hist,#notesText";
   const key=el=>{const c=el.closest(".card"),l=c&&c.querySelector(".lbl,.nm");return(el.id||(c&&c.parentElement&&c.parentElement.id)||"")+"|"+(l?l.textContent.trim():"")};
   function run(el){
     if(!el.isConnected)return;
@@ -1930,7 +2177,7 @@ async function checkUser(){
     const em=data.session.user.email||"";
     $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];
     const prev=LS("tracker.uid");
-    if(prev&&prev!==uid)["pass","event","gempic","quest","buys","notes","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
+    if(prev&&prev!==uid)["pass","event","gempic","quest","buys","notes","notesHtml","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
   }catch(e){}
 }
