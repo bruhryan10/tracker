@@ -166,14 +166,29 @@ let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"
 const committed={},els={};
 const num=k=>Number(s[k])||0;
 const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
-const saveTimers={};
+const saveTimers={},dirty=new Set(),pendDelta={},deltaTimers={};
 function queueSave(k){
-  clearTimeout(saveTimers[k]);
-  saveTimers[k]=setTimeout(()=>{
+  clearTimeout(saveTimers[k]);dirty.add("s"+k);
+  saveTimers[k]=setTimeout(async()=>{
     const v=k==="start"?s.start:num(k);
-    if(k==="start"&&!v)return;
-    track(sb.from("shiny_state").update({[col[k]]:v,updated_at:new Date().toISOString()}).eq("id",1));
+    if(!(k==="start"&&!v))await track(sb.from("shiny_state").update({[col[k]]:v,updated_at:new Date().toISOString()}).eq("id",1));
+    dirty.delete("s"+k);
   },500);
+}
+/* +/- buttons add to the value that is in the database right now, so a stale screen cannot overwrite another device */
+function queueDelta(k,d){
+  pendDelta[k]=(pendDelta[k]||0)+d;dirty.add("d"+k);
+  clearTimeout(deltaTimers[k]);deltaTimers[k]=setTimeout(()=>flushDelta(k),400);
+}
+async function flushDelta(k){
+  const d=pendDelta[k]||0;pendDelta[k]=0;
+  if(!d){dirty.delete("d"+k);return}
+  const r=await track(sb.from("shiny_state").select(col[k]).eq("id",1).single());
+  if(!r||!r.data){dirty.delete("d"+k);return}
+  const nv=Math.max(0,(Number(r.data[col[k]])||0)+d);
+  const u=await track(sb.from("shiny_state").update({[col[k]]:nv,updated_at:new Date().toISOString()}).eq("id",1));
+  dirty.delete("d"+k);
+  if(u&&!pendDelta[k]){s[k]=nv;els[k].value=nv;committed[k]=nv;calc()}
 }
 fields.forEach(([k,l])=>{
   const host=$(k==="bought"||k==="start"?"inv":"inputs");
@@ -187,7 +202,7 @@ fields.forEach(([k,l])=>{
     const row=document.createElement("div");row.className="steps";
     [["+",1],["\u2212",-1]].forEach(([txt,dlt])=>{
       const b=document.createElement("button");b.type="button";b.textContent=txt;
-      b.onclick=()=>{const o=num(k);s[k]=Math.max(0,o+dlt);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueSave(k)};
+      b.onclick=()=>{const o=num(k);s[k]=Math.max(0,o+dlt);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o)};
       row.appendChild(b);
     });
     d.appendChild(row);
@@ -280,10 +295,11 @@ function setView(v){
 }
 const slotTimers={};
 function schedSlot(e,j){
-  const key=e.id+":"+j;clearTimeout(slotTimers[key]);
-  slotTimers[key]=setTimeout(()=>{
-    const v=e.holders[j];if(v===undefined)return;
-    track(sb.from("epic_slots").upsert({epic_id:e.id,slot:j+1,holder:v}));
+  const key=e.id+":"+j;clearTimeout(slotTimers[key]);dirty.add("e"+key);
+  slotTimers[key]=setTimeout(async()=>{
+    const v=e.holders[j];
+    if(v!==undefined)await track(sb.from("epic_slots").upsert({epic_id:e.id,slot:j+1,holder:v}));
+    dirty.delete("e"+key);
   },600);
 }
 const epicList=$("epicList");
@@ -299,7 +315,7 @@ epicList.addEventListener("click",ev=>{
   const done=()=>{renderEpics();renderMeta()};
   if(a==="add"){
     e.holders.push("");done();
-    track(sb.from("epic_slots").upsert({epic_id:e.id,slot:e.holders.length,holder:""}));
+    track(sb.from("epic_slots").upsert({epic_id:e.id,slot:e.holders.length,holder:""},{ignoreDuplicates:true}));
   }else if(a==="rem"){
     if(e.holders.length<=1)return;
     const n=e.holders.length,last=e.holders[n-1];
@@ -352,8 +368,8 @@ det.open=LS("tracker.more")==="1";
 det.addEventListener("toggle",()=>LS("tracker.more",det.open?"1":"0"));
 
 /* ---------- load from database ---------- */
-async function loadAll(){
-  setStatus("Loading...");
+async function loadAll(quiet){
+  if(!quiet)setStatus("Loading...");
   const [st,lg,ep,sl]=await Promise.all([
     sb.from("shiny_state").select("*").eq("id",1).maybeSingle(),
     sb.from("shiny_log").select("*").order("at",{ascending:false}).limit(200),
@@ -372,7 +388,7 @@ async function loadAll(){
   epics=ep.data.map(e=>({id:e.id,name:e.name,holders:Array.from(bySlot[e.id]||[""],h=>h||"")}));
   sortEpics();
   calc();renderLog();renderEpics();renderMeta();
-  setStatus("Saved");
+  if(!quiet)setStatus("Saved");
   return true;
 }
 
@@ -419,6 +435,28 @@ $("bkImport").onclick=()=>{
   });
 };
 
+/* ---------- live sync between devices ---------- */
+let chan=null,rTimer=null;
+function busy(){
+  const a=document.activeElement;
+  return inflight>0||dirty.size>0||pend!==null||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList"));
+}
+function scheduleRefresh(ms){clearTimeout(rTimer);rTimer=setTimeout(doRefresh,ms||500)}
+async function doRefresh(){
+  if($("app").hidden)return;
+  if(busy()){scheduleRefresh(1500);return}
+  await loadAll(true);
+}
+function subscribe(){
+  if(chan)return;
+  chan=sb.channel("tracker-sync");
+  ["shiny_state","shiny_log","epics","epic_slots"].forEach(tb=>chan.on("postgres_changes",{event:"*",schema:"public",table:tb},()=>scheduleRefresh(500)));
+  chan.subscribe();
+}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)scheduleRefresh(200)});
+window.addEventListener("focus",()=>scheduleRefresh(200));
+window.addEventListener("online",()=>scheduleRefresh(200));
+
 /* ---------- login ---------- */
 function showLogin(){
   $("app").hidden=true;$("login").hidden=false;$("lgPass").value="";
@@ -428,6 +466,7 @@ async function enter(){
   showTab(LS("tracker.tab")||"shiny");setView("epic");
   calc();renderLog();
   await loadAll();
+  subscribe();
 }
 async function doLogin(){
   $("lgErr").textContent="";
@@ -437,7 +476,7 @@ async function doLogin(){
 }
 $("lgGo").onclick=doLogin;
 $("lgPass").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
-$("signOut").onclick=async()=>{await flushLog();await sb.auth.signOut();showLogin()};
+$("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);chan=null}await sb.auth.signOut();showLogin()};
 (async()=>{
   const {data}=await sb.auth.getSession();
   if(data&&data.session)enter();else showLogin();
