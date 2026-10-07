@@ -104,6 +104,7 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .top h1{margin:0}
 .top .r{display:flex;align-items:center;gap:10px}
 .top button{margin:0;padding:6px 10px;font-size:13px}
+#who{font-size:13px;font-weight:600;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #sync{font-size:12px;color:var(--mut)}#sync.bad{color:var(--neg)}
 #login{max-width:340px;margin:12vh auto 0}
 #login input{margin-bottom:10px}
@@ -197,7 +198,7 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 </div>
 
 <div id="app" hidden>
-<div class="top"><h1>Soundmap Helper</h1><div class="r"><span id="sync"></span><button type="button" id="signOut">Sign out</button></div></div>
+<div class="top"><h1>Soundmap Helper</h1><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="signOut">Sign out</button></div></div>
 <div class="tabs"><button type="button" id="tbShiny">Shiny Tracker</button><button type="button" id="tbEpic">Epic Tracker</button><button type="button" id="tbPass">Pass Tracker</button><button type="button" id="tbMap">Artist Guesser</button><button type="button" id="tbBuys">Purchases</button><button type="button" id="tbEvent">Event Tracker</button><button type="button" id="tbInfo">Wiki</button><button type="button" id="tbNotes">Notes</button></div>
 <div id="tab-shiny">
 
@@ -1054,7 +1055,8 @@ $("bkImport").onclick=()=>{
 let chan=null,rTimer=null;
 function busy(){
   const a=document.activeElement;
-  return inflight>0||dirty.size>0||pend!==null||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList,#notesText"));
+  const typing=!!(a&&/^(INPUT|TEXTAREA)$/.test(a.tagName)&&a.type!=="checkbox"&&a.type!=="radio"&&a.closest&&a.closest("#tab-pass,#tab-event"));
+  return inflight>0||dirty.size>0||pend!==null||typing||!!(a&&a.closest&&a.closest("#inputs,#inv,#epicList,#buyList,#notesText"));
 }
 function scheduleRefresh(ms){clearTimeout(rTimer);rTimer=setTimeout(doRefresh,ms||500)}
 async function doRefresh(){
@@ -1065,7 +1067,7 @@ async function doRefresh(){
 function subscribe(){
   if(chan)return;
   chan=sb.channel("tracker-sync");
-  ["shiny_state","shiny_log","epic_sets","epics","epic_slots"].forEach(tb=>chan.on("postgres_changes",{event:"*",schema:"public",table:tb},()=>scheduleRefresh(500)));
+  ["shiny_state","shiny_log","epic_sets","epics","epic_slots","pass_state"].forEach(tb=>chan.on("postgres_changes",{event:"*",schema:"public",table:tb},()=>scheduleRefresh(500)));
   chan.subscribe();
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)scheduleRefresh(200)});
@@ -1082,6 +1084,8 @@ async function checkUser(){
     const {data}=await sb.auth.getSession();
     const uid=data&&data.session&&data.session.user&&data.session.user.id;
     if(!uid)return;
+    const em=data.session.user.email||"";
+    $("who").textContent=em.split("@")[0];
     const prev=LS("tracker.uid");
     if(prev&&prev!==uid)["pass","event","buys","notes","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
