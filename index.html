@@ -82,8 +82,67 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 .tabs button,.seg button{flex:1;margin:0;padding:10px;font-size:15px;font-weight:600}
 .seg{margin:10px 0}.seg button{padding:7px;font-size:13px}
 .tabs button.on,.seg button.on{background:var(--ac);color:var(--bg);border-color:var(--ac)}
-#epicList,#holderList{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
-@media (max-width:700px){#epicList,#holderList{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#epicList,#holderList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
+#epicList .mk.open,#holderList .mk.open,#epicList .empty,#holderList .empty{grid-column:1/-1}
+@media (max-width:640px){#epicList,#holderList{grid-template-columns:1fr}}
+#tab-epic{max-width:1000px;margin:0 auto}
+#epTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
+#epTop .card{padding:12px 8px;text-align:center;border-top:3px solid var(--ac)}
+#epTop .lbl{font-size:12px;font-weight:600;margin-bottom:4px}
+#epTop .val{font-size:clamp(18px,5vw,28px);font-weight:700;line-height:1.15;white-space:nowrap}
+.mks.all{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.35;margin-top:2px}
+.mk.open .mks.all{display:none}
+#tab-map{max-width:1000px;margin:0 auto}
+#agTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:6px}
+#agTop .card{padding:12px 8px;text-align:center;border-top:3px solid var(--ac)}
+#agTop .lbl{font-size:12px;font-weight:600;margin-bottom:4px}
+#agTop .val{font-size:clamp(18px,5vw,28px);font-weight:700;line-height:1.15}
+#agList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:640px){#agList{grid-template-columns:1fr}}
+.mkh.nc{grid-template-columns:auto minmax(0,1fr) auto;cursor:default}
+.mkh.nc:hover{background:none}
+.agg{margin-top:8px}
+.agf{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.agf button{margin:0;padding:6px 10px;font-size:13px}
+.agf button.eq{border-color:var(--pos);color:var(--pos);box-shadow:0 0 0 1px var(--pos)}
+.agf button.no{border-color:var(--neg);color:var(--neg);box-shadow:0 0 0 1px var(--neg)}
+.agf button.cl{border-color:#d4a017;color:#d4a017;box-shadow:0 0 0 1px #d4a017}
+.agf button.dir{border-color:var(--ac);color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+.agtwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:640px){.agtwo{grid-template-columns:1fr}}
+.agm{cursor:pointer}
+.agm .mkt{color:var(--pos)}
+.agm .mkh.nc{cursor:pointer}
+.agm:hover{border-color:var(--pos)}
+.agm.hi{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 8%,var(--card))}
+.agy{font-size:12px;font-weight:400;color:var(--mut)}
+.agplus{width:34px;height:34px;border:2px solid var(--pos);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--pos);font-size:20px;font-weight:700;line-height:1}
+.agg{padding:22px 16px;margin-top:10px}
+@media (min-width:641px){#agGuesses .agg{width:80%;box-sizing:border-box}}
+.agh{display:flex;align-items:center;gap:8px}
+.agh .t{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.agh .ctl{display:flex;gap:6px}
+.agh button{margin:0;padding:2px 8px;font-size:13px;line-height:1.3}
+input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
+.agp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+@media (max-width:640px){.agp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.agp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:16px 10px}
+.agp.ok{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 10%,var(--bg))}
+.agph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.agph span{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+.agph b{font-size:13px;text-align:right;overflow-wrap:anywhere}
+.agpb{display:flex;align-items:center;gap:4px;margin-top:6px;flex-wrap:wrap}
+.agpb button{margin:0;width:28px;height:26px;padding:0;font-size:13px;line-height:1;border-radius:5px}
+.agpb .sp{width:4px}
+.agpb button.on{background:#6b7280;color:#fff;border-color:#6b7280}
+.agpb button.on.ok{background:var(--pos);border-color:var(--pos)}
+.agpb button.on.cl{background:#d4a017;border-color:#d4a017}
+.agpb button.on.ar{background:var(--ac);border-color:var(--ac)}
+.mkh.nop{grid-template-columns:minmax(0,1fr) auto 14px}
+.mkb .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:2px 10px;margin-top:4px}
+.mkb .slots .slot{margin-top:6px}
+.mkb .chips{padding-top:8px}
+.mkb .ep-act{display:flex;gap:6px;margin-top:8px}
 .eph{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:4px 6px;margin-bottom:4px}
 .ehl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;min-width:0}
 .eph strong{min-width:0;white-space:normal;overflow-wrap:anywhere}
@@ -233,6 +292,8 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .mkrow select{flex:none;font-size:14px;padding:7px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);max-width:42%}
 .mkrow button{margin:0;white-space:nowrap}
 @media (max-width:520px){.mkrow{flex-wrap:wrap}.mkrow input{flex:1 1 100%}.mkrow select{flex:1 1 0;max-width:none}}
+#agHints .mkrow,#agHints .empty{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 10px}
+#agHints .empty{margin-top:8px}
 .mkf,.mkcats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
 .mkcats{margin:10px 0 2px}
 .mkf button,.mkcats button{margin:0;padding:2px 8px 2px 3px;border-radius:999px;background:transparent;border:2px solid transparent;display:inline-flex;align-items:center;gap:6px;font-size:12px;cursor:pointer}
@@ -425,10 +486,16 @@ details[open]>:not(summary){animation:fade .25s ease}
 </div>
 <div id="tab-epic" hidden>
 <div class="seg" id="setBar"></div>
-<div class="note" id="epSum"></div>
-<input id="epSearch" type="search" placeholder="Search epic or holder..." style="margin-top:8px">
+<div class="grid" id="epTop">
+<div class="card"><div class="lbl" id="epL1">Epics</div><div class="val" id="epV1">0</div></div>
+<div class="card"><div class="lbl" id="epL2">Known holders</div><div class="val" id="epV2">0</div></div>
+<div class="card"><div class="lbl" id="epL3">Unknown slots</div><div class="val" id="epV3">0</div></div>
+</div>
 <div class="seg" id="nfBar"><button type="button" data-nf="num" class="on">Numbered</button><button type="button" data-nf="nl">Numberless</button></div>
 <div class="seg" id="viewBar"><button type="button" id="vEpic">By Epic</button><button type="button" id="vHolder">By Holder</button></div>
+<div class="mkrow"><input id="epSearch" type="search" placeholder="Search epic or holder..."><select id="epSort" aria-label="Sort"></select><button class="small" id="epToggle" type="button" style="margin:0">Expand all</button></div>
+<div class="mkf" id="epBar"></div>
+<div class="note" id="epSum"></div>
 <div id="epicList"></div>
 <div id="holderList" hidden></div>
 <div class="addrow"><input id="newEpic" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button><button type="button" id="addNL">Add numberless</button></div>
@@ -623,12 +690,30 @@ details[open]>:not(summary){animation:fade .25s ease}
 </div>
 
 <div id="tab-map" hidden>
-<div class="note" style="margin:0 0 8px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-<span style="display:flex;align-items:center;gap:6px">Zoom <button type="button" class="small" id="zOut" style="margin:0" aria-label="Zoom out">&minus;</button><span id="zVal" style="min-width:42px;text-align:center"></span><button type="button" class="small" id="zIn" style="margin:0" aria-label="Zoom in">+</button></span>
-<a id="mapOpen" href="https://smartistguesser.github.io/soundmap-artist-guesser/" target="_blank" rel="noopener">Open in new tab</a></div>
-<div id="mapWrap" style="height:max(480px,calc(100vh - 180px));overflow:hidden;border:1px solid var(--bd);border-radius:10px;background:#fff">
-<iframe id="mapFrame" title="Artist Guesser" allow="autoplay; fullscreen; clipboard-write" allowfullscreen loading="lazy" style="width:calc(100% / var(--z,1));height:calc(max(480px,100vh - 180px) / var(--z,1));border:0;transform:scale(var(--z,1));transform-origin:0 0"></iframe>
+<div class="grid" id="agTop">
+<div class="card"><div class="lbl">Matches</div><div class="val" id="agV1">0</div></div>
+<div class="card"><div class="lbl">Active filters</div><div class="val" id="agV2">0</div></div>
+<div class="card"><div class="lbl">Best match</div><div class="val" id="agV3" style="font-size:clamp(14px,3.6vw,20px);white-space:normal">—</div></div>
 </div>
+<div class="agtwo">
+<div>
+<h2>Hints</h2>
+<div id="agHints"></div>
+<div class="addrow"><button type="button" id="agAddHint" style="margin:0">Add hint</button><button type="button" id="agClear" style="margin:0">Clear all</button></div>
+</div>
+<div>
+<div class="note" id="agMsg"></div>
+</div>
+</div>
+<h2>Guesses</h2>
+<div id="agGuesses"></div>
+<button type="button" id="agAddG" style="margin-top:12px">Add guess</button>
+<h2>Best match</h2>
+<div id="agBest"></div>
+<h2 id="agMH">Matches</h2>
+<div id="agList"></div>
+<button type="button" id="agMore" class="small" hidden>Show more</button>
+<datalist id="agDL"></datalist>
 </div>
 
 <div id="tab-info" hidden>
@@ -896,29 +981,87 @@ function matches(e){
   if(!eq)return true;const t=eq.toLowerCase();
   return e.name.toLowerCase().includes(t)||(!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
 }
+const EP={open:new Set(),hopen:new Set(),f:"all",o:"az"};
+const ESORT=[["az","A\u2013Z"],["unk","Most unknown slots"],["fill","Most holders known"]];
+const eCount=e=>{if(e.numberless)return[got(e)?1:0,1];let k=0;e.holders.forEach(h=>{if(h.trim())k++});return[k,e.holders.length]};
+const noRar='<span class="pill rt none" style="cursor:inherit">No rarity</span>';
+function epHead(e){
+  const [k,n]=eCount(e);
+  const pill=e.rarity?`<span class="pill r r-${e.rarity}">${RLBL[e.rarity]}</span>`:noRar;
+  let sub;
+  if(e.numberless)sub=k?"Obtained":"Not obtained";
+  else{const hs=e.holders.map((h,j)=>h.trim()?"#"+(j+1)+" "+h.trim():"").filter(Boolean);sub=hs.length?hs.join(" \u00b7 "):"No holders yet"}
+  const cnt=e.numberless?(k?"\u2713":"\u2014"):k+"/"+n;
+  return pill+`<div style="min-width:0"><div class="mkt">${esc(e.name)}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><span class="mkv" aria-hidden="true">\u25B8</span>`;
+}
+function epBody(e){
+  const t=eq.toLowerCase();
+  const rar=`<div class="mkcats" role="group" aria-label="Rarity"><button type="button" data-act="rar" data-r="" class="${e.rarity?"":"on"}">${noRar}</button>`+RAR.map(r=>`<button type="button" data-act="rar" data-r="${r}" class="${e.rarity===r?"on":""}"><span class="pill r r-${r}">${RLBL[r]}</span></button>`).join("")+`</div>`;
+  const slots=e.numberless
+    ?`<label class="chk"><input type="checkbox" data-act="chk"${got(e)?" checked":""}> Obtained</label>`
+    :`<div class="slots">${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}</div><div class="steps"><button type="button" data-act="add">+ slot</button><button type="button" data-act="rem">\u2212 slot</button></div>`;
+  return rar+slots+`<button type="button" class="small mkdel" data-act="del" aria-label="Delete epic">Delete epic</button>`;
+}
+function epView(){
+  let list=epics.map((e,i)=>[e,i]).filter(([e])=>matches(e));
+  const base=list;
+  if(EP.f==="none")list=list.filter(([e])=>!e.rarity);else if(EP.f!=="all")list=list.filter(([e])=>e.rarity===EP.f);
+  const gap=e=>{const c=eCount(e);return c[1]-c[0]};
+  if(EP.o==="unk")list=list.slice().sort((x,y)=>gap(y[0])-gap(x[0]));
+  else if(EP.o==="fill")list=list.slice().sort((x,y)=>eCount(y[0])[0]-eCount(x[0])[0]);
+  return {list,base};
+}
+function holderView(){
+  const t=eq.toLowerCase();
+  return holderMap().filter(h=>!t||h.n.toLowerCase().includes(t)||h.items.some(x=>x.toLowerCase().includes(t)));
+}
+function epToggleLbl(){
+  let all;
+  if(curView==="holder"&&nf==="num"){const v=holderView();all=v.length&&v.every(h=>EP.hopen.has(h.n.toLowerCase()));$("epToggle").hidden=!v.length}
+  else{const v=epView().list;all=v.length&&v.every(([e])=>EP.open.has(e.id));$("epToggle").hidden=!v.length}
+  $("epToggle").textContent=all?"Collapse all":"Expand all";
+}
 function renderEpics(){
   const t=eq.toLowerCase();
-  const list=epics.map((e,i)=>[e,i]).filter(([e])=>matches(e));
-  $("epicList").innerHTML=list.map(([e,i])=>`<div class="card ep" data-i="${i}">
-<div class="eph"><div class="ehl"><strong title="${esc(e.name)}"${e.name.length>20?` style="font-size:${e.name.length>30?11:12}px"`:""}>${esc(e.name)}</strong>${rarTag(e.rarity)}</div><button type="button" class="x" data-act="del" aria-label="Delete epic">\u2715</button></div>
-${e.numberless?`<label class="chk"><input type="checkbox" data-act="chk"${got(e)?" checked":""}> Obtained</label>`:`${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}
-<div class="steps"><button type="button" data-act="add">+ slot</button><button type="button" data-act="rem">\u2212 slot</button></div>`}</div>`).join("")||'<div class="empty">No matches.</div>';
+  const {list,base}=epView();
+  const chip=(r,n)=>n||EP.f===r?`<button type="button" class="${EP.f===r?"on":""}" data-f="${r}">${r==="none"?noRar:`<span class="pill r r-${r}">${RLBL[r]}</span>`}<span class="mkn">${n}</span></button>`:"";
+  $("epBar").innerHTML=`<button type="button" class="all${EP.f==="all"?" on":""}" data-f="all">All <span class="mkn">${base.length}</span></button>`+RAR.map(r=>chip(r,base.filter(([e])=>e.rarity===r).length)).join("")+chip("none",base.filter(([e])=>!e.rarity).length);
+  $("epSort").innerHTML=ESORT.map(o=>`<option value="${o[0]}"${EP.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
+  $("epicList").innerHTML=list.map(([e,i])=>{
+    const open=EP.open.has(e.id)||(t&&!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
+    return `<div class="card ep mk${open?" open":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
+  }).join("")||'<div class="empty">'+(epics.length?"Nothing matches your search or filter.":"No epics yet.")+'</div>';
+  epToggleLbl();
+}
+function epStats(){
+  let known=0,unk=0,nn=0,ng=0,nm=0;
+  epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}nm++;e.holders.forEach(h=>h.trim()?known++:unk++)});
+  const nl=nf==="nl";
+  $("epL1").textContent=nl?"Numberless":"Numbered epics";$("epV1").textContent=nl?nn:nm;
+  $("epL2").textContent=nl?"Obtained":"Known holders";$("epV2").textContent=nl?ng:known;
+  $("epL3").textContent=nl?"Missing":"Unknown slots";$("epV3").textContent=nl?nn-ng:unk;
 }
 function renderMeta(){
   const hm=holderMap();
-  let known=0,unk=0,nn=0,ng=0;epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}e.holders.forEach(h=>h.trim()?known++:unk++)});
+  epStats();
   const curS=sets.find(x=>x.id===curSet);
-  $("epSum").textContent=`${curS?curS.name+": ":""}${epics.length} epics${nn?` (${epics.length-nn} numbered, ${nn} numberless)`:""} \u00b7 ${known} known holders \u00b7 ${unk} unknown slots \u00b7 ${hm.length} users${nn?` \u00b7 ${ng}/${nn} numberless obtained`:""}`;
+  $("epSum").textContent=(curS?curS.name+" \u00b7 ":"")+epics.length+" epics \u00b7 "+hm.length+" users";
   $("holderDL").innerHTML=hm.map(h=>`<option value="${esc(h.n)}">`).join("");
-  const t=eq.toLowerCase();
-  const hl=hm.filter(h=>!t||h.n.toLowerCase().includes(t)||h.items.some(x=>x.toLowerCase().includes(t)));
-  $("holderList").innerHTML=hl.map(h=>`<div class="card"><div class="eph"><strong title="${esc(h.n)}">${esc(h.n)}</strong><span class="lbl" style="margin:0">${h.items.length}</span></div>${h.items.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div>`).join("")||'<div class="empty">No matches.</div>';
+  const hl=holderView();
+  $("holderList").innerHTML=hl.map(h=>{
+    const k=h.n.toLowerCase(),open=EP.hopen.has(k);
+    const sub=h.items.join(" \u00b7 ");
+    return `<div class="card mk${open?" open":""}" data-h="${esc(k)}"><div class="mkh nop" role="button" tabindex="0" aria-expanded="${open}"><div style="min-width:0"><div class="mkt">${esc(h.n)}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc">${h.items.length}</div><span class="mkv" aria-hidden="true">\u25B8</span></div><div class="mkb chips">${h.items.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div>`;
+  }).join("")||'<div class="empty">No matches.</div>';
+  epToggleLbl();
 }
 function setView(v){
-  curView=v;const nl=nf==="nl";
-  $("epicList").hidden=nl?false:v!=="epic";$("holderList").hidden=nl?true:v!=="holder";
+  curView=v;const nl=nf==="nl",hv=!nl&&v==="holder";
+  $("epicList").hidden=hv;$("holderList").hidden=!hv;
   $("viewBar").hidden=nl;$("nfBar").hidden=false;
+  $("epBar").hidden=hv;$("epSort").hidden=hv;
   $("vEpic").classList.toggle("on",v==="epic");$("vHolder").classList.toggle("on",v==="holder");
+  if(typeof epToggleLbl==="function")epToggleLbl();
 }
 const slotTimers={};
 function schedSlot(e,j){
@@ -930,26 +1073,36 @@ function schedSlot(e,j){
   },600);
 }
 const epicList=$("epicList");
+function epToggleRow(card){
+  const e=epics[+card.dataset.i],open=!card.classList.contains("open");
+  card.classList.toggle("open",open);card.querySelector(".mkh").setAttribute("aria-expanded",open);
+  if(open)EP.open.add(e.id);else EP.open.delete(e.id);
+  epToggleLbl();
+}
 epicList.addEventListener("input",ev=>{
   const inp=ev.target.closest("input");if(!inp||inp.type==="checkbox")return;
-  const e=epics[+inp.closest(".ep").dataset.i],j=+inp.dataset.j;
+  const card=inp.closest(".ep"),e=epics[+card.dataset.i],j=+inp.dataset.j;
   e.holders[j]=inp.value;schedSlot(e,j);
+  card.querySelector(".mkh").innerHTML=epHead(e);epStats();
 });
 epicList.addEventListener("change",ev=>{
   const c=ev.target.closest('input[type="checkbox"]');
   if(!c){renderMeta();return}
-  const e=epics[+c.closest(".ep").dataset.i],n=e.holders.length,v=c.checked?"1":"";
+  const card=c.closest(".ep"),e=epics[+card.dataset.i],n=e.holders.length,v=c.checked?"1":"";
   e.holders=[v];
   track(sb.from("epic_slots").upsert({epic_id:e.id,slot:1,holder:v}));
   if(n>1)track(sb.from("epic_slots").delete().eq("epic_id",e.id).gt("slot",1));
-  renderMeta();
+  card.querySelector(".mkh").innerHTML=epHead(e);renderMeta();
 });
 epicList.addEventListener("click",ev=>{
-  const b=ev.target.closest("button");if(!b)return;
-  const e=epics[+b.closest(".ep").dataset.i],a=b.dataset.act;
+  const card=ev.target.closest(".ep");if(!card)return;
+  const b=ev.target.closest("button");
+  if(!b){const h=ev.target.closest(".mkh");if(h)epToggleRow(card);return}
+  const e=epics[+card.dataset.i],a=b.dataset.act;
   const done=()=>{renderEpics();renderMeta()};
   if(a==="rar"){
-    const nx=RAR[RAR.indexOf(e.rarity)+1]||null;
+    const nx=b.dataset.r||null;
+    if(nx===(e.rarity||null))return;
     e.rarity=nx;done();
     if(rarityDB)track(sb.from("epics").update({rarity:nx}).eq("id",e.id));
     else{const m=rarLS();if(nx)m[e.id]=nx;else delete m[e.id];LS("tracker.rarity",JSON.stringify(m))}
@@ -965,13 +1118,40 @@ epicList.addEventListener("click",ev=>{
     if(last.trim())ask(e.numberless?"Remove holder ("+last+")?":"Remove slot #"+n+" ("+last+")?",go);else go();
   }else if(a==="del"){
     ask("Delete epic \u201c"+e.name+"\u201d?",()=>{
-      allEpics.splice(allEpics.indexOf(e),1);applySet();done();
+      EP.open.delete(e.id);allEpics.splice(allEpics.indexOf(e),1);applySet();done();
       track(sb.from("epics").delete().eq("id",e.id));
     });
   }
 });
+epicList.addEventListener("keydown",ev=>{
+  const h=ev.target.closest(".mkh");
+  if(h&&ev.target===h&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();epToggleRow(h.closest(".ep"))}
+});
+const holderList=$("holderList");
+function hToggle(card){
+  const k=card.dataset.h,open=!card.classList.contains("open");
+  card.classList.toggle("open",open);card.querySelector(".mkh").setAttribute("aria-expanded",open);
+  if(open)EP.hopen.add(k);else EP.hopen.delete(k);
+  epToggleLbl();
+}
+holderList.addEventListener("click",ev=>{const h=ev.target.closest(".mkh");if(h)hToggle(h.closest(".mk"))});
+holderList.addEventListener("keydown",ev=>{
+  const h=ev.target.closest(".mkh");
+  if(h&&ev.target===h&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();hToggle(h.closest(".mk"))}
+});
+$("epBar").addEventListener("click",ev=>{const b=ev.target.closest("button[data-f]");if(!b)return;EP.f=b.dataset.f;renderEpics()});
+$("epSort").addEventListener("change",()=>{EP.o=$("epSort").value;renderEpics()});
+$("epToggle").onclick=()=>{
+  if(curView==="holder"&&nf==="num"){
+    const v=holderView(),all=v.every(h=>EP.hopen.has(h.n.toLowerCase()));
+    v.forEach(h=>{const k=h.n.toLowerCase();if(all)EP.hopen.delete(k);else EP.hopen.add(k)});renderMeta();
+  }else{
+    const v=epView().list,all=v.every(([e])=>EP.open.has(e.id));
+    v.forEach(([e])=>{if(all)EP.open.delete(e.id);else EP.open.add(e.id)});renderEpics();
+  }
+};
 $("epSearch").addEventListener("input",ev=>{eq=ev.target.value.trim();renderEpics();renderMeta()});
-function setNF(v){nf=v;LS("tracker.nf",v);setView(curView);[...$("nfBar").children].forEach(x=>x.classList.toggle("on",x.dataset.nf===v))}
+function setNF(v){nf=v;LS("tracker.nf",v);setView(curView);epStats();[...$("nfBar").children].forEach(x=>x.classList.toggle("on",x.dataset.nf===v))}
 setNF(nf);
 $("nfBar").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;setNF(b.dataset.nf);renderEpics()});
 $("vEpic").onclick=()=>setView("epic");
@@ -984,7 +1164,7 @@ async function addEpicNew(newNL){
   if(!r||!r.data)return;
   await track(sb.from("epic_slots").insert({epic_id:r.data.id,slot:1,holder:""}));
   const ne={id:r.data.id,set_id:curSet,name:n,rarity:null,numberless:newNL,holders:[""]};
-  allEpics.push(ne);if(newNL&&!useNum)nlSave(ne);setNF(newNL?"nl":"num");applySet();
+  allEpics.push(ne);EP.f="all";EP.open.add(ne.id);if(newNL&&!useNum)nlSave(ne);setNF(newNL?"nl":"num");applySet();
   $("newEpic").value="";eq=n;$("epSearch").value=n;setView("epic");renderEpics();renderMeta();
 }
 $("addEpic").onclick=()=>addEpicNew(false);
@@ -1017,23 +1197,170 @@ $("setDel").onclick=()=>{
   });
 };
 
-/* ---------- tabs ---------- */
-let zoom=Number(LS("tracker.zoom"))||0.8;
-function applyZoom(){
-  zoom=Math.min(1.5,Math.max(0.4,Math.round(zoom*10)/10));
-  $("mapWrap").style.setProperty("--z",zoom);
-  $("zVal").textContent=Math.round(zoom*100)+"%";
-  LS("tracker.zoom",zoom);
+/* ---------- artist guesser ----------
+   Data and idea: smartistguesser/soundmap-artist-guesser, MIT License, Copyright (c) 2026 smartistguesser.
+   Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+   documentation files, to deal in the Software without restriction, subject to the copyright notice and this
+   permission notice being included in all copies or substantial portions. THE SOFTWARE IS PROVIDED "AS IS",
+   WITHOUT WARRANTY OF ANY KIND. */
+const AGD=[["The Weeknd",2011,1,"Solo","Pop","CA","Male"],["Billie Eilish",2016,2,"Solo","Pop","US","Female"],["Michael Jackson",1972,3,"Solo","Pop","US","Male"],["Sabrina Carpenter",2014,4,"Solo","Pop","US","Female"],["Lana Del Rey",2012,5,"Solo","Pop","US","Female"],["Olivia Rodrigo",2016,6,"Solo","Pop","US","Female"],["Taylor Swift",2006,7,"Solo","Pop","US","Female"],["Ariana Grande",2011,8,"Solo","Pop","US","Female"],["Doja Cat",2014,9,"Solo","Pop","US","Female"],["Khalid",2016,10,"Solo","Pop","US","Male"],["Chappell Roan",2017,11,"Solo","Pop","US","Female"],["Bruno Mars",2010,12,"Solo","Pop","US","Male"],["Gracie Abrams",2019,13,"Solo","Pop","US","Female"],["Charli xcx",2012,14,"Solo","Pop","GB","Female"],["Harry Styles",2017,15,"Solo","Pop","GB","Male"],["PinkPantheress",2021,16,"Solo","Pop","GB","Female"],["Lady Gaga",2008,17,"Solo","Pop","US","Female"],["One Direction",2010,18,"Group","Pop","GB","Male"],["Tate McRae",2017,19,"Solo","Pop","CA","Female"],["Rihanna",2005,20,"Solo","Pop","BB","Female"],["KATSEYE",2024,21,"Group","Pop","US","Mixed"],["Beyoncé",2002,22,"Solo","Pop","US","Female"],["Adele",2008,23,"Solo","Pop","GB","Female"],["Reneé Rapp",2022,24,"Solo","Pop","US","Female"],["Justin Bieber",2009,25,"Solo","Pop","CA","Male"],["Niall Horan",2017,26,"Solo","Pop","IE","Male"],["Dua Lipa",2015,27,"Solo","Pop","GB","Female"],["ABBA",1973,28,"Group","Pop","SE","Mixed"],["Madison Beer",2013,29,"Solo","Pop","US","Female"],["5 Seconds of Summer",2012,30,"Group","Pop","AU","Male"],["ZAYN",2016,31,"Solo","Pop","GB","Male"],["Louis Tomlinson",2017,32,"Solo","Pop","GB","Male"],["Katy Perry",2007,33,"Solo","Pop","US","Female"],["MARINA",2009,34,"Solo","Pop","GB","Female"],["Benson Boone",2021,35,"Solo","Pop","US","Male"],["Ed Sheeran",2009,36,"Solo","Pop","GB","Male"],["Chris Brown",2005,37,"Solo","Pop","US","Male"],["Britney Spears",1999,38,"Solo","Pop","US","Female"],["Halsey",2014,39,"Solo","Pop","US","Female"],["Ayesha Erotica",2005,40,"Solo","Pop","US","Female"],["Elton John",1969,41,"Solo","Pop","GB","Male"],["Kesha",2009,42,"Solo","Pop","US","Female"],["Maroon 5",2002,43,"Group","Pop","US","Male"],["Shawn Mendes",2015,47,"Solo","Pop","CA","Male"],["Addison Rae",2021,48,"Solo","Pop","US","Female"],["Liam Payne",2017,50,"Solo","Pop","GB","Male"],["Miley Cyrus",2007,51,"Solo","Pop","US","Female"],["Pitbull",2004,52,"Solo","Pop","US","Male"],["Troye Sivan",2012,53,"Solo","Pop","AU","Male"],["Dean Blunt",2012,55,"Solo","Pop","GB","Male"],["Magdalena Bay",2017,56,"Group","Pop","US","Female"],["Justin Timberlake",2002,57,"Solo","Pop","US","Male"],["AJ. & Big Justice",2024,58,"Group","Pop","US","Male"],["Selena Gomez",2011,61,"Solo","Pop","US","Female"],["Nessa Barrett",2020,63,"Solo","Pop","US","Female"],["OneRepublic",2007,64,"Group","Pop","US","Male"],["JVKE",2020,67,"Solo","Pop","US","Male"],["P!nk",2000,68,"Solo","Pop","US","Female"],["Tyla",2019,69,"Solo","Pop","ZA","Female"],["AURORA",1994,70,"Solo","Pop","NO","Female"],["Black Eyed Peas",1998,72,"Group","Pop","US","Mixed"],["Camila Cabello",2017,73,"Solo","Pop","US","Female"],["Kate Bush",1978,74,"Solo","Pop","GB","Female"],["Zara Larsson",2012,75,"Solo","Pop","SE","Female"],["Maisie Peters",2017,76,"Solo","Pop","GB","Female"],["Mariah Carey",1990,80,"Solo","Pop","US","Female"],["Isabel LaRosa",2021,81,"Solo","Pop","US","Female"],["Luke Hemmings",2021,82,"Solo","Pop","AU","Male"],["Wham!",1982,83,"Group","Pop","GB","Male"],["Steven Universe",2017,85,"Solo","Pop","US","Male"],["Madonna",1983,87,"Solo","Pop","US","Female"],["*NSYNC",1997,88,"Group","Pop","US","Male"],["Caroline Polachek",2019,90,"Solo","Pop","US","Female"],["Shakira",1995,91,"Solo","Pop","CO","Female"],["Teddy Swims",2019,92,"Solo","Pop","US","Male"],["Alessi Rose",2023,94,"Solo","Pop","US","Female"],["Charlie Puth",2015,96,"Solo","Pop","US","Male"],["Lewis Capaldi",2017,98,"Solo","Pop","GB","Male"],["Dove Cameron",2016,99,"Solo","Pop","US","Female"],["John Mayer",2001,100,"Solo","Pop","US","Male"],["ADÉLA",2024,101,"Solo","Pop","US","Female"],["Glee Cast",2009,102,"Group","Pop","US","Mixed"],["Big Time Rush",2010,103,"Group","Pop","US","Male"],["Demi Lovato",2008,104,"Solo","Pop","US","Female"],["Slayyyter",2018,105,"Solo","Pop","US","Female"],["Jonas Brothers",2006,106,"Group","Pop","US","Male"],["Hannah Montana",2006,107,"Solo","Pop","US","Female"],["Whitney Houston",1985,109,"Solo","Pop","US","Female"],["Remi Wolf",2019,110,"Solo","Pop","US","Female"],["Carly Rae Jepsen",2008,112,"Solo","Pop","CA","Female"],["Meghan Trainor",2014,113,"Solo","Pop","US","Female"],["Sia",2000,114,"Solo","Pop","AU","Female"],["Backstreet Boys",1996,119,"Group","Pop","US","Male"],["Sam Smith",2013,120,"Solo","Pop","GB","Male"],["Gwen Stefani",2004,121,"Solo","Pop","US","Female"],["Little Mix",2012,122,"Group","Pop","GB","Female"],["ConcernedApe",2016,123,"Solo","Pop","US","Male"],["George Michael",1987,125,"Solo","Pop","GB","Male"],["Ellie Goulding",2010,130,"Solo","Pop","GB","Female"],["Ava Max",2018,131,"Solo","Pop","US","Female"],["Bee Gees",1967,132,"Group","Pop","AU","Male"],["Kim Petras",2017,133,"Solo","Pop","US","Female"],["Lola Young",2019,134,"Solo","Pop","GB","Female"],["Maggie Lindemann",2013,135,"Solo","Pop","US","Female"],["The Jackson 5",1969,136,"Group","Pop","US","Male"],["Jon Bellion",2013,137,"Solo","Pop","US","Male"],["Michael Bublé",2003,138,"Solo","Pop","CA","Male"],["Ashton Irwin",2020,139,"Solo","Pop","AU","Male"],["Labrinth",2010,143,"Solo","Pop","GB","Male"],["Selena Gomez & The Scene",2009,146,"Group","Pop","US","Female"],["Nirvana",2003,147,"Group","Pop","GB","Male"],["Kelly Clarkson",2003,148,"Solo","Pop","US","Female"],["The Lonely Island",2009,149,"Group","Pop","US","Male"],["The Home Depot",2019,151,"Group","Pop","US","Mixed"],["Stromae",2009,153,"Solo","Pop","BE","Male"],["Owl City",2007,156,"Solo","Pop","US","Male"],["Tove Lo",2014,158,"Solo","Pop","SE","Female"],["half•alive",2017,159,"Group","Pop","US","Male"],["Markiplier",2016,161,"Solo","Pop","US","Male"],["JADE",2024,162,"Group","Pop","GB","Female"],["Hailee Steinfeld",2015,163,"Solo","Pop","US","Female"],["Quinn XCII",2015,164,"Solo","Pop","US","Male"],["Towa Bird",2024,165,"Solo","Pop","GB","Female"],["Enrique Iglesias",1995,166,"Solo","Pop","ES","Male"],["Christina Aguilera",1999,167,"Solo","Pop","US","Female"],["Dean Lewis",2017,171,"Solo","Pop","AU","Male"],["Maggie Rogers",2017,173,"Solo","Pop","US","Female"],["James Arthur",2012,174,"Solo","Pop","GB","Male"],["Lauv",2017,176,"Solo","Pop","US","Male"],["whatsaheart",2023,178,"Solo","Pop","NZ","Female"],["Nelly Furtado",2000,179,"Solo","Pop","CA","Female"],["Bebe Rexha",2014,180,"Solo","Pop","US","Female"],["Why Don't We",2016,181,"Group","Pop","US","Male"],["FLETCHER",2016,182,"Solo","Pop","US","Female"],["Emei",2021,183,"Solo","Pop","US","Female"],["SAWTOWNE",2023,185,"Group","Pop","US","Male"],["Puzzle",2014,187,"Solo","Pop","US","Male"],["Mckenna Grace",2021,188,"Solo","Pop","US","Female"],["Joshua Bassett",2019,189,"Solo","Pop","US","Male"],["LANY",2015,190,"Group","Pop","US","Male"],["Millionaires",2007,191,"Group","Pop","US","Female"],["Sean Paul",1999,192,"Solo","Pop","JM","Male"],["SIX",2018,193,"Group","Pop","GB","Female"],["RuPaul",1992,195,"Solo","Pop","US","Male"],["Fifth Harmony",2013,196,"Group","Pop","US","Female"],["Lizzo",2014,197,"Solo","Pop","US","Female"],["High School Musical Cast",2007,198,"Group","Pop","US","Mixed"],["Lily Allen",2006,199,"Solo","Pop","GB","Female"],["Kanye West",2004,1,"Solo","HipHop","US","Male"],["Kendrick Lamar",2010,2,"Solo","HipHop","US","Male"],["Travis Scott",2013,3,"Solo","HipHop","US","Male"],["Tyler, The Creator",2011,4,"Solo","HipHop","US","Male"],["Playboi Carti",2016,5,"Solo","HipHop","US","Male"],["Drake",2009,6,"Solo","HipHop","CA","Male"],["21 Savage",2015,7,"Solo","HipHop","GB","Male"],["Metro Boomin",2014,8,"Solo","HipHop","US","Male"],["Future",2011,9,"Solo","HipHop","US","Male"],["J. Cole",2011,10,"Solo","HipHop","US","Male"],["Eminem",1996,11,"Solo","HipHop","US","Male"],["Lil Wayne",1999,12,"Solo","HipHop","US","Male"],["Gunna",2016,13,"Solo","HipHop","US","Male"],["Ken Carson",2018,14,"Solo","HipHop","US","Male"],["Post Malone",2016,15,"Solo","HipHop","US","Male"],["JAŸ-Z",1996,16,"Solo","HipHop","US","Male"],["Juice WRLD",2018,17,"Solo","HipHop","US","Male"],["XXXTENTACION",2015,18,"Solo","HipHop","US","Male"],["Lil Uzi Vert",2014,19,"Solo","HipHop","US","Male"],["A$AP Rocky",2011,20,"Solo","HipHop","US","Male"],["Destroy Lonely",2018,21,"Solo","HipHop","US","Male"],["LUCKI",2013,22,"Solo","HipHop","US","Male"],["MF DOOM",1999,23,"Solo","HipHop","GB","Male"],["Wiz Khalifa",2006,24,"Solo","HipHop","US","Male"],["Lil Peep",2015,25,"Solo","HipHop","US","Male"],["Lil Tecca",2019,26,"Solo","HipHop","JP","Male"],["Mac Miller",2010,27,"Solo","HipHop","US","Male"],["Yeat",2018,28,"Solo","HipHop","US","Male"],["Don Toliver",2017,29,"Solo","HipHop","US","Male"],["$uicideboy$",2014,30,"Group","HipHop","US","Male"],["Childish Gambino",2011,31,"Solo","HipHop","US","Male"],["OsamaSon",2022,32,"Solo","HipHop","US","Male"],["2Pac",1991,33,"Solo","HipHop","US","Male"],["Nettspend",2000,34,"Solo","HipHop","US","Male"],["Lil Baby",2017,35,"Solo","HipHop","US","Male"],["Young Thug",2011,36,"Solo","HipHop","US","Male"],["Lil Yachty",2015,37,"Solo","HipHop","US","Male"],["King Von",2018,38,"Solo","HipHop","US","Male"],["JID",2015,39,"Solo","HipHop","US","Male"],["Trippie Redd",2017,40,"Solo","HipHop","US","Male"],["YoungBoy Never Broke Again",2016,41,"Solo","HipHop","US","Male"],["The Notorious B.I.G.",1994,42,"Solo","HipHop","US","Male"],["Baby Keem",2018,43,"Solo","HipHop","US","Male"],["Chief Keef",2012,44,"Solo","HipHop","US","Male"],["Polo G",2018,45,"Solo","HipHop","US","Male"],["Denzel Curry",2013,46,"Solo","HipHop","US","Male"],["Che",2021,47,"Solo","HipHop","US","Male"],["JPEGMAFIA",2013,48,"Solo","HipHop","US","Male"],["Snoop Dogg",1993,49,"Solo","HipHop","US","Male"],["Kid Cudi",2009,50,"Solo","HipHop","US","Male"],["Dr. Dre",1992,51,"Solo","HipHop","US","Male"],["Earl Sweatshirt",2013,52,"Solo","HipHop","US","Male"],["Homixide Gang",2021,53,"Group","HipHop","US","Male"],["Ice Cube",1990,54,"Solo","HipHop","US","Male"],["Kodak Black",2014,55,"Solo","HipHop","US","Male"],["Lil Tjay",2018,56,"Solo","HipHop","US","Male"],["NLE Choppa",2018,57,"Solo","HipHop","US","Male"],["Summrs",2018,58,"Solo","HipHop","US","Male"],["ian",2022,59,"Solo","HipHop","GB","Male"],["Joey Bada$$",2012,60,"Solo","HipHop","US","Male"],["Nas",1994,61,"Solo","HipHop","US","Male"],["Ski Mask The Slump God",2016,62,"Solo","HipHop","US","Male"],["Lil Durk",2012,63,"Solo","HipHop","US","Male"],["Autumn!",2019,64,"Solo","HipHop","US","Female"],["Glokk40Spaz",2019,65,"Solo","HipHop","US","Male"],["jaydes",2020,66,"Solo","HipHop","US","Female"],["The Kid LAROI",2019,67,"Solo","HipHop","AU","Male"],["xaviersobased",2020,68,"Solo","HipHop","US","Male"],["Westside Gunn",2005,69,"Solo","HipHop","US","Male"],["Bladee",2014,70,"Solo","HipHop","SE","Male"],["Eazy-E",1988,71,"Solo","HipHop","US","Male"],["Tory Lanez",2012,72,"Solo","HipHop","CA","Male"],["2hollis",2021,73,"Solo","HipHop","US","Male"],["50 Cent",2003,74,"Solo","HipHop","US","Male"],["Rod Wave",2018,75,"Solo","HipHop","US","Male"],["Lil Darkie",2018,76,"Solo","HipHop","US","Male"],["Nicki Minaj",2010,77,"Solo","HipHop","US","Female"],["Outkast",1993,78,"Group","HipHop","US","Male"],["BigXthaPlug",2019,79,"Solo","HipHop","US","Male"],["A Boogie Wit da Hoodie",2016,80,"Solo","HipHop","US","Male"],["N.W.A",1987,81,"Group","HipHop","US","Male"],["Megan Thee Stallion",2017,82,"Solo","HipHop","US","Female"],["Yung Lean",2013,83,"Solo","HipHop","SE","Male"],["YNW Melly",2017,85,"Solo","HipHop","US","Male"],["Pop Smoke",2019,87,"Solo","HipHop","US","Male"],["Doechii",2019,88,"Solo","HipHop","US","Female"],["Central Cee",2017,89,"Solo","HipHop","GB","Male"],["Freddie Gibbs",2009,91,"Solo","HipHop","US","Male"],["LAZER DIM 700",2021,92,"Solo","HipHop","US","Male"],["Wu-Tang Clan",1992,93,"Group","HipHop","US","Male"],["Sleepy Hallow",2018,94,"Solo","HipHop","US","Male"],["Dave",2016,95,"Solo","HipHop","GB","Male"],["Ice Spice",2021,96,"Solo","HipHop","US","Female"],["BabyTron",2019,97,"Solo","HipHop","US","Male"],["Ecco2k",2015,98,"Solo","HipHop","SE","Male"],["Nemzzz",2018,99,"Solo","HipHop","GB","Male"],["1oneam",2021,100,"Solo","HipHop","US","Male"],["Lil Tracy",2016,101,"Solo","HipHop","US","Male"],["Madvillain",2003,102,"Group","HipHop","US","Male"],["bbno$",2016,103,"Solo","HipHop","CA","Male"],["The Alchemist",2007,104,"Solo","HipHop","US","Male"],["DaBaby",2016,105,"Solo","HipHop","US","Male"],["Yuno Miles",2020,106,"Solo","HipHop","US","Male"],["Jace!",2019,107,"Solo","HipHop","US","Male"],["Xavier Wulf",1997,108,"Solo","HipHop","US","Male"],["Insane Clown Posse",1990,109,"Group","HipHop","US","Male"],["KIDS SEE GHOSTS",2018,110,"Group","HipHop","US","Male"],["BONES",2013,111,"Solo","HipHop","US","Male"],["A Tribe Called Quest",1990,112,"Group","HipHop","US","Male"],["Death Grips",2011,113,"Group","HipHop","US","Male"],["ScHoolboy Q",2011,114,"Solo","HipHop","US","Male"],["Tay-K",2017,115,"Solo","HipHop","US","Male"],["Veeze",2019,116,"Solo","HipHop","US","Male"],["Vince Staples",2012,117,"Solo","HipHop","US","Male"],["Migos",2011,118,"Group","HipHop","US","Male"],["Odd Future",2012,119,"Group","HipHop","US","Mixed"],["GloRilla",2019,120,"Solo","HipHop","US","Female"],["Offset",2015,121,"Solo","HipHop","US","Male"],["Isaiah Rashad",2014,122,"Solo","HipHop","US","Male"],["Sexyy Red",2019,123,"Solo","HipHop","US","Female"],["Cardi B",2015,125,"Solo","HipHop","US","Female"],["Chris Travis",2012,126,"Solo","HipHop","US","Male"],["Rio Da Yung Og",2018,127,"Solo","HipHop","US","Male"],["Danny Brown",2008,128,"Solo","HipHop","US","Male"],["Sematary",2019,129,"Solo","HipHop","US","Male"],["mgk",2010,130,"Solo","HipHop","US","Male"],["Quavo",2017,131,"Solo","HipHop","US","Male"],["Young Dolph",2010,132,"Solo","HipHop","US","Male"],["$NOT",2018,133,"Solo","HipHop","US","Male"],["Key Glock",2017,134,"Solo","HipHop","US","Male"],["Kankan",2019,135,"Solo","HipHop","US","Male"],["Smino",2014,136,"Solo","HipHop","US","Male"],["JACKBOYS",2019,137,"Group","HipHop","US","Male"],["Jack Harlow",2015,138,"Solo","HipHop","US","Male"],["Logic",2014,139,"Solo","HipHop","US","Male"],["Devon Hendryx",2009,140,"Solo","HipHop","JP","Male"],["That Mexican OT",2020,142,"Solo","HipHop","US","Male"],["wifiskeleton",2022,143,"Solo","HipHop","US","Male"],["Pusha T",2011,144,"Solo","HipHop","US","Male"],["Pouya",2012,145,"Solo","HipHop","US","Male"],["SoFaygo",2019,146,"Solo","HipHop","US","Male"],["prettifun",2022,147,"Solo","HipHop","US","Female"],["Nujabes",2003,148,"Solo","HipHop","JP","Male"],["Skepta",2007,149,"Solo","HipHop","GB","Male"],["Ty Dolla $ign",2011,150,"Solo","HipHop","US","Male"],["Lil B",2009,152,"Solo","HipHop","US","Male"],["BROCKHAMPTON",2015,153,"Group","HipHop","US","Mixed"],["Lil Loaded",2019,154,"Solo","HipHop","US","Male"],["Lil Skies",2017,155,"Solo","HipHop","US","Male"],["ZillaKami",2021,156,"Solo","HipHop","US","Male"],["Pi'erre Bourne",2017,157,"Solo","HipHop","US","Male"],["Beastie Boys",1986,158,"Group","HipHop","US","Male"],["Lil Nas X",2019,159,"Solo","HipHop","US","Male"],["Ashnikko",2017,160,"Solo","HipHop","US","Female"],["Ghostemane",2014,161,"Solo","HipHop","US","Male"],["Young Nudy",2016,162,"Solo","HipHop","US","Male"],["smokedope2016",2022,163,"Solo","HipHop","US","Male"],["fakemink",2005,164,"Solo","HipHop","GB","Female"],["DC THE DON",2018,165,"Solo","HipHop","US","Male"],["G Herbo",2014,166,"Solo","HipHop","US","Male"],["BabyChiefDoit",2023,167,"Solo","HipHop","US","Male"],["Baby Smoove",2017,168,"Solo","HipHop","US","Male"],["Pink Guy",2017,169,"Solo","HipHop","US","Male"],["THE SCOTTS",2020,170,"Group","HipHop","US","Mixed"],["Boldy James",2012,171,"Solo","HipHop","US","Male"],["Joost",2016,172,"Solo","HipHop","NL","Male"],["Chance the Rapper",2012,173,"Solo","HipHop","US","Male"],["Sickboyrari",2010,174,"Solo","HipHop","US","Male"],["PlaqueBoyMax",2025,175,"Solo","HipHop","US","Male"],["ThaiBoy Digital",2014,176,"Solo","HipHop","TH","Male"],["André 3000",2010,177,"Solo","HipHop","US","Male"],["Moneybagg Yo",2016,179,"Solo","HipHop","US","Male"],["Gucci Mane",2005,180,"Solo","HipHop","US","Male"],["Benny The Butcher",2015,181,"Solo","HipHop","US","Male"],["Lil Tony Official",2020,182,"Solo","HipHop","US","Male"],["Nino Paid",2023,183,"Solo","HipHop","US","Male"],["Fetty Wap",2015,184,"Solo","HipHop","US","Male"],["Eem Triplin",2018,185,"Solo","HipHop","US","Male"],["Diddy",1997,186,"Solo","HipHop","US","Male"],["EBK Jaaybo",2018,187,"Solo","HipHop","US","Male"],["Roddy Ricch",2018,188,"Solo","HipHop","US","Male"],["DMX",1993,189,"Solo","HipHop","US","Male"],["Shoreline Mafia",2017,190,"Group","HipHop","US","Male"],["Madlib",2003,192,"Solo","HipHop","US","Male"],["MIKE",2017,193,"Solo","HipHop","GB","Male"],["Scrim",2020,194,"Solo","HipHop","US","Male"],["City Morgue",2018,195,"Group","HipHop","US","Male"],["Black Kray",2001,196,"Solo","HipHop","US","Male"],["Freddie Dredd",2016,197,"Solo","HipHop","CA","Male"],["Teezo Touchdown",2019,198,"Solo","HipHop","US","Male"],["ericdoa",2019,199,"Solo","HipHop","US","Male"],["NAV",2015,201,"Solo","HipHop","CA","Male"],["Noah Kahan",2017,1,"Solo","Indie","US","Male"],["TV Girl",2013,2,"Group","Indie","US","Male"],["Laufey",2020,3,"Solo","Indie","US","Female"],["beabadoobee",2017,4,"Solo","Indie","GB","Female"],["Mac DeMarco",2012,5,"Solo","Indie","US","Male"],["Clairo",2017,6,"Solo","Indie","US","Female"],["Alex G",2010,7,"Solo","Indie","US","Male"],["Twenty One Pilots",2009,8,"Group","Indie","US","Male"],["Cigarettes After Sex",2012,9,"Group","Indie","US","Male"],["Phoebe Bridgers",2017,10,"Solo","Indie","US","Female"],["Faye Webster",2013,11,"Solo","Indie","US","Female"],["Melanie Martinez",2012,12,"Solo","Indie","US","Female"],["Hozier",2013,13,"Solo","Indie","IE","Male"],["Conan Gray",2018,14,"Solo","Indie","US","Male"],["The Marías",2017,15,"Group","Indie","US","Mixed"],["d4vd",2021,16,"Solo","Indie","US","Male"],["Lorde",2013,17,"Solo","Indie","NZ","Female"],["alex_g_offline",2023,18,"Solo","Indie","US","Male"],["Dominic Fike",2018,19,"Solo","Indie","US","Male"],["Adrianne Lenker",2014,20,"Solo","Indie","US","Female"],["Ethel Cain",2019,21,"Solo","Indie","US","Female"],["girl in red",2018,22,"Solo","Indie","NO","Female"],["Fiona Apple",1996,23,"Solo","Indie","US","Female"],["Lizzy McAlpine",2019,24,"Solo","Indie","US","Female"],["Rex Orange County",2016,25,"Solo","Indie","GB","Male"],["Wallows",2017,26,"Group","Indie","US","Male"],["AJR",2013,27,"Group","Indie","US","Male"],["Björk",1990,28,"Solo","Indie","IS","Female"],["Cocteau Twins",1982,29,"Group","Indie","US","Mixed"],["Glass Animals",2012,30,"Group","Indie","GB","Male"],["Cavetown",2015,31,"Solo","Indie","GB","Male"],["Eyedress",2013,32,"Solo","Indie","US","Male"],["Men I Trust",2014,33,"Group","Indie","CA","Mixed"],["Vacations",2015,34,"Group","Indie","AU","Male"],["Beach House",2006,35,"Group","Indie","US","Mixed"],["Jack Stauber",2013,36,"Solo","Indie","US","Male"],["Jack Stauber's Micropop",2018,37,"Solo","Indie","US","Male"],["sombr",2021,38,"Solo","Indie","US","Male"],["Florence + The Machine",2009,39,"Group","Indie","GB","Female"],["BoyWithUke",2021,41,"Solo","Indie","US","Male"],["Gigi Perez",2021,42,"Solo","Indie","US","Female"],["Alec Benjamin",2018,43,"Solo","Indie","US","Male"],["Lucy Dacus",2016,44,"Solo","Indie","US","Female"],["Grimes",2010,45,"Solo","Indie","CA","Female"],["Cuco",2016,46,"Solo","Indie","US","Male"],["Imogen Heap",1998,47,"Solo","Indie","GB","Female"],["glaive",2020,48,"Solo","Indie","US","Male"],["Bon Iver",2008,49,"Group","Indie","US","Male"],["Jane Remover",2021,50,"Solo","Indie","US","Female"],["ROLE MODEL",2017,51,"Solo","Indie","US","Male"],["Blood Orange",2011,52,"Solo","Indie","US","Male"],["Alex Warren",2021,53,"Solo","Indie","US","Male"],["FINNEAS",2016,55,"Solo","Indie","US","Male"],["Her's",2016,56,"Group","Indie","GB","Male"],["FKA twigs",2012,57,"Solo","Indie","GB","Female"],["Rainbow Kitten Surprise",2013,58,"Group","Indie","US","Mixed"],["Suki Waterhouse",2016,59,"Solo","Indie","US","Female"],["Miracle Musical",2012,60,"Group","Indie","US","Mixed"],["Forrest Frank",2023,61,"Solo","Indie","US","Male"],["Sufjan Stevens",2003,62,"Solo","Indie","US","Male"],["brakence",2017,63,"Solo","Indie","US","Male"],["Ricky Montgomery",2014,64,"Solo","Indie","US","Male"],["grentperez",2021,65,"Solo","Indie","AU","Male"],["Artemas",2020,66,"Solo","Indie","GB","Male"],["Empire Of The Sun",2008,67,"Group","Indie","AU","Male"],["blackbear",2013,68,"Solo","Indie","US","Male"],["Mk.gee",2018,69,"Solo","Indie","US","Male"],["Hot Mulligan",2015,70,"Group","Indie","US","Male"],["Ichiko Aoba",2010,71,"Solo","Indie","JP","Female"],["David Kushner",2022,72,"Solo","Indie","US","Male"],["Foster The People",2011,73,"Group","Indie","US","Male"],["Oliver Tree",2017,74,"Solo","Indie","US","Male"],["Bakar",2017,75,"Solo","Indie","GB","Male"],["Vance Joy",2013,76,"Solo","Indie","AU","Male"],["Strawberry Guy",2018,77,"Solo","Indie","GB","Male"],["Penelope Scott",2020,78,"Solo","Indie","US","Female"],["NIKI",2017,80,"Solo","Indie","ID","Female"],["Declan McKenna",2015,81,"Solo","Indie","GB","Male"],["Jazmin Bean",2019,82,"Solo","Indie","GB","Female"],["Rina Sawayama",2013,83,"Solo","Indie","GB","Female"],["MUNA",2016,84,"Group","Indie","US","Female"],["Kero Kero Bonito",2013,85,"Group","Indie","GB","Mixed"],["mxmtoon",2017,87,"Solo","Indie","US","Female"],["Cults",2011,88,"Group","Indie","US","Mixed"],["Maya Hawke",2019,89,"Solo","Indie","US","Female"],["Basement",2010,90,"Group","Indie","GB","Mixed"],["yeule",2014,91,"Solo","Indie","SG","Female"],["EDEN",2015,92,"Solo","Indie","IE","Male"],["Lyn Lapid",2020,93,"Solo","Indie","US","Female"],["hannah bahng",2023,94,"Solo","Indie","AU","Female"],["Still Woozy",2017,95,"Solo","Indie","US","Male"],["Esha Tewari",2024,96,"Solo","Indie","AU","Female"],["Matt Maltese",2015,97,"Solo","Indie","GB","Male"],["Dayglow",2019,98,"Solo","Indie","US","Male"],["Joyce Manor",2010,99,"Group","Indie","US","Male"],["Stephen Sanchez",2020,100,"Solo","Indie","US","Male"],["Weyes Blood",2011,101,"Solo","Indie","US","Female"],["alexgoffline",2024,102,"Solo","Indie","US","Male"],["Ashe",2017,103,"Solo","Indie","US","Female"],["Bleachers",2014,105,"Solo","Indie","US","Male"],["Rio Romeo",2018,106,"Solo","Indie","US","Male"],["COIN",2015,107,"Group","Indie","US","Male"],["MICO",2020,108,"Solo","Indie","CA","Female"],["fun.",2009,109,"Group","Indie","US","Male"],["Yot Club",2019,110,"Solo","Indie","US","Male"],["The Microphones",1998,111,"Group","Indie","US","Male"],["The xx",2009,112,"Group","Indie","GB","Mixed"],["Japanese Breakfast",2016,113,"Solo","Indie","US","Female"],["Liana Flores",2018,114,"Solo","Indie","GB","Female"],["Of Monsters and Men",2012,115,"Group","Indie","IS","Mixed"],["Rocco",2020,116,"Solo","Indie","US","Male"],["Ari Abdul",2022,117,"Solo","Indie","US","Female"],["Wilbur Soot",2020,119,"Solo","Indie","GB","Male"],["Frou Frou",2002,120,"Group","Indie","GB","Mixed"],["Elita",2018,121,"Solo","Indie","CA","Female"],["aldn",2020,122,"Solo","Indie","US","Male"],["Ghost and Pals",2017,123,"Group","Indie","US","Mixed"],["Fleet Foxes",2008,124,"Group","Indie","US","Mixed"],["Alvvays",2014,125,"Group","Indie","CA","Mixed"],["Shelly",2020,126,"Solo","Indie","US","Female"],["Paris Paloma",2020,127,"Solo","Indie","GB","Female"],["SOFIA ISELLA",2022,128,"Solo","Indie","US","Female"],["The Japanese House",2015,129,"Solo","Indie","GB","Female"],["HAIM",2012,130,"Group","Indie","US","Female"],["Royel Otis",2021,131,"Group","Indie","AU","Male"],["Sodikken",2021,132,"Solo","Indie","US","Male"],["Rachel Chinouriri",2018,133,"Solo","Indie","GB","Female"],["Wasia Project",2019,134,"Group","Indie","GB","Mixed"],["Jeremy Zucker",2015,135,"Solo","Indie","US","Male"],["Novo Amor",2014,136,"Solo","Indie","GB","Male"],["The Hellp",2021,137,"Group","Indie","US","Male"],["Sub Urban",2019,138,"Solo","Indie","US","Male"],["Oklou",2014,139,"Solo","Indie","FR","Female"],["BETWEEN FRIENDS",2017,140,"Group","Indie","US","Mixed"],["EKKSTACY",2020,141,"Solo","Indie","CA","Male"],["Searows",2022,142,"Group","Indie","US","Mixed"],["Alice Phoebe Lou",2016,143,"Solo","Indie","ZA","Female"],["Kevin Kaarl",2018,144,"Solo","Indie","MX","Male"],["Los Retros",2019,145,"Group","Indie","US","Mixed"],["LATIN MAFIA",2021,146,"Group","Indie","MX","Male"],["Mili",2014,147,"Solo","Indie","JP","Female"],["Elusin",2019,148,"Solo","Indie","US","Female"],["Natalia Lafourcade",2002,149,"Solo","Indie","MX","Female"],["Beach Weather",2016,150,"Group","Indie","US","Mixed"],["venturing",2023,151,"Solo","Indie","US","Male"],["Vansire",2016,152,"Group","Indie","US","Mixed"],["Saint Motel",2009,153,"Group","Indie","US","Mixed"],["yung kai",2022,154,"Solo","Indie","PH","Male"],["Bruno Major",2017,155,"Solo","Indie","GB","Male"],["BENEE",2017,156,"Solo","Indie","NZ","Female"],["Laura Shigihara",2010,157,"Solo","Indie","US","Female"],["Finn Wolfhard",2025,158,"Solo","Indie","SE","Male"],["Nieve Ella",2023,159,"Solo","Indie","GB","Female"],["chloe moriondo",2018,160,"Solo","Indie","US","Female"],["Ed Maverick",2018,161,"Solo","Indie","MX","Male"],["Holly Humberstone",2020,163,"Solo","Indie","GB","Female"],["Lily Chou-Chou",2008,164,"Solo","Indie","JP","Female"],["Phoenix",1999,165,"Group","Indie","FR","Male"],["Nicole Dollaganger",2012,166,"Solo","Indie","CA","Female"],["i don't like mirrors",2023,169,"Solo","Indie","GB","Female"],["The Drums",2009,170,"Group","Indie","US","Male"],["Sophie Thatcher",2024,171,"Solo","Indie","US","Female"],["Jhariah",2018,172,"Solo","Indie","US","Male"],["Tom Cardy",2021,173,"Solo","Indie","AU","Male"],["boy pablo",2016,174,"Solo","Indie","NO","Male"],["Enya",1987,175,"Solo","Indie","IE","Female"],["PEGGY",2021,176,"Solo","Indie","US","Female"],["Dream, Ivory",2017,177,"Solo","Indie","US","Male"],["Lexa Gates",2020,179,"Solo","Indie","US","Female"],["Paolo Nutini",2007,180,"Solo","Indie","GB","Male"],["Sleeping At Last",2003,181,"Solo","Indie","US","Male"],["Jordana",2018,182,"Solo","Indie","US","Female"],["Luvcat",2025,183,"Group","Indie","US","Female"],["The Favors",2025,184,"Group","Indie","GB","Female"],["Dead Calm",2023,185,"Solo","Indie","US","Male"],["Rojuu",2017,186,"Solo","Indie","ES","Male"],["Passion Pit",2008,187,"Group","Indie","US","Male"],["Ginger Root",2017,188,"Solo","Indie","US","Male"],["Michael Cera",2014,189,"Solo","Indie","CA","Male"],["The Postal Service",2001,190,"Group","Indie","US","Male"],["Evan Fong",2025,191,"Solo","Indie","US","Male"],["re6ce",2021,192,"Solo","Indie","US","Nonbinary"],["Phantogram",2010,193,"Group","Indie","US","Mixed"],["Bella Kay",2025,194,"Solo","Indie","AU","Female"],["Surfaces",2017,195,"Group","Indie","US","Mixed"],["St. Vincent",2007,196,"Solo","Indie","US","Female"],["Fitz and The Tantrums",2009,197,"Group","Indie","US","Mixed"],["hard life",2017,198,"Group","Indie","GB","Male"],["King Princess",2018,200,"Solo","Indie","US","Female"],["Eartheater",2017,201,"Solo","Indie","US","Female"],["Arctic Monkeys",2005,1,"Group","Rock","GB","Male"],["Radiohead",1992,2,"Group","Rock","GB","Male"],["Nirvana",1989,3,"Group","Rock","US","Male"],["Tame Impala",2008,4,"Solo","Rock","AU","Male"],["The Neighbourhood",2012,5,"Group","Rock","US","Male"],["Mitski",2012,6,"Solo","Rock","JP","Female"],["AC/DC",1976,7,"Group","Rock","AU","Male"],["Linkin Park",2000,8,"Group","Rock","US","Mixed"],["My Chemical Romance",2002,9,"Group","Rock","US","Male"],["Green Day",1991,10,"Group","Rock","US","Male"],["The Smiths",1984,11,"Group","Rock","GB","Male"],["Pierce The Veil",2007,12,"Group","Rock","US","Male"],["The Beatles",1963,13,"Group","Rock","GB","Male"],["Gorillaz",2001,14,"Group","Rock","GB","Male"],["Paramore",2005,15,"Group","Rock","US","Mixed"],["Queen",1973,16,"Group","Rock","GB","Male"],["Alice In Chains",1990,17,"Group","Rock","US","Male"],["Red Hot Chili Peppers",1984,18,"Group","Rock","US","Male"],["Weezer",1996,19,"Group","Rock","US","Male"],["Fall Out Boy",2003,20,"Group","Rock","US","Male"],["Fleetwood Mac",1968,21,"Group","Rock","US","Mixed"],["Foo Fighters",1995,22,"Group","Rock","US","Male"],["Panic! At The Disco",2005,23,"Group","Rock","US","Male"],["Pink Floyd",1967,24,"Group","Rock","GB","Male"],["The Smashing Pumpkins",1991,25,"Group","Rock","US","Mixed"],["The Cure",1979,26,"Group","Rock","GB","Male"],["blink-182",1994,27,"Group","Rock","US","Male"],["The Strokes",2001,28,"Group","Rock","US","Male"],["Jeff Buckley",1994,29,"Solo","Rock","US","Male"],["Coldplay",1999,30,"Group","Rock","GB","Male"],["TOOL",1992,32,"Group","Rock","US","Male"],["Oasis",1994,33,"Group","Rock","GB","Male"],["Guns N' Roses",1987,34,"Group","Rock","US","Male"],["Three Days Grace",2003,35,"Group","Rock","CA","Male"],["Led Zeppelin",1969,36,"Group","Rock","GB","Male"],["Creed",1997,37,"Group","Rock","US","Male"],["Evanescence",2003,38,"Group","Rock","US","Mixed"],["Pearl Jam",1991,39,"Group","Rock","US","Male"],["boygenius",2018,40,"Group","Rock","US","Female"],["David Bowie",1967,41,"Solo","Rock","GB","Male"],["Sleeping With Sirens",2010,42,"Group","Rock","US","Male"],["Billy Joel",1971,43,"Solo","Rock","US","Male"],["Soundgarden",1989,44,"Group","Rock","US","Male"],["Imagine Dragons",2009,45,"Group","Rock","US","Male"],["Cage The Elephant",2009,46,"Group","Rock","US","Male"],["The Cranberries",1990,48,"Group","Rock","IE","Female"],["wave to earth",2019,49,"Group","Rock","KR","Mixed"],["Modern Baseball",2021,50,"Group","Rock","US","Male"],["Nickelback",1996,51,"Group","Rock","CA","Male"],["The 1975",2012,52,"Group","Rock","GB","Male"],["Djo",2019,53,"Solo","Rock","US","Male"],["Rage Against The Machine",1992,54,"Group","Rock","US","Male"],["Disturbed",2000,55,"Group","Rock","US","Male"],["The Offspring",1989,56,"Group","Rock","US","Male"],["Mom Jeans.",2016,57,"Group","Rock","US","Male"],["Big Thief",2016,58,"Group","Rock","US","Mixed"],["Stone Temple Pilots",1992,59,"Group","Rock","US","Male"],["Elliott Smith",1995,60,"Solo","Rock","US","Male"],["Eagles",1972,61,"Group","Rock","US","Male"],["Mazzy Star",1990,62,"Group","Rock","US","Mixed"],["Blur",1991,63,"Group","Rock","GB","Male"],["The Killers",2003,64,"Group","Rock","US","Male"],["Van Halen",1978,65,"Group","Rock","US","Male"],["Title Fight",2007,66,"Group","Rock","US","Male"],["Panchiko",2000,67,"Group","Rock","GB","Mixed"],["Nine Inch Nails",1989,69,"Group","Rock","US","Male"],["Muse",1999,70,"Group","Rock","GB","Male"],["Car Seat Headrest",2011,71,"Group","Rock","US","Male"],["Avril Lavigne",2002,72,"Solo","Rock","CA","Female"],["KISS",1974,73,"Group","Rock","US","Male"],["Slowdive",1991,74,"Group","Rock","GB","Mixed"],["Duster",1997,75,"Group","Rock","US","Male"],["my bloody valentine",1988,76,"Group","Rock","IE","Mixed"],["Elvis Presley",1956,77,"Solo","Rock","US","Male"],["Mother Mother",2007,78,"Group","Rock","CA","Mixed"],["Breaking Benjamin",2002,79,"Group","Rock","US","Male"],["Fontaines D.C.",2017,80,"Group","Rock","IE","Male"],["Mötley Crüe",1981,81,"Group","Rock","US","Male"],["Mindless Self Indulgence",2000,82,"Group","Rock","US","Male"],["The Front Bottoms",2011,83,"Group","Rock","US","Male"],["MGMT",2005,84,"Group","Rock","US","Male"],["The Lumineers",2012,85,"Group","Rock","US","Mixed"],["Depeche Mode",1981,86,"Group","Rock","GB","Male"],["Måneskin",2017,87,"Group","Rock","IT","Mixed"],["Current Joys",2013,88,"Solo","Rock","US","Male"],["Jimi Hendrix",1967,89,"Solo","Rock","US","Male"],["Creedence Clearwater Revival",1968,90,"Group","Rock","US","Male"],["Kurt Cobain",2015,91,"Solo","Rock","US","Male"],["The Backseat Lovers",2018,92,"Group","Rock","US","Male"],["Pixies",1987,93,"Group","Rock","US","Mixed"],["Aerosmith",1973,94,"Group","Rock","US","Male"],["Audioslave",2002,95,"Group","Rock","US","Male"],["Hole",1991,96,"Group","Rock","US","Female"],["Queens of the Stone Age",1998,97,"Group","Rock","US","Male"],["Chevelle",1999,98,"Group","Rock","US","Male"],["Will Wood",2020,100,"Solo","Rock","US","Male"],["Incubus",1997,101,"Group","Rock","US","Male"],["Tally Hall",2005,102,"Group","Rock","US","Male"],["3 Doors Down",2000,103,"Group","Rock","US","Male"],["Bob Dylan",1962,104,"Solo","Rock","US","Male"],["Def Leppard",1979,105,"Group","Rock","GB","Male"],["Bon Jovi",1984,106,"Group","Rock","US","Male"],["The Doors",1967,107,"Group","Rock","US","Male"],["Seether",2002,108,"Group","Rock","ZA","Male"],["Misfits",1984,109,"Group","Rock","US","Male"],["Hayley Williams",2020,110,"Solo","Rock","US","Female"],["Wisp",2023,111,"Solo","Rock","US","Female"],["Joy Division",1979,112,"Group","Rock","GB","Male"],["YUNGBLUD",2018,113,"Solo","Rock","GB","Male"],["Talking Heads",1977,114,"Group","Rock","US","Mixed"],["The Beach Boys",1962,115,"Group","Rock","US","Male"],["Black Country, New Road",2021,116,"Group","Rock","GB","Mixed"],["Poppy",2016,117,"Solo","Rock","US","Female"],["Journey",1975,119,"Group","Rock","US","Male"],["Paul McCartney",1967,120,"Solo","Rock","GB","Male"],["Lynyrd Skynyrd",1973,121,"Group","Rock","US","Male"],["sign crushes motorist",2022,122,"Group","Rock","IE","Mixed"],["Skillet",1996,123,"Group","Rock","US","Mixed"],["Lemon Demon",2004,124,"Solo","Rock","US","Male"],["Stevie Nicks",1981,125,"Solo","Rock","US","Female"],["The Police",1978,126,"Group","Rock","GB","Male"],["Sum 41",2000,127,"Group","Rock","CA","Male"],["Staind",1999,128,"Group","Rock","US","Male"],["Flyleaf",2006,129,"Group","Rock","US","Mixed"],["Shinedown",2003,130,"Group","Rock","US","Male"],["Jack Johnson",2003,131,"Solo","Rock","US","Male"],["Siouxsie and the Banshees",1978,132,"Group","Rock","GB","Mixed"],["julie",2020,133,"Solo","Rock","US","Female"],["American Football",1998,134,"Group","Rock","US","Male"],["Daryl Hall & John Oates",1970,135,"Group","Rock","US","Male"],["All Time Low",2006,136,"Group","Rock","US","Male"],["The Sundays",1990,137,"Group","Rock","GB","Mixed"],["Electric Light Orchestra",1971,138,"Group","Rock","GB","Male"],["Will Wood and the Tapeworms",2015,139,"Group","Rock","US","Male"],["Fleshwater",2020,140,"Group","Rock","US","Mixed"],["Tears For Fears",1983,142,"Group","Rock","GB","Male"],["WWE",2004,143,"Group","Rock","US","Mixed"],["John Lennon",1968,144,"Solo","Rock","GB","Male"],["George Harrison",1968,145,"Solo","Rock","GB","Male"],["McCafferty",2014,146,"Solo","Rock","US","Male"],["\"Weird Al\" Yankovic",1983,147,"Solo","Rock","US","Male"],["Black Veil Brides",2010,148,"Group","Rock","US","Male"],["Hollywood Undead",2008,149,"Group","Rock","US","Mixed"],["Julien Baker",2015,150,"Solo","Rock","US","Female"],["Good Kid",2015,151,"Group","Rock","CA","Male"],["WILLOW",2010,153,"Solo","Rock","US","Female"],["The Cardigans",1994,154,"Group","Rock","SE","Mixed"],["Hotel Ugly",2020,155,"Group","Rock","US","Male"],["She Wants Revenge",2005,156,"Group","Rock","US","Male"],["Rush",1974,157,"Group","Rock","CA","Male"],["salvia plath",2013,158,"Solo","Rock","NZ","Male"],["The All-American Rejects",2002,159,"Group","Rock","US","Male"],["Set It Off",2008,161,"Group","Rock","US","Male"],["King Krule",2011,162,"Solo","Rock","GB","Male"],["Whirr",2010,163,"Group","Rock","US","Mixed"],["Kings of Leon",2003,164,"Group","Rock","US","Male"],["James Marriott",2020,165,"Solo","Rock","GB","Male"],["VIOLENT VIRA",2021,166,"Solo","Rock","US","Female"],["R.E.M.",1981,167,"Group","Rock","US","Male"],["The Used",2002,168,"Group","Rock","US","Male"],["Have A Nice Life",2007,169,"Group","Rock","US","Male"],["I DONT KNOW HOW BUT THEY FOUND ME",2017,170,"Group","Rock","US","Mixed"],["The Stone Roses",1987,171,"Group","Rock","GB","Mixed"],["Xdinary Heroes",2021,172,"Group","Rock","KR","Male"],["The Clash",1977,173,"Group","Rock","GB","Male"],["Duran Duran",1981,174,"Group","Rock","GB","Male"],["Dire Straits",1978,175,"Group","Rock","GB","Male"],["Sam Fender",2017,176,"Solo","Rock","GB","Male"],["Surf Curse",2015,177,"Group","Rock","US","Male"],["King Gizzard & The Lizard Wizard",2011,178,"Group","Rock","AU","Male"],["Marilyn Manson",1994,179,"Solo","Rock","US","Male"],["Two Door Cinema Club",2009,180,"Group","Rock","GB","Male"],["Beach Bunny",2015,182,"Group","Rock","US","Female"],["Bauhaus",1980,183,"Group","Rock","GB","Male"],["Pinegrove",2015,184,"Group","Rock","US","Male"],["Lord Huron",2010,185,"Group","Rock","US","Male"],["The Goo Goo Dolls",1987,186,"Group","Rock","US","Male"],["Gerard Way",2014,187,"Solo","Rock","US","Male"],["The White Stripes",1998,188,"Group","Rock","US","Mixed"],["Grateful Dead",1967,189,"Group","Rock","US","Mixed"],["Superheaven",2013,190,"Group","Rock","US","Male"],["A Perfect Circle",2000,191,"Group","Rock","US","Mixed"],["Catfish and the Bottlemen",2014,192,"Group","Rock","GB","Male"],["Neutral Milk Hotel",1996,193,"Group","Rock","US","Mixed"],["DUCKBOY",2023,194,"Solo","Rock","US","Male"],["Inhaler",2018,195,"Group","Rock","IE","Male"],["No Doubt",1992,196,"Group","Rock","US","Mixed"],["The Garden",2012,197,"Group","Rock","US","Male"],["Steely Dan",1972,198,"Group","Rock","US","Male"],["Modest Mouse",1996,199,"Group","Rock","US","Mixed"],["The Last Dinner Party",2023,200,"Group","Rock","GB","Mixed"],["Frank Ocean",2011,1,"Solo","R&B","US","Male"],["SZA",2014,2,"Solo","R&B","US","Female"],["Brent Faiyaz",2015,3,"Solo","R&B","US","Male"],["Daniel Caesar",2015,4,"Solo","R&B","CA","Male"],["Steve Lacy",2015,5,"Solo","R&B","US","Male"],["PARTYNEXTDOOR",2013,6,"Solo","R&B","CA","Male"],["Joji",2017,7,"Solo","R&B","US","Male"],["Kali Uchis",2015,8,"Solo","R&B","CO","Female"],["Bryson Tiller",2015,9,"Solo","R&B","US","Male"],["Chase Atlantic",2014,10,"Group","R&B","AU","Male"],["Jhené Aiko",2003,11,"Solo","R&B","US","Female"],["Sonder",2017,12,"Group","R&B","US","Male"],["Sade",1984,13,"Solo","R&B","GB","Female"],["Ms. Lauryn Hill",1998,14,"Solo","R&B","US","Female"],["Summer Walker",2018,15,"Solo","R&B","US","Female"],["Malcolm Todd",2022,16,"Solo","R&B","US","Male"],["GIVEON",2018,17,"Solo","R&B","US","Male"],["Pharrell Williams",2005,18,"Solo","R&B","US","Male"],["Amy Winehouse",2003,19,"Solo","R&B","GB","Female"],["H.E.R.",2017,20,"Solo","R&B","US","Female"],["USHER",1994,21,"Solo","R&B","US","Male"],["Montell Fish",2016,22,"Solo","R&B","US","Male"],["keshi",2017,23,"Solo","R&B","US","Male"],["Stevie Wonder",1962,24,"Solo","R&B","US","Male"],["Miguel",2010,25,"Solo","R&B","US","Male"],["Erykah Badu",1996,26,"Solo","R&B","US","Female"],["Prince",1978,27,"Solo","R&B","US","Male"],["Thundercat",2011,28,"Solo","R&B","US","Male"],["RAYE",2016,29,"Solo","R&B","GB","Female"],["Kehlani",2014,30,"Solo","R&B","US","Female"],["Marvin Gaye",1961,31,"Solo","R&B","US","Male"],["Anderson .Paak",2014,32,"Solo","R&B","US","Male"],["Jamiroquai",1993,33,"Group","R&B","GB","Male"],["Aaliyah",1994,34,"Solo","R&B","US","Female"],["Akon",2004,35,"Solo","R&B","US","Male"],["Omar Apollo",2017,36,"Solo","R&B","US","Male"],["Ne-Yo",2005,37,"Solo","R&B","US","Male"],["4batz",2023,38,"Solo","R&B","US","Male"],["Tems",2018,39,"Solo","R&B","NG","Female"],["The Internet",2011,40,"Group","R&B","US","Mixed"],["Bryant Barnes",2023,41,"Solo","R&B","US","Male"],["Sampha",2013,42,"Solo","R&B","GB","Male"],["T-Pain",2005,43,"Solo","R&B","US","Male"],["Avenoir",2022,44,"Solo","R&B","CA","Male"],["Alicia Keys",2001,45,"Solo","R&B","US","Female"],["Olivia Dean",2019,46,"Solo","R&B","GB","Female"],["6LACK",2016,47,"Solo","R&B","US","Male"],["DPR IAN",2020,48,"Solo","R&B","KR","Male"],["TLC",1992,49,"Group","R&B","US","Female"],["Jessie Murph",2021,50,"Solo","R&B","US","Female"],["Mariah the Scientist",2019,51,"Solo","R&B","US","Female"],["Destiny's Child",1998,52,"Group","R&B","US","Female"],["Earth, Wind & Fire",1971,53,"Group","R&B","US","Male"],["SiR",2015,54,"Solo","R&B","US","Male"],["DEAN",2015,56,"Solo","R&B","KR","Male"],["FLO",2022,57,"Group","R&B","GB","Female"],["Leon Thomas",2018,58,"Solo","R&B","US","Male"],["Jordan Ward",2017,59,"Solo","R&B","US","Male"],["Tinashe",2014,60,"Solo","R&B","US","Female"],["Solange",2002,61,"Solo","R&B","US","Female"],["Dijon",2017,62,"Solo","R&B","US","Male"],["Jungle",2013,63,"Group","R&B","GB","Male"],["Thee Sacred Souls",2020,64,"Group","R&B","US","Male"],["Victoria Monét",2014,65,"Solo","R&B","US","Female"],["Mary J. Blige",1992,66,"Solo","R&B","US","Female"],["Jorja Smith",2016,67,"Solo","R&B","GB","Female"],["Jeremih",2009,69,"Solo","R&B","US","Male"],["Ella Mai",2016,70,"Solo","R&B","GB","Female"],["Jacquees",2014,71,"Solo","R&B","US","Male"],["Janet Jackson",1982,72,"Solo","R&B","US","Female"],["Bill Withers",1971,73,"Solo","R&B","US","Male"],["D'Angelo",1995,74,"Solo","R&B","US","Male"],["SWV",1992,75,"Group","R&B","US","Female"],["Cleo Sol",2018,76,"Solo","R&B","GB","Female"],["Al Green",1967,77,"Solo","R&B","US","Male"],["Clara La San",2017,78,"Solo","R&B","GB","Female"],["UMI",2017,79,"Solo","R&B","US","Female"],["Ravyn Lenae",2016,80,"Solo","R&B","US","Female"],["Ashanti",2002,81,"Solo","R&B","US","Female"],["millkzy",2022,82,"Solo","R&B","US","Female"],["Keyshia Cole",2004,83,"Solo","R&B","US","Female"],["Cynthia Erivo",2015,84,"Solo","R&B","GB","Female"],["Otis Redding",1964,85,"Solo","R&B","US","Male"],["Boyz II Men",1994,86,"Group","R&B","US","Male"],["Snoh Aalegra",2014,87,"Solo","R&B","SE","Female"],["The Temptations",1964,88,"Group","R&B","US","Male"],["Trey Songz",2005,89,"Solo","R&B","US","Male"],["Queen Naija",2018,90,"Solo","R&B","US","Female"],["Lucky Daye",2019,91,"Solo","R&B","US","Male"],["Brandy",1994,93,"Solo","R&B","US","Female"],["Chase Shakur",2018,94,"Solo","R&B","US","Male"],["Etta James",1960,95,"Solo","R&B","US","Female"],["Amaarae",2017,96,"Solo","R&B","GH","Female"],["Orion Sun",2017,97,"Solo","R&B","US","Female"],["Khamari",2020,99,"Group","R&B","US","Male"],["Aretha Franklin",1956,100,"Solo","R&B","US","Female"],["John Legend",2003,101,"Solo","R&B","US","Male"],["Ray Charles",1957,102,"Solo","R&B","US","Male"],["Bazzi",2016,103,"Solo","R&B","US","Male"],["Ciara",2004,104,"Solo","R&B","US","Female"],["Ari Lennox",2014,105,"Solo","R&B","US","Female"],["Chris Grey",2018,106,"Solo","R&B","CA","Male"],["Nina Simone",1959,107,"Solo","R&B","US","Female"],["Leon Bridges",2015,108,"Solo","R&B","US","Male"],["Leslie Odom Jr.",2014,110,"Solo","R&B","US","Male"],["Vulfpeck",2012,111,"Group","R&B","US","Mixed"],["Lloyd",2004,113,"Solo","R&B","US","Male"],["Coco Jones",2011,114,"Solo","R&B","US","Female"],["New Edition",1982,115,"Group","R&B","US","Male"],["Masego",2016,116,"Solo","R&B","US","Male"],["Jessie Reyez",2017,118,"Solo","R&B","CA","Female"],["Syd",2017,119,"Solo","R&B","US","Female"],["R. Kelly",1992,120,"Solo","R&B","US","Male"],["The Jacksons",1976,121,"Group","R&B","US","Male"],["88rising",2018,122,"Group","R&B","US","Mixed"],["Chloe x Halle",2013,123,"Group","R&B","US","Female"],["Luke Chiang",2019,124,"Solo","R&B","US","Male"],["Ginuwine",1996,125,"Solo","R&B","US","Male"],["Kelela",2013,126,"Solo","R&B","US","Female"],["War",1971,127,"Group","R&B","US","Mixed"],["Janelle Monáe",2006,128,"Solo","R&B","US","Female"],["starfall",2021,129,"Solo","R&B","US","Male"],["Nobu Woods",2021,132,"Solo","R&B","US","Male"],["Luther Vandross",1979,134,"Solo","R&B","US","Male"],["Chlöe",2021,135,"Solo","R&B","US","Female"],["Jacob Collier",2013,138,"Solo","R&B","GB","Male"],["JMSN",2012,139,"Solo","R&B","US","Male"],["Kool & The Gang",1970,140,"Group","R&B","US","Male"],["James Brown",1962,141,"Solo","R&B","US","Male"],["Mario",1982,142,"Solo","R&B","US","Male"],["Halle",2023,143,"Solo","R&B","US","Female"],["Sabrina Claudio",2017,145,"Solo","R&B","US","Female"],["The Isley Brothers",1959,146,"Group","R&B","US","Male"],["Hiatus Kaiyote",2013,147,"Group","R&B","AU","Mixed"],["Jodeci",1991,148,"Group","R&B","US","Male"],["Bell Biv DeVoe",1990,149,"Group","R&B","US","Male"],["Rick James",1978,150,"Solo","R&B","US","Male"],["Jill Scott",2000,151,"Solo","R&B","US","Female"],["SAILORR",2023,152,"Solo","R&B","US","Male"],["Quincy Jones",1954,153,"Solo","R&B","US","Male"],["Brenton Wood",1967,154,"Solo","R&B","US","Male"],["Emotional Oranges",2019,155,"Group","R&B","US","Mixed"],["DESTIN CONRAD",2019,156,"Solo","R&B","US","Male"],["Micah Dailey-White",2024,157,"Solo","R&B","US","Male"],["Pink Sweat$",2018,158,"Solo","R&B","US","Male"],["thủy",2015,159,"Solo","R&B","US","Female"],["Tyde",2023,160,"Solo","R&B","GB","Male"],["Tom Misch",2014,161,"Solo","R&B","GB","Male"],["Donna Summer",1974,162,"Solo","R&B","US","Female"],["Mac Ayres",2017,163,"Solo","R&B","US","Male"],["Labi Siffre",1970,166,"Solo","R&B","GB","Male"],["Lay Bankz",2020,168,"Solo","R&B","US","Female"],["Aya Nakamura",2016,171,"Solo","R&B","FR","Female"],["marQ",2023,172,"Solo","R&B","US","Male"],["Musiq Soulchild",2000,173,"Solo","R&B","US","Male"],["Laila!",2023,174,"Solo","R&B","US","Female"],["Muni Long",2020,175,"Solo","R&B","US","Female"],["MIRRAR",2024,176,"Group","R&B","DE","Female"],["Kaash Paige",2019,177,"Solo","R&B","US","Female"],["Keith Sweat",1987,179,"Solo","R&B","US","Male"],["Amerie",2002,180,"Solo","R&B","US","Female"],["Free Nationals",2019,181,"Group","R&B","US","Mixed"],["AUDREY NUNA",2018,182,"Solo","R&B","US","Female"],["Teyana Taylor",2008,183,"Solo","R&B","US","Female"],["Cassie",2006,184,"Solo","R&B","US","Female"],["Majid Jordan",2014,187,"Group","R&B","CA","Male"],["Mariya Takeuchi",1984,188,"Solo","R&B","JP","Female"],["Durand Jones & The Indications",2016,190,"Group","R&B","US","Mixed"],["RINI",2016,193,"Solo","R&B","AU","Male"],["Raveena",2016,194,"Solo","R&B","US","Female"],["CeeLo Green",2002,195,"Solo","R&B","US","Male"],["Sammy Rae & The Friends",2018,196,"Group","R&B","US","Mixed"],["Tim Maia",1970,197,"Solo","R&B","BR","Male"],["Black Pumas",2019,198,"Group","R&B","US","Male"],["Chezile",2024,199,"Solo","R&B","US","Male"],["Fridayy",2022,200,"Solo","R&B","US","Male"]].map(r=>({name:r[0],debut:r[1],popularity:r[2],members:r[3],genre:r[4],country:r[5],gender:r[6]}));
+const AF=[["debut","Debut year","n"],["popularity","Popularity rank","n"],["members","Members","c"],["genre","Genre","c"],["country","Country","c"],["gender","Gender","c"]];
+const AGEN={Pop:"pop",HipHop:"hiphop",Indie:"indie",Rock:"rock","R&B":"rnb"};
+const AOPS={n:[["=","="],[">=","\u2265"],["<=","\u2264"]],c:[["=","is"],["!=","is not"]]};
+const AVALS={};AF.forEach(f=>{if(f[2]==="c"){const m={};AGD.forEach(a=>m[a[f[0]]]=(m[a[f[0]]]||0)+1);AVALS[f[0]]=Object.keys(m).sort((x,y)=>m[y]-m[x])}});
+let AG={hints:[],guesses:[],cfg:{d:5,p:50}},agShow=60;
+try{const v=JSON.parse(LS("tracker.ag")||"null");if(v&&Array.isArray(v.hints)&&Array.isArray(v.guesses))AG=Object.assign(AG,v)}catch(e){}
+AG.guesses.forEach(g=>{g.s=g.s||{};Object.keys(g.s).forEach(k=>{if(typeof g.s[k]!=="object")delete g.s[k]})});
+AG.hints=AG.hints.filter((h,i,arr)=>AF.some(f=>f[0]===h.f)&&arr.findIndex(x=>x.f===h.f)===i).map(h=>({f:h.f,v:h.v}));
+AG.cfg={d:5,p:50};
+const agSave=()=>LS("tracker.ag",JSON.stringify(AG));
+const agLbl=f=>AF.find(x=>x[0]===f)[1];
+/* feedback model, as in the game: each trait gets a result (correct / wrong / close) and, for debut and popularity,
+   an arrow. Debut: up = answer is MORE recent. Popularity: up = answer is HIGHER on the list (smaller rank number).
+   "Close" = within 5 years (debut), within 50 spots (popularity), same continent (country). Members/genre/gender: correct or wrong. */
+const ANUM={debut:1,popularity:1};
+const ACONT={US:"NA",CA:"NA",MX:"NA",JM:"NA",BB:"NA",CO:"SA",BR:"SA",GB:"EU",IE:"EU",SE:"EU",NO:"EU",FR:"EU",ES:"EU",IS:"EU",BE:"EU",NL:"EU",IT:"EU",DE:"EU",AU:"OC",NZ:"OC",JP:"AS",KR:"AS",TH:"AS",ID:"AS",SG:"AS",PH:"AS",ZA:"AF",NG:"AF",GH:"AF"};
+const AFB={debut:["ok","no","close"],popularity:["ok","no","close"],members:["ok","no"],genre:["ok","no"],country:["ok","no","close"],gender:["ok","no"]};
+const ASYM={ok:"\u2713",no:"\u2715",close:"\u25CB",up:"\u25B2",down:"\u25BC"};
+function agTitle(f,b){
+  if(b==="ok")return"Correct";if(b==="no")return"Incorrect";
+  if(b==="close")return f==="debut"?"Within "+AG.cfg.d+" years":f==="popularity"?"Within "+AG.cfg.p+" spots":"Same continent";
+  if(f==="debut")return b==="up"?"Answer is more recent":"Answer is less recent";
+  return b==="up"?"Answer is higher on the popularity list":"Answer is lower on the popularity list";
 }
-$("zOut").onclick=()=>{zoom-=0.1;applyZoom()};
-$("zIn").onclick=()=>{zoom+=0.1;applyZoom()};
-applyZoom();
-const MAP_URL="https://smartistguesser.github.io/soundmap-artist-guesser/";
+function agTest(f,st,v){
+  const r=st.r,d=st.d||0;
+  if(r==="ok")return x=>x===v;
+  if(ANUM[f]){
+    const W=f==="debut"?AG.cfg.d:AG.cfg.p,sg=f==="debut"?1:-1;
+    const dir=d?(d*sg>0?x=>x>v:x=>x<v):()=>true;
+    const dist=r==="close"?x=>x!==v&&Math.abs(x-v)<=W:r==="no"?x=>Math.abs(x-v)>W:()=>true;
+    return x=>dir(x)&&dist(x);
+  }
+  if(f==="country")return r==="close"?x=>x!==v&&ACONT[x]===ACONT[v]:r==="no"?x=>ACONT[x]!==ACONT[v]:null;
+  return r==="no"?x=>x!==v:null;
+}
+const agOp=(x,op,v)=>op==="="?x==v:op==="!="?x!=v:op===">="?x>=v:x<=v;
+function agCons(){
+  const cs=[];
+  AG.hints.forEach(h=>{if(h.v!==""&&h.v!=null)cs.push(a=>a[h.f]==h.v)});
+  AG.guesses.forEach(g=>{const a=AGD.find(x=>x.name===g.n);if(!a)return;AF.forEach(f=>{const st=g.s[f[0]];if(!st||(!st.r&&!st.d))return;const t=agTest(f[0],st,a[f[0]]);if(t)cs.push(x=>t(x[f[0]]))})});
+  return cs;
+}
+function agMatches(){
+  const cs=agCons(),skip=new Set(AG.guesses.map(g=>g.n));
+  return {cs,list:AGD.filter(a=>!skip.has(a.name)&&cs.every(t=>t(a))).sort((x,y)=>x.popularity-y.popularity||x.name.localeCompare(y.name))};
+}
+const agRow=(a,hi)=>`<div class="card mk agm${hi?" hi":""}" data-n="${esc(a.name)}" role="button" tabindex="0" title="Add as a guess"><div class="mkh nc" style="grid-template-columns:minmax(0,1fr) auto"><div style="min-width:0"><div class="mkt">${esc(a.name)} <span class="agy">(${a.debut})</span></div><div class="mks">${[a.genre,a.members,a.country,a.gender,"Popularity "+a.popularity].map(esc).join(" \u2022 ")}</div></div><span class="agplus" aria-hidden="true">+</span></div></div>`;
+const agFree=()=>AF.map(f=>f[0]).filter(k=>!AG.hints.some(h=>h.f===k));
+function agHintsHtml(){
+  $("agHints").innerHTML=AG.hints.map((h,i)=>{
+    const t=AF.find(x=>x[0]===h.f)[2];
+    const fields=AF.filter(x=>x[0]===h.f||agFree().includes(x[0]));
+    return `<div class="mkrow" data-i="${i}"><select data-k="f">${fields.map(x=>`<option value="${x[0]}"${x[0]===h.f?" selected":""}>${x[1]}</option>`).join("")}</select>${t==="n"?`<input data-k="v" type="number" inputmode="numeric" placeholder="${h.f==="debut"?"e.g. 2016":"e.g. 99"}" value="${h.v==null?"":h.v}">`:`<select data-k="v">${AVALS[h.f].map(v=>`<option${v===h.v?" selected":""}>${esc(v)}</option>`).join("")}</select>`}<button type="button" class="x" data-act="del" aria-label="Remove hint">\u2715</button></div>`}).join("")||'<div class="empty">No hints yet.</div>';
+  $("agAddHint").disabled=!agFree().length;
+}
+function agGuessHtml(){
+  $("agGuesses").innerHTML=AG.guesses.map((g,i)=>{
+    const a=AGD.find(x=>x.name===g.n);
+    const head=`<div class="agh"><span class="t">#${i+1}</span><input class="agn" list="agDL" data-act="name" placeholder="Search for an artist..." value="${esc(g.n)}" autocomplete="off"><span class="ctl">${a?`<button type="button" data-act="col" aria-label="${g.c?"Expand":"Collapse"}" style="${g.c?"":"transform:rotate(180deg)"}">\u02C5</button>`:""}<button type="button" data-act="del" aria-label="Remove guess">\u2715</button></span></div>`;
+    if(!a||g.c)return `<div class="card agg" data-i="${i}">${head}</div>`;
+    const panels=AF.map(f=>{
+      const k=f[0],st=g.s[k]||{r:"",d:0};
+      const btn=(b,on,cls)=>`<button type="button" data-f="${k}" data-b="${b}" class="${on?"on "+cls:""}" title="${esc(agTitle(k,b))}" aria-pressed="${!!on}">${ASYM[b]}</button>`;
+      const res=AFB[k].map(b=>btn(b,st.r===b,b==="ok"?"ok":b==="close"?"cl":"")).join("");
+      const arr=ANUM[k]?`<span class="sp"></span>${btn("up",st.d===1,"ar")}${btn("down",st.d===-1,"ar")}`:"";
+      return `<div class="agp${st.r==="ok"?" ok":""}"><div class="agph"><span>${f[1].replace(" year","").replace(" rank","")}</span><b>${esc(String(a[k]))}</b></div><div class="agpb">${res}${arr}</div></div>`;
+    }).join("");
+    return `<div class="card agg" data-i="${i}">${head}<div class="agp-grid">${panels}</div></div>`;
+  }).join("");
+  $("agMsg").textContent="";
+}
+/* best match = the candidate closest to the median debut year and median popularity of those still matching
+   (the most informative next guess); it is listed first, the rest by popularity */
+function agPickBest(list){
+  if(list.length<3)return list;
+  const med=k=>{const v=list.map(a=>a[k]).sort((x,y)=>x-y),m=v.length>>1;return v.length%2?v[m]:(v[m-1]+v[m])/2};
+  const md=med("debut"),mp=med("popularity");
+  const rg=k=>Math.max(1,Math.max(...list.map(a=>a[k]))-Math.min(...list.map(a=>a[k])));
+  const rd=rg("debut"),rp=rg("popularity"),sc=a=>Math.abs(a.debut-md)/rd+Math.abs(a.popularity-mp)/rp;
+  let best=list[0];list.forEach(a=>{if(sc(a)<sc(best))best=a});
+  return [best].concat(list.filter(a=>a!==best));
+}
+function agResults(){
+  let {cs,list}=agMatches();list=agPickBest(list);
+  $("agV1").textContent=list.length;$("agV2").textContent=cs.length;
+  $("agV3").textContent=list.length?list[0].name:"\u2014";
+  $("agBest").innerHTML=list.length?agRow(list[0],true):'<div class="empty">No matching artists. Check your hints and feedback for a mistake.</div>';
+  $("agMH").textContent="Matches ("+list.length+")";
+  $("agList").innerHTML=list.slice(0,agShow).map(a=>agRow(a)).join("");
+  $("agMore").hidden=list.length<=agShow;$("agMore").textContent="Show more ("+(list.length-agShow)+" left)";
+}
+function agRender(){agHintsHtml();agGuessHtml();agResults()}
+$("agDL").innerHTML=AGD.map(a=>`<option value="${esc(a.name)}">`).join("");
+$("agAddHint").onclick=()=>{const f=agFree()[0];if(!f)return;AG.hints.push({f:f,v:AF.find(x=>x[0]===f)[2]==="n"?"":AVALS[f][0]});agSave();agHintsHtml();agResults();const r=$("agHints").lastElementChild,i=r&&r.querySelector("input,select[data-k=v]");if(i)i.focus()};
+$("agClear").onclick=()=>{if(!AG.hints.length&&!AG.guesses.length)return;ask("Clear all hints and guesses?",()=>{AG.hints=[];AG.guesses=[];agShow=60;agSave();agRender()})};
+function agPick(name){
+  if(!AG.guesses.some(g=>g.n===name)){
+    const blank=AG.guesses.find(g=>!g.n);
+    if(blank){blank.n=name;blank.s={}}else AG.guesses.push({n:name,s:{},c:false});
+    agSave();agShow=60;agGuessHtml();agResults();
+  }
+  const i=AG.guesses.findIndex(g=>g.n===name),el=$("agGuesses").children[i];
+  if(el)el.scrollIntoView({behavior:"smooth",block:"center"});
+}
+$("agAddG").onclick=()=>{
+  const blank=AG.guesses.findIndex(g=>!g.n);
+  if(blank<0){AG.guesses.push({n:"",s:{},c:false});agSave();agGuessHtml()}
+  const i=blank<0?AG.guesses.length-1:blank,inp=$("agGuesses").children[i].querySelector("input.agn");
+  inp.focus();inp.scrollIntoView({behavior:"smooth",block:"center"});
+};
+["agBest","agList"].forEach(id=>{
+  $(id).addEventListener("click",e=>{const c=e.target.closest(".agm");if(c)agPick(c.dataset.n)});
+  $(id).addEventListener("keydown",e=>{const c=e.target.closest(".agm");if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();agPick(c.dataset.n)}});
+});
+$("agHints").addEventListener("input",e=>{const el=e.target.closest("input[data-k]");if(!el)return;AG.hints[+el.closest(".mkrow").dataset.i].v=el.value===""?"":Number(el.value);agSave();agShow=60;agResults()});
+$("agHints").addEventListener("change",e=>{
+  const el=e.target.closest("select[data-k]");if(!el)return;
+  const h=AG.hints[+el.closest(".mkrow").dataset.i];
+  if(el.dataset.k==="f"){h.f=el.value;h.v=AF.find(x=>x[0]===h.f)[2]==="n"?"":AVALS[h.f][0]}
+  else h.v=el.value;
+  agSave();agShow=60;agHintsHtml();agResults();
+});
+$("agHints").addEventListener("click",e=>{const b=e.target.closest('button[data-act="del"]');if(!b)return;AG.hints.splice(+b.closest(".mkrow").dataset.i,1);agSave();agShow=60;agHintsHtml();agResults()});
+$("agGuesses").addEventListener("change",e=>{
+  const inp=e.target.closest('input[data-act="name"]');if(!inp)return;
+  const i=+inp.closest(".agg").dataset.i,g=AG.guesses[i],v=inp.value.trim().toLowerCase();
+  if(!v){g.n="";g.s={}}
+  else{
+    const a=AGD.find(x=>x.name.toLowerCase()===v);
+    if(!a){$("agMsg").textContent="No artist named \u201c"+inp.value.trim()+"\u201d in the data. Pick one from the suggestions.";inp.value=g.n;return}
+    if(AG.guesses.some((x,j)=>j!==i&&x.n===a.name)){$("agMsg").textContent=a.name+" is already one of your guesses.";inp.value=g.n;return}
+    if(g.n!==a.name){g.n=a.name;g.s={}}
+  }
+  agSave();agShow=60;agGuessHtml();agResults();
+});
+$("agGuesses").addEventListener("click",e=>{
+  const card=e.target.closest(".agg"),b=e.target.closest("button");if(!card||!b)return;
+  const i=+card.dataset.i,g=AG.guesses[i];
+  if(b.dataset.act==="del")AG.guesses.splice(i,1);
+  else if(b.dataset.act==="col")g.c=!g.c;
+  else if(b.dataset.f){
+    const f=b.dataset.f,k=b.dataset.b,st=g.s[f]||(g.s[f]={r:"",d:0});
+    if(k==="up"||k==="down"){const d=k==="up"?1:-1;st.d=st.d===d?0:d;if(st.d&&st.r==="ok")st.r=""}
+    else{st.r=st.r===k?"":k;if(st.r==="ok")st.d=0}
+  }else return;
+  agSave();agShow=60;agGuessHtml();agResults();
+});
+$("agMore").onclick=()=>{agShow+=60;agResults()};
+agRender();
+
+/* ---------- tabs ---------- */
 function showTab(n){
   const ids={shiny:"tbShiny",epic:"tbEpic",gempic:"tbGempic",quest:"tbQuest",pass:"tbPass",event:"tbEvent",buys:"tbBuys",profile:"tbProfile",map:"tbMap",info:"tbInfo",artist:"tbArtist"};
   Object.keys(ids).forEach(x=>{$("tab-"+x).hidden=n!==x;$(ids[x]).classList.toggle("on",n===x)});
   $("bk").hidden=n==="map"||n==="info"||n==="gempic"||n==="quest"||n==="pass"||n==="event"||n==="buys"||n==="profile"||n==="artist";
-  if(n==="map"&&!$("mapFrame").getAttribute("src"))$("mapFrame").src=MAP_URL;
+  if(n==="map")agRender();
   LS("tracker.tab",n);
 }
 $("tbShiny").onclick=()=>showTab("shiny");
