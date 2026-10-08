@@ -131,9 +131,10 @@ input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
 .agph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .agph span{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
 .agph b{font-size:13px;text-align:right;overflow-wrap:anywhere}
-.agpb{display:flex;align-items:center;gap:4px;margin-top:6px;flex-wrap:wrap}
-.agpb button{margin:0;width:28px;height:26px;padding:0;font-size:13px;line-height:1;border-radius:5px}
-.agpb .sp{width:4px}
+.agpb{display:flex;align-items:center;gap:3px;margin-top:6px;flex-wrap:nowrap}
+.agpb button{margin:0;flex:0 1 28px;min-width:0;width:28px;height:26px;padding:0;font-size:13px;line-height:1;border-radius:5px}
+.agpb .sp{flex:0 0 4px;width:4px}
+@media (max-width:640px){.agp{padding:16px 8px}}
 .agpb button.on{background:#6b7280;color:#fff;border-color:#6b7280}
 .agpb button.on.ok{background:var(--pos);border-color:var(--pos)}
 .agpb button.on.cl{background:#d4a017;border-color:#d4a017}
@@ -322,6 +323,44 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #passGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 #evGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 @media (max-width:520px){#passGrid,#evGrid{grid-template-columns:1fr}}
+#evGridSm{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+#evGridSm .card{padding:8px 10px}
+#evGridSm .pc .nm{flex-direction:column;gap:0;font-size:12px}
+#evGridSm .pc .val{font-size:22px;margin:3px 0 1px}
+#evGridSm .pc .obs{font-size:11px;margin-bottom:4px}
+#evGridSm .steps{margin-top:4px}
+#evGridSm .steps button{padding:5px 0;font-size:15px}
+.evc{margin:6px 0;padding:10px 12px;background:var(--card);border:1px solid var(--bd);border-radius:10px;gap:12px}
+.evc.on{border-color:var(--ac)}
+.evc .evt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.evc .evt b{font-size:14px;font-weight:600}
+.evc .evt span{font-size:12px;color:var(--mut)}
+.evc .pill{flex:none;margin:0}
+.evcf{display:flex;align-items:center;gap:10px;margin-top:8px}
+.evcf input[type=search]{flex:1;min-width:0;margin:0;font-size:15px;padding:7px 8px}
+.evcf .evonly{display:flex;align-items:center;gap:6px;flex:none;font-size:13px;color:var(--tx);cursor:pointer;white-space:nowrap}
+.evcf .evonly input{width:18px;height:18px;margin:0;padding:0}
+#evColNote{margin:6px 0 0}#evColNote:empty{display:none}
+/* compact rows for long lists (World Tour) */
+.evc.sm{margin:3px 0;padding:4px 8px;gap:8px;border-radius:7px}
+.evc.sm input{width:16px;height:16px}
+.evc.sm .evt{flex-direction:row;align-items:baseline;gap:8px;overflow:hidden}
+.evc.sm .evt b{flex:0 1 46%;min-width:0;font-size:12.5px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evc.sm .evt span{flex:1 1 0;min-width:0;font-size:11px;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evc.sm .pill{font-size:10px;padding:0 7px 0 5px;border-width:1px}
+@media (max-width:640px){.evc.sm .evt{flex-direction:column;align-items:stretch;gap:0}.evc.sm .evt b{flex:none}.evc.sm .evt span{flex:none}}
+/* three per line: checkbox + title on top, artist/country and genre use the full cell width below */
+#evCol.cols3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+#evCol.cols3 .empty{grid-column:1/-1}
+#evCol.cols3 .evc.sm{margin:0;padding:5px 6px;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:5px;row-gap:2px;align-items:start;align-content:start;min-width:0}
+#evCol.cols3 .evc.sm>input{grid-column:1;grid-row:1;width:15px;height:15px;margin-top:1px}
+#evCol.cols3 .evc.sm .evt{display:contents}
+#evCol.cols3 .evc.sm .evt b,#evCol.cols3 .evc.sm .evt span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;white-space:normal;overflow:hidden;overflow-wrap:anywhere;min-width:0;flex:none}
+#evCol.cols3 .evc.sm .evt b{grid-column:2;grid-row:1;font-size:12px;line-height:1.2}
+#evCol.cols3 .evc.sm .evt span{grid-column:1/-1;grid-row:2;font-size:10.5px;line-height:1.25}
+#evCol.cols3 .evc.sm .pill{grid-column:1/-1;grid-row:3;justify-self:start;max-width:100%;overflow:hidden;font-size:9px;padding:0 6px;line-height:1.35;margin-top:1px}
+#evCol.cols3 .evc.sm .pill::before{display:none}
+@media (max-width:400px){#evCol.cols3 .evc.sm{padding:5px 5px}#evCol.cols3 .evc.sm .pill{font-size:8px;padding:0 4px;letter-spacing:-.1px}}
 #evTotals,#ulTotals{display:flex;flex-direction:column}
 #evTotals .lbl,#ulTotals .lbl{font-size:16px;font-weight:600;margin:0}
 #evTotals .big,#ulTotals .big{font-size:44px;font-weight:700;line-height:1.1;margin:6px 0 14px}
@@ -598,17 +637,29 @@ details[open]>:not(summary){animation:fade .25s ease}
 </div>
 
 <div id="tab-event" hidden>
+<div class="seg" id="evTabs"></div>
+<div id="evRewards">
 <div class="passTop">
 <div class="card" id="evTotals">
 <div class="lbl">Total coins</div><div class="val big" id="evCoins">0</div>
 <div class="lbl">Total gems</div><div class="val big" id="evGems">0</div>
+<div class="lbl">Total leaves</div><div class="val big" id="evLeaves">0</div><div class="note" id="evLeavesNote"></div>
+<div class="steps"><button type="button" id="evLeafSub" aria-label="Remove one leaf added without a reward">−</button><button type="button" id="evLeafAdd" style="flex:4">+ Leaf (no reward)</button></div>
 </div>
 <div class="card" id="evOddsBox"><div class="lbl">Odds</div><table id="evOdds"></table></div>
 </div>
 <h2>Tracker</h2>
 <div class="grid" id="evGrid"></div>
+<div class="grid" id="evGridSm"></div>
 <div class="note" id="evTot"></div>
 <button class="small" id="evReset" type="button">Reset &amp; save to history</button>
+</div>
+<div id="evColBox">
+<h2 id="evColHead">Collectables</h2>
+<div class="evcf"><input id="evSearch" type="search" placeholder="Search song, artist, country or genre..." aria-label="Search collectables" autocomplete="off"><label class="evonly"><input type="checkbox" id="evOnly"><span>Collected only</span></label></div>
+<div class="note" id="evColNote"></div>
+<div id="evCol"></div>
+</div>
 <details id="evHistBox"><summary id="evHistSum">History</summary><div id="evHist"></div></details>
 </div>
 
@@ -803,9 +854,17 @@ function updateLabels(){
 }
 const col=Object.fromEntries(fields.map(f=>[f[0],f[2]]));
 const labelOf=k=>(fields.find(f=>f[0]===k)||[0,k])[1];
-let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"2026-04-11",oneOnePrice:1000,commonPrice:4000,uncommonPrice:6000,rarePrice:8000,costEach:1250};
+let s={bought:0,twoToOne:0,oneOne:0,commons:0,uncommons:0,rares:0,misc:0,start:"",oneOnePrice:1000,commonPrice:4000,uncommonPrice:6000,rarePrice:8000,costEach:1250};
 const committed={},els={};
 const num=k=>Number(s[k])||0;
+/* start date = the day an account makes its first shiny entry (sales/inventory counts, not prices) */
+const ENTRY=new Set(["bought","twoToOne","oneOne","commons","uncommons","rares","misc"]);
+function todayISO(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function autoStart(k){
+  if(s.start||!ENTRY.has(k)||!(num(k)>0))return;
+  const old=s.start;s.start=todayISO();els.start.value=s.start;
+  logChange("start",old,s.start);committed.start=s.start;queueSave("start");calc();
+}
 const fmt=n=>"$"+Math.round(n).toLocaleString("en-US");
 const saveTimers={},dirty=new Set(),pendDelta={},deltaTimers={};
 function queueSave(k){
@@ -837,7 +896,7 @@ fields.forEach(([k,l])=>{
   d.innerHTML=`<label for="${k}">${l}</label><input id="${k}" type="${k==="start"?"date":"number"}" inputmode="numeric">`;
   host.appendChild(d);
   const el=d.querySelector("input");els[k]=el;
-  el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k)});
+  el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k);autoStart(k)});
   el.addEventListener("change",()=>{logChange(k,committed[k],s[k]);committed[k]=s[k]});
   if(k!=="start"&&!PRICE.has(k)){
     const row=document.createElement("div");row.className="steps";
@@ -854,7 +913,7 @@ fields.forEach(([k,l])=>{
       b.setAttribute("aria-label",(dlt>0?"Add to ":"Subtract from ")+k);
       b.onclick=()=>{
         const n=Math.max(1,Math.floor(Number(amt.value))||1);
-        const o=num(k);s[k]=Math.max(0,o+dlt*n);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o);
+        const o=num(k);s[k]=Math.max(0,o+dlt*n);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o);autoStart(k);
       };
       sb2.appendChild(b);
     });
@@ -864,7 +923,7 @@ fields.forEach(([k,l])=>{
 });
 function results(st){
   const n=k=>Number(st[k])||0;
-  const remaining=n("bought")-n("commons")-n("uncommons")-n("rares")+n("twoToOne")-1;
+  const remaining=n("bought")-n("commons")-n("uncommons")-n("rares")+n("twoToOne");
   const profit11=n("oneOne")*n("oneOnePrice");
   const sold=n("commons")*n("commonPrice")+n("uncommons")*n("uncommonPrice")+n("rares")*n("rarePrice")+n("misc");
   const total=profit11+sold,cost=n("bought")*n("costEach"),net=total-cost;
@@ -873,14 +932,13 @@ function results(st){
 function calc(){
   updateLabels();
   const {remaining,profit11,sold,total,cost,net}=results(s);
-  const st=new Date((s.start||"2026-04-11")+"T00:00:00");
   const now=new Date();now.setHours(0,0,0,0);
-  const days=Math.max(1,Math.round((now-st)/864e5)+1);
+  const days=s.start?Math.max(1,Math.round((now-new Date(s.start+"T00:00:00"))/864e5)+1):1;
   const avg=net/days;
   const card=([l,v,sign])=>`<div class="card"><div class="lbl">${l}</div><div class="val ${sign>0?"pos":sign<0?"neg":""}">${v}</div></div>`;
   $("outputs").innerHTML=[["Net Gain",fmt(net),net],["Average Net Per Day",fmt(avg),avg],["1:1 Profit",fmt(profit11)],["Sold Profit",fmt(sold)]].map(card).join("");
   $("invOut").innerHTML=[["Shinies Remaining",remaining,0],["Total Sales",fmt(total)],["Cost",fmt(cost)]].map(card).join("");
-  $("days").textContent=`Day ${days} since ${s.start} (updates automatically with today's date)`;
+  $("days").textContent=s.start?`Day ${days} since ${s.start} (updates automatically with today's date)`:"Start date is set automatically when you add your first entry";
 }
 
 /* ---------- history log ---------- */
@@ -1408,7 +1466,7 @@ async function loadAll(quiet){
   if(err){setStatus("Load failed: "+err.message,true);return false}
   if(!st.data)await sb.from("shiny_state").insert({id:1});
   const r=st.data||{};
-  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"2026-04-11",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
+  s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
   fields.forEach(([k])=>{els[k].value=s[k];committed[k]=s[k]});
   log=lg.data.map(x=>({id:x.id,t:Date.parse(x.at),k:x.field,from:x.old_value,to:x.new_value}));
   const bySlot={};
@@ -1525,22 +1583,76 @@ $("passHist").addEventListener("click",ev=>{
 });
 
 /* ---------- event tracker ---------- */
-const EVT=[["c20k","20,000 Coins","3%",{coins:20000}],["g100","100 Gems","0.02%",{gems:100}],["c100k","100,000 Coins","0.01%",{coins:100000}]];
-const evCnt=c=>{const o={};EVT.forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
-const evSum=c=>EVT.reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0);a.gems+=c[k]*(v.gems||0);a.n+=c[k];return a},{coins:0,gems:0,n:0});
-function evNorm(d){d=d||{};return{c:evCnt(d.c),start:+d.start||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(h.c)})):[]}}
-let ev=evNorm(),evDB=true;
+/* One entry per event. big = the three large reward buttons, small = the smaller ones below; col = collectable epics [title, artist, genre]. */
+const EVTS=[{id:"soundfall",name:"Soundfall",
+ big:[["c20k","20,000 Coins","3%",{coins:20000}],["g100","100 Gems","0.02%",{gems:100}],["c100k","100,000 Coins","0.01%",{coins:100000}]],
+ small:[["c100","100 Coins","50%",{coins:100}],["c200","200 Coins","30%",{coins:200}],["c2k","2,000 Coins","16.7%",{coins:2000}]],
+ col:[["The Way Life Goes (feat. Oh Wonder)","Lil Uzi Vert","Hip Hop"],["Juna","Clairo","Indie"],["The Great Pumpkin Waltz","Vince Guaraldi","Classical & Jazz"],["Holocene","Bon Iver","Indie"],["Wake Me Up When September Ends","Green Day","Rock"],["Fade Into You","Mazzy Star","Rock"],["we fell in love in october","girl in red","Indie"],["Sweater Weather","The Neighbourhood","Rock"],["Pushing It Down and Praying","Lizzy McAlpine","Indie"],["When the Sun hits","Slowdive","Rock"],["this is what autumn feels like","JVKE","Pop"],["Hug All Ur Friends","Cavetown","Indie"],["evermore (feat. Bon Iver)","Taylor Swift","Pop"],["Mean It","LAUV","Pop"],["Treehouse","Alex G","Indie"],["Sally, When The Wine Runs Out","ROLE MODEL","Indie"],["Cough Syrup","Young the Giant","Rock"],["talking \u2018bout u","wave to earth","Rock"],["Ho Hey","The Lumineers","Rock"],["Stick Season","Noah Kahan","Pop"]]},
+{id:"worldtour",name:"World Tour",big:[],small:[],
+/* [song, artist, genre, country] */
+col:[["Uma casa portuguesa","Am\u00e1lia Rodrigues","Classical & Jazz","Portugal"],["Con Te Partir\u00f2","Andrea Bocelli","Classical & Jazz","Italy"],["Time","Hans Zimmer","Classical & Jazz","Germany"],["\u30c8\u30fc\u30ad\u30e7\u30fc\u30ec\u30ae\u30fc","Masayoshi Takanaka","Classical & Jazz","Japan"],["Theme From New York, New York","Frank Sinatra","Classical & Jazz","America"],["Tennessee Whiskey","Chris Stapleton","Country","America"],["Jolene","Dolly Parton","Country","America"],["Man! I Feel Like A Woman!","Shania Twain","Country","Canada"],["The Business","Ti\u00ebsto","Electronic","Netherlands"],["Faded","Alan Walker","Electronic","Norway"],["Better Off Alone","Alice Deejay","Electronic","Netherlands"],["Wake Me Up","Avicii","Electronic","Sweden"],["One Kiss (with Dua Lipa)","Calvin Harris;Dua Lipa","Electronic","United Kingdom"],["Witch Doctor","Cartoons","Electronic","Denmark"],["Murder She Wrote","Chaka Demus & Pliers","Electronic","Jamaica"],["Pump It Up - Radio Edit","Danzel","Electronic","Belgium"],["Freed From Desire","Gala","Electronic","Italy"],["L'Amour Toujours","GIGI D'AGOSTINO","Electronic","Italy"],["Spaceman","Hardwell","Electronic","Netherlands"],["Laxed \u2013 Siren Beat","Jawsh 685","Electronic","New Zealand"],["D.A.N.C.E.","Justice","Electronic","France"],["Nightcall","Kavinsky","Electronic","France"],["The Ketchup Song (Aserej\u00e9) - Spanish Version","Las Ketchup","Electronic","Spain"],["Are You With Me","Lost Frequencies","Electronic","Belgium"],["Animals","Martin Garrix","Electronic","Netherlands"],["Solo Dance","Martin Jensen","Electronic","Denmark"],["Lady - Hear Me Tonight","Modjo","Electronic","France"],["Waves","Mr. Probz","Electronic","Netherlands"],["Innerbloom","R\u00dcF\u00dcS DU SOL","Electronic","Australia"],["Swing","Savage;Soulja Boy","Electronic","New Zealand"],["It Wasn't Me","Shaggy;Rik Rok","Electronic","Jamaica"],["Bam Bam","Sister Nancy","Electronic","Jamaica"],["Music Sounds Better With You","Stardust;Benjamin Diamond;Alan Braxe;Thomas Bangalter","Electronic","France"],["Don't You Worry Child","Swedish House Mafia;John Martin","Electronic","Sweden"],["Pump Up The Jam","Technotronic","Electronic","Belgium"],["Boom, Boom, Boom, Boom!!","Vengaboys","Electronic","Netherlands"],["Saturday Night","Whigfield","Electronic","Denmark"],["Sweden","C418","Electronic","Germany"],["Around the World","Daft Punk","Electronic","France"],["From Paris to Berlin","Infernal","Electronic","Denmark"],["Don't Say You Love Me","M2M","Electronic","Norway"],["Lose Yourself","Eminem","Hip Hop","America"],["luther (with sza)","Kendrick Lamar;SZA","Hip Hop","America"],["Last Last","Burna Boy","Hip Hop","Nigeria"],["God's Plan","Drake","Hip Hop","Canada"],["Europapa","Joost","Hip Hop","Netherlands"],["CRAZY LOVE","Marracash","Hip Hop","Italy"],["Kenny G","Matu\u00ea","Hip Hop","Brazil"],["Interestelar","Plutonio","Hip Hop","Portugal"],["LA GRACIOSA","Quevedo;Elvis Crespo","Hip Hop","Spain"],["Vida Loka, Pt. 1","Racionais MC's","Hip Hop","Brazil"],["Do You No Wrong","Richie Campbell","Hip Hop","Portugal"],["Ricchi x Sempre","Sfera Ebbasta","Hip Hop","Italy"],["Al Natural (feat. Yandel)","Tego Calder\u00f3n;Yandel","Hip Hop","Puerto Rico"],["WITHOUT YOU","The Kid LAROI","Hip Hop","Australia"],["Devia Ir","Wet Bed Gang","Hip Hop","Portugal"],["Essence (feat. Tems)","Wizkid;Tems","Hip Hop","Nigeria"],["\u0e18\u0e32\u0e15\u0e38\u0e17\u0e2d\u0e07\u0e0b\u0e32\u0e27\u0e14\u0e4c","YOUNGOHM;SONOFO","Hip Hop","Thailand"],["Glitter","BENEE","Indie","New Zealand"],["Only Time","Enya","Indie","Ireland"],["Black Sheep","Gin Wigmore","Indie","New Zealand"],["we fell in love in october","girl in red","Indie","Norway"],["Heat Waves","Glass Animals","Indie","United Kingdom"],["Mad About You","Hooverphonic","Indie","Belgium"],["Too Sweet","Hozier","Indie","Ireland"],["Not an Addict","K's Choice","Indie","Belgium"],["Royals","Lorde","Indie","New Zealand"],["Midnight City","M83","Indie","France"],["Beggin'","Madcon","Indie","Norway"],["1901.0","Phoenix","Indie","France"],["Pastello Bianco","Pinguini Tattici Nucleari","Indie","Italy"],["Don\u2019t Forget Your Roots","SIX60","Indie","New Zealand"],["Hearts Like Ours","The Naked And Famous","Indie","New Zealand"],["Riptide","Vance Joy","Indie","Australia"],["Lover Boy","Phum Viphurit","Indie","Thailand"],["WONDERLAND","ATEEZ","K-Pop","South Korea"],["How You Like That","BLACKPINK","K-Pop","South Korea"],["FAKE LOVE","BTS","K-Pop","South Korea"],["Love Shot","EXO","K-Pop","South Korea"],["Gee","Girls' Generation","K-Pop","South Korea"],["First Love","Hikaru Utada","K-Pop","Japan"],["Palette (feat. G-DRAGON)","IU;G-DRAGON","K-Pop","South Korea"],["LOVE DIVE","IVE","K-Pop","South Korea"],["MONEY","LISA","K-Pop","Thailand"],["Rockstar","LISA","K-Pop","Thailand"],["ReawakeR (feat. Felix of Stray Kids)","LiSA;Stray Kids","K-Pop","Japan"],["Butterfly","LOONA","K-Pop","South Korea"],["Subtitle","OFFICIAL HIGE DANDISM","K-Pop","Japan"],["Gangnam Style (\uac15\ub0a8\uc2a4\ud0c0\uc77c)","PSY","K-Pop","South Korea"],["Double Team","Anitta;Brray;Bad Gyal","Latin","Brazil"],["Amanece","Anuel AA;Haze","Latin","Puerto Rico"],["Pa' Que La Pases Bien","Arc\u00e1ngel","Latin","Puerto Rico"],["Te Dar\u00e9","Bad Gyal","Latin","Spain"],["No tiene sentido","Be\u00e9le","Latin","Colombia"],["Automotivo Bibi Fogosa","Bibi Babydoll;Dj Brunin XM;KZA Produ\u00e7\u00f5es","Latin","Brazil"],["M\u00edrame","Blessd;Ovy On The Drums","Latin","Colombia"],["Alma Enamorada","Chalino Sanchez","Latin","Mexico"],["NUBES","De La Rose;Omar Courtz","Latin","Puerto Rico"],["Pobre Diabla","Don Omar","Latin","Puerto Rico"],["Castigo","Feid","Latin","Colombia"],["SABOR FRESA","Fuerza Regida","Latin","Mexico"],["EL AMOR DE SU VIDA","Grupo Frontera;Grupo Firme","Latin","Mexico"],["Ginza","J Balvin","Latin","Colombia"],["Atrapado en un Sue\u00f1o","Junior H","Latin","Mexico"],["Si Antes Te Hubiera Conocido","KAROL G","Latin","Colombia"],["Corazon De Seda (feat. Ozuna)","Klasico;Ozuna","Latin","Puerto Rico"],["Nunca Es Suficiente","Los \u00c1ngeles Azules;Natalia Lafourcade","Latin","Mexico"],["El \u00c1guila Blanca","Los Tucanes De Tijuana","Latin","Mexico"],["Bandida","Luis R Conriquez;Peso Pluma","Latin","Mexico"],["La Bachata","Manuel Turizo","Latin","Colombia"],["Bum Bum Tam Tam","MC Fioti;Future;J Balvin;Stefflon Don;Juan Mag\u00e1n","Latin","Brazil"],["O Grave Bater","MC Kevinho","Latin","Brazil"],["Ai Se Eu Te Pego - Ao Vivo","Michel Tel\u00f3","Latin","Brazil"],["Madonna","Natanael Cano;Oscar Maydon","Latin","Mexico"],["Gato de Noche","\u00d1engo Flow;Bad Bunny","Latin","Puerto Rico"],["Loco","Neton Vega","Latin","Mexico"],["Tragos Amargos","Ramon Ayala Y Sus Bravos Del Norte","Latin","Mexico"],["La Old Skul","Rauw Alejandro","Latin","Puerto Rico"],["La Perla","ROSAL\u00cdA;Yahritza Y Su Esencia","Latin","Spain"],["Jordan","Ryan Castro","Latin","Colombia"],["Tacones Rojos","Sebastian Yatra","Latin","Colombia"],["FANTASMA | AVC","Tainy;JHAYCO","Latin","Puerto Rico"],["Boa Sorte / Good Luck (feat. Ben Harper)","Vanessa Da Mata;Ben Harper","Latin","Brazil"],["Yo Voy (feat. Daddy Yankee)","Zion & Lennox","Latin","Puerto Rico"],["Gimme Chocolate!!","BABYMETAL","Metal","Japan"],["Mary On A Cross","Ghost","Metal","Sweden"],["Du hast","Rammstein","Metal","Germany"],["Still Counting","Volbeat","Metal","Denmark"],["Youngblood","5 Seconds of Summer","Pop","Australia"],["Take on Me","a-ha","Pop","Norway"],["Dancing Queen","ABBA","Pop","Sweden"],["The Sign","Ace of Base","Pop","Sweden"],["SUPERESTRELLA","Aitana","Pop","Spain"],["Felicit\u00e0","Al Bano And Romina Power","Pop","Italy"],["Fairytale","Alexander Rybak","Pop","Norway"],["Fascination","Alphabeat","Pop","Denmark"],["Forever Young","Alphaville","Pop","Germany"],["Bruxelles je t\u2019aime","Ang\u00e8le","Pop","Belgium"],["Barbie Girl","Aqua","Pop","Denmark"],["Runaway","AURORA","Pop","Norway"],["\u30a4\u30c1\u30d6\u30c8\u30bc\u30f3\u30d6","B'z","Pop","Japan"],["Hooked On A Feeling","Blue Swede;Bj\u00f6rn Skifs","Pop","Sweden"],["Could You Be Loved","Bob Marley & The Wailers","Pop","Jamaica"],["Kung Fu Fighting","Carl Douglas","Pop","Jamaica"],["Call Me Maybe","Carly Rae Jepsen","Pop","Canada"],["My Heart Will Go On","C\u00e9line Dion","Pop","Canada"],["As Vezes","D.A.M.A","Pop","Portugal"],["Fall","Davido","Pop","Nigeria"],["Woke Up Late","Drax Project","Pop","New Zealand"],["Arcade","Duncan Laurence","Pop","Netherlands"],["Shape of You","Ed Sheeran","Pop","United Kingdom"],["Bailando - Spanish Version","Enrique Iglesias;Descemer Bueno;Gente De Zona","Pop","Spain"],["Peru","Fireboy DML","Pop","Nigeria"],["Maniac 2000 - 25th Anniversary Edition","Mark McCabe;MIMI","Pop","Ireland"],["Shinunoga E-Wa","Fujii Kaze","Pop","Japan"],["Radar Love","Golden Earring","Pop","Netherlands"],["What Is Love - 7\" Mix","Haddaway","Pop","Germany"],["Ride","HYBS","Pop","Thailand"],["Derni\u00e8re danse","Indila","Pop","France"],["World A Music","iNi Kamoze","Pop","Jamaica"],["Bad Boys","Inner Circle","Pop","Jamaica"],["Makeba","Jain","Pop","France"],["Dum Dum","Jeff Satur","Pop","Thailand"],["Move Your Feet","Junior Senior","Pop","Denmark"],["Sorry","Justin Bieber","Pop","Canada"],["KICK BACK","Kenshi Yonezu","Pop","Japan"],["In the Air","L.A.B.","Pop","New Zealand"],["Die With A Smile","Lady Gaga;Bruno Mars","Pop","America"],["La solitudine","Laura Pausini","Pop","Italy"],["EL TONTO","Lola Indigo;Quevedo","Pop","Spain"],["Macarena - Bayside Boys Remix","Los Del Rio","Pop","Spain"],["Mambo No. 5 (a Little Bit of...)","Lou Bega","Pop","Germany"],["7 Years","Lukas Graham","Pop","Denmark"],["Billie Jean","Michael Jackson","Pop","America"],["Ayo Technology","Milow","Pop","Belgium"],["Final Song","M\u00d8","Pop","Denmark"],["99 Luftballons","Nena","Pop","Germany"],["Slow Hands","Niall Horan","Pop","Ireland"],["Am I Wrong","Nico & Vinz","Pop","Norway"],["stupid song","Olivia Rodrigo","Pop","America"],["How Bizarre","OMC","Pop","New Zealand"],["Cheerleader","OMI","Pop","Jamaica"],["\u00c7a Plane Pour Moi","Plastic Bertrand","Pop","Belgium"],["FIRE BOY","PP KRIT","Pop","Thailand"],["Bacalhau \u00c0 Portuguesa","Quim Barreiros","Pop","Portugal"],["Pedro","Raffaella Carr\u00e0","Pop","Italy"],["Calm Down","Rema","Pop","Nigeria"],["Espresso","Sabrina Carpenter","Pop","America"],["Temperature","Sean Paul","Pop","Jamaica"],["Chantaje (feat. Maluma)","Shakira;Maluma","Pop","Colombia"],["Stitches","Shawn Mendes","Pop","Canada"],["Venus","Shocking Blue","Pop","Netherlands"],["Chandelier","Sia","Pop","Australia"],["Strangers","Sigrid","Pop","Norway"],["Nothing Compares 2 U","Sin\u00e9ad O'Connor","Pop","Ireland"],["Alors on danse - Radio Edit","Stromae","Pop","Belgium"],["greedy","Tate McRae","Pop","Canada"],["Love Story (Taylor\u2019s Version)","Taylor Swift","Pop","America"],["Blinding Lights","The Weeknd","Pop","Canada"],["HIT ME UP","Timethai","Pop","Thailand"],["Garota de lpanema","Tom Jobim","Pop","Brazil"],["It's Not Unusual","Tom Jones","Pop","United Kingdom"],["Quem Era Eu Sem Ti","Tony Carreira","Pop","Portugal"],["Talking Body","Tove Lo","Pop","Sweden"],["Nah Neh Nah","Vaya Con Dios","Pop","Belgium"],["Soweto","Victony;Tempoe","Pop","Nigeria"],["The Fox (What Does the Fox Say?)","Ylvis","Pop","Norway"],["\u591c\u306b\u99c6\u3051\u308b","YOASOBI","Pop","Japan"],["Lush Life","Zara Larsson","Pop","Sweden"],["Back To Black","Amy Winehouse","R&B","United Kingdom"],["Djadja","Aya Nakamura","R&B","France"],["Rush","Ayra Starr","R&B","Nigeria"],["love nwantiti (ah ah ah)","CKay","R&B","Nigeria"],["understand","OMAH LAY","R&B","Nigeria"],["Free Mind","Tems","R&B","Nigeria"],["Thunderstruck","AC/DC","Rock","Australia"],["Usseewa","Ado","Rock","Japan"],["Complicated","Avril Lavigne","Rock","Canada"],["Summer Of '69","Bryan Adams","Rock","Canada"],["The Final Countdown","Europe","Rock","Sweden"],["I Love You","Fontaines D.C.","Rock","Ireland"],["Great Southern Land","ICEHOUSE","Rock","Australia"],["Are You Gonna Be My Girl","Jet","Rock","Australia"],["Mas, Que Nada!","Jorge Ben Jor","Rock","Brazil"],["Besos En Guerra","Juanes","Rock","Colombia"],["Rosas","La Oreja de Van Gogh","Rock","Spain"],["Stairway to Heaven - Remaster","Led Zeppelin","Rock","United Kingdom"],["ZITTI E BUONI","M\u00e5neskin","Rock","Italy"],["Electric Boogie","Marcia Griffiths","Rock","Jamaica"],["Down Under","Men At Work","Rock","Australia"],["Stolen Dance","Milky Chance","Rock","Germany"],["Wonderwall - Remastered","Oasis","Rock","United Kingdom"],["Para Os Bra\u00e7os da Minha M\u00e3e","Pedro Abrunhosa;Comit\u00e9 Caviar;Caman\u00e9","Rock","Portugal"],["Bohemian Rhapsody - 2011 Remaster","Queen","Rock","United Kingdom"],["A paix\u00e3o (Segundo Nicolau da Viola)","Rui Veloso","Rock","Portugal"],["Rock You Like A Hurricane","Scorpions","Rock","Germany"],["Free Fall (Theme From KinnPorsche The Series)","Slot Machine","Rock","Thailand"],["Chasing Cars","Snow Patrol","Rock","United Kingdom"],["The Less I Know The Better","Tame Impala","Rock","Australia"],["Here Comes The Sun - Remastered 2009","The Beatles","Rock","United Kingdom"],["Lovefool","The Cardigans","Rock","Sweden"],["Breathless","The Corrs","Rock","Ireland"],["Linger - Remastered 2026","The Cranberries","Rock","Ireland"],["Breakeven","The Script","Rock","Ireland"],["\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19\u0e40\u0e25\u0e48\u0e19 \u0e44\u0e21\u0e48\u0e40\u0e25\u0e48\u0e19\u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e19 (Just Being Friendly) [feat. MILLI]","Tilly Birds;MILLI","Rock","Thailand"],["Monsoon","Tokio Hotel","Rock","Germany"],["I Still Haven't Found What I'm Looking For - Remastered 2007","U2","Rock","Ireland"],["seasons","wave to earth","Rock","South Korea"],["A Minha Casinha","Xutos & Pontap\u00e9s","Rock","Portugal"],["Tu jard\u00edn con enanitos","Melendi","Rock","Spain"]]},
+{id:"summersplash",name:"Summer Splash",big:[],small:[],
+col:[["Summer","Calvin Harris","Electronic"],["Stateside + Zara Larsson","PinkPantheress","Pop"],["Uptown Funk","Mark Ronson","Pop"],["Cake By The Ocean","DNCE","Pop"],["Cruel Summer","Taylor Swift","Pop"],["STAY (with Justin Bieber)","The Kid Laroi","Hip Hop"],["Tik Tok","Kesha","Pop"],["Need It (feat. YoungBoy Never Broke Again)","Migos","Hip Hop"],["I Gotta Feelin","Black Eyed Peas","Pop"],["Havana","Camila Cabello","Pop"],["Drop dead","Olivia Rodrigo","Pop"],["Summertime sadness","Lana Del Rey","Pop"],["Watermelon Sugar","Harry Styles","Pop"],["Island In The Sun","Weezer","Rock"],["I'm Good (Blue)","David Guetta","Electronic"],["Choosin' Texas","Ella Langley","Country"],["Pocketful of Sunshine","Natasha Bedingfield","Pop"],["Good Feeling","Flo Rida","Hip Hop"],["Cool For The Summer","Demi Lovato","Pop"],["Adventure of a lifetime","Coldplay","Rock"]]}];
+const EVG={"Hip Hop":"hiphop",Pop:"pop",Indie:"indie",Rock:"rock","Classical & Jazz":"classical",Latin:"latin",Electronic:"electronic","K-Pop":"kpop","R&B":"rnb",Metal:"metal",Country:"country"};
+const evRw=c=>c.big.concat(c.small);
+const evCnt=(cfg,c)=>{const o={};evRw(cfg).forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
+const evSum=(cfg,c)=>evRw(cfg).reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0);a.gems+=c[k]*(v.gems||0);a.n+=c[k];return a},{coins:0,gems:0,n:0});
+function evNormS(cfg,d){
+  d=d||{};
+  const got={};if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{if(d.got[i]&&+i>=0&&+i<cfg.col.length)got[i]=1});
+  return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),start:+d.start||0,got,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0)})):[]};
+}
+/* Leaves = one per reward entry (so they follow the + and − buttons) plus "extra" leaves added without a reward.
+   saved shape: {e:{<eventId>:{c,extra,start,got,history}}}; the older single-event shape {c,start,history} is Soundfall's */
+function evNorm(d){
+  d=d||{};const src=d.e||{soundfall:d};const o={e:{}};
+  EVTS.forEach(cfg=>{o.e[cfg.id]=evNormS(cfg,src[cfg.id])});
+  return o;
+}
+let ev=evNorm(),evDB=true,evSel=LS("tracker.evtab")||EVTS[0].id;
+const evCfg=()=>EVTS.find(x=>x.id===evSel)||EVTS[0];
+const evS=()=>ev.e[evCfg().id];
 const nfmt=n=>n.toLocaleString();
+function evCard(cfg,s,t,[k,n,o]){
+  return `<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}</span></div><div class="val">${s.c[k]}</div><div class="obs">${t.n?(s.c[k]/t.n*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`;
+}
+let evOnly={};try{evOnly=JSON.parse(LS("tracker.evonly")||"{}")||{}}catch(e){}
+function evRenderCol(cfg,s){
+  const total=cfg.col.length,gn=Object.keys(s.got).length;
+  $("evColBox").hidden=!total;
+  $("evColHead").textContent="Collectables ("+gn+"/"+total+")"+(total?" \u00b7 "+Math.round(gn/total*100)+"%":"");
+  const only=!!evOnly[cfg.id],q=$("evSearch").value.trim().toLowerCase(),sm=total>50?" sm":"";
+  $("evOnly").checked=only;$("evCol").classList.toggle("cols3",total>50);
+  let shown=0;
+  const html=cfg.col.map((c,i)=>{
+    if(only&&!s.got[i])return"";
+    if(q&&!c.filter(Boolean).join(" ").toLowerCase().includes(q))return"";
+    shown++;
+    return `<label class="chk evc${sm}${s.got[i]?" on":""}"><input type="checkbox" data-ci="${i}"${s.got[i]?" checked":""}><span class="evt"><b title="${esc(c[0])}">${esc(c[0])}</b><span>${esc(c[1])}${c[3]?" \u00b7 "+esc(c[3]):""}</span></span><span class="pill g g-${EVG[c[2]]||"pop"}">${esc(c[2])}</span></label>`;
+  }).join("");
+  $("evCol").innerHTML=html||'<div class="empty">'+(only&&!q?"Nothing collected yet.":"No matches.")+'</div>';
+  $("evColNote").textContent=(only||q)?"Showing "+shown+" of "+total:"";
+}
+$("evSearch").addEventListener("input",()=>evRenderCol(evCfg(),evS()));
+$("evOnly").addEventListener("change",()=>{evOnly[evCfg().id]=$("evOnly").checked?1:0;LS("tracker.evonly",JSON.stringify(evOnly));evRenderCol(evCfg(),evS())});
 function renderEvent(){
-  const t=evSum(ev.c);
+  if(!EVTS.some(x=>x.id===evSel))evSel=EVTS[0].id;
+  const cfg=evCfg(),s=evS(),t=evSum(cfg,s.c);
+  $("evTabs").innerHTML=EVTS.map(x=>`<button type="button" data-ev="${x.id}"${x.id===cfg.id?' class="on"':""}>${esc(x.name)}</button>`).join("");
   $("evCoins").textContent=nfmt(t.coins);$("evGems").textContent=nfmt(t.gems);
-  $("evOdds").innerHTML=EVT.map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}</td></tr>`).join("");
-  $("evGrid").innerHTML=EVT.map(([k,n,o])=>`<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}</span></div><div class="val">${ev.c[k]}</div><div class="obs">${t.n?(ev.c[k]/t.n*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`).join("");
+  $("evOdds").innerHTML=evRw(cfg).map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}</td></tr>`).join("");
+  $("evGrid").innerHTML=cfg.big.map(r=>evCard(cfg,s,t,r)).join("");
+  $("evGridSm").innerHTML=cfg.small.map(r=>evCard(cfg,s,t,r)).join("");
   $("evTot").textContent="Total: "+t.n;
-  $("evHistSum").textContent="History"+(ev.history.length?" ("+ev.history.length+")":"");
-  $("evHist").innerHTML=ev.history.map((h,i)=>{
-    const x=evSum(h.c);
-    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${EVT.map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${x.n}</b></div><div class="hrow"><span>Total coins</span><b>${nfmt(x.coins)}</b></div><div class="hrow"><span>Total gems</span><b>${nfmt(x.gems)}</b></div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+  $("evLeaves").textContent=nfmt(t.n+s.extra);
+  $("evLeavesNote").textContent=t.n+" from rewards"+(s.extra?" + "+s.extra+" without a reward":"");
+  const hasRw=evRw(cfg).length>0;
+  $("evRewards").hidden=!hasRw;$("evHistBox").hidden=!hasRw;
+  evRenderCol(cfg,s);
+  $("evHistSum").textContent="History"+(s.history.length?" ("+s.history.length+")":"");
+  $("evHist").innerHTML=s.history.map((h,i)=>{
+    const x=evSum(cfg,h.c);
+    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${evRw(cfg).map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${x.n}</b></div><div class="hrow"><span>Leaves</span><b>${x.n+h.extra}</b></div><div class="hrow"><span>Total coins</span><b>${nfmt(x.coins)}</b></div><div class="hrow"><span>Total gems</span><b>${nfmt(x.gems)}</b></div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
 }
 function saveEvent(){
   LS("tracker.event",JSON.stringify(ev));
@@ -1557,25 +1669,39 @@ async function loadEvent(){
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:2,data:evNorm(local)},{onConflict:"user_id,id"}))}
   ev=evNorm(d);renderEvent();
 }
-$("evGrid").addEventListener("click",ev2=>{
+$("evTabs").addEventListener("click",ev2=>{
+  const b=ev2.target.closest("button[data-ev]");if(!b)return;
+  evSel=b.dataset.ev;LS("tracker.evtab",evSel);$("evSearch").value="";renderEvent();
+});
+["evGrid","evGridSm"].forEach(id=>$(id).addEventListener("click",ev2=>{
   const b=ev2.target.closest("button");if(!b)return;
-  const k=b.dataset.k,d=+b.dataset.d;
-  if(d<0&&ev.c[k]<=0)return;
-  if(!ev.start)ev.start=Date.now();
-  ev.c[k]+=d;
+  const s=evS(),k=b.dataset.k,d=+b.dataset.d;
+  if(d<0&&s.c[k]<=0)return;
+  if(!s.start)s.start=Date.now();
+  s.c[k]+=d;
+  saveEvent();renderEvent();
+}));
+$("evLeafAdd").onclick=()=>{const s=evS();if(!s.start)s.start=Date.now();s.extra++;saveEvent();renderEvent()};
+$("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEvent();renderEvent()};
+$("evCol").addEventListener("change",ev2=>{
+  const el=ev2.target.closest("input[data-ci]");if(!el)return;
+  const s=evS();
+  if(el.checked)s.got[el.dataset.ci]=1;else delete s.got[el.dataset.ci];
   saveEvent();renderEvent();
 });
 $("evReset").onclick=()=>{
-  if(!evSum(ev.c).n)return;
+  const cfg=evCfg(),s=evS();
+  if(!evSum(cfg,s.c).n&&!s.extra)return;
   ask("Save the current counts to history and reset them?",()=>{
-    const e={t:Date.now(),start:ev.start,c:{...ev.c}};
-    ev=evNorm({start:0,history:[e,...ev.history]});saveEvent();renderEvent();
+    const h={t:Date.now(),start:s.start,c:{...s.c},extra:s.extra};
+    ev.e[cfg.id]={c:evCnt(cfg),extra:0,start:0,got:s.got,history:[h,...s.history]};
+    saveEvent();renderEvent();
   });
 };
 $("evHist").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-hdel]");if(!b)return;
-  const i=+b.dataset.hdel;
-  ask("Delete this history entry?",()=>{ev.history.splice(i,1);saveEvent();renderEvent()});
+  const i=+b.dataset.hdel,s=evS();
+  ask("Delete this history entry?",()=>{s.history.splice(i,1);saveEvent();renderEvent()});
 });
 
 /* ---------- gempic tracker ---------- */
@@ -2397,7 +2523,7 @@ $("bkImport").onclick=()=>{
   ask("Replace everything in the database with this data?",async()=>{
     const msg=$("bkMsg");msg.textContent="Importing...";
     const sh=o.shiny,n=v=>Number(v)||0,pr=(v,d)=>v===undefined?d:n(v);
-    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),start_date:sh.start||"2026-04-11",one_one_price:pr(sh.oneOnePrice,1000),common_price:pr(sh.commonPrice,4000),uncommon_price:pr(sh.uncommonPrice,6000),rare_price:pr(sh.rarePrice,8000),cost_each:pr(sh.costEach,1250),updated_at:new Date().toISOString()},{onConflict:"user_id,id"}));
+    let r=await track(sb.from("shiny_state").upsert({id:1,bought:n(sh.bought),two_to_one:n(sh.twoToOne),one_one:n(sh.oneOne),commons:n(sh.commons),uncommons:n(sh.uncommons),rares:n(sh.rares),misc:n(sh.misc),...(sh.start?{start_date:sh.start}:{}),one_one_price:pr(sh.oneOnePrice,1000),common_price:pr(sh.commonPrice,4000),uncommon_price:pr(sh.uncommonPrice,6000),rare_price:pr(sh.rarePrice,8000),cost_each:pr(sh.costEach,1250),updated_at:new Date().toISOString()},{onConflict:"user_id,id"}));
     if(!r){msg.textContent="Import failed at the numbers step.";return}
     r=await track(sb.from("shiny_log").delete().gt("id",0));
     if(!r){msg.textContent="Import failed clearing the log.";return}
