@@ -111,15 +111,10 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 .mks.all{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.35;margin-top:2px}
 .mk.open .mks.all{display:none}
 #tab-map{max-width:1000px;margin:0 auto}
-#agTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:6px}
-#agTop .card{padding:12px 8px;text-align:center;border-top:3px solid var(--ac)}
-#agTop .lbl{font-size:12px;font-weight:600;margin-bottom:4px}
-#agTop .val{font-size:clamp(18px,5vw,28px);font-weight:700;line-height:1.15}
 #agList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 @media (max-width:640px){#agList{grid-template-columns:1fr}}
 .mkh.nc{grid-template-columns:auto minmax(0,1fr) auto;cursor:default}
 .mkh.nc:hover{background:none}
-.agg{margin-top:8px}
 .agf{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .agf button{margin:0;padding:6px 10px;font-size:13px}
 .agf button.eq{border-color:var(--pos);color:var(--pos);box-shadow:0 0 0 1px var(--pos)}
@@ -128,15 +123,8 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 .agf button.dir{border-color:var(--ac);color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
 .agtwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
 @media (max-width:640px){.agtwo{grid-template-columns:1fr}}
-.agm{cursor:pointer}
-.agm .mkt{color:var(--pos)}
-.agm .mkh.nc{cursor:pointer}
-.agm:hover{border-color:var(--pos)}
-.agm.hi{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 8%,var(--card))}
 .agy{font-size:12px;font-weight:400;color:var(--mut)}
 .agplus{width:34px;height:34px;border:2px solid var(--pos);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--pos);font-size:20px;font-weight:700;line-height:1}
-.agg{padding:22px 16px;margin-top:10px}
-@media (min-width:641px){#agGuesses .agg{width:80%;box-sizing:border-box}}
 .agh{display:flex;align-items:center;gap:8px}
 .agh .t{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
 .agh .ctl{display:flex;gap:6px}
@@ -144,7 +132,7 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
 .agp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
 @media (max-width:640px){.agp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.agp{background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:16px 10px}
+.agp{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:12px 10px}
 .agp.ok{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 10%,var(--bg))}
 .agph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .agph span{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
@@ -180,28 +168,59 @@ input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
 #qtFRar button,#qtFTyp button{background:var(--card)}
 #qtFRar button:not(.on) .pill,#qtFTyp button:not(.on) .pill{opacity:.5}
 #qtFRar button.on,#qtFTyp button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
-}
 .arGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
-#arLy{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:14px}
-#arLy .box{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;width:min(560px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden}
-#arLy .hd{padding:12px 14px;border-bottom:1px solid var(--bd)}
-#arLy .hd strong{display:block;font-size:15px;overflow-wrap:anywhere}
-#arLy .hd .sub{font-size:12px;color:var(--mut);margin-top:2px}
-#arLy .bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
-#arLy .bar button{font:inherit;font-size:12px;font-weight:600;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:4px 10px;cursor:pointer}
-#arLy .bar button.on{background:var(--ac);border-color:var(--ac);color:#fff}
-#arLy pre{margin:0;padding:14px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:14px;line-height:1.5}
+#arLy{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.84);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;padding:16px}
+#arLy .box{--t1:#3a3d42;--t2:#17181a;background:linear-gradient(180deg,var(--t1),var(--t2));color:#fff;border:1px solid rgba(255,255,255,.14);position:relative;border-radius:18px;width:min(760px,100%);max-height:100%;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.6)}
+#arLy .bg{position:absolute;inset:0;background:center/cover no-repeat;opacity:.1;filter:blur(3px);transform:scale(1.08);pointer-events:none}
+#arLy .box>*:not(.bg){position:relative;z-index:1}
+#arLy .hd{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(0,0,0,.18)}
+#arLy .hd .cv{flex:none;width:68px;height:68px;border-radius:8px;background:rgba(0,0,0,.35) center/cover no-repeat;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+#arLy .hd .tx{flex:1;min-width:0}
+#arLy .hd strong{display:block;font-size:22px;line-height:1.2;overflow-wrap:anywhere}
+#arLy .hd .sub{font-size:14px;color:rgba(255,255,255,.72);margin-top:3px;overflow-wrap:anywhere}
+#arLy .hd .x{flex:none;margin:0;width:38px;height:38px;border-radius:50%;padding:0;font-size:18px;line-height:1;color:#fff;background:rgba(255,255,255,.16);border:0;cursor:pointer}
+#arLy .hd .x:hover{background:rgba(255,255,255,.28)}
+#arLy .bar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 18px;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+#arLy .bar button{margin:0;font:inherit;font-size:13px;font-weight:600;color:#fff;background:rgba(255,255,255,.14);border:0;border-radius:999px;padding:6px 14px;cursor:pointer}
+#arLy .bar button:hover{background:rgba(255,255,255,.26)}
+#arLy .bar button.on{background:#fff;color:#111}
+#arLy .bar .gap{flex:1}
+#arLy pre{margin:0;padding:22px 24px 40px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:clamp(18px,2.9vw,25px);font-weight:700;line-height:1.4;text-align:center;text-shadow:0 1px 8px rgba(0,0,0,.35);scrollbar-width:thin}
+#arLy pre.msg{font-size:18px;font-weight:500;color:rgba(255,255,255,.8)}
 .artabs{display:flex;gap:6px;margin:10px 0 4px}
 .artabs button{font:inherit;font-size:13px;font-weight:600;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:5px 14px;cursor:pointer}
 .artabs button.on{background:var(--ac);border-color:var(--ac);color:#fff}
 .arc{background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden;min-width:0}
 .arm{position:relative;aspect-ratio:1;background:#000}
 .arm img,.arm video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arm video{opacity:0;transition:opacity .3s}.arm video.on{opacity:1}
+.arc{content-visibility:auto;contain-intrinsic-size:auto 300px}
 .arm .cvb{position:absolute;left:6px;bottom:6px;font-size:10px;font-weight:700;background:rgba(0,0,0,.65);color:#fff;border-radius:6px;padding:1px 6px;z-index:2}
 .arb{padding:8px 10px 10px}
 .arb strong{display:block;font-size:14px;overflow-wrap:anywhere}
 .arb .sub{font-size:12px;color:var(--mut);margin:2px 0 6px;overflow-wrap:anywhere}
-.arb .lk{display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
+.arSort{font:inherit;font-size:13px;font-weight:600;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:5px 8px;margin-left:auto;cursor:pointer;width:auto}
+.arbar{grid-column:1/-1;display:flex;gap:6px}.arbar button{margin:0}
+.arAl{grid-column:1/-1;margin:0;padding:0;background:var(--card);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+.arAl>summary{display:flex;align-items:center;gap:14px;padding:12px 14px;text-transform:none;letter-spacing:0;font-size:13px;font-weight:400;color:var(--tx);list-style:none;cursor:pointer}
+.arAl>summary::-webkit-details-marker{display:none}
+.arAl>summary:hover{background:rgba(127,127,127,.08)}
+.arAl .alim{flex:none;width:64px;height:64px;border-radius:6px;background:#000;overflow:hidden}
+.arAl .alim img{width:100%;height:100%;object-fit:cover;display:block}
+.arAl .alin{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:3px}
+.arAl .alin strong{font-size:16px;overflow-wrap:anywhere}
+.arAl .altype{font-size:10px;font-weight:700;letter-spacing:.08em;background:rgba(127,127,127,.22);border-radius:4px;padding:1px 7px}
+.arAl .alrow{display:flex;gap:8px;font-size:12px}.arAl .alrow span{color:var(--mut);min-width:58px}.arAl .alrow b{font-weight:600}
+.arAl .alchev{flex:none;width:9px;height:9px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(45deg);transition:transform .2s;margin-right:4px}
+.arAl[open] .alchev{transform:rotate(-135deg)}
+.arIn{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;padding:0 14px 14px}
+.arh{grid-column:1/-1;display:flex;align-items:baseline;gap:8px;margin:10px 0 0;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.arh strong{font-size:15px;overflow-wrap:anywhere}.arh span{font-size:12px;color:var(--mut)}
+.arb .lk{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px}
+.arb .lk button{margin:0}
+.arb .lk a{display:inline-block;line-height:1.4}
+.arm{max-height:260px}
+.arm video{background:#000}
 .arb .lk a,.arb .lk button{font:inherit;font-size:12px;font-weight:600;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:6px;padding:3px 9px;text-decoration:none;cursor:pointer}
 .arb .lk a:hover,.arb .lk button:hover{border-color:var(--ac);color:var(--ac)}
 .arb .lk .cvfs{background:var(--ac);border-color:var(--ac);color:#fff}
@@ -257,7 +276,7 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .rt{cursor:pointer;margin:0!important;flex:none;font-size:11px;padding:0 7px 0 5px;gap:3px;font-family:inherit}
 .rt.none{background:transparent;color:var(--mut);border:1.5px dashed var(--bd);padding:0 7px}
 .rt.none::before{display:none}
-#tab-pass,#tab-event{max-width:860px;margin:0 auto}
+#tab-pass,#tab-event,#tab-map{max-width:860px;margin:0 auto}
 #tab-profile{max-width:860px;margin:0 auto}
 #tab-profile h2{margin:0 0 2px}
 #tab-profile h3{margin:18px 0 8px;font-size:16px}
@@ -295,8 +314,8 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .mkrow select{flex:none;font-size:14px;padding:7px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);max-width:42%}
 .mkrow button{margin:0;white-space:nowrap}
 @media (max-width:520px){.mkrow{flex-wrap:wrap}.mkrow input{flex:1 1 100%}.mkrow select{flex:1 1 0;max-width:none}}
-#agHints .mkrow,#agHints .empty{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:8px 10px}
-#agHints .empty{margin-top:8px}
+#agHints .mkrow,#agHints .empty{background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);border-radius:12px;padding:10px}
+#agHints .empty{margin-top:0;color:var(--mut);font-size:14px}
 .mkf,.mkcats{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
 .mkcats{margin:10px 0 2px}
 .mkf button,.mkcats button{margin:0;padding:2px 8px 2px 3px;border-radius:999px;background:transparent;border:2px solid transparent;display:inline-flex;align-items:center;gap:6px;font-size:12px;cursor:pointer}
@@ -323,15 +342,6 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #passOdds tr:last-child td,#evOdds tr:last-child td{border-bottom:0}
 #passOdds td:last-child,#evOdds td:last-child{text-align:right;font-weight:600}
 #passGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-#evGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:520px){#passGrid,#evGrid{grid-template-columns:1fr}}
-#evGridSm{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-#evGridSm .card{padding:8px 10px}
-#evGridSm .pc .nm{flex-direction:column;gap:0;font-size:12px}
-#evGridSm .pc .val{font-size:22px;margin:3px 0 1px}
-#evGridSm .pc .obs{font-size:11px;margin-bottom:4px}
-#evGridSm .steps{margin-top:4px}
-#evGridSm .steps button{padding:5px 0;font-size:15px}
 .evc{margin:6px 0;padding:10px 12px;background:var(--card);border:1px solid var(--bd);border-radius:10px;gap:12px}
 .evc.on{border-color:var(--ac)}
 .evc .evt{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
@@ -367,16 +377,6 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #evTotals .lbl,#ulTotals .lbl{font-size:16px;font-weight:600;margin:0}
 #evTotals .big,#ulTotals .big{font-size:44px;font-weight:700;line-height:1.1;margin:6px 0 14px}
 #evTotals .big:last-of-type,#ulTotals .big:last-of-type{margin-bottom:0}
-#ulOdds{width:100%;border-collapse:collapse}
-#ulOdds th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
-#ulOdds td{padding:5px 4px;border-top:1px solid var(--bd);font-size:13px}
-#ulOdds th:nth-child(n+2),#ulOdds td:nth-child(n+2){text-align:right}
-#ulOdds td:last-child{font-weight:600}
-#ulGrid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
-.ue{padding:8px 10px}
-.ue.on{border-color:var(--ac)}
-.ue .lbl{margin-bottom:4px}
-.ue select{width:100%;box-sizing:border-box;font-size:14px;padding:8px 6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)}
 .pc .nm{font-size:13px;font-weight:600;color:var(--mut);display:flex;justify-content:space-between;gap:8px}
 .pc .val{font-size:34px;margin:6px 0 2px}
 .pc .obs{font-size:12px;color:var(--mut);margin-bottom:6px}
@@ -568,15 +568,6 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 .ver .vh span{font-size:12px;color:var(--mut)}
 .ver ul{margin:4px 0 0;padding-left:18px}
 .ver li{margin:2px 0;line-height:1.35}
-#evView{margin:0 0 14px}
-#evView button{padding:6px;font-size:13px}
-#evView button[data-v="info"]{flex:.55;font-size:12px}
-#evTotals{margin-top:10px}
-#evTotals .evstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;text-align:center}
-#evTotals .evstats .lbl{font-size:13px}
-#evTotals .evstats .big{font-size:24px;margin:4px 0 0;overflow-wrap:anywhere}
-#evTotals .note{text-align:center;margin-bottom:8px}
-@media (min-width:521px){#evTotals .evstats .big{font-size:30px}}
 #evPaneInfo .card{margin-top:10px}
 #evPaneInfo .card:first-child{margin-top:0}
 #evChips:not(:empty){margin-bottom:6px}
@@ -665,6 +656,21 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 #tab-epic #setMgr:not([open]){display:none}
 #tab-epic #setMgr>summary{display:none}
 @media (max-width:520px){#tab-epic .epSets button{height:42px;padding:0 12px;font-size:13px}}
+#tab-artist .epSets{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 14px}
+#tab-artist .epSets button{margin:0;height:46px;padding:0 18px;border-radius:12px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;background:var(--card);border:1px solid var(--bd);color:var(--tx);flex:0 1 auto}
+#tab-artist .epSets button svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-artist .epSets button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-artist .epSets button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));box-shadow:0 0 0 1px var(--ac),0 4px 16px color-mix(in srgb,var(--ac) 30%,transparent)}
+#tab-artist .epSets .dash{border-style:dashed;color:var(--mut);font-weight:600;text-transform:none;letter-spacing:0}
+#tab-artist .epSets .man{margin-left:auto;font-weight:600;text-transform:none;letter-spacing:0}
+#tab-artist .epSets .man.on{background:var(--card);box-shadow:none}
+@media (max-width:520px){#tab-artist .epSets button{height:42px;padding:0 12px;font-size:13px}}
+#tab-artist #arPresets{display:contents}
+#tab-artist .epSets .setn{max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tab-artist #arPMgr{margin:0 0 14px;padding:12px;border-radius:12px}
+#tab-artist #arPMgr:not([open]){display:none}
+#tab-artist #arPMgr>summary{display:none}
+#tab-artist #arPMgr input{margin-bottom:8px}
 
 /* stat cards */
 #tab-epic #epTop{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
@@ -760,85 +766,211 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 /* ---------- gempic tracker (redesign: matches home + shiny + epic) ---------- */
 #tab-gempic{max-width:960px;margin:0 auto}
 #gpTop,#qtTop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
-:is(#tab-gempic,#tab-quest) .gc{--c:var(--ac);position:relative;box-sizing:border-box;min-width:0;overflow:hidden;padding:16px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i s";column-gap:14px;align-items:center;align-content:center;transition:border-color .2s,box-shadow .2s}
-@media (hover:hover){:is(#tab-gempic,#tab-quest) .gc:hover{border-color:var(--c);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}}
-:is(#tab-gempic,#tab-quest) .gc .sci{--c:inherit;grid-area:i;width:52px;height:52px;border-radius:14px}
-:is(#tab-gempic,#tab-quest) .gc .sci svg{width:28px;height:28px}
-:is(#tab-gempic,#tab-quest) .gc .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
-:is(#tab-gempic,#tab-quest) .gc .scv{grid-area:v;margin-top:2px;font-size:clamp(26px,4.4vw,34px);color:var(--tx)}
-:is(#tab-gempic,#tab-quest) .gc .scs{grid-area:s;margin-top:2px;font-size:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc{--c:var(--ac);position:relative;box-sizing:border-box;min-width:0;overflow:hidden;padding:16px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i s";column-gap:14px;align-items:center;align-content:center;transition:border-color .2s,box-shadow .2s}
+@media (hover:hover){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc:hover{border-color:var(--c);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .sci{--c:inherit;grid-area:i;width:52px;height:52px;border-radius:14px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .sci svg{width:28px;height:28px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .scv{grid-area:v;margin-top:2px;font-size:clamp(26px,4.4vw,34px);color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .scs{grid-area:s;margin-top:2px;font-size:12px}
 @media (max-width:700px){#gpTop,#qtTop{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#gpTop .gc:last-child,#qtTop .gc:last-child{grid-column:1/-1}}
 @media (max-width:520px){
-:is(#tab-gempic,#tab-quest) .gc{padding:12px;grid-template-areas:"i l" "v v" "s s";column-gap:10px}
-:is(#tab-gempic,#tab-quest) .gc .sci{width:34px;height:34px;border-radius:10px}
-:is(#tab-gempic,#tab-quest) .gc .sci svg{width:20px;height:20px}
-:is(#tab-gempic,#tab-quest) .gc .scl{font-size:12px;font-weight:600;line-height:1.2}
-:is(#tab-gempic,#tab-quest) .gc .scv{margin-top:8px;font-size:clamp(22px,7vw,28px)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc{padding:12px;grid-template-areas:"i l" "v v" "s s";column-gap:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .sci{width:34px;height:34px;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .sci svg{width:20px;height:20px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .scl{font-size:12px;font-weight:600;line-height:1.2}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gc .scv{margin-top:8px;font-size:clamp(22px,7vw,28px)}
 }
 
-:is(#tab-gempic,#tab-quest) .gsec{margin-top:14px;padding:16px;border-radius:14px}
-:is(#tab-gempic,#tab-quest) .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px;min-width:0}
-:is(#tab-gempic,#tab-quest) .gh .sci{width:42px;height:42px;border-radius:12px}
-:is(#tab-gempic,#tab-quest) .gh .gt{min-width:0;flex:1}
-:is(#tab-gempic,#tab-quest) .gh .gt b{display:block;font-size:17px}
-:is(#tab-gempic,#tab-quest) .gh .gt span{display:block;font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
-:is(#tab-gempic,#tab-quest) .gh .gx{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none}
-@media (max-width:520px){:is(#tab-gempic,#tab-quest) .gsec{padding:12px}:is(#tab-gempic,#tab-quest) .gh .gx .gtxt{display:none}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gsec{margin-top:14px;padding:16px;border-radius:14px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px;min-width:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .sci{width:42px;height:42px;border-radius:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .gt{min-width:0;flex:1}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .gt b{display:block;font-size:17px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .gt span{display:block;font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .gx{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gsec{padding:12px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gh .gx .gtxt{display:none}}
 
 /* settings panels */
-:is(#tab-gempic,#tab-quest) .gpan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.3fr);gap:12px}
-@media (max-width:820px){:is(#tab-gempic,#tab-quest) .gpan{grid-template-columns:1fr}}
-:is(#tab-gempic,#tab-quest) .gp1{box-sizing:border-box;min-width:0;margin:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,background .15s,box-shadow .15s}
-:is(#tab-gempic,#tab-quest) .gp1>.gl{font-size:13px;font-weight:500;color:var(--mut);margin-bottom:10px}
-:is(#tab-gempic,#tab-quest) .gcost{display:flex;gap:8px}
-:is(#tab-gempic,#tab-quest) .gcost input{flex:1;width:auto;min-width:0;height:46px;padding:0 14px;font-size:20px;font-weight:600;border-radius:10px}
-:is(#tab-gempic,#tab-quest) .gcost button{margin:0;flex:none;width:46px;height:46px;padding:0;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:600;line-height:1}
-:is(#tab-gempic,#tab-quest) .gcost .gplus{background:var(--ac);color:#fff;border-color:var(--ac)}
-:is(#tab-gempic,#tab-quest) .gcost .gplus:hover{filter:brightness(1.1)}
-:is(#tab-gempic,#tab-quest) label.grr{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--tx);font-size:15px}
-:is(#tab-gempic,#tab-quest) label.grr:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
-:is(#tab-gempic,#tab-quest) label.grr:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
-:is(#tab-gempic,#tab-quest) .grr input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
-:is(#tab-gempic,#tab-quest) .grr input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
-:is(#tab-gempic,#tab-quest) .grr input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-:is(#tab-gempic,#tab-quest) .grr b{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
-:is(#tab-gempic,#tab-quest) .grr small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
-:is(#tab-gempic,#tab-quest) .gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-:is(#tab-gempic,#tab-quest) .gq button{margin:0;height:46px;padding:0;border-radius:10px;font-size:15px;font-weight:600}
-:is(#tab-gempic,#tab-quest) .gq button.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gpan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.3fr);gap:12px}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gpan{grid-template-columns:1fr}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gp1{box-sizing:border-box;min-width:0;margin:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,background .15s,box-shadow .15s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gp1>.gl{font-size:13px;font-weight:500;color:var(--mut);margin-bottom:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gcost{display:flex;gap:8px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gcost input{flex:1;width:auto;min-width:0;height:46px;padding:0 14px;font-size:20px;font-weight:600;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gcost button{margin:0;flex:none;width:46px;height:46px;padding:0;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:600;line-height:1}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gcost .gplus{background:var(--ac);color:#fff;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gcost .gplus:hover{filter:brightness(1.1)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) label.grr{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--tx);font-size:15px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) label.grr:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) label.grr:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .grr input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .grr input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .grr input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .grr b{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .grr small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gq button{margin:0;height:46px;padding:0;border-radius:10px;font-size:15px;font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gq button.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
 
 /* action row */
-:is(#tab-gempic,#tab-quest) .gact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:12px;margin-top:12px}
-:is(#tab-gempic,#tab-quest) .gb{margin:0;box-sizing:border-box;min-height:48px;padding:8px 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:600;line-height:1.2;text-align:center;background:color-mix(in srgb,var(--bg) 70%,var(--card));color:var(--tx);border:1px solid var(--bd)}
-:is(#tab-gempic,#tab-quest) .gb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-gempic,#tab-quest) .gb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
-:is(#tab-gempic,#tab-quest) .gb.go{font-size:16px;color:#fff;border-color:#8b5cf6;background:linear-gradient(135deg,#8b5cf6,#6d4ae8);box-shadow:0 4px 16px color-mix(in srgb,#8b5cf6 38%,transparent)}
-:is(#tab-gempic,#tab-quest) .gb.go:hover{filter:brightness(1.12)}
-:is(#tab-gempic,#tab-quest) .gb.hit svg{color:#c084fc}
-:is(#tab-gempic,#tab-quest) .gb:disabled{opacity:.5;cursor:not-allowed}
-:is(#tab-gempic,#tab-quest) .gb.sm{min-height:38px;padding:0 14px;font-size:13px;border-radius:10px}
-:is(#tab-gempic,#tab-quest) .gb.sq{width:38px;padding:0}
-:is(#tab-gempic,#tab-quest) .gb.sq svg{transition:transform .2s}
-:is(#tab-gempic,#tab-quest) .gb.sq[aria-expanded="false"] svg{transform:rotate(180deg)}
-@media (max-width:820px){:is(#tab-gempic,#tab-quest) .gact{grid-template-columns:1fr 1fr}:is(#tab-gempic,#tab-quest) .gb.go{grid-column:1/-1;order:-1}:is(#tab-gempic,#tab-quest) .gb.hit{grid-column:1/-1;order:3}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:12px;margin-top:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb{margin:0;box-sizing:border-box;min-height:48px;padding:8px 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:600;line-height:1.2;text-align:center;background:color-mix(in srgb,var(--bg) 70%,var(--card));color:var(--tx);border:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.go{font-size:16px;color:#fff;border-color:#8b5cf6;background:linear-gradient(135deg,#8b5cf6,#6d4ae8);box-shadow:0 4px 16px color-mix(in srgb,#8b5cf6 38%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.go:hover{filter:brightness(1.12)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.hit svg{color:#c084fc}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb:disabled{opacity:.5;cursor:not-allowed}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.sm{min-height:38px;padding:0 14px;font-size:13px;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.sq{width:38px;padding:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.sq svg{transition:transform .2s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.sq[aria-expanded="false"] svg{transform:rotate(180deg)}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gact{grid-template-columns:1fr 1fr}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.go{grid-column:1/-1;order:-1}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gb.hit{grid-column:1/-1;order:3}}
 
 /* tables + pills */
-:is(#tab-gempic,#tab-quest) .gtbl{border:1px solid var(--bd);border-radius:12px;overflow:auto;max-width:100%;background:color-mix(in srgb,var(--bg) 70%,var(--card))}
-:is(#tab-gempic,#tab-quest) #gpLogBody .gtbl{max-height:340px}
-:is(#tab-gempic,#tab-quest) .gtbl table{width:100%;border-collapse:collapse}
-:is(#tab-gempic,#tab-quest) .gtbl th{position:sticky;top:0;z-index:1;padding:11px 16px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;white-space:nowrap;background:color-mix(in srgb,var(--mut) 13%,var(--card));border:0}
-:is(#tab-gempic,#tab-quest) .gtbl td{padding:10px 16px;font-size:14px;text-align:left;white-space:nowrap;border:0;border-top:1px solid var(--bd)}
-:is(#tab-gempic,#tab-quest) .gtbl .c{text-align:center}:is(#tab-gempic,#tab-quest) .gtbl .r{text-align:right}
-:is(#tab-gempic,#tab-quest) .gtbl td.b{font-weight:600}
-:is(#tab-gempic,#tab-quest) .gtbl tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
-:is(#tab-gempic,#tab-quest) .gtbl td.gempty{text-align:center;color:var(--mut);padding:20px 16px;white-space:normal}
-:is(#tab-gempic,#tab-quest) .gtbl .x{margin:0!important}
-:is(#tab-gempic,#tab-quest) .rrm{display:none}
-:is(#tab-gempic,#tab-quest) .gres{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:13px;font-weight:500;background:color-mix(in srgb,var(--mut) 16%,var(--bg));color:var(--tx)}
-:is(#tab-gempic,#tab-quest) .gres::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
-:is(#tab-gempic,#tab-quest) .gres.hit{background:color-mix(in srgb,#34d399 18%,var(--bg));color:#34d399;font-weight:600}
-:is(#tab-gempic,#tab-quest) .gres.hit::before{background:#34d399}
-@media (max-width:520px){:is(#tab-gempic,#tab-quest) .gtbl th,:is(#tab-gempic,#tab-quest) .gtbl td{padding:9px 8px;font-size:12.5px}:is(#tab-gempic,#tab-quest) #gpLog td:nth-child(2){white-space:normal;min-width:84px}:is(#tab-gempic,#tab-quest) #gpLog .rrc{display:none}:is(#tab-gempic,#tab-quest) #gpLog .rrm{display:inline;color:var(--ac)}:is(#tab-gempic,#tab-quest) #gpLog th{letter-spacing:.04em}:is(#tab-gempic,#tab-quest) .gres{font-size:12px;padding:2px 9px 2px 7px;gap:5px}:is(#tab-gempic,#tab-quest) .gres::before{width:7px;height:7px}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl{border:1px solid var(--bd);border-radius:12px;overflow:auto;max-width:100%;background:color-mix(in srgb,var(--bg) 70%,var(--card))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) #gpLogBody .gtbl{max-height:340px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl table{width:100%;border-collapse:collapse}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl th{position:sticky;top:0;z-index:1;padding:11px 16px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;white-space:nowrap;background:color-mix(in srgb,var(--mut) 13%,var(--card));border:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl td{padding:10px 16px;font-size:14px;text-align:left;white-space:nowrap;border:0;border-top:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl .c{text-align:center}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl .r{text-align:right}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl td.b{font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl td.gempty{text-align:center;color:var(--mut);padding:20px 16px;white-space:normal}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl .x{margin:0!important}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .rrm{display:none}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:13px;font-weight:500;background:color-mix(in srgb,var(--mut) 16%,var(--bg));color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres.hit{background:color-mix(in srgb,#34d399 18%,var(--bg));color:#34d399;font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres.hit::before{background:#34d399}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl th,:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gtbl td{padding:9px 8px;font-size:12.5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) #gpLog td:nth-child(2){white-space:normal;min-width:84px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) #gpLog .rrc{display:none}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) #gpLog .rrm{display:inline;color:var(--ac)}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) #gpLog th{letter-spacing:.04em}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres{font-size:12px;padding:2px 9px 2px 7px;gap:5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map) .gres::before{width:7px;height:7px}}
+
+/* ---------- pass tracker (redesign: same building blocks as gempic) ---------- */
+:is(#tab-pass,#tab-event,#tab-map){max-width:960px;margin:0 auto}
+:is(#tab-pass,#tab-event,#tab-map) .pTabs{display:flex;gap:10px;margin:4px 0 14px}
+:is(#tab-pass,#tab-event,#tab-map) .pTabs[hidden]{display:none}
+:is(#tab-pass,#tab-event,#tab-map) .pTabs button{flex:1;margin:0;height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:700;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+:is(#tab-pass,#tab-event,#tab-map) .pTabs button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-pass,#tab-event,#tab-map) .pTabs button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));box-shadow:0 0 0 1px var(--ac),0 4px 16px color-mix(in srgb,var(--ac) 30%,transparent)}
+#passTop,#evTop,#agTop{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:14px}
+@media (max-width:700px){#passTop,#evTop,#agTop{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}:is(#passTop,#evTop,#agTop) .gc:nth-child(odd):last-child{grid-column:1/-1}}
+
+/* settings switches */
+:is(#tab-pass,#tab-event,#tab-map) .pset{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:820px){:is(#tab-pass,#tab-event,#tab-map) .pset{grid-template-columns:1fr}}
+:is(#tab-pass,#tab-event,#tab-map) label.pSw{position:relative;display:flex;align-items:center;gap:14px;margin:0;cursor:pointer;font-size:15px;color:var(--tx)}
+:is(#tab-pass,#tab-event,#tab-map) label.pSw:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-pass,#tab-event,#tab-map) label.pSw:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
+:is(#tab-pass,#tab-event,#tab-map) .pSw input{position:absolute;opacity:0;width:1px;height:1px;margin:0;padding:0;pointer-events:none}
+:is(#tab-pass,#tab-event,#tab-map) .pSw .sw{position:relative;flex:none;width:46px;height:26px;border-radius:999px;background:color-mix(in srgb,var(--mut) 35%,var(--bg));transition:background .15s}
+:is(#tab-pass,#tab-event,#tab-map) .pSw .sw::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+:is(#tab-pass,#tab-event,#tab-map) .pSw input:checked+.sw{background:var(--ac)}
+:is(#tab-pass,#tab-event,#tab-map) .pSw input:checked+.sw::after{transform:translateX(20px)}
+:is(#tab-pass,#tab-event,#tab-map) .pSw input:focus-visible+.sw{outline:2px solid var(--ac);outline-offset:2px}
+:is(#tab-pass,#tab-event,#tab-map) .pSw .pst{min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) .pSw .pst b{display:block;font-size:15px;font-weight:600;line-height:1.3}
+:is(#tab-pass,#tab-event,#tab-map) .pSw .pst small{display:block;font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.35}
+
+/* item badges */
+:is(#tab-pass,#tab-event,#tab-map) .pit{--c:var(--ac);display:inline-flex;align-items:center;gap:9px;padding:4px 14px 4px 5px;border-radius:999px;font-size:13.5px;font-weight:600;line-height:1.2;color:color-mix(in srgb,var(--c) 72%,var(--tx));background:color-mix(in srgb,var(--c) 16%,var(--bg));border:1px solid color-mix(in srgb,var(--c) 30%,transparent);white-space:nowrap}
+:is(#tab-pass,#tab-event,#tab-map) .pit i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 28%,transparent)}
+:is(#tab-pass,#tab-event,#tab-map) .pit i svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-pass,#tab-event,#tab-map) .pit b{margin-left:2px;color:var(--tx);font-weight:700}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl td .pit{font-size:13px}
+
+/* add entries */
+:is(#tab-pass,#tab-event,#tab-map) .pAdd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat{--c:var(--ac);box-sizing:border-box;min-width:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,box-shadow .15s}
+:is(#tab-pass,#tab-event,#tab-map) .pcat:hover,:is(#tab-pass,#tab-event,#tab-map) .pcat:focus-within{border-color:color-mix(in srgb,var(--c) 55%,var(--bd))}
+:is(#tab-pass,#tab-event,#tab-map) .pch{display:flex;align-items:center;gap:12px;min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .sci{--c:inherit;width:42px;height:42px;border-radius:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pcn{display:flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:10px}
+:is(#tab-pass,#tab-event,#tab-map) .pcn b{font-size:15px;font-weight:600;line-height:1.25;min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) .pco{flex:none;font-size:14px;font-weight:500;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .gcost{margin-top:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .gcost button:disabled{opacity:.45;cursor:not-allowed}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .ps{margin-top:8px;font-size:12px;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .pTot{margin:14px 2px 0;font-size:14px;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .pTot b{margin-left:4px;font-size:16px;color:var(--tx)}
+:is(#tab-pass,#tab-event,#tab-map) .pact{grid-template-columns:repeat(3,minmax(0,1fr))}
+:is(#tab-pass,#tab-event,#tab-map) .pact2{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:820px){:is(#tab-pass,#tab-event,#tab-map) .pact{grid-template-columns:1fr 1fr}:is(#tab-pass,#tab-event,#tab-map) .pact #passUndo,:is(#tab-pass,#tab-event,#tab-map) .pact #ulUndo,#evLeafAdd{grid-column:1/-1}}
+
+/* tables */
+:is(#tab-pass,#tab-event,#tab-map) .gtbl .pit{padding-right:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pEmpty{display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0}
+:is(#tab-pass,#tab-event,#tab-map) .pEmpty svg{width:24px;height:24px;margin-bottom:4px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-pass,#tab-event,#tab-map) .pEmpty b{font-size:14px;color:var(--tx)}
+:is(#tab-pass,#tab-event,#tab-map) .pEmpty span{font-size:13px;color:var(--mut)}
+
+/* ultra tab */
+:is(#tab-pass,#tab-event,#tab-map) .uOdds{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+@media (max-width:820px){:is(#tab-pass,#tab-event,#tab-map) .uOdds{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){:is(#tab-pass,#tab-event,#tab-map) .uOdds{grid-template-columns:1fr}}
+:is(#tab-pass,#tab-event,#tab-map) .uo{--c:var(--ac);display:flex;align-items:center;gap:8px;min-width:0;padding:5px 9px 5px 6px;border-radius:8px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);font-size:12.5px;line-height:1.2}
+:is(#tab-pass,#tab-event,#tab-map) .uo i{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 22%,transparent)}
+:is(#tab-pass,#tab-event,#tab-map) .uo i svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-pass,#tab-event,#tab-map) .uo .un{flex:1;min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) .uo em{flex:none;font-style:normal;font-size:11px;font-weight:700;padding:1px 6px;border-radius:999px;color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}
+:is(#tab-pass,#tab-event,#tab-map) .uo b{flex:none;font-weight:600;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .uSel{display:block;box-sizing:border-box;padding:10px 12px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd)}
+:is(#tab-pass,#tab-event,#tab-map) .uSel span{display:block;font-size:12.5px;color:var(--mut);margin-bottom:6px}
+:is(#tab-pass,#tab-event,#tab-map) .uSel select{width:100%;box-sizing:border-box;height:46px;padding:0 12px;font-size:15px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx)}
+:is(#tab-pass,#tab-event,#tab-map) #ulAddBtn{width:100%;margin-top:12px}
+:is(#tab-pass,#tab-event,#tab-map) #ulAddBtn:disabled{box-shadow:none}
+
+/* history snapshots */
+:is(#tab-pass,#tab-event,#tab-map) #passHist,#evHist{display:grid;gap:10px}
+:is(#tab-pass,#tab-event,#tab-map) #passHist:empty,#evHist:empty{display:none}
+:is(#tab-pass,#tab-event,#tab-map) .pH{padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd)}
+:is(#tab-pass,#tab-event,#tab-map) .pHh{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+:is(#tab-pass,#tab-event,#tab-map) .pHh b{font-size:15px}
+:is(#tab-pass,#tab-event,#tab-map) .pHt{margin-right:auto;font-size:13px;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .pHc{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+:is(#tab-pass,#tab-event,#tab-map) .pHc .chip{margin:0}
+:is(#tab-pass,#tab-event,#tab-map) .pHu{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-top:12px;padding-top:12px;border-top:1px solid var(--bd);font-size:13px;color:var(--mut)}
+:is(#tab-pass,#tab-event,#tab-map) .pHu b{font-size:14px;color:var(--tx)}
+/* event tracker */
+#evTabs{flex-wrap:wrap}
+#tab-event #evTabs button{flex:1 1 130px}
+#tab-event #evGrid .pcat:last-child:nth-child(odd){grid-column:1/-1}
+#tab-event .pact{grid-template-columns:repeat(2,minmax(0,1fr))}
+#tab-event .pact #evLeafAdd{grid-column:1/-1;order:-1}
+@media (max-width:820px){#tab-event .pact #evUndo{grid-column:auto}}
+#tab-event .evsh{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--mut)}
+#tab-event details.gsec>summary{font-size:17px;font-weight:700;cursor:pointer}
+#tab-event details.gsec[open]>summary{margin-bottom:12px}
+#tab-event #evChips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+
+@media (max-width:520px){
+:is(#tab-pass,#tab-event,#tab-map) .pTabs button{height:42px;font-size:14px}
+:is(#tab-pass,#tab-event,#tab-map) .pAdd{gap:8px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat{padding:10px}
+:is(#tab-pass,#tab-event,#tab-map) .pch{align-items:flex-start;gap:8px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .sci{width:28px;height:28px;border-radius:8px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .sci svg{width:16px;height:16px}
+:is(#tab-pass,#tab-event,#tab-map) .pcn{flex-direction:column;align-items:flex-start;gap:2px}
+:is(#tab-pass,#tab-event,#tab-map) .pcn b{font-size:12.5px}
+:is(#tab-pass,#tab-event,#tab-map) .pco{font-size:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .gcost{flex-wrap:wrap;gap:6px;margin-top:8px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .gcost input{flex:1 1 100%;width:100%;height:40px;font-size:18px;padding:0 10px}
+:is(#tab-pass,#tab-event,#tab-map) .pcat .gcost button{flex:1 1 0;width:auto;height:36px;font-size:20px}
+:is(#tab-pass,#tab-event,#tab-map) .pact,:is(#tab-pass,#tab-event,#tab-map) .pact2{grid-template-columns:1fr}
+:is(#tab-pass,#tab-event,#tab-map) .pit i{display:none}
+:is(#tab-pass,#tab-event,#tab-map) .pit{padding-left:11px}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl .pit{white-space:normal;font-size:12px}
+:is(#tab-pass,#tab-event,#tab-map) .pwy{display:none}
+:is(#tab-pass,#tab-event,#tab-map) #pOdds td:first-child,:is(#tab-pass,#tab-event,#tab-map) #passLog td:nth-child(3){white-space:normal;min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) #passLog td:nth-child(2){white-space:normal;min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) #passLog td:nth-child(3){min-width:104px}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl th,:is(#tab-pass,#tab-event,#tab-map) .gtbl td{padding:9px 6px}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl th{white-space:normal;letter-spacing:.03em;font-size:10.5px}
+:is(#tab-pass,#tab-event,#tab-map) #passLog td:nth-child(3){min-width:0}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl .pit{padding:3px 8px}
+:is(#tab-pass,#tab-event,#tab-map) .gtbl th{letter-spacing:0;font-size:10px}
+:is(#tab-pass,#tab-event,#tab-map) .pSw{gap:12px}
+}
 
 /* ---------- quest tracker (redesign: same building blocks as gempic) ---------- */
 #tab-quest{max-width:960px;margin:0 auto}
@@ -901,6 +1033,240 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 #tab-quest td.qpc{min-width:0}
 #tab-quest #qtHist th,#tab-quest #qtHist td{padding:9px 6px}
 #tab-quest #qtHist .qsubl{white-space:normal}
+}
+/* event tracker: compact phone layout so the tracker fits on screen */
+#tab-event .pcp{display:none}
+@media (max-width:520px){
+#tab-event #evTabs{flex-wrap:nowrap;overflow:hidden;gap:5px;margin-bottom:10px}
+#tab-event #evTabs button{flex:1 1 0;min-width:0;height:36px;padding:0 4px;font-size:12px;line-height:1.1;border-radius:10px;overflow-wrap:anywhere}
+#tab-event #evView{margin-bottom:10px}
+#tab-event #evView button{height:38px;font-size:13.5px}
+#tab-event #evTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+#tab-event #evTop .gc:nth-child(odd):last-child{grid-column:auto}
+#tab-event #evTop .gc{padding:8px 9px;grid-template-areas:"i l" "v v";column-gap:6px;border-radius:12px}
+#tab-event #evTop .gc .sci{width:22px;height:22px;border-radius:7px}
+#tab-event #evTop .gc .sci svg{width:13px;height:13px}
+#tab-event #evTop .gc .scl{font-size:11px;line-height:1.15;align-self:center}
+#tab-event #evTop .gc .scv{margin-top:4px;font-size:clamp(18px,6vw,24px);line-height:1.1}
+#tab-event #evTop .gc .scs{display:none}
+#tab-event #evRewards{margin-top:0}
+#tab-event #evRewards .gh{margin-bottom:10px}
+#tab-event #evRewards .gh .sci{width:34px;height:34px;border-radius:10px}
+#tab-event #evRewards .gh .gt b{font-size:16px}
+#tab-event #evGrid{grid-template-columns:1fr;gap:6px}
+#tab-event #evGrid .pcat{display:flex;align-items:center;gap:8px;padding:7px 8px}
+#tab-event #evGrid .pch{flex:1;min-width:0;align-items:center;gap:8px}
+#tab-event #evGrid .pcat .sci{width:30px;height:30px;border-radius:9px}
+#tab-event #evGrid .pcn{flex-direction:column;align-items:flex-start;gap:1px}
+#tab-event #evGrid .pcn b{font-size:13px}
+#tab-event #evGrid .pco{font-size:11.5px}
+#tab-event #evGrid .pcp{display:inline}
+#tab-event #evGrid .ps{display:none}
+#tab-event #evGrid .gcost{margin:0;flex:none;gap:6px}
+#tab-event #evGrid .gcost input{flex:none;width:52px;height:38px;padding:0 4px;font-size:16px;text-align:center;border-radius:9px}
+#tab-event #evGrid .gcost button{width:38px;height:38px;font-size:20px;border-radius:9px}
+#tab-event .pTot{margin-top:10px}
+#tab-event .pact{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+#tab-event .pact .gb{min-height:40px;padding:6px 8px;font-size:12.5px;gap:6px;border-radius:10px}
+#tab-event .pact .gb svg{width:15px;height:15px}
+#tab-event .pact #evLeafAdd{grid-column:1/-1;order:-1;font-size:14px}
+}
+/* artist guesser */
+#tab-map #agV3{font-size:clamp(17px,4.2vw,24px);white-space:normal;overflow-wrap:anywhere;line-height:1.15}
+#tab-map #agHints,#tab-map #agGuesses{display:grid;gap:8px}
+#tab-map #agHintsSec{padding:12px}
+#tab-map #agHintsSec .gh{margin-bottom:10px}
+#tab-map #agHintsSec .gh .sci{width:32px;height:32px;border-radius:10px}
+#tab-map #agHintsSec .gh .gt b{font-size:16px}
+#tab-map #agHints{gap:6px}
+#tab-map #agHints .mkrow{padding:6px;gap:6px;margin:0}
+#tab-map #agHints .empty{padding:8px 10px;font-size:13px}
+#tab-map #agHints .mkrow select,#tab-map #agHints .mkrow input{height:36px;font-size:13.5px;border-radius:8px;padding:0 8px}
+#tab-map .agg{margin-top:0;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd)}
+#tab-map input.agn{height:40px;font-size:15px;padding:0 12px;border-radius:10px}
+#tab-map .agh button{height:34px;min-width:34px;border-radius:10px;font-size:14px}
+#tab-map .agm{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);cursor:pointer;transition:border-color .15s}
+#tab-map .agm:hover,#tab-map .agm:focus-visible{border-color:var(--pos)}
+#tab-map .agm.hi{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 8%,var(--card))}
+#tab-map .agmt{flex:1;min-width:0}
+#tab-map .agmt b{display:block;font-size:15px;font-weight:600}
+#tab-map .agmt>span{display:block;margin-top:2px;font-size:12.5px;color:var(--mut);line-height:1.35}
+#tab-map #agBest .empty{color:var(--mut);font-size:14px}
+#tab-map #agAddG,#tab-map #agMore{width:100%;margin-top:12px}
+#tab-map #agGuessSec{padding:12px}
+#tab-map #agGuessSec .gh{margin-bottom:10px}
+#tab-map #agGuessSec .gh .sci{width:32px;height:32px;border-radius:10px}
+#tab-map #agGuessSec .gh .gt b{font-size:16px}
+#tab-map #agGuesses{gap:6px}
+#tab-map .agg{padding:9px;border-radius:10px}
+#tab-map input.agn{height:36px;font-size:14px;border-radius:8px}
+#tab-map .agh button{height:32px;min-width:32px;border-radius:8px}
+#tab-map .agp-grid{gap:6px;margin-top:8px}
+#tab-map .agp{padding:8px;border-radius:8px}
+#tab-map .agpb{margin-top:4px}
+#tab-map #agAddG{margin-top:10px;min-height:42px}
+#tab-map #agMore[hidden]{display:none}
+#tab-map #agMsg:empty{display:none}
+#tab-map #agMsg{margin-top:10px}
+@media (max-width:700px){
+#tab-map #agTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+#tab-map #agTop .gc:nth-child(odd):last-child{grid-column:auto}
+#tab-map #agTop .gc{padding:8px 9px;grid-template-areas:"i l" "v v";column-gap:6px;border-radius:12px}
+#tab-map #agTop .gc .sci{width:22px;height:22px;border-radius:7px}
+#tab-map #agTop .gc .sci svg{width:13px;height:13px}
+#tab-map #agTop .gc .scl{font-size:11px;line-height:1.15;align-self:center}
+#tab-map #agTop .gc .scv{margin-top:4px;font-size:clamp(18px,6vw,24px);line-height:1.1}
+#tab-map #agTop .gc .scs{display:none}
+#tab-map #agV3{font-size:13px;line-height:1.2;margin-top:4px}
+}
+/* wiki tab: matches tracker sections, icon chips and callouts */
+#tab-info .wkSec{margin-top:14px;padding:14px;border-radius:14px}
+#tab-info .wkSec:first-child{margin-top:0}
+#tab-info .shHead{margin-bottom:12px}
+#tab-info .wkBox{background:var(--bg);border:1px solid var(--bd);border-radius:12px;overflow-x:auto}
+#tab-info .wkBox table{min-width:0}
+#tab-info .wkTwo th:last-child,#tab-info .wkTwo td:last-child{white-space:nowrap;width:1%}
+#tab-info .wkRates td,#tab-info .wkRates th{white-space:nowrap}
+@media (max-width:520px){
+#tab-info .wkSec{padding:10px}
+#tab-info .shChip{display:none}
+#tab-info .wkBox{overflow-x:hidden}
+#tab-info .wkBox th,#tab-info .wkBox td{padding:8px 6px;font-size:12px}
+#tab-info .wkBox th{font-size:11px;letter-spacing:.03em}
+#tab-info .wkRates .pill{margin-right:0;padding:1px 7px 1px 5px}
+#tab-info .wkTwo td .pill{margin:2px 4px 2px 0}
+#tab-info .wkV{font-size:20px}
+}
+#tab-info .wkBox th,#tab-info .wkBox td{padding:10px 12px;vertical-align:middle}
+#tab-info .wkBox th{background:color-mix(in srgb,var(--card) 55%,var(--bg))}
+#tab-info .wkBox tr:last-child td{border-bottom:0}
+#tab-info .wkCall{display:flex;align-items:center;gap:12px;margin-top:10px;padding:12px;border-radius:12px;background:color-mix(in srgb,var(--c) 10%,var(--bg));border:1px solid color-mix(in srgb,var(--c) 30%,var(--bd))}
+#tab-info .wkCt{font-size:14px;font-weight:600}
+#tab-info .wkCall .note{margin:2px 0 0}
+#tab-info .wkV{margin-left:auto;font-size:24px;font-weight:700;color:var(--c);white-space:nowrap}
+#tab-info .wkNote{margin:0 0 10px;font-size:13px;line-height:1.4}
+/* artist cards refresh */
+.arGrid,.arIn{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.arIn{padding:14px}
+.arc{border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.14);transition:box-shadow .2s,border-color .2s,transform .2s}
+.arc:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.3);border-color:color-mix(in srgb,var(--ac) 55%,var(--bd))}
+.arm::after{content:"";position:absolute;left:0;right:0;bottom:0;height:45%;background:linear-gradient(to top,rgba(0,0,0,.55),transparent);pointer-events:none;z-index:1}
+.arm .cvb{left:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;padding:4px 10px 4px 8px;border-radius:999px;background:rgba(15,15,18,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.2)}
+.arm .cvb::before{content:"";width:0;height:0;border-left:7px solid #fff;border-top:4.5px solid transparent;border-bottom:4.5px solid transparent}
+.arb{padding:12px}
+.arb strong{font-size:15px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.arb .sub{font-size:12px;line-height:1.35;margin:4px 0 12px}
+.arb .lk{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.arc .arb .lk a,.arc .arb .lk button{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:34px;padding:0 6px;min-width:0;margin:0;overflow:hidden;box-sizing:border-box;border-radius:10px;font-size:12.5px;line-height:1;white-space:nowrap;transition:border-color .15s,background .15s,filter .15s}
+.arc .arb .lk a::before,.arc .arb .lk button::before{content:"";flex:none;width:12px;height:12px;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+.arc .arb .lk a{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 3v11.3A3.5 3.5 0 1 0 11 17.5V8h6V3z'/%3E%3C/svg%3E");color:#1db954;background:color-mix(in srgb,#1db954 12%,var(--bg));border-color:color-mix(in srgb,#1db954 38%,var(--bd))}
+.arc .arb .lk a:hover{color:#1db954;border-color:#1db954;background:color-mix(in srgb,#1db954 20%,var(--bg))}
+.arc .arb .lk .lyr{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='3' y='5' width='18' height='2.4' rx='1.2'/%3E%3Crect x='3' y='10.8' width='18' height='2.4' rx='1.2'/%3E%3Crect x='3' y='16.6' width='11' height='2.4' rx='1.2'/%3E%3C/svg%3E")}
+.arm .cvb{position:absolute;left:8px;bottom:8px;z-index:3;width:30px;height:30px;padding:0;margin:0;display:grid;place-items:center;border-radius:9px;font-size:0;letter-spacing:0;background:rgba(15,15,18,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);pointer-events:none}
+.arm .cvb::before{border-left:9px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:3px}
+.arm .cvfs{position:absolute;right:8px;bottom:8px;z-index:3;width:30px;height:30px;padding:0;margin:0;border-radius:9px;display:grid;place-items:center;cursor:pointer;color:#fff;background:rgba(15,15,18,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.22);transition:background .15s,border-color .15s,transform .15s}
+.arm .cvfs svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.arm .cvfs:hover{background:var(--ac);border-color:var(--ac);transform:scale(1.08)}
+.arAl{border-radius:16px}
+.arAl>summary{padding:14px 16px;gap:16px}
+.arAl .alim{width:72px;height:72px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.arAl .alin strong{font-size:17px}
+.arAl .altype{color:var(--ac);background:color-mix(in srgb,var(--ac) 16%,transparent);border:1px solid color-mix(in srgb,var(--ac) 30%,transparent);border-radius:999px;padding:1px 9px}
+.arAl[open]>summary{border-bottom:1px solid var(--bd)}
+@media (max-width:520px){.arc .arb .lk a::before,.arc .arb .lk button::before{display:none}.arGrid,.arIn{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}.arIn{padding:10px}.arAl .alim{width:56px;height:56px}}
+/* artist tab: same controls as the Epic tracker */
+#tab-artist .arLoad{gap:10px;margin:0 0 12px}
+#tab-artist .arIdW{position:relative;display:block;flex:1 1 auto;min-width:0;margin:0}
+#tab-artist .arIdW svg{position:absolute;left:15px;top:14px;width:18px;height:18px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+#tab-artist .arIdW input,#arExBox .addrow input{height:46px;padding:0 14px;font-size:16px;border-radius:12px;background:var(--card)}
+#tab-artist .arIdW input{padding-left:44px}
+#arExBox .addrow input{background:var(--bg)}
+#tab-artist #arGo,#arExSave{flex:none;margin:0;height:46px;padding:0 22px;border-radius:12px;font-size:15px;font-weight:700;background:var(--ac);border:1px solid var(--ac);color:#fff;cursor:pointer;transition:filter .15s}
+#tab-artist #arGo:hover,#arExSave:hover{filter:brightness(1.1)}
+#tab-artist #arGo:active,#arExSave:active{filter:brightness(.85)}
+#arExBox{--c:var(--ac);margin:0 0 12px;padding:0;border-radius:14px;overflow:hidden}
+#arExBox>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;text-transform:none;letter-spacing:0;font-size:15px;color:var(--tx);list-style:none}
+#arExBox>summary::before{display:none}
+#arExBox>summary::-webkit-details-marker{display:none}
+#arExBox>summary::after{content:"";margin-left:6px;flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .15s}
+#arExBox[open]>summary::after{transform:rotate(45deg)}
+#arExBox .dsum{min-width:0}
+#arExBox .dsum b{display:block;font-size:15px;font-weight:600;white-space:nowrap}
+#arExBox .exPrev{margin-left:auto;min-width:0;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;font-weight:500;color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,transparent);border:1px solid color-mix(in srgb,var(--ac) 30%,var(--bd));border-radius:999px;padding:3px 10px}
+#arExBox>:not(summary){margin-left:14px;margin-right:14px}
+#arExBox>:last-child{margin-bottom:14px}
+#arExBox label{margin-bottom:0}
+.artabs{flex-wrap:wrap;gap:8px;margin:0 0 12px;align-items:stretch}
+.artabs button{margin:0;height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:600;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:var(--tx);transition:border-color .15s,background .15s}
+.artabs button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+.artabs button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 28%,var(--card));box-shadow:0 0 0 1px var(--ac);color:var(--tx)}
+.artabs .arSort{flex:none;height:46px;margin-left:auto;padding:0 40px 0 16px;font-size:15px;font-weight:600;border-radius:12px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px}
+#arHead .card{border-radius:14px}
+@media (max-width:520px){
+#tab-artist #arGo,#arExSave{padding:0 16px}
+.artabs button{flex:1 1 0;padding:0 6px;font-size:14px;height:44px}
+.artabs .arSort{flex:1 1 100%;margin-left:0;height:44px}
+}
+#arHead .card{margin-bottom:12px}
+@media (max-width:520px){
+#tab-artist .epSets .dash,#tab-artist .epSets .man{flex:1 1 calc(50% - 5px);justify-content:center;margin-left:0}
+}
+/* market: same look as the Epic tracker */
+#tab-buys .sc{--c:var(--ac);min-width:0;overflow:hidden;padding:12px;border-radius:14px;text-align:left;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:flex;flex-direction:column}
+#tab-buys #mkSum{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 14px}
+#tab-buys .scv{font-size:clamp(16px,4.6vw,26px)}
+#tab-buys .scv.pos{color:var(--pos)}
+#tab-buys .scv.neg{color:var(--neg)}
+#tab-buys #mkSeg{display:flex;gap:8px;margin:0 0 12px}
+#tab-buys #mkSeg button{flex:1;margin:0;height:46px;padding:0 10px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:15px;font-weight:600;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tab-buys #mkSeg button svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-buys #mkSeg button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-buys #mkSeg button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 28%,var(--card));box-shadow:0 0 0 1px var(--ac);color:var(--tx)}
+#tab-buys .mkIn{position:relative;display:block;flex:1 1 auto;min-width:0;margin:0}
+#tab-buys .mkIn svg{position:absolute;left:15px;top:14px;width:18px;height:18px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+#tab-buys .mkIn input{height:46px;padding:0 14px 0 44px;font-size:16px;border-radius:12px;background:var(--card)}
+#tab-buys .mkAdd{gap:10px;margin:0 0 12px}
+#tab-buys .mkAdd button{flex:none;margin:0;height:46px;padding:0 20px;border-radius:12px;font-size:15px;font-weight:700;background:var(--ac);border:1px solid var(--ac);color:#fff}
+#tab-buys .mkAdd button:hover{filter:brightness(1.1)}
+#tab-buys .mkAdd button:active{filter:brightness(.85)}
+#tab-buys .mkrow{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 12px;align-items:stretch}
+#tab-buys .mkrow .mkSrch{flex:1 1 220px}
+#tab-buys .mkrow select{flex:none;height:46px;max-width:none;padding:0 40px 0 16px;font-size:15px;font-weight:600;border-radius:12px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px}
+#tab-buys .mkrow>button{flex:none;margin:0!important;height:46px;padding:0 18px;border-radius:12px;font-size:15px;font-weight:600;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tab-buys .mkrow>button:hover,#tab-buys .mkrow select:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#buyBar,#soldBar{gap:10px;margin:0 0 10px}
+#buyBar button,#soldBar button{margin:0;height:40px;padding:0 12px 0 8px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--mut);font-size:14px;gap:9px}
+#buyBar button.all,#soldBar button.all{padding:0 12px 0 16px;color:var(--tx);font-weight:600}
+#buyBar button:hover,#soldBar button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#buyBar button.on,#soldBar button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));color:var(--tx)}
+#buyBar button.all.on,#soldBar button.all.on{background:var(--ac);color:#fff}
+#buyBar .mkn,#soldBar .mkn{padding:1px 9px;border-radius:999px;font-size:13px;color:inherit;background:color-mix(in srgb,var(--mut) 22%,var(--bg))}
+#buyBar button.all.on .mkn,#soldBar button.all.on .mkn{background:rgba(0,0,0,.35);color:#fff}
+#buySum,#soldSum{margin:0 0 10px;font-size:14px}
+#buyList,#soldList{gap:10px;margin-top:0}
+#buyList .mk,#soldList .mk{border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.14);transition:border-color .2s,box-shadow .2s}
+#buyList .mk:hover,#soldList .mk:hover{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd))}
+#buyList .mk.open,#soldList .mk.open{border-color:color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:0 6px 20px rgba(0,0,0,.18)}
+#buyList .mkh,#soldList .mkh{padding:14px 16px;gap:14px}
+#buyList .mkc,#soldList .mkc{font-size:18px}
+#soldList .mkc{color:var(--pos)}
+#buyList .mkb,#soldList .mkb{padding:6px 16px 16px}
+#buyList .mkb input,#soldList .mkb input{height:42px;padding:0 12px;border-radius:10px;font-size:15px;box-sizing:border-box}
+#buyList .mkb .bt,#soldList .mkb .bt{height:44px;padding:0 12px!important;margin-top:12px}
+#buyList .fld,#soldList .fld{gap:8px;margin-top:8px}
+#buyList .steps,#soldList .steps{display:flex;gap:8px;margin-top:12px}
+#buyList .steps button,#soldList .steps button{flex:1;margin:0;height:40px;padding:0;border-radius:10px;font-size:14px;font-weight:600}
+#buyList .mkdel,#soldList .mkdel{width:100%;height:42px;padding:0;border-radius:10px;font-size:14px;font-weight:600;margin-top:12px!important;color:var(--neg);border-color:color-mix(in srgb,var(--neg) 40%,var(--bd));background:color-mix(in srgb,var(--neg) 8%,var(--card))}
+#buyList .mkdel:hover,#soldList .mkdel:hover{border-color:var(--neg)}
+#buyList .empty,#soldList .empty{padding:26px 16px;text-align:center;color:var(--mut);border:1px dashed var(--bd);border-radius:14px}
+@media (max-width:520px){
+#tab-buys .sct{flex-direction:column;align-items:flex-start;gap:6px}
+#tab-buys .sci{width:28px;height:28px;border-radius:8px}
+#tab-buys .sci svg{width:16px;height:16px}
+#tab-buys .mkAdd button{padding:0 14px}
+#tab-buys .mkrow .mkSrch{flex:1 1 100%}
+#tab-buys .mkrow select,#tab-buys .mkrow>button{flex:1 1 0}
+#tab-buys .mkrow select{padding:0 36px 0 12px}
 }
 </style></head><body><main>
 
@@ -1090,93 +1456,124 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 </div>
 
 <div id="tab-pass" hidden>
-<div style="display:flex;gap:22px;flex-wrap:wrap"><label class="chk" style="margin-top:0"><input type="checkbox" id="passPlus"> I have Plus</label><label class="chk" style="margin-top:0"><input type="checkbox" id="passUltra"> I have Ultra Pass</label></div>
-<div class="seg" id="passSub" hidden><button type="button" data-sub="reg" class="on">Regular</button><button type="button" data-sub="ultra">Ultra</button></div>
+<div class="pTabs" id="passSub" hidden><button type="button" data-sub="reg" class="on">Regular</button><button type="button" data-sub="ultra">Ultra</button></div>
+<div id="passTop"></div>
+
 <div id="passReg">
-<div class="passTop">
-<div class="card" id="gemBox" hidden>
-<div class="lbl">Gems gained</div>
-<div class="val" id="gemVal">0</div>
-<div class="note">+10 gems each time an item is added</div>
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b>Tracker</b></div></div>
+<div class="pAdd" id="passAdd"></div>
+<div class="pTot">Total:<b id="passTotN">0</b></div>
+<div class="gact pact">
+<button type="button" class="gb" id="passUndo"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo Last Entry</button>
+<button type="button" class="gb" id="passReset"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg>Reset &amp; save to history</button>
+<button type="button" class="gb" id="passResetNo"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
 </div>
-<div class="card" id="oddsBox"><div class="lbl">Odds</div><table id="passOdds"></table></div>
+</section>
 </div>
-<h2>Tracker</h2>
-<div class="grid" id="passGrid"></div>
-<div class="note" id="passTot"></div>
-</div>
+
 <div id="passUl" hidden>
-<div class="passTop">
-<div class="card" id="ulTotals">
-<div class="lbl">Total coins</div><div class="val big" id="ulCoins">0</div>
-<div class="lbl">Total gems</div><div class="val big" id="ulGems">0</div>
+<section class="card gsec" id="ulOddsSec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Ultra Pass Odds</b></div><div class="gx"><button type="button" class="gb sm sq" id="ulOddsToggle" aria-expanded="false" aria-label="Expand odds"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="ulOddsBody" hidden><div class="uOdds" id="ulOdds"></div></div>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b>Add Ultra Entry</b></div></div>
+<label class="uSel" for="ulSel"><span>Item received</span><select id="ulSel"></select></label>
+<button type="button" class="gb go" id="ulAddBtn" disabled><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Ultra Entry</button>
+<div class="gact pact">
+<button type="button" class="gb" id="ulUndo"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo Last Entry</button>
+<button type="button" class="gb" id="passResetU"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg>Reset &amp; save to history</button>
+<button type="button" class="gb" id="passResetNoU"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
 </div>
-<div class="card"><div class="lbl">Odds</div><table id="ulOdds"></table></div>
+</section>
 </div>
-<h2 id="ulHead">Entries</h2>
-<div class="grid" id="ulGrid"></div>
-</div>
-<button class="small" id="passReset" type="button">Reset &amp; save to history</button>
-<details id="passHistBox"><summary id="passHistSum">History</summary><div id="passHist"></div></details>
+
+<section class="card gsec" id="passCtl">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Pass Tracker Settings</b><span>Track your Regular and Ultra Pass entries. Add what you receive from each entry to keep an accurate count.</span></div><div class="gx"><button type="button" class="gb sm sq" id="passCtlToggle" aria-expanded="true" aria-label="Minimize settings"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="passCtlBody"><div class="gpan pset">
+<label class="gp1 pSw" for="passPlus"><input type="checkbox" id="passPlus"><span class="sw"></span><span class="pst"><b>I have Plus Pass</b><small>+10 gems each time an item is added</small></span></label>
+<label class="gp1 pSw" for="passUltra"><input type="checkbox" id="passUltra"><span class="sw"></span><span class="pst"><b>I have Ultra Pass</b><small>Adds an Ultra tab to log its 25 entries</small></span></label>
+</div></div>
+</section>
+
+<section class="card gsec" id="passRecent">
+<div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div class="gt"><b id="passRecTitle">Recent Entries (Regular)</b><span id="passRecSub">Your most recent Regular Pass entries.</span></div><div class="gx"><button type="button" class="gb sm" id="passLogClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear History</span></button><button type="button" class="gb sm sq" id="passLogToggle" aria-expanded="true" aria-label="Collapse recent entries"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="passLogBody"><div class="gtbl"><table id="passLog"></table></div></div>
+</section>
+
+<section class="card gsec" id="passHistBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg></span><div class="gt"><b id="passHistSum">Pass History</b><span id="passHistNote"></span></div></div>
+<div id="passHist"></div>
+</section>
 </div>
 
 <div id="tab-event" hidden>
-<div class="seg" id="evTabs"></div>
-<div class="seg" id="evView" hidden></div>
+<div class="pTabs" id="evTabs"></div>
+<div class="pTabs" id="evView" hidden></div>
 <div id="evPaneTrk">
-<div id="evRewards">
-<div class="card" id="evTotals">
-<div class="evstats">
-<div><div class="lbl">Total coins</div><div class="val big" id="evCoins">0</div></div>
-<div><div class="lbl">Total gems</div><div class="val big" id="evGems">0</div></div>
-<div><div class="lbl" id="evResLbl">Total leaves</div><div class="val big" id="evLeaves">0</div></div>
+<div id="evTop"></div>
+<section class="card gsec" id="evRewards">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b id="evTrkH">Tracker</b></div></div>
+<div class="pAdd" id="evGrid"></div>
+<div class="pTot" id="evTot"></div>
+<div class="gact pact">
+<button type="button" class="gb go" id="evLeafAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="evLeafAddT">Leaf (no reward)</span></button>
+<button type="button" class="gb" id="evLeafSub"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg><span id="evLeafSubT">Remove leaf</span></button>
+<button type="button" class="gb" id="evUndo"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo Last Entry</button>
+<button type="button" class="gb" id="evReset"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg>Reset &amp; save to history</button>
 </div>
-<div class="note" id="evLeavesNote"></div>
-<div class="steps"><button type="button" id="evLeafSub" aria-label="Remove one leaf added without a reward">−</button><button type="button" id="evLeafAdd" style="flex:4">+ Leaf (no reward)</button></div>
-</div>
-<h2 id="evTrkH">Tracker</h2>
-<div class="grid" id="evGrid"></div>
-<div class="grid" id="evGridSm"></div>
-<div class="note" id="evTot"></div>
-<button class="small" id="evReset" type="button">Reset &amp; save to history</button>
-</div>
-<details id="evHistBox"><summary id="evHistSum">History</summary><div id="evHist"></div></details>
+</section>
+<section class="card gsec" id="evRecent">
+<div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div class="gt"><b>Recent Entries</b><span>Your most recent entries for this event.</span></div><div class="gx"><button type="button" class="gb sm" id="evLogClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear History</span></button></div></div>
+<div class="gtbl"><table id="evLog"></table></div>
+</section>
+<section class="card gsec" id="evHistBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg></span><div class="gt"><b id="evHistSum">History</b></div></div>
+<div id="evHist"></div>
+</section>
 </div>
 <div id="evPaneCol">
-<div id="evColBox">
-<h2 id="evColHead">Collectables</h2>
+<section class="card gsec" id="evColBox">
+<div class="gh"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/></svg></span><div class="gt"><b id="evColHead">Collectables</b></div></div>
 <div class="evcf"><input id="evSearch" maxlength="300" type="search" placeholder="Search song, artist, country or genre..." aria-label="Search collectables" autocomplete="off"><label class="evonly"><input type="checkbox" id="evOnly"><span>Collected only</span></label></div>
 <div class="note" id="evColNote"></div>
 <div id="evCol"></div>
+</section>
 </div>
-</div>
+
 <div id="evPaneInfo">
-<div class="card" id="evInfoBox" hidden>
+<section class="card gsec" id="evInfoBox" hidden>
+<div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="gt"><b>Event Info</b></div></div>
 <div id="evChips"></div>
 <div id="evInfoRows"></div>
-</div>
-<div class="card" id="evOddsBox"><div id="evOddsWrap"><div class="lbl">Odds</div><table id="evOdds"></table></div><div id="evShopBox" hidden><div class="lbl" style="margin-top:12px">Shop</div><table id="evShop"></table></div></div>
-<details id="evFullBox" hidden><summary id="evFullSum">Full description</summary><div class="note" id="evNote"></div></details>
+</section>
+<section class="card gsec" id="evOddsBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Odds</b></div><div class="gx"><button type="button" class="gb sm sq" id="evOddsToggle" aria-expanded="true" aria-label="Collapse odds"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="evOddsBody"><div id="evOddsWrap"><div class="uOdds" id="evOdds"></div></div><div id="evShopBox" hidden><div class="evsh">Shop</div><div class="uOdds" id="evShop"></div></div></div>
+</section>
+<details class="card gsec" id="evFullBox" hidden><summary id="evFullSum">Full description</summary><div class="note" id="evNote"></div></details>
 </div>
 </div>
 
 <div id="tab-buys" hidden>
-<div class="seg" id="mkSeg"><button type="button" data-m="buy">Purchases</button><button type="button" data-m="sold">Sold</button></div>
+<div class="seg" id="mkSeg"><button type="button" data-m="buy"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>Purchases</button><button type="button" data-m="sold"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>Sold</button></div>
 <div class="grid" id="mkSum">
-<div class="card"><div class="lbl">Spent</div><div class="val" id="mkSpent">0</div></div>
-<div class="card"><div class="lbl">Earned</div><div class="val" id="mkEarned">0</div></div>
-<div class="card"><div class="lbl">Net</div><div class="val" id="mkNet">0</div></div>
+<div class="sc" style="--c:#fb923c"><div class="sct"><span class="sci"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><div class="scl">Spent</div></div><div class="scv" id="mkSpent">0</div></div>
+<div class="sc" style="--c:#34d399"><div class="sct"><span class="sci"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><div class="scl">Earned</div></div><div class="scv" id="mkEarned">0</div></div>
+<div class="sc" style="--c:#60a5fa"><div class="sct"><span class="sci"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="scl">Net</div></div><div class="scv" id="mkNet">0</div></div>
 </div>
 <div id="mkBuy">
-<div class="addrow"><input id="newBuy" maxlength="300" placeholder="New purchase title"><button type="button" id="addBuy">Add purchase</button></div>
-<div class="mkrow"><input id="buySearch" maxlength="300" type="search" placeholder="Search purchases..."><select id="buySort" aria-label="Sort"></select><button class="small" id="buyToggle" type="button" style="margin:0">Expand all</button></div>
+<div class="addrow mkAdd"><label class="mkIn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><input id="newBuy" maxlength="300" placeholder="New purchase title"></label><button type="button" id="addBuy">Add purchase</button></div>
+<div class="mkrow"><label class="mkIn mkSrch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="buySearch" maxlength="300" type="search" placeholder="Search purchases..."></label><select id="buySort" aria-label="Sort"></select><button class="small" id="buyToggle" type="button" style="margin:0">Expand all</button></div>
 <div class="mkf" id="buyBar"></div>
 <div class="note" id="buySum"></div>
 <div id="buyList"></div>
 </div>
 <div id="mkSold" hidden>
-<div class="addrow"><input id="newSold" maxlength="300" placeholder="New sold item title"><button type="button" id="addSold">Add sold item</button></div>
-<div class="mkrow"><input id="soldSearch" maxlength="300" type="search" placeholder="Search sold items..."><select id="soldSort" aria-label="Sort"></select><button class="small" id="soldToggle" type="button" style="margin:0">Expand all</button></div>
+<div class="addrow mkAdd"><label class="mkIn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><input id="newSold" maxlength="300" placeholder="New sold item title"></label><button type="button" id="addSold">Add sold item</button></div>
+<div class="mkrow"><label class="mkIn mkSrch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="soldSearch" maxlength="300" type="search" placeholder="Search sold items..."></label><select id="soldSort" aria-label="Sort"></select><button class="small" id="soldToggle" type="button" style="margin:0">Expand all</button></div>
 <div class="mkf" id="soldBar"></div>
 <div class="note" id="soldSum"></div>
 <div id="soldList"></div>
@@ -1184,22 +1581,34 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 </div>
 
 <div id="tab-artist" hidden>
-<details id="arSetup"><summary>Spotify setup</summary>
-<label for="arCid">Client ID</label><input id="arCid" type="text" autocomplete="off" spellcheck="false">
-<label for="arSec" style="margin-top:8px">Client secret</label><input id="arSec" type="password" autocomplete="off">
-<label for="arEx" style="margin-top:8px">Exclude words (comma separated)</label><input id="arEx" maxlength="300" type="text" spellcheck="false">
+<details id="arSetup" hidden><summary>Settings</summary>
+<label class="chk"><input type="checkbox" id="arVoom"> Load releases from the voom discography (no Spotify account needed)</label>
+<div class="note">Spotify client ID and secret below are optional. They are only used if voom is off or fails, and for the "Featured on" tab.</div>
+<label for="arCid">Spotify client ID (optional)</label><input id="arCid" type="text" autocomplete="off" spellcheck="false">
+<label for="arSec" style="margin-top:8px">Spotify client secret (optional)</label><input id="arSec" type="password" autocomplete="off">
+<label for="arMaxV" style="margin-top:8px">Max Canvas videos playing at once (lower if scrolling lags)</label><input id="arMaxV" type="number" min="1" step="1" inputmode="numeric">
 <label for="arCap" style="margin-top:8px">Max new releases to fetch per Load (0 = no limit)</label><input id="arCap" type="number" min="0" step="1" inputmode="numeric">
 <label class="chk"><input type="checkbox" id="arSkip"> Skip releases whose album name has an excluded word (saves requests)</label>
 <div class="note">Each new release costs one Spotify request. When the limit is reached the page stops, shows what it has, and the next Load continues from the saved releases for free.</div>
-<div class="note">Saved only in this browser. A song whose title or album name contains an excluded word is left out of the epic list.</div>
+<div class="note">Saved only in this browser.</div>
 <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="arSave" type="button">Save</button><button class="small" id="arClr" type="button">Clear Canvas cache</button><button class="small" id="arClrS" type="button">Clear song cache</button><button class="small" id="arClrL" type="button">Re-check for new releases</button><button class="small" id="arClrW" type="button" title="Only if you are sure Spotify's wait is over">Clear saved wait</button></div>
 <div class="note" id="arUsage"></div>
 </details>
-<div class="addrow"><input id="arId" maxlength="300" placeholder="Spotify artist ID or link" autocomplete="off" spellcheck="false"><button type="button" id="arGo">Load</button></div>
+<div class="addrow arLoad"><label class="arIdW"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.1 0l3-3a5 5 0 0 0-7.1-7.1l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.1 0l-3 3a5 5 0 0 0 7.1 7.1l1.7-1.7"/></svg><input id="arId" maxlength="300" placeholder="Spotify artist ID or link" autocomplete="off" spellcheck="false"></label><button type="button" id="arGo">Load</button></div>
+<div class="epSets" id="arSets"><div id="arPresets"></div><button type="button" id="arPNew" class="dash"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Artist</button><button type="button" id="arPMan" class="man"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>Manage</button></div>
+<details id="arPMgr"><summary>Manage artists</summary>
+<input id="arPName" maxlength="60" placeholder="New name for the current artist button" autocomplete="off">
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="arPRen" type="button" style="margin:0">Rename current</button><button class="small" id="arPDel" type="button" style="margin:0">Remove current</button></div>
+</details>
 <div class="note" id="arWait" hidden style="color:var(--neg);font-weight:600"></div>
 <div class="note" id="arMsg"></div>
 <div id="arHead"></div>
 <div class="note" id="arNote"></div>
+<details id="arExBox"><summary><span class="sci" style="--c:#f472b6"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span><span class="dsum"><b>Exclude words</b></span><span class="exPrev" id="arExPrev"></span></summary>
+<label for="arEx">Comma separated</label>
+<div class="addrow" style="margin-top:6px"><input id="arEx" maxlength="300" type="text" spellcheck="false"><button class="small" id="arExSave" type="button">Save</button></div>
+<div class="note">Saved only in this browser. A song whose title or album name contains an excluded word is left out of the epic list.</div>
+</details>
 <div class="arGrid" id="arGrid"></div>
 </div>
 
@@ -1215,6 +1624,19 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 <button type="button" id="pwGo" class="small">Change password</button>
 <div class="note" id="pwMsg"></div>
 </details>
+<div id="arSetBox" hidden>
+<h3>Artist tracker</h3>
+<div class="card" style="padding:10px 12px">
+<label class="chk" for="arShowSet"><input type="checkbox" id="arShowSet"> Show Artist tracker settings</label>
+<div class="note">Shows or hides the Settings panel on the Artist tab. The exclude words box always stays visible.</div>
+</div>
+</div>
+<h3>Start page</h3>
+<div class="card" id="startBox" style="padding:10px 12px">
+<label for="startSel">Open this tab when I start the website</label>
+<select id="startSel" style="width:100%;box-sizing:border-box;font-size:16px;padding:8px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx)"></select>
+<div class="note" id="startMsg">Saved on this device. Refreshing the page still keeps the tab you are on.</div>
+</div>
 <h3>Website version</h3>
 <div class="card" id="verBox">
 <div class="verTop"><span class="verNow" id="verNow"></span><span class="note" id="verDate"></span></div>
@@ -1243,47 +1665,55 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 </div>
 
 <div id="tab-map" hidden>
-<div class="grid" id="agTop">
-<div class="card"><div class="lbl">Matches</div><div class="val" id="agV1">0</div></div>
-<div class="card"><div class="lbl">Active filters</div><div class="val" id="agV2">0</div></div>
-<div class="card"><div class="lbl">Best match</div><div class="val" id="agV3" style="font-size:clamp(14px,3.6vw,20px);white-space:normal">—</div></div>
+<div id="agTop">
+<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div class="scl">Matches</div><div class="scv val" id="agV1">0</div><div class="scs">Artists still possible</div></div>
+<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span><div class="scl">Active filters</div><div class="scv val" id="agV2">0</div><div class="scs">Hints and feedback applied</div></div>
+<div class="gc" style="--c:#f59e0b"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/></svg></span><div class="scl">Best match</div><div class="scv val" id="agV3">—</div><div class="scs">Most useful next guess</div></div>
 </div>
-<div class="agtwo">
-<div>
-<h2>Hints</h2>
+
+<section class="card gsec" id="agHintsSec">
+<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div><div class="gx"><button type="button" class="gb sm" id="agAddHint" aria-label="Add hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="gtxt">Add hint</span></button><button type="button" class="gb sm" id="agClear" aria-label="Clear all"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear all</span></button></div></div>
 <div id="agHints"></div>
-<div class="addrow"><button type="button" id="agAddHint" style="margin:0">Add hint</button><button type="button" id="agClear" style="margin:0">Clear all</button></div>
-</div>
-<div>
 <div class="note" id="agMsg"></div>
-</div>
-</div>
-<h2>Guesses</h2>
+</section>
+
+<section class="card gsec" id="agGuessSec">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div class="gt"><b>Guesses</b></div></div>
 <div id="agGuesses"></div>
-<button type="button" id="agAddG" style="margin-top:12px">Add guess</button>
-<h2>Best match</h2>
+<button type="button" class="gb go" id="agAddG"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add guess</button>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/></svg></span><div class="gt"><b>Best match</b></div></div>
 <div id="agBest"></div>
-<h2 id="agMH">Matches</h2>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg></span><div class="gt"><b id="agMH">Matches</b></div></div>
 <div id="agList"></div>
-<button type="button" id="agMore" class="small" hidden>Show more</button>
+<button type="button" class="gb" id="agMore" hidden>Show more</button>
+</section>
 <datalist id="agDL"></datalist>
 </div>
 
 <div id="tab-info" hidden>
-<h2>Quest rates</h2>
-<div class="card">
-<table>
+<section class="card wkSec">
+<div class="shHead"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></span><b>Quest rates</b><span class="shChip">3 rarities</span></div>
+<div class="wkBox">
+<table class="wkRates">
 <tr><th>Rarity</th><th><span class="pill r r-epic">Epic</span></th><th><span class="pill r r-lyrics">Lyric</span></th><th><span class="pill r r-shiny">Shiny</span></th></tr>
 <tr><td><span class="pill r r-common">Common</span></td><td>0.225%</td><td>0.2%</td><td>0.667%</td></tr>
 <tr><td><span class="pill r r-uncommon">Uncommon</span></td><td>0.056%</td><td>0.04%</td><td>0.125%</td></tr>
 <tr><td><span class="pill r r-rare">Rare</span></td><td>0.0225%</td><td>0.022%</td><td>0.05%</td></tr>
 </table>
-<div class="note" style="margin-top:6px;font-size:15px;color:var(--tx)"><strong>Gem Epic rate:</strong> 0.4% <span style="font-size:12px;color:var(--mut)">(can be pulled during cooldown)</span></div>
 </div>
+<div class="wkCall" style="--c:#c084fc"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M8 3l4 18M16 3l-4 18"/></svg></span><div><div class="wkCt">Gem Epic rate</div><div class="note">Can be pulled during cooldown</div></div><div class="wkV">0.4%</div></div>
+</section>
 
-<h2>Epic / Lyric map drop pool</h2>
-<div class="card">
-<table>
+<section class="card wkSec">
+<div class="shHead"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/></svg></span><b>Epic / Lyric map drop pool</b><span class="shChip">Top artists by genre</span></div>
+<div class="wkBox">
+<table class="wkTwo">
 <tr><th>Genre</th><th>Artists included</th></tr>
 <tr><td><span class="pill g g-hiphop">Hip-hop</span><span class="pill g g-pop">Pop</span><span class="pill g g-rock">Rock</span></td><td>Top 1500 artists</td></tr>
 <tr><td><span class="pill g g-indie">Indie</span></td><td>Top 1000 artists</td></tr>
@@ -1291,17 +1721,20 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 <tr><td><span class="pill g g-rnb">R&amp;B</span><span class="pill g g-electronic">Electronic</span><span class="pill g g-classical">Other</span></td><td>Top 500 artists</td></tr>
 </table>
 </div>
+</section>
 
-<h2>Quest eligibility</h2>
-<div class="card">
-<div class="note" style="margin:0 0 8px">Which artists will drop epics/lyrics, or numberless epics and no lyrics. If an artist is within the top number listed for its genre, it will drop numberless epics.</div>
-<table>
+<section class="card wkSec">
+<div class="shHead"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg></span><b>Quest eligibility</b><span class="shChip">Numberless epics</span></div>
+<div class="note wkNote">Which artists will drop epics/lyrics, or numberless epics and no lyrics. If an artist is within the top number listed for its genre, it will drop numberless epics.</div>
+<div class="wkBox">
+<table class="wkTwo">
 <tr><th>Genre</th><th>Numberless epics</th></tr>
 <tr><td><span class="pill g g-hiphop">Hip-hop</span><span class="pill g g-pop">Pop</span><span class="pill g g-rock">Rock</span></td><td>Top 350</td></tr>
 <tr><td><span class="pill g g-indie">Indie</span></td><td>Top 250</td></tr>
 <tr><td><span class="pill g g-rnb">R&amp;B</span><span class="pill g g-electronic">Electronic</span><span class="pill g g-classical">Other</span></td><td>Top 150</td></tr>
 </table>
 </div>
+</section>
 </div>
 
 <details id="bk"><summary>Import / Export</summary>
@@ -1883,7 +2316,7 @@ function agMatches(){
   const cs=agCons(),skip=new Set(AG.guesses.map(g=>g.n));
   return {cs,list:AGD.filter(a=>!skip.has(a.name)&&cs.every(t=>t(a))).sort((x,y)=>x.popularity-y.popularity||x.name.localeCompare(y.name))};
 }
-const agRow=(a,hi)=>`<div class="card mk agm${hi?" hi":""}" data-n="${esc(a.name)}" role="button" tabindex="0" title="Add as a guess"><div class="mkh nc" style="grid-template-columns:minmax(0,1fr) auto"><div style="min-width:0"><div class="mkt">${esc(a.name)} <span class="agy">(${a.debut})</span></div><div class="mks">${[a.genre,a.members,a.country,a.gender,"Popularity "+a.popularity].map(esc).join(" \u2022 ")}</div></div><span class="agplus" aria-hidden="true">+</span></div></div>`;
+const agRow=(a,hi)=>`<div class="agm${hi?" hi":""}" data-n="${esc(a.name)}" role="button" tabindex="0" title="Add as a guess"><div class="agmt"><b>${esc(a.name)} <span class="agy">(${a.debut})</span></b><span>${[a.genre,a.members,a.country,a.gender,"Popularity "+a.popularity].map(esc).join(" \u2022 ")}</span></div><span class="agplus" aria-hidden="true">+</span></div>`;
 const agFree=()=>AF.map(f=>f[0]).filter(k=>!AG.hints.some(h=>h.f===k));
 function agHintsHtml(){
   $("agHints").innerHTML=AG.hints.map((h,i)=>{
@@ -1990,13 +2423,17 @@ agRender();
 /* ---------- tabs ---------- */
 let isRyan=false;
 function applyArtistLock(){
-  const b=$("tbArtist");b.classList.toggle("soon",!isRyan);
-  if(isRyan)b.removeAttribute("aria-disabled");else b.setAttribute("aria-disabled","true");
-  $("tbArtistSoon").hidden=isRyan;
+  const b=$("tbArtist");b.classList.remove("soon");b.removeAttribute("aria-disabled");
+  $("tbArtistSoon").hidden=true;
+  arSetVis();
   navTitles();renderOverview();
 }
+function arSetVis(){
+  const on=LS("tracker.arShowSet")==="1";
+  $("arSetBox").hidden=!isRyan;$("arShowSet").checked=on;
+  $("arSetup").hidden=!(isRyan&&on);
+}
 function showTab(n){
-  if(n==="artist"&&!isRyan)n="home";
   const ids={home:"tbHome",shiny:"tbShiny",epic:"tbEpic",gempic:"tbGempic",quest:"tbQuest",pass:"tbPass",event:"tbEvent",buys:"tbBuys",profile:"tbProfile",map:"tbMap",info:"tbInfo",artist:"tbArtist"};
   Object.keys(ids).forEach(x=>{$("tab-"+x).hidden=n!==x;$(ids[x]).classList.toggle("on",n===x)});
   $("bk").hidden=n==="home"||n==="map"||n==="info"||n==="gempic"||n==="quest"||n==="pass"||n==="event"||n==="buys"||n==="profile"||n==="artist";
@@ -2010,7 +2447,7 @@ function navTitles(){
   document.querySelectorAll("div.tabs button").forEach(b=>{
     const t=b.querySelector(".tx");if(!t)return;
     let l=Array.from(t.childNodes).filter(n=>n.nodeType===3).map(n=>n.textContent).join(" ").trim();
-    if((b.id==="tbArtist"&&!isRyan)||b.id==="tbSound")l+=" (Coming Soon)";
+    if(b.id==="tbSound")l+=" (Coming Soon)";
     b.title=l;b.setAttribute("aria-label",l);
   });
 }
@@ -2028,14 +2465,19 @@ $("navHide").onclick=()=>{LS("tracker.navHide","1");applyNav()};
 $("navShow").onclick=()=>{LS("tracker.navHide","0");applyNav()};
 applyNav();
 /* ---------- editable menu: reorder / hide the top icons (saved per account) ---------- */
-const NAVBTN=["tbHome","tbShiny","tbEpic","tbGempic","tbQuest","tbPass","tbEvent","tbMap","tbSound","tbBuys","tbInfo","tbArtist"];
+const NAVBTN=["tbHome","tbShiny","tbEpic","tbGempic","tbQuest","tbPass","tbEvent","tbMap","tbArtist","tbBuys","tbInfo","tbSound"];
 let nav={order:NAVBTN.slice(),hidden:[]},navDB=true,navEditing=false;
 function navNorm(d){
   d=d||{};const seen=new Set(),o=[];
   (Array.isArray(d.order)?d.order:[]).forEach(id=>{if(NAVBTN.includes(id)&&!seen.has(id)){seen.add(id);o.push(id)}});
   NAVBTN.forEach((id,i)=>{if(!seen.has(id)){const at=i?o.indexOf(NAVBTN[i-1]):-1;o.splice(at+1,0,id)}});
+  /* v3: Artist Overview sits right after Artist Guesser and Sound Guesser goes last (also for menus saved earlier) */
+  if(d.v!==3){
+    const r=o.filter(id=>id!=="tbArtist"&&id!=="tbSound"),m=r.indexOf("tbMap");
+    r.splice(m>=0?m+1:r.length,0,"tbArtist");r.push("tbSound");o.length=0;r.forEach(x=>o.push(x));
+  }
   const h=(Array.isArray(d.hidden)?d.hidden:[]).filter((id,i,a)=>NAVBTN.includes(id)&&a.indexOf(id)===i);
-  return{order:o,hidden:h};
+  return{order:o,hidden:h,v:3};
 }
 function navControls(){
   const bar=document.querySelector("div.tabs");
@@ -2102,7 +2544,7 @@ $("tbBuys").onclick=()=>showTab("buys");
 $("tbProfile").onclick=()=>showTab("profile");
 $("tbMap").onclick=()=>showTab("map");
 $("tbInfo").onclick=()=>showTab("info");
-$("tbArtist").onclick=()=>{if(isRyan)showTab("artist")};
+$("tbArtist").onclick=()=>showTab("artist");
 const det=$("more");
 det.open=LS("tracker.more")==="1";
 det.addEventListener("toggle",()=>LS("tracker.more",det.open?"1":"0"));
@@ -2169,6 +2611,7 @@ async function loadAll(quiet){
   await loadBuys();
   await loadNotes();
   await loadNav();
+  await loadArPresets();
   renderOverview();
   if(!quiet)setStatus("Saved");
   return true;
@@ -2176,40 +2619,89 @@ async function loadAll(quiet){
 
 /* ---------- pass tracker ---------- */
 const PASS=[["srand","Shiny Box (Random Artist)",50],["schoose","Shiny Box (Choose Artist)",45],["nlepic","Random Numberless Epic",3],["nepic","Numbered Epic",2]];
+const PMETA={srand:["#a78bfa","spark"],schoose:["#38bdf8","target"],nlepic:["#f59e0b","crown"],nepic:["#f43f5e","hash"]};
+const PIC={map:'<path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',drop:'<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>',bolt:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',spark:'<path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>',target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',crown:'<path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/>',hash:'<path d="M5 9h14M5 15h14M10 4L8 20M16 4l-2 16"/>',gem:'<path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/>',cube:'<path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/>',coin:'<circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c0-1.2-1.3-2-3-2s-3 .8-3 2 1.3 1.8 3 2.2 3 1 3 2.3-1.3 2-3 2-3-.8-3-2"/>',doc:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'};
 const PLUS_GEMS=10;
-let pass={plus:false,ultra:false,gems:0,c:{},u:[],start:0,history:[]},passDB=true,psub=LS("tracker.psub")==="ultra"?"ultra":"reg";
+let pass={plus:false,ultra:false,gems:0,c:{},u:[],start:0,seq:0,floor:0,log:[],ulog:[],useq:0,ufloor:0,history:[]},passDB=true,psub=LS("tracker.psub")==="ultra"?"ultra":"reg";
 const passCnt=c=>{const o={};PASS.forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
 const ULT=[["u10k","10k Coins",24.5,10000,0],["u20k","20k Coins",32.5,20000,0],["g20","20 Gems",22,0,20],["nepic","Random Numbered Epic",5,0,0],["u40k","40k Coins",3,40000,0],["g40","40 Gems",2,0,40],["u100k","100k Coins",0.5,100000,0],["g100","100 Gems",0.5,0,100],["sbox","Shiny Artist Box (Boosted Odds)",0.6,0,0],["t150","Top 150 Random Artist Epic",0.3,0,0],["gemb","Gem Rate Boost",3,0,0],["genb","Genre Drop Boost",3,0,0],["mapb","Map Boost",3,0,0]];
+const UMETA={u10k:["#eab308","coin"],u20k:["#eab308","coin"],g20:["#c084fc","gem"],nepic:["#f43f5e","hash"],u40k:["#f59e0b","coin"],g40:["#a855f7","gem"],u100k:["#f97316","coin"],g100:["#f472b6","gem"],sbox:["#f59e0b","crown"],t150:["#c084fc","spark"],gemb:["#34d399","bolt"],genb:["#a78bfa","drop"],mapb:["#38bdf8","map"]};
 const ULN=25,ULK=new Set(ULT.map(x=>x[0]));
-const ulNorm=u=>{const a=Array.from({length:ULN},(_,i)=>ULK.has(u&&u[i])?u[i]:"");return a};
+/* entries are kept in the order they were added; empty slots sit at the end */
+const ulNorm=u=>{const a=(Array.isArray(u)?u:[]).filter(k=>ULK.has(k)).slice(0,ULN);while(a.length<ULN)a.push("");return a};
 const ulSum=u=>{const r={coins:0,gems:0,n:0,c:{}};ULT.forEach(x=>r.c[x[0]]=0);u.forEach(k=>{if(!k)return;const x=ULT.find(y=>y[0]===k);r.c[k]++;r.coins+=x[3];r.gems+=x[4];r.n++});return r};
-function passNorm(d){d=d||{};return{plus:!!d.plus,ultra:!!d.ultra,gems:Math.max(0,parseInt(d.gems)||0),c:passCnt(d.c),u:ulNorm(d.u),start:+d.start||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,plus:!!h.plus,gems:Math.max(0,parseInt(h.gems)||0),c:passCnt(h.c),u:Array.isArray(h.u)&&h.u.some(Boolean)?ulNorm(h.u):null})):[]}}
+function passNorm(d){d=d||{};
+  const log=Array.isArray(d.log)?d.log.filter(e=>e&&PASS.some(p=>p[0]===e.k)&&Math.trunc(+e.n)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  const ulog=Array.isArray(d.ulog)?d.ulog.filter(e=>e&&ULK.has(e.k)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  return{plus:!!d.plus,ultra:!!d.ultra,gems:Math.max(0,parseInt(d.gems)||0),c:passCnt(d.c),u:ulNorm(d.u),start:+d.start||0,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),log,ulog,useq:Math.max(0,parseInt(d.useq)||0),ufloor:Math.max(0,parseInt(d.ufloor)||0),history:Array.isArray(d.history)?d.history.map(h=>({kind:h.kind==="ultra"?"ultra":h.kind==="reg"?"reg":"",t:+h.t||0,start:+h.start||0,plus:!!h.plus,gems:Math.max(0,parseInt(h.gems)||0),c:passCnt(h.c),u:Array.isArray(h.u)&&h.u.some(Boolean)?ulNorm(h.u):null})):[]}}
 const fmtD=t=>new Date(t).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+const pWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
 pass=passNorm();
-function renderPass(){
-  $("passPlus").checked=pass.plus;$("gemBox").hidden=!pass.plus;
-  $("gemVal").textContent=pass.gems;
-  $("passOdds").innerHTML=PASS.map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}%</td></tr>`).join("");
-  const tot=PASS.reduce((a,[k])=>a+pass.c[k],0);
-  $("passGrid").innerHTML=PASS.map(([k,n,o])=>`<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}%</span></div><div class="val">${pass.c[k]}</div><div class="obs">${tot?(pass.c[k]/tot*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`).join("");
-  $("passTot").textContent="Total: "+tot;
-  renderUltra();
-  $("passHistSum").textContent="History"+(pass.history.length?" ("+pass.history.length+")":"");
-  $("passHist").innerHTML=pass.history.map((h,i)=>{
-    const total=PASS.reduce((a,[k])=>a+h.c[k],0);
-    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${PASS.map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${total}</b></div>${h.plus?`<div class="hrow"><span>Gems gained</span><b>${h.gems}</b></div>`:""}${h.u?(()=>{const q=ulSum(h.u);return `<div class="hrow" style="font-weight:600"><span>Ultra pass</span><span>${q.n}/${ULN}</span></div>`+ULT.filter(x=>q.c[x[0]]).map(x=>`<div class="hrow"><span>${esc(x[1])}</span><b>${q.c[x[0]]}</b></div>`).join("")+`<div class="hrow"><span>Ultra coins</span><b>${nfmt(q.coins)}</b></div><div class="hrow"><span>Ultra gems</span><b>${nfmt(q.gems)}</b></div>`})():""}</div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+const pWhenH=t=>pWhen(t).replace(/, (\d{4}),/,'<span class="pwy">, $1</span>,');
+const passTot=()=>PASS.reduce((a,[k])=>a+pass.c[k],0);
+const pIco=n=>`<svg viewBox="0 0 24 24">${PIC[n]}</svg>`;
+const pName=k=>PASS.find(p=>p[0]===k)[1];
+const uName=k=>ULT.find(x=>x[0]===k)[1];
+const upit=k=>`<span class="pit" style="--c:${UMETA[k][0]}"><i>${pIco(UMETA[k][1])}</i>${esc(uName(k))}</span>`;
+const uAmt=k=>{const x=ULT.find(y=>y[0]===k);return x[3]?"+"+nfmt(x[3])+" coins":x[4]?"+"+nfmt(x[4])+" gems":""};
+const pit=(k,n)=>`<span class="pit" style="--c:${PMETA[k][0]}"><i>${pIco(PMETA[k][1])}</i>${esc(pName(k))}${n==null?"":` <b>${n}</b>`}</span>`;
+const pStat=(c,ic,l,v,s)=>`<div class="gc" style="--c:${c}"><span class="sci" style="--c:${c}">${pIco(ic)}</span><div class="scl">${l}</div><div class="scv val">${v}</div><div class="scs">${s}</div></div>`;
+function buildPassAdd(){
+  $("passAdd").innerHTML=PASS.map(([k,n,o])=>`<div class="pcat" data-k="${k}" style="--c:${PMETA[k][0]}"><div class="pch"><span class="sci">${pIco(PMETA[k][1])}</span><div class="pcn"><b>${esc(n)}</b><span class="pco">${o}%</span></div></div><div class="gcost"><input type="number" inputmode="numeric" min="0" step="1" value="0" data-k="${k}" aria-label="${esc(n)} count"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one ${esc(n)}">\u2212</button><button type="button" class="gplus" data-k="${k}" data-d="1" aria-label="Add one ${esc(n)}">+</button></div><div class="ps"></div></div>`).join("");
 }
-function renderUltra(){
-  $("passUltra").checked=pass.ultra;
+buildPassAdd();
+$("ulSel").innerHTML='<option value="">Select an item...</option>'+ULT.map(x=>`<option value="${x[0]}">${esc(x[1])}</option>`).join("");
+function ulSync(){
+  const full=pass.u.filter(Boolean).length>=ULN,b=$("ulAddBtn");
+  $("ulSel").disabled=full;b.disabled=full||!$("ulSel").value;
+  b.lastChild.textContent=full?"All "+ULN+" entries logged":"Add Ultra Entry";
+}
+function renderPass(){
+  const tot=passTot(),shiny=pass.c.srand+pass.c.schoose,epics=pass.c.nlepic+pass.c.nepic;
+  $("passPlus").checked=pass.plus;$("passUltra").checked=pass.ultra;
   if(!pass.ultra&&psub==="ultra")psub="reg";
+  const ul=psub==="ultra";
   $("passSub").hidden=!pass.ultra;
-  [...$("passSub").children].forEach(b=>b.classList.toggle("on",b.dataset.sub===psub));
-  $("passReg").hidden=psub==="ultra";$("passUl").hidden=psub!=="ultra";
-  const q=ulSum(pass.u);
-  $("ulCoins").textContent=nfmt(q.coins);$("ulGems").textContent=nfmt(q.gems);
-  $("ulHead").textContent="Entries ("+q.n+"/"+ULN+")";
-  $("ulOdds").innerHTML="<tr><th>Item</th><th>Odds</th><th>Got</th></tr>"+ULT.map(x=>`<tr><td>${esc(x[1])}</td><td>${x[2]}%</td><td>${q.c[x[0]]}</td></tr>`).join("");
-  $("ulGrid").innerHTML=pass.u.map((k,i)=>`<div class="card ue${k?" on":""}"><div class="lbl">Entry ${i+1}</div><select data-i="${i}"><option value="">\u2014</option>${ULT.map(x=>`<option value="${x[0]}"${x[0]===k?" selected":""}>${esc(x[1])}</option>`).join("")}</select></div>`).join("");
+  [...$("passSub").children].forEach(b=>{const on=b.dataset.sub===psub;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
+  $("passReg").hidden=ul;$("passUl").hidden=!ul;
+  /* top stat cards */
+  const q=ulSum(pass.u),pc=n=>tot?(n/tot*100).toFixed(1)+"% of entries":"No entries yet";
+
+  $("passTop").innerHTML=ul
+    ?pStat("#eab308","coin","Total coins gained",nfmt(q.coins),"From Ultra Pass items")+pStat("#c084fc","gem","Total gems gained",nfmt(q.gems),"From Ultra Pass items")+pStat("#34d399","cube","Items opened",q.n+" / "+ULN,"Ultra Pass entries")
+    :pStat("#a78bfa","spark","Shiny boxes",nfmt(shiny),pc(shiny))+pStat("#f59e0b","crown","Epics",nfmt(epics),pc(epics))+pStat("#34d399","cube","Items opened",nfmt(tot),"Regular Pass entries")+(pass.plus?pStat("#c084fc","gem","Gems gained",nfmt(pass.gems),"From Plus Pass items"):"");
+  /* regular */
+  $("passAdd").querySelectorAll(".pcat").forEach(el=>{
+    const k=el.dataset.k,v=pass.c[k],inp=el.querySelector("input");
+    inp.value=v;el.querySelector("[data-d='-1']").disabled=v<=0;
+    el.querySelector(".ps").textContent=tot?(v/tot*100).toFixed(1)+"% of total":"\u2013";
+  });
+  $("passTotN").textContent=nfmt(tot);
+  const un=pass.u.some(Boolean),can=pass.log.length&&pass.log[0].i>pass.floor,any=!!(tot||pass.gems||un);
+  $("passUndo").disabled=!can;$("ulUndo").disabled=!un;
+  [$("passReset"),$("passResetNo")].forEach(b=>b.disabled=!(tot||pass.gems));[$("passResetU"),$("passResetNoU")].forEach(b=>b.disabled=!un);
+  /* recent entries */
+  const RL=ul?pass.ulog:pass.log,RN=ul?"Ultra":"Regular";
+  $("passRecTitle").textContent="Recent Entries ("+RN+")";
+  $("passRecSub").textContent="Your most recent "+RN+" Pass entries.";
+  $("passLogClear").disabled=!RL.length;
+  $("passLog").innerHTML='<tr><th>#</th><th>Time</th><th>Item</th><th class="c">Amount</th><th class="r">Total entries</th></tr>'+(RL.length
+    ?(ul
+      ?RL.slice(0,50).map(e=>`<tr><td>${e.i}</td><td>${pWhenH(e.t)}</td><td>${upit(e.k)}</td><td class="c b" style="color:var(${uAmt(e.k)?"--pos":"--mut"})">${uAmt(e.k)||"\u2013"}</td><td class="r">${nfmt(e.tot)}</td></tr>`)
+      :RL.slice(0,50).map(e=>`<tr><td>${e.i}</td><td>${pWhenH(e.t)}</td><td>${pit(e.k)}</td><td class="c b" style="color:var(${e.n>0?"--pos":"--neg"})">${e.n>0?"+":"\u2212"}${nfmt(Math.abs(e.n))}</td><td class="r">${nfmt(e.tot)}</td></tr>`)).join("")
+    :`<tr><td colspan="5" class="gempty"><div class="pEmpty">${pIco("doc")}<b>No entries yet</b><span>Add your first entry to start tracking.</span></div></td></tr>`);
+  /* ultra */
+  $("ulOdds").innerHTML=ULT.map(x=>`<div class="uo" style="--c:${UMETA[x[0]][0]}" title="${esc(x[1])}"><i>${pIco(UMETA[x[0]][1])}</i><span class="un">${esc(x[1])}</span>${q.c[x[0]]?`<em>\u00d7${q.c[x[0]]}</em>`:""}<b>${x[2]}%</b></div>`).join("");
+  ulSync();
+  /* history */
+  const H=pass.history;
+  $("passHistSum").textContent="Pass History"+(H.length?" ("+H.length+")":"");
+  $("passHistNote").textContent=H.length?"Counts saved each time you reset.":"No history yet. Resetting with save stores the counts here.";
+  $("passHist").innerHTML=H.map((h,i)=>{
+    const total=PASS.reduce((a,[k])=>a+h.c[k],0);
+    let u="";
+    if(h.u){const s=ulSum(h.u);u=`<div class="pHu"><b>Ultra Pass</b><span>${s.n}/${ULN} entries</span><span>${nfmt(s.coins)} coins</span><span>${nfmt(s.gems)} gems</span></div><div class="pHc">${ULT.filter(x=>s.c[x[0]]).map(x=>`<span class="chip">${esc(x[1])} <b>${s.c[x[0]]}</b></span>`).join("")}</div>`}
+    return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${h.kind==="ultra"?"Ultra \u00b7 "+ulSum(h.u).n+" entries":(h.kind==="reg"?"Regular \u00b7 ":"")+nfmt(total)+" entries"+(h.plus?" \u00b7 "+nfmt(h.gems)+" gems":"")}</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${h.kind==="ultra"?"":`<div class="pHc">${PASS.map(([k])=>pit(k,h.c[k])).join("")}</div>`}${u}</div>`}).join("");
 }
 function savePass(){
   LS("tracker.pass",JSON.stringify(pass));
@@ -2226,31 +2718,95 @@ async function loadPass(){
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:1,data:passNorm(local)},{onConflict:"user_id,id"}))}
   pass=passNorm(d);renderPass();
 }
-$("passUltra").onchange=e=>{pass.ultra=e.target.checked;if(!pass.ultra)psub="reg";LS("tracker.psub",psub);savePass();renderPass()};
-$("passSub").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;psub=b.dataset.sub;LS("tracker.psub",psub);renderUltra()});
-$("ulGrid").addEventListener("change",ev=>{
-  const sel=ev.target.closest("select");if(!sel)return;
+/* change one item's count by d (can be negative) and log it */
+function passAdd(k,d){
+  const cur=pass.c[k],nx=Math.min(1e6,Math.max(0,cur+Math.trunc(d)));d=nx-cur;
+  if(!d)return false;
   if(!pass.start)pass.start=Date.now();
-  pass.u[+sel.dataset.i]=sel.value;savePass();renderPass();
-});
-$("passPlus").onchange=e=>{pass.plus=e.target.checked;savePass();renderPass()};
-$("passGrid").addEventListener("click",ev=>{
-  const b=ev.target.closest("button");if(!b)return;
-  const k=b.dataset.k,d=+b.dataset.d;
-  if(d<0&&pass.c[k]<=0)return;
-  if(!pass.start)pass.start=Date.now();
-  pass.c[k]+=d;
+  pass.c[k]=nx;
   if(pass.plus)pass.gems=Math.max(0,pass.gems+d*PLUS_GEMS);
+  pass.seq++;
+  pass.log.unshift({i:pass.seq,t:Date.now(),k,n:d,tot:passTot()});
+  if(pass.log.length>100)pass.log.length=100;
+  savePass();renderPass();return true;
+}
+function passUndo(){
+  const e=pass.log[0];if(!e||e.i<=pass.floor)return;
+  pass.c[e.k]=Math.max(0,pass.c[e.k]-e.n);
+  if(pass.plus)pass.gems=Math.max(0,pass.gems-e.n*PLUS_GEMS);
+  pass.log.shift();if(e.i===pass.seq)pass.seq--;
+  if(!passTot()&&!pass.u.some(Boolean))pass.start=0;
   savePass();renderPass();
-});
-$("passReset").onclick=()=>{
-  const tot=PASS.reduce((a,[k])=>a+pass.c[k],0);
-  const un=pass.u.some(Boolean);
-  if(!tot&&!pass.gems&&!un)return;
-  ask("Save the current counts to history and reset them?",()=>{
-    const e={t:Date.now(),start:pass.start,plus:pass.plus,gems:pass.gems,c:{...pass.c},u:un?[...pass.u]:null};
-    pass=passNorm({plus:pass.plus,ultra:pass.ultra,start:0,history:[e,...pass.history]});savePass();renderPass();
+}
+function passDoReset(save,ultra){
+  const un=pass.u.some(Boolean),hasReg=!!(passTot()||pass.gems);
+  if(ultra?!un:!hasReg)return;
+  const nm=ultra?"Ultra":"Regular";
+  ask(save?"Save the current "+nm+" counts to history and reset them?":"Reset the "+nm+" counts without saving to history?",()=>{
+    const snap=ultra?{kind:"ultra",t:Date.now(),start:pass.start,plus:false,gems:0,c:passCnt(),u:[...pass.u]}:{kind:"reg",t:Date.now(),start:pass.start,plus:pass.plus,gems:pass.gems,c:{...pass.c},u:null};
+    const hist=save?[snap,...pass.history]:pass.history;
+    /* only the tab you are on is reset; the other one keeps its counts */
+    const next={...pass,history:hist};
+    if(ultra){next.u=[];next.ufloor=pass.useq;next.start=hasReg?pass.start:0}
+    else{next.c={};next.gems=0;next.floor=pass.seq;next.start=un?pass.start:0}
+    pass=passNorm(next);
+    savePass();renderPass();
   });
+}
+$("passUltra").onchange=e=>{pass.ultra=e.target.checked;if(!pass.ultra)psub="reg";LS("tracker.psub",psub);savePass();renderPass()};
+$("passPlus").onchange=e=>{pass.plus=e.target.checked;savePass();renderPass()};
+$("passSub").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;psub=b.dataset.sub;LS("tracker.psub",psub);renderPass()});
+function ulAdd(k){
+  const n=pass.u.filter(Boolean).length;
+  if(!ULK.has(k)||n>=ULN)return false;
+  if(!pass.start)pass.start=Date.now();
+  pass.u[n]=k;pass.useq++;
+  pass.ulog.unshift({i:pass.useq,t:Date.now(),k,tot:n+1});
+  if(pass.ulog.length>100)pass.ulog.length=100;
+  savePass();renderPass();return true;
+}
+function ulUndo(){
+  let s=-1;for(let i=ULN-1;i>=0;i--)if(pass.u[i]){s=i;break}
+  if(s<0)return;
+  pass.u[s]="";
+  const e=pass.ulog[0];
+  if(e&&e.i>pass.ufloor){pass.ulog.shift();if(e.i===pass.useq)pass.useq--}
+  if(!passTot()&&!pass.u.some(Boolean))pass.start=0;
+  savePass();renderPass();
+}
+$("ulSel").onchange=ulSync;
+$("ulAddBtn").onclick=()=>{const s=$("ulSel");if(ulAdd(s.value)){s.value="";ulSync()}};
+$("ulUndo").onclick=ulUndo;
+function ulOddsSet(open){const b=$("ulOddsToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse odds":"Expand odds");$("ulOddsBody").hidden=!open;$("ulOddsSec").querySelector(".gh").style.marginBottom=open?"":"0"}
+ulOddsSet(LS("tracker.ulodds")==="1");
+$("ulOddsToggle").onclick=()=>{const open=$("ulOddsToggle").getAttribute("aria-expanded")!=="true";LS("tracker.ulodds",open?"1":"0");ulOddsSet(open)};
+$("passAdd").addEventListener("click",ev=>{
+  const b=ev.target.closest("button[data-d]");if(!b||b.disabled)return;
+  passAdd(b.dataset.k,+b.dataset.d);
+});
+$("passAdd").addEventListener("change",ev=>{
+  const i=ev.target.closest("input");if(!i)return;
+  const k=i.dataset.k;
+  if(i.value.trim()===""){i.value=pass.c[k];return}
+  const v=Math.min(1e6,Math.max(0,Math.trunc(+i.value)||0));
+  if(!passAdd(k,v-pass.c[k]))i.value=pass.c[k];
+});
+$("passAdd").addEventListener("focusin",ev=>{if(ev.target.matches("input"))ev.target.select()});
+$("passUndo").onclick=passUndo;
+$("passReset").onclick=()=>passDoReset(true,false);$("passResetU").onclick=()=>passDoReset(true,true);
+$("passResetNo").onclick=()=>passDoReset(false,false);$("passResetNoU").onclick=()=>passDoReset(false,true);
+$("passLogClear").onclick=()=>{
+  const ul=psub==="ultra";
+  if(!(ul?pass.ulog:pass.log).length)return;
+  ask("Clear the recent entries log? Your counts and saved history are not affected.",()=>{if(ul){pass.ulog=[];pass.ufloor=pass.useq}else{pass.log=[];pass.floor=pass.seq}savePass();renderPass()});
+};
+function passCtlSet(open){const b=$("passCtlToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Minimize settings":"Expand settings");$("passCtlBody").hidden=!open;$("passCtl").querySelector(".gh").style.marginBottom=open?"":"0"}
+passCtlSet(LS("tracker.passctl")!=="0");
+$("passCtlToggle").onclick=()=>{const open=$("passCtlToggle").getAttribute("aria-expanded")!=="true";LS("tracker.passctl",open?"1":"0");passCtlSet(open)};
+$("passLogToggle").onclick=()=>{
+  const b=$("passLogToggle"),open=b.getAttribute("aria-expanded")!=="true";
+  b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse recent entries":"Expand recent entries");
+  $("passLogBody").hidden=!open;
 };
 $("passHist").addEventListener("click",ev=>{
   const b=ev.target.closest("button[data-hdel]");if(!b)return;
@@ -2288,7 +2844,8 @@ const evSum=(cfg,c)=>evRw(cfg).reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0)
 function evNormS(cfg,d){
   d=d||{};
   const got={};if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{if(d.got[i]&&+i>=0&&+i<cfg.col.length)got[i]=1});
-  return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),start:+d.start||0,got,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0)})):[]};
+  const ks=new Set(evRw(cfg).map(r=>r[0])),log=Array.isArray(d.log)?d.log.filter(e=>e&&ks.has(e.k)&&Math.trunc(+e.n)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),start:+d.start||0,got,log,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0)})):[]};
 }
 /* Leaves = one per reward entry (so they follow the + and − buttons) plus "extra" leaves added without a reward.
    saved shape: {e:{<eventId>:{c,extra,start,got,history}}}; the older single-event shape {c,start,history} is Soundfall's */
@@ -2301,8 +2858,12 @@ let ev=evNorm(),evDB=true,evSel=LS("tracker.evtab")||EVTS[0].id;
 const evCfg=()=>EVTS.find(x=>x.id===evSel)||EVTS[0];
 const evS=()=>ev.e[evCfg().id];
 const nfmt=n=>n.toLocaleString();
-function evCard(cfg,s,t,[k,n,o]){
-  return `<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}</span></div><div class="val">${s.c[k]}</div><div class="obs">${t.n?(s.c[k]/t.n*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`;
+const evMeta=v=>v.coins?["#eab308","coin"]:v.gems?["#c084fc","gem"]:["#a78bfa","spark"];
+const evFind=(cfg,k)=>evRw(cfg).find(r=>r[0]===k);
+const evpit=(r,n)=>{const m=evMeta(r[3]||{});return `<span class="pit" style="--c:${m[0]}"><i>${pIco(m[1])}</i>${esc(r[1])}${n==null?"":` <b>${n}</b>`}</span>`};
+function evCard(cfg,s,t,[k,n,o,v]){
+  const m=evMeta(v||{}),c=s.c[k];
+  return `<div class="pcat" style="--c:${m[0]}"><div class="pch"><span class="sci">${pIco(m[1])}</span><div class="pcn"><b>${esc(n)}</b><span class="pco">${o}<span class="pcp"> \u00b7 ${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</span></span></div></div><div class="gcost"><input type="number" inputmode="numeric" min="0" step="1" value="${c}" data-k="${k}" aria-label="${esc(n)} count"><button type="button" data-k="${k}" data-d="-1"${c<=0?" disabled":""} aria-label="Remove one">\u2212</button><button type="button" class="gplus" data-k="${k}" data-d="1" aria-label="Add one">+</button></div><div class="ps">${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</div></div>`;
 }
 let evV="trk"; /* always opens on Tracker (events without one fall back to their first view) */
 let evOnly={};try{evOnly=JSON.parse(LS("tracker.evonly")||"{}")||{}}catch(e){}
@@ -2328,15 +2889,19 @@ function renderEvent(){
   if(!EVTS.some(x=>x.id===evSel))evSel=EVTS[0].id;
   const cfg=evCfg(),s=evS(),t=evSum(cfg,s.c);
   $("evTabs").innerHTML=EVTS.map(x=>`<button type="button" data-ev="${x.id}"${x.id===cfg.id?' class="on"':""}>${esc(x.name)}</button>`).join("");
-  $("evCoins").textContent=nfmt(t.coins);$("evGems").textContent=nfmt(t.gems);
-  $("evOdds").innerHTML=evRw(cfg).map(([k,n,o])=>`<tr><td>${esc(n)}</td><td>${o}</td></tr>`).join("");
-  $("evGrid").innerHTML=cfg.big.map(r=>evCard(cfg,s,t,r)).join("");
-  $("evGridSm").innerHTML=cfg.small.map(r=>evCard(cfg,s,t,r)).join("");
-  $("evTot").textContent="Total: "+t.n;
-  $("evLeaves").textContent=nfmt(t.n+s.extra);
+    $("evOdds").innerHTML=evRw(cfg).map(r=>{const m=evMeta(r[3]||{});return `<div class="uo" style="--c:${m[0]}" title="${esc(r[1])}"><i>${pIco(m[1])}</i><span class="un">${esc(r[1])}</span><b>${r[2]}</b></div>`}).join("");
+  $("evGrid").innerHTML=evRw(cfg).map(r=>evCard(cfg,s,t,r)).join("");
+  $("evTot").innerHTML="Total:<b>"+nfmt(t.n)+"</b>";
   const rs=cfg.res||["leaves","leaf"],cap=x=>x[0].toUpperCase()+x.slice(1);
-  $("evResLbl").textContent="Total "+rs[0];$("evLeafAdd").textContent="+ "+cap(rs[1])+" (no reward)";
+  $("evTop").innerHTML=pStat("#eab308","coin","Total coins",nfmt(t.coins),"From event rewards")+pStat("#c084fc","gem","Total gems",nfmt(t.gems),"From event rewards")+pStat("#34d399","cube","Total "+rs[0],nfmt(t.n+s.extra),t.n+" from rewards"+(s.extra?" + "+s.extra+" without a reward":""));
+  $("evLeafAddT").textContent=cap(rs[1])+" (no reward)";$("evLeafSubT").textContent="Remove "+rs[1];
   $("evLeafSub").setAttribute("aria-label","Remove one "+rs[1]+" added without a reward");
+  $("evUndo").disabled=!(s.log.length&&s.log[0].i>s.floor);
+  $("evReset").disabled=!(t.n||s.extra);$("evLeafSub").disabled=s.extra<=0;
+  $("evLogClear").disabled=!s.log.length;
+  $("evLog").innerHTML='<tr><th>#</th><th>Time</th><th>Item</th><th class="c">Amount</th><th class="r">Total entries</th></tr>'+(s.log.length
+    ?s.log.slice(0,50).map(e=>{const r=evFind(cfg,e.k);return r?`<tr><td>${e.i}</td><td>${pWhenH(e.t)}</td><td>${evpit(r)}</td><td class="c b" style="color:var(${e.n>0?"--pos":"--neg"})">${e.n>0?"+":"\u2212"}${nfmt(Math.abs(e.n))}</td><td class="r">${nfmt(e.tot)}</td></tr>`:""}).join("")
+    :`<tr><td colspan="5" class="gempty"><div class="pEmpty">${pIco("doc")}<b>No entries yet</b><span>Add your first entry to start tracking.</span></div></td></tr>`);
   const inf=cfg.info;
   $("evInfoBox").hidden=!inf;
   if(inf){
@@ -2346,9 +2911,8 @@ function renderEvent(){
   $("evNote").textContent=cfg.note||"";
   $("evFullBox").hidden=!cfg.note;$("evFullBox").open=!inf;
   $("evFullSum").textContent=inf?"Full description":"Details";
-  $("evShopBox").hidden=!cfg.shop;$("evShop").innerHTML=(cfg.shop||[]).map(([n,c])=>`<tr><td>${esc(n)}</td><td>${c} ${esc(rs[0])}</td></tr>`).join("");
-  $("evLeavesNote").textContent=t.n+" from rewards"+(s.extra?" + "+s.extra+" without a reward":"");
-  const hasRw=evRw(cfg).length>0;
+  $("evShopBox").hidden=!cfg.shop;$("evShop").innerHTML=(cfg.shop||[]).map(([n,c])=>`<div class="uo" style="--c:#38bdf8" title="${esc(n)}"><i>${pIco("target")}</i><span class="un">${esc(n)}</span><b>${c} ${esc(rs[0])}</b></div>`).join("");
+    const hasRw=evRw(cfg).length>0;
   const over=!!cfg.passed;
   const hasInfo=!!(inf||cfg.note||cfg.shop);
   $("evOddsWrap").hidden=!hasRw;
@@ -2365,7 +2929,7 @@ function renderEvent(){
   $("evHistSum").textContent="History"+(s.history.length?" ("+s.history.length+")":"");
   $("evHist").innerHTML=s.history.map((h,i)=>{
     const x=evSum(cfg,h.c);
-    return `<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${evRw(cfg).map(([k,n])=>`<div class="hrow"><span>${esc(n)}</span><b>${h.c[k]}</b></div>`).join("")}<div class="hrow"><span>Total</span><b>${x.n}</b></div><div class="hrow"><span>${esc(cap(rs[0]))}</span><b>${x.n+h.extra}</b></div><div class="hrow"><span>Total coins</span><b>${nfmt(x.coins)}</b></div><div class="hrow"><span>Total gems</span><b>${nfmt(x.gems)}</b></div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+    return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${nfmt(x.n)} entries \u00b7 ${nfmt(x.n+h.extra)} ${esc(rs[0])} \u00b7 ${nfmt(x.coins)} coins \u00b7 ${nfmt(x.gems)} gems</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="pHc">${evRw(cfg).filter(r=>h.c[r[0]]).map(r=>evpit(r,h.c[r[0]])).join("")}</div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
 }
 function saveEvent(){
   LS("tracker.event",JSON.stringify(ev));
@@ -2390,14 +2954,37 @@ $("evView").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-v]");if(!b)return;
   evV=b.dataset.v;renderEvent();
 });
-["evGrid","evGridSm"].forEach(id=>$(id).addEventListener("click",ev2=>{
-  const b=ev2.target.closest("button");if(!b)return;
-  const s=evS(),k=b.dataset.k,d=+b.dataset.d;
-  if(d<0&&s.c[k]<=0)return;
+function evBump(k,d){
+  const s=evS(),cur=s.c[k],nx=Math.min(1e6,Math.max(0,cur+Math.trunc(d)));d=nx-cur;
+  if(!d)return false;
   if(!s.start)s.start=Date.now();
-  s.c[k]+=d;
+  s.c[k]=nx;s.seq++;
+  s.log.unshift({i:s.seq,t:Date.now(),k,n:d,tot:evSum(evCfg(),s.c).n});
+  if(s.log.length>100)s.log.length=100;
+  saveEvent();renderEvent();return true;
+}
+$("evGrid").addEventListener("click",ev2=>{const b=ev2.target.closest("button[data-d]");if(!b||b.disabled)return;evBump(b.dataset.k,+b.dataset.d)});
+$("evGrid").addEventListener("change",ev2=>{
+  const i=ev2.target.closest("input");if(!i)return;
+  const k=i.dataset.k,s=evS();
+  if(i.value.trim()===""){i.value=s.c[k];return}
+  const v=Math.min(1e6,Math.max(0,Math.trunc(+i.value)||0));
+  if(!evBump(k,v-s.c[k]))i.value=s.c[k];
+});
+$("evGrid").addEventListener("focusin",ev2=>{if(ev2.target.matches("input"))ev2.target.select()});
+$("evUndo").onclick=()=>{
+  const cfg=evCfg(),s=evS(),e=s.log[0];if(!e||e.i<=s.floor)return;
+  s.c[e.k]=Math.max(0,s.c[e.k]-e.n);s.log.shift();if(e.i===s.seq)s.seq--;
+  if(!evSum(cfg,s.c).n&&!s.extra)s.start=0;
   saveEvent();renderEvent();
-}));
+};
+$("evLogClear").onclick=()=>{
+  const s=evS();if(!s.log.length)return;
+  ask("Clear the recent entries log? Your counts and saved history are not affected.",()=>{s.log=[];s.floor=s.seq;saveEvent();renderEvent()});
+};
+function evOddsSet(open){const b=$("evOddsToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse odds":"Expand odds");$("evOddsBody").hidden=!open;$("evOddsBox").querySelector(".gh").style.marginBottom=open?"":"0"}
+evOddsSet(LS("tracker.evodds")!=="0");
+$("evOddsToggle").onclick=()=>{const open=$("evOddsToggle").getAttribute("aria-expanded")!=="true";LS("tracker.evodds",open?"1":"0");evOddsSet(open)};
 $("evLeafAdd").onclick=()=>{const s=evS();if(!s.start)s.start=Date.now();s.extra++;saveEvent();renderEvent()};
 $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEvent();renderEvent()};
 $("evCol").addEventListener("change",ev2=>{
@@ -2411,7 +2998,7 @@ $("evReset").onclick=()=>{
   if(!evSum(cfg,s.c).n&&!s.extra)return;
   ask("Save the current counts to history and reset them?",()=>{
     const h={t:Date.now(),start:s.start,c:{...s.c},extra:s.extra};
-    ev.e[cfg.id]={c:evCnt(cfg),extra:0,start:0,got:s.got,history:[h,...s.history]};
+    ev.e[cfg.id]={c:evCnt(cfg),extra:0,start:0,got:s.got,log:s.log,seq:s.seq,floor:s.seq,history:[h,...s.history]};
     saveEvent();renderEvent();
   });
 };
@@ -2635,18 +3222,81 @@ function acSave(){
     arr=arr.slice(Math.ceil(arr.length/4));AC=new Map(arr);
   }
 }
-const acPack=al=>({n:al.name,d:al.release_date,i:(al.images[1]||al.images[0]||{}).url||"",t:al.tracks.items.map(t=>[t.id,t.name,t.duration_ms||0,t.artists.map(x=>[x.id,x.name])])});
-const acOpen=(id,c)=>({id,name:c.n,release_date:c.d,images:c.i?[{url:c.i}]:[],tracks:{items:c.t.map(t=>({id:t[0],name:t[1],duration_ms:t[2],artists:t[3].map(x=>({id:x[0],name:x[1]}))}))}});
+const acPack=al=>({n:al.name,y:al.album_type||"",d:al.release_date,i:(al.images[1]||al.images[0]||{}).url||"",t:al.tracks.items.map(t=>[t.id,t.name,t.duration_ms||0,t.artists.map(x=>[x.id,x.name])])});
+const acOpen=(id,c)=>({id,name:c.n,album_type:c.y||"",release_date:c.d,images:c.i?[{url:c.i}]:[],tracks:{items:c.t.map(t=>({id:t[0],name:t[1],duration_ms:t[2],artists:t[3].map(x=>({id:x[0],name:x[1]}))}))}});
 const AL_KEY="tracker.arLists",AA_KEY="tracker.arArtists";
 function alGet(k,stale){try{const o=JSON.parse(LS(AL_KEY)||"{}")[k];return o&&(stale||Date.now()-o.t<6048e5)?o.ids:null}catch(e){return null}}
 function alPut(k,ids){try{const o=JSON.parse(LS(AL_KEY)||"{}");o[k]={t:Date.now(),ids};const ks=Object.keys(o);if(ks.length>20)ks.sort((x,y)=>o[x].t-o[y].t).slice(0,ks.length-20).forEach(x=>delete o[x]);localStorage.setItem(AL_KEY,JSON.stringify(o))}catch(e){}}
 function aaGet(id){try{return JSON.parse(LS(AA_KEY)||"{}")[id]||null}catch(e){return null}}
 function aaPut(a){try{const o=JSON.parse(LS(AA_KEY)||"{}");o[a.id]={id:a.id,name:a.name,images:(a.images||[]).slice(0,2).map(x=>({url:x.url}))};const ks=Object.keys(o);if(ks.length>30)delete o[ks[0]];localStorage.setItem(AA_KEY,JSON.stringify(o))}catch(e){}}
+/* ---------- voom discography adapter (third-party, unofficial) ---------- */
+const VOOM="https://voom.soundmap.tools/spotify/artists/";
+const voomArr=x=>Array.isArray(x)?x:(x&&typeof x==="object"?(x.items||x.data||x.albums||x.releases||x.discography||x.results||null):null);
+const voomImgs=r=>{
+  const a=r.images||r.cover_art||r.coverArt||r.cover||r.image||r.artwork||[];
+  const arr=Array.isArray(a)?a:(a&&a.sources?a.sources:(a?[a]:[]));
+  return arr.map(i=>typeof i==="string"?{url:i}:{url:i.url||i.uri||i.src||""}).filter(i=>i.url);
+};
+const voomDate=r=>{
+  let d=r.release_date||r.releaseDate||r.date||"";
+  if(d&&typeof d==="object")d=d.isoString||d.iso||(d.year?[d.year,d.month,d.day].filter(Boolean).map((v,i)=>i?String(v).padStart(2,"0"):v).join("-"):"");
+  if(!d&&r.year)d=String(r.year);
+  return String(d||"").slice(0,10);
+};
+const voomTrack=(t,fallbackArtists)=>{
+  t=t.track||t;
+  const as=(t.artists&&(t.artists.items||t.artists))||fallbackArtists||[];
+  return{id:t.id||String(t.uri||"").split(":").pop(),name:t.name||t.title||"",duration_ms:t.duration_ms||t.durationMs||(t.duration&&t.duration.totalMilliseconds)||0,
+    artists:as.map(x=>({id:x.id||String(x.uri||"").split(":").pop(),name:(x.name||(x.profile&&x.profile.name)||"")}))};
+};
+function voomNorm(r,id){
+  const tr=voomArr(r.tracks)||r.items&&voomArr(r.items)||[];
+  const al={id:r.id||String(r.uri||"").split(":").pop(),name:r.name||r.title||"",album_type:String(r.album_type||r.albumType||r.type||r.release_type||"").toLowerCase(),release_date:voomDate(r),images:voomImgs(r),
+    tracks:{items:tr.map(t=>voomTrack(t,r.artists&&(r.artists.items||r.artists)))}};
+  return al;
+}
+async function voomFetch(id,gen){
+  if(gen!==undefined&&gen!==AR.gen)throw ARABORT;
+  const r=await fetch(VOOM+id+"/discography",{headers:{"Accept":"application/json","x-app-version":"1.2.4"}});
+  if(!r.ok)throw new Error("voom "+r.status);
+  const j=await r.json();
+  window.AR_VOOM_RAW=j; /* inspect in the console: AR_VOOM_RAW */
+  const list=voomArr(j)||(j&&j.discography&&(voomArr(j.discography)||[].concat(j.discography.albums||[],j.discography.singles||[],j.discography.compilations||[])))||
+    [].concat(j.albums||[],j.singles||[]);
+  if(!list||!list.length)throw new Error("voom: unrecognised response shape");
+  const out=list.map(x=>voomNorm(x,id)).filter(a=>a.id&&a.name);
+  /* only accept it if tracks (needed by arBuild) are actually present */
+  if(!out.length||!out.some(a=>a.tracks.items.length))throw new Error("voom: no tracks in response");
+  out.artist=voomArtist(j,out,id);
+  return out;
+}
+const voomOn=()=>LS("tracker.arVoom")!=="0";
+function voomArtist(j,full,id){
+  const ja=(j&&(j.artist||j.profile))||{};
+  let name=ja.name||(ja.profile&&ja.profile.name)||(j&&typeof j.name==="string"?j.name:"")||"";
+  if(!name){for(const al of full)for(const t of al.tracks.items){const x=t.artists.find(q=>q.id===id);if(x&&x.name){name=x.name;break}}if(!name){for(const al of full){const x=(al.artistsRaw||[]).find(q=>q.id===id);if(x){name=x.name;break}}}}
+  let imgs=voomImgs(ja);
+  if(!imgs.length&&ja.visuals&&ja.visuals.avatarImage)imgs=voomImgs({images:ja.visuals.avatarImage.sources||[]});
+  if(!imgs.length){const al=full.find(x=>x.images.length);if(al)imgs=al.images.slice(0,1)}
+  return{id,name:name||"Artist "+id.slice(0,6),images:imgs};
+}
 /* cacheOnly: never call Spotify; use whatever is saved (even if old) and count what's missing */
 async function arCollect(id,groups,label,msg,gen,cacheOnly){
   const lk=id+"|"+groups;let albums=alGet(lk);
   if(!albums&&cacheOnly)albums=alGet(lk,true);
   if(!albums&&cacheOnly){const e=new Error("Nothing is saved for this artist yet, so there's nothing to show without asking Spotify.");e.nosave=true;throw e}
+  let voomErr=null;
+  if(!cacheOnly&&groups==="album,single"&&voomOn()&&(!albums||albums.some(a=>!AC.has(a.id)))){
+    try{
+      msg.textContent="Loading "+label+" (voom)...";
+      const vf=await voomFetch(id,gen);
+      vf.forEach(a=>{if(!AC.has(a.id))AC.set(a.id,acPack(a))});acSave();
+      alPut(lk,vf.map(a=>({id:a.id,n:a.name})));
+      vf.missing=0;vf.total=vf.length;vf.skipped=0;
+      return vf;
+    }catch(e){if(e===ARABORT)throw e;voomErr=e;console.warn("voom failed, falling back to Spotify:",e);
+      if(!arCfg().id||!arCfg().sec)throw new Error("Couldn't load releases from voom ("+(e.message||e)+"). It may be down, blocked, or have changed. Add a Spotify client ID and secret under Settings to use the Spotify fallback.")}
+  }
   if(!albums){
     albums=[];
     for(let off=0;;off+=10){const j=await arGet(`/artists/${id}/albums?include_groups=${groups}&limit=10&offset=${off}`,gen);albums.push(...j.items.map(x=>({id:x.id,n:x.name})));msg.textContent="Finding "+label+"... "+albums.length;if(!j.next||!j.items.length)break}
@@ -2686,24 +3336,43 @@ function arBuild(full,id){
       const mt=rx.exec(t.name),ma=mt?null:rx.exec(al.name);
       if(mt||ma){
         st.ex++;const ek=arKey(t.name)+"|"+arKey(al.name)+"|"+(isMain?"m":"f");
-        if(!se.has(ek))se.set(ek,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",main:isMain,album:al.name,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||"",why:'"'+(mt||ma)[2]+'" in the '+(mt?"song title":"album name")});
+        if(!se.has(ek))se.set(ek,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",main:isMain,album:al.name,aid:al.id,at:al.album_type||"",ntr:al.tracks.items.length,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||"",why:'"'+(mt||ma)[2]+'" in the '+(mt?"song title":"album name")});
         continue;
       }
     }
     const seen=isMain?sm:sf,k=arKey(t.name)+(isMain?"":"|"+arKey(t.artists[0]?t.artists[0].name:""));
     if(seen.has(k)){st.dup++;continue}
-    seen.set(k,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",album:al.name,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||""});
+    seen.set(k,{id:t.id,name:t.name,dur:Math.round((t.duration_ms||0)/1000),by:(t.artists[0]||{}).name||"",album:al.name,aid:al.id,at:al.album_type||"",ntr:al.tracks.items.length,date:al.release_date,year:al.release_date.slice(0,4),img:(al.images[1]||al.images[0]||{}).url||""});
   }
   const byNew=(x,y)=>y.date.localeCompare(x.date);
   return{main:[...sm.values()].sort(byNew),feat:[...sf.values()].sort(byNew),exl:[...se.values()].sort(byNew),ex:st.ex,dup:st.dup};
 }
 function arRender(){
-  const D=AR.d,tab=AR.tab,list=tab==="feat"?D.feat:tab==="exl"?D.exl:D.main,a=D.a;
+  arVidReset();
+  const D=AR.d,tab=AR.tab,a=D.a,sk=AR.sort||LS("tracker.arSort")||"album";
+  const base=tab==="feat"?D.feat:tab==="exl"?D.exl:D.main;
+  const cmp={new:(x,y)=>y.date.localeCompare(x.date),old:(x,y)=>x.date.localeCompare(y.date),
+    name:(x,y)=>x.name.localeCompare(y.name,undefined,{sensitivity:"base"}),
+    long:(x,y)=>y.dur-x.dur,short:(x,y)=>x.dur-y.dur,
+    artist:(x,y)=>(x.by||"").localeCompare(y.by||"",undefined,{sensitivity:"base"})||y.date.localeCompare(x.date)};
+  /* base is already newest-first with album track order kept; Array.sort is stable, so albums stay in track order */
+  const list=sk==="album"||sk==="new"?base:base.slice().sort(cmp[sk]||cmp.new);
+  const so=$("arSort");if(so)so.value=sk;
   $("arTabs").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.t===tab));
   $("arCount").textContent=(tab==="exl"?list.length+" left out by your excluded words (not in the Songs or Featured lists)":list.length+(tab==="feat"?" featured songs":" pullable epics")+" \u00b7 "+D.ex+" left out by excluded words \u00b7 "+D.dup+" duplicate titles merged")+((tab==="feat"||tab==="exl")&&!D.featDone?" \u00b7 featured releases still loading":"");
   AR.q=[];if(AR.io)AR.io.disconnect();
   AR.byId={};list.forEach(t=>AR.byId[t.id]=t);
-  $("arGrid").innerHTML=list.map(t=>`<div class="arc" data-id="${esc(t.id)}"><div class="arm">${t.img?`<img src="${esc(t.img)}" alt="" loading="lazy">`:""}</div><div class="arb"><strong>${esc(t.name)}</strong><div class="sub">${(tab==="feat"||(tab==="exl"&&!t.main))&&t.by?esc(t.by)+" &middot; ":""}${esc(t.album)}${t.year?" &middot; "+esc(t.year):""}${tab==="exl"&&t.why?"<br>Matched "+esc(t.why):""}</div><div class="lk"><a href="https://open.spotify.com/track/${esc(t.id)}" target="_blank" rel="noopener">Spotify</a><button type="button" class="lyr">Lyrics</button></div></div></div>`).join("");
+  const card=t=>`<div class="arc" data-id="${esc(t.id)}"><div class="arm">${t.img?`<img src="${esc(t.img)}" alt="" loading="lazy">`:""}</div><div class="arb"><strong>${esc(t.name)}</strong><div class="sub">${(tab==="feat"||(tab==="exl"&&!t.main))&&t.by?esc(t.by)+" &middot; ":""}${esc(t.album)}${t.year?" &middot; "+esc(t.year):""}${tab==="exl"&&t.why?"<br>Matched "+esc(t.why):""}</div><div class="lk"><a href="https://open.spotify.com/track/${esc(t.id)}" target="_blank" rel="noopener">Spotify</a><button type="button" class="lyr">Lyrics</button></div></div></div>`;
+  if(sk==="album"){
+    const gs=[],gm=new Map();
+    for(const t of list){const k=t.aid||t.album+"|"+t.date;let g=gm.get(k);if(!g){g={k,t,items:[]};gm.set(k,g);gs.push(g)}g.items.push(t)}
+    const fd=d=>{const m=/^(\d{4})-(\d\d)-(\d\d)/.exec(d||"");return m?new Date(+m[1],+m[2]-1,+m[3]).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"}):(d||"").slice(0,4)};
+    AR.open=AR.open||{};
+    let h=`<div class="arbar"><button type="button" class="small" data-act="open">Expand all</button><button type="button" class="small" data-act="close">Collapse all</button></div>`;
+    h+=gs.map(g=>{const t=g.t,ty=(t.at||(t.ntr>=7?"album":"single")).toUpperCase(),n=g.items.length,tot=t.ntr||n;
+      return `<details class="arAl" data-k="${esc(g.k)}"${AR.open[g.k]?" open":""}><summary><span class="alim">${t.img?`<img src="${esc(t.img)}" alt="" loading="lazy">`:""}</span><span class="alin"><strong>${esc(t.album)}</strong><span class="altype">${esc(ty)}</span><span class="alrow"><span>Released</span><b>${esc(fd(t.date))}</b></span><span class="alrow"><span>Tracks</span><b>${tot}${n!==tot?` &middot; ${n} shown`:""}</b></span></span><span class="alchev"></span></summary><div class="arIn">${g.items.map(card).join("")}</div></details>`}).join("");
+    $("arGrid").innerHTML=h}
+  else $("arGrid").innerHTML=list.map(card).join("");
   AR.io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){AR.io.unobserve(e.target);arQueue(e.target)}}),{rootMargin:"200px"});
   $("arGrid").querySelectorAll(".arc").forEach(el=>AR.io.observe(el));
 }
@@ -2711,6 +3380,7 @@ const arPartialMsg=(e,full)=>(e.message||"")+" Showing the "+(full.total-full.mi
 async function arFeat(){
   const D=AR.d;if(!D||D.featDone||AR.loading)return;
   const gen=AR.gen,msg=$("arMsg");
+  {const c=arCfg();if(!c.id||!c.sec){msg.textContent='"Featured on" needs a Spotify client ID and secret under Settings (voom only provides the artist\'s own releases).';return}}
   AR.loading=1;AR.stopped=0;AR.stoppedFeat=0;AR.fresh=0;D.featBusy=1;arBtn();
   let note="";
   try{
@@ -2734,7 +3404,7 @@ async function arFeat(){
 async function arLoad(){
   const id=arId($("arId").value),msg=$("arMsg");
   if(!id){msg.textContent="Paste a Spotify artist ID or artist link.";return}
-  const c=arCfg();if(!c.id||!c.sec){msg.textContent="Add your Spotify client ID and secret under Spotify setup first.";$("arSetup").open=true;return}
+  const c=arCfg();if(!voomOn()&&(!c.id||!c.sec)){msg.textContent="Add your Spotify client ID and secret under Settings (turn on Artist tracker settings in Profile), or turn on the voom option.";$("arSetup").open=true;return}
   const wait=(AR.nextAt||0)-Date.now();
   $("arHead").innerHTML="";$("arGrid").innerHTML="";$("arNote").textContent="";AR.q=[];AR.warned=0;AR.d=null;
   if(AR.io)AR.io.disconnect();
@@ -2747,10 +3417,18 @@ async function arLoad(){
     msg.textContent="Loading artist...";
     let a,full;
     try{
-      a=aaGet(id)||await arGet("/artists/"+id,gen);
-      if(a)aaPut(a);
-      if(!a)throw arQuotaErr(wait,true);
-      full=await arCollect(id,"album,single","releases",msg,gen);
+      if(voomOn()){
+        full=await arCollect(id,"album,single","releases",msg,gen);
+        a=(full.artist&&full.artist.name?full.artist:null)||aaGet(id);
+        if(!a&&arCfg().id&&arCfg().sec)a=await arGet("/artists/"+id,gen);
+        if(!a){const al=full.find(x=>x.images&&x.images.length);a={id,name:"Artist "+id.slice(0,6),images:al?al.images.slice(0,1):[]}}
+        aaPut(a);
+      }else{
+        a=aaGet(id)||await arGet("/artists/"+id,gen);
+        if(a)aaPut(a);
+        if(!a)throw arQuotaErr(wait,true);
+        full=await arCollect(id,"album,single","releases",msg,gen);
+      }
     }catch(e){
       if(e&&e.quota&&AR.gen===gen){
         a=aaGet(id);if(!a){const e2=new Error(e.message+" Nothing is saved for this artist yet, so there's nothing to show.");throw e2}
@@ -2761,11 +3439,14 @@ async function arLoad(){
     }
     const b=arBuild(full,id);
     if(full.skipped)note=(note?note+" ":"")+"Skipped "+full.skipped+" releases with an excluded word in the album name to save requests.";
-    AR.d={id,a,full,main:b.main,feat:b.feat,exl:b.exl,ex:b.ex,dup:b.dup,featDone:0,featBusy:0};AR.tab="main";
+    AR.d={id,a,full,main:b.main,feat:b.feat,exl:b.exl,ex:b.ex,dup:b.dup,featDone:0,featBusy:0};AR.tab="main";arPreRender();
     msg.textContent=note;
-    $("arHead").innerHTML=`<div class="card" style="display:flex;gap:12px;align-items:center;margin-top:10px">${a.images&&a.images[0]?`<img src="${esc(a.images[a.images.length>1?1:0].url)}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover">`:""}<div><strong>${esc(a.name)}</strong><div class="note" id="arCount" style="margin:2px 0 0"></div></div></div><div class="artabs" id="arTabs"><button type="button" data-t="main">Songs</button><button type="button" data-t="feat">Featured on</button><button type="button" data-t="exl">Excluded</button></div>`;
+    $("arHead").innerHTML=`<div class="card" style="display:flex;gap:12px;align-items:center;margin-top:10px">${a.images&&a.images[0]?`<img src="${esc(a.images[a.images.length>1?1:0].url)}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover">`:""}<div><strong>${esc(a.name)}</strong><div class="note" id="arCount" style="margin:2px 0 0"></div></div></div><div class="artabs" id="arTabs"><button type="button" data-t="main">Songs</button><button type="button" data-t="feat">Featured on</button><button type="button" data-t="exl">Excluded</button><select id="arSort" class="arSort" title="Sort by"><option value="album">By album</option><option value="new">Newest first</option><option value="old">Oldest first</option><option value="name">A to Z</option><option value="long">Longest</option><option value="short">Shortest</option><option value="artist">Artist (featured)</option></select></div>`;
+    $("arSort").onchange=e=>{AR.sort=e.target.value;LS("tracker.arSort",AR.sort);const i=arPCur();if(i>=0&&arPL[i].sort!==AR.sort){arPL[i].sort=AR.sort;arPreSave()}arRender()};
     $("arTabs").onclick=e=>{const t=e.target.closest("button");if(!t||AR.tab===t.dataset.t)return;AR.tab=t.dataset.t;arRender();if(AR.tab==="feat"||AR.tab==="exl")arFeat()};
+    $("arGrid").addEventListener("toggle",e=>{const d=e.target;if(d.classList&&d.classList.contains("arAl")){AR.open=AR.open||{};if(d.open)AR.open[d.dataset.k]=1;else delete AR.open[d.dataset.k]}},true);
     $("arGrid").onclick=e=>{
+      const ab=e.target.closest("button[data-act]");if(ab){const o=ab.dataset.act==="open";$("arGrid").querySelectorAll("details.arAl").forEach(d=>{d.open=o});return}
       const b=e.target.closest("button.lyr");if(b){const c=b.closest(".arc");if(c)arLyr(c.dataset.id)}};
     arRender();
   }catch(e){
@@ -2776,7 +3457,32 @@ async function arLoad(){
 }
 const arStrip=n=>n.replace(/\s*[\(\[][^)\]]*[\)\]]/g,"").replace(/\s+-\s+.*$/,"").trim();
 async function arJ(u){const r=await fetch(u);if(r.status===404)return null;if(!r.ok)throw new Error("status "+r.status);return r.json()}
+/* lyrics from the voom lyric-cache (keyed by Spotify track id). Plain GET, no custom headers, so no CORS preflight. */
+async function voomLyrics(t){
+  const r=await fetch("https://voom.soundmap.tools/spotify/lyric-cache/"+encodeURIComponent(t.id));
+  if(r.status===404)return null;
+  if(!r.ok)throw new Error("voom lyrics "+r.status);
+  const j=await r.json();window.AR_LYR_RAW=j; /* inspect in console: AR_LYR_RAW */
+  if(!j)return null;
+  if(j.instrumental||j.isInstrumental)return{inst:1};
+  const L=j.lyrics&&typeof j.lyrics==="object"&&!Array.isArray(j.lyrics)?j.lyrics:null;
+  const lines=j.lines||(L&&L.lines)||(Array.isArray(j.lyrics)?j.lyrics:null)||(Array.isArray(j)?j:null);
+  if(lines&&lines.length){
+    const raw=lines.map(l=>typeof l==="string"?{w:l,ms:null}:{
+      w:String(l.words!=null?l.words:l.text!=null?l.text:l.line!=null?l.line:l.lyrics!=null?l.lyrics:"").trim(),
+      ms:l.startTimeMs!=null?+l.startTimeMs:l.start_time_ms!=null?+l.start_time_ms:l.startMs!=null?+l.startMs:l.time!=null?+l.time:l.start!=null?+l.start:null});
+    if(!raw.some(x=>x.w))return null;
+    const timed=raw.every(x=>x.ms!=null&&!isNaN(x.ms));
+    const sec=timed&&Math.max(...raw.map(x=>x.ms))<1000&&raw.length>5; /* looks like seconds, not ms */
+    const lrc=timed?raw.map(x=>{const ms=Math.round(sec?x.ms*1000:x.ms),m=Math.floor(ms/60000),s=((ms%60000)/1000).toFixed(2).padStart(5,"0");return"["+String(m).padStart(2,"0")+":"+s+"] "+x.w}).join("\n"):"";
+    return{synced:lrc,plain:raw.map(x=>x.w).join("\n"),src:"voom"};
+  }
+  const syn=j.syncedLyrics||j.synced||(L&&L.syncedLyrics)||"",pl=j.plainLyrics||j.plain||(typeof j.lyrics==="string"?j.lyrics:"")||(L&&L.plainLyrics)||"";
+  if(syn||pl)return{synced:syn,plain:pl,src:"voom"};
+  return null;
+}
 async function arFindLyrics(t){
+  if(voomOn()&&t.id){try{const v=await voomLyrics(t);if(v)return v}catch(e){console.warn("voom lyrics failed, trying LRCLIB:",e)}}
   const q=o=>Object.entries(o).filter(e=>e[1]).map(e=>e[0]+"="+encodeURIComponent(e[1])).join("&");
   const artist=t.by||(AR.d&&AR.d.a.name)||"";let j=null,err=null;
   try{
@@ -2799,36 +3505,58 @@ async function arFindLyrics(t){
   if(err)throw err;
   return null;
 }
+function arTint(url,cb){
+  if(!url)return;
+  const im=new Image();im.crossOrigin="anonymous";
+  im.onload=()=>{try{
+    const c=document.createElement("canvas");c.width=c.height=16;const x=c.getContext("2d");x.drawImage(im,0,0,16,16);
+    const d=x.getImageData(0,0,16,16).data;let r=0,g=0,b=0,w=0;
+    for(let i=0;i<d.length;i+=4){const R=d[i],G=d[i+1],B=d[i+2],mx=Math.max(R,G,B),mn=Math.min(R,G,B),sat=mx?(mx-mn)/mx:0,wt=.15+sat*sat*3;r+=R*wt;g+=G*wt;b+=B*wt;w+=wt}
+    r/=w;g/=w;b/=w;const f=Math.min(1.8,150/(Math.max(r,g,b)||1)),k=n=>Math.round(Math.min(255,n*f));
+    cb("rgb("+k(r)+","+k(g)+","+k(b)+")","rgb("+Math.round(k(r)*.4)+","+Math.round(k(g)*.4)+","+Math.round(k(b)*.4)+")");
+  }catch(e){}};
+  im.src=url;
+}
+function arVidPause(){AR.lyOpen=1;document.querySelectorAll("video").forEach(v=>{if(!v.paused){v.pause();v.dataset.arp="1"}})}
+function arVidResume(){AR.lyOpen=0;document.querySelectorAll("video[data-arp]").forEach(v=>{delete v.dataset.arp;v.play().catch(()=>{})});if(AR.vo&&AR.vbox)AR.vbox.forEach(b=>{if(!b._v){AR.vo.unobserve(b);AR.vo.observe(b)}})}
 async function arLyr(id){
   const t=AR.byId&&AR.byId[id];if(!t)return;
-  const old=$("arLy");if(old)old.remove();
+  const old=$("arLy");if(old){old.remove();arVidResume()}
+  arVidPause();
+  const prevOv=document.body.style.overflow;document.body.style.overflow="hidden";
   const o=document.createElement("div");o.id="arLy";
-  const close=()=>{document.removeEventListener("keydown",kd);o.remove()};
+  const close=()=>{document.removeEventListener("keydown",kd);o.remove();document.body.style.overflow=prevOv;arVidResume()};
   const kd=e=>{if(e.key==="Escape")close()};document.addEventListener("keydown",kd);
   o.onclick=e=>{if(e.target===o)close()};
   const box=document.createElement("div");box.className="box";
   const hd=document.createElement("div");hd.className="hd";
+  const cv=document.createElement("div");cv.className="cv";if(t.img)cv.style.backgroundImage="url('"+t.img.replace(/'/g,"%27")+"')";
+  const tx=document.createElement("div");tx.className="tx";
   const h=document.createElement("strong");h.textContent=t.name;
   const sub=document.createElement("div");sub.className="sub";sub.textContent=(t.by?t.by+" \u00b7 ":"")+t.album;
+  tx.append(h,sub);
+  const xb=document.createElement("button");xb.type="button";xb.className="x";xb.setAttribute("aria-label","Close");xb.textContent="\u2715";xb.onclick=close;
+  hd.append(cv,tx,xb);
   const bar=document.createElement("div");bar.className="bar";
-  hd.append(h,sub,bar);
-  const pre=document.createElement("pre");pre.textContent="Looking for lyrics...";
-  box.append(hd,pre);o.appendChild(box);document.body.appendChild(o);
+  const pre=document.createElement("pre");pre.className="msg";pre.textContent="Looking for lyrics...";
+  const bg=document.createElement("div");bg.className="bg";if(t.img)bg.style.backgroundImage="url('"+t.img.replace(/'/g,"%27")+"')";
+  box.append(bg,hd,bar,pre);o.appendChild(box);document.body.appendChild(o);
+  arTint(t.img,(c1,c2)=>{box.style.setProperty("--t1",c1);box.style.setProperty("--t2",c2)});
   const mk=(txt,fn)=>{const b=document.createElement("button");b.type="button";b.textContent=txt;b.onclick=fn;bar.appendChild(b);return b};
   AR.ly=AR.ly||{};
   let d;
   try{d=id in AR.ly?AR.ly[id]:(AR.ly[id]=await arFindLyrics(t))}
-  catch(e){pre.textContent="Couldn't reach the lyrics sites ("+(e.message||"error")+"). They may be blocking requests from this page.";mk("Close",close);return}
+  catch(e){pre.textContent="Couldn't reach the lyrics sites ("+(e.message||"error")+"). They may be blocking requests from this page.";return}
   if(!document.body.contains(o))return;
-  if(!d||d.inst){pre.textContent=d&&d.inst?"This song is listed as instrumental.":"No lyrics found for this song.";mk("Close",close);return}
+  if(!d||d.inst){pre.textContent=d&&d.inst?"This song is listed as instrumental.":"No lyrics found for this song.";return}
   const plain=d.plain||d.synced.replace(/^\s*(\[\d+:\d+(?:[.:]\d+)?\]\s*)+/gm,"").trim();
   let mode="plain";
-  const show=()=>{pre.textContent=mode==="lrc"?d.synced:plain;if(bp)bp.classList.toggle("on",mode==="plain");if(bl)bl.classList.toggle("on",mode==="lrc")};
+  pre.className="";
+  const show=()=>{pre.textContent=mode==="lrc"?d.synced:plain;pre.scrollTop=0;if(bp)bp.classList.toggle("on",mode==="plain");if(bl)bl.classList.toggle("on",mode==="lrc")};
   let bp=null,bl=null;
   if(d.synced){bp=mk("Plain",()=>{mode="plain";show()});bl=mk("Synced (LRC)",()=>{mode="lrc";show()})}
+  const gap=document.createElement("span");gap.className="gap";bar.appendChild(gap);
   const cp=mk("Copy",()=>{try{navigator.clipboard.writeText(pre.textContent);cp.textContent="Copied";setTimeout(()=>cp.textContent="Copy",1200)}catch(e){}});
-  mk("Close",close);
-  const src=document.createElement("span");src.className="sub";src.style.alignSelf="center";src.textContent="via "+d.src;bar.appendChild(src);
   show();
 }
 function arQueue(el){const id=el.dataset.id;if(id in arC){arShow(el,arC[id]);return}AR.q.push(el);arPump()}
@@ -2848,18 +3576,64 @@ function arShow(el,url){
   if(!url)return;
   const box=el.querySelector(".arm");
   const lk=el.querySelector(".lk");
-  if(lk&&!lk.querySelector(".cvfs")){const fb=document.createElement("button");fb.type="button";fb.className="cvfs";fb.textContent="Full size";fb.onclick=()=>arFull(url);lk.appendChild(fb)}
+  if(!box.querySelector(".cvfs")){const fb=document.createElement("button");fb.type="button";fb.className="cvfs";fb.title="Full size";fb.setAttribute("aria-label","Full size");fb.innerHTML='<svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>';fb.onclick=e=>{e.stopPropagation();arFull(url)};box.appendChild(fb)}
   if(/\.(jpe?g|png)(\?|$)/i.test(url)){const im=box.querySelector("img");if(im)im.src=url;return}
-  const v=document.createElement("video");
-  v.muted=true;v.loop=true;v.autoplay=true;v.playsInline=true;v.setAttribute("playsinline","");
-  v.onerror=()=>v.remove();
-  v.src=url;box.appendChild(v);
-  const b=document.createElement("span");b.className="cvb";b.textContent="Canvas";box.appendChild(b);
-  v.play().catch(()=>{});
+  box.dataset.cv=url;
+  if(!box.querySelector(".cvb")){const b=document.createElement("span");b.className="cvb";b.setAttribute("aria-hidden","true");box.appendChild(b)}
+  arVidWatch(box);
 }
+/* video manager: only a few videos exist at once, only for tiles on screen; the rest show their cover */
+const arMaxV=()=>Math.max(1,Math.floor(+LS("tracker.arMaxV"))||24);
+function arVidWatch(box){
+  AR.vbox=AR.vbox||new Set();AR.vp=AR.vp||new Set();AR.vbox.add(box);
+  if(!AR.vo)AR.vo=new IntersectionObserver(es=>es.forEach(e=>{
+    const bx=e.target;clearTimeout(bx._t);
+    if(e.isIntersecting)bx._t=setTimeout(()=>arVidOn(bx),180+Math.random()*250); /* wait: skip tiles that fly past while scrolling; jitter spreads out the start */
+    else arVidOff(bx);
+  }),{rootMargin:"60px"});
+  if(!AR.vfill)AR.vfill=()=>{
+    clearTimeout(AR.vft);
+    AR.vft=setTimeout(()=>{ /* give visible tiles without a video a chance when a slot has freed up */
+      if(AR.lyOpen||document.hidden||!AR.vbox)return;
+      for(const b of AR.vbox){if(AR.vp.size>=arMaxV())break;if(!b._v&&!b._bad&&b.isConnected){const r=b.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)arVidOn(b)}}
+    },500);
+  };
+  window.addEventListener("scroll",AR.vfill,{passive:true});
+  AR.vo.observe(box);
+}
+const arDist=bx=>{const r=bx.getBoundingClientRect();return Math.abs((r.top+r.bottom)/2-innerHeight/2)};
+function arVidOn(box){
+  if(AR.lyOpen||document.hidden||box._v||box._bad||!box.isConnected)return;
+  const r=box.getBoundingClientRect();if(r.bottom<-60||r.top>innerHeight+60)return;
+  while(AR.vp.size>=arMaxV()){
+    let far=null,fd=-1;AR.vp.forEach(x=>{const d=arDist(x);if(d>fd){fd=d;far=x}});
+    if(!far||fd<=arDist(box))return; /* everything playing is closer to the middle than this tile */
+    arVidOff(far);
+  }
+  const v=document.createElement("video");
+  v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.preload="auto";v.disablePictureInPicture=true;v.className="cvv";
+  v.onerror=()=>{box._bad=1;arVidOff(box)};
+  v.addEventListener("playing",()=>v.classList.add("on"),{once:true});
+  v.src=box.dataset.cv;box.appendChild(v);
+  box._v=v;AR.vp.add(box);v.play().catch(()=>{});
+}
+function arVidOff(box){
+  clearTimeout(box._t);const v=box._v;if(!v)return;
+  v.pause();v.removeAttribute("src");v.load();v.remove();box._v=null;AR.vp&&AR.vp.delete(box);
+}
+function arVidReset(){
+  if(AR.vo)AR.vo.disconnect();
+  if(AR.vbox)AR.vbox.forEach(b=>{clearTimeout(b._t);if(b._v){b._v.pause();b._v.removeAttribute("src");b._v.remove();b._v=null}});
+  if(AR.vbox)AR.vbox.clear();if(AR.vp)AR.vp.clear();
+}
+document.addEventListener("visibilitychange",()=>{
+  if(!AR.vp)return;
+  if(document.hidden)AR.vp.forEach(b=>b._v&&b._v.pause());
+  else if(!AR.lyOpen)AR.vp.forEach(b=>b._v&&b._v.play().catch(()=>{}));
+});
 function arFull(url){
-  const o=document.createElement("div");o.id="arFs";
-  const close=()=>{document.removeEventListener("keydown",kd);o.remove()};
+  const o=document.createElement("div");o.id="arFs";arVidPause();
+  const close=()=>{document.removeEventListener("keydown",kd);o.remove();arVidResume()};
   const kd=e=>{if(e.key==="Escape")close()};
   document.addEventListener("keydown",kd);
   const m=/\.(jpe?g|png)(\?|$)/i.test(url)?document.createElement("img"):document.createElement("video");
@@ -2870,20 +3644,73 @@ function arFull(url){
   o.append(m,x);document.body.appendChild(o);
   if(m.play)m.play().catch(()=>{});
 }
+/* ---------- artist presets (saved in pass_state id 8, per account) ---------- */
+let arPL=[],arPreDB=true;
+const arPreNorm=d=>{const l=d&&Array.isArray(d.list)?d.list:[];return l.filter(x=>x&&typeof x.aid==="string"&&/^[A-Za-z0-9]{22}$/.test(x.aid)).slice(0,30).map(x=>({aid:x.aid,name:String(x.name||"Artist").slice(0,60),img:typeof x.img==="string"?x.img:"",sort:["album","new","old","name","long","short","artist"].includes(x.sort)?x.sort:"album"}))};
+function arPreRender(){
+  const el=$("arPresets");if(!el)return;
+  const cur=AR.d&&AR.d.id;
+  el.innerHTML=arPL.map((p,i)=>`<button type="button" data-i="${i}" class="${p.aid===cur?"on":""}" title="Load ${esc(p.name)}"><span class="setn">${esc(p.name)}</span></button>`).join("");
+}
+function arPreSave(){
+  LS("tracker.arPresets",JSON.stringify({list:arPL}));
+  if(arPreDB)track(sb.from("pass_state").upsert({id:8,data:{list:arPL}},{onConflict:"user_id,id"}));
+}
+async function loadArPresets(){
+  let d=null;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",8).maybeSingle();
+    if(r.error)arPreDB=false;else{arPreDB=true;d=r.data&&r.data.data}
+  }catch(e){arPreDB=false}
+  let local=null;try{local=JSON.parse(LS("tracker.arPresets")||"null")}catch(e){}
+  if(!arPreDB)d=local;
+  else if(!d&&local&&arPreNorm(local).length){d=local;track(sb.from("pass_state").upsert({id:8,data:{list:arPreNorm(local)}},{onConflict:"user_id,id"}))}
+  arPL=arPreNorm(d);arPreRender();
+}
+const arPCur=()=>{const id=AR.d&&AR.d.id;return arPL.findIndex(x=>x.aid===id)};
+$("arPresets").onclick=e=>{
+  const b=e.target.closest("button[data-i]");if(!b)return;const p=arPL[+b.dataset.i];if(!p)return;
+  $("arId").value=p.aid;AR.sort=p.sort;LS("tracker.arSort",p.sort);
+  arLoad();
+};
+$("arPMan").onclick=()=>{const d=$("arPMgr");d.open=!d.open;$("arPMan").classList.toggle("on",d.open)};
+$("arPNew").onclick=async()=>{
+  const msg=$("arMsg"),want=arId($("arId").value);
+  if(want&&(!AR.d||AR.d.id!==want)){if(AR.loading)return;await arLoad()}
+  const D=AR.d;
+  if(!D||!D.a||(want&&D.id!==want)){msg.textContent="Paste an artist link or ID above and press Load first, then Add Artist.";return}
+  const old=arPL.find(x=>x.aid===D.id);
+  if(old){msg.textContent="\u201c"+old.name+"\u201d is already saved.";arPreRender();return}
+  arPL.push({aid:D.id,name:(D.a.name||"Artist").slice(0,60),img:"",sort:AR.sort||LS("tracker.arSort")||"album"});
+  arPL=arPL.slice(0,30);arPreRender();arPreSave();
+  msg.textContent="Added \u201c"+D.a.name+"\u201d.";
+};
+$("arPRen").onclick=()=>{
+  const nm=$("arPName").value.trim().slice(0,60),i=arPCur();if(!nm||i<0)return;
+  arPL[i].name=nm;$("arPName").value="";arPreRender();arPreSave();
+};
+$("arPDel").onclick=()=>{
+  const i=arPCur();if(i<0)return;const p=arPL[i];
+  ask("Remove \u201c"+p.name+"\u201d from your artists?",()=>{arPL.splice(i,1);arPreRender();arPreSave()});
+};
 $("arSave").onclick=()=>{
   LS("tracker.spotify",JSON.stringify({id:$("arCid").value.trim(),sec:$("arSec").value.trim()}));
-  LS("tracker.arEx",$("arEx").value);LS("tracker.arCap",String(Math.max(0,Math.floor(+$("arCap").value)||0)));LS("tracker.arSkip",$("arSkip").checked?"1":"0");AR.tok="";$("arMsg").textContent="Saved.";
+  LS("tracker.arEx",$("arEx").value);LS("tracker.arCap",String(Math.max(0,Math.floor(+$("arCap").value)||0)));LS("tracker.arSkip",$("arSkip").checked?"1":"0");LS("tracker.arVoom",$("arVoom").checked?"1":"0");LS("tracker.arMaxV",String(Math.max(1,Math.floor(+$("arMaxV").value)||24)));AR.tok="";$("arMsg").textContent="Saved.";
 };
 $("arClrW").onclick=()=>{AR.nextAt=0;try{localStorage.removeItem(AR_UNTIL)}catch(e){}$("arMsg").textContent="Saved wait cleared. If Spotify's quota is still used up, the next request will be refused again."};
 arUsage();
 $("arClrS").onclick=()=>{AC=new Map();try{localStorage.removeItem(AC_KEY);localStorage.removeItem(AL_KEY)}catch(e){}$("arMsg").textContent="Song cache cleared."};
 $("arClrL").onclick=()=>{try{localStorage.removeItem(AL_KEY)}catch(e){}$("arMsg").textContent="Release lists cleared. The next Load re-checks Spotify for new releases; saved songs stay cached."};
+const arExPrev=()=>{const v=($("arEx").value||"").trim();$("arExPrev").textContent=v?v:"none"};
+$("arExSave").onclick=()=>{LS("tracker.arEx",$("arEx").value);arExPrev();$("arMsg").textContent="Exclude words saved."};
+$("arEx").addEventListener("input",arExPrev);
+$("arShowSet").onchange=()=>{LS("tracker.arShowSet",$("arShowSet").checked?"1":"0");arSetVis()};
 $("arClr").onclick=()=>{arC={};arSaveC();$("arMsg").textContent="Canvas cache cleared."};
 const arGoClick=()=>{if(AR.loading){arStop();return}if(AR.stopped&&AR.stoppedFeat&&AR.d){arFeat();return}arLoad()};
 $("arGo").onclick=arGoClick;
 $("arId").addEventListener("input",()=>{if(!AR.loading){AR.stopped=0;AR.stoppedFeat=0;arBtn()}});
 $("arId").addEventListener("keydown",e=>{if(e.key==="Enter")arGoClick()});
-(function(){const c=arCfg();$("arCid").value=c.id||"";$("arSec").value=c.sec||"";$("arEx").value=LS("tracker.arEx")||"live, remix, remixes";$("arCap").value=arCap();$("arSkip").checked=LS("tracker.arSkip")!=="0";$("arId").value=LS("tracker.artistId")||"";if(!c.id||!c.sec)$("arSetup").open=true})();
+(function(){const c=arCfg();$("arCid").value=c.id||"";$("arSec").value=c.sec||"";$("arEx").value=LS("tracker.arEx")||"live, remix, remixes";arExPrev();$("arCap").value=arCap();$("arMaxV").value=arMaxV();$("arSkip").checked=LS("tracker.arSkip")!=="0";$("arVoom").checked=LS("tracker.arVoom")!=="0";$("arId").value=LS("tracker.artistId")||"";if((!c.id||!c.sec)&&LS("tracker.arVoom")==="0")$("arSetup").open=true})();
 
 /* ---------- quest tracker ---------- */
 const QT_LOG_MAX=200,QT_QUICK=[1,5,10,25,50,100];
@@ -3411,12 +4238,12 @@ function renderOverview(){
     ["event","Event Tracker","Event rewards and collectables.",()=>{const c=evCfg(),t=evSum(c,evS().c);return[nfmt(t.n),"rewards \u00b7 "+c.name]}],
     ["buys","Market","What you've bought and sold.",()=>{const n=mkTotal("sold")-mkTotal("buy");return[(n<0?"-":"")+nfmt(Math.abs(n)),"net"]}],
     ["map","Artist Guesser","Narrow down the mystery artist from hints.",()=>[nfmt((AG.guesses||[]).length),"guesses logged"]],
-    ["sound","Sound Guesser","Guess the mystery song from its sound.",()=>["Coming Soon",""]],
+    ["artist","Artist Overview","Browse an artist's releases and songs.",()=>["Open","releases and songs"]],
     ["info","Wiki","Drop rates, eligibility and reference tables.",()=>["Open","reference"]],
-    ["artist","Artist Overview","Browse an artist's releases and songs.",()=>isRyan?["Open","needs Spotify setup"]:["Coming Soon",""]]
+    ["sound","Sound Guesser","Guess the mystery song from its sound.",()=>["Coming Soon",""]]
   ];
   g.innerHTML=T.map(([id,name,desc,f])=>{
-    const lock=(id==="artist"&&!isRyan)||id==="sound",v=safe(f);
+    const lock=id==="sound",v=safe(f);
     const TB={shiny:"tbShiny",epic:"tbEpic",gempic:"tbGempic",quest:"tbQuest",pass:"tbPass",event:"tbEvent",map:"tbMap",sound:"tbSound",buys:"tbBuys",info:"tbInfo",artist:"tbArtist"};
     const ic=$(TB[id])&&$(TB[id]).querySelector(".ti svg");
     return `<div class="card tile${lock?" soon":""}" data-go="${id}" role="button" tabindex="${lock?-1:0}"${lock?' aria-disabled="true"':""}><span class="ti">${ic?ic.outerHTML:""}</span><div class="tb"><div class="tn">${name}</div><div class="tl">${desc}</div><div class="tv">${v[0]}</div><div class="tl">${v[1]}</div></div></div>`;
@@ -3425,7 +4252,7 @@ function renderOverview(){
 }
 $("ovGrid").addEventListener("click",e=>{
   const t=e.target.closest("[data-go]");if(!t)return;
-  const id=t.getAttribute("data-go");if((id==="artist"&&!isRyan)||id==="sound")return;
+  const id=t.getAttribute("data-go");if(id==="sound")return;
   showTab(id);
 });
 $("ovGrid").addEventListener("keydown",e=>{
@@ -3436,11 +4263,10 @@ $("ovGrid").addEventListener("keydown",e=>{
 
 /* ---------- website versions ----------
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
-   The first entry is shown as the current version in Profile. Every update is a new 0.1.X. */
+   The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
-["0.1.17","2026-10-08",["Epic Tracker: removed the page option; every epic now shows on one page"]],
-["0.1.16","2026-10-08",["Epic Tracker: added an All holders switch that shows every holder on each epic without expanding it"]],
-["0.1.15","2026-10-08",["Epic Tracker: added a Completion switch to show or hide the Completion card; when off, the top row shows only three cards"]],
+["0.3","2026-10-09",["Artist Overview is now available to everyone","Artist Overview now sits next to Artist Guesser in the menu, and Sound Guesser moved to the end"]],
+["0.2","2026-10-09",["Every tab got a UI and interface refresh"]],
 ["0.1.14","2026-10-08",["Redesigned the Epic Tracker to match the Shiny Tracker and home page: collection tabs with counts, stat cards, icon controls, rarity chips and card rows with a done checkbox","Completion card is now a toggle: it tracks epics you check off and, when switched on, shows only the ones left","Added pagination (25 / 50 / 100 per page)"]],
 ["0.1.13","2026-10-08",["Redesigned the Shiny Tracker to look better and match the new home page: stat cards, an Inventory & Sales section with icon cards, and Results Breakdown, Inventory & Totals, Prices and Recent Activity sections","On mobile, all 6 Inventory & Sales categories now show at once in a compact 2-column grid"]],
 ["0.1.12","2026-10-08",["Fixed the top bar on mobile","Collapsed bar: menu buttons sit in one row and the bar shrinks to fit its icons and is centered","Collapsed bar with many icons: menu buttons stacked on the left, icons fill the bar in even columns","Expanded bar: buttons stretch to fill the row instead of leaving empty space"]],
@@ -3477,7 +4303,7 @@ async function checkUser(){
     $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];
     isRyan=em.split("@")[0].toLowerCase()==="ryan";applyArtistLock();
     const prev=LS("tracker.uid");
-    if(prev&&prev!==uid)["pass","event","gempic","quest","buys","notes","notesHtml","nav","rarity","numberless","set"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
+    if(prev&&prev!==uid)["pass","event","gempic","quest","buys","notes","notesHtml","nav","rarity","numberless","set","startTab"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
   }catch(e){}
 }
@@ -3486,12 +4312,26 @@ function startTab(restore){
   let t="home";
   try{
     if(restore&&sessionStorage.getItem("tracker.opened")){const x=LS("tracker.tab");if(x&&x!=="sound"&&$("tab-"+x))t=x}
+    else{const p=LS("tracker.startTab")||"home",x=p==="last"?LS("tracker.tab"):p;if(x&&x!=="sound"&&$("tab-"+x))t=x}
     sessionStorage.setItem("tracker.opened","1");
   }catch(e){}
   return t;
 }
+const START_OPTS=[["home","Home (default)"],["last","The last tab I used"],["shiny","ShinyTracker"],["epic","EpicTracker"],["gempic","GempicTracker"],["quest","QuestTracker"],["pass","PassTracker"],["event","EventTracker"],["map","ArtistGuesser"],["artist","Artist Overview"],["buys","Market"],["info","Wiki"]];
+function initStartSel(){
+  const sel=$("startSel");if(!sel)return;
+  let cur=LS("tracker.startTab")||"home";
+  sel.innerHTML="";
+  START_OPTS.forEach(([v,l])=>{const o=document.createElement("option");o.value=v;o.textContent=l;sel.appendChild(o)});
+  if(!Array.from(sel.options).some(o=>o.value===cur))cur="home";
+  sel.value=cur;
+}
+$("startSel").onchange=()=>{
+  LS("tracker.startTab",$("startSel").value);
+  const m=$("startMsg");m.textContent="Saved. The website will open on "+$("startSel").selectedOptions[0].textContent.replace(" (default)","")+" next time you start it.";
+};
 async function enter(restore){
-  await checkUser();
+  await checkUser();initStartSel();
   $("login").hidden=true;$("app").hidden=false;
   showTab(startTab(restore));setView("epic");
   calc();renderLog();
