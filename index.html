@@ -103,7 +103,7 @@ div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 #epicList,#holderList{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:8px}
 #epicList .mk.open,#holderList .mk.open,#epicList .empty,#holderList .empty{grid-column:1/-1}
 @media (max-width:640px){#epicList,#holderList{grid-template-columns:1fr}}
-#tab-epic{max-width:1000px;margin:0 auto}
+#tab-epic{max-width:1100px;margin:0 auto}
 #epTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:10px}
 #epTop .card{padding:12px 8px;text-align:center;border-top:3px solid var(--ac)}
 #epTop .lbl{font-size:12px;font-weight:600;margin-bottom:4px}
@@ -180,22 +180,6 @@ input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
 #qtFRar button,#qtFTyp button{background:var(--card)}
 #qtFRar button:not(.on) .pill,#qtFTyp button:not(.on) .pill{opacity:.5}
 #qtFRar button.on,#qtFTyp button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
-#qtDrop th,#qtDrop td{padding:4px 6px;text-align:left}
-#qtDrop th:nth-child(n+2),#qtDrop td:nth-child(n+2){text-align:right}
-#qtDrop{width:100%;border-collapse:collapse}
-@media (max-width:520px){
-#qtDrop,#qtExp{table-layout:fixed;width:100%}
-#qtDrop th,#qtDrop td{padding:4px 1px;font-size:11px;white-space:nowrap}
-#qtDrop th:first-child,#qtDrop td:first-child{width:21%;white-space:normal}
-#qtDrop th:nth-child(n+2),#qtDrop td:nth-child(n+2){width:19.75%}
-#qtExp th,#qtExp td{padding:5px 2px;font-size:12px;letter-spacing:0}
-#qtExp th:first-child,#qtExp td:first-child{width:31%}
-#qtExp th:nth-child(2),#qtExp td:nth-child(2){width:27%;white-space:nowrap}
-#qtExp th:nth-child(n+3),#qtExp td:nth-child(n+3){width:21%}
-#qtDrop .pill,#qtExp .pill{font-size:10px;padding:1px 5px;margin:1px 2px 1px 0}
-#qtDrop th .pill{font-size:9px;padding:1px 3px;margin:0}
-#qtDrop .pill::before,#qtExp .pill::before{display:none}
-}
 }
 .arGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:10px}
 #arLy{position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;padding:14px}
@@ -410,39 +394,9 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 .chk input{width:22px;height:22px;padding:0;margin:0;flex:none}
 .r-exclusive{background:linear-gradient(135deg,#6a665f,#4a4742);color:#fff}
 #tab-gempic{max-width:860px;margin:0 auto}
-#gpTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#gpTop .card{padding:12px 8px;text-align:center}
-#gpTop .lbl{font-size:12px;font-weight:600;min-height:2.6em;margin-bottom:4px}
-#gpTop .val{font-size:clamp(20px,6vw,34px);font-weight:700;line-height:1.15;overflow-wrap:anywhere}
-#gpTop .note{font-size:11px;min-height:1.4em}
-#gpCtl input#gpCost{font-size:20px;font-weight:600}
-#gpCtl .steps{margin-top:12px;align-items:stretch}
-#gpCtl .steps button{padding:12px 0;font-size:16px}
-#gpAmt{flex:1;min-width:0;width:0;margin:0;padding:4px 2px;font-size:15px;text-align:center}
-#gpExp{width:100%;border-collapse:collapse}
-#gpExp th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
-#gpExp td{padding:6px 4px;border-top:1px solid var(--bd);font-size:14px}
-#gpExp th:nth-child(n+2),#gpExp td:nth-child(n+2){text-align:right}
-#gpExp td:first-child,#gpExp td:last-child{font-weight:600}
-#gpBtns{display:flex;gap:8px;flex-wrap:wrap}
-#gpBtns button{margin:12px 0 0}
+
 #tab-quest{max-width:860px;margin:0 auto}
-#qtTop{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#qtTop .card{padding:12px 8px;text-align:center}
-#qtTop .lbl{font-size:12px;font-weight:600;min-height:2.6em;margin-bottom:4px}
-#qtTop .val{font-size:clamp(20px,6vw,34px);font-weight:700;line-height:1.15;overflow-wrap:anywhere}
-#qtTop .note{font-size:11px;min-height:1.4em}
-#qtCtl .seg{margin:6px 0 10px}
-#qtCtl .steps{margin-top:12px;align-items:stretch}
-#qtCtl .steps button{padding:12px 0;font-size:16px}
-#qtAmt{flex:1;min-width:0;width:0;margin:0;padding:4px 2px;font-size:15px;text-align:center}
-#qtExp{width:100%;border-collapse:collapse}
-#qtExp th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);text-align:left;padding:4px}
-#qtExp td{padding:6px 4px;border-top:1px solid var(--bd);font-size:14px}
-#qtExp th:nth-child(n+2),#qtExp td:nth-child(n+2){text-align:right}
-#qtExp td:first-child{font-weight:600}
-#qtBtns{display:flex;gap:8px;flex-wrap:wrap}
-#qtBtns button{margin:12px 0 0}
+
 
 /* ---- motion & polish ---- */
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -558,6 +512,24 @@ div.tabs.icons .navbtns{grid-template-columns:repeat(6,minmax(0,1fr))}
 div.tabs .navctl{grid-column:auto;flex-direction:column;justify-content:center;margin:0;padding:0 6px 0 0;border-right:1px solid var(--bd)}
 }
 div.tabs .navctl button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+/* collapsed (icons only): keep the three menu buttons in one row, on mobile too, so the bar stays short */
+div.tabs.icons .navctl{flex-direction:row;gap:3px;padding:0 6px 0 0}
+@media (max-width:700px){
+div.tabs.icons .navctl button{width:24px;height:24px}
+/* shrink the collapsed bar to its icons instead of leaving empty grid columns on the right */
+div.tabs.icons{width:fit-content;max-width:100%;margin-left:auto;margin-right:auto}
+div.tabs.icons .navbtns{display:flex;flex-wrap:wrap;justify-content:flex-start;flex:0 1 auto}
+div.tabs.icons .navbtns>button{flex:0 0 auto;padding:8px}
+/* expanded bar: up to 4 per row, and the buttons stretch to fill the row instead of leaving empty columns */
+div.tabs:not(.icons) .navbtns{display:flex;flex-wrap:wrap;justify-content:center}
+div.tabs:not(.icons) .navbtns>button{flex:1 1 calc(25% - 4px);min-width:0}
+/* collapsed with lots of icons (class "many"): menu buttons stacked on the left, icons in an even 6-column grid filling the bar */
+div.tabs.icons.many{width:auto}
+div.tabs.icons.many .navctl{flex-direction:column;gap:3px;padding:0 6px 0 0}
+div.tabs.icons.many .navctl button{width:26px;height:26px}
+div.tabs.icons.many .navbtns{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));flex:1 1 0;gap:3px}
+div.tabs.icons.many .navbtns>button{padding:8px 0;justify-content:center}
+}
 div.tabs.editing{border-color:var(--ac)}
 div.tabs.editing .navbtns>button{padding-top:26px;cursor:default}
 div.tabs.editing .navbtns>button.nhid{opacity:.45;border:1px dashed var(--bd)}
@@ -620,6 +592,316 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 #evShop td{padding:6px 4px;border-bottom:1px solid var(--bd);font-size:14px}
 #evShop tr:last-child td{border-bottom:0}
 #evShop td:last-child{text-align:right;font-weight:600}
+
+/* ---------- shiny tracker (fresh look, matches the home page) ---------- */
+#tab-shiny #outputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
+@media (min-width:720px){#tab-shiny #outputs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+#tab-shiny .sc,#tab-epic .sc{--c:var(--ac);min-width:0;overflow:hidden;padding:12px;border-radius:14px;text-align:left;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:flex;flex-direction:column}
+.sct{display:flex;gap:8px;align-items:center}
+.sci{--c:var(--ac);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 20%,transparent)}
+.sci svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.scl{font-size:12px;font-weight:600;line-height:1.2}
+.scv{font-size:clamp(18px,5.4vw,25px);font-weight:700;color:var(--c);line-height:1.15;margin-top:8px;white-space:nowrap}
+.scv.neg{color:var(--neg)}
+.scs{font-size:11px;color:var(--mut);margin-top:4px;line-height:1.3}
+#tab-shiny .shSec{margin-top:14px;padding:14px;border-radius:14px}
+.shHead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.shHead b{font-size:17px}
+.shChip{margin-left:auto;font-size:12px;color:var(--ac);border:1px solid color-mix(in srgb,var(--ac) 35%,var(--bd));background:color-mix(in srgb,var(--ac) 12%,transparent);padding:3px 10px;border-radius:999px;white-space:nowrap}
+#tab-shiny #inputs{grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+#tab-shiny #inv{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+#tab-shiny .shcat{padding:12px;border-radius:12px;background:var(--bg)}
+.shh{display:flex;gap:10px;align-items:center}
+.sht{min-width:0}
+#tab-shiny .shcat label{font-size:14px;font-weight:600;color:var(--tx);margin:0}
+.shr{display:flex;gap:8px;margin-top:10px;align-items:stretch}
+#tab-shiny .shr input{flex:1;width:auto;min-width:0;font-size:20px;font-weight:600;padding:10px 12px;border-radius:10px}
+#tab-shiny .shr button{flex:none;width:44px;margin:0;padding:0;font-size:22px;font-weight:600;line-height:1;border-radius:10px}
+#tab-shiny .shr .shp{background:var(--ac);color:#fff;border-color:var(--ac)}
+#tab-shiny .shr .shm:active{background:var(--bd)}
+#tab-shiny .shr .shp:active{filter:brightness(.85)}
+.shs{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--mut)}
+#tab-shiny .shs input{width:56px;flex:none;font-size:13px;padding:3px 4px;text-align:center}
+#tab-shiny>details{--c:var(--ac);margin-top:10px;padding:0;border-radius:14px;overflow:hidden}
+#tab-shiny>details>summary{display:flex;align-items:center;gap:10px;padding:12px 14px;text-transform:none;letter-spacing:0;font-size:15px;color:var(--tx);list-style:none}
+#tab-shiny>details>summary::-webkit-details-marker{display:none}
+#tab-shiny>details>summary::after{content:"";margin-left:auto;flex:none;width:8px;height:8px;border-right:2px solid var(--mut);border-bottom:2px solid var(--mut);transform:rotate(-45deg);transition:transform .15s}
+#tab-shiny>details[open]>summary::after{transform:rotate(45deg)}
+#tab-shiny .dsum{min-width:0}
+#tab-shiny .dsum b{display:block;font-size:15px;font-weight:600}
+#tab-shiny>details>:not(summary){margin-left:14px;margin-right:14px}
+#tab-shiny>details>:last-child{margin-bottom:14px}
+/* mobile: show all 6 Inventory & Sales categories at once (2 columns, compact cards) */
+@media (max-width:520px){
+#tab-shiny .shSec{padding:10px}
+#tab-shiny .shHead{margin-bottom:10px}
+#tab-shiny #inputs{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#tab-shiny #inputs .shcat{padding:10px;min-width:0}
+#tab-shiny #inputs .shh{gap:8px;align-items:flex-start}
+#tab-shiny #inputs .shh .sci{width:28px;height:28px;border-radius:8px}
+#tab-shiny #inputs .shh .sci svg{width:16px;height:16px}
+#tab-shiny #inputs .shcat label{font-size:12.5px;line-height:1.25;display:block;overflow-wrap:anywhere}
+#tab-shiny #inputs .shr{flex-wrap:wrap;gap:6px;margin-top:8px}
+#tab-shiny #inputs .shr input{flex:1 1 100%;width:100%;font-size:18px;padding:8px 10px}
+#tab-shiny #inputs .shr button{flex:1 1 0;width:auto;height:36px;font-size:20px}
+#tab-shiny #inputs .shs{margin-top:6px;gap:6px}
+#tab-shiny #inputs .shs span{white-space:nowrap}
+#tab-shiny #inputs .shs input{flex:1;width:auto;min-width:0}
+}
+
+/* ---------- epic tracker (redesign: matches home + shiny tracker) ---------- */
+#tab-epic .epSets{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:4px 0 14px}
+#tab-epic #setBar{display:contents}
+#tab-epic .epSets button{margin:0;height:46px;padding:0 18px;border-radius:12px;display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;letter-spacing:.02em;text-transform:uppercase;background:var(--card);border:1px solid var(--bd);color:var(--tx);flex:0 1 auto}
+#tab-epic .epSets button svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-epic .epSets button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-epic .epSets button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));box-shadow:0 0 0 1px var(--ac),0 4px 16px color-mix(in srgb,var(--ac) 30%,transparent)}
+#tab-epic .epSets .setc{padding:2px 9px;border-radius:999px;font-size:13px;font-weight:600;letter-spacing:0;background:color-mix(in srgb,var(--mut) 22%,var(--bg));color:var(--tx)}
+#tab-epic .epSets button.on .setc{background:color-mix(in srgb,#000 38%,var(--card))}
+#tab-epic .epSets .dash{border-style:dashed;color:var(--mut);font-weight:600;text-transform:none;letter-spacing:0}
+#tab-epic .epSets .man{margin-left:auto;font-weight:600;text-transform:none;letter-spacing:0}
+#tab-epic .epSets .man.on{background:var(--card);box-shadow:none}
+#tab-epic #setMgr{margin:0 0 14px;padding:12px;border-radius:12px}
+#tab-epic #setMgr:not([open]){display:none}
+#tab-epic #setMgr>summary{display:none}
+@media (max-width:520px){#tab-epic .epSets button{height:42px;padding:0 12px;font-size:13px}}
+
+/* stat cards */
+#tab-epic #epTop{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+@media (max-width:860px){#tab-epic #epTop{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}}
+#tab-epic .sc{padding:16px 18px;position:relative;box-sizing:border-box}
+#tab-epic .sc.side{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i b" "i s";column-gap:14px;align-items:center;align-content:center;text-align:left;font:inherit;color:var(--tx);width:100%;margin:0}
+#tab-epic .sc.side .sci{grid-area:i;width:52px;height:52px;border-radius:14px}
+#tab-epic .sc.side .sci svg{width:28px;height:28px}
+#tab-epic .sc.side .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
+#tab-epic .sc.side .scv{grid-area:v;margin-top:2px;font-size:clamp(24px,4.4vw,34px);color:var(--tx)}
+#tab-epic .sc.side .scs{grid-area:s;margin-top:4px}
+#tab-epic .epComp .scv{color:var(--c)}
+#tab-epic .epbar{grid-area:b;height:8px;border-radius:999px;margin-top:8px;background:color-mix(in srgb,var(--c) 16%,var(--bd));overflow:hidden}
+#tab-epic .epbar i{display:block;height:100%;border-radius:999px;background:var(--c);transition:width .4s ease}
+@media (max-width:520px){
+#tab-epic .sc{padding:12px}
+#tab-epic .sc.side{grid-template-areas:"i l" "v v" "b b" "s s";column-gap:10px}
+#tab-epic .sc.side .sci{width:34px;height:34px;border-radius:10px}
+#tab-epic .sc.side .sci svg{width:20px;height:20px}
+#tab-epic .sc.side .scl{font-size:12px;font-weight:600;line-height:1.2}
+#tab-epic .sc.side .scv{margin-top:8px;font-size:clamp(20px,6.4vw,26px)}
+}
+
+/* controls */
+#tab-epic .epCtl{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:0 0 12px}
+#tab-epic .epGrp{display:flex;gap:8px}
+#tab-epic .epb{margin:0;height:46px;padding:0 15px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:15px;font-weight:600;white-space:nowrap;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tab-epic .epb svg,#tab-epic .epSearchW svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-epic .epb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-epic .epb.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 28%,var(--card));box-shadow:0 0 0 1px var(--ac)}
+#tab-epic .epSearchW{position:relative;display:block;flex:1 1 120px;min-width:0;margin:0}
+#tab-epic .epSearchW svg{position:absolute;left:15px;top:14px;color:var(--mut);pointer-events:none}
+#tab-epic .epSearchW input{height:46px;padding:0 14px 0 44px;font-size:15px;border-radius:12px;background:var(--card)}
+#tab-epic #epSort{flex:none;height:46px;max-width:none;padding:0 40px 0 16px;font-size:15px;border-radius:12px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px}
+@media (max-width:700px){
+#tab-epic .epGrp{flex:1 1 100%}
+#tab-epic .epGrp .epb{flex:1 1 0;padding:0 8px;font-size:14px}
+#tab-epic .epSearchW{flex:1 1 100%}
+#tab-epic #epSort,#tab-epic #epToggle{flex:1 1 0}
+}
+
+#tab-epic .epMetaR{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-left:auto}
+#tab-epic .epOpt{margin:0;height:34px;padding:0 12px 0 8px;border-radius:999px;display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;background:var(--card);border:1px solid var(--bd);color:var(--mut)}
+#tab-epic .epOpt .sw{position:relative;width:30px;height:18px;border-radius:999px;background:color-mix(in srgb,var(--mut) 35%,var(--bg));transition:background .15s}
+#tab-epic .epOpt .sw::after{content:"";position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .15s}
+#tab-epic .epOpt[aria-checked="true"]{color:var(--tx);border-color:color-mix(in srgb,#a78bfa 55%,var(--bd))}
+#tab-epic .epOpt[aria-checked="true"] .sw{background:#a78bfa}
+#tab-epic #epAllOpt[aria-checked="true"]{border-color:color-mix(in srgb,var(--ac) 55%,var(--bd))}
+#tab-epic #epAllOpt[aria-checked="true"] .sw{background:var(--ac)}
+#tab-epic .epOpt[aria-checked="true"] .sw::after{transform:translateX(12px)}
+#tab-epic #epTop.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){#tab-epic #epTop.three{grid-template-columns:repeat(2,minmax(0,1fr))}#tab-epic #epTop.three .sc:last-child{grid-column:1/-1}}
+/* rarity chips + summary */
+#tab-epic .epMeta{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin:0 0 12px}
+#tab-epic #epBar{margin:0;gap:10px}
+#tab-epic #epSum{margin:0;font-size:14px}
+#tab-epic #epBar button{margin:0;height:40px;padding:0 12px 0 16px;border-radius:999px;border:1px solid var(--bd);background:var(--card);color:var(--mut);font-size:14px;gap:9px}
+#tab-epic #epBar button.all{color:var(--tx);font-weight:600}
+#tab-epic #epBar button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));color:var(--tx)}
+#tab-epic #epBar button.all.on{background:var(--ac);color:#fff}
+#tab-epic #epBar .mkn{padding:1px 9px;border-radius:999px;font-size:13px;color:inherit;background:color-mix(in srgb,var(--mut) 22%,var(--bg))}
+#tab-epic #epBar button.all.on .mkn{background:rgba(0,0,0,.35);color:#fff}
+#tab-epic #epBar .pill{margin:0;padding:0;border-color:transparent;background:transparent;font-size:14px;opacity:1}
+#tab-epic #epBar button:not(.on):has(.r-rare){border-color:color-mix(in srgb,#f08a2c 45%,var(--bd));background:color-mix(in srgb,#f08a2c 12%,var(--card))}
+#tab-epic #epBar button:not(.on):has(.r-uncommon){border-color:color-mix(in srgb,#8b3cf0 45%,var(--bd));background:color-mix(in srgb,#8b3cf0 12%,var(--card))}
+#tab-epic #epBar button:not(.on):has(.r-common){border-color:color-mix(in srgb,#3ddc5a 45%,var(--bd));background:color-mix(in srgb,#3ddc5a 10%,var(--card))}
+
+/* rows */
+#epicList .mk,#holderList .mk{border-radius:12px}
+#epicList .mk{container:epc/inline-size}
+#epicList .mk.done{border-color:color-mix(in srgb,var(--ac) 40%,var(--bd))}
+#epicList .mkh,#holderList .mkh{padding:14px 16px;gap:14px}
+#epicList .epck{display:grid;place-items:center;margin:-4px;padding:4px;cursor:pointer}
+#epicList .epck input{-webkit-appearance:none;appearance:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+#epicList .epck input:hover{border-color:var(--ac)}
+#epicList .epck input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+#epicList .epck input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+#epicList .epm{display:flex;align-items:center;gap:12px;min-width:0}
+#epicList .epn{display:flex;align-items:center;gap:10px;min-width:0;flex:0 1 auto;max-width:55%}
+#epicList .epn .mkt{display:block;-webkit-line-clamp:unset;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px;font-weight:700}
+#epicList .epm .mks.all{flex:1 1 0;min-width:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+#epicList .mkc{font-size:20px;font-weight:700}
+@container epc (max-width:480px){
+#epicList .epm{display:block}
+#epicList .epn{max-width:none;flex-wrap:wrap}
+#epicList .epm .mks.all{margin-top:4px}
+}
+
+#epicList.showall .epm{display:block}
+#epicList.showall .epn{max-width:none;flex-wrap:wrap}
+#epicList.showall .epm .mks.all{margin-top:5px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.45}
+
+/* ---------- gempic tracker (redesign: matches home + shiny + epic) ---------- */
+#tab-gempic{max-width:960px;margin:0 auto}
+#gpTop,#qtTop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+:is(#tab-gempic,#tab-quest) .gc{--c:var(--ac);position:relative;box-sizing:border-box;min-width:0;overflow:hidden;padding:16px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i s";column-gap:14px;align-items:center;align-content:center;transition:border-color .2s,box-shadow .2s}
+@media (hover:hover){:is(#tab-gempic,#tab-quest) .gc:hover{border-color:var(--c);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}}
+:is(#tab-gempic,#tab-quest) .gc .sci{--c:inherit;grid-area:i;width:52px;height:52px;border-radius:14px}
+:is(#tab-gempic,#tab-quest) .gc .sci svg{width:28px;height:28px}
+:is(#tab-gempic,#tab-quest) .gc .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
+:is(#tab-gempic,#tab-quest) .gc .scv{grid-area:v;margin-top:2px;font-size:clamp(26px,4.4vw,34px);color:var(--tx)}
+:is(#tab-gempic,#tab-quest) .gc .scs{grid-area:s;margin-top:2px;font-size:12px}
+@media (max-width:700px){#gpTop,#qtTop{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#gpTop .gc:last-child,#qtTop .gc:last-child{grid-column:1/-1}}
+@media (max-width:520px){
+:is(#tab-gempic,#tab-quest) .gc{padding:12px;grid-template-areas:"i l" "v v" "s s";column-gap:10px}
+:is(#tab-gempic,#tab-quest) .gc .sci{width:34px;height:34px;border-radius:10px}
+:is(#tab-gempic,#tab-quest) .gc .sci svg{width:20px;height:20px}
+:is(#tab-gempic,#tab-quest) .gc .scl{font-size:12px;font-weight:600;line-height:1.2}
+:is(#tab-gempic,#tab-quest) .gc .scv{margin-top:8px;font-size:clamp(22px,7vw,28px)}
+}
+
+:is(#tab-gempic,#tab-quest) .gsec{margin-top:14px;padding:16px;border-radius:14px}
+:is(#tab-gempic,#tab-quest) .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px;min-width:0}
+:is(#tab-gempic,#tab-quest) .gh .sci{width:42px;height:42px;border-radius:12px}
+:is(#tab-gempic,#tab-quest) .gh .gt{min-width:0;flex:1}
+:is(#tab-gempic,#tab-quest) .gh .gt b{display:block;font-size:17px}
+:is(#tab-gempic,#tab-quest) .gh .gt span{display:block;font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
+:is(#tab-gempic,#tab-quest) .gh .gx{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest) .gsec{padding:12px}:is(#tab-gempic,#tab-quest) .gh .gx .gtxt{display:none}}
+
+/* settings panels */
+:is(#tab-gempic,#tab-quest) .gpan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.3fr);gap:12px}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest) .gpan{grid-template-columns:1fr}}
+:is(#tab-gempic,#tab-quest) .gp1{box-sizing:border-box;min-width:0;margin:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,background .15s,box-shadow .15s}
+:is(#tab-gempic,#tab-quest) .gp1>.gl{font-size:13px;font-weight:500;color:var(--mut);margin-bottom:10px}
+:is(#tab-gempic,#tab-quest) .gcost{display:flex;gap:8px}
+:is(#tab-gempic,#tab-quest) .gcost input{flex:1;width:auto;min-width:0;height:46px;padding:0 14px;font-size:20px;font-weight:600;border-radius:10px}
+:is(#tab-gempic,#tab-quest) .gcost button{margin:0;flex:none;width:46px;height:46px;padding:0;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:600;line-height:1}
+:is(#tab-gempic,#tab-quest) .gcost .gplus{background:var(--ac);color:#fff;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest) .gcost .gplus:hover{filter:brightness(1.1)}
+:is(#tab-gempic,#tab-quest) label.grr{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--tx);font-size:15px}
+:is(#tab-gempic,#tab-quest) label.grr:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest) label.grr:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
+:is(#tab-gempic,#tab-quest) .grr input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+:is(#tab-gempic,#tab-quest) .grr input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest) .grr input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+:is(#tab-gempic,#tab-quest) .grr b{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
+:is(#tab-gempic,#tab-quest) .grr small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+:is(#tab-gempic,#tab-quest) .gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+:is(#tab-gempic,#tab-quest) .gq button{margin:0;height:46px;padding:0;border-radius:10px;font-size:15px;font-weight:600}
+:is(#tab-gempic,#tab-quest) .gq button.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
+
+/* action row */
+:is(#tab-gempic,#tab-quest) .gact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:12px;margin-top:12px}
+:is(#tab-gempic,#tab-quest) .gb{margin:0;box-sizing:border-box;min-height:48px;padding:8px 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:600;line-height:1.2;text-align:center;background:color-mix(in srgb,var(--bg) 70%,var(--card));color:var(--tx);border:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest) .gb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-gempic,#tab-quest) .gb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest) .gb.go{font-size:16px;color:#fff;border-color:#8b5cf6;background:linear-gradient(135deg,#8b5cf6,#6d4ae8);box-shadow:0 4px 16px color-mix(in srgb,#8b5cf6 38%,transparent)}
+:is(#tab-gempic,#tab-quest) .gb.go:hover{filter:brightness(1.12)}
+:is(#tab-gempic,#tab-quest) .gb.hit svg{color:#c084fc}
+:is(#tab-gempic,#tab-quest) .gb:disabled{opacity:.5;cursor:not-allowed}
+:is(#tab-gempic,#tab-quest) .gb.sm{min-height:38px;padding:0 14px;font-size:13px;border-radius:10px}
+:is(#tab-gempic,#tab-quest) .gb.sq{width:38px;padding:0}
+:is(#tab-gempic,#tab-quest) .gb.sq svg{transition:transform .2s}
+:is(#tab-gempic,#tab-quest) .gb.sq[aria-expanded="false"] svg{transform:rotate(180deg)}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest) .gact{grid-template-columns:1fr 1fr}:is(#tab-gempic,#tab-quest) .gb.go{grid-column:1/-1;order:-1}:is(#tab-gempic,#tab-quest) .gb.hit{grid-column:1/-1;order:3}}
+
+/* tables + pills */
+:is(#tab-gempic,#tab-quest) .gtbl{border:1px solid var(--bd);border-radius:12px;overflow:auto;max-width:100%;background:color-mix(in srgb,var(--bg) 70%,var(--card))}
+:is(#tab-gempic,#tab-quest) #gpLogBody .gtbl{max-height:340px}
+:is(#tab-gempic,#tab-quest) .gtbl table{width:100%;border-collapse:collapse}
+:is(#tab-gempic,#tab-quest) .gtbl th{position:sticky;top:0;z-index:1;padding:11px 16px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;white-space:nowrap;background:color-mix(in srgb,var(--mut) 13%,var(--card));border:0}
+:is(#tab-gempic,#tab-quest) .gtbl td{padding:10px 16px;font-size:14px;text-align:left;white-space:nowrap;border:0;border-top:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest) .gtbl .c{text-align:center}:is(#tab-gempic,#tab-quest) .gtbl .r{text-align:right}
+:is(#tab-gempic,#tab-quest) .gtbl td.b{font-weight:600}
+:is(#tab-gempic,#tab-quest) .gtbl tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+:is(#tab-gempic,#tab-quest) .gtbl td.gempty{text-align:center;color:var(--mut);padding:20px 16px;white-space:normal}
+:is(#tab-gempic,#tab-quest) .gtbl .x{margin:0!important}
+:is(#tab-gempic,#tab-quest) .rrm{display:none}
+:is(#tab-gempic,#tab-quest) .gres{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:13px;font-weight:500;background:color-mix(in srgb,var(--mut) 16%,var(--bg));color:var(--tx)}
+:is(#tab-gempic,#tab-quest) .gres::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
+:is(#tab-gempic,#tab-quest) .gres.hit{background:color-mix(in srgb,#34d399 18%,var(--bg));color:#34d399;font-weight:600}
+:is(#tab-gempic,#tab-quest) .gres.hit::before{background:#34d399}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest) .gtbl th,:is(#tab-gempic,#tab-quest) .gtbl td{padding:9px 8px;font-size:12.5px}:is(#tab-gempic,#tab-quest) #gpLog td:nth-child(2){white-space:normal;min-width:84px}:is(#tab-gempic,#tab-quest) #gpLog .rrc{display:none}:is(#tab-gempic,#tab-quest) #gpLog .rrm{display:inline;color:var(--ac)}:is(#tab-gempic,#tab-quest) #gpLog th{letter-spacing:.04em}:is(#tab-gempic,#tab-quest) .gres{font-size:12px;padding:2px 9px 2px 7px;gap:5px}:is(#tab-gempic,#tab-quest) .gres::before{width:7px;height:7px}}
+
+/* ---------- quest tracker (redesign: same building blocks as gempic) ---------- */
+#tab-quest{max-width:960px;margin:0 auto}
+#tab-quest .gpan{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width:820px){#tab-quest .gpan{grid-template-columns:1fr}}
+#tab-quest .qrow{display:flex;align-items:center;gap:12px;margin:0;padding:8px 0;font-size:15px;color:var(--tx);cursor:pointer}
+#tab-quest .qrow+.qrow{border-top:1px solid color-mix(in srgb,var(--bd) 60%,transparent)}
+#tab-quest .qrow>span:first-of-type{min-width:0;line-height:1.3}
+#tab-quest .qrow input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+#tab-quest .qrow input:hover{border-color:var(--ac)}
+#tab-quest .qrow input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+#tab-quest .qrow input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+#tab-quest .qinfo{display:inline-grid;place-items:center;flex:none;color:var(--mut);cursor:help}
+#tab-quest .qinfo svg,#tab-quest .gl svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-quest .gl{display:flex;align-items:center;gap:8px}
+#tab-quest .gl svg{color:var(--ac)}
+#tab-quest .gq{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:520px){#tab-quest .gq{grid-template-columns:repeat(3,minmax(0,1fr))}}
+#tab-quest .gact{grid-template-columns:minmax(0,1.3fr) minmax(0,2.4fr) minmax(0,.8fr)}
+@media (max-width:820px){#tab-quest .gact{grid-template-columns:1fr 1fr}}
+#tab-quest #qtAmt{box-sizing:border-box;width:100%;min-width:0;min-height:48px;margin:0;padding:0 8px;border-radius:12px;text-align:center;font-size:18px;font-weight:600}
+#tab-quest .gb.go{border-color:#10b981;background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 16px color-mix(in srgb,#10b981 38%,transparent)}
+#tab-quest .qsub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+#tab-quest .qlog{margin-left:auto;font-size:13px;color:var(--mut)}
+#tab-quest #qtDisc{margin:12px 0 0;font-size:12.5px}
+#tab-quest tr.qtot td{background:color-mix(in srgb,#34d399 8%,transparent)}
+#tab-quest .qtwo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:14px;margin-top:14px;align-items:start}
+#tab-quest .qtwo .gsec{margin-top:0}
+@media (max-width:820px){#tab-quest .qtwo{grid-template-columns:1fr;gap:0;margin-top:0}#tab-quest .qtwo .gsec{margin-top:14px}}
+#tab-quest .qprog{display:flex;align-items:center;gap:16px;margin-top:4px}
+#tab-quest .qbar{flex:1;height:12px;border-radius:999px;background:color-mix(in srgb,#a78bfa 16%,var(--bd));overflow:hidden}
+#tab-quest .qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#a78bfa);transition:width .4s ease}
+#tab-quest .qprog b{font-size:26px;font-weight:700;min-width:64px;text-align:right}
+#tab-quest #qtBarNote{margin:14px 0 0;font-size:13.5px;color:var(--mut);line-height:1.5}
+#tab-quest #qtLogT{max-height:none}
+#tab-quest .qlogw{max-height:300px}
+#tab-quest td.qpc{white-space:normal;min-width:190px}
+#tab-quest .qpt{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
+#tab-quest .qpt strong{overflow-wrap:anywhere}
+#tab-quest .qsubl{font-size:12px;color:var(--mut);margin-top:3px}
+#tab-quest .qact{display:inline-flex;gap:6px}
+#tab-quest #qtForm .lbl,#tab-quest #qtForm label{font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
+#tab-quest #qtForm input{height:44px;padding:0 12px;border-radius:10px}
+#tab-quest #qtForm .seg{margin:0 0 4px}
+#tab-quest #qtForm .seg button{min-height:42px;border-radius:10px}
+#tab-quest #qtForm .note{margin:8px 0 0}
+#tab-quest .qfa{display:flex;gap:10px;margin-top:18px}
+#tab-quest .qfa .gb{flex:1}#tab-quest .qfa .gb.go{flex:2}
+#tab-quest .qacm{display:none}
+@media (max-width:520px){
+#tab-quest #qtLogT td:nth-child(2){white-space:normal;min-width:84px}
+#tab-quest #qtDrop th,#tab-quest #qtDrop td,#tab-quest #qtExp th,#tab-quest #qtExp td{padding:9px 4px;font-size:11.5px}
+#tab-quest #qtDrop th,#tab-quest #qtExp th{white-space:normal;letter-spacing:.03em;font-size:10px;vertical-align:bottom}
+#tab-quest #qtDrop td:first-child,#tab-quest #qtExp td:first-child{white-space:normal}
+#tab-quest #qtDrop .pill,#tab-quest #qtExp .pill{font-size:10px;padding:1px 6px;margin:1px 2px 1px 0}
+#tab-quest #qtDrop th .pill{font-size:9px;padding:1px 5px;margin:0}
+#tab-quest #qtDrop .pill::before,#tab-quest #qtExp .pill::before{display:none}
+#tab-quest #qtHist th:nth-child(3),#tab-quest #qtHist td:nth-child(3){display:none}
+#tab-quest .qacm{display:block}
+#tab-quest td.qpc{min-width:0}
+#tab-quest #qtHist th,#tab-quest #qtHist td{padding:9px 6px}
+#tab-quest #qtHist .qsubl{white-space:normal}
+}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -646,19 +928,23 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 
 <div id="tab-shiny">
 
-<h2>Inputs</h2>
-<div class="grid" id="inputs"></div>
+<div id="outputs"></div>
 
-<h2>Results</h2>
-<div class="grid" id="outputs"></div>
-<details id="more"><summary>Inventory &amp; Totals</summary>
-<div class="grid" id="inv"></div>
-<div class="grid" id="invOut" style="margin-top:10px"></div>
+<section class="card shSec">
+<div class="shHead"><span class="sci" style="--c:var(--ac)"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><b>Inventory &amp; Sales</b><span class="shChip">6 categories</span></div>
+<div class="grid" id="inputs"></div>
+</section>
+
+<details id="resBox" style="--c:#60a5fa"><summary><span class="sci"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><span class="dsum"><b>Results Breakdown</b></span></summary>
+<div class="grid" id="invOut"></div>
 </details>
-<details id="priceBox"><summary>Prices</summary>
+<details id="more" style="--c:#fb923c"><summary><span class="sci"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><span class="dsum"><b>Inventory &amp; Totals</b></span></summary>
+<div class="grid" id="inv"></div>
+</details>
+<details id="priceBox" style="--c:#f5b83d"><summary><span class="sci"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="dsum"><b>Prices</b></span></summary>
 <div class="grid" id="prices"></div>
 </details>
-<details id="histBox"><summary id="histSum">History</summary>
+<details id="histBox" style="--c:#94a3b8"><summary><span class="sci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span class="dsum"><b id="histTitle">Recent Activity</b></span></summary>
 <div id="reportBody"></div>
 <h2 style="margin:16px 0 0">All changes</h2>
 <ul class="log" id="hist"></ul>
@@ -668,67 +954,95 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 
 </div>
 <div id="tab-epic" hidden>
-<div class="seg" id="setBar"></div>
-<div class="grid" id="epTop">
-<div class="card"><div class="lbl" id="epL1">Epics</div><div class="val" id="epV1">0</div></div>
-<div class="card"><div class="lbl" id="epL2">Known holders</div><div class="val" id="epV2">0</div></div>
-<div class="card"><div class="lbl" id="epL3">Unknown slots</div><div class="val" id="epV3">0</div></div>
-</div>
-<div class="seg" id="nfBar"><button type="button" data-nf="num" class="on">Numbered</button><button type="button" data-nf="nl">Numberless</button></div>
-<div class="seg" id="viewBar"><button type="button" id="vEpic">By Epic</button><button type="button" id="vHolder">By Holder</button></div>
-<div class="mkrow"><input id="epSearch" maxlength="300" type="search" placeholder="Search epic or holder..."><select id="epSort" aria-label="Sort"></select><button class="small" id="epToggle" type="button" style="margin:0">Expand all</button></div>
-<div class="mkf" id="epBar"></div>
-<div class="note" id="epSum"></div>
-<div id="epicList"></div>
-<div id="holderList" hidden></div>
-<div class="addrow"><input id="newEpic" maxlength="300" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button><button type="button" id="addNL">Add numberless</button></div>
+<div class="epSets"><div id="setBar"></div><button type="button" id="setNew" class="dash"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add Collection</button><button type="button" id="setManage" class="man"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Manage</button></div>
 <details id="setMgr"><summary>Manage sets</summary>
 <input id="setName" maxlength="300" placeholder="Set name">
 <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="small" id="setAdd" type="button" style="margin:0">Add set</button><button class="small" id="setRen" type="button" style="margin:0">Rename current</button><button class="small" id="setDel" type="button" style="margin:0">Delete current</button></div>
 </details>
+<div class="grid" id="epTop"></div>
+<div class="epCtl">
+<div class="epGrp" id="nfBar"><button type="button" data-nf="num" class="epb on"><svg viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>Numbered</button><button type="button" data-nf="nl" class="epb"><svg viewBox="0 0 24 24"><path d="M12 12c-2-2.7-3.5-4-5.5-4a4 4 0 0 0 0 8c2 0 3.5-1.3 5.5-4zm0 0c2 2.7 3.5 4 5.5 4a4 4 0 0 0 0-8c-2 0-3.5 1.3-5.5 4z"/></svg>Numberless</button></div>
+<div class="epGrp" id="viewBar"><button type="button" id="vEpic" class="epb"><svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>By Epic</button><button type="button" id="vHolder" class="epb"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.4c2 .8 3.5 2.6 3.5 5.6"/></svg>By Holder</button></div>
+<label class="epSearchW"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="epSearch" maxlength="300" type="search" placeholder="Search epic or holder..."></label>
+<select id="epSort" aria-label="Sort"></select>
+<button class="epb" id="epToggle" type="button"><svg viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span id="epToggleT">Expand all</span></button>
+</div>
+<div class="epMeta"><div class="mkf" id="epBar"></div><div class="epMetaR"><button type="button" id="epAllOpt" class="epOpt" role="switch" aria-checked="false" title="Show every holder on each epic without expanding it"><span class="sw" aria-hidden="true"></span>All holders</button><button type="button" id="epCompOpt" class="epOpt" role="switch" aria-checked="true" title="Show or hide the Completion card"><span class="sw" aria-hidden="true"></span>Completion</button><div class="note" id="epSum"></div></div></div>
+<div id="epicList"></div>
+<div id="holderList" hidden></div>
+<div class="addrow"><input id="newEpic" maxlength="300" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button><button type="button" id="addNL">Add numberless</button></div>
 <datalist id="holderDL"></datalist>
 </div>
 
 <div id="tab-gempic" hidden>
-<div class="grid" id="gpTop">
-<div class="card"><div class="lbl">Gems spent since last gempic</div><div class="val" id="gpGems">0</div><div class="note" id="gpGemsNote"></div></div>
-<div class="card"><div class="lbl">Times gem box rolled</div><div class="val" id="gpRolls">0</div><div class="note" id="gpRollsNote"></div></div>
-<div class="card"><div class="lbl">Odds of a gempic next roll</div><div class="val" id="gpOdds">0.4%</div><div class="note" id="gpOddsNote"></div></div>
+<div id="gpTop">
+<div class="gc" style="--c:#c084fc"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="scl">Gems spent since last gempic</div><div class="scv val" id="gpGems">0</div><div class="scs" id="gpGemsNote">Total gems spent</div></div>
+<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></span><div class="scl">Times gem box rolled</div><div class="scv val" id="gpRolls">0</div><div class="scs" id="gpRollsNote">Total rolls</div></div>
+<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><div class="scl">Odds of a gempic next roll</div><div class="scv val" id="gpOdds">0.4%</div><div class="scs" id="gpOddsNote"></div></div>
 </div>
-<h2>Roll</h2>
-<div class="card" id="gpCtl">
-<label for="gpCost">Gems spent per roll (this box)</label>
-<input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 500">
-<label class="chk"><input type="checkbox" id="gpReroll"> Reroll (second chance on every roll)</label>
-<div class="note" id="gpRrNote"></div>
-<div class="steps"><button type="button" id="gpUndo" aria-label="Undo rolls">&minus; Undo</button><button type="button" id="gpRoll" style="flex:3" aria-label="Add rolls">+ Roll</button><input id="gpAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of rolls to add or undo"></div>
-<div class="note">Each roll adds the gem cost above to the total, so you can change the cost between boxes without changing earlier rolls.</div>
+
+<section class="card gsec" id="gpCtl">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Roll Settings</b><span id="gpRrNote"></span></div></div>
+<div class="gpan">
+<div class="gp1"><div class="gl">Gems spent per roll (this box)</div><div class="gcost"><input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" aria-label="Gems spent per roll"><button type="button" id="gpCostDn" aria-label="Decrease gem cost">&minus;</button><button type="button" id="gpCostUp" class="gplus" aria-label="Increase gem cost">+</button></div></div>
+<label class="gp1 grr" for="gpReroll"><input type="checkbox" id="gpReroll"><span><b>Reroll (second chance on every roll)</b><small id="gpRrSub"></small></span></label>
+<div class="gp1"><div class="gl">Quick Add Rolls</div><div class="gq" id="gpQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div></div>
 </div>
-<div id="gpBtns"><button class="small" id="gpHit" type="button">Got a gempic! Save and reset</button><button class="small" id="gpReset" type="button">Reset without saving</button></div>
-<h2>Average to get 1 gempic</h2>
-<div class="card"><div class="note" id="gpExpNote" style="margin:0 0 6px"></div><table id="gpExp"></table></div>
-<details id="gpHistBox"><summary id="gpHistSum">History</summary><div class="note" id="gpAvg" style="margin:0 0 6px"></div><div id="gpHist"></div></details>
+<div class="gact">
+<button type="button" class="gb" id="gpUndo"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>Undo Last Roll</button>
+<button type="button" class="gb go" id="gpRoll"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="gpRollT">Roll</span></button>
+<button type="button" class="gb hit" id="gpHit"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg>Got a gempic? Save and reset</button>
+<button type="button" class="gb" id="gpReset"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
+</div>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Average to Get 1 Gempic</b><span id="gpExpNote"></span></div></div>
+<div class="gtbl"><table id="gpExp"></table></div>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div class="gt"><b>Roll History</b><span>A log of your recent rolls.</span></div><div class="gx"><button type="button" class="gb sm" id="gpLogClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear History</span></button><button type="button" class="gb sm sq" id="gpLogToggle" aria-expanded="true" aria-label="Collapse roll history"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="gpLogBody"><div class="gtbl"><table id="gpLog"></table></div></div>
+</section>
+
+<section class="card gsec" id="gpHistBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="gt"><b id="gpHistSum">Gempic History</b><span id="gpAvg"></span></div></div>
+<div id="gpHist"></div>
+</section>
 </div>
 
 <div id="tab-quest" hidden>
-<div class="grid" id="qtTop">
-<div class="card"><div class="lbl">Quests since last pull</div><div class="val" id="qtQuests">0</div><div class="note" id="qtQuestsNote"></div></div>
-<div class="card"><div class="lbl">Odds of a pull next quest</div><div class="val" id="qtOdds">0.225%</div><div class="note" id="qtOddsNote"></div></div>
-<div class="card"><div class="lbl">Chance of at least one so far</div><div class="val" id="qtSoFar">0%</div><div class="note" id="qtSoFarNote"></div></div>
+<div id="qtTop">
+<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><div class="scl">Quests since last pull</div><div class="scv val" id="qtQuests">0</div><div class="scs" id="qtQuestsNote"></div></div>
+<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><div class="scl">Odds of a pull next quest</div><div class="scv val" id="qtOdds">0.225%</div><div class="scs" id="qtOddsNote"></div></div>
+<div class="gc" style="--c:#a78bfa"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span><div class="scl">Chance of at least one so far</div><div class="scv val" id="qtSoFar">0%</div><div class="scs" id="qtSoFarNote">Across all quests logged</div></div>
 </div>
-<h2>Quest</h2>
-<div class="note" id="qtDisc" style="margin:0 0 8px"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong.</div>
-<div class="card" id="qtCtl">
-<label class="chk"><input type="checkbox" id="qtReroll"> Reroll (second chance on every quest)</label>
-<label class="chk"><input type="checkbox" id="qtExLy"> Exclude lyrics from calculations</label>
-<div class="note" id="qtRrNote"></div>
-<table id="qtDrop" style="margin:8px 0"></table>
-<div class="steps"><button type="button" id="qtUndo" aria-label="Undo quests">&minus; Undo</button><button type="button" id="qtAdd" style="flex:3" aria-label="Add quests">+ Quest</button><input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add or undo"></div>
-<div class="note" id="qtLog"></div>
+
+<section class="card gsec" id="qtCtl">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Quest Settings &amp; Controls</b><span id="qtRrNote"></span></div></div>
+<div class="gpan">
+<div class="gp1">
+<label class="qrow" for="qtReroll"><input type="checkbox" id="qtReroll"><span>Reroll (second chance on every quest)</span><span class="qinfo" title="Each quest gets a second chance at every drop."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<label class="qrow" for="qtExLy"><input type="checkbox" id="qtExLy"><span>Exclude lyrics from calculations</span><span class="qinfo" title="Only epics count as a pull. Lyric odds are left out of the math."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
 </div>
-<div id="qtBtns"><button class="small" id="qtHit" type="button">Got a pull!</button><button class="small" id="qtReset" type="button">Reset without saving</button></div>
-<div class="card" id="qtForm" hidden>
-<div class="lbl" id="qtFormTitle" style="margin:0 0 6px">Log your pull</div>
+<div class="gp1"><div class="gl"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Quick Add</div><div class="gq" id="qtQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="25">25</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div></div>
+</div>
+<div class="gact">
+<button type="button" class="gb" id="qtUndo" aria-label="Undo quests"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg><span id="qtUndoT">Undo Last Quest</span></button>
+<button type="button" class="gb go" id="qtAdd" aria-label="Add quests"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="qtAddT">Add Quest</span></button>
+<input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add">
+</div>
+<div class="qsub">
+<button type="button" class="gb hit sm" id="qtHit"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg>Got a pull? Save and reset</button>
+<button type="button" class="gb sm" id="qtReset"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
+<span class="qlog" id="qtLog"></span>
+</div>
+<div class="note" id="qtDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong.</div>
+</section>
+
+<section class="card gsec" id="qtForm" hidden>
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="gt"><b id="qtFormTitle">Log your pull</b><span>Record what you pulled and how many quests it took.</span></div></div>
 <label for="qtArtist">What you pulled</label><input id="qtArtist" maxlength="120" type="text" placeholder="Artist name" autocomplete="off" style="margin-bottom:8px"><input id="qtSong" maxlength="120" type="text" placeholder="Song name" autocomplete="off">
 <div class="lbl" style="margin:8px 0 0">Type</div>
 <div class="seg" id="qtFTyp"><button type="button" data-t="s"><span class="pill r r-shiny">Shiny</span></button><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
@@ -744,10 +1058,35 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 <label for="qtTB" style="margin-top:8px">Artist quest count (before &rarr; after)</label>
 <div style="display:flex;gap:8px;align-items:center"><input id="qtTB" type="number" min="0" step="1" inputmode="numeric" placeholder="Before"><span>&rarr;</span><input id="qtTA" type="number" min="0" step="1" inputmode="numeric" placeholder="After"></div>
 <div class="note" style="margin:4px 0 0">After fills in as before + quests, but you can edit both (for example if rerolls count differently).</div>
-<div style="display:flex;gap:8px;margin-top:10px"><button class="small" id="qtFSave" type="button">Save</button><button class="small" id="qtFCancel" type="button">Cancel</button></div>
+<div class="qfa"><button type="button" class="gb go" id="qtFSave">Save</button><button type="button" class="gb" id="qtFCancel">Cancel</button></div>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Rarity Odds Per Quest</b><span>Each quest rolls every drop at once. Percentages account for your reroll setting.</span></div></div>
+<div class="gtbl"><table id="qtDrop"></table></div>
+</section>
+
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><div class="gt"><b>Average Quests to Get One</b><span>How many quests it takes on average, with and without reroll.</span></div></div>
+<div class="gtbl"><table id="qtExp"></table></div>
+</section>
+
+<div class="qtwo">
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span><div class="gt"><b>Progress to Next Pull</b><span>Based on the odds of at least one pull so far.</span></div></div>
+<div class="qprog"><div class="qbar"><i id="qtBarFill" style="width:0%"></i></div><b id="qtBarPct">0%</b></div>
+<p id="qtBarNote"></p>
+</section>
+<section class="card gsec">
+<div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div class="gt"><b>Recent Quest History</b><span>A log of your recent quest additions.</span></div><div class="gx"><button type="button" class="gb sm" id="qtLogClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear History</span></button></div></div>
+<div class="gtbl qlogw"><table id="qtLogT"></table></div>
+</section>
 </div>
-<details id="qtExpBox"><summary>Average quests to get one</summary><table id="qtExp"></table></details>
-<details id="qtHistBox"><summary id="qtHistSum">History</summary><div class="note" id="qtAvg" style="margin:0 0 6px"></div><div id="qtHist"></div></details>
+
+<section class="card gsec" id="qtHistBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="gt"><b id="qtHistSum">Pull History</b><span id="qtAvg"></span></div></div>
+<div id="qtHist"></div>
+</section>
 </div>
 
 <div id="tab-pass" hidden>
@@ -1005,7 +1344,29 @@ const fields=[
 ["oneOnePrice","1:1 + amount ($ each)","one_one_price"],["commonPrice","Common price ($)","common_price"],
 ["uncommonPrice","Uncommon price ($)","uncommon_price"],["rarePrice","Rare price ($)","rare_price"]
 ];
-const PRICE=new Set(["oneOnePrice","commonPrice","uncommonPrice","rarePrice","costEach"]);
+const SHI={
+ bars:'<svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg>',
+ cal:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>',
+ gem:'<svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M8 3l4 18M16 3l-4 18"/></svg>',
+ coins:'<svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>',
+ star:'<svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg>',
+ spark:'<svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.7 1.8 1.8.7-1.8.7L19 20l-.7-1.8-1.8-.7 1.8-.7z"/></svg>',
+ cube:'<svg viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
+ crown:'<svg viewBox="0 0 24 24"><path d="M2 8l5 4 5-8 5 8 5-4-2 12H4z"/></svg>',
+ tag:'<svg viewBox="0 0 24 24"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>',
+ bag:'<svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>',
+ clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>'
+};
+const SHCAT={
+ twoToOne:["#f5b83d","Shinies obtained through 2:1 trades.",SHI.star],
+ oneOne:["#60a5fa","Shinies obtained through 1:1 trades or +1k.",SHI.spark],
+ commons:["#94a3b8","Total commons sold and converted to profit.",SHI.cube],
+ uncommons:["#34d399","Total uncommons sold and converted to profit.",SHI.gem],
+ rares:["#a78bfa","Total rares sold and converted to profit.",SHI.crown],
+ misc:["#f472b6","Other sales with custom list prices.",SHI.tag],
+ bought:["#fb923c","Total shinies you have bought.",SHI.bag]
+};
+ const PRICE=new Set(["oneOnePrice","commonPrice","uncommonPrice","rarePrice","costEach"]);
 const hostOf=k=>k==="costEach"?"inv":PRICE.has(k)?"prices":(k==="bought"||k==="start")?"inv":"inputs";
 const short=n=>n>=1000&&n%1000===0?(n/1000)+"k":Number(n).toLocaleString("en-US");
 function updateLabels(){
@@ -1056,32 +1417,36 @@ async function flushDelta(k){
 fields.forEach(([k,l])=>{
   const host=$(hostOf(k));
   const d=document.createElement("div");d.className="card";
-  d.innerHTML=`<label for="${k}">${l}</label><input id="${k}" type="${k==="start"?"date":"number"}" inputmode="numeric">`;
+  const meta=SHCAT[k];
+  if(meta){
+    d.className="card shcat";d.style.setProperty("--c",meta[0]);
+    d.innerHTML=`<div class="shh"><span class="sci">${meta[2]}</span><div class="sht"><label for="${k}">${l}</label></div></div><div class="shr"><input id="${k}" type="number" inputmode="numeric"></div><div class="shs"><span>Change by</span></div>`;
+  }else{
+    d.innerHTML=`<label for="${k}">${l}</label><input id="${k}" type="${k==="start"?"date":"number"}" inputmode="numeric">`;
+  }
   host.appendChild(d);
   const el=d.querySelector("input");els[k]=el;
   el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k);autoStart(k)});
   el.addEventListener("change",()=>{logChange(k,committed[k],s[k]);committed[k]=s[k]});
-  if(k!=="start"&&!PRICE.has(k)){
-    const row=document.createElement("div");row.className="steps";
-    const sb2=document.createElement("div");sb2.className="sb";
+  if(meta){
+    const row=d.querySelector(".shr");
     const amt=document.createElement("input");
-    amt.type="number";amt.min="1";amt.step="1";amt.className="stepin";amt.setAttribute("inputmode","numeric");
+    amt.type="number";amt.min="1";amt.step="1";amt.className="shstep";amt.setAttribute("inputmode","numeric");
     amt.setAttribute("aria-label","Amount to add or subtract for "+k);
     amt.value=LS("tracker.step."+k)||"1";
     amt.addEventListener("change",()=>{
       const v=Math.max(1,Math.floor(Number(amt.value))||1);amt.value=v;LS("tracker.step."+k,String(v));
     });
-    [["+",1],["\u2212",-1]].forEach(([txt,dlt])=>{
-      const b=document.createElement("button");b.type="button";b.textContent=txt;
-      b.setAttribute("aria-label",(dlt>0?"Add to ":"Subtract from ")+k);
-      b.onclick=()=>{
+    [["\u2212",-1,"shm"],["+",1,"shp"]].forEach(([txt,dlt,cls])=>{
+      const bt=document.createElement("button");bt.type="button";bt.textContent=txt;bt.className=cls;
+      bt.setAttribute("aria-label",(dlt>0?"Add to ":"Subtract from ")+k);
+      bt.onclick=()=>{
         const n=Math.max(1,Math.floor(Number(amt.value))||1);
         const o=num(k);s[k]=Math.max(0,o+dlt*n);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o);autoStart(k);
       };
-      sb2.appendChild(b);
+      row.appendChild(bt);
     });
-    row.appendChild(sb2);row.appendChild(amt);
-    d.appendChild(row);
+    d.querySelector(".shs").appendChild(amt);
   }
 });
 function results(st){
@@ -1092,14 +1457,26 @@ function results(st){
   const total=profit11+sold,cost=n("bought")*n("costEach"),net=total-cost;
   return {remaining,profit11,sold,total,cost,net};
 }
+function shDays(){
+  const now=new Date();now.setHours(0,0,0,0);
+  return s.start?Math.max(1,Math.round((now-new Date(s.start+"T00:00:00"))/864e5)+1):1;
+}
+function renderStats(){
+  const r=results(s),days=shDays(),avg=r.net/days;
+  const C=[
+    ["Net Gain",fmt(r.net),r.net,"#34d399",SHI.bars,"Total profit after costs"],
+    ["Average Net Per Day",fmt(avg),avg,"#60a5fa",SHI.cal,"Based on total days tracked"],
+    ["1:1 Profit",fmt(r.profit11),0,"#a78bfa",SHI.gem,"Estimated profit from 1:1 + 1k shinies"],
+    ["Sold Profit",fmt(r.sold),0,"#f5b83d",SHI.coins,"Total from all sold items"]
+  ];
+  $("outputs").innerHTML=C.map(([l,v,sg,c,ic,sub])=>`<div class="sc" style="--c:${c}"><div class="sct"><span class="sci">${ic}</span><span class="scl">${l}</span></div><div class="scv${sg<0?" neg":""}">${v}</div><div class="scs">${sub}</div></div>`).join("");
+}
 function calc(){
   updateLabels();
-  const {remaining,profit11,sold,total,cost,net}=results(s);
-  const now=new Date();now.setHours(0,0,0,0);
-  const days=s.start?Math.max(1,Math.round((now-new Date(s.start+"T00:00:00"))/864e5)+1):1;
-  const avg=net/days;
+  const {remaining,total,cost}=results(s);
+  const days=shDays();
   const card=([l,v,sign])=>`<div class="card"><div class="lbl">${l}</div><div class="val ${sign>0?"pos":sign<0?"neg":""}">${v}</div></div>`;
-  $("outputs").innerHTML=[["Net Gain",fmt(net),net],["Average Net Per Day",fmt(avg),avg],["1:1 Profit",fmt(profit11)],["Sold Profit",fmt(sold)]].map(card).join("");
+  renderStats();
   $("invOut").innerHTML=[["Shinies Remaining",remaining,0],["Total Sales",fmt(total)],["Cost",fmt(cost)]].map(card).join("");
   $("days").textContent=s.start?`Day ${days} since ${s.start} (updates automatically with today's date)`:"Start date is set automatically when you add your first entry";
 }
@@ -1134,8 +1511,8 @@ function renderReport(){
   body.innerHTML=`<h2 style="margin:4px 0 0">Daily report, last 24 hours (${keys.length} changed)</h2><div class="rgrid">${rows}</div><h2 style="margin:14px 0 0">Effect on totals</h2><div class="rgrid w">${eff||'<div class="empty">No effect on totals.</div>'}</div>`;
 }
 function renderLog(){
-  renderReport();
-  $("histSum").textContent="History ("+log.length+")";
+  renderReport();renderStats();
+  $("histTitle").textContent="Recent Activity ("+log.length+")";
   const ul=$("hist");
   if(!log.length){ul.innerHTML='<li class="empty">No changes logged yet.</li>';return}
   ul.innerHTML=log.map(e=>{
@@ -1177,13 +1554,16 @@ let rarityDB=true,numDB=true,nf=LS("tracker.nf")==="nl"?"nl":"num",curView="epic
 const nlLS=()=>{try{return JSON.parse(LS("tracker.numberless")||"{}")}catch(e){return {}}};
 const nlSave=(e)=>{const m=nlLS();if(e.numberless)m[e.id]=1;else delete m[e.id];LS("tracker.numberless",JSON.stringify(m))};
 const eLabel=(e,j)=>e.numberless?e.name:e.name+" #"+(j+1);
+/* per-epic "done" checkmarks (feeds the Completion card); kept on this device */
+let EPD={};try{EPD=JSON.parse(LS("tracker.epdone")||"{}")||{}}catch(e){EPD={}}
+const isDone=e=>!!EPD[e.id];
 const rarLS=()=>{try{return JSON.parse(LS("tracker.rarity")||"{}")}catch(e){return {}}};
 function rarTag(r){return r?`<button type="button" class="pill r rt r-${r}" data-act="rar" title="Change rarity">${RLBL[r]}</button>`:`<button type="button" class="pill rt none" data-act="rar" title="Set rarity">Rarity</button>`}
 const sk=n=>n.toLowerCase().replace(/[^a-z0-9]/g,"");
 const cmp=(a,b)=>sk(a.name)<sk(b.name)?-1:sk(a.name)>sk(b.name)?1:a.id-b.id;
 function applySet(){epics=allEpics.filter(e=>e.set_id===curSet).sort(cmp)}
 function renderSets(){
-  $("setBar").innerHTML=sets.map(x=>`<button type="button" data-set="${x.id}" class="${x.id===curSet?"on":""}">${esc(x.name)}</button>`).join("");
+  $("setBar").innerHTML=sets.map(x=>`<button type="button" data-set="${x.id}" class="${x.id===curSet?"on":""}"><span class="setn">${esc(x.name)}</span><span class="setc">${allEpics.filter(e=>e.set_id===x.id).length}</span></button>`).join("");
   const cur=sets.find(x=>x.id===curSet);
   $("setName").placeholder=cur?"New name or new set name (current: "+cur.name+")":"Set name";
 }
@@ -1202,18 +1582,18 @@ function matches(e){
   if(!eq)return true;const t=eq.toLowerCase();
   return e.name.toLowerCase().includes(t)||(!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
 }
-const EP={open:new Set(),hopen:new Set(),f:"all",o:"az"};
+const EP={open:new Set(),hopen:new Set(),f:"all",o:"az",comp:LS("tracker.epcomp")!=="0",all:LS("tracker.epall")==="1"};
 const ESORT=[["az","A\u2013Z"],["unk","Most unknown slots"],["fill","Most holders known"]];
 const eCount=e=>{if(e.numberless)return[got(e)?1:0,1];let k=0;e.holders.forEach(h=>{if(h.trim())k++});return[k,e.holders.length]};
 const noRar='<span class="pill rt none" style="cursor:inherit">No rarity</span>';
 function epHead(e){
-  const [k,n]=eCount(e);
+  const [k,n]=eCount(e),d=isDone(e);
   const pill=e.rarity?`<span class="pill r r-${e.rarity}">${RLBL[e.rarity]}</span>`:noRar;
   let sub;
   if(e.numberless)sub=k?"Obtained":"Not obtained";
-  else{const hs=e.holders.map((h,j)=>h.trim()?"#"+(j+1)+" "+h.trim():"").filter(Boolean);sub=hs.length?hs.join(" \u00b7 "):"No holders yet"}
+  else{const hs=e.holders.map((h,j)=>h.trim()?"#"+(j+1)+" "+h.trim():"").filter(Boolean);sub=hs.length?(hs.length>3&&!EP.all?hs.slice(0,3).join(" \u00b7 ")+" \u00b7 +"+(hs.length-3)+" more":hs.join(" \u00b7 ")):"No holders yet"}
   const cnt=e.numberless?(k?"\u2713":"\u2014"):k+"/"+n;
-  return pill+`<div style="min-width:0"><div class="mkt">${esc(e.name)}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><span class="mkv" aria-hidden="true">\u25B8</span>`;
+  return `<label class="epck" title="Mark as done"><input type="checkbox" data-act="done" aria-label="Mark ${esc(e.name)} as done"${d?" checked":""}></label><div class="epm"><div class="epn"><span class="mkt">${esc(e.name)}</span>${pill}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><span class="mkv" aria-hidden="true">\u25B8</span>`;
 }
 function epBody(e){
   const t=eq.toLowerCase();
@@ -1240,17 +1620,17 @@ function epToggleLbl(){
   let all;
   if(curView==="holder"&&nf==="num"){const v=holderView();all=v.length&&v.every(h=>EP.hopen.has(h.n.toLowerCase()));$("epToggle").hidden=!v.length}
   else{const v=epView().list;all=v.length&&v.every(([e])=>EP.open.has(e.id));$("epToggle").hidden=!v.length}
-  $("epToggle").textContent=all?"Collapse all":"Expand all";
+  $("epToggleT").textContent=all?"Collapse all":"Expand all";
 }
 function renderEpics(){
   const t=eq.toLowerCase();
   const {list,base}=epView();
   const chip=(r,n)=>n||EP.f===r?`<button type="button" class="${EP.f===r?"on":""}" data-f="${r}">${r==="none"?noRar:`<span class="pill r r-${r}">${RLBL[r]}</span>`}<span class="mkn">${n}</span></button>`:"";
-  $("epBar").innerHTML=`<button type="button" class="all${EP.f==="all"?" on":""}" data-f="all">All <span class="mkn">${base.length}</span></button>`+RAR.map(r=>chip(r,base.filter(([e])=>e.rarity===r).length)).join("")+chip("none",base.filter(([e])=>!e.rarity).length);
+  $("epBar").innerHTML=`<button type="button" class="all${EP.f==="all"?" on":""}" data-f="all">All <span class="mkn">${base.length}</span></button>`+chip("none",base.filter(([e])=>!e.rarity).length)+RAR.map(r=>chip(r,base.filter(([e])=>e.rarity===r).length)).join("");
   $("epSort").innerHTML=ESORT.map(o=>`<option value="${o[0]}"${EP.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
   $("epicList").innerHTML=list.map(([e,i])=>{
     const open=EP.open.has(e.id)||(t&&!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
-    return `<div class="card ep mk${open?" open":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
+    return `<div class="card ep mk${open?" open":""}${isDone(e)?" done":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
   }).join("")||'<div class="empty">'+(epics.length?"Nothing matches your search or filter.":"No epics yet.")+'</div>';
   epToggleLbl();
 }
@@ -1258,15 +1638,27 @@ function epStats(){
   let known=0,unk=0,nn=0,ng=0,nm=0;
   epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}nm++;e.holders.forEach(h=>h.trim()?known++:unk++)});
   const nl=nf==="nl";
-  $("epL1").textContent=nl?"Numberless":"Numbered epics";$("epV1").textContent=nl?nn:nm;
-  $("epL2").textContent=nl?"Obtained":"Known holders";$("epV2").textContent=nl?ng:known;
-  $("epL3").textContent=nl?"Missing":"Unknown slots";$("epV3").textContent=nl?nn-ng:unk;
+  const scope=epics.filter(e=>!!e.numberless===nl),tot=scope.length,dn=scope.filter(isDone).length;
+  const pct=tot?Math.round(dn/tot*1000)/10:0;
+  $("epTop").classList.toggle("three",!EP.comp);
+  const IC={
+    crown:SHI.crown,spark:SHI.spark,
+    users:'<svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.4c2 .8 3.5 2.6 3.5 5.6"/></svg>',
+    frame:'<svg viewBox="0 0 24 24"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/><path d="M9 12h6"/></svg>'
+  };
+  const C=[
+    [nl?"Total Numberless":"Total Epics",nl?nn:nm,"#f59e0b",IC.crown,nl?"Numberless epics in this collection":"Numbered epics in this collection"],
+    [nl?"Obtained":"Known Holders",nl?ng:known,"#3b82f6",IC.users,nl?"Numberless epics you have":"Slots with a known holder"],
+    [nl?"Missing":"Unknown Slots",nl?nn-ng:unk,"#94a3b8",IC.frame,nl?"Numberless epics still missing":"Slots without confirmed owners"]
+  ];
+  $("epTop").innerHTML=C.map(([l,v,c,ic,sub])=>`<div class="sc side" style="--c:${c}"><span class="sci">${ic}</span><div class="scl">${l}</div><div class="scv">${v}</div><div class="scs">${sub}</div></div>`).join("")+(!EP.comp?"":
+   `<div class="sc side epComp" style="--c:#a78bfa"><span class="sci">${IC.spark}</span><div class="scl">Completion</div><div class="scv">${pct.toFixed(1)}%</div><div class="epbar"><i style="width:${pct}%"></i></div><div class="scs">${dn} / ${tot} epics</div></div>`);
 }
 function renderMeta(){
   const hm=holderMap();
-  epStats();
+  renderSets();epStats();
   const curS=sets.find(x=>x.id===curSet);
-  $("epSum").textContent=(curS?curS.name+" \u00b7 ":"")+epics.length+" epics \u00b7 "+hm.length+" users";
+  $("epSum").textContent=(curS?curS.name+" \u2022 ":"")+epics.length+" epics \u2022 "+hm.length+" users";
   $("holderDL").innerHTML=hm.map(h=>`<option value="${esc(h.n)}">`).join("");
   const hl=holderView();
   $("holderList").innerHTML=hl.map(h=>{
@@ -1309,6 +1701,11 @@ epicList.addEventListener("input",ev=>{
 epicList.addEventListener("change",ev=>{
   const c=ev.target.closest('input[type="checkbox"]');
   if(!c){renderMeta();return}
+  if(c.dataset.act==="done"){
+    const dc=c.closest(".ep"),de=epics[+dc.dataset.i];
+    if(c.checked)EPD[de.id]=1;else delete EPD[de.id];
+    LS("tracker.epdone",JSON.stringify(EPD));dc.classList.toggle("done",c.checked);epStats();return;
+  }
   const card=c.closest(".ep"),e=epics[+card.dataset.i],n=e.holders.length,v=c.checked?"1":"";
   e.holders=[v];
   track(sb.from("epic_slots").upsert({epic_id:e.id,slot:1,holder:v}));
@@ -1316,6 +1713,7 @@ epicList.addEventListener("change",ev=>{
   card.querySelector(".mkh").innerHTML=epHead(e);renderMeta();
 });
 epicList.addEventListener("click",ev=>{
+  if(ev.target.closest(".epck"))return;
   const card=ev.target.closest(".ep");if(!card)return;
   const b=ev.target.closest("button");
   if(!b){const h=ev.target.closest(".mkh");if(h)epToggleRow(card);return}
@@ -1377,6 +1775,19 @@ setNF(nf);
 $("nfBar").addEventListener("click",ev=>{const b=ev.target.closest("button");if(!b)return;setNF(b.dataset.nf);renderEpics()});
 $("vEpic").onclick=()=>setView("epic");
 $("vHolder").onclick=()=>setView("holder");
+/* switch: show / hide the Completion card (top row becomes 3 cards when off) */
+function epCompSync(){$("epCompOpt").setAttribute("aria-checked",EP.comp)}
+$("epCompOpt").onclick=()=>{
+  EP.comp=!EP.comp;LS("tracker.epcomp",EP.comp?"1":"0");
+  epCompSync();renderEpics();epStats();
+};
+epCompSync();
+/* switch: show every holder on each epic row, no expanding needed */
+function epAllSync(){$("epAllOpt").setAttribute("aria-checked",EP.all);$("epicList").classList.toggle("showall",EP.all)}
+$("epAllOpt").onclick=()=>{EP.all=!EP.all;LS("tracker.epall",EP.all?"1":"0");epAllSync();renderEpics()};
+epAllSync();
+$("setManage").onclick=()=>{const d=$("setMgr");d.open=!d.open;$("setManage").classList.toggle("on",d.open)};
+$("setNew").onclick=()=>{$("setMgr").open=true;$("setManage").classList.add("on");$("setName").focus()};
 async function addEpicNew(newNL){
   const n=$("newEpic").value.trim().slice(0,300);if(!n)return;
   let useNum=numDB;
@@ -1591,6 +2002,7 @@ function showTab(n){
   $("bk").hidden=n==="home"||n==="map"||n==="info"||n==="gempic"||n==="quest"||n==="pass"||n==="event"||n==="buys"||n==="profile"||n==="artist";
   if(n==="map")agRender();
   if(n==="home")renderOverview();
+  if(n==="event"){try{evV="trk";renderEvent()}catch(e){}} /* entering Events starts on Tracker */
   LS("tracker.tab",n);
 }
 /* menu bar: icons only + hide completely, remembered per device */
@@ -1639,6 +2051,7 @@ function applyTabs(){
   nav.order.forEach(id=>$("navBtns").appendChild($(id)));
   NAVBTN.forEach(id=>{const b=$(id),h=nav.hidden.includes(id);b.hidden=h&&!navEditing;b.classList.toggle("nhid",h&&navEditing)});
   bar.classList.toggle("editing",navEditing);
+  bar.classList.toggle("many",NAVBTN.filter(id=>!$(id).hidden).length>4);
   $("navEditBar").hidden=!navEditing;
   $("navEdit").classList.toggle("on",navEditing);
   $("navEdit").setAttribute("aria-pressed",navEditing?"true":"false");
@@ -1693,6 +2106,9 @@ $("tbArtist").onclick=()=>{if(isRyan)showTab("artist")};
 const det=$("more");
 det.open=LS("tracker.more")==="1";
 det.addEventListener("toggle",()=>LS("tracker.more",det.open?"1":"0"));
+const rdet=$("resBox");
+rdet.open=LS("tracker.res")==="1";
+rdet.addEventListener("toggle",()=>LS("tracker.res",rdet.open?"1":"0"));
 const pdet=$("priceBox");
 pdet.open=LS("tracker.prices")==="1";
 pdet.addEventListener("toggle",()=>LS("tracker.prices",pdet.open?"1":"0"));
@@ -1888,7 +2304,7 @@ const nfmt=n=>n.toLocaleString();
 function evCard(cfg,s,t,[k,n,o]){
   return `<div class="card pc"><div class="nm"><span>${esc(n)}</span><span>${o}</span></div><div class="val">${s.c[k]}</div><div class="obs">${t.n?(s.c[k]/t.n*100).toFixed(1)+"% of total":"\u2013"}</div><div class="steps"><button type="button" data-k="${k}" data-d="-1" aria-label="Remove one">\u2212</button><button type="button" data-k="${k}" data-d="1" style="flex:3" aria-label="Add one">+</button></div></div>`;
 }
-let evV=LS("tracker.evview")||"trk";
+let evV="trk"; /* always opens on Tracker (events without one fall back to their first view) */
 let evOnly={};try{evOnly=JSON.parse(LS("tracker.evonly")||"{}")||{}}catch(e){}
 function evRenderCol(cfg,s){
   const total=cfg.col.length,gn=Object.keys(s.got).length;
@@ -1968,11 +2384,11 @@ async function loadEvent(){
 }
 $("evTabs").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-ev]");if(!b)return;
-  evSel=b.dataset.ev;LS("tracker.evtab",evSel);$("evSearch").value="";renderEvent();
+  evSel=b.dataset.ev;LS("tracker.evtab",evSel);evV="trk";$("evSearch").value="";renderEvent();
 });
 $("evView").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-v]");if(!b)return;
-  evV=b.dataset.v;LS("tracker.evview",evV);renderEvent();
+  evV=b.dataset.v;renderEvent();
 });
 ["evGrid","evGridSm"].forEach(id=>$(id).addEventListener("click",ev2=>{
   const b=ev2.target.closest("button");if(!b)return;
@@ -2006,31 +2422,43 @@ $("evHist").addEventListener("click",ev2=>{
 });
 
 /* ---------- gempic tracker ---------- */
-const GP=0.004;
+const GP=0.004,GP_LOG_MAX=200,GP_QUICK=[1,5,10,50,100],GP_COSTSTEP=5;
 const gpNum=v=>Math.max(0,Math.floor(Number(v))||0);
 const gpP=x=>x?1-(1-GP)*(1-GP):GP;
 const gpPct=(p,d)=>Number((p*100).toFixed(d))+"%";
-function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,start:+d.start||0,r:Array.isArray(d.r)?d.r.map(e=>({c:gpNum(e&&e.c),x:e&&e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr)})):[]}}
+const gpWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
+function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,start:+d.start||0,seq:gpNum(d.seq),
+  r:Array.isArray(d.r)?d.r.map(e=>({c:gpNum(e&&e.c),x:e&&e.x?1:0})):[],
+  log:Array.isArray(d.log)?d.log.slice(0,GP_LOG_MAX).map(e=>({i:gpNum(e&&e.i),t:+(e&&e.t)||0,c:gpNum(e&&e.c),x:e&&e.x?1:0,h:e&&e.h?1:0})):[],
+  history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr)})):[]}}
 let gp=gpNorm(),gpDB=true,gpT=null;
 const gpSum=()=>({n:gp.r.length,gems:gp.r.reduce((a,e)=>a+e.c,0),rr:gp.r.filter(e=>e.x).length});
+let gpStep=(()=>{const v=gpNum(LS("tracker.step.gempic"));return GP_QUICK.includes(v)?v:1})();
 function renderGempic(){
-  const q=gpSum(),next=gpP(gp.reroll);
+  const q=gpSum(),next=gpP(gp.reroll),ex=1/next;
   let miss=1;gp.r.forEach(e=>miss*=1-gpP(e.x));
   $("gpGems").textContent=nfmt(q.gems);
+  $("gpGemsNote").textContent="Total gems spent";
   $("gpRolls").textContent=nfmt(q.n);
-  $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?q.rr+" of these with reroll":"";
+  $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?"Total rolls \u00b7 "+nfmt(q.rr)+" with reroll":"Total rolls";
   $("gpOdds").textContent=gpPct(next,3);
-  $("gpOddsNote").textContent=q.n?"Chance of at least one so far: "+gpPct(1-miss,1):"About 1 in "+Math.round(1/next)+" rolls";
-  $("gpRrNote").textContent=gp.reroll?"Reroll is on: each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll. The gem cost stays the same.":"Each roll has a "+gpPct(GP,1)+" chance of a gempic.";
-  const ex=1/next;
-  $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+": about "+nfmt(Math.round(ex))+" rolls per gempic.";
-  $("gpExp").innerHTML="<tr><th>Box</th><th>Pulls</th><th>Gems</th></tr>"+[5,10,20,30,40,50,60].map(c=>`<tr><td>${c} gem artist</td><td>${nfmt(Math.round(ex))}</td><td>${nfmt(Math.round(ex*c))}</td></tr>`).join("");
+  $("gpOddsNote").textContent="About 1 in "+nfmt(Math.round(ex))+" rolls"+(q.n?" \u00b7 "+gpPct(1-miss,1)+" so far":"");
+  const two="each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll.";
+  $("gpRrNote").textContent="Track your gem rolls. "+(gp.reroll?"Each roll has two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll. The gem cost stays the same.":"Each roll has a "+gpPct(GP,1)+" chance of a gempic.");
+  $("gpRrSub").textContent=gp.reroll?"Reroll is on: "+two:"Reroll is off: each roll has one chance at "+gpPct(GP,1)+".";
+  $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+", about "+nfmt(Math.round(ex))+" rolls per gempic.";
+  $("gpExp").innerHTML='<tr><th>Box</th><th class="c">Pulls</th><th class="r">Gems</th></tr>'+[5,10,20,30,40,50,60].map(c=>`<tr><td class="b">${c} gem artist</td><td class="c">${nfmt(Math.round(ex))}</td><td class="r b">${nfmt(Math.round(ex*c))}</td></tr>`).join("");
   if(document.activeElement!==$("gpCost"))$("gpCost").value=gp.cost||"";
   $("gpReroll").checked=gp.reroll;
-  $("gpHistSum").textContent="History"+(gp.history.length?" ("+gp.history.length+")":"");
+  $("gpQuick").querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.q===gpStep));
+  $("gpRollT").textContent=gpStep>1?"Roll \u00d7"+gpStep:"Roll";
+  $("gpUndo").disabled=!q.n;$("gpHit").disabled=!q.n;$("gpReset").disabled=!q.n;
+  $("gpLogClear").disabled=!gp.log.length;
+  $("gpLog").innerHTML='<tr><th>#</th><th>Roll time</th><th>Gems</th><th class="rrc">Reroll</th><th>Result</th></tr>'+(gp.log.length?gp.log.slice(0,50).map(e=>`<tr><td>${e.i}</td><td>${gpWhen(e.t)}</td><td>${nfmt(e.c)}${e.x?'<span class="rrm" title="Reroll"> \u21ba</span>':""}</td><td class="rrc">${e.x?"Yes":"No"}</td><td><span class="gres${e.h?" hit":""}">${e.h?"Gempic!":"No gempic"}</span></td></tr>`).join(""):'<tr><td colspan="5" class="gempty">No rolls logged yet. Press Roll to start tracking.</td></tr>');
   const H=gp.history;
+  $("gpHistSum").textContent="Gempic History"+(H.length?" ("+H.length+")":"");
   $("gpAvg").textContent=H.length?"Average per gempic: "+nfmt(Math.round(H.reduce((a,h)=>a+h.rolls,0)/H.length))+" rolls, "+nfmt(Math.round(H.reduce((a,h)=>a+h.gems,0)/H.length))+" gems":"No gempics saved yet.";
-  $("gpHist").innerHTML=H.map((h,i)=>`<div class="card" style="margin-top:8px"><div class="eph"><strong>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</strong><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="hrow"><span>Rolls</span><b>${nfmt(h.rolls)}</b></div><div class="hrow"><span>Gems spent</span><b>${nfmt(h.gems)}</b></div>${h.rr?`<div class="hrow"><span>Rolls with reroll</span><b>${nfmt(h.rr)}</b></div>`:""}</div>`).join("");
+  $("gpHist").innerHTML=H.length?'<div class="gtbl"><table><tr><th>Date</th><th class="c">Rolls</th><th class="c">Gems spent</th><th class="c">Reroll rolls</th><th></th></tr>'+H.map((h,i)=>`<tr><td class="b">${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</td><td class="c">${nfmt(h.rolls)}</td><td class="c">${nfmt(h.gems)}</td><td class="c">${h.rr?nfmt(h.rr):"\u2013"}</td><td class="r"><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></td></tr>`).join("")+'</table></div>':"";
 }
 function saveGempic(){
   clearTimeout(gpT);dirty.delete("gp");
@@ -2049,19 +2477,27 @@ async function loadGempic(){
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:5,data:gpNorm(local)},{onConflict:"user_id,id"}))}
   gp=gpNorm(d);renderGempic();
 }
-$("gpAmt").value=LS("tracker.step.gempic")||"1";
-const gpAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("gpAmt").value))||1));
-$("gpAmt").addEventListener("change",()=>{const v=gpAmt();$("gpAmt").value=v;LS("tracker.step.gempic",String(v))});
+$("gpQuick").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-q]");if(!b)return;
+  gpStep=+b.dataset.q;LS("tracker.step.gempic",String(gpStep));renderGempic();
+});
 $("gpCost").addEventListener("input",()=>{gp.cost=gpNum($("gpCost").value);schedGempic()});
+$("gpCostDn").onclick=()=>{gp.cost=Math.max(0,gp.cost-GP_COSTSTEP);$("gpCost").value=gp.cost||"";saveGempic();renderGempic()};
+$("gpCostUp").onclick=()=>{gp.cost+=GP_COSTSTEP;$("gpCost").value=gp.cost;saveGempic();renderGempic()};
 $("gpReroll").addEventListener("change",()=>{gp.reroll=$("gpReroll").checked;saveGempic();renderGempic()});
 $("gpRoll").onclick=()=>{
-  const n=gpAmt();if(!gp.start)gp.start=Date.now();
-  for(let i=0;i<n;i++)gp.r.push({c:gp.cost,x:gp.reroll?1:0});
+  const n=gpStep,now=Date.now();if(!gp.start)gp.start=now;
+  for(let i=0;i<n;i++){
+    gp.r.push({c:gp.cost,x:gp.reroll?1:0});
+    gp.log.unshift({i:++gp.seq,t:now,c:gp.cost,x:gp.reroll?1:0,h:0});
+  }
+  if(gp.log.length>GP_LOG_MAX)gp.log.length=GP_LOG_MAX;
   saveGempic();renderGempic();
 };
 $("gpUndo").onclick=()=>{
-  const n=Math.min(gpAmt(),gp.r.length);if(!n)return;
-  gp.r.splice(gp.r.length-n,n);
+  if(!gp.r.length)return;
+  gp.r.pop();
+  if(gp.log.length&&!gp.log[0].h){if(gp.log[0].i===gp.seq)gp.seq--;gp.log.shift()}
   if(!gp.r.length)gp.start=0;
   saveGempic();renderGempic();
 };
@@ -2069,16 +2505,26 @@ $("gpHit").onclick=()=>{
   if(!gp.r.length)return;
   ask("Save this gempic to history and reset the counters?",()=>{
     const q=gpSum(),e={t:Date.now(),start:gp.start,rolls:q.n,gems:q.gems,rr:q.rr};
-    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,history:[e,...gp.history]});
+    if(gp.log.length)gp.log[0].h=1;
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,seq:gp.seq,log:gp.log,history:[e,...gp.history]});
     saveGempic();renderGempic();
   });
 };
 $("gpReset").onclick=()=>{
   if(!gp.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,history:gp.history});
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,seq:gp.seq,log:gp.log,history:gp.history});
     saveGempic();renderGempic();
   });
+};
+$("gpLogClear").onclick=()=>{
+  if(!gp.log.length)return;
+  ask("Clear the roll log? Your counters and saved gempics are not affected.",()=>{gp.log=[];saveGempic();renderGempic()});
+};
+$("gpLogToggle").onclick=()=>{
+  const b=$("gpLogToggle"),open=b.getAttribute("aria-expanded")!=="true";
+  b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse roll history":"Expand roll history");
+  $("gpLogBody").hidden=!open;
 };
 $("gpHist").addEventListener("click",e2=>{
   const b=e2.target.closest("button[data-hdel]");if(!b)return;
@@ -2440,6 +2886,7 @@ $("arId").addEventListener("keydown",e=>{if(e.key==="Enter")arGoClick()});
 (function(){const c=arCfg();$("arCid").value=c.id||"";$("arSec").value=c.sec||"";$("arEx").value=LS("tracker.arEx")||"live, remix, remixes";$("arCap").value=arCap();$("arSkip").checked=LS("tracker.arSkip")!=="0";$("arId").value=LS("tracker.artistId")||"";if(!c.id||!c.sec)$("arSetup").open=true})();
 
 /* ---------- quest tracker ---------- */
+const QT_LOG_MAX=200,QT_QUICK=[1,5,10,25,50,100];
 const QK=["c","u","r"];
 const QO={c:["Common",0.00225,0.002,0.00667],u:["Uncommon",0.00056,0.0004,0.00125],r:["Rare",0.000225,0.00022,0.0005]};
 const QD=[["Epic",1,"epic"],["Lyric",2,"lyrics"],["Shiny",3,"shiny"]];
@@ -2456,29 +2903,48 @@ const qtPullIdx=()=>qt.exLy?[1]:[1,2];
 const qtP=x=>qtPd(qtPullIdx(),x);
 const qtPct=p=>Number((p*100).toFixed(4))+"%";
 const qtN=v=>Math.max(0,Math.floor(+v||0));
-function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
+function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
 let qt=qtNorm(),qtDB=true;
 function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
+function qtUndoInfo(){const lg=qt.log[0],n=qt.r.length;return lg&&lg.n>0&&lg.n<=n&&lg.tot===n?lg:null}
 function renderQuest(){
   const q=qtSum(),next=qtP(qt.reroll);
   let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x));
+  const pct=(1-miss)*100;
   $("qtQuests").textContent=nfmt(q.n);
   const last=qt.history.find(h=>h.typ!=="s"&&!(qt.exLy&&h.typ==="l"));
   $("qtQuestsNote").textContent=last?"Last pull: "+fmtD(last.t):"No pull logged yet";
   $("qtOdds").textContent=qtPct(next);
   $("qtOddsNote").textContent="About 1 in "+nfmt(Math.round(1/next))+" quests";
-  $("qtSoFar").textContent=Number(((1-miss)*100).toFixed(1))+"%";
-  $("qtSoFarNote").textContent=q.n?"Across all quests logged":"";
+  $("qtSoFar").textContent=Number(pct.toFixed(1))+"%";
+  $("qtSoFarNote").textContent=q.n?"Across all quests logged":"Log a quest to start";
   $("qtReroll").checked=qt.reroll;$("qtExLy").checked=qt.exLy;
-  $("qtRrNote").textContent=qt.reroll?"Reroll is on: each quest gets two chances, so "+qtPct(next)+" for "+(qt.exLy?"an epic":"an epic or lyric")+" per quest.":"Each quest has a "+qtPct(next)+" chance of "+(qt.exLy?"an epic (lyrics excluded).":"an epic or lyric (a pull).");
-  $("qtDrop").innerHTML="<tr><th>Per quest</th>"+QK.map(k=>"<th>"+qpill(QR[k],QO[k][0])+"</th>").join("")+"<th>Total</th></tr>"+QD.filter(d=>!(qt.exLy&&d[1]===2)).map(([n,i,c])=>`<tr><td>${qpill(c,n)}</td>${QK.map(k=>`<td>${qtPct(qt.reroll?1-(1-QO[k][i])*(1-QO[k][i]):QO[k][i])}</td>`).join("")}<td>${qtPct(qtPd(i,qt.reroll))}</td></tr>`).join("")+`<tr style="font-weight:600"><td>${qPullLbl()}</td>${QK.map(k=>{const p=QO[k][1]+(qt.exLy?0:QO[k][2]);return `<td>${qtPct(qt.reroll?1-(1-p)*(1-p):p)}</td>`}).join("")}<td>${qtPct(qtP(qt.reroll))}</td></tr>`;
-  $("qtLog").textContent=q.n?"Logged: "+q.n+" quests"+(q.rr?" ("+q.rr+" with reroll)":""):"";
-  $("qtExp").innerHTML="<tr><th>Drop</th><th>Odds</th><th>Avg quests</th><th>With reroll</th></tr>"+[[qPullLbl(),qtPullIdx()],[qpill("epic","Epic"),1],[qpill("lyrics","Lyric"),2],[qpill("shiny","Shiny"),3]].filter(r=>!(qt.exLy&&r[1]===2)).map(([n,i])=>`<tr><td>${n}</td><td>${qtPct(qtPd(i,0))}</td><td>${nfmt(Math.round(1/qtPd(i,0)))}</td><td>${nfmt(Math.round(1/qtPd(i,1)))}</td></tr>`).join("");
+  $("qtRrNote").textContent="Track your quests and see the odds for each rarity. "+(qt.reroll?"Reroll is on: each quest gets two chances, so "+qtPct(next)+" for "+(qt.exLy?"an epic":"an epic or lyric")+" per quest.":"Each quest has a "+qtPct(next)+" chance of "+(qt.exLy?"an epic (lyrics excluded).":"an epic or lyric (a pull)."));
+  $("qtDrop").innerHTML='<tr><th>Per quest</th>'+QK.map(k=>'<th class="c">'+qpill(QR[k],QO[k][0])+'</th>').join("")+'<th class="r">Total</th></tr>'+QD.filter(d=>!(qt.exLy&&d[1]===2)).map(([n,i,c])=>`<tr><td>${qpill(c,n)}</td>${QK.map(k=>`<td class="c">${qtPct(qt.reroll?1-(1-QO[k][i])*(1-QO[k][i]):QO[k][i])}</td>`).join("")}<td class="r b">${qtPct(qtPd(i,qt.reroll))}</td></tr>`).join("")+`<tr class="qtot"><td class="b">${qPullLbl()}</td>${QK.map(k=>{const p=QO[k][1]+(qt.exLy?0:QO[k][2]);return `<td class="c b">${qtPct(qt.reroll?1-(1-p)*(1-p):p)}</td>`}).join("")}<td class="r b">${qtPct(qtP(qt.reroll))}</td></tr>`;
+  $("qtLog").textContent=q.n?"Logged: "+nfmt(q.n)+" quests"+(q.rr?" ("+nfmt(q.rr)+" with reroll)":""):"";
+  $("qtExp").innerHTML='<tr><th>Drop</th><th class="c">Odds</th><th class="c">Avg quests</th><th class="r">With reroll</th></tr>'+[[qPullLbl(),qtPullIdx()],[qpill("epic","Epic"),1],[qpill("lyrics","Lyric"),2],[qpill("shiny","Shiny"),3]].filter(r=>!(qt.exLy&&r[1]===2)).map(([n,i])=>`<tr><td>${n}</td><td class="c">${qtPct(qtPd(i,0))}</td><td class="c">${nfmt(Math.round(1/qtPd(i,0)))}</td><td class="r b">${nfmt(Math.round(1/qtPd(i,1)))}</td></tr>`).join("");
+  /* controls */
+  const amt=qtAmt(),ui=qtUndoInfo();
+  $("qtQuick").querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.q===amt));
+  $("qtAddT").textContent=amt>1?"Add Quest \u00d7"+amt:"Add Quest";
+  $("qtUndoT").textContent=ui&&ui.n>1?"Undo Last Add (+"+nfmt(ui.n)+")":"Undo Last Quest";
+  $("qtUndo").disabled=!q.n;$("qtReset").disabled=!q.n;$("qtLogClear").disabled=!qt.log.length;
+  /* progress */
+  $("qtBarFill").style.width=Math.min(100,pct).toFixed(1)+"%";
+  $("qtBarPct").textContent=Number(pct.toFixed(0))+"%";
+  $("qtBarNote").textContent=q.n?"There is a "+Number(pct.toFixed(1))+"% chance you have gotten at least one pull in your "+nfmt(q.n)+" quest"+(q.n===1?"":"s")+".":"Add quests to see your chance of a pull build up.";
+  /* recent quest log */
+  $("qtLogT").innerHTML='<tr><th>#</th><th>Time</th><th class="c">Added</th><th class="r">Total</th></tr>'+(qt.log.length?qt.log.slice(0,50).map(e=>`<tr><td>${e.i}</td><td>${gpWhen(e.t)}</td><td class="c b" style="color:var(--pos)">+${nfmt(e.n)}</td><td class="r">${nfmt(e.tot)}</td></tr>`).join(""):'<tr><td colspan="4" class="gempty">No quests logged yet. Press Add Quest to start tracking.</td></tr>');
+  /* saved pulls */
   const H=qt.history;
-  $("qtHistSum").textContent="History"+(H.length?" ("+H.length+")":"");
+  $("qtHistSum").textContent="Pull History"+(H.length?" ("+H.length+")":"");
   const HP=H.filter(h=>h.typ!=="s"&&!(qt.exLy&&h.typ==="l")),HS=H.filter(h=>h.typ==="s").length;
   $("qtAvg").textContent=(HP.length?"Average per "+(qt.exLy?"epic":"epic/lyric")+": "+nfmt(Math.round(HP.reduce((a,h)=>a+h.n,0)/HP.length))+" quests":"No pulls saved yet.")+(HS?" \u00b7 "+HS+" shiny":"");
-  $("qtHist").innerHTML=H.map((h,i)=>`<div class="card" style="margin-top:8px"><div class="eph"><div class="ehl"><strong>${qtTitle(h)?esc(qtTitle(h)):(h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t))}</strong>${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]):""}${h.rar?qpill(QR[h.rar],QO[h.rar][0]):""}</div><span style="display:flex;gap:6px"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>${qtTitle(h)?`<div class="hrow"><span>Saved</span><b>${fmtD(h.t)}</b></div>`:""}${h.ta?`<div class="hrow"><span>Artist quest count</span><b>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</b></div>`:""}${h.nb==="n"?`<div class="hrow"><span>Epic #</span><b>${h.num?"#"+nfmt(h.num):"Numbered"}</b></div>`:h.nb==="l"?`<div class="hrow"><span>Epic style</span><b>Numberless</b></div>`:""}<div class="hrow"><span>Quests</span><b>${nfmt(h.n)}</b></div>${h.rr?`<div class="hrow"><span>Quests with reroll</span><b>${nfmt(h.rr)}</b></div>`:""}</div>`).join("");
+  $("qtHist").innerHTML=H.length?'<div class="gtbl"><table><tr><th>Pull</th><th class="c">Quests</th><th class="c">Artist count</th><th></th></tr>'+H.map((h,i)=>{
+    const ttl=qtTitle(h),head=ttl?esc(ttl):(h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t));
+    const ep=h.nb==="n"?(h.num?"Epic #"+nfmt(h.num):"Numbered"):h.nb==="l"?"Numberless":"";
+    const sub=(ttl?"Saved "+fmtD(h.t):"")+(ttl&&ep?" \u00b7 ":"")+ep;
+    return `<tr><td class="qpc"><div class="qpt"><strong>${head}</strong>${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]):""}${h.rar?qpill(QR[h.rar],QO[h.rar][0]):""}</div>${sub?`<div class="qsubl">${sub}</div>`:""}${h.ta?`<div class="qsubl qacm">Artist count ${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</div>`:""}</td><td class="c b">${nfmt(h.n)}${h.rr?`<div class="qsubl">${nfmt(h.rr)} with reroll</div>`:""}</td><td class="c">${h.ta?nfmt(h.tb)+" \u2192 "+nfmt(h.ta):"\u2013"}</td><td class="r"><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></td></tr>`}).join("")+'</table></div>':"";
 }
 function saveQuest(){
   LS("tracker.quest",JSON.stringify(qt));
@@ -2497,19 +2963,33 @@ async function loadQuest(){
 }
 $("qtAmt").value=LS("tracker.step.quest")||"1";
 const qtAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("qtAmt").value))||1));
-$("qtAmt").addEventListener("change",()=>{const v=qtAmt();$("qtAmt").value=v;LS("tracker.step.quest",String(v))});
+$("qtAmt").addEventListener("input",renderQuest);
+$("qtAmt").addEventListener("change",()=>{const v=qtAmt();$("qtAmt").value=v;LS("tracker.step.quest",String(v));renderQuest()});
+$("qtQuick").addEventListener("click",e=>{
+  const b=e.target.closest("button[data-q]");if(!b)return;
+  $("qtAmt").value=b.dataset.q;LS("tracker.step.quest",b.dataset.q);renderQuest();
+});
 $("qtReroll").addEventListener("change",()=>{qt.reroll=$("qtReroll").checked;saveQuest();renderQuest()});
 $("qtExLy").addEventListener("change",()=>{qt.exLy=$("qtExLy").checked;saveQuest();renderQuest()});
 $("qtAdd").onclick=()=>{
-  const n=qtAmt();if(!qt.start)qt.start=Date.now();
+  const n=qtAmt(),now=Date.now();if(!qt.start)qt.start=now;
   for(let i=0;i<n;i++)qt.r.push({x:qt.reroll?1:0});
+  qt.log.unshift({i:++qt.seq,t:now,n:n,tot:qt.r.length});
+  if(qt.log.length>QT_LOG_MAX)qt.log.length=QT_LOG_MAX;
   saveQuest();renderQuest();
 };
+/* undo removes the last add as a whole (e.g. a +10), or one quest if there is no matching log entry */
 $("qtUndo").onclick=()=>{
-  const n=Math.min(qtAmt(),qt.r.length);if(!n)return;
-  qt.r.splice(qt.r.length-n,n);
+  if(!qt.r.length)return;
+  const lg=qtUndoInfo();
+  if(lg){qt.r.splice(qt.r.length-lg.n,lg.n);if(lg.i===qt.seq)qt.seq--;qt.log.shift()}
+  else qt.r.pop();
   if(!qt.r.length)qt.start=0;
   saveQuest();renderQuest();
+};
+$("qtLogClear").onclick=()=>{
+  if(!qt.log.length)return;
+  ask("Clear the quest log? Your counters and saved pulls are not affected.",()=>{qt.log=[];saveQuest();renderQuest()});
 };
 let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false;
 function qtAutoTA(){
@@ -2558,14 +3038,14 @@ $("qtFSave").onclick=()=>{
   }else{
     const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta};
     if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.total=ta;qt.cnt=n} /* shiny: log it but keep the quest count going */
-    else qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:ta||qt.total,cnt:0,history:[e,...qt.history]});
+    else qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:ta||qt.total,cnt:0,seq:qt.seq,log:qt.log,history:[e,...qt.history]});
   }
   qtCloseForm();saveQuest();renderQuest();
 };
 $("qtReset").onclick=()=>{
   if(!qt.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:qt.total,cnt:0,history:qt.history});
+    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:qt.total,cnt:0,seq:qt.seq,log:qt.log,history:qt.history});
     saveQuest();renderQuest();
   });
 };
@@ -2958,6 +3438,12 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Every update is a new 0.1.X. */
 const VERSIONS=[
+["0.1.17","2026-10-08",["Epic Tracker: removed the page option; every epic now shows on one page"]],
+["0.1.16","2026-10-08",["Epic Tracker: added an All holders switch that shows every holder on each epic without expanding it"]],
+["0.1.15","2026-10-08",["Epic Tracker: added a Completion switch to show or hide the Completion card; when off, the top row shows only three cards"]],
+["0.1.14","2026-10-08",["Redesigned the Epic Tracker to match the Shiny Tracker and home page: collection tabs with counts, stat cards, icon controls, rarity chips and card rows with a done checkbox","Completion card is now a toggle: it tracks epics you check off and, when switched on, shows only the ones left","Added pagination (25 / 50 / 100 per page)"]],
+["0.1.13","2026-10-08",["Redesigned the Shiny Tracker to look better and match the new home page: stat cards, an Inventory & Sales section with icon cards, and Results Breakdown, Inventory & Totals, Prices and Recent Activity sections","On mobile, all 6 Inventory & Sales categories now show at once in a compact 2-column grid"]],
+["0.1.12","2026-10-08",["Fixed the top bar on mobile","Collapsed bar: menu buttons sit in one row and the bar shrinks to fit its icons and is centered","Collapsed bar with many icons: menu buttons stacked on the left, icons fill the bar in even columns","Expanded bar: buttons stretch to fill the row instead of leaving empty space"]],
 ["0.1.11","2026-10-08",["Refreshing the page now keeps you on the tab you were on; Home only on the first load or after logging in"]],
 ["0.1.10","2026-10-08",["Name inputs (epics, sets, purchases, sold items, holders, labels, searches) are limited to 300 characters, also enforced when saving"]],
 ["0.1.9","2026-10-08",["Event pages have sub-tabs: Tracker, Collectables and a smaller Info tab","Condensed Soundfall info with key chips, short rows, odds and shop","Compact coins, gems and leaves totals in one row"]],
