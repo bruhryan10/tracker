@@ -56,7 +56,7 @@ div.tabs{display:grid;grid-template-columns:repeat(5,1fr)}
 .tile .ti svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .tile[data-go=shiny]{--c:#a78bfa}.tile[data-go=epic]{--c:#f59e0b}.tile[data-go=gempic]{--c:#c084fc}.tile[data-go=quest]{--c:#34d399}.tile[data-go=pass]{--c:#eab308}.tile[data-go=event]{--c:#f43f5e}.tile[data-go=map]{--c:#38bdf8}.tile[data-go=buys]{--c:#fb923c}.tile[data-go=info]{--c:#6366f1}.tile[data-go=artist]{--c:#94a3b8}
 .tile:hover,.tile:focus-visible{border-color:var(--c);outline:none;box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}
-.tile:active{transform:scale(.99)}
+.tile:active{transform:none}
 .tile .tn{font-weight:600;font-size:15px}
 .tile .tv{font-size:20px;font-weight:600;margin-top:8px;overflow-wrap:anywhere;color:var(--c)}
 .tile .tl{font-size:12px;color:var(--mut)}
@@ -437,7 +437,7 @@ button:hover{border-color:var(--ac)}
 .arc:hover .arm img{transform:scale(1.07)}
 }
 button{transition:background .15s,color .15s,border-color .15s,transform .12s ease,box-shadow .15s}
-button:active{transform:scale(.96)}
+button:active{transform:none}
 .tabs button.on,.top button.on{box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
 input,select,textarea{transition:border-color .15s,box-shadow .15s}
 input:not([type=checkbox]):focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 22%,transparent)}
@@ -1274,6 +1274,19 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 #tab-buys .mkrow select,#tab-buys .mkrow>button{flex:1 1 0}
 #tab-buys .mkrow select{padding:0 36px 0 12px}
 }
+
+
+
+
+
+/* ---------- press feedback: no size change (keeps the tap target fixed), no filters (fast), no extra transitions ---------- */
+button,.tile,label.chk,label:has(input[type=checkbox]),label:has(input[type=radio]),label.grr,[role=button]{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,label:has(input[type=checkbox]):active,label:has(input[type=radio]):active,label.grr:active,[role=button]:not([aria-expanded]):active,.pressing:not(:disabled){box-shadow:inset 0 0 0 999px rgba(255,255,255,.2)!important}
+@keyframes tapflash{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ac,#8b5cf6) 90%,transparent)}100%{box-shadow:0 0 0 14px color-mix(in srgb,var(--ac,#8b5cf6) 0%,transparent)}}
+.tapfx{animation:tapflash .3s ease-out}
+.tabs button,.tabs button:active,.tabs button.pressing,.tabs button.tapfx{animation:none!important;-webkit-tap-highlight-color:initial}
+.tabs button:active:not(.on),.tabs button.pressing:not(.on){box-shadow:none!important}
+@media (prefers-reduced-motion:reduce){.tapfx{animation:none}}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -1700,6 +1713,7 @@ div.tabs.icons.editing .navbtns>button{min-width:58px}
 <div id="agList"></div>
 <button type="button" class="gb" id="agMore" hidden>Show more</button>
 </section>
+<div class="note" id="agUpdated" style="text-align:center;margin:14px 0">Artist data last updated October 9, 2026</div>
 <datalist id="agDL"></datalist>
 </div>
 
@@ -2934,7 +2948,7 @@ function renderEvent(){
   $("evView").hidden=views.length<2;
   $("evView").innerHTML=views.map(([v,n])=>`<button type="button" data-v="${v}"${v===evV?' class="on"':""}>${n}</button>`).join("");
   $("evPaneTrk").hidden=evV!=="trk";$("evPaneCol").hidden=evV!=="col";$("evPaneInfo").hidden=evV!=="info";
-  evRenderCol(cfg,s);
+  if(evV==="col")evRenderCol(cfg,s);
   $("evHistSum").textContent="History"+(s.history.length?" ("+s.history.length+")":"");
   $("evHist").innerHTML=s.history.map((h,i)=>{
     const x=evSum(cfg,h.c);
@@ -3000,7 +3014,13 @@ $("evCol").addEventListener("change",ev2=>{
   const el=ev2.target.closest("input[data-ci]");if(!el)return;
   const s=evS();
   if(el.checked)s.got[el.dataset.ci]=1;else delete s.got[el.dataset.ci];
-  saveEvent();renderEvent();
+  saveEvent();
+  const cfg=evCfg();
+  if(evOnly[cfg.id]){renderEvent();return}
+  /* update just this row and the counter instead of redrawing the whole page */
+  const row=el.closest("label");if(row)row.classList.toggle("on",!!el.checked);
+  const total=cfg.col.length,gn=Object.keys(s.got).length;
+  $("evColHead").textContent="Collectables ("+gn+"/"+total+")"+(total?" \u00b7 "+Math.round(gn/total*100)+"%":"");
 });
 $("evReset").onclick=()=>{
   const cfg=evCfg(),s=evS();
@@ -3739,7 +3759,7 @@ const qtPullIdx=()=>qt.exLy?[1]:[1,2];
 const qtP=x=>qtPd(qtPullIdx(),x);
 const qtPct=p=>Number((p*100).toFixed(4))+"%";
 const qtN=v=>Math.max(0,Math.floor(+v||0));
-function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,total:qtN(d.total),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
+function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,total:qtN(d.total),run:(d.run==null?qtN(d.total):Math.max(qtN(d.run),qtN(d.total))),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
 let qt=qtNorm(),qtDB=true;
 function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
 function qtUndoInfo(){const lg=qt.log[0],n=qt.r.length;return lg&&lg.n>0&&lg.n<=n&&lg.tot===n?lg:null}
@@ -3827,11 +3847,14 @@ $("qtLogClear").onclick=()=>{
   if(!qt.log.length)return;
   ask("Clear the quest log? Your counters and saved pulls are not affected.",()=>{qt.log=[];saveQuest();renderQuest()});
 };
+/* artist count before the current streak of shinies: the first shiny since the last epic/lyric remembers it */
+function qtBase(){let b=qt.total;for(const h of qt.history){if(h.typ!=="s")break;if(h.ta)b=h.tb}return b}
+const qtRun=()=>Math.max(qt.run||0,qt.total);
 let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false;
 function qtAutoTA(){
   if(qtTAman)return;
   const n=Math.max(0,Math.floor(Number($("qtFN").value))||0),tb=Math.max(0,Math.floor(Number($("qtTB").value))||0);
-  $("qtTA").value=tb+Math.max(0,n-qt.cnt);
+  $("qtTA").value=tb+Math.max(0,qtRun()-qtBase())+Math.max(0,n-qt.cnt);
 }
 $("qtFN").addEventListener("input",qtAutoTA);
 $("qtTB").addEventListener("input",qtAutoTA);
@@ -3849,7 +3872,7 @@ function qtOpenForm(i){
   qtFNb=h?h.nb:"";
   $("qtFNum").value=h&&h.num?h.num:"";
   qtTAman=!!h;
-  $("qtTB").value=h?(h.ta?h.tb:""):qt.total;
+  $("qtTB").value=h?(h.ta?h.tb:""):qtBase();
   $("qtTA").value=h?(h.ta||""):"";
   qtFRar=h?h.rar:"";
   qtFTyp=h?h.typ:"";
@@ -3868,12 +3891,12 @@ $("qtFNb").addEventListener("click",e2=>{const b=e2.target.closest("button[data-
 $("qtFCancel").onclick=qtCloseForm;
 $("qtFSave").onclick=()=>{
   const artist=$("qtArtist").value.trim().slice(0,120),song=$("qtSong").value.trim().slice(0,120),nb=qtFTyp==="e"?qtFNb:"",num=nb==="n"?Math.max(0,Math.floor(Number($("qtFNum").value))||0):0,n=Math.max(0,Math.floor(Number($("qtFN").value))||0);
-  const tb=qtN($("qtTB").value),ta=$("qtTA").value===""?(tb?tb+Math.max(0,n-(qtEdit>=0?0:qt.cnt)):0):qtN($("qtTA").value);
+  const tb=qtN($("qtTB").value),ta=$("qtTA").value===""?(tb?tb+(qtEdit>=0?0:Math.max(0,qtRun()-qtBase()))+Math.max(0,n-(qtEdit>=0?0:qt.cnt)):0):qtN($("qtTA").value);
   if(qtEdit>=0){
-    const h=qt.history[qtEdit];if(h){h.name="";h.artist=artist;h.song=song;h.nb=nb;h.num=num;h.rar=qtFRar;h.typ=qtFTyp;h.n=n;h.tb=tb;h.ta=ta;if(qtEdit===0&&ta)qt.total=ta}
+    const h=qt.history[qtEdit];if(h){h.name="";h.artist=artist;h.song=song;h.nb=nb;h.num=num;h.rar=qtFRar;h.typ=qtFTyp;h.n=n;h.tb=tb;h.ta=ta;if(qtEdit===0&&ta){if(qtFTyp==="s")qt.run=Math.max(ta,qt.total);else{qt.total=ta;qt.run=ta}}}
   }else{
     const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta};
-    if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.total=ta;qt.cnt=n} /* shiny: log it but keep the quest count going */
+    if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.run=Math.max(ta,qtRun());qt.cnt=n} /* shiny: log it but keep the quest count going */
     else qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:ta||qt.total,cnt:0,seq:qt.seq,log:qt.log,history:[e,...qt.history]});
   }
   qtCloseForm();saveQuest();renderQuest();
@@ -3881,7 +3904,7 @@ $("qtFSave").onclick=()=>{
 $("qtReset").onclick=()=>{
   if(!qt.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:qt.total,cnt:0,seq:qt.seq,log:qt.log,history:qt.history});
+    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,total:qt.total,run:qt.run,cnt:0,seq:qt.seq,log:qt.log,history:qt.history});
     saveQuest();renderQuest();
   });
 };
@@ -4274,6 +4297,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.3.2","2026-10-10",["Fixed various bugs","Updated button press feedback","Added last update date on artist guesser"]],
 ["0.3.1","2026-10-09",["Artist Guesser can be tried without logging in: use the button on the login page, and Back to login to return"]],
 ["0.3","2026-10-09",["Artist Overview is now available to everyone","Artist Overview now sits next to Artist Guesser in the menu, and Sound Guesser moved to the end"]],
 ["0.2","2026-10-09",["Every tab got a UI and interface refresh"]],
@@ -4406,4 +4430,34 @@ $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);
   const {data}=await sb.auth.getSession();
   if(data&&data.session)enter(true);else showLogin();
 })();
-</script></main></body></html>
+</script></main><script>
+/* press feedback: instant glow + short vibration on touch devices that support it */
+(function(){
+  const SEL='button,.tile,label.chk,label:has(input[type=checkbox]),label:has(input[type=radio]),label.grr,[role=button]';
+  /* no feedback in the top nav bar or on expand/collapse controls (drop-downs, headers, summaries) */
+  const skip=t=>!t||t.disabled||t.closest('.tabs,summary')||t.matches('[aria-expanded]')||t.closest('[aria-expanded]');
+  let cur=null;
+  const rel=()=>{if(cur){cur.classList.remove('pressing');cur=null}};
+  document.addEventListener('pointerdown',e=>{
+    const t=e.target.closest&&e.target.closest(SEL);
+    if(skip(t))return;
+    rel();cur=t;t.classList.add('pressing');
+    if(e.pointerType==='touch'&&navigator.vibrate){try{navigator.vibrate(14)}catch(_){}}
+  },{passive:true});
+  ['pointerup','pointercancel','pointerleave','dragstart'].forEach(ev=>document.addEventListener(ev,()=>setTimeout(rel,70),{passive:true}));
+  document.addEventListener('click',e=>{
+    let t=e.target.closest&&e.target.closest(SEL);
+    /* lists that redraw themselves on click replace the pressed element: find its replacement under the pointer */
+    if(t&&!t.isConnected||!t){
+      if(!(e.clientX||e.clientY))return;
+      const u=document.elementFromPoint(e.clientX,e.clientY);t=u&&u.closest&&u.closest(SEL);
+      if(skip(t))return;
+      t.classList.add('pressing');setTimeout(()=>t.classList.remove('pressing'),120);
+    }
+    if(skip(t))return;
+    t.classList.remove('tapfx');void t.offsetWidth;t.classList.add('tapfx');
+    t.addEventListener('animationend',()=>t.classList.remove('tapfx'),{once:true});
+  },{passive:true});
+})();
+</script>
+</body></html>
