@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><title>Soundmap Helper</title>
+<style>
+/* Sound Guesser rock-only notice: red outline, faded red background, larger bold text */
+#sdRockNote{--rk:#dc2626;margin:0 0 12px;font-size:13px;line-height:1.45;border:1px solid color-mix(in srgb,var(--rk) 55%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--rk) 18%,var(--card)),var(--card) 75%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #sdRockNote{--rk:#f87171}}
+:root[data-theme="dark"] #sdRockNote{--rk:#f87171}
+#sdRockNote b{font-size:1.35em;color:var(--rk)}
+</style>
 <meta property="og:type" content="website"><meta property="og:site_name" content="Soundmap Helper">
 <meta property="og:title" content="Soundmap Helper"><meta property="og:description" content="Helper for soundmap">
 <meta property="og:url" content="https://bruhryan10.github.io/tracker/"><meta property="og:image" content="https://bruhryan10.github.io/tracker/img/soundmap-helper-icon.png">
@@ -1974,7 +1981,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 </section>
 <section class="card gsec" id="gsLinkSec" style="display:none">
-<div class="gh"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><div class="gt"><b>Guess a song by its sound</b></div><div class="gx"><button type="button" class="gb sm" id="gsOpen">Try Sound Guesser</button></div></div>
+<div class="gh"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><div class="gt"><b>Guess a song by its sound</b><span>Rock songs only for now</span></div><div class="gx"><button type="button" class="gb sm" id="gsOpen">Try Sound Guesser</button></div></div>
 </section>
 <div class="note" id="agUpdated" style="text-align:center;margin:14px 0">Artist data last updated October 9, 2026</div>
 <datalist id="agDL"></datalist>
@@ -1994,6 +2001,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 
 <div id="tab-sound" hidden>
 <button type="button" class="gb sm" id="sdGuestBack" style="display:none;margin:0 0 10px">&larr; Back to Artist Guesser</button>
+<div class="card" id="sdRockNote" role="note"><b>Rock songs only (for now).</b> The Sound Guesser only knows songs from the rock category. Songs from other genres are not in the index, so a clip from one may show a wrong match or no match at all.</div>
 <div id="sdTop">
 <div class="gc" style="--c:#2dd4bf"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><label class="gb sm sdtemp" title="Load temp index file" aria-label="Load temp index file"><svg viewBox="0 0 24 24"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg><span class="gtxt">Temp</span><input class="sdfile" type="file" id="sdIdx" accept=".bin"></label><div class="scl">Song index</div><div class="scv val" id="sdV1">Not loaded</div><div class="scs" id="sdS1">Load a temp index file to start</div></div>
 <section class="card gsec" id="sdClipSec">
@@ -2006,7 +2014,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <button type="button" class="gb go sm" id="sdRun" disabled><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Run match</button>
 </div>
 <div class="sdstat"><span class="note" id="sdSrcMsg">No clip chosen yet.</span><span class="note" id="sdHintMsg"></span><span class="note" id="sdMsg" role="status"></span></div>
-<div class="note" id="sdPriv">Files up to 10 MB. Only the first 30 seconds are used. Clips are only used to find a match and are not saved.</div>
+<div class="note" id="sdPriv">Files up to 10 MB. Only the first 30 seconds are used. Clips are only used to find a match and are not saved. Only rock songs are in the index.</div>
 </section>
 </div>
 
@@ -2844,7 +2852,7 @@ const SDSTAT={count:0};
    multipart form: audio (16-bit mono WAV), sr, hintA, hintS, whole ("1"/"0").
    Reply JSON: {"results":[{"title","artist","sid","prev","score","offset"}, ...]} sorted best first.
    Errors: 401 = not signed in, 403 = not allowed in the current mode, 429 = rate limited, 503 = off or busy. */
-const SOUND_API_URL="";
+const SOUND_API_URL="https://sound-api-production-af4f.up.railway.app";
 const SD_MAX_BYTES=10*1024*1024,SD_MAX_SECS=30,SD_COOLDOWN=5000,SD_DAY_MAX=30,SD_GUEST_DAY=15;
 let soundMode="ryan";
 const isGuest=()=>document.body.classList.contains("guest");
@@ -3084,9 +3092,33 @@ function guestSoundLink(){
       sdx=null;SDSTAT.count=0;
       $("sdV1").textContent="Not loaded";$("sdS1").textContent="Could not read that file: "+err.message;
       updateRun();
+      sdServerStatus();
     }
     e.target.value="";
   };
+
+  /* show the server's index in the Song index card (a loaded temp file takes over) */
+  async function sdServerStatus(){
+    if(!SOUND_API_URL||sdx)return;
+    $("sdS1").textContent="Checking server...";
+    try{
+      const r=await fetch(SOUND_API_URL.replace(/\/+$/,""),{method:"GET"});
+      const j=await r.json();
+      if(sdx)return;
+      if(r.ok&&j&&j.ok&&Number(j.songs)>0){
+        SDSTAT.count=Number(j.songs);
+        $("sdV1").textContent=SDSTAT.count.toLocaleString();
+        $("sdS1").textContent="songs in the server index";
+        try{renderOverview()}catch(x){}
+      }else{
+        $("sdV1").textContent="Not loaded";$("sdS1").textContent="The server answered but has no index loaded.";
+      }
+    }catch(e){
+      if(sdx)return;
+      $("sdV1").textContent="Unreachable";$("sdS1").textContent="Can't reach the matching server.";
+    }
+  }
+  sdServerStatus();
 
   /* ---------- clip: file or microphone ---------- */
   async function to22k(audioBuf,sr){
@@ -3174,7 +3206,7 @@ function guestSoundLink(){
     const res=(j&&Array.isArray(j.results)?j.results:[]).slice(0,isRyan?10:5).map(function(x){
       return {title:String(x.title||"").slice(0,200),artist:String(x.artist||"").slice(0,200),sid:cleanSid(x.sid),prev:cleanPrev(x.prev),score:Number(x.score)||0,offset:Number(x.offset)||0};
     });
-    if(!res.length){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short to match.</div>';setMsg("sdMsg",doneText(),"ok");return}
+    if(!res.length){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short, or the song may not be rock (only rock songs are in the index).</div>';setMsg("sdMsg",doneText(),"ok");return}
     render(1,1,y.length/sr,res,parseFloat($("sdMargin").value)||0.03);
     setMsg("sdMsg",doneText(),"ok");
   }
@@ -3212,7 +3244,7 @@ function guestSoundLink(){
       }
       if(!best||res[0].score>best.res[0].score)best={n:i+1,secs:clip.length/sr,res:res};
     }
-    if(!best){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short to match.</div>';setMsg("sdMsg",doneText(),"ok");return}
+    if(!best){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short, or the song may not be rock (only rock songs are in the index).</div>';setMsg("sdMsg",doneText(),"ok");return}
     render(best.n,segs.length,best.secs,best.res,margin);
     setMsg("sdMsg",doneText(),"ok");
   }
@@ -5399,7 +5431,7 @@ function renderOverview(){
     ["map","Artist Guesser","Narrow down the mystery artist from hints.",()=>[nfmt((AG.guesses||[]).length),"guesses logged"]],
     ["artist","Artist Overview","Browse an artist's releases and songs.",()=>["Open","releases and songs"]],
     ["info","Wiki","Drop rates, eligibility and reference tables.",()=>["Open","reference"]],
-    ["sound","Sound Guesser","Guess the mystery song from its sound.",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):["Coming Soon",""]]
+    ["sound","Sound Guesser","Guess a rock song from its sound (rock only for now).",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):["Coming Soon",""]]
   ];
   g.innerHTML=T.map(([id,name,desc,f])=>{
     const lock=id==="sound"&&!canSound(),v=safe(f);
@@ -5424,6 +5456,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.3.6","2026-10-10",["Sound Guesser: the rock-only notice has a red outline, a faded red background and larger bold text"]],
 ["0.3.5","2026-10-10",["Sound Guesser: clips are limited to 10 MB and the first 30 seconds, matches have a short cooldown and a daily limit, and you can report a wrong or missing song"]],
 ["0.3.4","2026-10-10",["Added reporting for Artist Guesser: report a missing artist from the guesser page"]],
 ["0.3.3","2026-10-10",["Artist Overview: after an artist finishes loading, loading a new artist is paused for 3 minutes (already-loaded artists still open instantly)","Added report system for Artist Guesser & Sound Guesser"]],
