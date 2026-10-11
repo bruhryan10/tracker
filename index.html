@@ -1542,6 +1542,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <label for="lgPass">Password</label><input id="lgPass" type="password" autocomplete="current-password">
 <button type="button" id="lgGo">Log in</button>
 <button type="button" id="lgGuest" class="guestbtn">Try the Artist Guesser (no login)</button>
+<button type="button" id="lgGuestSound" class="guestbtn">Try the Sound Guesser (no login)</button>
 <div class="err" id="lgErr"></div>
 </div>
 
@@ -1932,6 +1933,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-map" hidden>
+<div style="text-align:right"><button type="button" class="gb sm" id="gsOpen" style="display:none;margin:0 0 10px">Sound Guesser &rarr;</button></div>
 <div id="agTop">
 <div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div class="scl">Matches</div><div class="scv val" id="agV1">0</div><div class="scs">Artists still possible</div></div>
 <div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span><div class="scl">Active filters</div><div class="scv val" id="agV2">0</div><div class="scs">Hints and feedback applied</div></div>
@@ -1980,9 +1982,6 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="note" id="rpMsg" role="status"></div>
 </div>
 </section>
-<section class="card gsec" id="gsLinkSec" style="display:none">
-<div class="gh"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><div class="gt"><b>Guess a song by its sound</b><span>Rock songs only for now</span></div><div class="gx"><button type="button" class="gb sm" id="gsOpen">Try Sound Guesser</button></div></div>
-</section>
 <div class="note" id="agUpdated" style="text-align:center;margin:14px 0">Artist data last updated October 9, 2026</div>
 <datalist id="agDL"></datalist>
 </div>
@@ -2026,7 +2025,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div id="sdOut"><div class="empty">Run a match to see the closest songs here.</div></div>
 </section>
 
-<section class="card gsec" id="sdRpSec">
+<section class="card gsec" id="sdRpSec" style="display:none">
 <div class="gh"><span class="sci" style="--c:#f87171"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></span><div class="gt"><b>Wrong match or missing song?</b></div><div class="gx"><button type="button" class="gb sm" id="sdRpToggle" aria-expanded="false" aria-controls="sdRpForm">Report</button></div></div>
 <div class="note" style="margin:0">Tell us what it should have been, or which song is missing from the index.</div>
 <div id="sdRpForm" hidden>
@@ -2867,9 +2866,9 @@ async function loadSoundMode(){
   }catch(e){}
   const sel=$("sdAccSel");if(sel)sel.value=soundMode;
 }
-/* guests only: show a link to Sound Guesser on the Artist Guesser page when the mode allows it */
+/* guests only: show a Sound Guesser arrow at the top of the Artist Guesser page when the mode allows it */
 function guestSoundLink(){
-  const e=$("gsLinkSec");if(e)e.style.display=(isGuest()&&canSound())?"":"none";
+  const e=$("gsOpen");if(e)e.style.display=(isGuest()&&canSound())?"":"none";
 }
 (function(){
   let sdx=null,srcFile=null,srcY=null,running=false,coolUntil=0,sdTrim=false;
@@ -3156,7 +3155,7 @@ function guestSoundLink(){
     const wait=coolUntil-Date.now();
     if(wait>0){setMsg("sdMsg","Please wait "+Math.ceil(wait/1000)+"s before the next match.","bad");return}
     if(!isRyan&&dayUsed()>=(isGuest()?SD_GUEST_DAY:SD_DAY_MAX)){setMsg("sdMsg","Daily match limit reached. Try again tomorrow.","bad");return}
-    running=true;updateRun();
+    running=true;updateRun();sdRptShow(false);
     try{
       const sr=sdSR();
       let y=srcY;
@@ -3185,6 +3184,22 @@ function guestSoundLink(){
   const doneText=()=>sdTrim?"Done. Only the first "+SD_MAX_SECS+"s of the file were used.":"Done.";
   const cleanSid=v=>/^[A-Za-z0-9]{10,30}$/.test(String(v||""))?String(v):"";
   const cleanPrev=v=>/^https:\/\//.test(String(v||""))?String(v):"";
+  /* no match found: say so and offer a one-click "missing song" report */
+  /* the report card only appears when the result isn't a clear winner (weak, close call, or nothing found) */
+  function sdRptShow(on){const e=$("sdRpSec");if(e)e.style.display=on?"":"none"}
+  function sdShowEmpty(){
+    sdRptShow(true);
+    window.sdLast=null;   /* don't attach an older clip's results to a report about this one */
+    $("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short, or the song may not be rock (only rock songs are in the index).'
+      +'<div style="margin-top:10px"><button type="button" class="gb sm" data-sdrpt="missing">Report a missing song</button></div></div>';
+  }
+  $("sdOut").addEventListener("click",function(e){
+    if(!e.target.closest("[data-sdrpt]"))return;
+    const f=$("sdRpForm");
+    if(f.hidden)$("sdRpToggle").click();
+    $("sdRpKind").value="missing";
+    f.scrollIntoView({behavior:"smooth",block:"center"});
+  });
   /* Turnstile (guests only): the widget produces a one-time token; the server checks it with Cloudflare */
   let tsId=null,tsToken="",tsP=null;
   function tsReady(){
@@ -3245,7 +3260,7 @@ function guestSoundLink(){
     const res=(j&&Array.isArray(j.results)?j.results:[]).slice(0,isRyan?10:5).map(function(x){
       return {title:String(x.title||"").slice(0,200),artist:String(x.artist||"").slice(0,200),sid:cleanSid(x.sid),prev:cleanPrev(x.prev),score:Number(x.score)||0,offset:Number(x.offset)||0};
     });
-    if(!res.length){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short, or the song may not be rock (only rock songs are in the index).</div>';setMsg("sdMsg",doneText(),"ok");return}
+    if(!res.length){sdShowEmpty();setMsg("sdMsg",doneText(),"ok");return}
     render(1,1,y.length/sr,res,parseFloat($("sdMargin").value)||0.03);
     setMsg("sdMsg",doneText(),"ok");
   }
@@ -3283,7 +3298,7 @@ function guestSoundLink(){
       }
       if(!best||res[0].score>best.res[0].score)best={n:i+1,secs:clip.length/sr,res:res};
     }
-    if(!best){$("sdOut").innerHTML='<div class="empty">No candidates found. The clip may be too short, or the song may not be rock (only rock songs are in the index).</div>';setMsg("sdMsg",doneText(),"ok");return}
+    if(!best){sdShowEmpty();setMsg("sdMsg",doneText(),"ok");return}
     render(best.n,segs.length,best.secs,best.res,margin);
     setMsg("sdMsg",doneText(),"ok");
   }
@@ -3306,6 +3321,7 @@ function guestSoundLink(){
     window.sdLast={secs:Number(secs.toFixed(2)),top:res.slice(0,3).map(function(r){return {title:r.title,artist:r.artist,score:Number(r.score.toFixed(3))}})};
     const closeN=res.filter(function(r){return r.score>=top.score-margin}).length;
     const clear=top.score>=0.8&&closeN===1;
+    if(!clear)sdRptShow(true);
     const head=(total>1?'Best of '+total+' clips (clip '+n+')':'Clip')+' \u00b7 '+secs.toFixed(2)+'s of audio';
     let html;
     if(clear){
@@ -3625,7 +3641,7 @@ function showTab(n){
   navCurSet(ids[n]);
   $("bk").hidden=n==="home"||n==="map"||n==="info"||n==="gempic"||n==="quest"||n==="pass"||n==="event"||n==="buys"||n==="profile"||n==="artist"||n==="sound"||n==="reports";
   if(n==="map"){agRender();guestSoundLink()}
-  if(n==="sound"){const gb=$("sdGuestBack");if(gb)gb.style.display=guest?"":"none"}
+  if(n==="sound"){const gb=$("sdGuestBack");if(gb)gb.style.display=guest?"":"none";applySoundOwnerUI()}
   if(n==="reports"&&typeof rptLoad==="function")rptLoad();
   if(n==="home")renderOverview();
   if(n==="event"){try{evV="trk";renderEvent()}catch(e){}} /* entering Events starts on Tracker */
@@ -5601,6 +5617,18 @@ $("lgGuest").onclick=()=>{
   $("login").hidden=true;$("app").hidden=false;
   showTab("map");window.scrollTo(0,0);
   loadSoundMode().then(guestSoundLink);
+};
+$("lgGuestSound").onclick=async()=>{
+  $("lgErr").textContent="";
+  document.body.classList.add("guest");
+  await loadSoundMode();
+  if(!canSound()){
+    document.body.classList.remove("guest");
+    $("lgErr").textContent=soundMode==="off"?"Sound Guesser is switched off right now.":"Sound Guesser needs a login right now.";
+    return;
+  }
+  $("login").hidden=true;$("app").hidden=false;
+  showTab("sound");window.scrollTo(0,0);guestSoundLink();
 };
 $("gsOpen").onclick=()=>{showTab("sound");window.scrollTo(0,0)};
 $("sdGuestBack").onclick=()=>{showTab("map");window.scrollTo(0,0)};
