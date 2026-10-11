@@ -2119,7 +2119,27 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <script>
 const SB_URL="https://ukgsgiqajqiymaueokeq.supabase.co";
 const SB_KEY="sb_publishable_1kETf3CcPLRckOSNITUQtw_k3fRxfIO";
-const sb=supabase.createClient(SB_URL,SB_KEY);
+/* Request gate. Every database request goes through here so a signed-out (or tampered) page cannot spam the server with calls that are certain to be refused.
+   - Only these tables may be used without a login: the sound-mode setting and report submissions.
+   - Anything else sent without a real login is answered locally with a 401 and never leaves the browser.
+   - If the server itself answers 401 (or a table-level "permission denied"), requests to protected tables are paused for 30 seconds and the person is sent to the login. */
+const SB_OPEN_TABLES=["app_settings","reports"];
+let sbDeny=0;
+const sbNoAuth=()=>new Response(JSON.stringify({code:"NOAUTH",message:"Not signed in",details:null,hint:null}),{status:401,statusText:"Unauthorized",headers:{"Content-Type":"application/json"}});
+async function sbFetch(url,opts){
+  const u=String((url&&url.url)||url),R=SB_URL+"/rest/v1/";
+  if(u.indexOf(R)!==0)return fetch(url,opts);
+  if(SB_OPEN_TABLES.indexOf(u.slice(R.length).split(/[?\/]/)[0])>=0)return fetch(url,opts);
+  let a="";try{a=new Headers(opts&&opts.headers).get("authorization")||""}catch(e){}
+  if(Date.now()<sbDeny||!a||a==="Bearer "+SB_KEY)return sbNoAuth();
+  const r=await fetch(url,opts);
+  let denied=r.status===401;
+  if(!denied&&r.status===403){try{const j=await r.clone().json();denied=!!j&&j.code==="42501"&&/^permission denied for table/i.test(j.message||"")}catch(e){}}
+  if(denied){sbDeny=Date.now()+30000;Promise.resolve().then(function(){try{badSession()}catch(e){}})}
+  return r;
+}
+const sb=supabase.createClient(SB_URL,SB_KEY,{global:{fetch:sbFetch}});
+sb.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="TOKEN_REFRESHED")sbDeny=0});
 const $=id=>document.getElementById(id);
 const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ask=(msg,fn)=>{if(confirm(msg))fn()};
@@ -2898,7 +2918,7 @@ function refreshSoundAccess(){
     const before=soundMode;
     await loadSoundMode();
     if(soundMode!==before)applyArtistLock();
-    guestSoundLink();
+    guestSoundLink();applySoundLock();
     const tab=$("tab-sound");
     if(!canSound()&&tab&&!tab.hidden)sdKickOut();
   })().catch(function(){}).then(function(){sdAccBusy=null});
@@ -3844,6 +3864,20 @@ async function fetchAll(table){
   }
   return {data:out};
 }
+/* A stored login that the server no longer accepts (expired, cleared by the browser, blocked storage in Tor/private windows) used to leave the app half signed in:
+   every request went out as an anonymous visitor, so loads failed with "permission denied" and nothing saved. Now that state is detected and the person is sent to the login. */
+const isAuthErr=e=>!!e&&(e.code==="42501"||e.code==="NOAUTH"||e.status===401||e.status===403||/permission denied|jwt|not authenticated|auth session missing|invalid.*token|token.*(expired|invalid)/i.test(e.message||""));
+let badSessionBusy=false;
+async function badSession(msg){
+  if(badSessionBusy)return;badSessionBusy=true;
+  try{if(chan){sb.removeChannel(chan);chan=null}}catch(e){}
+  try{await sb.auth.signOut({scope:"local"})}catch(e){}
+  try{sessionStorage.removeItem("tracker.opened")}catch(e){}
+  isRyan=false;document.body.classList.remove("guest");
+  showLogin();$("lgErr").textContent=msg||"Your session expired. Please sign in again.";
+  applySoundLock();
+  badSessionBusy=false;
+}
 async function loadAll(quiet){
   if(!quiet)setStatus("Loading...");
   const [st,lg,ss,ep,sl]=await Promise.all([
@@ -3854,7 +3888,7 @@ async function loadAll(quiet){
     fetchAll("epic_slots")
   ]);
   const err=st.error||lg.error||ss.error||ep.error||sl.error;
-  if(err){setStatus("Load failed: "+err.message,true);return false}
+  if(err){if(isAuthErr(err)){badSession();return false}setStatus("Load failed: "+err.message,true);return false}
   if(!st.data)await sb.from("shiny_state").insert({id:1});
   const r=st.data||{};
   s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
@@ -5667,7 +5701,7 @@ async function doLogin(){
   if(!email){$("lgErr").textContent="Enter your name.";return}
   const {error}=await sb.auth.signInWithPassword({email:email,password:$("lgPass").value});
   if(error){$("lgErr").textContent=error.message;return}
-  enter();
+  sbDeny=0;enter();
 }
 $("lgGo").onclick=doLogin;
 $("lgGuest").onclick=()=>{
@@ -5723,7 +5757,12 @@ $("pwNew2").addEventListener("keydown",e=>{if(e.key==="Enter")changePw()});
 $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);chan=null}await sb.auth.signOut();try{sessionStorage.removeItem("tracker.opened")}catch(e){}location.reload()};
 (async()=>{
   const {data}=await sb.auth.getSession();
-  if(data&&data.session){enter(true);return}
+  if(data&&data.session){
+    let bad=false;
+    try{const u=await sb.auth.getUser();if(u.error&&isAuthErr(u.error))bad=true}catch(e){}
+    if(bad){await badSession("Your session expired. Please sign in again.");return}
+    enter(true);return
+  }
   /* shared deep link while signed out: open it as a guest when guests are allowed there, otherwise show the login (the link still opens after signing in) */
   const dl=DEEP[location.hash.slice(1)];
   if(dl){
