@@ -2003,7 +2003,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <button type="button" class="gb sm" id="sdGuestBack" style="display:none;margin:0 0 10px">&larr; Back to Artist Guesser</button>
 <div class="card" id="sdRockNote" role="note"><b>Rock songs only (for now).</b> The Sound Guesser only knows songs from the rock category. Songs from other genres are not in the index, so a clip from one may show a wrong match or no match at all.</div>
 <div id="sdTop">
-<div class="gc" style="--c:#2dd4bf"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><label class="gb sm sdtemp" title="Load temp index file" aria-label="Load temp index file"><svg viewBox="0 0 24 24"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg><span class="gtxt">Temp</span><input class="sdfile" type="file" id="sdIdx" accept=".bin"></label><div class="scl">Song index</div><div class="scv val" id="sdV1">Not loaded</div><div class="scs" id="sdS1">Load a temp index file to start</div></div>
+<div class="gc" style="--c:#2dd4bf"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><label class="gb sm sdtemp" title="Load temp index file" aria-label="Load temp index file"><svg viewBox="0 0 24 24"><path d="M12 16V4M6 10l6-6 6 6M4 20h16"/></svg><span class="gtxt">Temp</span><input class="sdfile" type="file" id="sdIdx" accept=".bin"></label><div class="scl">Song index</div><div class="scv val" id="sdV1">Loading...</div><div class="scs" id="sdS1">Checking the server</div></div>
 <section class="card gsec" id="sdClipSec">
 <div class="gh"><span class="sci" style="--c:#2dd4bf"><svg viewBox="0 0 24 24"><path d="M3 12h2M7 8v8M11 4v16M15 7v10M19 10v4"/></svg></span><div class="gt"><b>Audio clip</b><span>Choose a file, then run the match</span></div></div>
 <div class="sdtool">
@@ -2013,6 +2013,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <input type="text" id="sdHintS" maxlength="6" placeholder="Song starts with" aria-label="Song starts with" autocomplete="off">
 <button type="button" class="gb go sm" id="sdRun" disabled><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>Run match</button>
 </div>
+<div id="sdTs"></div>
 <div class="sdstat"><span class="note" id="sdSrcMsg">No clip chosen yet.</span><span class="note" id="sdHintMsg"></span><span class="note" id="sdMsg" role="status"></span></div>
 <div class="note" id="sdPriv">Files up to 10 MB. Only the first 30 seconds are used. Clips are only used to find a match and are not saved. Only rock songs are in the index.</div>
 </section>
@@ -2853,6 +2854,8 @@ const SDSTAT={count:0};
    Reply JSON: {"results":[{"title","artist","sid","prev","score","offset"}, ...]} sorted best first.
    Errors: 401 = not signed in, 403 = not allowed in the current mode, 429 = rate limited, 503 = off or busy. */
 const SOUND_API_URL="https://sound-api-production-af4f.up.railway.app";
+/* Cloudflare Turnstile site key (public). Empty = no human check. Guests only; signed-in users are never asked. */
+const TURNSTILE_SITE_KEY="0x4AAAAAAFTgczHBniGOpBDr";
 const SD_MAX_BYTES=10*1024*1024,SD_MAX_SECS=30,SD_COOLDOWN=5000,SD_DAY_MAX=30,SD_GUEST_DAY=15;
 let soundMode="ryan";
 const isGuest=()=>document.body.classList.contains("guest");
@@ -3182,6 +3185,32 @@ function guestSoundLink(){
   const doneText=()=>sdTrim?"Done. Only the first "+SD_MAX_SECS+"s of the file were used.":"Done.";
   const cleanSid=v=>/^[A-Za-z0-9]{10,30}$/.test(String(v||""))?String(v):"";
   const cleanPrev=v=>/^https:\/\//.test(String(v||""))?String(v):"";
+  /* Turnstile (guests only): the widget produces a one-time token; the server checks it with Cloudflare */
+  let tsId=null,tsToken="",tsP=null;
+  function tsReady(){
+    if(tsP)return tsP;
+    tsP=new Promise(function(res){
+      function go(){
+        if(!window.turnstile){res();return}
+        if(tsId===null)tsId=turnstile.render("#sdTs",{sitekey:TURNSTILE_SITE_KEY,appearance:"interaction-only",
+          callback:function(t){tsToken=t},"expired-callback":function(){tsToken=""},"error-callback":function(){tsToken=""}});
+        res();
+      }
+      if(window.turnstile){go();return}
+      const sc=document.createElement("script");
+      sc.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      sc.async=true;sc.onload=go;sc.onerror=function(){tsP=null;res()};
+      document.head.appendChild(sc);
+    });
+    return tsP;
+  }
+  async function tsGet(){
+    await tsReady();
+    const t0=Date.now();
+    while(!tsToken&&Date.now()-t0<15000)await new Promise(function(r){setTimeout(r,200)});
+    return tsToken;
+  }
+  function tsReset(){tsToken="";try{if(tsId!==null)turnstile.reset(tsId)}catch(e){}}
   async function serverAnalyze(y){
     const sr=sdSR();
     const fd=new FormData();
@@ -3190,6 +3219,13 @@ function guestSoundLink(){
     fd.append("hintA",$("sdHintA").value.slice(0,6));fd.append("hintS",$("sdHintS").value.slice(0,6));
     fd.append("whole",$("sdWhole").checked?"1":"0");
     $("sdOut").innerHTML="";setMsg("sdHintMsg","");setMsg("sdMsg","Matching...");
+    if(TURNSTILE_SITE_KEY&&isGuest()){
+      setMsg("sdMsg","Checking that you're human...");
+      const ts=await tsGet();
+      if(!ts){setMsg("sdMsg","The human check didn't finish. Please reload the page and try again.","bad");return}
+      fd.append("cf-turnstile-response",ts);tsReset();
+      setMsg("sdMsg","Matching...");
+    }
     const ac=new AbortController(),to=setTimeout(function(){ac.abort()},45000);
     let tok="";
     try{const g=await sb.auth.getSession();tok=(g&&g.data&&g.data.session&&g.data.session.access_token)||""}catch(e){}
@@ -3198,7 +3234,10 @@ function guestSoundLink(){
     catch(e){clearTimeout(to);setMsg("sdMsg",e.name==="AbortError"?"The server took too long. Please try again.":"Can't reach the matching server right now. Please try again later.","bad");return}
     clearTimeout(to);
     if(r.status===401){setMsg("sdMsg","Please sign in again to use Sound Guesser.","bad");return}
-    if(r.status===403){setMsg("sdMsg","Sound Guesser isn't open to your account right now.","bad");return}
+    if(r.status===403){
+      let em="";try{em=String((await r.clone().json()).error||"")}catch(e){}
+      setMsg("sdMsg",/human/i.test(em)?"The human check failed. Please reload the page and try again.":"Sound Guesser isn't open to your account right now.","bad");return;
+    }
     if(r.status===429){setMsg("sdMsg","Too many requests. Please wait a minute and try again.","bad");return}
     if(r.status===503){setMsg("sdMsg","The matcher is busy or switched off right now. Please try again later.","bad");return}
     if(!r.ok){setMsg("sdMsg","Something went wrong on the server. Please try again later.","bad");return}
@@ -3561,12 +3600,11 @@ function applySoundLock(){
   $("tbSoundSoon").hidden=ok;
   applySoundOwnerUI();
 }
-/* owner-only tools inside Sound Guesser: temp index loader, index check, matching settings */
+/* owner-only tools inside Sound Guesser: temp index loader (the index card itself is for everyone), index check, matching settings */
 function applySoundOwnerUI(){
   const o=isRyan;
   ["sdSetSec","sdChkSec","sdAccSec"].forEach(id=>{const e=$(id);if(e)e.style.display=o?"":"none"});
-  const g=document.querySelector("#sdTop>.gc");if(g)g.style.display=o?"":"none";
-  const t=$("sdTop");if(t)t.style.gridTemplateColumns=o?"":"minmax(0,1fr)";
+  const tl=document.querySelector("#sdTop .sdtemp");if(tl)tl.style.display=o?"":"none";
 }
 /* Reports tab is only for ryan */
 function applyReportsLock(){
@@ -5456,9 +5494,8 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.4","2026-10-10",["Added Sound Guesser"]],
 ["0.3.6","2026-10-10",["Sound Guesser: the rock-only notice has a red outline, a faded red background and larger bold text"]],
-["0.3.5","2026-10-10",["Sound Guesser: clips are limited to 10 MB and the first 30 seconds, matches have a short cooldown and a daily limit, and you can report a wrong or missing song"]],
-["0.3.4","2026-10-10",["Added reporting for Artist Guesser: report a missing artist from the guesser page"]],
 ["0.3.3","2026-10-10",["Artist Overview: after an artist finishes loading, loading a new artist is paused for 3 minutes (already-loaded artists still open instantly)","Added report system for Artist Guesser & Sound Guesser"]],
 ["0.3.2","2026-10-10",["Fixed various bugs","Updated button press feedback","Added last update date on artist guesser"]],
 ["0.3.1","2026-10-09",["Artist Guesser can be tried without logging in: use the button on the login page, and Back to login to return"]],
