@@ -2771,14 +2771,18 @@ function agGuessHtml(){
   }).join("");
   $("agMsg").textContent="";
 }
-/* best match = the candidate closest to the median debut year and median popularity of those still matching
-   (the most informative next guess); it is listed first, the rest by popularity */
+/* best match = the most "typical" candidate among those still matching: closest to the median debut year and
+   median popularity, and (so an outlier like a lone SE artist in hip-hop is not suggested over a US one) it also
+   prefers the most common country, members and gender among the matches. It is listed first, the rest by popularity */
 function agPickBest(list){
   if(list.length<3)return list;
   const med=k=>{const v=list.map(a=>a[k]).sort((x,y)=>x-y),m=v.length>>1;return v.length%2?v[m]:(v[m-1]+v[m])/2};
   const md=med("debut"),mp=med("popularity");
   const rg=k=>Math.max(1,Math.max(...list.map(a=>a[k]))-Math.min(...list.map(a=>a[k])));
-  const rd=rg("debut"),rp=rg("popularity"),sc=a=>Math.abs(a.debut-md)/rd+Math.abs(a.popularity-mp)/rp;
+  const rd=rg("debut"),rp=rg("popularity");
+  const mode=k=>{const c={};list.forEach(a=>{c[a[k]]=(c[a[k]]||0)+1});return Object.keys(c).reduce((x,y)=>c[y]>c[x]?y:x)};
+  const mc=mode("country"),mm=mode("members"),mg=mode("gender");
+  const sc=a=>Math.abs(a.debut-md)/rd+Math.abs(a.popularity-mp)/rp+(a.country===mc?0:1)+(a.members===mm?0:.5)+(a.gender===mg?0:.5);
   let best=list[0];list.forEach(a=>{if(sc(a)<sc(best))best=a});
   return [best].concat(list.filter(a=>a!==best));
 }
