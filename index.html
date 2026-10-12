@@ -980,6 +980,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-event .pact{grid-template-columns:repeat(2,minmax(0,1fr))}
 #tab-event .pact #evLeafAdd{grid-column:1/-1;order:-1}
 @media (max-width:820px){#tab-event .pact #evUndo{grid-column:auto}}
+#evShopTot b.neg{color:var(--neg)}
 #tab-event .evsh{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--mut)}
 #tab-event details.gsec>summary{font-size:17px;font-weight:700;cursor:pointer}
 #tab-event details.gsec[open]>summary{margin-bottom:12px}
@@ -1794,6 +1795,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <button type="button" class="gb" id="evUndo"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo Last Entry</button>
 <button type="button" class="gb" id="evReset"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg>Reset &amp; save to history</button>
 </div>
+</section>
+<section class="card gsec" id="evShopTrk" hidden>
+<div class="gh"><span class="sci" style="--c:#fb923c"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><div class="gt"><b id="evShopH">Shop</b><span id="evShopSub">Track what you spend your leaves on.</span></div></div>
+<div class="pAdd" id="evShopGrid"></div>
+<div class="pTot" id="evShopTot"></div>
 </section>
 <section class="card gsec" id="evRecent">
 <div class="gh"><span class="sci" style="--c:#38bdf8"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><div class="gt"><b>Recent Entries</b><span>Your most recent entries for this event.</span></div><div class="gx"><button type="button" class="gb sm" id="evLogClear"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear History</span></button></div></div>
@@ -3195,6 +3201,68 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     return r.getChannelData(0);
   }
 
+  /* iPhone videos (.mov/.mp4): Safari often refuses to decode them directly, so the AAC audio track is pulled out
+     and handed over as a plain ADTS stream, which it does accept. Only the first few seconds are taken. */
+  function mp4Aac(buf,maxSecs){
+    const dv=new DataView(buf),u8=new Uint8Array(buf),n=buf.byteLength;
+    const tag=o=>String.fromCharCode(u8[o],u8[o+1],u8[o+2],u8[o+3]);
+    function kids(a,b){
+      const r=[];let o=a;
+      while(o+8<=b){
+        let sz=dv.getUint32(o),h=8;
+        if(sz===1){sz=dv.getUint32(o+8)*4294967296+dv.getUint32(o+12);h=16}
+        else if(sz===0)sz=b-o;
+        if(sz<h||o+sz>b)break;
+        r.push({t:tag(o+4),s:o+h,e:o+sz});o+=sz;
+      }
+      return r;
+    }
+    const find=(b,t)=>kids(b.s,b.e).find(x=>x.t===t);
+    const moov=kids(0,n).find(x=>x.t==="moov");
+    if(!moov)return null;
+    for(const trak of kids(moov.s,moov.e).filter(x=>x.t==="trak")){
+      const mdia=find(trak,"mdia"),hdlr=mdia&&find(mdia,"hdlr");
+      if(!hdlr||tag(hdlr.s+8)!=="soun")continue;
+      const minf=find(mdia,"minf"),stbl=minf&&find(minf,"stbl");if(!stbl)continue;
+      const stsd=find(stbl,"stsd"),stsz=find(stbl,"stsz"),stsc=find(stbl,"stsc"),stco=find(stbl,"stco")||find(stbl,"co64");
+      if(!stsd||!stsz||!stsc||!stco)continue;
+      const ent=kids(stsd.s+8,stsd.e)[0];
+      if(!ent||ent.t!=="mp4a")return {err:"The audio in this file isn't AAC ("+(ent?ent.t:"unknown")+")"};
+      let p=-1;for(let i=ent.s;i+4<=ent.e;i++){if(tag(i)==="esds"){p=i;break}}
+      if(p<0)return null;
+      let o=p+8,asc=null;
+      const len=()=>{let l=0,b;do{b=u8[o++];l=(l<<7)|(b&127)}while(b&128);return l};
+      if(u8[o]===3){o++;len();o+=2;const fl=u8[o++];if(fl&128)o+=2;if(fl&64)o+=1+u8[o];if(fl&32)o+=2}
+      if(u8[o]===4){o++;len();o+=13;if(u8[o]===5){o++;const l=len();asc=u8.subarray(o,o+l)}}
+      if(!asc||asc.length<2)return null;
+      const obj=asc[0]>>3,fi=((asc[0]&7)<<1)|(asc[1]>>7),ch=(asc[1]>>3)&15;
+      if(obj!==2||fi>12||!ch)return {err:"This AAC variant isn't supported"};
+      const sr=[96000,88200,64000,48000,44100,32000,24000,22050,16000,12000,11025,8000,7350][fi];
+      const maxFrames=Math.ceil(maxSecs*sr/1024);
+      const fixed=dv.getUint32(stsz.s+4),total=dv.getUint32(stsz.s+8);
+      const nch=dv.getUint32(stco.s+4),wide=stco.t==="co64";
+      const nsc=dv.getUint32(stsc.s+4),sc=[];
+      for(let i=0;i<nsc;i++)sc.push([dv.getUint32(stsc.s+8+i*12),dv.getUint32(stsc.s+12+i*12)]);
+      const out=[];let k=0,si=0,total2=0;
+      for(let c=1;c<=nch&&k<total&&k<maxFrames;c++){
+        while(si+1<sc.length&&sc[si+1][0]<=c)si++;
+        let off=wide?dv.getUint32(stco.s+8+(c-1)*8)*4294967296+dv.getUint32(stco.s+12+(c-1)*8):dv.getUint32(stco.s+8+(c-1)*4);
+        for(let j=0;j<sc[si][1]&&k<total&&k<maxFrames;j++,k++){
+          const sz=fixed||dv.getUint32(stsz.s+12+k*4);
+          if(off+sz>n)break;
+          const L=sz+7,h=new Uint8Array(7);
+          h[0]=255;h[1]=241;h[2]=((obj-1)<<6)|(fi<<2)|(ch>>2);h[3]=((ch&3)<<6)|((L>>11)&3);h[4]=(L>>3)&255;h[5]=((L&7)<<5)|31;h[6]=252;
+          out.push(h,u8.subarray(off,off+sz));off+=sz;total2+=L;
+        }
+      }
+      if(!k)return null;
+      const adts=new Uint8Array(total2);let w=0;out.forEach(a=>{adts.set(a,w);w+=a.length});
+      return {adts:adts};
+    }
+    return null;
+  }
+  const decodeBuf=(c,b)=>new Promise((ok,no)=>{const r=c.decodeAudioData(b,ok,no);if(r&&r.catch)r.catch(no)});
+
   $("sdAud").onchange=function(e){
     const f=e.target.files[0];
     if(f&&f.size>SD_MAX_BYTES){
@@ -3230,7 +3298,15 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       if(srcFile){
         setMsg("sdMsg","Decoding...");
         const ctx=new (window.AudioContext||window.webkitAudioContext)();
-        const buf=await ctx.decodeAudioData(await srcFile.arrayBuffer());
+        const raw=await srcFile.arrayBuffer();
+        let buf;
+        try{buf=await decodeBuf(ctx,raw.slice(0))}
+        catch(e1){
+          const m=mp4Aac(raw,SD_MAX_SECS+2);
+          if(!m)throw e1;
+          if(m.err)throw new Error(m.err);
+          try{buf=await decodeBuf(ctx,m.adts.buffer)}catch(e2){throw e1}
+        }
         ctx.close();
         y=await to22k(buf,sr);
       }
@@ -3240,7 +3316,10 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       if(sdTrim)y=y.slice(0,maxN);
       if(!isRyan)dayBump();
       await analyze(y);
-    }catch(err){setMsg("sdMsg","Could not decode that file: "+err.message,"bad")}
+    }catch(err){
+      const fi=srcFile?" ("+((srcFile.name.split(".").pop()||"?").toLowerCase())+", "+(srcFile.size/1048576).toFixed(1)+" MB)":"";
+      setMsg("sdMsg","Could not decode that file"+fi+": "+err.message+(srcFile?". Try an MP3, M4A or WAV.":""),"bad");
+    }
     running=false;
     if(!isRyan){coolUntil=Date.now()+SD_COOLDOWN;setTimeout(updateRun,SD_COOLDOWN+50)}
     updateRun();
@@ -3488,8 +3567,56 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   function plain(s){
     return String(s).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
   }
+  let dbgBusy=false;
+  async function dbgServer(){
+    const q=plain($("sdDbgQ").value);
+    const out=$("sdDbgOut");out.innerHTML="";
+    if(!q){setMsg("sdDbgMsg","Type something to search for.");return}
+    if(dbgBusy)return;dbgBusy=true;
+    setMsg("sdDbgMsg","Searching the server...");
+    try{
+      let tok="";
+      try{const g=await sb.auth.getSession();tok=(g&&g.data&&g.data.session&&g.data.session.access_token)||""}catch(e){}
+      if(!tok){setMsg("sdDbgMsg","Please sign in again to use the index check.","bad");return}
+      const ac=new AbortController(),to=setTimeout(function(){ac.abort()},15000);
+      const qs=new URLSearchParams({q:q,hintA:$("sdHintA").value.slice(0,6),hintS:$("sdHintS").value.slice(0,6)});
+      let r;
+      try{r=await fetch(SOUND_API_URL.replace(/\/+$/,"")+"/check?"+qs.toString(),{signal:ac.signal,headers:{Authorization:"Bearer "+tok}})}
+      catch(e){clearTimeout(to);setMsg("sdDbgMsg",e.name==="AbortError"?"The server took too long.":"Can't reach the server right now.","bad");return}
+      clearTimeout(to);
+      if(r.status===401){setMsg("sdDbgMsg","Please sign in again to use the index check.","bad");return}
+      if(r.status===403){setMsg("sdDbgMsg","The index check is only open to the owner account.","bad");return}
+      if(r.status===404){setMsg("sdDbgMsg","The server doesn't have the /check endpoint yet.","bad");return}
+      if(r.status===429){setMsg("sdDbgMsg","Too many searches. Wait a moment and try again.","bad");return}
+      if(!r.ok){setMsg("sdDbgMsg","The server couldn't run that search.","bad");return}
+      let j=null;try{j=await r.json()}catch(e){}
+      const hits=j&&Array.isArray(j.hits)?j.hits:[];
+      const total=Number(j&&j.total)||hits.length;
+      if(!hits.length){
+        setMsg("sdDbgMsg",'No matches for "'+$("sdDbgQ").value+'" among '+(SDSTAT.count||"the")+" songs.");
+        out.innerHTML='<div class="sdv warn">Not in the index. Common reasons: Spotify had no preview for it, it was skipped as live/demo/remaster, the artist is not one of your 55, or the spelling differs. Try fewer words (e.g. only the artist).</div>';
+        return;
+      }
+      setMsg("sdDbgMsg",total+" match"+(total===1?"":"es")+" in the index"+(total>hits.length?" (showing first "+hits.length+")":"")+".");
+      const byArtist={};
+      (Array.isArray(j.artists)?j.artists:[]).forEach(function(a){if(a&&a.name)byArtist[String(a.name)]=Number(a.n)||0});
+      const artists=Object.keys(byArtist).sort(function(a,b){return byArtist[b]-byArtist[a]});
+      let html="";
+      if(artists.length>1)html+='<div class="sdsum">Artists: '+artists.slice(0,12).map(function(a){return esc(a)+" ("+byArtist[a]+")"}).join(", ")+(artists.length>12?", ...":"")+"</div>";
+      hits.forEach(function(h){
+        let tags="";
+        if(h.pass===true)tags+='<span class="sdtag g">passes your hints</span>';
+        else if(h.pass===false)tags+='<span class="sdtag r">excluded by your hints</span>';
+        const dc=Number(h.dupes)||0;
+        if(dc>0)tags+='<span class="sdtag y">shares duplicate key with '+dc+" other"+(dc>1?"s":"")+" (only the best scorer is listed)</span>";
+        if(!tags)tags='<span class="sdtag g">will show in results</span>';
+        html+='<div class="sdhit"><b>'+esc(String(h.title||""))+'</b><span class="a">'+esc(String(h.artist||""))+" \u00b7 #"+esc(String(h.id))+"</span>"+tags+"</div>";
+      });
+      out.innerHTML=html;
+    }finally{dbgBusy=false}
+  }
   function dbgSearch(){
-    if(!sdx){setMsg("sdDbgMsg","Load the index first.");return}
+    if(!sdx){if(SOUND_API_URL&&isRyan)return dbgServer();setMsg("sdDbgMsg","Load the index first.");return}
     const words=plain($("sdDbgQ").value).split(" ").filter(Boolean);
     const out=$("sdDbgOut");out.innerHTML="";
     if(!words.length){setMsg("sdDbgMsg","Type something to search for.");return}
@@ -3536,6 +3663,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     out.innerHTML=html;
   }
   $("sdDbgGo").onclick=dbgSearch;
+  if(SOUND_API_URL){$("sdDbgGo").disabled=false;setMsg("sdDbgMsg","Type part of a song or artist name and press Search.")}
   $("sdDbgQ").addEventListener("keydown",function(e){if(e.key==="Enter")dbgSearch()});
 })();
 
@@ -4148,13 +4276,17 @@ col:[["Summer","Calvin Harris","Electronic"],["Stateside + Zara Larsson","PinkPa
  col:[["Swimming Pools (Drank)","Kendrick Lamar","Hip Hop"],["MIDDLE CHILD","J. Cole","Hip Hop"],["Pursuit Of Happiness (Nightmare)","Kid Cudi","Hip Hop"],["Good News","Mac Miller","Hip Hop"],["Mask Off","Future","Hip Hop"],["HIGHEST IN THE ROOM","Travis Scott","Hip Hop"],["Hate Bein' Sober","Chief Keef","Hip Hop"],["Flooded The Face","Lil Uzi Vert","Hip Hop"],["Ultimate","Denzel Curry","Hip Hop"],["Airplanes (feat. Hayley Williams of Paramore)","B.o.B","Hip Hop"],["Pardon Me (Lil Yachty feat. Future & Mike WiLL Made-It)","Lil Yachty","Hip Hop"],["@ MEH","Playboi Carti","Hip Hop"],["Black and Yellow","Wiz Khalifa","Hip Hop"],["Faucet Failure","Ski Mask The Slump God","Hip Hop"],["Miss The Rage","Trippie Redd","Hip Hop"],["Savage","Megan Thee Stallion","Hip Hop"],["ORANGE SODA","Baby Keem","Hip Hop"],["Surround Sound (feat. 21 Savage & Baby Tate)","JID","Hip Hop"],["Drowning (feat. Kodak Black)","A Boogie Wit da Hoodie","Hip Hop"],["Doja","Central Cee","Hip Hop"]]}];
 const EVG={"Hip Hop":"hiphop",Pop:"pop",Indie:"indie",Rock:"rock","Classical & Jazz":"classical",Latin:"latin",Electronic:"electronic","K-Pop":"kpop","R&B":"rnb",Metal:"metal",Country:"country"};
 const evRw=c=>c.big.concat(c.small);
+/* shop purchases: {<item name>:count}; cost per item comes from cfg.shop [name, cost] */
+const evSp=(cfg,c)=>{const o={};(cfg.shop||[]).forEach(([n])=>o[n]=Math.max(0,parseInt(c&&c[n])||0));return o};
+const evSpent=(cfg,c)=>(cfg.shop||[]).reduce((a,[n,k])=>a+(c&&c[n]||0)*k,0);
+const evSpN=(cfg,c)=>(cfg.shop||[]).reduce((a,[n])=>a+(c&&c[n]||0),0);
 const evCnt=(cfg,c)=>{const o={};evRw(cfg).forEach(([k])=>o[k]=Math.max(0,parseInt(c&&c[k])||0));return o};
 const evSum=(cfg,c)=>evRw(cfg).reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0);a.gems+=c[k]*(v.gems||0);a.n+=c[k];return a},{coins:0,gems:0,n:0});
 function evNormS(cfg,d){
   d=d||{};
   const got={};if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{if(d.got[i]&&+i>=0&&+i<cfg.col.length)got[i]=1});
   const ks=new Set(evRw(cfg).map(r=>r[0])),log=Array.isArray(d.log)?d.log.filter(e=>e&&ks.has(e.k)&&Math.trunc(+e.n)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
-  return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),start:+d.start||0,got,log,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0)})):[]};
+  return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),sp:evSp(cfg,d.sp),start:+d.start||0,got,log,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0),sp:evSp(cfg,h.sp)})):[]};
 }
 /* Leaves = one per reward entry (so they follow the + and − buttons) plus "extra" leaves added without a reward.
    saved shape: {e:{<eventId>:{c,extra,start,got,history}}}; the older single-event shape {c,start,history} is Soundfall's */
@@ -4173,6 +4305,18 @@ const evpit=(r,n)=>{const m=evMeta(r[3]||{});return `<span class="pit" style="--
 function evCard(cfg,s,t,[k,n,o,v]){
   const m=evMeta(v||{}),c=s.c[k];
   return `<div class="pcat" style="--c:${m[0]}"><div class="pch"><span class="sci">${pIco(m[1])}</span><div class="pcn"><b>${esc(n)}</b><span class="pco">${o}<span class="pcp"> \u00b7 ${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</span></span></div></div><div class="gcost"><input type="number" inputmode="numeric" min="0" step="1" value="${c}" data-k="${k}" aria-label="${esc(n)} count"><button type="button" data-k="${k}" data-d="-1"${c<=0?" disabled":""} aria-label="Remove one">\u2212</button><button type="button" class="gplus" data-k="${k}" data-d="1" aria-label="Add one">+</button></div><div class="ps">${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</div></div>`;
+}
+const EV_BAG='<svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>';
+const evspit=(n,c)=>`<span class="pit" style="--c:#fb923c"><i>${EV_BAG}</i>${esc(n)} <b>${c}</b></span>`;
+function evRenderShop(cfg,s,t,rs){
+  const has=!!(cfg.shop&&evRw(cfg).length&&!cfg.passed);
+  $("evShopTrk").hidden=!has;if(!has)return;
+  const spent=evSpent(cfg,s.sp),left=t.n+s.extra-spent;
+  $("evShopSub").textContent="Track what you spend your "+rs[0]+" on.";
+  $("evShopGrid").innerHTML=cfg.shop.map(([n,cost],i)=>{
+    const c=s.sp[n]||0;
+    return `<div class="pcat" style="--c:#fb923c"><div class="pch"><span class="sci">${EV_BAG}</span><div class="pcn"><b>${esc(n)}</b><span class="pco">${cost} ${esc(rs[0])}</span></div></div><div class="gcost"><input type="number" inputmode="numeric" min="0" step="1" value="${c}" data-si="${i}" aria-label="${esc(n)} bought"><button type="button" data-si="${i}" data-d="-1"${c<=0?" disabled":""} aria-label="Remove one">\u2212</button><button type="button" class="gplus" data-si="${i}" data-d="1" aria-label="Add one">+</button></div><div class="ps">${c?nfmt(c*cost)+" "+esc(rs[0])+" spent":"None bought yet"}</div></div>`}).join("");
+  $("evShopTot").innerHTML=`${esc(rs[0][0].toUpperCase()+rs[0].slice(1))} spent:<b>${nfmt(spent)}</b> \u00b7 Left:<b${left<0?' class="neg"':""}>${nfmt(left)}</b>${left<0?' <span title="You have spent more than the '+esc(rs[0])+' you have tracked">(more than tracked)</span>':""}`;
 }
 let evV="trk"; /* always opens on Tracker (events without one fall back to their first view) */
 let evOnly={};try{evOnly=JSON.parse(LS("tracker.evonly")||"{}")||{}}catch(e){}
@@ -4206,7 +4350,7 @@ function renderEvent(){
   $("evLeafAddT").textContent=cap(rs[1])+" (no reward)";$("evLeafSubT").textContent="Remove "+rs[1];
   $("evLeafSub").setAttribute("aria-label","Remove one "+rs[1]+" added without a reward");
   $("evUndo").disabled=!(s.log.length&&s.log[0].i>s.floor);
-  $("evReset").disabled=!(t.n||s.extra);$("evLeafSub").disabled=s.extra<=0;
+  $("evReset").disabled=!(t.n||s.extra||evSpN(cfg,s.sp));$("evLeafSub").disabled=s.extra<=0;
   $("evLogClear").disabled=!s.log.length;
   $("evLog").innerHTML='<tr><th>#</th><th>Time</th><th>Item</th><th class="c">Amount</th><th class="r">Total entries</th></tr>'+(s.log.length
     ?s.log.slice(0,50).map(e=>{const r=evFind(cfg,e.k);return r?`<tr><td>${e.i}</td><td>${pWhenH(e.t)}</td><td>${evpit(r)}</td><td class="c b" style="color:var(${e.n>0?"--pos":"--neg"})">${e.n>0?"+":"\u2212"}${nfmt(Math.abs(e.n))}</td><td class="r">${nfmt(e.tot)}</td></tr>`:""}).join("")
@@ -4223,6 +4367,7 @@ function renderEvent(){
   $("evShopBox").hidden=!cfg.shop;$("evShop").innerHTML=(cfg.shop||[]).map(([n,c])=>`<div class="uo" style="--c:#38bdf8" title="${esc(n)}"><i>${pIco("target")}</i><span class="un">${esc(n)}</span><b>${c} ${esc(rs[0])}</b></div>`).join("");
     const hasRw=evRw(cfg).length>0;
   const over=!!cfg.passed;
+  evRenderShop(cfg,s,t,rs);
   const hasInfo=!!(inf||cfg.note||cfg.shop);
   $("evOddsWrap").hidden=!hasRw;
   $("evOddsBox").hidden=!(hasRw||cfg.shop);
@@ -4238,7 +4383,7 @@ function renderEvent(){
   $("evHistSum").textContent="History"+(s.history.length?" ("+s.history.length+")":"");
   $("evHist").innerHTML=s.history.map((h,i)=>{
     const x=evSum(cfg,h.c);
-    return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${nfmt(x.n)} entries \u00b7 ${nfmt(x.n+h.extra)} ${esc(rs[0])} \u00b7 ${nfmt(x.coins)} coins \u00b7 ${nfmt(x.gems)} gems</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="pHc">${evRw(cfg).filter(r=>h.c[r[0]]).map(r=>evpit(r,h.c[r[0]])).join("")}</div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
+    return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${nfmt(x.n)} entries \u00b7 ${nfmt(x.n+h.extra)} ${esc(rs[0])} \u00b7 ${nfmt(x.coins)} coins \u00b7 ${nfmt(x.gems)} gems${evSpN(cfg,h.sp)?" \u00b7 "+nfmt(evSpent(cfg,h.sp))+" "+esc(rs[0])+" spent":""}</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="pHc">${evRw(cfg).filter(r=>h.c[r[0]]).map(r=>evpit(r,h.c[r[0]])).join("")}${(cfg.shop||[]).filter(r=>h.sp&&h.sp[r[0]]).map(r=>evspit(r[0],h.sp[r[0]])).join("")}</div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
 }
 function saveEvent(){
   LS("tracker.event",JSON.stringify(ev));
@@ -4280,11 +4425,26 @@ $("evGrid").addEventListener("change",ev2=>{
   const v=Math.min(1e6,Math.max(0,Math.trunc(+i.value)||0));
   if(!evBump(k,v-s.c[k]))i.value=s.c[k];
 });
+function evShopSet(i,v){
+  const cfg=evCfg(),s=evS(),it=cfg.shop&&cfg.shop[i];if(!it)return false;
+  const cur=s.sp[it[0]]||0,nx=Math.min(9999,Math.max(0,Math.trunc(v)||0));
+  if(nx===cur)return false;
+  if(!s.start)s.start=Date.now();
+  s.sp[it[0]]=nx;saveEvent();renderEvent();return true;
+}
+$("evShopGrid").addEventListener("click",ev2=>{const b=ev2.target.closest("button[data-d]");if(!b||b.disabled)return;const i=+b.dataset.si,it=evCfg().shop[i];evShopSet(i,(evS().sp[it[0]]||0)+(+b.dataset.d))});
+$("evShopGrid").addEventListener("change",ev2=>{
+  const el=ev2.target.closest("input[data-si]");if(!el)return;
+  const i=+el.dataset.si,it=evCfg().shop[i],s=evS();
+  if(el.value.trim()===""){el.value=s.sp[it[0]]||0;return}
+  if(!evShopSet(i,+el.value))el.value=s.sp[it[0]]||0;
+});
+$("evShopGrid").addEventListener("focusin",ev2=>{if(ev2.target.matches("input"))ev2.target.select()});
 $("evGrid").addEventListener("focusin",ev2=>{if(ev2.target.matches("input"))ev2.target.select()});
 $("evUndo").onclick=()=>{
   const cfg=evCfg(),s=evS(),e=s.log[0];if(!e||e.i<=s.floor)return;
   s.c[e.k]=Math.max(0,s.c[e.k]-e.n);s.log.shift();if(e.i===s.seq)s.seq--;
-  if(!evSum(cfg,s.c).n&&!s.extra)s.start=0;
+  if(!evSum(cfg,s.c).n&&!s.extra&&!evSpN(cfg,s.sp))s.start=0;
   saveEvent();renderEvent();
 };
 $("evLogClear").onclick=()=>{
@@ -4310,10 +4470,10 @@ $("evCol").addEventListener("change",ev2=>{
 });
 $("evReset").onclick=()=>{
   const cfg=evCfg(),s=evS();
-  if(!evSum(cfg,s.c).n&&!s.extra)return;
+  if(!evSum(cfg,s.c).n&&!s.extra&&!evSpN(cfg,s.sp))return;
   ask("Save the current counts to history and reset them?",()=>{
-    const h={t:Date.now(),start:s.start,c:{...s.c},extra:s.extra};
-    ev.e[cfg.id]={c:evCnt(cfg),extra:0,start:0,got:s.got,log:s.log,seq:s.seq,floor:s.seq,history:[h,...s.history]};
+    const h={t:Date.now(),start:s.start,c:{...s.c},extra:s.extra,sp:{...s.sp}};
+    ev.e[cfg.id]={c:evCnt(cfg),extra:0,sp:evSp(cfg),start:0,got:s.got,log:s.log,seq:s.seq,floor:s.seq,history:[h,...s.history]};
     saveEvent();renderEvent();
   });
 };
@@ -5601,6 +5761,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.4.2","2026-10-11",["Added a Shop tracker to the Soundfall event: log what you buy with your leaves, see leaves spent and left, and shop purchases are saved to history on reset"]],
 ["0.4.1","2026-10-10",["Updated Sound Guesser position & admin toggles","Added Rate boost toggle to the Quest Tracker: shiny, lyric, and epic rates are 50% higher than usual"]],
 ["0.4","2026-10-10",["Added Sound Guesser"]],
 ["0.3.6","2026-10-10",["Sound Guesser: the rock-only notice has a red outline, a faded red background and larger bold text"]],
