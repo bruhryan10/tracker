@@ -73,6 +73,18 @@ div.tabs{display:grid;grid-template-columns:repeat(5,1fr)}
 .tile .tl{font-size:12px;color:var(--mut)}
 .tile.soon{opacity:.45;filter:grayscale(1);cursor:not-allowed}
 .tile.soon:hover{border-color:var(--bd)}
+/* home page on phones: condensed tiles, 2 per row (icon + name on top, big value, short caption; description hidden) */
+@media (max-width:700px){
+#ovGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#ovGrid .tile{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i n" "v v" "s s";column-gap:8px;row-gap:0;align-items:center;align-content:start;padding:9px 10px}
+#ovGrid .tile .tb{display:contents}
+#ovGrid .tile .ti{grid-area:i;width:28px;height:28px;border-radius:8px}
+#ovGrid .tile .ti svg{width:16px;height:16px}
+#ovGrid .tile .tn{grid-area:n;font-size:13px;line-height:1.15;overflow-wrap:anywhere}
+#ovGrid .tile .tn+.tl{display:none}
+#ovGrid .tile .tv{grid-area:v;font-size:19px;line-height:1.1;margin-top:7px}
+#ovGrid .tile .tv+.tl{grid-area:s;font-size:11px;line-height:1.25;margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+}
 #tbArtist.soon{opacity:.45;cursor:not-allowed;filter:grayscale(1)}
 div.tabs button{min-width:0;padding:10px 4px;font-size:14px}
 @media (max-width:700px){div.tabs{grid-template-columns:repeat(2,1fr)}}
@@ -1092,6 +1104,17 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-event #evTop .gc .scl{font-size:11px;line-height:1.15;align-self:center}
 #tab-event #evTop .gc .scv{margin-top:4px;font-size:clamp(18px,6vw,24px);line-height:1.1}
 #tab-event #evTop .gc .scs{display:none}
+/* gempic + quest trackers: the three stat boxes stay side by side on phones (compact, like the event tracker) */
+@media (max-width:700px){
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop){grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc:last-child{grid-column:auto}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc{padding:8px 9px;grid-template-areas:"i l" "v v" "s s";column-gap:6px;align-content:start;align-items:center;border-radius:12px}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .sci{width:22px;height:22px;border-radius:7px}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .sci svg{width:13px;height:13px}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scl{font-size:10.5px;font-weight:600;line-height:1.15;align-self:center;overflow-wrap:anywhere}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scv{margin-top:4px;font-size:clamp(17px,5.6vw,24px);line-height:1.1;overflow-wrap:anywhere}
+:is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scs{margin-top:3px;font-size:9.5px;line-height:1.2;overflow-wrap:anywhere}
+}
 #tab-event #evRewards{margin-top:0}
 #tab-event #evRewards .gh{margin-bottom:10px}
 #tab-event #evRewards .gh .sci{width:34px;height:34px;border-radius:10px}
@@ -1543,6 +1566,64 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-reports .admBar i{display:block;background:var(--ac);border-radius:3px 3px 0 0;min-height:1px}
 #tab-reports .admAx{display:flex;justify-content:space-between;font-size:10px;color:var(--mut);margin-top:4px}
 #tab-reports .admOk{color:#22c55e}#tab-reports .admWarn{color:#f59e0b}#tab-reports .admBad{color:#ef4444}
+/* ---- admin visual refresh ---- */
+#tab-reports .rptHead{margin-top:10px;padding:14px 16px}
+#tab-reports>.rptHead:first-child{margin-top:0}
+#tab-reports .rptTitle b{font-size:22px}
+#tab-reports .admSub{margin:-4px 0 2px}
+#tab-reports .admCtl .rptRow{gap:10px}
+#tab-reports .admChk{display:inline-flex;align-items:center;gap:8px;margin:0 0 0 auto;padding:8px 12px;font-size:13px;font-weight:600;color:var(--tx);border:1px solid var(--bd);border-radius:9px;background:var(--bg);cursor:pointer;user-select:none}
+#tab-reports .admChk input{width:16px;height:16px;margin:0;padding:0;flex:none;accent-color:var(--ac);cursor:pointer}
+#tab-reports .admChk:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 14%,var(--bg))}
+#tab-reports .admStat{margin:0;min-height:16px}
+#tab-reports .admGrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+#tab-reports .admC{--c:var(--ac);padding:12px 14px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 35%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 14%,var(--card)),var(--card) 75%);box-shadow:inset 3px 0 0 var(--c)}
+#tab-reports .admC.bad{--c:#ef4444}
+#tab-reports .admC small{font-size:11px;font-weight:600}
+#tab-reports .admC b{display:block;font-size:26px;line-height:1.15;margin-top:2px}
+#tab-reports .admC span{font-size:12px;margin-top:2px;line-height:1.3}
+#tab-reports .admSec{padding:14px 16px;border-radius:14px}
+#tab-reports .admSec h3{display:flex;align-items:center;gap:8px;font-size:15px;margin:0 0 10px}
+#tab-reports .admSec h3::before{content:"";width:4px;height:15px;border-radius:2px;background:var(--ac)}
+#tab-reports .admT th{padding:6px 8px}
+#tab-reports .admT td{padding:8px}
+#tab-reports .admT tbody tr:nth-child(even){background:color-mix(in srgb,var(--bd) 18%,transparent)}
+#tab-reports .admT tbody tr:last-child td{border-bottom:0}
+#tab-reports .admLeg{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:8px}
+#tab-reports .admLeg span{display:inline-flex;align-items:center;gap:6px}
+#tab-reports .admLeg i,#tab-reports .admCol i.v{background:var(--ac)}
+#tab-reports .admLeg i.m,#tab-reports .admCol i.m{background:#34d399}
+#tab-reports .admLeg i{width:10px;height:10px;border-radius:3px}
+#tab-reports .admBars{height:170px;gap:6px;justify-content:center;align-items:stretch;margin-bottom:6px}
+#tab-reports .admBar{flex:1 1 0;min-width:4px;max-width:84px}
+#tab-reports .admPair{flex:1;min-height:0;display:flex;align-items:stretch;justify-content:center;gap:3px;border-bottom:1px solid var(--bd)}
+#tab-reports .admCol{flex:1;max-width:30px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0}
+#tab-reports .admCol i{width:100%;border-radius:4px 4px 0 0;min-height:2px}
+#tab-reports .admCol em{font-style:normal;font-size:10px;font-weight:600;color:var(--mut);margin-bottom:2px;line-height:1}
+#tab-reports .admDay{font-size:10px;color:var(--mut);text-align:center;margin-top:4px;white-space:nowrap}
+#tab-reports .admBars+.admT,#tab-reports .admBars~.admWrap{margin-top:10px}
+#tab-reports .admGrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+#tab-reports .admGrid.two .admC b{font-size:30px}
+#tab-reports .admGroup{margin-top:14px}
+#tab-reports .admGh{display:flex;align-items:center;gap:4px 10px;flex-wrap:wrap;width:100%;box-sizing:border-box;margin:0;padding:8px 10px;border:1px solid color-mix(in srgb,var(--c) 30%,var(--bd));border-radius:12px;background:color-mix(in srgb,var(--c) 8%,var(--card));color:var(--tx);text-align:left;cursor:pointer}
+#tab-reports .admGh:hover{border-color:var(--c)}
+#tab-reports .admGh b{font-size:16px;display:inline-flex;align-items:center;gap:8px}
+#tab-reports .admGh b::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
+#tab-reports .admGh small{font-size:12px;font-weight:400;color:var(--mut);flex:1;min-width:0}
+#tab-reports .admCh{width:20px;height:20px;flex:none;margin-left:auto;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+#tab-reports .admGroup.shut .admCh{transform:rotate(180deg)}
+#tab-reports .admGroup.shut .admBody{display:none}
+#tab-reports .admGroup>.note{margin:8px 2px 0}
+#tab-reports .admTwo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+#tab-reports .admTwo .admSec{margin-top:10px;min-width:0}
+@media (max-width:700px){#tab-reports .admTwo{grid-template-columns:1fr}}
+@media (max-width:520px){
+#tab-reports .admGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#tab-reports .admC:last-child:nth-child(odd){grid-column:1/-1}
+#tab-reports .admC b{font-size:22px}
+#tab-reports .admChk{margin-left:0;width:100%;box-sizing:border-box}
+#tab-reports .admSec{padding:12px}
+}
 
 /* ---------- Sound Guesser report form ---------- */
 #tab-sound #sdRpForm{display:grid;gap:10px;margin-top:12px}
@@ -2015,16 +2096,18 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div id="tab-reports" hidden>
 <section class="card rptHead">
 <div class="rptTitle"><b>Admin</b><span class="note" id="rptMsg" role="status"></span></div>
+<div class="note admSub">Usage analytics and user reports for the Sound Guesser and Artist Guesser.</div>
 <div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button></div></div>
 </section>
 <div id="admAn">
-<section class="card rptHead">
+<section class="card rptHead admCtl">
 <div class="rptRow">
 <div class="rptSeg" id="admDays"><button type="button" data-d="1">24h</button><button type="button" data-d="7" class="on">7 days</button><button type="button" data-d="30">30 days</button><button type="button" data-d="90">90 days</button></div>
 <button type="button" class="rb" id="admRefresh">Refresh</button>
+<button type="button" class="rb" id="admFold">Collapse all</button>
+<label class="admChk"><input type="checkbox" id="admInc"><span>Include my own activity</span></label>
 </div>
-<label class="note" style="display:flex;align-items:center;gap:6px"><input type="checkbox" id="admInc"> Include my own activity</label>
-<div class="note" id="admMsg" role="status"></div>
+<div class="note admStat" id="admMsg" role="status"></div>
 </section>
 <div id="admOut"></div>
 </div>
@@ -3889,43 +3972,74 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   const pct=(a,b)=>b?Math.round(a*100/b)+"%":"-";
   const when=t=>{try{return new Date(t).toLocaleString([],{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}catch(e){return ""}};
   const msgSet=(t,bad)=>{const m=q("admMsg");if(m){m.textContent=t||"";m.style.color=bad?"#ef4444":""}};
-  function card(label,val,sub,bad){return '<div class="admC'+(bad?" bad":"")+'"><small>'+esc(label)+'</small><b>'+esc(val)+'</b>'+(sub?'<span>'+esc(sub)+'</span>':'')+'</div>'}
+  function card(label,val,sub,bad,color){const c=bad?"#ef4444":color;return '<div class="admC'+(bad?" bad":"")+'"'+(c?' style="--c:'+c+'"':'')+'><small>'+esc(label)+'</small><b>'+esc(val)+'</b>'+(sub?'<span>'+esc(sub)+'</span>':'')+'</div>'}
+  /* collapsible sections: which ones are shut is remembered on this device */
+  const GKEYS=["byday","sound","artist","tabs","errors"];
+  let shut=new Set();try{shut=new Set(JSON.parse(LS("tracker.admShut")||"[]"))}catch(e){}
+  const saveShut=()=>LS("tracker.admShut",JSON.stringify([...shut]));
+  function foldLbl(){const b=q("admFold");if(b)b.textContent=GKEYS.every(k=>shut.has(k))?"Expand all":"Collapse all"}
+  function group(key,title,sub,color,body){const c=shut.has(key);return '<div class="admGroup'+(c?' shut':'')+'" data-g="'+key+'" style="--c:'+color+'"><button type="button" class="admGh" aria-expanded="'+(!c)+'"><b>'+esc(title)+'</b>'+(sub?'<small>'+esc(sub)+'</small>':'')+'<svg class="admCh" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button><div class="admBody">'+body+'</div></div>'}
   function table(head,rows,numCols){
     if(!rows.length)return '<div class="note">Nothing yet.</div>';
     return '<div class="admWrap"><table class="admT"><thead><tr>'+head.map((h,i)=>'<th'+(numCols.indexOf(i)>=0?' class="n"':'')+'>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+
       rows.map(r=>'<tr>'+r.map((c,i)=>'<td'+(numCols.indexOf(i)>=0?' class="n"':'')+'>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';
   }
-  function sec(title,body){return '<section class="card admSec"><h3>'+esc(title)+'</h3>'+body+'</section>'}
+  function sec(title,body){return '<section class="card admSec">'+(title?'<h3>'+esc(title)+'</h3>':'')+body+'</section>'}
   function render(d){
-    const hit=d.hits+d.close;
-    let h='<div class="admGrid">'+
-      card("Visits",n0(d.visits),"page views")+
-      card("Sessions",n0(d.sessions),"guests "+n0(d.guest_sessions)+" / signed in "+n0(d.user_sessions))+
-      card("Matches",n0(d.matches),"guests "+n0(d.guest_matches)+" / signed in "+n0(d.user_matches))+
-      card("Hit rate",pct(d.hits,d.matches),n0(d.hits)+" hit, "+n0(d.close)+" close")+
-      card("Misses",n0(d.misses),pct(d.misses,d.matches)+" of matches")+
-      card("Median speed",(d.p50_ms/1000).toFixed(1)+"s","95th: "+(d.p95_ms/1000).toFixed(1)+"s")+
-      card("Errors",n0(d.errors),"",d.errors>0)+
-      card("Turnstile fails",n0(d.turnstile_fail),"",d.turnstile_fail>0)+
-      card("Rate limited",n0(d.rate_limited),"")+
+    const tb=t=>(d.by_tab||[]).find(x=>x.tab===t)||{visits:0,sessions:0};
+    const snd=tb("sound"),art=tb("map");
+    const none=!d.matches;
+    /* 1) top: visits + sessions */
+    let h='<div class="admGrid two">'+
+      card("Visits",n0(d.visits),"page views",false,"#3b82f6")+
+      card("Sessions",n0(d.sessions),"guests "+n0(d.guest_sessions)+" / signed in "+n0(d.user_sessions),false,"#a78bfa")+
     '</div>';
     /* by day */
     const bd=d.by_day||[];
     if(bd.length){
-      const mx=Math.max.apply(null,bd.map(x=>Math.max(x.visits,x.matches,1)));
-      h+=sec("By day (visits, matches)",'<div class="admBars">'+bd.map(x=>'<div class="admBar" title="'+esc(x.day)+': '+x.visits+' visits, '+x.matches+' matches, '+x.errors+' errors"><i style="height:'+Math.round(x.visits*100/mx)+'%"></i></div>').join('')+'</div>'+
-        '<div class="admAx"><span>'+esc(bd[0].day)+'</span><span>'+esc(bd[bd.length-1].day)+'</span></div>'+
-        table(["Day","Visits","Sessions","Matches","Errors"],bd.slice().reverse().map(x=>[esc(x.day),n0(x.visits),n0(x.sessions),n0(x.matches),x.errors?'<span class="admBad">'+n0(x.errors)+'</span>':'0']),[1,2,3,4]));
+      const mx=Math.max.apply(null,bd.map(x=>Math.max(x.visits,x.matches,1))),few=bd.length<=14;
+      const col=(v,c)=>'<div class="admCol">'+(few&&v?'<em>'+n0(v)+'</em>':'')+'<i class="'+c+'" style="height:'+Math.round(v*88/mx)+'%"></i></div>';
+      const bars=bd.map(x=>'<div class="admBar" title="'+esc(x.day)+': '+x.visits+' visits, '+x.matches+' matches, '+x.errors+' errors"><div class="admPair">'+col(x.visits,"v")+col(x.matches,"m")+'</div>'+(few?'<span class="admDay">'+esc(String(x.day).slice(5))+'</span>':'')+'</div>').join('');
+      h+=group("byday","By day","Visits and matches per day","#3b82f6",sec("",'<div class="admLeg"><span><i class="v"></i>Visits</span><span><i class="m"></i>Matches</span></div><div class="admBars">'+bars+'</div>'+
+        (few?'':'<div class="admAx"><span>'+esc(bd[0].day)+'</span><span>'+esc(bd[bd.length-1].day)+'</span></div>')+
+        table(["Day","Visits","Sessions","Matches","Errors"],bd.slice().reverse().map(x=>[esc(x.day),n0(x.visits),n0(x.sessions),n0(x.matches),x.errors?'<span class="admBad">'+n0(x.errors)+'</span>':'0']),[1,2,3,4])));
     }
-    h+=sec("Tabs used",table(["Tab","Visits","Sessions"],(d.by_tab||[]).map(x=>[esc(x.tab),n0(x.visits),n0(x.sessions)]),[1,2]));
-    h+=sec("Errors by type",table(["Type","Count","Last seen","Example"],(d.errors_by_type||[]).map(x=>[esc(x.type),n0(x.n),esc(when(x.last)),esc(x.sample||"")]),[1]));
-    h+=sec("Devices",table(["Device","Browser","Sessions"],(d.devices||[]).map(x=>[esc(x.device),esc(x.browser),n0(x.n)]),[2]));
-    h+=sec("Most matched songs",table(["Song","Artist","Times"],(d.top_songs||[]).map(x=>[esc(x.song||""),esc(x.artist||""),n0(x.n)]),[2]));
-    h+=sec("Recent activity",table(["When","Type","Status","Speed","Who","Result"],(d.recent||[]).map(x=>{
-      const bad=(x.status>=400)||/error/.test(x.type);
-      const res=x.type==="match_request"?esc((x.result||"")+(x.song?" - "+x.song:"")+(x.score?" ("+x.score+")":"")):esc(x.msg||"");
-      return [esc(when(x.t)),esc(x.type.replace("_"," ")),'<span class="'+(bad?"admBad":"admOk")+'">'+esc(x.status==null?"-":x.status)+'</span>',x.ms==null?"-":(x.ms/1000).toFixed(1)+"s",x.guest?"guest":"user",res]}),[3]));
-    q("admOut").innerHTML=h;
+    /* 2) Sound Guesser */
+    h+=group("sound","Sound Guesser","Song matching from uploaded clips","#34d399",
+      '<div class="admGrid">'+
+        card("Page views",n0(snd.visits),"Sound Guesser tab",false,"#38bdf8")+
+        card("Sessions",n0(snd.sessions),"opened the tool",false,"#a78bfa")+
+        card("Matches",n0(d.matches),"guests "+n0(d.guest_matches)+" / signed in "+n0(d.user_matches),false,"#3b82f6")+
+        card("Hit rate",pct(d.hits,d.matches),n0(d.hits)+" hit, "+n0(d.close)+" close",false,"#22c55e")+
+        card("Misses",n0(d.misses),pct(d.misses,d.matches)+" of matches",false,"#f59e0b")+
+        card("Median speed",none?"-":(d.p50_ms/1000).toFixed(1)+"s",none?"":"95th: "+(d.p95_ms/1000).toFixed(1)+"s",false,"#38bdf8")+
+      '</div>'+
+      sec("Most matched songs",table(["Song","Artist","Times"],(d.top_songs||[]).map(x=>[esc(x.song||""),esc(x.artist||""),n0(x.n)]),[2])));
+    /* 3) Artist Guesser */
+    h+=group("artist","Artist Guesser","Narrow down the mystery artist from hints","#38bdf8",
+      '<div class="admGrid two">'+
+        card("Page views",n0(art.visits),"Artist Guesser tab",false,"#38bdf8")+
+        card("Sessions",n0(art.sessions),"opened the tool",false,"#a78bfa")+
+      '</div><div class="note">Only page views and sessions are tracked for this tool so far.</div>');
+    /* 4) tabs + devices */
+    h+=group("tabs","Tabs & devices","Where people go and what they use","#a78bfa",
+      '<div class="admTwo">'+
+        sec("Tabs used",table(["Tab","Visits","Sessions"],(d.by_tab||[]).map(x=>[esc(x.tab),n0(x.visits),n0(x.sessions)]),[1,2]))+
+        sec("Devices",table(["Device","Browser","Sessions"],(d.devices||[]).map(x=>[esc(x.device),esc(x.browser),n0(x.n)]),[2]))+
+      '</div>');
+    /* 5) bottom: errors, fails and rate limits */
+    h+=group("errors","Errors & limits","Things that went wrong or were blocked","#ef4444",
+      '<div class="admGrid">'+
+        card("Errors",n0(d.errors),d.errors>0?"see the table below":"none",d.errors>0,"#94a3b8")+
+        card("Turnstile fails",n0(d.turnstile_fail),"failed human checks",d.turnstile_fail>0,"#94a3b8")+
+        card("Rate limited",n0(d.rate_limited),"requests blocked",false,d.rate_limited>0?"#f59e0b":"#94a3b8")+
+      '</div>'+
+      sec("Errors by type",table(["Type","Count","Last seen","Example"],(d.errors_by_type||[]).map(x=>[esc(x.type),n0(x.n),esc(when(x.last)),esc(x.sample||"")]),[1]))+
+      sec("Recent activity",table(["When","Type","Status","Speed","Who","Result"],(d.recent||[]).map(x=>{
+        const bad=(x.status>=400)||/error/.test(x.type);
+        const res=x.type==="match_request"?esc((x.result||"")+(x.song?" - "+x.song:"")+(x.score?" ("+x.score+")":"")):esc(x.msg||"");
+        return [esc(when(x.t)),esc(x.type.replace("_"," ")),'<span class="'+(bad?"admBad":"admOk")+'">'+esc(x.status==null?"-":x.status)+'</span>',x.ms==null?"-":(x.ms/1000).toFixed(1)+"s",x.guest?"guest":"user",res]}),[3])));
+    q("admOut").innerHTML=h;foldLbl();
   }
   async function load(){
     if(busy)return;busy=true;msgSet("Loading...");
@@ -3950,6 +4064,18 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   q("admDays").onclick=e=>{const b=e.target.closest("button");if(!b)return;days=+b.dataset.d;q("admDays").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));load()};
   q("admInc").onchange=load;
   q("admRefresh").onclick=load;
+  q("admOut").addEventListener("click",e=>{
+    const hd=e.target.closest(".admGh");if(!hd)return;
+    const g=hd.parentElement,k=g.dataset.g,c=!g.classList.contains("shut");
+    g.classList.toggle("shut",c);hd.setAttribute("aria-expanded",String(!c));
+    if(c)shut.add(k);else shut.delete(k);saveShut();foldLbl();
+  });
+  q("admFold").onclick=()=>{
+    const all=GKEYS.every(k=>shut.has(k));
+    shut=new Set(all?[]:GKEYS);saveShut();
+    q("admOut").querySelectorAll(".admGroup").forEach(g=>{const c=shut.has(g.dataset.g);g.classList.toggle("shut",c);g.querySelector(".admGh").setAttribute("aria-expanded",String(!c))});
+    foldLbl();
+  };
   window.admOpen=function(){setView(view)};
 })();
 
@@ -4063,8 +4189,8 @@ function navCurSet(id){
   else ic.hidden=true;
   lb.textContent=(b&&(b.title||b.textContent.trim()))||"Menu";
 }
-$("navCur").addEventListener("click",()=>navOpen(!document.querySelector("div.tabs").classList.contains("open")));
-$("navBtns").addEventListener("click",()=>{if(!navEditing)navOpen(false)});
+/* the menu stays open when you pick a tab; only the V button (or edit mode) changes it, and it is remembered per device */
+$("navCur").addEventListener("click",()=>{const o=!document.querySelector("div.tabs").classList.contains("open");LS("tracker.navOpen",o?"1":"0");navOpen(o)});
 function applyTabs(){
   const bar=document.querySelector("div.tabs");
   nav.order.forEach(id=>$("navBtns").appendChild($(id)));
@@ -4075,7 +4201,7 @@ function applyTabs(){
   $("navEdit").classList.toggle("on",navEditing);
   $("navEdit").setAttribute("aria-pressed",navEditing?"true":"false");
   if(navEditing)navControls();else bar.querySelectorAll(".ned").forEach(x=>x.remove());
-  navOpen(navEditing);
+  navOpen(navEditing||LS("tracker.navOpen")==="1");
 }
 function saveNav(){
   LS("tracker.nav",JSON.stringify(nav));
@@ -5888,11 +6014,11 @@ function renderOverview(){
     ["quest","Quest Tracker","Quests since your last pull and the chance of one next.",()=>[nfmt(qtSum().n),"quests since last pull \u00b7 "+qtPct(qtP(qt.reroll,qt.boost))+" next"]],
     ["pass","Pass Tracker","Pass rewards and ultra pass results.",()=>[nfmt(PASS.reduce((a,[k])=>a+pass.c[k],0)),"pass rewards logged"]],
     ["event","Event Tracker","Event rewards and collectables.",()=>{const c=evCfg(),t=evSum(c,evS().c);return[nfmt(t.n),"rewards \u00b7 "+c.name]}],
-    ["buys","Market","What you've bought and sold.",()=>{const n=mkTotal("sold")-mkTotal("buy");return[(n<0?"-":"")+nfmt(Math.abs(n)),"net"]}],
     ["map","Artist Guesser","Narrow down the mystery artist from hints.",()=>[nfmt((AG.guesses||[]).length),"guesses logged"]],
+    ["sound","Sound Guesser","Guess a rock song from its sound (rock only for now).",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):[soundSoonText(),""]],
     ["artist","Artist Overview","Browse an artist's releases and songs.",()=>["Open","releases and songs"]],
-    ["info","Wiki","Drop rates, eligibility and reference tables.",()=>["Open","reference"]],
-    ["sound","Sound Guesser","Guess a rock song from its sound (rock only for now).",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):[soundSoonText(),""]]
+    ["buys","Market","What you've bought and sold.",()=>{const n=mkTotal("sold")-mkTotal("buy");return[(n<0?"-":"")+nfmt(Math.abs(n)),"net"]}],
+    ["info","Wiki","Drop rates, eligibility and reference tables.",()=>["Open","reference"]]
   ];
   g.innerHTML=T.map(([id,name,desc,f])=>{
     const lock=id==="sound"&&!canSound(),v=safe(f);
@@ -5918,6 +6044,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.4.4","2026-10-13",["Mobile quality-of-life update: the menu bar now stays open between tabs, and the home, Gempic and Quest pages are more compact"]],
 ["0.4.3","2026-10-12",["Artist Guesser: if your clues include an exact popularity rank and nothing matches, it now suggests the closest artists within 5 spots of that rank","Improved Artist Guesser matching so slightly outdated rankings no longer leave you with zero results"]],
 ["0.4.2","2026-10-11",["More tracking tools & various bug fixes","Updated artist guesser","Added shop tracker to soundfall event"]],
 ["0.4.1","2026-10-10",["Updated Sound Guesser position & admin toggles","Added Rate boost toggle to the Quest Tracker: shiny, lyric, and epic rates are 50% higher than usual"]],
