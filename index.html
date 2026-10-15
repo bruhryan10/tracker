@@ -1623,6 +1623,18 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-reports .admC b{font-size:22px}
 #tab-reports .admChk{margin-left:0;width:100%;box-sizing:border-box}
 #tab-reports .admSec{padding:12px}
+#admPip #pipPrev{width:100%;max-width:420px;height:auto;aspect-ratio:16/9;border-radius:10px;background:#0f1118;display:block}
+#admPip .pipCat{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;margin-bottom:6px;background:var(--bg);cursor:pointer}
+#admPip .pipCat.sel{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
+#admPip .pipCat i{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
+#admPip .pipCat b{flex:1}
+#admPip .pipCat output{min-width:44px;text-align:right;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+#admPip .pipCat button{margin:0;padding:6px 12px;font-weight:700;border-radius:8px;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}
+#admPip .pipChk{display:grid;grid-template-columns:1fr auto;gap:3px 12px;font-size:13px}
+#admPip .pipChk span:nth-child(even){font-weight:700;text-align:right}
+#admPip .pipChk .y{color:#22c55e}#admPip .pipChk .no{color:#ef4444}
+#admPip #pipLog{font:12px/1.5 ui-monospace,Menlo,monospace;max-height:230px;overflow:auto;white-space:pre-wrap;color:var(--mut)}
+#admPip #pipLog b{color:var(--tx)}
 }
 
 /* ---------- Sound Guesser report form ---------- */
@@ -2097,7 +2109,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card rptHead">
 <div class="rptTitle"><b>Admin</b><span class="note" id="rptMsg" role="status"></span></div>
 <div class="note admSub">Usage analytics and user reports for the Sound Guesser and Artist Guesser.</div>
-<div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button></div></div>
+<div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button><button type="button" data-v="pip">PiP Test</button></div></div>
 </section>
 <div id="admAn">
 <section class="card rptHead admCtl">
@@ -2120,6 +2132,16 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="rptRow"><button type="button" class="rb" id="rptRefresh">Refresh</button><button type="button" class="rb bad" id="rptClear">Clear all done</button></div>
 </section>
 <div id="rptList"></div>
+</div>
+<div id="admPip" hidden>
+<section class="card rptHead">
+<div class="note">Test of an interactive Picture in Picture counter. In the PiP window, pause or play adds 1 to the selected counter, and next or previous track changes which counter is selected. These test counts are saved on this device only and are not connected to your tracker data.</div>
+<div class="rptRow"><button type="button" class="rb ok" id="pipStart">Start Picture in Picture</button><button type="button" class="rb" id="pipStop">Stop PiP</button><button type="button" class="rb bad" id="pipReset">Reset counts</button></div>
+</section>
+<section class="card admSec"><h3>Preview</h3><canvas id="pipPrev" width="640" height="360"></canvas></section>
+<section class="card admSec"><h3>Counters (tap a row to select)</h3><div id="pipCats"></div></section>
+<section class="card admSec"><h3>Browser support</h3><div class="pipChk" id="pipChk"></div></section>
+<section class="card admSec"><h3>Event log</h3><div id="pipLog"></div></section>
 </div>
 </div>
 
@@ -4056,9 +4078,9 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   }
   function setView(v){
     view=v;
-    q("admAn").hidden=v!=="an";q("admRp").hidden=v!=="rp";
+    q("admAn").hidden=v!=="an";q("admRp").hidden=v!=="rp";q("admPip").hidden=v!=="pip";
     q("admSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
-    if(v==="an")load();else if(typeof rptLoad==="function")rptLoad();
+    if(v==="an")load();else if(v==="rp"){if(typeof rptLoad==="function")rptLoad()}else if(typeof pipOpen==="function")pipOpen();
   }
   q("admSeg").onclick=e=>{const b=e.target.closest("button");if(b)setView(b.dataset.v)};
   q("admDays").onclick=e=>{const b=e.target.closest("button");if(!b)return;days=+b.dataset.d;q("admDays").querySelectorAll("button").forEach(x=>x.classList.toggle("on",x===b));load()};
@@ -4077,6 +4099,176 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     foldLbl();
   };
   window.admOpen=function(){setView(view)};
+})();
+
+/* ---------- Admin: Picture in Picture counter test ---------- */
+(function(){
+  const CATS=[
+    {k:"twoToOne",label:"2:1",color:"#f5b83d"},
+    {k:"oneOne",label:"1:1 + 1k",color:"#60a5fa"},
+    {k:"commons",label:"Commons",color:"#94a3b8"},
+    {k:"uncommons",label:"Uncommons",color:"#34d399"},
+    {k:"rares",label:"Rares",color:"#a78bfa"}
+  ];
+  const KEY="tracker.pipTest",W=640,H=360,FONT="-apple-system,system-ui,Helvetica,Arial,sans-serif";
+  const q=id=>document.getElementById(id);
+  let st={sel:1,counts:{}};CATS.forEach(c=>st.counts[c.k]=0);
+  try{const r=JSON.parse(LS(KEY)||"null");if(r&&r.counts){st.sel=Math.min(Math.max(r.sel|0,0),CATS.length-1);CATS.forEach(c=>{st.counts[c.k]=r.counts[c.k]|0})}}catch(e){}
+  const save=()=>LS(KEY,JSON.stringify(st));
+
+  /* log */
+  let lines=[];
+  function log(msg,strong){
+    const t=new Date().toLocaleTimeString([],{hour12:false});
+    lines.unshift(t+"  "+(strong?"<b>"+msg+"</b>":msg));lines=lines.slice(0,60);
+    const el=q("pipLog");if(el)el.innerHTML=lines.join("\n");
+  }
+
+  /* the picture that ends up in the PiP window */
+  const cv=document.createElement("canvas");cv.width=W;cv.height=H;
+  const ctx=cv.getContext("2d");
+  let beat=0;
+  function draw(){
+    const c=CATS[st.sel],n=String(st.counts[c.k]);
+    ctx.fillStyle="#0f1118";ctx.fillRect(0,0,W,H);
+    ctx.fillStyle=c.color;ctx.fillRect(0,0,16,H);
+    ctx.textBaseline="alphabetic";
+    ctx.fillStyle=c.color;ctx.font="700 58px "+FONT;ctx.fillText(c.label,48,90);
+    let size=180;
+    do{ctx.font="700 "+size+"px "+FONT;size-=8}while(ctx.measureText(n).width>W-96&&size>40);
+    ctx.fillStyle="#fff";ctx.fillText(n,48,270);
+    for(let i=0;i<CATS.length;i++){
+      ctx.beginPath();ctx.arc(W-40-(CATS.length-1-i)*30,320,i===st.sel?9:6,0,Math.PI*2);
+      ctx.fillStyle=i===st.sel?CATS[i].color:"#3a4056";ctx.fill();
+    }
+    beat^=1;ctx.fillStyle=beat?"#2a2f3f":"#232838";ctx.fillRect(W-14,8,6,6); /* heartbeat keeps frames flowing */
+    const pv=q("pipPrev");if(pv)pv.getContext("2d").drawImage(cv,0,0);
+    meta();
+  }
+
+  /* hidden video that stays alive when you switch tabs */
+  let v=null;
+  function ensureVideo(){
+    if(v)return v;
+    v=document.createElement("video");
+    v.muted=true;v.playsInline=true;v.setAttribute("playsinline","");v.setAttribute("webkit-playsinline","");
+    v.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
+    document.body.appendChild(v);
+    v.addEventListener("pause",()=>{
+      if(stopping||!active)return;
+      setTimeout(()=>{if(Date.now()-lastAct>500&&v.paused&&!stopping&&active){act("add","video pause event (no handler fired)");v.play().catch(()=>{})}},250);
+    });
+    v.addEventListener("enterpictureinpicture",()=>log("event: entered PiP"));
+    v.addEventListener("leavepictureinpicture",()=>{log("event: left PiP");endSession()});
+    v.addEventListener("webkitpresentationmodechanged",()=>{log("event: presentation mode is "+v.webkitPresentationMode);if(v.webkitPresentationMode==="inline"&&active)endSession()});
+    return v;
+  }
+
+  /* state changes */
+  let lastAct=0,stopping=false,active=false;
+  function act(name,src){
+    lastAct=Date.now();const c=CATS[st.sel];
+    if(name==="add")st.counts[c.k]++;
+    else if(name==="next")st.sel=(st.sel+1)%CATS.length;
+    else if(name==="prev")st.sel=(st.sel-1+CATS.length)%CATS.length;
+    save();draw();renderCats();
+    log(src+" &rarr; "+name+" ("+CATS[st.sel].label+": "+st.counts[CATS[st.sel].k]+")",true);
+  }
+
+  /* Media Session: only claimed while PiP is running, released afterwards */
+  function meta(){
+    if(!active||!("mediaSession" in navigator)||typeof MediaMetadata==="undefined")return;
+    const c=CATS[st.sel];
+    try{navigator.mediaSession.metadata=new MediaMetadata({title:c.label+": "+st.counts[c.k],artist:"Shiny counter test",album:"PiP test"})}catch(e){}
+  }
+  const ACTIONS=["pause","play","nexttrack","previoustrack"];
+  let handled=[];
+  function setH(a,fn){try{navigator.mediaSession.setActionHandler(a,fn);handled.push(a)}catch(e){log("handler not supported: "+a)}}
+  function claimSession(){
+    if(!("mediaSession" in navigator))return;
+    handled=[];
+    const keep=()=>{if(!stopping)v.play().catch(()=>{})};
+    setH("pause",()=>{act("add","mediaSession pause");keep()});
+    setH("play",()=>{act("add","mediaSession play");keep()});
+    setH("nexttrack",()=>act("next","mediaSession nexttrack"));
+    setH("previoustrack",()=>act("prev","mediaSession previoustrack"));
+    try{navigator.mediaSession.playbackState="playing"}catch(e){}
+    renderChk();
+  }
+  function releaseSession(){
+    if(!("mediaSession" in navigator))return;
+    ACTIONS.forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
+    try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
+    handled=[];renderChk();
+  }
+  function endSession(){
+    if(!active)return;
+    active=false;stopping=true;
+    try{v.pause()}catch(e){}
+    releaseSession();log("PiP ended");
+  }
+
+  /* start / stop */
+  const hasCapture=typeof cv.captureStream==="function";
+  async function start(){
+    if(!hasCapture){log("canvas.captureStream is not available on this browser",true);return}
+    const vid=ensureVideo();
+    const hasStd=!!(document.pictureInPictureEnabled&&vid.requestPictureInPicture);
+    const hasWk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
+    stopping=false;active=true;
+    if(!vid.srcObject)vid.srcObject=cv.captureStream(15);
+    draw();
+    try{await vid.play()}catch(e){active=false;log("video.play failed: "+e.message,true);return}
+    try{
+      if(hasStd)await vid.requestPictureInPicture();
+      else if(hasWk)vid.webkitSetPresentationMode("picture-in-picture");
+      else{active=false;log("No PiP API found on this browser",true);return}
+      claimSession();log("PiP started",true);
+    }catch(e){active=false;log("PiP failed: "+e.name+" "+e.message,true)}
+  }
+  async function stop(){
+    if(!v)return;
+    stopping=true;
+    try{
+      if(document.pictureInPictureElement)await document.exitPictureInPicture();
+      else if(v.webkitPresentationMode==="picture-in-picture")v.webkitSetPresentationMode("inline");
+    }catch(e){}
+    if(active)endSession();else log("PiP is not running");
+  }
+
+  /* on-page controls */
+  function renderCats(){
+    const el=q("pipCats");if(!el)return;
+    el.innerHTML=CATS.map((c,i)=>'<div class="pipCat'+(i===st.sel?" sel":"")+'" data-i="'+i+'" style="--c:'+c.color+'"><i></i><b>'+c.label+'</b><button type="button" data-d="-1">&minus;</button><output>'+st.counts[c.k]+'</output><button type="button" data-d="1">+</button></div>').join("");
+  }
+  function renderChk(){
+    const el=q("pipChk");if(!el)return;
+    const tv=v||document.createElement("video");
+    const rows=[["canvas.captureStream",hasCapture],["Standard PiP API",!!(document.pictureInPictureEnabled&&tv.requestPictureInPicture)],["WebKit (iOS) PiP API",!!(tv.webkitSupportsPresentationMode&&tv.webkitSupportsPresentationMode("picture-in-picture"))],["Media Session",("mediaSession" in navigator)]];
+    el.innerHTML=rows.map(r=>"<span>"+r[0]+'</span><span class="'+(r[1]?"y":"no")+'">'+(r[1]?"yes":"no")+"</span>").join("")+"<span>Handlers registered</span><span>"+(handled.join(", ")||"none until PiP starts")+"</span>";
+  }
+  q("pipCats").addEventListener("click",e=>{
+    const row=e.target.closest(".pipCat");if(!row)return;
+    const i=+row.dataset.i,b=e.target.closest("button");
+    if(b){const k=CATS[i].k;st.counts[k]=Math.max(0,st.counts[k]+(+b.dataset.d));st.sel=i;log("page button "+(b.dataset.d>0?"+1":"-1")+" on "+CATS[i].label)}
+    else{st.sel=i;log("selected "+CATS[i].label+" from the page")}
+    save();draw();renderCats();
+  });
+  q("pipStart").onclick=start;
+  q("pipStop").onclick=stop;
+  q("pipReset").onclick=()=>{if(confirm("Reset all PiP test counters?")){CATS.forEach(c=>st.counts[c.k]=0);save();draw();renderCats();log("counters reset")}};
+
+  /* diagnostics: spot Safari throttling the page while PiP is open */
+  let lastTick=Date.now();
+  setInterval(()=>{
+    const now=Date.now(),gap=now-lastTick;lastTick=now;
+    if(!active&&!q("admPip").offsetParent)return;
+    if(active&&gap>2500)log("timer gap of "+(gap/1000).toFixed(1)+"s (page was throttled or suspended)");
+    draw();
+  },500);
+  document.addEventListener("visibilitychange",()=>{if(active)log("page is now "+document.visibilityState)});
+
+  window.pipOpen=function(){renderCats();renderChk();draw();if(!lines.length)log("ready. Tap Start, then press pause, next and previous in the PiP window.")};
 })();
 
 /* ---------- tabs ---------- */
