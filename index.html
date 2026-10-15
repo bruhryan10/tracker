@@ -2135,9 +2135,9 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 <div id="admPip" hidden>
 <section class="card rptHead">
-<div class="note">Test of lock screen and Control Center controls. Start plays silent audio, and the iPhone's Now Playing controls then drive the counters: pause or play adds 1 to the selected counter, and next or previous changes which counter is selected. While it runs, it takes over the media controls from any other audio. Press Stop to give them back. Test counts stay on this device only and are not connected to your tracker data.</div>
+<div class="note">Test of lock screen and Control Center controls. Start plays silent audio, and the iPhone's Now Playing controls then drive the counters: pause or play adds 1 to the selected counter, and next or previous changes which counter is selected. The PiP (video file) button instead floats a small window over other apps. It plays pip-counter.mp4, where every counter value is one frame, and the page jumps to the right frame; it needs a normal Safari tab and the file next to index.html. The PiP (live) button floats a window that can show any count. Press its center button once to add 1, twice quickly to select the next counter, or three times quickly to select the previous one. Either way, it takes over the media controls from any other audio. Press Stop to give them back. Test counts stay on this device only and are not connected to your tracker data.</div>
 <div class="note" id="pipBuild"></div>
-<div class="rptRow"><button type="button" class="rb ok" id="pipStart">Start Now Playing controls</button><button type="button" class="rb" id="pipStop">Stop</button><button type="button" class="rb bad" id="pipReset">Reset counts</button></div>
+<div class="rptRow"><button type="button" class="rb ok" id="pipStartL">Start PiP (live)</button><button type="button" class="rb ok" id="pipStartV">Start PiP (video file)</button><button type="button" class="rb ok" id="pipStart">Start Now Playing controls</button><button type="button" class="rb" id="pipStop">Stop</button><button type="button" class="rb bad" id="pipReset">Reset counts</button></div>
 </section>
 <section class="card admSec"><h3>Preview (this is the artwork on the lock screen)</h3><canvas id="pipPrev" width="512" height="512"></canvas></section>
 <section class="card admSec"><h3>Counters (tap a row to select)</h3><div id="pipCats"></div></section>
@@ -4105,7 +4105,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
 /* ---------- Admin: Now Playing counter test ---------- */
 (function(){
   /* debug stamp: update this text whenever this module changes (separate from the version history) */
-  const PIP_BUILD="Now Playing build 7, changed Oct 14 2026, 11:30 PM";
+  const PIP_BUILD="PiP live + video + Now Playing build 9, changed Oct 15 2026";
   const CATS=[
     {k:"twoToOne",label:"2:1",color:"#f5b83d"},
     {k:"oneOne",label:"1:1 + 1k",color:"#60a5fa"},
@@ -4145,7 +4145,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       ctx.fillStyle=i===st.sel?CATS[i].color:"#3a4056";ctx.fill();
     }
     const pv=q("pipPrev");if(pv)pv.getContext("2d").drawImage(cv,0,0);
-    meta();
+    meta();lvDraw();
   }
 
   /* silent audio loop: gives the page a real, non-live track so iOS shows full Now Playing controls */
@@ -4178,19 +4178,19 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     if(name==="add")st.counts[c.k]++;
     else if(name==="next")st.sel=(st.sel+1)%CATS.length;
     else if(name==="prev")st.sel=(st.sel-1+CATS.length)%CATS.length;
-    save();draw();renderCats();
+    save();draw();renderCats();pvShow();
     log(src+" &rarr; "+name+" ("+CATS[st.sel].label+": "+st.counts[CATS[st.sel].k]+")",true);
   }
 
   /* Media Session: only claimed while running, released afterwards */
   function meta(){
-    if(!active||!("mediaSession" in navigator)||typeof MediaMetadata==="undefined")return;
+    if(!(active||pvActive||lvActive)||!("mediaSession" in navigator)||typeof MediaMetadata==="undefined")return;
     const c=CATS[st.sel];
     let art=[];try{art=[{src:cv.toDataURL("image/png"),sizes:SZ+"x"+SZ,type:"image/png"}]}catch(e){}
     try{navigator.mediaSession.metadata=new MediaMetadata({title:c.label+": "+st.counts[c.k],artist:"Shiny counter test",album:"Counter controls test",artwork:art})}
     catch(e){log("could not set Now Playing info: "+e.message)}
   }
-  const ACTIONS=["pause","play","nexttrack","previoustrack"];
+  const ACTIONS=["pause","play","nexttrack","previoustrack","seekbackward","seekforward"];
   let handled=[];
   function setH(act_,fn){try{navigator.mediaSession.setActionHandler(act_,fn);handled.push(act_)}catch(e){log("handler not supported: "+act_)}}
   function claimSession(){
@@ -4213,6 +4213,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   /* start / stop (audio.play must be called straight from the tap) */
   function start(){
     if(!("mediaSession" in navigator)){log("Media Session is not available on this browser",true);return}
+    if(pvActive||lvActive){log("stop the PiP first",true);return}
     const au=ensureAudio();
     stopping=false;active=true;
     const p=au.play();
@@ -4222,12 +4223,204 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     else done();
   }
   function stop(){
+    if(pvActive){stopPv();return}
+    if(lvActive){stopLv();return}
     if(!active){log("not running");return}
     stopping=true;
     try{a.pause()}catch(e){}
     active=false;releaseSession();stopping=false;
     log("stopped, media controls released");
   }
+
+  /* ---- PiP with a pre-rendered video: each counter value is one frame, and the page seeks to the right one ---- */
+  const PV_SRC="pip-counter.mp4",PV_FPS=10,PV_N=300; /* 5 counters x values 0..299, 10 frames per second */
+  let pv=null,pvActive=false,ignoreSeek=false,pvState="not loaded yet";
+  const pvIdx=()=>st.sel*PV_N+Math.min(st.counts[CATS[st.sel].k],PV_N-1);
+  function pvShow(){
+    if(!pv||pv.readyState<1)return;
+    ignoreSeek=true;
+    try{pv.currentTime=(pvIdx()+0.5)/PV_FPS}catch(e){}
+    setTimeout(()=>{ignoreSeek=false},400);
+  }
+  const pvKeepPaused=()=>{setTimeout(()=>{try{if(pv)pv.pause()}catch(e){}},60)};
+  function ensurePv(){
+    if(pv)return pv;
+    pv=document.createElement("video");
+    pv.muted=true;pv.playsInline=true;pv.setAttribute("playsinline","");pv.setAttribute("webkit-playsinline","");pv.preload="auto";
+    pv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
+    pv.addEventListener("loadedmetadata",()=>{pvState="loaded ("+Math.round(pv.duration)+"s)";renderChk();pvShow()});
+    pv.addEventListener("error",()=>{pvState="failed to load";renderChk();log("could not load "+PV_SRC+". Put the file next to index.html on the site.",true)});
+    pv.addEventListener("seeked",()=>{ignoreSeek=false});
+    /* backup: if a skip button seeks the video without calling a handler, treat it as next or previous */
+    pv.addEventListener("seeking",()=>{
+      if(!pvActive||ignoreSeek)return;
+      const d=pv.currentTime-(pvIdx()+0.5)/PV_FPS;
+      if(Math.abs(d)<0.5)return;
+      if(Date.now()-lastAct<400){pvShow();return}
+      act(d>0?"next":"prev","video seek event (no handler fired)");
+    });
+    /* backup: if play is pressed without a handler, count it, then go back to paused so the frame stays put */
+    pv.addEventListener("play",()=>{
+      if(!pvActive)return;
+      setTimeout(()=>{if(Date.now()-lastAct>500)act("add","video play event (no handler fired)");try{pv.pause()}catch(e){}pvShow()},120);
+    });
+    pv.addEventListener("enterpictureinpicture",()=>log("event: entered PiP"));
+    pv.addEventListener("leavepictureinpicture",()=>{log("event: left PiP");endPv()});
+    pv.addEventListener("webkitpresentationmodechanged",()=>{log("event: presentation mode is "+pv.webkitPresentationMode);if(pv.webkitPresentationMode==="inline"&&pvActive)endPv()});
+    pv.src=PV_SRC;
+    document.body.appendChild(pv);
+    return pv;
+  }
+  function claimPv(){
+    handled=[];
+    if("mediaSession" in navigator){
+      setH("play",()=>{act("add","mediaSession play");pvKeepPaused()});
+      setH("pause",()=>{act("add","mediaSession pause");pvKeepPaused()});
+      setH("nexttrack",()=>act("next","mediaSession nexttrack"));
+      setH("previoustrack",()=>act("prev","mediaSession previoustrack"));
+      setH("seekbackward",()=>act("prev","mediaSession seekbackward"));
+      setH("seekforward",()=>act("next","mediaSession seekforward"));
+      try{navigator.mediaSession.playbackState="paused"}catch(e){}
+    }
+    renderChk();
+  }
+  function endPv(){
+    if(!pvActive)return;
+    pvActive=false;releaseSession();log("PiP ended");
+  }
+  async function stopPv(){
+    try{
+      if(document.pictureInPictureElement)await document.exitPictureInPicture();
+      else if(pv&&pv.webkitPresentationMode==="picture-in-picture")pv.webkitSetPresentationMode("inline");
+    }catch(e){}
+    endPv();
+  }
+  /* request PiP straight from the tap (the video is already loaded and paused, so Safari accepts it) */
+  function startPv(){
+    if(standalone){log("This site is open as a Home Screen app, and iOS blocks Picture in Picture there. Open it in a normal Safari tab and try again.",true);return}
+    if(active||lvActive){log("stop the other mode first",true);return}
+    const vid=ensurePv();
+    if(vid.readyState<1){log("video file is not ready yet ("+pvState+"). Wait a second and tap again.",true);return}
+    pvActive=true;pvShow();
+    const hasStd=!!(document.pictureInPictureEnabled&&vid.requestPictureInPicture);
+    const hasWk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
+    const fail=e=>{pvActive=false;log("PiP failed: "+((e&&e.name)||"")+" "+((e&&e.message)||e),true)};
+    try{
+      if(hasWk){
+        vid.webkitSetPresentationMode("picture-in-picture");
+        setTimeout(()=>{if(pvActive&&vid.webkitPresentationMode!=="picture-in-picture")fail({message:"presentation mode stayed "+vid.webkitPresentationMode})},1200);
+        claimPv();draw();log("PiP started (WebKit API), "+PIP_BUILD+", handlers: "+handled.join(", "),true);
+      }else if(hasStd){
+        vid.requestPictureInPicture().then(()=>{claimPv();draw();log("PiP started (standard API), "+PIP_BUILD+", handlers: "+handled.join(", "),true)}).catch(fail);
+      }else fail({message:"No PiP API found on this browser"});
+    }catch(e){fail(e)}
+  }
+
+  /* ---- Live PiP: the picture is a canvas stream, so any count works. Press patterns on the center button:
+          1 press = +1, 2 quick presses = next counter, 3 quick presses = previous counter ---- */
+  const TAP_MS=450;
+  let lv=null,lvCv=null,lvCtx=null,lvActive=false,lvBeat=0,tapN=0,tapT=null,tapBase=null,lastHandlerAt=0;
+  function lvDraw(){
+    if(!lvCtx)return;
+    const c=CATS[st.sel],n=String(st.counts[c.k]),W=640,H=360,x=lvCtx;
+    x.fillStyle="#0f1118";x.fillRect(0,0,W,H);
+    x.fillStyle=c.color;x.fillRect(0,0,16,H);
+    x.textBaseline="alphabetic";
+    x.fillStyle=c.color;x.font="700 58px "+FONT;x.fillText(c.label,48,90);
+    let size=180;
+    do{x.font="700 "+size+"px "+FONT;size-=8}while(x.measureText(n).width>W-96&&size>40);
+    x.fillStyle="#fff";x.fillText(n,48,270);
+    for(let i=0;i<CATS.length;i++){
+      x.beginPath();x.arc(W-40-(CATS.length-1-i)*30,320,i===st.sel?9:6,0,Math.PI*2);
+      x.fillStyle=i===st.sel?CATS[i].color:"#3a4056";x.fill();
+    }
+    lvBeat^=1;x.fillStyle=lvBeat?"#2a2f3f":"#232838";x.fillRect(W-14,8,6,6); /* keeps frames flowing */
+  }
+  /* each physical press restarts from the state before the burst, so 2 presses never leave a stray +1 behind */
+  function tapPress(src){
+    if(tapN===0)tapBase={sel:st.sel,count:st.counts[CATS[st.sel].k]};
+    tapN++;
+    st.sel=tapBase.sel;st.counts[CATS[tapBase.sel].k]=tapBase.count;
+    let what;
+    if(tapN===1){st.counts[CATS[st.sel].k]++;what="+1"}
+    else if(tapN===2){st.sel=(tapBase.sel+1)%CATS.length;what="next counter"}
+    else{st.sel=(tapBase.sel-1+CATS.length)%CATS.length;what="previous counter"}
+    lastAct=Date.now();
+    save();draw();renderCats();
+    log(src+", press "+tapN+" &rarr; "+what+" ("+CATS[st.sel].label+": "+st.counts[CATS[st.sel].k]+")",true);
+    clearTimeout(tapT);tapT=setTimeout(()=>{tapN=0;tapBase=null},TAP_MS);
+  }
+  const lvResume=()=>{if(lv&&lvActive)lv.play().catch(()=>{})};
+  function ensureLv(){
+    if(lv)return lv;
+    if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
+    lvCv=document.createElement("canvas");lvCv.width=640;lvCv.height=360;lvCtx=lvCv.getContext("2d");
+    lv=document.createElement("video");
+    lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
+    lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
+    lvDraw();
+    lv.srcObject=lvCv.captureStream(15);
+    /* in PiP the center button pauses the video without calling our handler, so count that event as a press, then resume */
+    lv.addEventListener("pause",()=>{
+      if(!lvActive)return;
+      setTimeout(()=>{
+        if(!lvActive)return;
+        if(Date.now()-lastHandlerAt>400)tapPress("video pause event");
+        lvResume();
+      },60);
+    });
+    lv.addEventListener("enterpictureinpicture",()=>log("event: entered PiP"));
+    lv.addEventListener("leavepictureinpicture",()=>{log("event: left PiP");endLv()});
+    lv.addEventListener("webkitpresentationmodechanged",()=>{log("event: presentation mode is "+lv.webkitPresentationMode);if(lv.webkitPresentationMode==="inline"&&lvActive)endLv()});
+    document.body.appendChild(lv);
+    lv.play().catch(()=>{});
+    return lv;
+  }
+  function claimLv(){
+    handled=[];
+    if("mediaSession" in navigator){
+      setH("pause",()=>{lastHandlerAt=Date.now();tapPress("mediaSession pause");lvResume()});
+      setH("play",()=>{lastHandlerAt=Date.now();tapPress("mediaSession play");lvResume()});
+      setH("nexttrack",()=>{lastHandlerAt=Date.now();act("next","mediaSession nexttrack")});
+      setH("previoustrack",()=>{lastHandlerAt=Date.now();act("prev","mediaSession previoustrack")});
+      try{navigator.mediaSession.playbackState="playing"}catch(e){}
+    }
+    renderChk();
+  }
+  function endLv(){
+    if(!lvActive)return;
+    lvActive=false;tapN=0;clearTimeout(tapT);releaseSession();log("PiP ended");
+  }
+  async function stopLv(){
+    try{
+      if(document.pictureInPictureElement)await document.exitPictureInPicture();
+      else if(lv&&lv.webkitPresentationMode==="picture-in-picture")lv.webkitSetPresentationMode("inline");
+    }catch(e){}
+    endLv();
+  }
+  /* request PiP straight from the tap; the stream is already playing, so Safari accepts it */
+  function startLv(){
+    if(standalone){log("This site is open as a Home Screen app, and iOS blocks Picture in Picture there. Open it in a normal Safari tab and try again.",true);return}
+    if(active||pvActive){log("stop the other mode first",true);return}
+    const vid=ensureLv();
+    if(!vid){log("canvas.captureStream is not available on this browser",true);return}
+    if(vid.readyState<1){log("live video is not ready yet. Wait a second and tap again.",true);return}
+    lvActive=true;tapN=0;lvDraw();
+    if(vid.paused)vid.play().catch(()=>{});
+    const hasStd=!!(document.pictureInPictureEnabled&&vid.requestPictureInPicture);
+    const hasWk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
+    const fail=e=>{lvActive=false;log("PiP failed: "+((e&&e.name)||"")+" "+((e&&e.message)||e),true)};
+    try{
+      if(hasWk){
+        vid.webkitSetPresentationMode("picture-in-picture");
+        setTimeout(()=>{if(lvActive&&vid.webkitPresentationMode!=="picture-in-picture")fail({message:"presentation mode stayed "+vid.webkitPresentationMode})},1200);
+        claimLv();draw();log("Live PiP started (WebKit API), "+PIP_BUILD+", handlers: "+handled.join(", "),true);
+      }else if(hasStd){
+        vid.requestPictureInPicture().then(()=>{claimLv();draw();log("Live PiP started (standard API), "+PIP_BUILD+", handlers: "+handled.join(", "),true)}).catch(fail);
+      }else fail({message:"No PiP API found on this browser"});
+    }catch(e){fail(e)}
+  }
+  setInterval(()=>{if(lv&&(lvActive||q("admPip").offsetParent))lvDraw()},500);
 
   /* on-page controls */
   function renderCats(){
@@ -4238,7 +4431,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     const el=q("pipChk");if(!el)return;
     const rows=[["Media Session",("mediaSession" in navigator)],["Audio playback",typeof Audio==="function"]];
     el.innerHTML=rows.map(r=>"<span>"+r[0]+'</span><span class="'+(r[1]?"y":"no")+'">'+(r[1]?"yes":"no")+"</span>").join("")+
-      "<span>Home Screen app mode</span><span>"+(standalone?"yes":"no")+"</span><span>Handlers registered</span><span>"+(handled.join(", ")||"none until started")+"</span>";
+      "<span>pip-counter.mp4</span><span>"+pvState+"</span><span>Home Screen app mode</span><span>"+(standalone?"yes":"no")+"</span><span>Handlers registered</span><span>"+(handled.join(", ")||"none until started")+"</span>";
   }
   q("pipCats").addEventListener("click",e=>{
     const row=e.target.closest(".pipCat");if(!row)return;
@@ -4248,6 +4441,8 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     save();draw();renderCats();
   });
   q("pipStart").onclick=start;
+  q("pipStartV").onclick=startPv;
+  q("pipStartL").onclick=startLv;
   q("pipStop").onclick=stop;
   q("pipReset").onclick=()=>{if(confirm("Reset all test counters?")){CATS.forEach(c=>st.counts[c.k]=0);save();draw();renderCats();log("counters reset")}};
 
@@ -4261,8 +4456,9 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
 
   window.pipOpen=function(){
     const bd=q("pipBuild");if(bd)bd.textContent="Debug: "+PIP_BUILD+(standalone?" (Home Screen app mode)":" (browser mode)");
+    if(!standalone){ensurePv();ensureLv()}
     renderCats();renderChk();draw();
-    if(!lines.length)log("ready. Tap Start, then use pause, next and previous from the lock screen or Control Center.");
+    if(!lines.length)log("ready. Tap a Start button, then use play or pause, next and previous from the PiP window, lock screen or Control Center.");
   };
 })();
 
