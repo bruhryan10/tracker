@@ -1623,7 +1623,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-reports .admC b{font-size:22px}
 #tab-reports .admChk{margin-left:0;width:100%;box-sizing:border-box}
 #tab-reports .admSec{padding:12px}
-#admPip #pipPrev{width:100%;max-width:420px;height:auto;aspect-ratio:16/9;border-radius:10px;background:#0f1118;display:block}
+#admPip #pipPrev{width:100%;max-width:260px;height:auto;aspect-ratio:1/1;border-radius:14px;background:#0f1118;display:block}
 #admPip .pipCat{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;margin-bottom:6px;background:var(--bg);cursor:pointer}
 #admPip .pipCat.sel{border-color:var(--c);box-shadow:0 0 0 1px var(--c) inset}
 #admPip .pipCat i{width:10px;height:10px;border-radius:50%;background:var(--c);flex:none}
@@ -2109,7 +2109,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card rptHead">
 <div class="rptTitle"><b>Admin</b><span class="note" id="rptMsg" role="status"></span></div>
 <div class="note admSub">Usage analytics and user reports for the Sound Guesser and Artist Guesser.</div>
-<div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button><button type="button" data-v="pip">PiP Test</button></div></div>
+<div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button><button type="button" data-v="pip">Controls Test</button></div></div>
 </section>
 <div id="admAn">
 <section class="card rptHead admCtl">
@@ -2135,11 +2135,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 <div id="admPip" hidden>
 <section class="card rptHead">
-<div class="note">Test of an interactive Picture in Picture counter. In the PiP window, pause or play adds 1 to the selected counter, and next or previous track changes which counter is selected. These test counts are saved on this device only and are not connected to your tracker data.</div>
+<div class="note">Test of lock screen and Control Center controls. Start plays silent audio, and the iPhone's Now Playing controls then drive the counters: pause or play adds 1 to the selected counter, and next or previous changes which counter is selected. While it runs, it takes over the media controls from any other audio. Press Stop to give them back. Test counts stay on this device only and are not connected to your tracker data.</div>
 <div class="note" id="pipBuild"></div>
-<div class="rptRow"><button type="button" class="rb ok" id="pipStart">Start Picture in Picture</button><button type="button" class="rb" id="pipStop">Stop PiP</button><button type="button" class="rb bad" id="pipReset">Reset counts</button></div>
+<div class="rptRow"><button type="button" class="rb ok" id="pipStart">Start Now Playing controls</button><button type="button" class="rb" id="pipStop">Stop</button><button type="button" class="rb bad" id="pipReset">Reset counts</button></div>
 </section>
-<section class="card admSec"><h3>Preview</h3><canvas id="pipPrev" width="640" height="360"></canvas></section>
+<section class="card admSec"><h3>Preview (this is the artwork on the lock screen)</h3><canvas id="pipPrev" width="512" height="512"></canvas></section>
 <section class="card admSec"><h3>Counters (tap a row to select)</h3><div id="pipCats"></div></section>
 <section class="card admSec"><h3>Browser support</h3><div class="pipChk" id="pipChk"></div></section>
 <section class="card admSec"><h3>Event log</h3><div id="pipLog"></div></section>
@@ -4102,8 +4102,10 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   window.admOpen=function(){setView(view)};
 })();
 
-/* ---------- Admin: Picture in Picture counter test ---------- */
+/* ---------- Admin: Now Playing counter test ---------- */
 (function(){
+  /* debug stamp: update this text whenever this module changes (separate from the version history) */
+  const PIP_BUILD="Now Playing build 7, changed Oct 14 2026, 11:30 PM";
   const CATS=[
     {k:"twoToOne",label:"2:1",color:"#f5b83d"},
     {k:"oneOne",label:"1:1 + 1k",color:"#60a5fa"},
@@ -4111,10 +4113,9 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     {k:"uncommons",label:"Uncommons",color:"#34d399"},
     {k:"rares",label:"Rares",color:"#a78bfa"}
   ];
-  /* PiP debug stamp: update this text whenever the PiP module changes (separate from the version history) */
-  const PIP_BUILD="PiP build 6, changed Oct 14 2026, 11:17 PM";
-  const KEY="tracker.pipTest",W=640,H=360,FONT="-apple-system,system-ui,Helvetica,Arial,sans-serif";
+  const KEY="tracker.pipTest",SZ=512,FONT="-apple-system,system-ui,Helvetica,Arial,sans-serif";
   const q=id=>document.getElementById(id);
+  const standalone=!!(window.navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches));
   let st={sel:1,counts:{}};CATS.forEach(c=>st.counts[c.k]=0);
   try{const r=JSON.parse(LS(KEY)||"null");if(r&&r.counts){st.sel=Math.min(Math.max(r.sel|0,0),CATS.length-1);CATS.forEach(c=>{st.counts[c.k]=r.counts[c.k]|0})}}catch(e){}
   const save=()=>LS(KEY,JSON.stringify(st));
@@ -4127,49 +4128,51 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     const el=q("pipLog");if(el)el.innerHTML=lines.join("\n");
   }
 
-  /* the picture that ends up in the PiP window */
-  const cv=document.createElement("canvas");cv.width=W;cv.height=H;
+  /* square picture: shown in the preview and used as the lock screen artwork */
+  const cv=document.createElement("canvas");cv.width=SZ;cv.height=SZ;
   const ctx=cv.getContext("2d");
-  let beat=0;
   function draw(){
     const c=CATS[st.sel],n=String(st.counts[c.k]);
-    ctx.fillStyle="#0f1118";ctx.fillRect(0,0,W,H);
-    ctx.fillStyle=c.color;ctx.fillRect(0,0,16,H);
+    ctx.fillStyle="#0f1118";ctx.fillRect(0,0,SZ,SZ);
+    ctx.fillStyle=c.color;ctx.fillRect(0,0,SZ,24);
     ctx.textBaseline="alphabetic";
-    ctx.fillStyle=c.color;ctx.font="700 58px "+FONT;ctx.fillText(c.label,48,90);
-    let size=180;
-    do{ctx.font="700 "+size+"px "+FONT;size-=8}while(ctx.measureText(n).width>W-96&&size>40);
-    ctx.fillStyle="#fff";ctx.fillText(n,48,270);
+    ctx.fillStyle=c.color;ctx.font="700 84px "+FONT;ctx.fillText(c.label,40,150);
+    let size=300;
+    do{ctx.font="700 "+size+"px "+FONT;size-=12}while(ctx.measureText(n).width>SZ-80&&size>60);
+    ctx.fillStyle="#fff";ctx.fillText(n,40,400);
     for(let i=0;i<CATS.length;i++){
-      ctx.beginPath();ctx.arc(W-40-(CATS.length-1-i)*30,320,i===st.sel?9:6,0,Math.PI*2);
+      ctx.beginPath();ctx.arc(SZ-44-(CATS.length-1-i)*36,SZ-44,i===st.sel?12:8,0,Math.PI*2);
       ctx.fillStyle=i===st.sel?CATS[i].color:"#3a4056";ctx.fill();
     }
-    beat^=1;ctx.fillStyle=beat?"#2a2f3f":"#232838";ctx.fillRect(W-14,8,6,6); /* heartbeat keeps frames flowing */
     const pv=q("pipPrev");if(pv)pv.getContext("2d").drawImage(cv,0,0);
     meta();
   }
 
-  /* hidden video that stays alive when you switch tabs */
-  let v=null;
-  function ensureVideo(){
-    if(v)return v;
-    v=document.createElement("video");
-    v.muted=true;v.playsInline=true;v.setAttribute("playsinline","");v.setAttribute("webkit-playsinline","");
-    v.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
-    document.body.appendChild(v);
-    v.addEventListener("pause",()=>{
+  /* silent audio loop: gives the page a real, non-live track so iOS shows full Now Playing controls */
+  function silentWav(sec){
+    const rate=8000,n=rate*sec,buf=new ArrayBuffer(44+n),dv=new DataView(buf);
+    const w=(o,t)=>{for(let i=0;i<t.length;i++)dv.setUint8(o+i,t.charCodeAt(i))};
+    w(0,"RIFF");dv.setUint32(4,36+n,true);w(8,"WAVE");w(12,"fmt ");
+    dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,1,true);
+    dv.setUint32(24,rate,true);dv.setUint32(28,rate,true);dv.setUint16(32,1,true);dv.setUint16(34,8,true);
+    w(36,"data");dv.setUint32(40,n,true);
+    new Uint8Array(buf,44).fill(128);
+    return new Blob([buf],{type:"audio/wav"});
+  }
+  let a=null,lastAct=0,stopping=false,active=false;
+  function ensureAudio(){
+    if(a)return a;
+    a=new Audio(URL.createObjectURL(silentWav(60)));
+    a.loop=true;a.preload="auto";
+    /* if the system pauses the audio without calling our handler, still count it and resume */
+    a.addEventListener("pause",()=>{
       if(stopping||!active)return;
-      setTimeout(()=>{if(Date.now()-lastAct>500&&v.paused&&!stopping&&active){act("add","video pause event (no handler fired)");v.play().catch(()=>{})}},250);
+      setTimeout(()=>{if(Date.now()-lastAct>500&&a.paused&&!stopping&&active){act("add","audio pause event (no handler fired)");a.play().catch(()=>{})}},250);
     });
-    v.addEventListener("seeking",()=>{if(active&&Date.now()-lastAct>500)log("video seeking event (skip button pressed, no handler fired)")});
-    v.addEventListener("enterpictureinpicture",()=>log("event: entered PiP"));
-    v.addEventListener("leavepictureinpicture",()=>{log("event: left PiP");endSession()});
-    v.addEventListener("webkitpresentationmodechanged",()=>{log("event: presentation mode is "+v.webkitPresentationMode);if(v.webkitPresentationMode==="inline"&&active)endSession()});
-    return v;
+    return a;
   }
 
   /* state changes */
-  let lastAct=0,stopping=false,active=false;
   function act(name,src){
     lastAct=Date.now();const c=CATS[st.sel];
     if(name==="add")st.counts[c.k]++;
@@ -4179,82 +4182,51 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     log(src+" &rarr; "+name+" ("+CATS[st.sel].label+": "+st.counts[CATS[st.sel].k]+")",true);
   }
 
-  /* Media Session: only claimed while PiP is running, released afterwards */
+  /* Media Session: only claimed while running, released afterwards */
   function meta(){
     if(!active||!("mediaSession" in navigator)||typeof MediaMetadata==="undefined")return;
     const c=CATS[st.sel];
-    try{navigator.mediaSession.metadata=new MediaMetadata({title:c.label+": "+st.counts[c.k],artist:"Shiny counter test",album:"PiP test"})}catch(e){}
+    let art=[];try{art=[{src:cv.toDataURL("image/png"),sizes:SZ+"x"+SZ,type:"image/png"}]}catch(e){}
+    try{navigator.mediaSession.metadata=new MediaMetadata({title:c.label+": "+st.counts[c.k],artist:"Shiny counter test",album:"Counter controls test",artwork:art})}
+    catch(e){log("could not set Now Playing info: "+e.message)}
   }
-  const ACTIONS=["pause","play","nexttrack","previoustrack","seekbackward","seekforward"];
+  const ACTIONS=["pause","play","nexttrack","previoustrack"];
   let handled=[];
-  function setH(a,fn){try{navigator.mediaSession.setActionHandler(a,fn);handled.push(a)}catch(e){log("handler not supported: "+a)}}
+  function setH(act_,fn){try{navigator.mediaSession.setActionHandler(act_,fn);handled.push(act_)}catch(e){log("handler not supported: "+act_)}}
   function claimSession(){
-    if(!("mediaSession" in navigator))return;
     handled=[];
-    const keep=()=>{if(!stopping)v.play().catch(()=>{})};
+    const keep=()=>{if(!stopping&&a)a.play().catch(()=>{})};
     setH("pause",()=>{act("add","mediaSession pause");keep()});
     setH("play",()=>{act("add","mediaSession play");keep()});
     setH("nexttrack",()=>act("next","mediaSession nexttrack"));
     setH("previoustrack",()=>act("prev","mediaSession previoustrack"));
-    /* a canvas stream counts as live video, so Safari shows greyed 10s skip buttons instead of track buttons: claim those too */
-    setH("seekbackward",()=>act("prev","mediaSession seekbackward"));
-    setH("seekforward",()=>act("next","mediaSession seekforward"));
-    try{navigator.mediaSession.setPositionState({duration:3600,position:1800,playbackRate:1})}catch(e){log("setPositionState not accepted: "+e.message)}
     try{navigator.mediaSession.playbackState="playing"}catch(e){}
     renderChk();
   }
   function releaseSession(){
     if(!("mediaSession" in navigator))return;
-    ACTIONS.forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
+    ACTIONS.forEach(x=>{try{navigator.mediaSession.setActionHandler(x,null)}catch(e){}});
     try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
     handled=[];renderChk();
   }
-  function endSession(){
-    if(!active)return;
-    active=false;stopping=false;
-    releaseSession();log("PiP ended");
-  }
 
-  /* start / stop */
-  const hasCapture=typeof cv.captureStream==="function";
-  const standalone=!!(window.navigator.standalone||(window.matchMedia&&matchMedia("(display-mode: standalone)").matches));
-  /* The video is already playing before the tap, because Safari only honors the PiP request
-     if it is made synchronously inside the tap (waiting on play() first loses the permission). */
-  function prime(){
-    if(!hasCapture)return null;
-    const vid=ensureVideo();
-    if(!vid.srcObject)vid.srcObject=cv.captureStream(15);
-    if(vid.paused)vid.play().catch(()=>{});
-    return vid;
-  }
+  /* start / stop (audio.play must be called straight from the tap) */
   function start(){
-    if(standalone){log("This site is open as a Home Screen app, and iOS blocks Picture in Picture there. Open it in a normal Safari tab and try again.",true);return}
-    if(!hasCapture){log("canvas.captureStream is not available on this browser",true);return}
-    stopping=false;
-    const vid=prime();
-    if(vid.readyState<1){log("video is not ready yet, wait a second and tap again",true);return}
-    active=true;draw();
-    const hasStd=!!(document.pictureInPictureEnabled&&vid.requestPictureInPicture);
-    const hasWk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
-    const fail=e=>{active=false;log("PiP failed: "+((e&&e.name)||"")+" "+((e&&e.message)||e),true)};
-    try{
-      if(hasWk){
-        vid.webkitSetPresentationMode("picture-in-picture");
-        setTimeout(()=>{if(active&&vid.webkitPresentationMode!=="picture-in-picture")fail({message:"presentation mode stayed "+vid.webkitPresentationMode})},1200);
-        claimSession();log("PiP started (WebKit API), "+PIP_BUILD+", handlers: "+handled.join(", "),true);
-      }else if(hasStd){
-        vid.requestPictureInPicture().then(()=>{claimSession();log("PiP started (standard API), "+PIP_BUILD+", handlers: "+handled.join(", "),true)}).catch(fail);
-      }else fail({message:"No PiP API found on this browser"});
-    }catch(e){fail(e)}
+    if(!("mediaSession" in navigator)){log("Media Session is not available on this browser",true);return}
+    const au=ensureAudio();
+    stopping=false;active=true;
+    const p=au.play();
+    claimSession();draw();
+    const done=()=>log("Now Playing started, "+PIP_BUILD+", handlers: "+handled.join(", "),true);
+    if(p&&p.then)p.then(done).catch(e=>{active=false;releaseSession();log("audio.play failed: "+e.name+" "+e.message,true)});
+    else done();
   }
-  async function stop(){
-    if(!v)return;
+  function stop(){
+    if(!active){log("not running");return}
     stopping=true;
-    try{
-      if(document.pictureInPictureElement)await document.exitPictureInPicture();
-      else if(v.webkitPresentationMode==="picture-in-picture")v.webkitSetPresentationMode("inline");
-    }catch(e){}
-    if(active)endSession();else log("PiP is not running");
+    try{a.pause()}catch(e){}
+    active=false;releaseSession();stopping=false;
+    log("stopped, media controls released");
   }
 
   /* on-page controls */
@@ -4264,9 +4236,9 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   }
   function renderChk(){
     const el=q("pipChk");if(!el)return;
-    const tv=v||document.createElement("video");
-    const rows=[["canvas.captureStream",hasCapture],["Standard PiP API",!!(document.pictureInPictureEnabled&&tv.requestPictureInPicture)],["WebKit (iOS) PiP API",!!(tv.webkitSupportsPresentationMode&&tv.webkitSupportsPresentationMode("picture-in-picture"))],["Media Session",("mediaSession" in navigator)],["Opened as Home Screen app (blocks PiP)",standalone]];
-    el.innerHTML=rows.map(r=>"<span>"+r[0]+'</span><span class="'+((r[1]!==(r[0].indexOf("Home Screen")===0||r[0].indexOf("Opened")===0))?"y":"no")+'">'+(r[1]?"yes":"no")+"</span>").join("")+"<span>Handlers registered</span><span>"+(handled.join(", ")||"none until PiP starts")+"</span>";
+    const rows=[["Media Session",("mediaSession" in navigator)],["Audio playback",typeof Audio==="function"]];
+    el.innerHTML=rows.map(r=>"<span>"+r[0]+'</span><span class="'+(r[1]?"y":"no")+'">'+(r[1]?"yes":"no")+"</span>").join("")+
+      "<span>Home Screen app mode</span><span>"+(standalone?"yes":"no")+"</span><span>Handlers registered</span><span>"+(handled.join(", ")||"none until started")+"</span>";
   }
   q("pipCats").addEventListener("click",e=>{
     const row=e.target.closest(".pipCat");if(!row)return;
@@ -4277,19 +4249,21 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   });
   q("pipStart").onclick=start;
   q("pipStop").onclick=stop;
-  q("pipReset").onclick=()=>{if(confirm("Reset all PiP test counters?")){CATS.forEach(c=>st.counts[c.k]=0);save();draw();renderCats();log("counters reset")}};
+  q("pipReset").onclick=()=>{if(confirm("Reset all test counters?")){CATS.forEach(c=>st.counts[c.k]=0);save();draw();renderCats();log("counters reset")}};
 
-  /* diagnostics: spot Safari throttling the page while PiP is open */
+  /* diagnostics: spot the page being suspended while it runs in the background */
   let lastTick=Date.now();
   setInterval(()=>{
     const now=Date.now(),gap=now-lastTick;lastTick=now;
-    if(!active&&!q("admPip").offsetParent)return;
-    if(active&&gap>2500)log("timer gap of "+(gap/1000).toFixed(1)+"s (page was throttled or suspended)");
-    draw();
-  },500);
+    if(active&&gap>3500)log("timer gap of "+(gap/1000).toFixed(1)+"s (page was throttled or suspended)");
+  },1000);
   document.addEventListener("visibilitychange",()=>{if(active)log("page is now "+document.visibilityState)});
 
-  window.pipOpen=function(){const bd=q("pipBuild");if(bd)bd.textContent="Debug: "+PIP_BUILD+(standalone?" (Home Screen app mode)":" (browser mode)");prime();renderCats();renderChk();draw();if(!lines.length)log("ready. Tap Start, then press pause, next and previous in the PiP window.")};
+  window.pipOpen=function(){
+    const bd=q("pipBuild");if(bd)bd.textContent="Debug: "+PIP_BUILD+(standalone?" (Home Screen app mode)":" (browser mode)");
+    renderCats();renderChk();draw();
+    if(!lines.length)log("ready. Tap Start, then use pause, next and previous from the lock screen or Control Center.");
+  };
 })();
 
 /* ---------- tabs ---------- */
