@@ -4203,28 +4203,39 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   }
   function endSession(){
     if(!active)return;
-    active=false;stopping=true;
-    try{v.pause()}catch(e){}
+    active=false;stopping=false;
     releaseSession();log("PiP ended");
   }
 
   /* start / stop */
   const hasCapture=typeof cv.captureStream==="function";
-  async function start(){
-    if(!hasCapture){log("canvas.captureStream is not available on this browser",true);return}
+  /* The video is already playing before the tap, because Safari only honors the PiP request
+     if it is made synchronously inside the tap (waiting on play() first loses the permission). */
+  function prime(){
+    if(!hasCapture)return null;
     const vid=ensureVideo();
+    if(!vid.srcObject)vid.srcObject=cv.captureStream(15);
+    if(vid.paused)vid.play().catch(()=>{});
+    return vid;
+  }
+  function start(){
+    if(!hasCapture){log("canvas.captureStream is not available on this browser",true);return}
+    stopping=false;
+    const vid=prime();
+    if(vid.readyState<1){log("video is not ready yet, wait a second and tap again",true);return}
+    active=true;draw();
     const hasStd=!!(document.pictureInPictureEnabled&&vid.requestPictureInPicture);
     const hasWk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
-    stopping=false;active=true;
-    if(!vid.srcObject)vid.srcObject=cv.captureStream(15);
-    draw();
-    try{await vid.play()}catch(e){active=false;log("video.play failed: "+e.message,true);return}
+    const fail=e=>{active=false;log("PiP failed: "+((e&&e.name)||"")+" "+((e&&e.message)||e),true)};
     try{
-      if(hasStd)await vid.requestPictureInPicture();
-      else if(hasWk)vid.webkitSetPresentationMode("picture-in-picture");
-      else{active=false;log("No PiP API found on this browser",true);return}
-      claimSession();log("PiP started",true);
-    }catch(e){active=false;log("PiP failed: "+e.name+" "+e.message,true)}
+      if(hasWk){
+        vid.webkitSetPresentationMode("picture-in-picture");
+        setTimeout(()=>{if(active&&vid.webkitPresentationMode!=="picture-in-picture")fail({message:"presentation mode stayed "+vid.webkitPresentationMode})},1200);
+        claimSession();log("PiP started (WebKit API)",true);
+      }else if(hasStd){
+        vid.requestPictureInPicture().then(()=>{claimSession();log("PiP started (standard API)",true)}).catch(fail);
+      }else fail({message:"No PiP API found on this browser"});
+    }catch(e){fail(e)}
   }
   async function stop(){
     if(!v)return;
@@ -4268,7 +4279,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   },500);
   document.addEventListener("visibilitychange",()=>{if(active)log("page is now "+document.visibilityState)});
 
-  window.pipOpen=function(){renderCats();renderChk();draw();if(!lines.length)log("ready. Tap Start, then press pause, next and previous in the PiP window.")};
+  window.pipOpen=function(){prime();renderCats();renderChk();draw();if(!lines.length)log("ready. Tap Start, then press pause, next and previous in the PiP window.")};
 })();
 
 /* ---------- tabs ---------- */
