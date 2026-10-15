@@ -4158,6 +4158,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       if(stopping||!active)return;
       setTimeout(()=>{if(Date.now()-lastAct>500&&v.paused&&!stopping&&active){act("add","video pause event (no handler fired)");v.play().catch(()=>{})}},250);
     });
+    v.addEventListener("seeking",()=>{if(active&&Date.now()-lastAct>500)log("video seeking event (skip button pressed, no handler fired)")});
     v.addEventListener("enterpictureinpicture",()=>log("event: entered PiP"));
     v.addEventListener("leavepictureinpicture",()=>{log("event: left PiP");endSession()});
     v.addEventListener("webkitpresentationmodechanged",()=>{log("event: presentation mode is "+v.webkitPresentationMode);if(v.webkitPresentationMode==="inline"&&active)endSession()});
@@ -4181,7 +4182,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     const c=CATS[st.sel];
     try{navigator.mediaSession.metadata=new MediaMetadata({title:c.label+": "+st.counts[c.k],artist:"Shiny counter test",album:"PiP test"})}catch(e){}
   }
-  const ACTIONS=["pause","play","nexttrack","previoustrack"];
+  const ACTIONS=["pause","play","nexttrack","previoustrack","seekbackward","seekforward"];
   let handled=[];
   function setH(a,fn){try{navigator.mediaSession.setActionHandler(a,fn);handled.push(a)}catch(e){log("handler not supported: "+a)}}
   function claimSession(){
@@ -4192,6 +4193,10 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     setH("play",()=>{act("add","mediaSession play");keep()});
     setH("nexttrack",()=>act("next","mediaSession nexttrack"));
     setH("previoustrack",()=>act("prev","mediaSession previoustrack"));
+    /* a canvas stream counts as live video, so Safari shows greyed 10s skip buttons instead of track buttons: claim those too */
+    setH("seekbackward",()=>act("prev","mediaSession seekbackward"));
+    setH("seekforward",()=>act("next","mediaSession seekforward"));
+    try{navigator.mediaSession.setPositionState({duration:3600,position:1800,playbackRate:1})}catch(e){log("setPositionState not accepted: "+e.message)}
     try{navigator.mediaSession.playbackState="playing"}catch(e){}
     renderChk();
   }
