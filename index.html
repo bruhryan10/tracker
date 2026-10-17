@@ -1174,6 +1174,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-event #evGrid .gcost input{flex:none;width:52px;height:38px;padding:0 4px;font-size:16px;text-align:center;border-radius:9px}
 #tab-event #evGrid .gcost button{width:38px;height:38px;font-size:20px;border-radius:9px}
 #tab-event .pTot{margin-top:10px}
+#tab-pass .gh .pTot{margin:0;white-space:nowrap}
 #tab-event .evTotTop{margin:0 2px 0 auto;flex:none;white-space:nowrap;font-size:15px}
 #tab-event .evTotTop b{font-size:20px}
 #tab-event .pact{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
@@ -1935,9 +1936,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 
 <div id="passReg">
 <section class="card gsec">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b>Tracker</b></div></div>
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b>Tracker</b></div><div class="gx"><div class="pTot">Total:<b id="passTotN">0</b></div></div></div>
 <div class="pAdd" id="passAdd"></div>
-<div class="pTot">Total:<b id="passTotN">0</b></div>
 <div class="gact pact">
 <button type="button" class="gb" id="passUndo"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg>Undo Last Entry</button>
 <button type="button" class="gb" id="passReset"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg>Reset &amp; save to history</button>
@@ -2573,6 +2573,29 @@ fields.forEach(([k,l])=>{
     clearTimeout(tapT);tapT=setTimeout(()=>{tapN=0},TAP_MS);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
+  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
+  let wakeAt=0;
+  function wake(){
+    if(!lv||!on||document.hidden)return;
+    wakeAt=Date.now();
+    draw();lv.play().catch(()=>{});
+    const t0=lv.currentTime;
+    setTimeout(draw,150);
+    setTimeout(()=>{
+      if(!lv||!on||document.hidden)return;
+      draw();
+      const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
+        wakeAt=Date.now();
+        try{lv.srcObject=cv.captureStream(15)}catch(e){}
+        draw();lv.play().catch(()=>{});
+        setTimeout(draw,200);
+      }
+    },600);
+  }
+  document.addEventListener("visibilitychange",wake);
+  window.addEventListener("pageshow",wake);
+  window.addEventListener("focus",wake);
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -2581,7 +2604,7 @@ fields.forEach(([k,l])=>{
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -5290,6 +5313,29 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
     clearTimeout(tapT);tapT=setTimeout(()=>{tapN=0},TAP_MS);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
+  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
+  let wakeAt=0;
+  function wake(){
+    if(!lv||!on||document.hidden)return;
+    wakeAt=Date.now();
+    draw();lv.play().catch(()=>{});
+    const t0=lv.currentTime;
+    setTimeout(draw,150);
+    setTimeout(()=>{
+      if(!lv||!on||document.hidden)return;
+      draw();
+      const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
+        wakeAt=Date.now();
+        try{lv.srcObject=cv.captureStream(15)}catch(e){}
+        draw();lv.play().catch(()=>{});
+        setTimeout(draw,200);
+      }
+    },600);
+  }
+  document.addEventListener("visibilitychange",wake);
+  window.addEventListener("pageshow",wake);
+  window.addEventListener("focus",wake);
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -5298,7 +5344,7 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -5501,6 +5547,29 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
     gpDoRoll(1);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
+  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
+  let wakeAt=0;
+  function wake(){
+    if(!lv||!on||document.hidden)return;
+    wakeAt=Date.now();
+    draw();lv.play().catch(()=>{});
+    const t0=lv.currentTime;
+    setTimeout(draw,150);
+    setTimeout(()=>{
+      if(!lv||!on||document.hidden)return;
+      draw();
+      const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
+        wakeAt=Date.now();
+        try{lv.srcObject=cv.captureStream(15)}catch(e){}
+        draw();lv.play().catch(()=>{});
+        setTimeout(draw,200);
+      }
+    },600);
+  }
+  document.addEventListener("visibilitychange",wake);
+  window.addEventListener("pageshow",wake);
+  window.addEventListener("focus",wake);
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -5509,7 +5578,7 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -6360,6 +6429,29 @@ $("qtLogClear").onclick=()=>{
     qtDoAdd();note("Live press: +"+qtAmt()+" ("+nfmt(qt.r.length)+" total)");
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
+  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
+  let wakeAt=0;
+  function wake(){
+    if(!lv||!on||document.hidden)return;
+    wakeAt=Date.now();
+    draw();lv.play().catch(()=>{});
+    const t0=lv.currentTime;
+    setTimeout(draw,150);
+    setTimeout(()=>{
+      if(!lv||!on||document.hidden)return;
+      draw();
+      const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
+        wakeAt=Date.now();
+        try{lv.srcObject=cv.captureStream(15)}catch(e){}
+        draw();lv.play().catch(()=>{});
+        setTimeout(draw,200);
+      }
+    },600);
+  }
+  document.addEventListener("visibilitychange",wake);
+  window.addEventListener("pageshow",wake);
+  window.addEventListener("focus",wake);
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -6368,7 +6460,7 @@ $("qtLogClear").onclick=()=>{
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
