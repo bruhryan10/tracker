@@ -2574,7 +2574,8 @@ fields.forEach(([k,l])=>{
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
   /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
-  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0,startAt=0;
+  const inPip=()=>!!(lv&&(document.pictureInPictureElement===lv||lv.webkitPresentationMode==="picture-in-picture"));
   function rebuild(){
     wakeAt=Date.now();
     try{
@@ -2602,7 +2603,15 @@ fields.forEach(([k,l])=>{
   /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
   setInterval(()=>{
     const n=Date.now(),gap=n-wdTick;wdTick=n;
-    if(!lv||!on){wdSame=0;return}
+    if(!lv)return;
+    if(!on){
+      /* idle: keep the stream healthy so the next button tap can open PiP right away */
+      wdSame=0;
+      if(!document.hidden&&n-wakeAt>3000){const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];if(lv.readyState<1||!tr||tr.readyState!=="live")rebuild()}
+      return;
+    }
+    /* we think PiP is on but it is not showing (closed with the X, or iOS closed it while locked): reset so the button is honest */
+    if(n-startAt>3000&&!inPip()){wdSame=0;end();return}
     if(gap>2500){wdSame=0;wake(true);return}
     const ct=lv.currentTime;
     if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
@@ -2649,7 +2658,7 @@ fields.forEach(([k,l])=>{
   function start(){
     if(standalone)return;
     const vid=ensure();
-    if(!vid||vid.readyState<1)return;
+    if(!vid)return;if(vid.readyState<1){rebuild();lbl.textContent="Getting ready, tap again";setTimeout(ui,1500);return}
     on=true;tapN=0;draw();ui();
     if(vid.paused)vid.play().catch(()=>{});
     const wk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
@@ -2662,7 +2671,7 @@ fields.forEach(([k,l])=>{
       else fail();
     }catch(e){fail()}
   }
-  btn.onclick=()=>{on?stop():start()};
+  btn.onclick=()=>{if(on&&!inPip()&&Date.now()-startAt>2500)end();if(on)stop();else{startAt=Date.now();start()}};
   setInterval(()=>{if(lv&&on)draw()},500);
   if(!standalone)try{ensure()}catch(e){}
 })();
@@ -5328,7 +5337,8 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
   /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
-  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0,startAt=0;
+  const inPip=()=>!!(lv&&(document.pictureInPictureElement===lv||lv.webkitPresentationMode==="picture-in-picture"));
   function rebuild(){
     wakeAt=Date.now();
     try{
@@ -5356,7 +5366,15 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
   /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
   setInterval(()=>{
     const n=Date.now(),gap=n-wdTick;wdTick=n;
-    if(!lv||!on){wdSame=0;return}
+    if(!lv)return;
+    if(!on){
+      /* idle: keep the stream healthy so the next button tap can open PiP right away */
+      wdSame=0;
+      if(!document.hidden&&n-wakeAt>3000){const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];if(lv.readyState<1||!tr||tr.readyState!=="live")rebuild()}
+      return;
+    }
+    /* we think PiP is on but it is not showing (closed with the X, or iOS closed it while locked): reset so the button is honest */
+    if(n-startAt>3000&&!inPip()){wdSame=0;end();return}
     if(gap>2500){wdSame=0;wake(true);return}
     const ct=lv.currentTime;
     if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
@@ -5403,7 +5421,7 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
   function start(){
     if(standalone||!rows().length)return;
     const vid=ensure();
-    if(!vid||vid.readyState<1)return;
+    if(!vid)return;if(vid.readyState<1){rebuild();lbl.textContent="Getting ready, tap again";setTimeout(ui,1500);return}
     on=true;tapN=0;draw();ui();
     if(vid.paused)vid.play().catch(()=>{});
     const wk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
@@ -5416,7 +5434,7 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
       else fail();
     }catch(e){fail()}
   }
-  btn.onclick=()=>{on?stop():start()};
+  btn.onclick=()=>{if(on&&!inPip()&&Date.now()-startAt>2500)end();if(on)stop();else{startAt=Date.now();start()}};
   setInterval(()=>{if(lv&&on)draw()},500);
   if(!standalone)try{ensure()}catch(e){}
 })();
@@ -5576,7 +5594,8 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
   /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
-  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0,startAt=0;
+  const inPip=()=>!!(lv&&(document.pictureInPictureElement===lv||lv.webkitPresentationMode==="picture-in-picture"));
   function rebuild(){
     wakeAt=Date.now();
     try{
@@ -5604,7 +5623,15 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
   /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
   setInterval(()=>{
     const n=Date.now(),gap=n-wdTick;wdTick=n;
-    if(!lv||!on){wdSame=0;return}
+    if(!lv)return;
+    if(!on){
+      /* idle: keep the stream healthy so the next button tap can open PiP right away */
+      wdSame=0;
+      if(!document.hidden&&n-wakeAt>3000){const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];if(lv.readyState<1||!tr||tr.readyState!=="live")rebuild()}
+      return;
+    }
+    /* we think PiP is on but it is not showing (closed with the X, or iOS closed it while locked): reset so the button is honest */
+    if(n-startAt>3000&&!inPip()){wdSame=0;end();return}
     if(gap>2500){wdSame=0;wake(true);return}
     const ct=lv.currentTime;
     if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
@@ -5651,7 +5678,7 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
   function start(){
     if(standalone)return;
     const vid=ensure();
-    if(!vid||vid.readyState<1)return;
+    if(!vid)return;if(vid.readyState<1){rebuild();lbl.textContent="Getting ready, tap again";setTimeout(ui,1500);return}
     on=true;draw();ui();
     if(vid.paused)vid.play().catch(()=>{});
     const wk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
@@ -5664,7 +5691,7 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
       else fail();
     }catch(e){fail()}
   }
-  btn.onclick=()=>{on?stop():start()};
+  btn.onclick=()=>{if(on&&!inPip()&&Date.now()-startAt>2500)end();if(on)stop();else{startAt=Date.now();start()}};
   setInterval(()=>{if(lv&&on)draw()},500);
   if(!standalone)try{ensure()}catch(e){}
 })();
@@ -6472,7 +6499,8 @@ $("qtLogClear").onclick=()=>{
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
   /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
-  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0,startAt=0;
+  const inPip=()=>!!(lv&&(document.pictureInPictureElement===lv||lv.webkitPresentationMode==="picture-in-picture"));
   function rebuild(){
     wakeAt=Date.now();
     try{
@@ -6500,7 +6528,15 @@ $("qtLogClear").onclick=()=>{
   /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
   setInterval(()=>{
     const n=Date.now(),gap=n-wdTick;wdTick=n;
-    if(!lv||!on){wdSame=0;return}
+    if(!lv)return;
+    if(!on){
+      /* idle: keep the stream healthy so the next button tap can open PiP right away */
+      wdSame=0;
+      if(!document.hidden&&n-wakeAt>3000){const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];if(lv.readyState<1||!tr||tr.readyState!=="live")rebuild()}
+      return;
+    }
+    /* we think PiP is on but it is not showing (closed with the X, or iOS closed it while locked): reset so the button is honest */
+    if(n-startAt>3000&&!inPip()){wdSame=0;end();return}
     if(gap>2500){wdSame=0;wake(true);return}
     const ct=lv.currentTime;
     if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
@@ -6548,7 +6584,7 @@ $("qtLogClear").onclick=()=>{
     if(standalone){note("Picture in Picture is blocked in Home Screen app mode. Open this in a normal Safari tab.");return}
     const vid=ensure();
     if(!vid){note("This browser can't do a live counter (no canvas.captureStream).");return}
-    if(vid.readyState<1){note("Live video isn't ready yet. Tap again in a second.");return}
+    if(vid.readyState<1){rebuild();note("Live video isn't ready yet. Tap again in a second.");return}
     on=true;draw();ui();
     if(vid.paused)vid.play().catch(()=>{});
     const wk=!!(vid.webkitSupportsPresentationMode&&vid.webkitSupportsPresentationMode("picture-in-picture"));
@@ -6561,7 +6597,7 @@ $("qtLogClear").onclick=()=>{
       else fail({message:"no PiP API on this browser"});
     }catch(e){fail(e)}
   }
-  btn.onclick=()=>{on?stop():start()};
+  btn.onclick=()=>{if(on&&!inPip()&&Date.now()-startAt>2500)end();if(on)stop();else{startAt=Date.now();start()}};
   setInterval(()=>{if(lv&&on)draw()},500);
   if(!standalone)try{ensure()}catch(e){}
 })();
