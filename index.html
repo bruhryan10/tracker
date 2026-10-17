@@ -2573,29 +2573,43 @@ fields.forEach(([k,l])=>{
     clearTimeout(tapT);tapT=setTimeout(()=>{tapN=0},TAP_MS);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
-  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
-  let wakeAt=0;
-  function wake(){
-    if(!lv||!on||document.hidden)return;
+  /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  function rebuild(){
+    wakeAt=Date.now();
+    try{
+      const st=cv.captureStream(15),tr=st.getVideoTracks()[0];
+      if(tr)tr.addEventListener("ended",()=>{if(on)rebuild()});
+      lv.srcObject=st;
+    }catch(e){}
+    draw();lv.play().catch(()=>{});
+    setTimeout(draw,200);setTimeout(draw,700);
+  }
+  function wake(force){
+    if(!lv||!on)return;
     wakeAt=Date.now();
     draw();lv.play().catch(()=>{});
+    if(force===true){rebuild();return}
     const t0=lv.currentTime;
     setTimeout(draw,150);
     setTimeout(()=>{
-      if(!lv||!on||document.hidden)return;
+      if(!lv||!on)return;
       draw();
       const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
-      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
-        wakeAt=Date.now();
-        try{lv.srcObject=cv.captureStream(15)}catch(e){}
-        draw();lv.play().catch(()=>{});
-        setTimeout(draw,200);
-      }
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live")rebuild();
     },600);
   }
-  document.addEventListener("visibilitychange",wake);
-  window.addEventListener("pageshow",wake);
-  window.addEventListener("focus",wake);
+  /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
+  setInterval(()=>{
+    const n=Date.now(),gap=n-wdTick;wdTick=n;
+    if(!lv||!on){wdSame=0;return}
+    if(gap>2500){wdSame=0;wake(true);return}
+    const ct=lv.currentTime;
+    if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
+  },500);
+  document.addEventListener("visibilitychange",()=>wake());
+  window.addEventListener("pageshow",()=>wake(true));
+  window.addEventListener("focus",()=>wake());
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -2604,7 +2618,7 @@ fields.forEach(([k,l])=>{
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on)return;if(document.hidden||Date.now()-wakeAt<1500){setTimeout(resume,100);return}setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -5313,29 +5327,43 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
     clearTimeout(tapT);tapT=setTimeout(()=>{tapN=0},TAP_MS);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
-  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
-  let wakeAt=0;
-  function wake(){
-    if(!lv||!on||document.hidden)return;
+  /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  function rebuild(){
+    wakeAt=Date.now();
+    try{
+      const st=cv.captureStream(15),tr=st.getVideoTracks()[0];
+      if(tr)tr.addEventListener("ended",()=>{if(on)rebuild()});
+      lv.srcObject=st;
+    }catch(e){}
+    draw();lv.play().catch(()=>{});
+    setTimeout(draw,200);setTimeout(draw,700);
+  }
+  function wake(force){
+    if(!lv||!on)return;
     wakeAt=Date.now();
     draw();lv.play().catch(()=>{});
+    if(force===true){rebuild();return}
     const t0=lv.currentTime;
     setTimeout(draw,150);
     setTimeout(()=>{
-      if(!lv||!on||document.hidden)return;
+      if(!lv||!on)return;
       draw();
       const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
-      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
-        wakeAt=Date.now();
-        try{lv.srcObject=cv.captureStream(15)}catch(e){}
-        draw();lv.play().catch(()=>{});
-        setTimeout(draw,200);
-      }
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live")rebuild();
     },600);
   }
-  document.addEventListener("visibilitychange",wake);
-  window.addEventListener("pageshow",wake);
-  window.addEventListener("focus",wake);
+  /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
+  setInterval(()=>{
+    const n=Date.now(),gap=n-wdTick;wdTick=n;
+    if(!lv||!on){wdSame=0;return}
+    if(gap>2500){wdSame=0;wake(true);return}
+    const ct=lv.currentTime;
+    if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
+  },500);
+  document.addEventListener("visibilitychange",()=>wake());
+  window.addEventListener("pageshow",()=>wake(true));
+  window.addEventListener("focus",()=>wake());
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -5344,7 +5372,7 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on)return;if(document.hidden||Date.now()-wakeAt<1500){setTimeout(resume,100);return}setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -5547,29 +5575,43 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
     gpDoRoll(1);
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
-  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
-  let wakeAt=0;
-  function wake(){
-    if(!lv||!on||document.hidden)return;
+  /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  function rebuild(){
+    wakeAt=Date.now();
+    try{
+      const st=cv.captureStream(15),tr=st.getVideoTracks()[0];
+      if(tr)tr.addEventListener("ended",()=>{if(on)rebuild()});
+      lv.srcObject=st;
+    }catch(e){}
+    draw();lv.play().catch(()=>{});
+    setTimeout(draw,200);setTimeout(draw,700);
+  }
+  function wake(force){
+    if(!lv||!on)return;
     wakeAt=Date.now();
     draw();lv.play().catch(()=>{});
+    if(force===true){rebuild();return}
     const t0=lv.currentTime;
     setTimeout(draw,150);
     setTimeout(()=>{
-      if(!lv||!on||document.hidden)return;
+      if(!lv||!on)return;
       draw();
       const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
-      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
-        wakeAt=Date.now();
-        try{lv.srcObject=cv.captureStream(15)}catch(e){}
-        draw();lv.play().catch(()=>{});
-        setTimeout(draw,200);
-      }
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live")rebuild();
     },600);
   }
-  document.addEventListener("visibilitychange",wake);
-  window.addEventListener("pageshow",wake);
-  window.addEventListener("focus",wake);
+  /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
+  setInterval(()=>{
+    const n=Date.now(),gap=n-wdTick;wdTick=n;
+    if(!lv||!on){wdSame=0;return}
+    if(gap>2500){wdSame=0;wake(true);return}
+    const ct=lv.currentTime;
+    if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
+  },500);
+  document.addEventListener("visibilitychange",()=>wake());
+  window.addEventListener("pageshow",()=>wake(true));
+  window.addEventListener("focus",()=>wake());
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -5578,7 +5620,7 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on)return;if(document.hidden||Date.now()-wakeAt<1500){setTimeout(resume,100);return}setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
@@ -6429,29 +6471,43 @@ $("qtLogClear").onclick=()=>{
     qtDoAdd();note("Live press: +"+qtAmt()+" ("+nfmt(qt.r.length)+" total)");
   }
   const resume=()=>{if(lv&&on)lv.play().catch(()=>{})};
-  /* after the phone is locked/unlocked the browser freezes the canvas stream, so the PiP window stays blank: redraw, restart, and rebuild the stream if frames are not advancing */
-  let wakeAt=0;
-  function wake(){
-    if(!lv||!on||document.hidden)return;
+  /* iOS: when the phone locks, Safari freezes the canvas stream behind the PiP window, and the page is usually hidden (PiP floats over another app), so recovery cannot wait for the page to become visible */
+  let wakeAt=0,wdTick=Date.now(),wdCT=-1,wdSame=0;
+  function rebuild(){
+    wakeAt=Date.now();
+    try{
+      const st=cv.captureStream(15),tr=st.getVideoTracks()[0];
+      if(tr)tr.addEventListener("ended",()=>{if(on)rebuild()});
+      lv.srcObject=st;
+    }catch(e){}
+    draw();lv.play().catch(()=>{});
+    setTimeout(draw,200);setTimeout(draw,700);
+  }
+  function wake(force){
+    if(!lv||!on)return;
     wakeAt=Date.now();
     draw();lv.play().catch(()=>{});
+    if(force===true){rebuild();return}
     const t0=lv.currentTime;
     setTimeout(draw,150);
     setTimeout(()=>{
-      if(!lv||!on||document.hidden)return;
+      if(!lv||!on)return;
       draw();
       const tr=lv.srcObject&&lv.srcObject.getVideoTracks&&lv.srcObject.getVideoTracks()[0];
-      if(lv.currentTime===t0||!tr||tr.readyState!=="live"){
-        wakeAt=Date.now();
-        try{lv.srcObject=cv.captureStream(15)}catch(e){}
-        draw();lv.play().catch(()=>{});
-        setTimeout(draw,200);
-      }
+      if(lv.currentTime===t0||!tr||tr.readyState!=="live")rebuild();
     },600);
   }
-  document.addEventListener("visibilitychange",wake);
-  window.addEventListener("pageshow",wake);
-  window.addEventListener("focus",wake);
+  /* watchdog: runs even while hidden. A big timer gap means the page was suspended (screen lock); a video clock that stops moving means the stream froze */
+  setInterval(()=>{
+    const n=Date.now(),gap=n-wdTick;wdTick=n;
+    if(!lv||!on){wdSame=0;return}
+    if(gap>2500){wdSame=0;wake(true);return}
+    const ct=lv.currentTime;
+    if(ct===wdCT){wdSame++;if(wdSame>=4&&n-wakeAt>3000){wdSame=0;wake(true)}}else{wdSame=0;wdCT=ct}
+  },500);
+  document.addEventListener("visibilitychange",()=>wake());
+  window.addEventListener("pageshow",()=>wake(true));
+  window.addEventListener("focus",()=>wake());
   function ensure(){
     if(lv)return lv;
     if(typeof HTMLCanvasElement.prototype.captureStream!=="function")return null;
@@ -6460,7 +6516,7 @@ $("qtLogClear").onclick=()=>{
     lv.muted=true;lv.playsInline=true;lv.setAttribute("playsinline","");lv.setAttribute("webkit-playsinline","");
     lv.style.cssText="position:fixed;right:0;bottom:0;width:2px;height:2px;opacity:.01;pointer-events:none";
     draw();lv.srcObject=cv.captureStream(15);
-    lv.addEventListener("pause",()=>{if(!on||document.hidden||Date.now()-wakeAt<1500)return;setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
+    lv.addEventListener("pause",()=>{if(!on)return;if(document.hidden||Date.now()-wakeAt<1500){setTimeout(resume,100);return}setTimeout(()=>{if(!on)return;if(Date.now()-lastHandlerAt>400)press();resume()},60)});
     lv.addEventListener("leavepictureinpicture",end);
     lv.addEventListener("webkitpresentationmodechanged",()=>{if(lv.webkitPresentationMode==="inline"&&on)end()});
     document.body.appendChild(lv);lv.play().catch(()=>{});
