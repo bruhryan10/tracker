@@ -868,7 +868,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #epicList .mk{container:epc/inline-size}
 #epicList .mk.done{border-color:color-mix(in srgb,var(--ac) 40%,var(--bd))}
 #epicList .mkh,#holderList .mkh{padding:14px 16px;gap:14px}
-#epicList .mkh:has(.epart){grid-template-columns:auto 44px minmax(0,1fr) auto 14px}
+#epicList .mkh{grid-template-columns:44px minmax(0,1fr) auto auto 14px}
 #epicList .epart{width:44px;height:44px;border-radius:9px;object-fit:cover;display:block;background:var(--bg);box-shadow:0 2px 8px rgba(0,0,0,.35)}
 #epicList .epck{display:grid;place-items:center;margin:-4px;padding:4px;cursor:pointer}
 #epicList .epck input{-webkit-appearance:none;appearance:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
@@ -889,6 +889,84 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #epicList.showall .epm{display:block}
 #epicList.showall .epn{max-width:none;flex-wrap:wrap}
 #epicList.showall .epm .mks.all{margin-top:5px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.45}
+
+/* ---------- epic/holder lists: two independent columns + desktop polish ---------- */
+#epicList,#holderList{align-items:start;gap:12px}
+#epicList .lcol,#holderList .lcol{display:flex;flex-direction:column;gap:8px;min-width:0}
+@media (max-width:640px){#epicList,#holderList{gap:8px}#epicList .lcol,#holderList .lcol{display:contents}}
+@media (min-width:900px){
+#epicList .mkh,#holderList .mkh{padding:11px 14px;gap:12px}
+#epicList .mkh{grid-template-columns:40px minmax(0,1fr) auto auto 14px}
+#epicList .epart{width:40px;height:40px}
+#epicList .mk,#holderList .mk{transition:border-color .15s,background-color .15s}
+#epicList .mk:not(.open):hover,#holderList .mk:not(.open):hover{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));background:color-mix(in srgb,var(--ac) 6%,var(--card))}
+}
+
+/* epic image uploader */
+#epicList .epart.ph{border:1.5px dashed color-mix(in srgb,var(--mut) 45%,var(--bd));box-shadow:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.6'/%3E%3Cpath d='m21 16-5-5-8 9'/%3E%3C/svg%3E") center/46% no-repeat;opacity:.8}
+#epicList .eparow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:0 0 10px}
+#epicList .eparow button{margin:0;height:34px;padding:0 14px;border-radius:999px;font-size:13px;font-weight:600}
+#epicList .eparow .note{margin:0}
+
+/* epic rows v2: calmer rows, rarity edge, progress bar, tidier editor */
+#epicList .mk.rr-common{--rc:#3ddc5a}#epicList .mk.rr-uncommon{--rc:#8b3cf0}#epicList .mk.rr-rare{--rc:#f08a2c}
+#epicList .mk{box-shadow:inset 2px 0 0 var(--rc,transparent)}
+#epicList .mk.done{border-color:var(--bd)}
+#epicList .epck input:not(:checked){border-color:color-mix(in srgb,var(--mut) 28%,var(--bd))}
+#epicList .mkh{position:relative}
+#epicList .mkc{font-size:15px;font-weight:600;color:var(--mut)}
+#epicList .mkc.pos{color:var(--pos)}
+#epicList.showall .epm .mks.all{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;overflow-wrap:normal}
+#epicList .epck input{width:22px;height:22px;border-radius:50%}
+#epicList .epck input:checked{background-color:var(--pos);border-color:var(--pos)}
+#epicList .mkb{padding:12px 14px 12px}
+#epicList .epbar2{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px 12px;margin:0 0 14px}
+#epicList .epbar2 .mkcats{margin:0;gap:2px;padding:3px;border-radius:999px;background:var(--bg);border:1px solid var(--bd)}
+#epicList .epbar2 .mkcats button{padding:0;border-width:1.5px}
+#epicList .epbar2 .eparow{margin:0}
+#epicList .eparow button{height:30px;padding:0 12px;font-size:12px}
+#epicList .epsh{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13px;font-weight:600;color:var(--mut)}
+#epicList .epcn{font-size:12px;padding:0 8px;border-radius:999px;background:var(--bg);border:1px solid var(--bd);color:var(--tx)}
+#epicList .epstep{margin-left:auto;display:inline-flex;gap:6px}
+#epicList .epstep button{margin:0;width:32px;height:32px;padding:0;border-radius:9px;font-size:18px;line-height:1;font-weight:600}
+#epicList .mkb .slots{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px 10px;margin:0}
+#epicList .slot{position:relative;display:block;margin:0!important}
+#epicList .slot span{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:auto;font-size:12px;font-weight:600;pointer-events:none}
+#epicList .slot input{width:100%;height:38px;margin:0;padding:0 10px 0 38px;font-size:14px;border-radius:10px;box-sizing:border-box}
+#epicList .epfoot{display:flex;justify-content:flex-end;margin-top:12px}
+#epicList .epdel{margin:0;padding:4px 8px;border:none;background:none;color:var(--mut);font-size:12px;font-weight:600;border-radius:8px}
+#epicList .epdel:hover{color:var(--neg);background:color-mix(in srgb,var(--neg) 10%,transparent)}
+
+/* numberless: copy button + Completion card no longer taller than the other stat cards */
+#tab-epic .epOpt.cp{padding:0 14px 0 10px;color:var(--tx);cursor:pointer}
+#tab-epic .epOpt.cp svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-epic .epOpt.cp:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+@media (min-width:760px){
+#tab-epic .sc.side.epComp{grid-template-columns:auto auto minmax(0,1fr);grid-template-areas:"i l l" "i v b" "i s s"}
+#tab-epic .sc.side.epComp .epbar{margin:0 0 0 14px;align-self:center}
+}
+
+/* controls row: smaller By holder + No holders switch at the end */
+#tab-epic #vHolder{flex:0 0 auto;padding:0 14px;gap:7px;font-size:13px}
+#tab-epic #vHolder svg{width:15px;height:15px}
+#tab-epic #epNoHold{flex:0 0 auto;height:50px;padding:0 12px 0 10px;gap:7px;border-radius:12px;font-size:12px;white-space:nowrap;cursor:pointer}
+
+/* numberless: Copy + Completion live at the end of the controls row */
+#tab-epic #epCopyNum,#tab-epic #epCompOpt{flex:0 0 auto;height:50px;padding:0 12px 0 10px;gap:7px;border-radius:12px;font-size:12px;white-space:nowrap;cursor:pointer}
+
+/* collection picker: wider columns, long names wrap instead of being cut off */
+#tab-epic #setBar{grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+#tab-epic #setBar button{height:auto;min-height:42px;padding:8px 14px;text-align:left}
+#tab-epic .epSets #setBar .setn{max-width:100%;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere;line-height:1.25}
+@media (max-width:520px){#tab-epic #setBar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* controls row on phones / narrow windows: search, then sort + rarity side by side, then the buttons on their own line(s) */
+@media (max-width:820px){
+#tab-epic .epFind{flex-wrap:wrap;gap:8px}
+#tab-epic .epSearchW{flex:1 1 100%}
+#tab-epic #epSort,#tab-epic #epRarW{flex:1 1 calc(50% - 4px);min-width:0;font-size:14px}
+#tab-epic #vHolder,#tab-epic #epNoHold,#tab-epic #epCopyNum,#tab-epic #epCompOpt{flex:1 1 auto;height:46px;justify-content:center}
+}
 
 /* ---------- gempic tracker (redesign: matches home + shiny + epic) ---------- */
 #tab-gempic{max-width:960px;margin:0 auto}
@@ -1990,9 +2068,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <select id="epSort" aria-label="Sort"></select>
 <div id="epRarW"><button type="button" id="epRar" class="epDDb" aria-haspopup="listbox" aria-expanded="false" aria-label="Rarity"></button><div class="epDDm" id="epRarM" role="listbox" hidden></div></div>
 <button type="button" id="vHolder" class="epb" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.4c2 .8 3.5 2.6 3.5 5.6"/></svg>By holder</button>
+<button type="button" id="epNoHold" class="epOpt" role="switch" aria-checked="true" title="Show or hide epics that have no holders yet"><span class="sw" aria-hidden="true"></span>No holders</button>
+<button type="button" id="epCopyNum" class="epOpt cp" title="Add every Numbered epic in this set to Numberless (names, rarities and images; not holders)"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>Copy from Numbered</button><button type="button" id="epCompOpt" class="epOpt" role="switch" aria-checked="true" title="Show or hide the Completion card"><span class="sw" aria-hidden="true"></span>Completion</button>
 </div>
 </div>
-<div class="epMeta" id="epMeta"><div class="epMetaR"><button type="button" id="epCompOpt" class="epOpt" role="switch" aria-checked="true" title="Show or hide the Completion card"><span class="sw" aria-hidden="true"></span>Completion</button></div></div>
 <div id="epicList" class="showall"></div>
 <div id="holderList" hidden></div>
 <div class="addrow"><input id="newEpic" maxlength="300" placeholder="New epic name"><button type="button" id="addEpic">Add epic</button></div>
@@ -3053,6 +3132,32 @@ let EPA={},EPT={};
 try{EPA=JSON.parse(LS("tracker.epArt")||"{}")||{}}catch(e){EPA={}}
 try{EPT=JSON.parse(LS("tracker.epArtImg")||"{}")||{}}catch(e){EPT={}}
 const epArtOf=e=>{const k=e.art_key||EPA[e.id];return k&&EPT[k]||""};
+/* custom (uploaded) epic art: one picture per epic, key "custom:<epic id>"; only epics without imported art get the uploader */
+const epCustomKey=e=>"custom:"+e.id;
+const epIsCustom=e=>String(e.art_key||EPA[e.id]||"").startsWith("custom:");
+async function epCustomThumb(file){
+  try{
+    if(!file||!/^image\//.test(file.type)||file.size>15*1024*1024)return"";
+    const bm=await createImageBitmap(file),S=96,c=document.createElement("canvas"),m=Math.min(bm.width,bm.height);
+    c.width=c.height=S;
+    c.getContext("2d").drawImage(bm,(bm.width-m)/2,(bm.height-m)/2,m,m,0,0,S,S);
+    return c.toDataURL("image/jpeg",.8);
+  }catch(e){return""}
+}
+async function epArtSetCustom(e,file){
+  const d=await epCustomThumb(file);
+  if(!d){setStatus("Couldn't read that image",true);return}
+  const k=epCustomKey(e);EPT[k]=d;
+  let synced=false;
+  if(artDB&&await track(sb.from("epic_art").upsert({key:k,img:d}))&&await track(sb.from("epics").update({art_key:k}).eq("id",e.id))){e.art_key=k;delete EPA[e.id];synced=true}
+  if(!synced){e.art_key=null;EPA[e.id]=k}
+  epArtSave();renderEpics();
+}
+async function epArtRemoveCustom(e){
+  const k=epCustomKey(e);
+  e.art_key=null;delete EPA[e.id];delete EPT[k];epArtSave();renderEpics();
+  if(artDB){await track(sb.from("epics").update({art_key:null}).eq("id",e.id));track(sb.from("epic_art").delete().eq("key",k))}
+}
 function epArtSave(){
   try{
     const used=new Set(Object.values(EPA));allEpics.forEach(e=>{if(e.art_key)used.add(e.art_key)});Object.keys(EPT).forEach(k=>{if(!used.has(k))delete EPT[k]});
@@ -3161,57 +3266,65 @@ function matches(e){
   if(!eq)return true;const t=eq.toLowerCase();
   return e.name.toLowerCase().includes(t)||(!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
 }
-const EP={open:new Set(),hopen:new Set(),f:"all",o:"az",comp:LS("tracker.epcomp")!=="0",all:true};
-const ESORT=[["az","A\u2013Z"],["unk","Most unknown"],["fill","Most known"]];
+const EP={open:new Set(),hopen:new Set(),f:"all",o:"az",comp:LS("tracker.epcomp")!=="0",nh:LS("tracker.epnh")!=="0",all:true};
+const ESORT=[["az","A\u2013Z"],["unk","Most unknown"],["fill","Most known"],["col","Collected first"]];
 const EFILT=[["all","All rarities"],["none","No rarity"],["common","Common"],["uncommon","Uncommon"],["rare","Rare"]];
 const eCount=e=>{if(e.numberless)return[got(e)?1:0,1];let k=0;e.holders.forEach(h=>{if(h.trim())k++});return[k,e.holders.length]};
 const noRar='<span class="pill rt none" style="cursor:inherit">No rarity</span>';
 function epHead(e){
   const [k,n]=eCount(e),d=isDone(e);
-  const pill=e.rarity?`<span class="pill r r-${e.rarity}">${RLBL[e.rarity]}</span>`:noRar;
   let sub;
   if(e.numberless)sub=k?"Obtained":"Not obtained";
-  else{const hs=e.holders.map((h,j)=>h.trim()?"#"+(j+1)+" "+h.trim():"").filter(Boolean);sub=hs.length?(hs.join(" \u00b7 ")):"No holders yet"}
+  else{const hs=e.holders.map((h,j)=>h.trim()?"#"+(j+1)+" "+h.trim():"").filter(Boolean);sub=hs.length?(hs.length>2?hs.slice(0,2).join(" \u00b7 ")+" \u00b7 +"+(hs.length-2)+" more":hs.join(" \u00b7 ")):"No holders yet"}
   const cnt=e.numberless?(k?"\u2713":"\u2014"):k+"/"+n;
   const art=epArtOf(e);
-  return `<label class="epck" title="${e.numberless?"Obtained":"Mark as done"}"><input type="checkbox" data-act="${e.numberless?"chk":"done"}" aria-label="${e.numberless?"Obtained: ":"Mark "}${esc(e.name)}${e.numberless?"":" as done"}"${d?" checked":""}></label>${art?`<img class="epart" src="${art}" alt="">`:""}<div class="epm"><div class="epn"><span class="mkt">${esc(e.name)}</span>${pill}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><span class="mkv" aria-hidden="true">\u25B8</span>`;
+  return `${art?`<img class="epart" src="${art}" alt="">`:`<span class="epart ph" aria-hidden="true"></span>`}<div class="epm"><div class="epn"><span class="mkt">${esc(e.name)}</span></div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><label class="epck" title="${e.numberless?"Obtained":"Mark as done"}"><input type="checkbox" data-act="${e.numberless?"chk":"done"}" aria-label="${e.numberless?"Obtained: ":"Mark "}${esc(e.name)}${e.numberless?"":" as done"}"${d?" checked":""}></label><span class="mkv" aria-hidden="true">\u25B8</span>`;
 }
 function epBody(e){
   const t=eq.toLowerCase();
-  const rar=`<div class="mkcats" role="group" aria-label="Rarity"><button type="button" data-act="rar" data-r="" class="${e.rarity?"":"on"}">${noRar}</button>`+RAR.map(r=>`<button type="button" data-act="rar" data-r="${r}" class="${e.rarity===r?"on":""}"><span class="pill r r-${r}">${RLBL[r]}</span></button>`).join("")+`</div>`;
+  const rar=`<div class="mkcats" role="group" aria-label="Rarity"><button type="button" data-act="rar" data-r="" class="${e.rarity?"":"on"}"><span class="pill rt none" style="cursor:inherit">None</span></button>`+RAR.map(r=>`<button type="button" data-act="rar" data-r="${r}" class="${e.rarity===r?"on":""}"><span class="pill r r-${r}">${RLBL[r]}</span></button>`).join("")+`</div>`;
+  let up="";
+  if(!epArtOf(e)||epIsCustom(e)){
+    const cu=epIsCustom(e);
+    up=`<div class="eparow"><input type="file" accept="image/*" hidden data-act="artfile" aria-label="Upload image for ${esc(e.name)}"><button type="button" data-act="artup">${cu?"Replace image":"Add image"}</button>${cu?`<button type="button" data-act="artrm">Remove</button>`:""}</div>`;
+  }
   const slots=e.numberless
     ?`<label class="chk"><input type="checkbox" data-act="chk"${got(e)?" checked":""}> Obtained</label>`
-    :`<div class="slots">${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input maxlength="300" data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}</div><div class="steps"><button type="button" data-act="add">+ slot</button><button type="button" data-act="rem">\u2212 slot</button></div>`;
-  return rar+slots+`<button type="button" class="small mkdel" data-act="del" aria-label="Delete epic">Delete epic</button>`;
+    :`<div class="epsh"><span>Holders</span><span class="epcn">${e.holders.length}</span><span class="epstep"><button type="button" data-act="rem" aria-label="Remove a slot">\u2212</button><button type="button" data-act="add" aria-label="Add a slot">+</button></span></div><div class="slots">${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>#${j+1}</span><input maxlength="300" data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}</div>`;
+  return `<div class="epbar2">${rar}${up}</div>`+slots+`<div class="epfoot"><button type="button" class="epdel" data-act="del" aria-label="Delete epic">Delete epic</button></div>`;
 }
 function epView(){
   let list=epics.map((e,i)=>[e,i]).filter(([e])=>matches(e));
   const base=list;
+  if(!EP.nh&&!eq.trim())list=list.filter(([e])=>e.numberless||eCount(e)[0]>0||EP.open.has(e.id));
   if(EP.f==="none")list=list.filter(([e])=>!e.rarity);else if(EP.f!=="all")list=list.filter(([e])=>e.rarity===EP.f);
   const gap=e=>{const c=eCount(e);return c[1]-c[0]};
   if(EP.o==="unk")list=list.slice().sort((x,y)=>gap(y[0])-gap(x[0]));
   else if(EP.o==="fill")list=list.slice().sort((x,y)=>eCount(y[0])[0]-eCount(x[0])[0]);
+  else if(EP.o==="col")list=list.slice().sort((x,y)=>(isDone(y[0])?1:0)-(isDone(x[0])?1:0));
   return {list,base};
 }
 function holderView(){
   const t=eq.toLowerCase();
   return holderMap().filter(h=>!t||h.n.toLowerCase().includes(t)||h.items.some(x=>x.toLowerCase().includes(t)));
 }
+function lcols(a){if(!a.length)return"";const m=Math.ceil(a.length/2);return'<div class="lcol">'+a.slice(0,m).join("")+'</div><div class="lcol">'+a.slice(m).join("")+'</div>'}
 function renderEpics(){
+  $("epNoHold").setAttribute("aria-checked",EP.nh);
   const t=eq.toLowerCase();
   const {list}=epView();
   const rl=r=>r==="all"?"All rarities":r==="none"?noRar:`<span class="pill r r-${r}">${RLBL[r]}</span>`;
   $("epRar").innerHTML=`<span class="epDDt">${rl(EP.f)}</span>`;
   $("epRarM").innerHTML=EFILT.map(o=>`<button type="button" role="option" class="epDDo${EP.f===o[0]?" on":""}" data-f="${o[0]}" aria-selected="${EP.f===o[0]}">${rl(o[0])}</button>`).join("");
   $("epSort").innerHTML=ESORT.map(o=>`<option value="${o[0]}"${EP.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
-  $("epicList").innerHTML=list.map(([e,i])=>{
+  $("epicList").innerHTML=lcols(list.map(([e,i])=>{
     const open=EP.open.has(e.id)||(t&&!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
-    return `<div class="card ep mk${open?" open":""}${isDone(e)?" done":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
-  }).join("")||'<div class="empty">'+(epics.length?"Nothing matches your search or filter.":"No epics yet.")+'</div>';
+    return `<div class="card ep mk${open?" open":""}${isDone(e)?" done":""}${e.rarity?" rr-"+e.rarity:""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
+  }))||'<div class="empty">'+(epics.length?"Nothing matches your search or filter.":"No epics yet.")+'</div>';
 }
 function epStats(){
   let known=0,unk=0,nn=0,ng=0,nm=0;
-  epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}nm++;e.holders.forEach(h=>h.trim()?known++:unk++)});
+  epics.forEach(e=>{if(e.numberless){nn++;if(got(e))ng++;return}nm++;const hs=e.holders.some(h=>h.trim());e.holders.forEach(h=>{if(h.trim())known++;else if(hs)unk++})});
   const nl=nf==="nl";
   const scope=epics.filter(e=>!!e.numberless===nl),tot=scope.length,dn=scope.filter(isDone).length;
   const pct=tot?Math.round(dn/tot*1000)/10:0;
@@ -3225,7 +3338,7 @@ function epStats(){
   const C=[
     ...(nl?[]:[["Total Epics",nm,"#f59e0b",IC.crown,"Numbered epics in this collection"]]),
     [nl?"Obtained":"Known Holders",nl?ng:known,"#3b82f6",IC.users,nl?"Numberless epics you have":"Slots with a known holder"],
-    [nl?"Missing":"Unknown Slots",nl?nn-ng:unk,"#94a3b8",IC.frame,nl?"Numberless epics still missing":"Slots without confirmed owners"]
+    [nl?"Missing":"Unknown Slots",nl?nn-ng:unk,"#94a3b8",IC.frame,nl?"Numberless epics still missing":"Open slots on epics that have holders"]
   ];
   $("epTop").innerHTML=C.map(([l,v,c,ic,sub])=>`<div class="sc side" style="--c:${c}"><span class="sci">${ic}</span><div class="scl">${l}</div><div class="scv">${v}</div><div class="scs">${sub}</div></div>`).join("")+(!showComp?"":
    `<div class="sc side epComp" style="--c:#a78bfa"><span class="sci">${IC.spark}</span><div class="scl">Completion</div><div class="scv">${pct.toFixed(1)}%</div><div class="epbar"><i style="width:${pct}%"></i></div><div class="scs">${dn} / ${tot} epics</div></div>`);
@@ -3235,11 +3348,11 @@ function renderMeta(){
   renderSets();epStats();
   $("holderDL").innerHTML=hm.map(h=>`<option value="${esc(h.n)}">`).join("");
   const hl=holderView();
-  $("holderList").innerHTML=hl.map(h=>{
+  $("holderList").innerHTML=lcols(hl.map(h=>{
     const k=h.n.toLowerCase(),open=EP.hopen.has(k);
     const sub=h.items.join(" \u00b7 ");
     return `<div class="card mk${open?" open":""}" data-h="${esc(k)}"><div class="mkh nop" role="button" tabindex="0" aria-expanded="${open}"><div style="min-width:0"><div class="mkt">${esc(h.n)}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc">${h.items.length}</div><span class="mkv" aria-hidden="true">\u25B8</span></div><div class="mkb chips">${h.items.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div>`;
-  }).join("")||'<div class="empty">No matches.</div>';
+  }))||'<div class="empty">No matches.</div>';
 }
 function setView(v){
   curView=v;const nl=nf==="nl",hv=!nl&&v==="holder";
@@ -3247,8 +3360,8 @@ function setView(v){
   $("vHolder").hidden=nl;$("nfBar").hidden=setModeOf(curSet)!=="both";
   $("epRarW").hidden=hv;$("epSort").hidden=hv;if(hv)epRarClose();
   $("vHolder").classList.toggle("on",hv);$("vHolder").setAttribute("aria-pressed",hv);
-  $("epCompOpt").hidden=!nl;
-  $("epMeta").hidden=!nl;
+  $("epCompOpt").hidden=!nl;$("epNoHold").hidden=nl||hv;
+  $("epCopyNum").hidden=!nl||setModeOf(curSet)!=="both";
 }
 const slotTimers={};
 function schedSlot(e,j){
@@ -3266,12 +3379,14 @@ function epToggleRow(card){
   if(open)EP.open.add(e.id);else EP.open.delete(e.id);
 }
 epicList.addEventListener("input",ev=>{
-  const inp=ev.target.closest("input");if(!inp||inp.type==="checkbox")return;
+  const inp=ev.target.closest("input");if(!inp||inp.type==="checkbox"||inp.type==="file")return;
   const card=inp.closest(".ep"),e=epics[+card.dataset.i],j=+inp.dataset.j;
   e.holders[j]=inp.value.slice(0,300);schedSlot(e,j);
   card.querySelector(".mkh").innerHTML=epHead(e);epStats();
 });
 epicList.addEventListener("change",ev=>{
+  const fi=ev.target.closest('input[type="file"]');
+  if(fi){const f=fi.files&&fi.files[0],card=fi.closest(".ep");fi.value="";if(f&&card)epArtSetCustom(epics[+card.dataset.i],f);return}
   const c=ev.target.closest('input[type="checkbox"]');
   if(!c){renderMeta();return}
   if(c.dataset.act==="done"){
@@ -3292,6 +3407,8 @@ epicList.addEventListener("click",ev=>{
   if(!b){const h=ev.target.closest(".mkh");if(h)epToggleRow(card);return}
   const e=epics[+card.dataset.i],a=b.dataset.act;
   const done=()=>{renderEpics();renderMeta()};
+  if(a==="artup"){const fi=card.querySelector('.eparow input[type="file"]');if(fi)fi.click();return}
+  if(a==="artrm"){epArtRemoveCustom(e);return}
   if(a==="rar"){
     const nx=b.dataset.r||null;
     if(nx===(e.rarity||null))return;
@@ -3335,6 +3452,7 @@ $("epRar").addEventListener("click",()=>{const o=$("epRarM").hidden;$("epRarM").
 $("epRarM").addEventListener("click",ev=>{const b=ev.target.closest("button[data-f]");if(!b)return;EP.f=b.dataset.f;epRarClose();renderEpics()});
 document.addEventListener("click",ev=>{if(!ev.target.closest("#epRarW"))epRarClose()});
 document.addEventListener("keydown",ev=>{if(ev.key==="Escape")epRarClose()});
+$("epNoHold").onclick=()=>{EP.nh=!EP.nh;LS("tracker.epnh",EP.nh?"1":"0");renderEpics()};
 $("epSort").addEventListener("change",()=>{EP.o=$("epSort").value;renderEpics()});
 $("epSearch").addEventListener("input",ev=>{eq=ev.target.value.trim();renderEpics();renderMeta()});
 function setNF(v){nf=v;LS("tracker.nf",v);setView(curView);epStats();[...$("nfBar").children].forEach(x=>x.classList.toggle("on",x.dataset.nf===v))}
@@ -3363,7 +3481,39 @@ async function addEpicNew(newNL){
   $("newEpic").value="";eq=n;$("epSearch").value=n;setView("epic");renderEpics();renderMeta();
 }
 $("addEpic").onclick=()=>addEpicNew(nf==="nl");
+$("epCopyNum").onclick=epCopyFromNumbered;
 $("newEpic").addEventListener("keydown",ev=>{if(ev.key==="Enter")$("addEpic").click()});
+
+/* Numberless: copy the Numbered epics of this set (name, rarity + image; no holders) for any that aren't there yet */
+async function epCopyFromNumbered(){
+  const have=new Set(allEpics.filter(e=>e.set_id===curSet&&e.numberless).map(e=>e.name.toLowerCase()));
+  const src=allEpics.filter(e=>e.set_id===curSet&&!e.numberless&&!have.has(e.name.toLowerCase())).sort(cmp);
+  if(!src.length){setStatus("Numberless already has every Numbered epic");setTimeout(()=>{if(!inflight)setStatus("Saved")},2500);return}
+  ask("Copy "+src.length+" epic"+(src.length===1?"":"s")+" from Numbered to Numberless? Names, rarities and images are copied; holders are not.",async()=>{
+    for(let i=0;i<src.length;i+=100){
+      const chunk=src.slice(i,i+100);
+      const rows=chunk.map(e=>({name:e.name,set_id:curSet,...(numDB?{numberless:true}:{}),...(rarityDB&&e.rarity?{rarity:e.rarity}:{}),...(artDB&&e.art_key&&!String(e.art_key).startsWith("custom:")?{art_key:e.art_key}:{})}));
+      const r=await track(sb.from("epics").insert(rows).select("id,name"));
+      if(!r||!r.data||r.data.length!==chunk.length)break;
+      await track(sb.from("epic_slots").insert(r.data.map(x=>({epic_id:x.id,slot:1,holder:""}))));
+      const cust=[];
+      r.data.forEach((x,j)=>{
+        const o=chunk[j],ne={id:x.id,set_id:curSet,name:x.name,rarity:o.rarity||null,numberless:true,holders:[""],art_key:rows[j].art_key||null};
+        allEpics.push(ne);if(!numDB)nlSave(ne);
+        if(!rarityDB&&o.rarity){const m=rarLS();m[ne.id]=o.rarity;LS("tracker.rarity",JSON.stringify(m))}
+        const ok=String(o.art_key||EPA[o.id]||"");
+        if(ok.startsWith("custom:")&&EPT[ok])cust.push([ne,EPT[ok]]);
+        else if(!ne.art_key&&EPA[o.id])EPA[ne.id]=EPA[o.id];
+      });
+      for(const [ne,img] of cust){
+        const k=epCustomKey(ne);EPT[k]=img;let ok=false;
+        if(artDB&&await track(sb.from("epic_art").upsert({key:k,img}))&&await track(sb.from("epics").update({art_key:k}).eq("id",ne.id))){ne.art_key=k;ok=true}
+        if(!ok)EPA[ne.id]=k;
+      }
+    }
+    epArtSave();applySet();renderEpics();renderMeta();
+  });
+}
 
 /* sets */
 function setMenuOpen(o){
@@ -6769,7 +6919,7 @@ async function arFeat(){
   D.featBusy=0;AR.loading=0;arBtn();
   if(AR.d===D)arRender();
 }
-/* export: every song in the Songs list becomes an epic (numbered or numberless) in a new set, or in an earlier set for this artist */
+/* export: every song in the Songs list (plus, if you tick the box, the songs left out by excluded words) becomes an epic (numbered or numberless) in a new set, or in an earlier set for this artist */
 const arLastGet=id=>{try{return (JSON.parse(LS("tracker.arLastExp")||"{}"))[id]||null}catch(e){return null}};
 const arLastSet=(id,v)=>{try{const m=JSON.parse(LS("tracker.arLastExp")||"{}");m[id]=v;LS("tracker.arLastExp",JSON.stringify(m))}catch(e){}};
 function arExpAsk(count,sg){
@@ -6778,9 +6928,10 @@ function arExpAsk(count,sg){
     const ov=document.createElement("div");
     ov.style.cssText="position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px";
     const opts=`<option value="new">New set \u201c${esc(sg.newName)}\u201d</option>`+sg.matches.map(x=>`<option value="${x.id}">Add to \u201c${esc(x.name)}\u201d</option>`).join("");
-    ov.innerHTML=`<div class="card" role="dialog" aria-modal="true" aria-label="Export to Epic Tracker" style="width:100%;max-width:380px"><strong>Export ${count} songs to Epic Tracker</strong><div class="lbl" style="margin-top:12px">Format</div><div class="seg" id="arXF" style="margin:0 0 12px"><button type="button" data-f="n">Numbered</button><button type="button" data-f="l">Numberless</button></div><div class="lbl">Destination</div><select id="arXD" style="width:100%;box-sizing:border-box;font-size:15px;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx)">${opts}</select><div class="note" id="arXN" style="margin-bottom:12px"></div><div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="small" id="arXC">Cancel</button><button type="button" class="small" id="arXG">Export</button></div></div>`;
+    ov.innerHTML=`<div class="card" role="dialog" aria-modal="true" aria-label="Export to Epic Tracker" style="width:100%;max-width:380px"><strong id="arXT">Export ${count} songs to Epic Tracker</strong><div class="lbl" style="margin-top:12px">Format</div><div class="seg" id="arXF" style="margin:0 0 12px"><button type="button" data-f="n">Numbered</button><button type="button" data-f="l">Numberless</button></div>${sg.exCount?`<label class="chk" style="margin:12px 0 0"><input type="checkbox" id="arXI"${sg.inc?" checked":""}> Also include ${sg.exCount} song${sg.exCount===1?"":"s"} left out by your excluded words</label>`:""}<div class="lbl" style="margin-top:12px">Destination</div><select id="arXD" style="width:100%;box-sizing:border-box;font-size:15px;padding:9px 10px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx)">${opts}</select><div class="note" id="arXN" style="margin-bottom:12px"></div><div style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="small" id="arXC">Cancel</button><button type="button" class="small" id="arXG">Export</button></div></div>`;
     document.body.appendChild(ov);
-    const dd=ov.querySelector("#arXD"),nt=ov.querySelector("#arXN");
+    const dd=ov.querySelector("#arXD"),nt=ov.querySelector("#arXN"),inc=ov.querySelector("#arXI"),tt=ov.querySelector("#arXT");
+    const upd=()=>{tt.textContent="Export "+(count+(inc&&inc.checked?sg.exCount:0))+" songs to Epic Tracker"};if(inc){inc.onchange=upd;upd()}
     dd.value=sg.dest;if(dd.value!==sg.dest)dd.value="new";
     const sync=()=>{
       const m=dd.value==="new"?"both":setModeOf(dd.value),lock=m==="num"?"n":m==="nl"?"l":"";
@@ -6794,7 +6945,7 @@ function arExpAsk(count,sg){
     ov.querySelector("#arXF").onclick=e=>{const b=e.target.closest("button");if(!b||b.disabled)return;fmt=b.dataset.f;sync()};
     dd.onchange=sync;
     ov.querySelector("#arXC").onclick=()=>done(null);
-    ov.querySelector("#arXG").onclick=()=>done({nl:fmt==="l",dest:dd.value});
+    ov.querySelector("#arXG").onclick=()=>done({nl:fmt==="l",dest:dd.value,inc:!!(inc&&inc.checked)});
     ov.addEventListener("click",e=>{if(e.target===ov)done(null)});
     sync();
   });
@@ -6802,15 +6953,20 @@ function arExpAsk(count,sg){
 async function arExport(){
   const D=AR.d,msg=$("arMsg"),btn=$("arExp");
   if(!D||AR.exporting)return;
-  const songs=D.main||[];
-  if(!songs.length){msg.textContent="There are no songs to export yet.";return}
+  const songs0=D.main||[];
+  const seenN=new Set(songs0.map(t=>String(t.name).slice(0,300).toLowerCase())),exNew=[];
+  for(const t of (D.exl||[])){if(!t.main)continue;const k=String(t.name).slice(0,300).toLowerCase();if(!seenN.has(k)){seenN.add(k);exNew.push(t)}}
+  if(!songs0.length&&!exNew.length){msg.textContent="There are no songs to export yet.";return}
   const base=String(D.a.name||"Artist").trim().slice(0,290)||"Artist",bl=base.toLowerCase();
   let name=base;
   if(sets.some(x=>x.name.toLowerCase()===bl)){let i=2;while(sets.some(x=>x.name.toLowerCase()===(base+" ("+i+")").toLowerCase()))i++;name=base+" ("+i+")"}
   const matches=sets.filter(x=>{const n=x.name.toLowerCase();return n===bl||(n.startsWith(bl)&&/^ \(\d+\)$/.test(n.slice(bl.length)))}).sort((p,q)=>p.position-q.position);
   const last=arLastGet(D.id),lm=last&&matches.find(x=>x.id===last.setId);
-  const pick=await arExpAsk(songs.length,{matches,newName:name,fmt:lm?(setModeOf(lm.id)==="num"?"n":setModeOf(lm.id)==="nl"?"l":(last.fmt==="n"?"l":"n")):"n",dest:lm?String(lm.id):"new"});
+  const pick=await arExpAsk(songs0.length,{exCount:exNew.length,inc:LS("tracker.arExInc")==="1",matches,newName:name,fmt:lm?(setModeOf(lm.id)==="num"?"n":setModeOf(lm.id)==="nl"?"l":(last.fmt==="n"?"l":"n")):"n",dest:lm?String(lm.id):"new"});
   if(!pick)return;
+  if(exNew.length)LS("tracker.arExInc",pick.inc?"1":"0");
+  const songs=pick.inc?songs0.concat(exNew):songs0;
+  if(!songs.length){msg.textContent="There are no songs to export yet.";return}
   const nl=pick.nl;
   AR.exporting=1;if(btn)btn.disabled=true;
   try{
@@ -7940,6 +8096,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.6.2","2026-10-19",["Epic Tracker: More UI enchancements."]],
 ["0.6.1","2026-10-19",["Epic Tracker Overhaul. Export discogs directly from Artist Overview. More to come."]],
 ["0.6","2026-10-17",["Introducing Daily Games: one place to log your daily routine and watch your totals grow, with running counts of every gem and coin you earn and every ad you watch"]],
 ["0.5.1","2026-10-15",["Small UI refinements throughout"]],
