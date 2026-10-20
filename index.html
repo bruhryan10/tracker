@@ -1252,6 +1252,9 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-quest #qtCoinBox .gb.go{flex:1;min-width:0;border-color:#ca8a04;background:linear-gradient(135deg,#ca8a04,#eab308);box-shadow:0 3px 10px color-mix(in srgb,#eab308 32%,transparent)}
 #tab-quest #qtCoinBox .gb.sq{flex:none;width:40px;padding:0}
 #tab-quest #qtCoinBox .gb.sq svg{transform:none}
+#tab-quest #qtCoinBox .gb.go{white-space:normal;line-height:1.15;overflow:hidden}
+#tab-quest #qtCoinBox .gb.go span{min-width:0;overflow-wrap:anywhere}
+#tab-quest #qtCoinBox,#tab-quest #qtOddsBox,#tab-quest #qtAvgBox,#tab-quest #qtTop+*{min-width:0}
 #tab-quest #qtCoinNote{margin:8px 0 0;font-size:11.5px;line-height:1.35}
 
 #tab-quest tr.qtot td{background:color-mix(in srgb,#34d399 8%,transparent)}
@@ -1288,7 +1291,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-quest :is(#qtOddsBox,#qtAvgBox) .gtbl{flex:1;display:flex}
 #tab-quest :is(#qtDrop,#qtExp){flex:1;height:100%}
 }
-@media (max-width:820px){#tab-quest .qtwo{grid-template-columns:1fr;gap:0;margin-top:0}#tab-quest .qtwo .gsec{margin-top:14px}}
+@media (max-width:820px){#tab-quest .qtwo{grid-template-columns:minmax(0,1fr);gap:0;margin-top:0}#tab-quest .qtwo .gsec{margin-top:14px}}
 #tab-quest .qprog{display:flex;align-items:center;gap:16px;margin-top:4px}
 #tab-quest .qbar{flex:1;height:12px;border-radius:999px;background:color-mix(in srgb,#a78bfa 16%,var(--bd));overflow:hidden}
 #tab-quest .qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#a78bfa);transition:width .4s ease}
@@ -8196,7 +8199,12 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
-["0.6.3","2026-10-19",["Removed the recent log from various pages.","Added Lyrics collection to Epic Tracker.","Small UI refinements throughout. "]],
+["0.7.3","2026-10-19",["Epic Tracker: Copy from Numbered now also fixes epics that were already copied: a missing or different rarity and a missing image are updated to match Numbered. Holders are never changed."]],
+["0.7.2","2026-10-19",["Epic Tracker: lyrics now have rarities (picker, filter and colour edge), and Copy from Numbered to Lyrics keeps the rarity."]],
+["0.7.1","2026-10-19",["Epic Tracker: Manage now has on/off toggles for Numbered, Numberless and Lyrics plus an All button, and Copy from Numbered moved there with options to copy to Numberless or Lyrics. \"Claimed lines\" is now \"Lyric holders\"."]],
+["0.7.0","2026-10-19",["Epic Tracker: new Lyrics collection. Lyrics are tracked like numbered epics (holder names, up to 20 lines per song) but without numbers. Add a Lyrics toggle, a Lyrics-only mode in the set manager, and lyric-aware stats, holder view and backups."]],
+["0.6.4","2026-10-19",["Market: the category filter is now a dropdown like the Epic Tracker rarity filter, and always lists Shiny alongside Epic, Lyric, Moment and Other."]],
+["0.6.3","2026-10-19",["Removed the recent log from the Gempic, Quest, Pass and Event trackers. Saved history is unchanged."]],
 ["0.6.2","2026-10-19",["Epic Tracker: More UI enchancements."]],
 ["0.6.1","2026-10-19",["Epic Tracker Overhaul. Export discogs directly from Artist Overview. More to come."]],
 ["0.6","2026-10-17",["Introducing Daily Games: one place to log your daily routine and watch your totals grow, with running counts of every gem and coin you earn and every ad you watch"]],
