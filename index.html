@@ -157,6 +157,9 @@ input.agn{margin:0;flex:1;min-width:0;font-size:14px;padding:5px 8px}
 @media (max-width:640px){.agp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .agp{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:12px 10px}
 .agp.ok{border-color:var(--pos);background:color-mix(in srgb,var(--pos) 10%,var(--bg))}
+.agp.cl{border-color:#d4a017;background:color-mix(in srgb,#d4a017 12%,var(--bg))}
+.agp.cl .agpb button.on.ar{background:#d4a017;border-color:#d4a017;color:#fff}
+.agp.no{border-color:color-mix(in srgb,#000 30%,var(--bd));background:color-mix(in srgb,#000 38%,var(--bg))}
 .agph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .agph span{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
 .agph b{font-size:13px;text-align:right;overflow-wrap:anywhere}
@@ -1431,6 +1434,46 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-map .agpb{margin-top:4px}
 #tab-map #agAddG{margin-top:10px;min-height:42px}
 #tab-map #agMore[hidden]{display:none}
+
+/* artist guesser: add-hint button, add-guess search bar, dropdown, fixed-height matches box */
+#tab-map #agAddHint{width:100%;margin-top:10px;min-height:42px}
+#tab-map #agBest{display:grid;gap:8px}
+#agDD .agdi{display:flex;align-items:center;gap:10px}
+#agDD .agdt{flex:1;min-width:0}
+}
+#tab-map .agh button.agstar{flex:none;padding:0;font-size:18px;line-height:1;color:var(--mut)}
+#tab-map .agh button.agstar.on{color:#eab308;border-color:#eab308;background:color-mix(in srgb,#eab308 14%,var(--card))}
+@media (max-width:520px){
+#tab-map .agh{gap:4px}
+#tab-map .agh .ctl{gap:4px}
+#tab-map .agh .ctl button{min-width:30px;height:30px}
+#tab-map .agh .agclaim{padding:2px 7px;min-height:30px;gap:4px}
+#tab-map .agh{flex-wrap:wrap;row-gap:8px}
+#tab-map .agh .t{order:1;letter-spacing:0}
+#tab-map .agh .ctl{order:2;margin-left:auto}
+#tab-map .agh input.agn{order:3;flex:1 1 100%;font-size:15px}
+}
+#tab-map #agHints:empty+#agAddHint{margin-top:0}
+@media (max-width:520px){#tab-map #agHints .mkrow{flex-wrap:nowrap}#tab-map #agHints .mkrow input{flex:1 1 0;min-width:0}#tab-map #agHints .mkrow select{flex:1 1 0;min-width:0}#tab-map #agHints .mkrow button{flex:none}}
+@media (max-width:640px){
+#tab-map .agpb{flex-wrap:wrap;gap:6px}
+#tab-map .agpb button{flex:0 0 auto;width:36px;height:34px;font-size:15px;border-radius:8px}
+#tab-map .agpb .sp{flex:0 0 100%;width:100%;height:0;margin:-3px 0}
+}
+#tab-map #agAddW{position:relative;margin-top:10px}
+#tab-map #agAddW svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:18px;height:18px;stroke:var(--mut);fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none}
+#tab-map #agAddIn{width:100%;box-sizing:border-box;height:46px;margin:0;padding:0 14px 0 40px;font-size:16px;border-radius:12px}
+#agDD{position:fixed;z-index:9999;box-sizing:border-box;padding:4px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.35);overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+#agDD[hidden]{display:none}
+#agDD .agdi{padding:9px 12px;border-radius:8px;cursor:pointer}
+#agDD .agdi b{display:block;font-size:15px;font-weight:600}
+#agDD .agdi b i{font-style:normal;font-weight:400;color:var(--mut);font-size:12.5px}
+#agDD .agdi span{display:block;margin-top:1px;font-size:12px;color:var(--mut)}
+#agDD .agdi:hover,#agDD .agdi.on{background:color-mix(in srgb,var(--ac) 16%,var(--card))}
+#agDD .agdn{padding:12px;font-size:13.5px;color:var(--mut)}
+#agList{box-sizing:border-box;align-content:start;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:6px;border:1px solid var(--bd);border-radius:12px;height:calc(5*62px + 4*8px + 14px)}
+@media (max-width:640px){#agList{height:calc(10*62px + 9*8px + 14px)}}
+#agList:empty::before{content:"No matches";grid-column:1/-1;padding:14px;text-align:center;color:var(--mut);font-size:14px}
 #tab-map #agMsg:empty{display:none}
 #tab-map #agMsg{margin-top:10px}
 @media (max-width:700px){
@@ -2500,22 +2543,17 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 
 <div id="tab-map" hidden>
 <div style="text-align:right"><button type="button" class="gb sm" id="gsOpen" style="display:none;margin:0 0 10px">Sound Guesser &rarr;</button></div>
-<div id="agTop">
-<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div class="scl">Matches</div><div class="scv val" id="agV1">0</div><div class="scs">Artists still possible</div></div>
-<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M3 4h18l-7 8v6l-4 2v-8z"/></svg></span><div class="scl">Active filters</div><div class="scv val" id="agV2">0</div><div class="scs">Hints and feedback applied</div></div>
-<div class="gc" style="--c:#f59e0b"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/></svg></span><div class="scl">Best match</div><div class="scv val" id="agV3">—</div><div class="scs">Most useful next guess</div></div>
-</div>
-
 <section class="card gsec" id="agHintsSec">
-<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div><div class="gx"><button type="button" class="gb sm" id="agAddHint" aria-label="Add hint"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span class="gtxt">Add hint</span></button><button type="button" class="gb sm" id="agClear" aria-label="Clear all"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear all</span></button></div></div>
+<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div><div class="gx"><button type="button" class="gb sm" id="agClear" aria-label="Clear all"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear all</span></button></div></div>
 <div id="agHints"></div>
-<div class="note" id="agMsg"></div>
+<button type="button" class="gb go" id="agAddHint"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add hint</button>
 </section>
 
 <section class="card gsec" id="agGuessSec">
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><div class="gt"><b>Guesses</b></div></div>
 <div id="agGuesses"></div>
-<button type="button" class="gb go" id="agAddG"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add guess</button>
+<div id="agAddW"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="agAddIn" type="text" maxlength="300" placeholder="Add a guess: search for an artist..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="search" aria-label="Add a guess"></div>
+<div class="note" id="agMsg"></div>
 </section>
 
 <section class="card gsec">
@@ -2549,7 +2587,6 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 </section>
 <div class="note" id="agUpdated" style="text-align:center;margin:14px 0">Artist data last updated October 20, 2026</div>
-<datalist id="agDL"></datalist>
 </div>
 
 <div id="tab-reports" hidden>
@@ -2779,11 +2816,17 @@ const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorag
 /* ---------- save status ---------- */
 let inflight=0,hadErr=false;
 function setStatus(t,bad){const el=$("sync");el.textContent=t;el.className=(bad?"bad":"")+(t==="Saving..."||t==="Loading..."?" busy":"")}
+/* wRev counts every save; loaders compare it before/after their fetch so a slow refresh can never overwrite a change made while it was in flight.
+   wChain runs saves one at a time, in order, so two quick taps can't reach the database out of order (last write wins with stale data). */
+let wRev=0,wChain=Promise.resolve();const wLoaded=new Set();
+function wStale(id,g0){const had=wLoaded.has(id);wLoaded.add(id);if(had&&wRev!==g0){scheduleRefresh(800);return true}return false}
 async function track(p){
+  wRev++;
   if(!inflight)hadErr=false;
   inflight++;setStatus("Saving...");
+  const run=wChain.then(()=>p,()=>p);wChain=run.then(()=>{},()=>{});
   try{
-    const r=await p;
+    const r=await run;
     if(r&&r.error)throw r.error;
     return r||{};
   }catch(e){hadErr=true;setStatus("Save failed: "+(e.message||e),true);return null}
@@ -2794,7 +2837,7 @@ async function track(p){
 const fields=[
 ["bought","Shinies Bought","bought"],["costEach","Cost per shiny bought ($)","cost_each"],["twoToOne","2:1 Shinies","two_to_one"],["oneOne","1:1 Shinies","one_one"],
 ["commons","Commons Sold","commons"],["uncommons","Uncommons Sold","uncommons"],["rares","Rares Sold","rares"],
-["misc","Misc. Sold (List Price, $)","misc"],["start","Start date","start_date"],
+["misc","Misc","misc"],["start","Start date","start_date"],
 ["oneOnePrice","1:1 + amount ($ each)","one_one_price"],["commonPrice","Common price ($)","common_price"],
 ["uncommonPrice","Uncommon price ($)","uncommon_price"],["rarePrice","Rare price ($)","rare_price"]
 ];
@@ -3735,12 +3778,43 @@ function agNear(){
 }
 const agNearNote=(a,r)=>{const d=a.popularity-r,n=Math.abs(d);return n+(n===1?" spot ":" spots ")+(d>0?"lower":"higher")+" than #"+r};
 const agRow=(a,hi,note)=>`<div class="agm${hi?" hi":""}" data-n="${esc(a.name)}" role="button" tabindex="0" title="Add as a guess"><div class="agmt"><b>${esc(a.name)} <span class="agy">(${a.debut})</span></b><span>${[a.genre,a.members,a.country,a.gender,"Popularity "+a.popularity].concat(note?[note]:[]).map(esc).join(" \u2022 ")}</span></div><span class="agplus" aria-hidden="true">+</span></div>`;
+/* a trait already confirmed correct on another guess (same value) is pre-marked correct on a new guess */
+function agAutoOk(g){
+  const a=AGD.find(x=>x.name===g.n);if(!a)return;
+  g.s=g.s||{};
+  AF.forEach(f=>{const k=f[0];
+    if(AG.guesses.some(o=>{if(o===g||!o.s||!o.s[k]||o.s[k].r!=="ok")return false;const oa=AGD.find(x=>x.name===o.n);return oa&&oa[k]===a[k]}))g.s[k]={r:"ok",d:0};
+  });
+}
+/* preferred first guess (signed-in only): saved with the account in pass_state id 12 (and on this device as a fallback) */
+let agPref=LS("tracker.agPref")||"",agPrefDB=true;
+const agPrefOk=n=>typeof n==="string"&&AGD.some(a=>a.name===n)?n:"";
+agPref=agPrefOk(agPref);
+function agSetPref(n){
+  agPref=agPrefOk(n);LS("tracker.agPref",agPref);
+  if(agPrefDB)track(sb.from("pass_state").upsert({id:12,data:{name:agPref}},{onConflict:"user_id,id"}));
+}
+async function loadAgPref(){
+  let d=null;const g0=wRev;
+  try{
+    const r=await sb.from("pass_state").select("data").eq("id",12).maybeSingle();
+    if(r.error)agPrefDB=false;else{agPrefDB=true;d=r.data&&r.data.data}
+  }catch(e){agPrefDB=false}
+  if(wStale(12,g0))return;
+  const local=agPrefOk(LS("tracker.agPref")||""),before=agPref;
+  if(!agPrefDB)agPref=local;
+  else if(d&&typeof d.name==="string")agPref=agPrefOk(d.name);
+  else if(local){agPref=local;track(sb.from("pass_state").upsert({id:12,data:{name:local}},{onConflict:"user_id,id"}))}
+  else agPref="";
+  LS("tracker.agPref",agPref);
+  if(agPref!==before){agGuessHtml();agResults(true)}
+}
 const agFree=()=>AF.map(f=>f[0]).filter(k=>!AG.hints.some(h=>h.f===k));
 function agHintsHtml(){
   $("agHints").innerHTML=AG.hints.map((h,i)=>{
     const t=AF.find(x=>x[0]===h.f)[2];
     const fields=AF.filter(x=>x[0]===h.f||agFree().includes(x[0]));
-    return `<div class="mkrow" data-i="${i}"><select data-k="f">${fields.map(x=>`<option value="${x[0]}"${x[0]===h.f?" selected":""}>${x[1]}</option>`).join("")}</select>${t==="n"?`<input data-k="v" type="number" inputmode="numeric" placeholder="${h.f==="debut"?"e.g. 2016":"e.g. 99"}" value="${h.v==null?"":h.v}">`:`<select data-k="v">${AVALS[h.f].map(v=>`<option${v===h.v?" selected":""}>${esc(v)}</option>`).join("")}</select>`}<button type="button" class="x" data-act="del" aria-label="Remove hint">\u2715</button></div>`}).join("")||'<div class="empty">No hints yet.</div>';
+    return `<div class="mkrow" data-i="${i}"><select data-k="f">${fields.map(x=>`<option value="${x[0]}"${x[0]===h.f?" selected":""}>${x[1]}</option>`).join("")}</select>${t==="n"?`<input data-k="v" type="number" inputmode="numeric" placeholder="${h.f==="debut"?"e.g. 2016":"e.g. 99"}" value="${h.v==null?"":h.v}">`:`<select data-k="v">${AVALS[h.f].map(v=>`<option${v===h.v?" selected":""}>${esc(v)}</option>`).join("")}</select>`}<button type="button" class="x" data-act="del" aria-label="Remove hint">\u2715</button></div>`}).join("")||'';
   $("agAddHint").disabled=!agFree().length;
 }
 /* "This was my artist": signed-in players log which attempt was right and get gems (1st try 4, 2nd 3, 3rd 2, 4th and later 1).
@@ -3815,14 +3889,14 @@ $("sdOut").addEventListener("click",e=>{const b=e.target.closest(".sdclaim");if(
 function agGuessHtml(){
   $("agGuesses").innerHTML=AG.guesses.map((g,i)=>{
     const a=AGD.find(x=>x.name===g.n);
-    const head=`<div class="agh"><span class="t">#${i+1}</span><input maxlength="300" class="agn" list="agDL" data-act="name" placeholder="Search for an artist..." value="${esc(g.n)}" autocomplete="off"><span class="ctl">${agClaimHtml(i,g)}${a?`<button type="button" data-act="col" aria-label="${g.c?"Expand":"Collapse"}" style="${g.c?"":"transform:rotate(180deg)"}">\u02C5</button>`:""}<button type="button" data-act="del" aria-label="Remove guess">\u2715</button></span></div>`;
+    const head=`<div class="agh"><span class="t">#${i+1}</span><input maxlength="300" class="agn" data-act="name" placeholder="Search for an artist..." value="${esc(g.n)}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"><span class="ctl">${a&&!agGuest()?`<button type="button" class="agstar${g.n===agPref?" on":""}" data-act="pref" aria-pressed="${g.n===agPref}" aria-label="Preferred first guess" title="${g.n===agPref?"Preferred first guess (tap to remove)":"Make this my preferred first guess"}">${g.n===agPref?"\u2605":"\u2606"}</button>`:""}${agClaimHtml(i,g)}${a?`<button type="button" data-act="col" aria-label="${g.c?"Expand":"Collapse"}" style="${g.c?"":"transform:rotate(180deg)"}">\u02C5</button>`:""}<button type="button" data-act="del" aria-label="Remove guess">\u2715</button></span></div>`;
     if(!a||g.c)return `<div class="card agg" data-i="${i}">${head}</div>`;
     const panels=AF.map(f=>{
       const k=f[0],st=g.s[k]||{r:"",d:0};
       const btn=(b,on,cls)=>`<button type="button" data-f="${k}" data-b="${b}" class="${on?"on "+cls:""}" title="${esc(agTitle(k,b))}" aria-pressed="${!!on}">${ASYM[b]}</button>`;
       const res=AFB[k].map(b=>btn(b,st.r===b,b==="ok"?"ok":b==="close"?"cl":"")).join("");
       const arr=ANUM[k]?`<span class="sp"></span>${btn("up",st.d===1,"ar")}${btn("down",st.d===-1,"ar")}`:"";
-      return `<div class="agp${st.r==="ok"?" ok":""}"><div class="agph"><span>${f[1].replace(" year","").replace(" rank","")}</span><b>${esc(String(a[k]))}</b></div><div class="agpb">${res}${arr}</div></div>`;
+      return `<div class="agp${st.r==="ok"?" ok":st.r==="close"?" cl":st.r==="no"?" no":""}"><div class="agph"><span>${f[1].replace(" year","").replace(" rank","")}</span><b>${esc(String(a[k]))}</b></div><div class="agpb">${res}${arr}</div></div>`;
     }).join("");
     return `<div class="card agg" data-i="${i}">${head}<div class="agp-grid">${panels}</div></div>`;
   }).join("");
@@ -3843,36 +3917,82 @@ function agPickBest(list){
   let best=list[0];list.forEach(a=>{if(sc(a)<sc(best))best=a});
   return [best].concat(list.filter(a=>a!==best));
 }
-function agResults(){
+/* the preferred first guess is offered above the best match until a first guess has been made */
+function agPrefRow(){
+  if(agGuest()||!agPref||AG.guesses.some(g=>g.n))return "";
+  const a=AGD.find(x=>x.name===agPref);
+  return a?agRow(a,false,"\u2605 Preferred first guess"):"";
+}
+function agResults(keep){
   let {cs,list}=agMatches();list=agPickBest(list);
   let near=null;if(!list.length){const n=agNear();if(n&&n.list.length)near=n}
   const shown=near?near.list:list;
-  $("agV1").textContent=list.length;$("agV2").textContent=cs.length;
-  $("agV3").textContent=list.length?list[0].name:"\u2014";
-  $("agBest").innerHTML=list.length?agRow(list[0],true):near?'<div class="empty">'+(near.rank!=null?'No artist fits your clues at exactly #'+near.rank+'. Rankings change often, so these are the closest artists within '+AG_NEAR+' spots of #'+near.rank+' that fit everything else.':'No artist fits your clues exactly. Rankings change often, so these are the closest artists when your popularity clues are loosened by '+AG_NEAR+' spots.')+'</div>':'<div class="empty">No matching artists. Check your hints and feedback for a mistake.</div>';
+  $("agBest").innerHTML=agPrefRow()+(list.length?agRow(list[0],true):near?'<div class="empty">'+(near.rank!=null?'No artist fits your clues at exactly #'+near.rank+'. Rankings change often, so these are the closest artists within '+AG_NEAR+' spots of #'+near.rank+' that fit everything else.':'No artist fits your clues exactly. Rankings change often, so these are the closest artists when your popularity clues are loosened by '+AG_NEAR+' spots.')+'</div>':'<div class="empty">No matching artists. Check your hints and feedback for a mistake.</div>');
   $("agMH").textContent=(near?"Closest by rank (":"Matches (")+shown.length+")";
   $("agList").innerHTML=shown.slice(0,agShow).map(a=>agRow(a,false,near&&(near.rank!=null?agNearNote(a,near.rank):"Popularity loosened by "+AG_NEAR))).join("");
   $("agMore").hidden=shown.length<=agShow;$("agMore").textContent="Show more ("+(shown.length-agShow)+" left)";
+  if(!keep)$("agList").scrollTop=0;
 }
 function agRender(){agHintsHtml();agGuessHtml();agResults()}
-$("agDL").innerHTML=AGD.map(a=>`<option value="${esc(a.name)}">`).join("");
 $("agAddHint").onclick=()=>{const f=agFree()[0];if(!f)return;AG.hints.push({f:f,v:AF.find(x=>x[0]===f)[2]==="n"?"":AVALS[f][0]});agSave();agHintsHtml();agResults();const r=$("agHints").lastElementChild,i=r&&r.querySelector("input,select[data-k=v]");if(i)i.focus()};
 $("agClear").onclick=()=>{if(!AG.hints.length&&!AG.guesses.length)return;ask("Clear all hints and guesses?",()=>{AG.hints=[];AG.guesses=[];agShow=60;agSave();agRender()})};
 function agPick(name){
   if(!AG.guesses.some(g=>g.n===name)){
     const blank=AG.guesses.find(g=>!g.n);
-    if(blank){blank.n=name;blank.s={}}else AG.guesses.push({n:name,s:{},c:false});
+    if(blank){blank.n=name;blank.s={};agAutoOk(blank)}else{const ng={n:name,s:{},c:false};AG.guesses.push(ng);agAutoOk(ng)}
     agSave();agShow=60;agGuessHtml();agResults();
   }
   const i=AG.guesses.findIndex(g=>g.n===name),el=$("agGuesses").children[i];
   if(el)el.scrollIntoView({behavior:"smooth",block:"center"});
 }
-$("agAddG").onclick=()=>{
-  const blank=AG.guesses.findIndex(g=>!g.n);
-  if(blank<0){AG.guesses.push({n:"",s:{},c:false});agSave();agGuessHtml()}
-  const i=blank<0?AG.guesses.length-1:blank,inp=$("agGuesses").children[i].querySelector("input.agn");
-  inp.focus();inp.scrollIntoView({behavior:"smooth",block:"center"});
-};
+/* ---- artist search dropdown (replaces the browser's own suggestion strip above the keyboard) ---- */
+const agNorm=x=>String(x==null?"":x).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().trim();
+const agDD=document.createElement("div");agDD.id="agDD";agDD.hidden=true;agDD.setAttribute("role","listbox");document.body.appendChild(agDD);
+let agDDin=null,agDDi=-1;
+function agDDhide(){agDD.hidden=true;agDDin=null;agDDi=-1}
+function agDDpos(){
+  const inp=agDDin;if(!inp||agDD.hidden)return;
+  if(!inp.isConnected){agDDhide();return}
+  const box=inp.closest(".agg,#agAddW")||inp,r=inp.getBoundingClientRect(),b=box.getBoundingClientRect(),vv=window.visualViewport;
+  const top0=vv?vv.offsetTop:0,bot0=top0+(vv?vv.height:innerHeight);
+  const below=bot0-r.bottom-10,above=r.top-top0-10,up=below<200&&above>below;
+  agDD.style.maxHeight=Math.max(120,Math.min(320,up?above:below))+"px";
+  agDD.style.left=b.left+"px";agDD.style.width=b.width+"px";
+  agDD.style.top=(up?Math.max(top0+4,r.top-4-agDD.offsetHeight):r.bottom+4)+"px";
+}
+function agDDshow(inp){
+  const q=agNorm(inp.value),card=inp.closest(".agg"),own=card?AG.guesses[+card.dataset.i]:null;
+  if(!q||(own&&agNorm(own.n)===q)){agDDhide();return}
+  const taken=new Set(AG.guesses.filter(g=>g!==own).map(g=>g.n)),hits=[];
+  AGD.forEach(a=>{if(taken.has(a.name))return;const n=agNorm(a.name),p=n.indexOf(q);if(p<0)return;hits.push({a:a,s:p===0?0:n.charAt(p-1)===" "?1:2})});
+  hits.sort((x,y)=>x.s-y.s||x.a.popularity-y.a.popularity);
+  agDD.innerHTML=hits.length?hits.slice(0,40).map(h=>`<div class="agdi" role="option" data-n="${esc(h.a.name)}"><div class="agdt"><b>${esc(h.a.name)} <i>(${h.a.debut})</i></b><span>${[h.a.genre,h.a.members,h.a.country,"Popularity "+h.a.popularity].map(esc).join(" \u2022 ")}</span></div></div>`).join(""):'<div class="agdn">No artist found</div>';
+  agDDin=inp;agDDi=-1;agDD.hidden=false;agDD.scrollTop=0;agDDpos();
+}
+function agDDpick(name){
+  const inp=agDDin;if(!inp)return;
+  agDDhide();
+  if(inp.id==="agAddIn"){inp.value="";inp.blur();agPick(name)}
+  else{inp.value=name;inp.dispatchEvent(new Event("change",{bubbles:true}))}
+}
+const agIsIn=el=>!!(el&&el.matches&&el.matches("#agGuesses input.agn,#agAddIn"));
+agDD.addEventListener("mousedown",e=>e.preventDefault());
+agDD.addEventListener("click",e=>{const it=e.target.closest(".agdi");if(it)agDDpick(it.dataset.n)});
+document.addEventListener("input",e=>{if(agIsIn(e.target))agDDshow(e.target)});
+document.addEventListener("focusin",e=>{if(agIsIn(e.target))agDDshow(e.target)});
+document.addEventListener("focusout",e=>{if(agIsIn(e.target)){const t=e.target;setTimeout(()=>{if(agDDin===t)agDDhide()},150)}});
+document.addEventListener("keydown",e=>{
+  if(!agIsIn(e.target)||agDD.hidden||agDDin!==e.target)return;
+  const its=[...agDD.querySelectorAll(".agdi")];
+  if(e.key==="ArrowDown"||e.key==="ArrowUp"){
+    e.preventDefault();if(!its.length)return;
+    agDDi=e.key==="ArrowDown"?(agDDi+1)%its.length:(agDDi<=0?its.length-1:agDDi-1);
+    its.forEach((x,k)=>x.classList.toggle("on",k===agDDi));its[agDDi].scrollIntoView({block:"nearest"});
+  }else if(e.key==="Enter"){const it=its[agDDi>=0?agDDi:0];if(it){e.preventDefault();agDDpick(it.dataset.n)}}
+  else if(e.key==="Escape"){agDDhide()}
+});
+["scroll","resize"].forEach(ev=>window.addEventListener(ev,agDDpos,true));
+if(window.visualViewport){visualViewport.addEventListener("resize",agDDpos);visualViewport.addEventListener("scroll",agDDpos)}
 ["agBest","agList"].forEach(id=>{
   $(id).addEventListener("click",e=>{const c=e.target.closest(".agm");if(c)agPick(c.dataset.n)});
   $(id).addEventListener("keydown",e=>{const c=e.target.closest(".agm");if(c&&(e.key==="Enter"||e.key===" ")){e.preventDefault();agPick(c.dataset.n)}});
@@ -3894,7 +4014,7 @@ $("agGuesses").addEventListener("change",e=>{
     const a=AGD.find(x=>x.name.toLowerCase()===v);
     if(!a){$("agMsg").textContent="No artist named \u201c"+inp.value.trim()+"\u201d in the data. Pick one from the suggestions.";inp.value=g.n;return}
     if(AG.guesses.some((x,j)=>j!==i&&x.n===a.name)){$("agMsg").textContent=a.name+" is already one of your guesses.";inp.value=g.n;return}
-    if(g.n!==a.name){g.n=a.name;g.s={}}
+    if(g.n!==a.name){g.n=a.name;g.s={};agAutoOk(g)}
   }
   agSave();agShow=60;agGuessHtml();agResults();
 });
@@ -3902,6 +4022,7 @@ $("agGuesses").addEventListener("click",e=>{
   const card=e.target.closest(".agg"),b=e.target.closest("button");if(!card||!b)return;
   const i=+card.dataset.i,g=AG.guesses[i];
   if(b.dataset.act==="claim"){dgAgClaim(i);return}
+  if(b.dataset.act==="pref"){if(!g||!g.n||agGuest())return;agSetPref(g.n===agPref?"":g.n);agGuessHtml();agResults(true);return}
   if(b.dataset.act==="del")AG.guesses.splice(i,1);
   else if(b.dataset.act==="col")g.c=!g.c;
   else if(b.dataset.f){
@@ -3963,7 +4084,8 @@ $("rpSend").onclick=async()=>{
   const n=document.querySelector("#rpSec .note");n.textContent="Thanks! Your report was sent.";n.style.color="var(--pos)";
   setTimeout(()=>{n.textContent="If the answer isn't in the data, tell us who it was and we'll add them.";n.style.color=""},5000);
 };
-$("agMore").onclick=()=>{agShow+=60;agResults()};
+$("agMore").onclick=()=>{agShow+=60;agResults(true)};
+$("agList").addEventListener("scroll",()=>{const l=$("agList");if(!$("agMore").hidden&&l.scrollTop+l.clientHeight>=l.scrollHeight-160){agShow+=60;agResults(true)}},{passive:true});
 agRender();
 
 /* ---------- Sound Guesser (owner only) ----------
@@ -5388,11 +5510,12 @@ function saveDailyGems(){
   if(dgDB)track(sb.from("pass_state").upsert({id:9,data:dg},{onConflict:"user_id,id"}));
 }
 async function loadDailyGems(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",9).maybeSingle();
     if(r.error)dgDB=false;else{dgDB=true;d=r.data&&r.data.data}
   }catch(e){dgDB=false}
+  if(wStale(9,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.dailyGems")||"null")}catch(e){}
   if(!dgDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:9,data:dgNorm(local)},{onConflict:"user_id,id"}))}
@@ -5554,11 +5677,12 @@ function saveStreak(){
   if(dsDB)track(sb.from("pass_state").upsert({id:10,data:ds},{onConflict:"user_id,id"}));
 }
 async function loadStreak(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",10).maybeSingle();
     if(r.error)dsDB=false;else{dsDB=true;d=r.data&&r.data.data}
   }catch(e){dsDB=false}
+  if(wStale(10,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.dailyStreak")||"null")}catch(e){}
   if(!dsDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:10,data:dsNorm(local)},{onConflict:"user_id,id"}))}
@@ -5722,11 +5846,12 @@ function saveNav(){
   if(navDB)track(sb.from("pass_state").upsert({id:7,data:nav},{onConflict:"user_id,id"}));
 }
 async function loadNav(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",7).maybeSingle();
     if(r.error)navDB=false;else{navDB=true;d=r.data&&r.data.data}
   }catch(e){navDB=false}
+  if(wStale(7,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.nav")||"null")}catch(e){}
   if(!navDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:7,data:navNorm(local)},{onConflict:"user_id,id"}))}
@@ -5855,7 +5980,8 @@ async function loadAll(quiet){
   await loadDailyGems();
   await loadStreak();
   await loadMisc();
-  renderOverview();
+  await loadAgPref();
+    renderOverview();
   if(!quiet)setStatus("Saved");
   return true;
 }
@@ -5942,11 +6068,12 @@ function savePass(){
   if(passDB)track(sb.from("pass_state").upsert({id:1,data:pass},{onConflict:"user_id,id"}));
 }
 async function loadPass(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",1).maybeSingle();
     if(r.error)passDB=false;else{passDB=true;d=r.data&&r.data.data}
   }catch(e){passDB=false}
+  if(wStale(1,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.pass")||"null")}catch(e){}
   if(!passDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:1,data:passNorm(local)},{onConflict:"user_id,id"}))}
@@ -6174,11 +6301,12 @@ function saveEvent(){
   if(evDB)track(sb.from("pass_state").upsert({id:2,data:ev},{onConflict:"user_id,id"}));
 }
 async function loadEvent(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",2).maybeSingle();
     if(r.error)evDB=false;else{evDB=true;d=r.data&&r.data.data}
   }catch(e){evDB=false}
+  if(wStale(2,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.event")||"null")}catch(e){}
   if(!evDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:2,data:evNorm(local)},{onConflict:"user_id,id"}))}
@@ -6475,11 +6603,12 @@ function saveGempic(){
 }
 function schedGempic(){dirty.add("gp");clearTimeout(gpT);gpT=setTimeout(saveGempic,500)}
 async function loadGempic(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",5).maybeSingle();
     if(r.error)gpDB=false;else{gpDB=true;d=r.data&&r.data.data}
   }catch(e){gpDB=false}
+  if(wStale(5,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.gempic")||"null")}catch(e){}
   if(!gpDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:5,data:gpNorm(local)},{onConflict:"user_id,id"}))}
@@ -7330,11 +7459,12 @@ function arPreSave(){
   if(arPreDB)track(sb.from("pass_state").upsert({id:8,data:{list:arPL}},{onConflict:"user_id,id"}));
 }
 async function loadArPresets(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",8).maybeSingle();
     if(r.error)arPreDB=false;else{arPreDB=true;d=r.data&&r.data.data}
   }catch(e){arPreDB=false}
+  if(wStale(8,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.arPresets")||"null")}catch(e){}
   if(!arPreDB)d=local;
   else if(!d&&local&&arPreNorm(local).length){d=local;track(sb.from("pass_state").upsert({id:8,data:{list:arPreNorm(local)}},{onConflict:"user_id,id"}))}
@@ -7451,11 +7581,12 @@ function saveQuest(){
   if(qtDB)track(sb.from("pass_state").upsert({id:6,data:qt},{onConflict:"user_id,id"}));
 }
 async function loadQuest(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",6).maybeSingle();
     if(r.error)qtDB=false;else{qtDB=true;d=r.data&&r.data.data}
   }catch(e){qtDB=false}
+  if(wStale(6,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.quest")||"null")}catch(e){}
   if(!qtDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:6,data:qtNorm(local)},{onConflict:"user_id,id"}))}
@@ -7555,11 +7686,12 @@ function saveMisc(){
   if(msDB)track(sb.from("pass_state").upsert({id:11,data:ms},{onConflict:"user_id,id"}));
 }
 async function loadMisc(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",11).maybeSingle();
     if(r.error)msDB=false;else{msDB=true;d=r.data&&r.data.data}
   }catch(e){msDB=false}
+  if(wStale(11,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.misc")||"null")}catch(e){}
   if(!msDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:11,data:msNorm(local)},{onConflict:"user_id,id"}))}
@@ -7883,11 +8015,12 @@ function saveBuys(){
 }
 function schedBuy(){dirty.add("buy");clearTimeout(buyT);buyT=setTimeout(()=>{dirty.delete("buy");saveBuys()},600)}
 async function loadBuys(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",3).maybeSingle();
     if(r.error)buyDB=false;else{buyDB=true;d=r.data&&r.data.data}
   }catch(e){buyDB=false}
+  if(wStale(3,g0))return;
   let local=null;try{local=JSON.parse(LS("tracker.buys")||"null")}catch(e){}
   if(!buyDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:3,data:bnorm(local)},{onConflict:"user_id,id"}))}
@@ -7995,11 +8128,12 @@ function saveNotes(){
 }
 function schedNotes(){dirty.add("notes");clearTimeout(notesT);notesT=setTimeout(()=>{dirty.delete("notes");saveNotes()},600)}
 async function loadNotes(){
-  let d=null;
+  let d=null; const g0=wRev;
   try{
     const r=await sb.from("pass_state").select("data").eq("id",4).maybeSingle();
     if(r.error)notesDB=false;else{notesDB=true;d=r.data&&r.data.data}
   }catch(e){notesDB=false}
+  if(wStale(4,g0))return;
   const local=LS("tracker.notes"),localHtml=LS("tracker.notesHtml");
   let t=d&&typeof d.text==="string"?d.text:null,h=d&&typeof d.html==="string"?d.html:null;
   if(!notesDB){t=local||"";h=localHtml}
@@ -8199,6 +8333,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.6.4","2026-10-20",["Updated Artist Guesser UI.","Various bugs fixed."]],
 ["0.6.3","2026-10-19",["Removed the recent log from various pages.","Added Lyrics collection to Epic Tracker.","Small UI refinements throughout."]],
 ["0.6.2","2026-10-19",["Epic Tracker: More UI enchancements."]],
 ["0.6.1","2026-10-19",["Epic Tracker Overhaul. Export discogs directly from Artist Overview. More to come."]],
