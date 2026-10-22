@@ -2211,6 +2211,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="gtbl"><table id="gpExp"></table></div>
 </section>
 
+<section class="card gsec" id="gpDayBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="gpDaySub"></span></div></div>
+<div id="gpDay"></div>
+</section>
+
 
 <section class="card gsec" id="gpHistBox">
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="gt"><b id="gpHistSum">Gempic History</b><span id="gpAvg"></span></div></div>
@@ -6560,18 +6565,29 @@ $("evHist").addEventListener("click",ev2=>{
 });
 
 /* ---------- gempic tracker ---------- */
-const GP=0.004,GP_LOG_MAX=200,GP_QUICK=[1,5,10,50,100],GP_COSTSTEP=5;
+const GP=0.004,GP_LOG_MAX=3000,GP_DAY=864e5,GP_QUICK=[1,5,10,50,100],GP_COSTSTEP=5;
 const gpNum=v=>Math.max(0,Math.floor(Number(v))||0);
 const gpP=x=>x?1-(1-GP)*(1-GP):GP;
 const gpPct=(p,d)=>Number((p*100).toFixed(d))+"%";
 const gpWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
 function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,start:+d.start||0,seq:gpNum(d.seq),
   r:Array.isArray(d.r)?d.r.map(e=>({c:gpNum(e&&e.c),x:e&&e.x?1:0})):[],
-  log:Array.isArray(d.log)?d.log.slice(0,GP_LOG_MAX).map(e=>({i:gpNum(e&&e.i),t:+(e&&e.t)||0,c:gpNum(e&&e.c),x:e&&e.x?1:0,h:e&&e.h?1:0})):[],
+  log:Array.isArray(d.log)?d.log.map(e=>({i:gpNum(e&&e.i),t:+(e&&e.t)||0,c:gpNum(e&&e.c),x:e&&e.x?1:0,h:e&&e.h?1:0})).filter(e=>e.t>=Date.now()-GP_DAY).slice(0,GP_LOG_MAX):[],
   history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr)})):[]}}
 let gp=gpNorm(),gpDB=true,gpT=null;
 const gpSum=()=>({n:gp.r.length,gems:gp.r.reduce((a,e)=>a+e.c,0),rr:gp.r.filter(e=>e.x).length});
 let gpStep=(()=>{const v=gpNum(LS("tracker.step.gempic"));return GP_QUICK.includes(v)?v:1})();
+function gpDayWhen(t){
+  const d=new Date(t),n=new Date(),tm=d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
+  return d.toDateString()===n.toDateString()?"Today, "+tm:"Yesterday, "+tm;
+}
+function gpRenderDay(){
+  const cut=Date.now()-GP_DAY,L=gp.log.filter(e=>e.t>=cut);
+  const rolls=L.length,gems=L.reduce((a,e)=>a+e.c,0);
+  $("gpDaySub").textContent="";
+  $("gpDay").innerHTML=`<div class="gpan" style="grid-template-columns:1fr 1fr"><div class="gp1"><div class="gl">Rolls</div><div style="font-size:26px;font-weight:700">${nfmt(rolls)}</div></div><div class="gp1"><div class="gl">Gems spent</div><div style="font-size:26px;font-weight:700">${nfmt(gems)}</div></div></div>`;
+}
+setInterval(()=>{const t=$("tab-gempic");if(t&&!t.hidden)renderGempic()},60000);
 function renderGempic(){
   if(window.gpLiveDraw)gpLiveDraw();
   const q=gpSum(),next=gpP(gp.reroll),ex=1/next;
@@ -6591,6 +6607,7 @@ function renderGempic(){
   $("gpQuick").querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.q===gpStep));
   $("gpRollT").textContent=gpStep>1?"Roll \u00d7"+gpStep:"Roll";
   $("gpUndo").disabled=!q.n;$("gpHit").disabled=!q.n;$("gpReset").disabled=!q.n;
+  gpRenderDay();
   const H=gp.history;
   $("gpHistSum").textContent="Gempic History"+(H.length?" ("+H.length+")":"");
   $("gpAvg").textContent=H.length?"Average per gempic: "+nfmt(Math.round(H.reduce((a,h)=>a+h.rolls,0)/H.length))+" rolls, "+nfmt(Math.round(H.reduce((a,h)=>a+h.gems,0)/H.length))+" gems":"No gempics saved yet.";
@@ -6628,6 +6645,7 @@ function gpDoRoll(n){
     gp.r.push({c:gp.cost,x:gp.reroll?1:0});
     gp.log.unshift({i:++gp.seq,t:now,c:gp.cost,x:gp.reroll?1:0,h:0});
   }
+  const cut=now-GP_DAY;while(gp.log.length&&gp.log[gp.log.length-1].t<cut)gp.log.pop();
   if(gp.log.length>GP_LOG_MAX)gp.log.length=GP_LOG_MAX;
   saveGempic();renderGempic();
 }
@@ -8333,6 +8351,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.6.5","2026-10-21",["Gempic Tracker: added a Last 24 Hours summary of rolls and gems spent."]],
 ["0.6.4","2026-10-20",["Updated Artist Guesser UI.","Various bugs fixed."]],
 ["0.6.3","2026-10-19",["Removed the recent log from various pages.","Added Lyrics collection to Epic Tracker.","Small UI refinements throughout."]],
 ["0.6.2","2026-10-19",["Epic Tracker: More UI enchancements."]],
