@@ -311,12 +311,11 @@ body.guest .brand{pointer-events:none}
 #tab-profile #verLatest .ver:first-child{border-top:0;padding-top:4px}
 #tab-profile #verLatest .ver:first-child .vh b::after{content:"Latest";margin-left:8px;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:700;color:var(--bg);background:var(--pos)}
 #tab-profile .verTop{display:none}
-#homeNew{display:flex;align-items:center;gap:12px;width:100%;margin:4px 0 6px;padding:10px 12px;text-align:left;border-radius:12px;border:1px solid color-mix(in srgb,var(--ac) 45%,var(--bd));background:linear-gradient(135deg,color-mix(in srgb,var(--ac) 14%,var(--card)),var(--card));color:var(--tx);cursor:pointer}
-#homeNew .nb{flex:none;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;color:var(--bg);background:var(--ac)}
-#homeNew .nt{flex:1;min-width:0;font-size:13px;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
-#homeNew .nt b{display:block;font-size:14px}
-#homeNew .nc{flex:none;color:var(--mut);font-size:18px}
-#homeNew:hover{border-color:var(--ac)}
+#homeNew{display:inline-flex;align-items:center;gap:6px;height:34px;margin:0;padding:0 12px;font-size:12.5px;font-weight:600;border-radius:999px;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
+#homeNew #homeNewV{color:var(--ac)}
+#homeNew .nw::before{content:"";display:inline-block;width:6px;height:6px;margin-right:6px;border-radius:50%;background:var(--ac);vertical-align:middle}
+#homeNew:hover{border-color:var(--ac);color:var(--tx)}
+@media (max-width:420px){#homeNew .nw{display:none}}
 #tab-profile .pfh{display:flex;align-items:center;gap:12px;margin-bottom:10px}
 #tab-profile .pfi{--c:var(--ac);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 18%,transparent)}
 #tab-profile .pfi svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -2363,9 +2362,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div id="tab-home" hidden>
 <div id="ovHello">Welcome</div>
 <div class="note" style="margin:0 0 6px">Your hub for tracking pulls, sales, passes and events. Pick a tool below, or use the tabs at the top any time.</div>
-<button type="button" id="homeNew" aria-label="See what's new"><span class="nb" id="homeNewV"></span><span class="nt"><b>What's new</b><span id="homeNewT"></span></span><span class="nc">&rsaquo;</span></button>
 <div id="homeHead"><h2>Tools</h2>
-<div id="homeBar"><button type="button" id="homeGear" title="Edit home layout" aria-label="Edit home layout" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div></div>
+<div id="homeBar"><button type="button" id="homeNew" title="See what's new" aria-label="See what's new"><span id="homeNewV"></span><span class="nw">What's new</span></button><button type="button" id="homeGear" title="Edit home layout" aria-label="Edit home layout" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button></div></div>
 <div id="homeTools" hidden><span id="homeSelName">Tap a box to edit it</span><span class="hts"><button type="button" data-a="l" title="Move earlier">&#9664;</button><button type="button" data-a="r" title="Move later">&#9654;</button><button type="button" data-a="s-" title="Smaller">&minus;</button><button type="button" data-a="s+" title="Larger">+</button><button type="button" data-a="c" title="Ultra condensed">&#8597;</button><button type="button" data-a="n" title="Icon and name only (big)">&#9635;</button><button type="button" data-a="x" title="Hide this box">&#10005;</button></span><button type="button" id="homeReset">Reset to default</button></div>
 <div class="grid" id="ovGrid"></div>
 <div class="note" style="margin-top:14px">Odds and averages shown in the trackers are my best understanding of how the game works and may not be exact.</div>
@@ -8858,7 +8856,7 @@ const VERSIONS=[
   const vr=([v,d,c])=>`<div class="ver"><div class="vh"><b>v${esc(v)}</b><span>${esc(d)}</span></div><ul>${c.map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>`;
   $("verLatest").innerHTML=VERSIONS.slice(0,2).map(vr).join("");
   $("verList").innerHTML=VERSIONS.slice(2).map(vr).join("");
-  $("homeNewV").textContent="v"+cur[0];$("homeNewT").textContent=cur[2][0]||"";
+  $("homeNewV").textContent="v"+cur[0];
 })();
 
 
