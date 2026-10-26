@@ -6851,7 +6851,7 @@ $("evLeafSub").onclick=()=>{if(evCfg().ended)return;const s=evS();if(s.extra<=0)
     return icons[k]=im;
   }
   /* only events with a live tracker count; ended events (no tracker tab) have none */
-  const rows=()=>{const c=evCfg();return c.passed||c.ended?[]:evRw(c)};
+  const rows=()=>{const c=evCfg();return c.passed?[]:evRw(c)};
   const cur=()=>{const r=rows();if(!r.length)return null;if(idx>=r.length||idx<0)idx=0;return r[idx]};
   function draw(){
     if(!x)return;
@@ -6985,7 +6985,7 @@ $("evLeafSub").onclick=()=>{if(evCfg().ended)return;const s=evS();if(s.extra<=0)
     end();
   }
   function start(){
-    if(standalone||!rows().length)return;
+    if(standalone||evCfg().ended||!rows().length)return;
     const vid=ensure();
     if(!vid)return;if(vid.readyState<1){rebuild();lbl.textContent="Getting ready, tap again";setTimeout(ui,1500);return}
     on=true;tapN=0;draw();ui();
