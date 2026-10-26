@@ -1280,6 +1280,19 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 @media (max-width:820px){#tab-event .pact #evUndo{grid-column:auto}}
 #evShopTot b.neg{color:var(--neg)}
 #tab-event .evsh{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--mut)}
+/* ended event: trackers locked, greyed out and collapsed by default */
+#tab-event .evOver{display:flex;align-items:center;gap:12px;margin:0 0 14px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,#ef4444 10%,var(--bg));border:1px solid color-mix(in srgb,#ef4444 35%,var(--bd))}
+#tab-event .evOver[hidden]{display:none}
+#tab-event .evOver svg{flex:none;width:22px;height:22px;fill:none;stroke:#f87171;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-event .evOver b{display:block;font-size:15px}
+#tab-event .evOver span{display:block;margin-top:2px;font-size:12.5px;color:var(--mut)}
+#tab-event .evEndTg[hidden]{display:none}
+#tab-event .evEndTg svg{transition:transform .15s}
+#tab-event .evEnded>.gh{margin-bottom:0}
+#tab-event .evEnded:not(.evCollapsed)>.gh{margin-bottom:14px}
+#tab-event .evEnded.evCollapsed>:not(.gh){display:none}
+#tab-event .evEnded :is(.pAdd,.gact,.pTot:not(.evTotTop)){filter:grayscale(1);opacity:.5;pointer-events:none}
+#tab-event .evEnded :is(button,input):not(.evEndTg){cursor:not-allowed}
 #tab-event details.gsec>summary{font-size:17px;font-weight:700;cursor:pointer}
 #tab-event details.gsec[open]>summary{margin-bottom:12px}
 #tab-event #evChips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
@@ -1632,6 +1645,11 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-info .wkRates .pill{margin-right:0;padding:1px 7px 1px 5px}
 #tab-info .wkTwo td .pill{margin:2px 4px 2px 0}
 #tab-info .wkV{font-size:20px}
+#tab-info .wkRates th,#tab-info .wkRates td{padding:8px 3px;font-size:11px}
+#tab-info .wkRates th:first-child,#tab-info .wkRates td:first-child{padding-left:6px}
+#tab-info .wkRates th:last-child,#tab-info .wkRates td:last-child{padding-right:6px}
+#tab-info .wkRates .pill{font-size:10.5px;padding:1px 5px 1px 4px;gap:3px}
+#tab-info .wkRates .pill::before{width:.85em;height:.85em}
 }
 #tab-info .wkBox th,#tab-info .wkBox td{padding:10px 12px;vertical-align:middle}
 #tab-info .wkBox th{background:color-mix(in srgb,var(--card) 55%,var(--bg))}
@@ -2626,9 +2644,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="pTabs" id="evTabs"></div>
 <div class="pTabs" id="evView" hidden></div>
 <div id="evPaneTrk">
+<div class="evOver" id="evOverNote" hidden><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><div><b>This event is over</b><span>Trackers are locked. You can still expand them to view your saved counts.</span></div></div>
 <div id="evTop"></div>
 <section class="card gsec" id="evRewards">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b id="evTrkH">Tracker</b></div><div class="pTot evTotTop" id="evTot"></div></div>
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span><div class="gt"><b id="evTrkH">Tracker</b></div><div class="pTot evTotTop" id="evTot"></div><div class="gx"><button type="button" class="gb sm sq evEndTg" hidden aria-expanded="false" aria-label="Expand tracker"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
 <div class="pAdd" id="evGrid"></div>
 <div class="gact pact">
 <button type="button" class="gb go" id="evLeafAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="evLeafAddT">Leaf (no reward)</span></button>
@@ -2639,7 +2658,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 </section>
 <section class="card gsec" id="evShopTrk" hidden>
-<div class="gh"><span class="sci" style="--c:#fb923c"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><div class="gt"><b id="evShopH">Shop</b><span id="evShopSub">Track what you spend your leaves on.</span></div></div>
+<div class="gh"><span class="sci" style="--c:#fb923c"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg></span><div class="gt"><b id="evShopH">Shop</b><span id="evShopSub">Track what you spend your leaves on.</span></div><div class="gx"><button type="button" class="gb sm sq evEndTg" hidden aria-expanded="false" aria-label="Expand shop tracker"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button></div></div>
 <div class="pAdd" id="evShopGrid"></div>
 <div class="pTot" id="evShopTot"></div>
 </section>
@@ -6574,7 +6593,7 @@ $("passHist").addEventListener("click",ev=>{
 
 /* ---------- event tracker ---------- */
 /* One entry per event. big = the three large reward buttons, small = the smaller ones below; col = collectable epics [title, artist, genre]. */
-const EVTS=[{id:"soundfall",name:"Soundfall",order:["c100","c200","c2k","c20k","c100k","g100"],
+const EVTS=[{id:"soundfall",name:"Soundfall",ended:true,order:["c100","c200","c2k","c20k","c100k","g100"],
  note:"Open map drops (the 70c genre drop works too) for a 3% chance at a leaf. A leaf can give coins, gems, a regular Soundfall epic or a chance at the Epic of the Day. Leaves go into your inventory at the top of the screen and can be redeemed for 4 types of rewards in the Soundfall shop.\n\nOther details:\n\u2022 Cosmetic items rotate every 5 days.\n\u2022 A new Soundfall epic is chosen as the Epic of the Day each day. 10 numbered versions of it drop at a random time and in a random order that day when you receive a leaf.\n\u2022 The Shiny Artist Drop shop reward is shinies only (no epics, lyrics or editions).\n\u2022 Cooldown does not apply to this event.\n\u2022 Event days run noon ET to noon ET (timers are on the event page).\n\u2022 A slightly more detailed Event Rules description is below the in-game Soundfall shop.",
  info:{chips:["3% leaf per drop","Day: noon\u2013noon ET","No cooldown"],rows:[["Leaf gives","Coins, gems, a regular Soundfall epic, or a shot at the Epic of the Day"],["Where","Any map drop, incl. the 70c genre drop"],["Epic of the Day","New one daily. 10 numbered versions drop at random times and order when you get a leaf"],["Cosmetics","Rotate every 5 days"],["Shiny drop","Shinies only (no epics, lyrics or editions)"],["Redeem","Leaves sit in your inventory at the top of the screen; spend them in the Soundfall shop"]]},
  shop:[["Random Soundfall Epic",30],["Soundfall Theme",15],["Soundfall Frame",5],["Shiny Artist Drop",15]],
@@ -6710,6 +6729,7 @@ function renderEvent(){
   evRenderShop(cfg,s,t,rs);
   evRenderRecent();
   if(window.evLiveDraw)evLiveDraw();
+  evEndApply(cfg);
   const hasInfo=!!(inf||cfg.note||cfg.shop);
   $("evOddsWrap").hidden=!hasRw;
   $("evOddsBox").hidden=!(hasRw||cfg.shop);
@@ -6727,6 +6747,24 @@ function renderEvent(){
     const x=evSum(cfg,h.c);
     return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${nfmt(x.n)} entries \u00b7 ${nfmt(x.n+h.extra)} ${esc(rs[0])} \u00b7 ${nfmt(x.coins)} coins \u00b7 ${nfmt(x.gems)} gems${evSpN(cfg,h.sp)?" \u00b7 "+nfmt(evSpent(cfg,h.sp))+" "+esc(rs[0])+" spent":""}</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div><div class="pHc">${evRw(cfg).filter(r=>h.c[r[0]]).map(r=>evpit(r,h.c[r[0]])).join("")}${(cfg.shop||[]).filter(r=>h.sp&&h.sp[r[0]]).map(r=>evspit(r[0],h.sp[r[0]])).join("")}</div></div>`}).join("")||'<div class="empty">No history yet. Resetting saves the current counts here.</div>';
 }
+let evEndOpen={};
+function evEndApply(cfg){
+  const on=!!cfg.ended;
+  $("evOverNote").hidden=!on;
+  [["evRewards","tracker"],["evShopTrk","shop tracker"]].forEach(([id,nm])=>{
+    const sec=$(id),b=sec.querySelector(".evEndTg"),open=!!evEndOpen[id];
+    sec.classList.toggle("evEnded",on);sec.classList.toggle("evCollapsed",on&&!open);
+    b.hidden=!on;b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",(open?"Collapse ":"Expand ")+nm);
+    b.firstElementChild.style.transform=open?"rotate(180deg)":"";
+  });
+  if(!on)return;
+  ["evGrid","evShopGrid"].forEach(id=>$(id).querySelectorAll("button,input").forEach(e=>{e.disabled=true}));
+  ["evLeafAdd","evLeafSub","evUndo","evReset","evLive"].forEach(id=>{$(id).disabled=true});
+}
+$("evPaneTrk").addEventListener("click",ev2=>{
+  const b=ev2.target.closest(".evEndTg");if(!b)return;
+  const id=b.closest("section").id;evEndOpen[id]=!evEndOpen[id];evEndApply(evCfg());
+});
 function saveEvent(){
   LS("tracker.event",JSON.stringify(ev));
   if(evDB)track(sb.from("pass_state").upsert({id:2,data:ev},{onConflict:"user_id,id"}));
@@ -6745,13 +6783,14 @@ async function loadEvent(){
 }
 $("evTabs").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-ev]");if(!b)return;
-  evSel=b.dataset.ev;LS("tracker.evtab",evSel);evV="trk";$("evSearch").value="";renderEvent();
+  evSel=b.dataset.ev;LS("tracker.evtab",evSel);evV="trk";evEndOpen={};$("evSearch").value="";renderEvent();
 });
 $("evView").addEventListener("click",ev2=>{
   const b=ev2.target.closest("button[data-v]");if(!b)return;
   evV=b.dataset.v;renderEvent();
 });
 function evBump(k,d){
+  if(evCfg().ended)return false;
   const s=evS(),cur=s.c[k],nx=Math.min(1e6,Math.max(0,cur+Math.trunc(d)));d=nx-cur;
   if(!d)return false;
   if(!s.start)s.start=Date.now();
@@ -6769,6 +6808,7 @@ $("evGrid").addEventListener("change",ev2=>{
   if(!evBump(k,v-s.c[k]))i.value=s.c[k];
 });
 function evShopSet(i,v){
+  if(evCfg().ended)return false;
   const cfg=evCfg(),s=evS(),it=cfg.shop&&cfg.shop[i];if(!it)return false;
   const cur=s.sp[it[0]]||0,nx=Math.min(9999,Math.max(0,Math.trunc(v)||0));
   if(nx===cur)return false;
@@ -6785,6 +6825,7 @@ $("evShopGrid").addEventListener("change",ev2=>{
 $("evShopGrid").addEventListener("focusin",ev2=>{if(ev2.target.matches("input"))ev2.target.select()});
 $("evGrid").addEventListener("focusin",ev2=>{if(ev2.target.matches("input"))ev2.target.select()});
 $("evUndo").onclick=()=>{
+  if(evCfg().ended)return;
   const cfg=evCfg(),s=evS(),e=s.log[0];if(!e||e.i<=s.floor)return;
   s.c[e.k]=Math.max(0,s.c[e.k]-e.n);s.log.shift();if(e.i===s.seq)s.seq--;
   if(!evSum(cfg,s.c).n&&!s.extra&&!evSpN(cfg,s.sp))s.start=0;
@@ -6793,8 +6834,8 @@ $("evUndo").onclick=()=>{
 function evOddsSet(open){const b=$("evOddsToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse odds":"Expand odds");$("evOddsBody").hidden=!open;$("evOddsBox").querySelector(".gh").style.marginBottom=open?"":"0"}
 evOddsSet(LS("tracker.evodds")!=="0");
 $("evOddsToggle").onclick=()=>{const open=$("evOddsToggle").getAttribute("aria-expanded")!=="true";LS("tracker.evodds",open?"1":"0");evOddsSet(open)};
-$("evLeafAdd").onclick=()=>{const s=evS();if(!s.start)s.start=Date.now();s.extra++;saveEvent();renderEvent()};
-$("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEvent();renderEvent()};
+$("evLeafAdd").onclick=()=>{if(evCfg().ended)return;const s=evS();if(!s.start)s.start=Date.now();s.extra++;saveEvent();renderEvent()};
+$("evLeafSub").onclick=()=>{if(evCfg().ended)return;const s=evS();if(s.extra<=0)return;s.extra--;saveEvent();renderEvent()};
 /* ---------- Event live counter (PiP): 1 press = +1 on the selected reward, 2 quick presses = next reward ---------- */
 (function(){
   const W=640,H=360,TAP_MS=450,FS="system-ui,-apple-system,Segoe UI,sans-serif";
@@ -6810,7 +6851,7 @@ $("evLeafSub").onclick=()=>{const s=evS();if(s.extra<=0)return;s.extra--;saveEve
     return icons[k]=im;
   }
   /* only events with a live tracker count; ended events (no tracker tab) have none */
-  const rows=()=>{const c=evCfg();return c.passed?[]:evRw(c)};
+  const rows=()=>{const c=evCfg();return c.passed||c.ended?[]:evRw(c)};
   const cur=()=>{const r=rows();if(!r.length)return null;if(idx>=r.length||idx<0)idx=0;return r[idx]};
   function draw(){
     if(!x)return;
@@ -6976,6 +7017,7 @@ $("evCol").addEventListener("change",ev2=>{
   $("evColHead").textContent="Collectables ("+gn+"/"+total+")"+(total?" \u00b7 "+Math.round(gn/total*100)+"%":"");
 });
 $("evReset").onclick=()=>{
+  if(evCfg().ended)return;
   const cfg=evCfg(),s=evS();
   if(!evSum(cfg,s.c).n&&!s.extra&&!evSpN(cfg,s.sp))return;
   ask("Save the current counts to history and reset them?",()=>{
