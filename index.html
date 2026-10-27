@@ -419,6 +419,7 @@ body.guest .brand{pointer-events:none}
 .mkh:hover{background:color-mix(in srgb,var(--ac) 7%,transparent)}
 .mkh:focus-visible{outline:2px solid var(--ac);outline-offset:-2px}
 .mkh .pill{margin:0}
+.mkpls{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
 .mkt{font-weight:600;font-size:15px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere}
 .mks{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mkc{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -442,6 +443,13 @@ body.guest .brand{pointer-events:none}
 .mkf button .pill,.mkcats button .pill{margin:0;pointer-events:none;opacity:.55}
 .mkf button.on,.mkcats button.on{border-color:var(--ac);background:var(--card)}
 .mkf button.on .pill,.mkcats button.on .pill{opacity:1}
+.mkcg{flex:1 0 100%;margin:8px 0 0;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.mkcg:first-child{margin-top:0}
+.pill.ed{background:#3a3a3a;color:#fff;padding:1px 10px 1px 7px}
+.pill.ed::before{display:none}
+.pill.ed i{font-style:normal;font-size:1.05em;line-height:1}
+#tab-buys .mkDDm{max-height:min(62vh,440px);overflow-y:auto;overscroll-behavior:contain}
+#tab-buys .mkDDg{padding:10px 12px 4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
 .mkn{color:var(--mut);font-weight:600;pointer-events:none}
 .mkdel{margin-top:10px!important}
 .r-other{background:#3a3a3a;color:#bdbdbd}
@@ -1454,6 +1462,36 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-quest .qfa{display:flex;gap:10px;margin-top:18px}
 #tab-quest .qfa .gb{flex:1}#tab-quest .qfa .gb.go{flex:2}
 #tab-quest .qacm{display:none}
+
+/* quest sets */
+#tab-quest #qtSetPick{margin-bottom:12px}
+#tab-quest .qsrow{display:flex;gap:8px;align-items:center}
+#tab-quest #qtSetSel{flex:1;min-width:0;width:auto;height:46px;margin:0;padding:0 40px 0 14px;font-size:15px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px}
+#tab-quest .qsrow .gb{margin:0;flex:none;min-height:46px}
+#tab-quest .qchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+#tab-quest .qchip{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.5;border:1px solid color-mix(in srgb,var(--c,var(--mut)) 45%,var(--bd));background:color-mix(in srgb,var(--c,var(--mut)) 12%,transparent);color:var(--c,var(--mut))}
+#tab-quest .qsline{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.5}
+#tab-quest .qsline b{color:var(--tx)}
+/* Quest Sets: collapsible (header is clickable, state remembered) */
+#tab-quest #qtSetsBox .gh{cursor:pointer;-webkit-user-select:none;user-select:none}
+#tab-quest #qtSetsBox .gh .gx{cursor:default}
+#tab-quest #qtSetsBox.shut .gh{margin-bottom:0}
+#tab-quest #qtSetsBody[hidden]{display:none}
+#tab-quest #qtSetsTog{margin:0;flex:none;height:38px;display:grid;place-items:center}
+#tab-quest #qtSetForm{margin:0 0 14px;padding:14px;border:1px solid var(--bd);border-radius:12px;background:color-mix(in srgb,var(--bg) 60%,var(--card))}
+#tab-quest .qsft{font-size:15px;font-weight:600;margin-bottom:12px}
+#tab-quest #qtSetForm .qfl{display:block;font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
+#tab-quest #qtSetForm input[type=text],#tab-quest #qtSetForm input[type=number]{height:44px;padding:0 12px;border-radius:10px}
+#tab-quest #qtSetForm .seg{margin:0 0 4px}
+#tab-quest #qtSetForm .seg button{min-height:42px;border-radius:10px}
+#tab-quest #qtSetForm .qrow{margin-top:10px}
+#tab-quest .qfa .gb[hidden],#tab-quest #qtFTyp button[hidden],#tab-quest #qtFSet[hidden]{display:none}
+#tab-quest #qtSetList tr.on td{background:color-mix(in srgb,#34d399 10%,transparent)}
+#tab-quest #qtSetList td.qpc{min-width:150px}
+#tab-quest #qtSetForm #qtSGen{display:flex;flex-wrap:wrap;gap:8px}
+#tab-quest #qtSetForm #qtSGen button{flex:1 1 100px;min-width:100px;margin:0}
+#tab-quest .qchips .pill,#tab-quest .qpt .pill{margin:0}
+@media (max-width:520px){#tab-quest #qtSetList td.qpc{min-width:0}#tab-quest #qtSetList th,#tab-quest #qtSetList td{padding-left:10px;padding-right:10px}}
 @media (max-width:520px){
 #tab-quest #qtLogT td:nth-child(2){white-space:normal;min-width:84px}
 #tab-quest #qtDrop th,#tab-quest #qtDrop td,#tab-quest #qtExp th,#tab-quest #qtExp td{padding:9px 4px;font-size:11.5px}
@@ -1533,6 +1571,12 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-map #agV3{font-size:clamp(17px,4.2vw,24px);white-space:normal;overflow-wrap:anywhere;line-height:1.15}
 #tab-map #agHints,#tab-map #agGuesses{display:grid;gap:8px}
 #tab-map #agHintsSec{padding:12px}
+#tab-map #agResetSec{display:block;margin-top:14px}
+#tab-map #agResetSec #agClear{width:100%;min-height:48px;border-radius:14px;gap:8px;font-size:15px;font-weight:700;white-space:nowrap}
+#tab-map #agResetSec #agClear svg{width:20px;height:20px}
+#tab-map #agResetSec #agClear{color:#f87171;border:1px solid #f87171;background:color-mix(in srgb,#f87171 14%,var(--card))}
+#tab-map #agResetSec #agClear:hover{background:color-mix(in srgb,#f87171 24%,var(--card))}
+#tab-map #agResetSec #agClear:active{background:#f87171;color:#fff}
 #tab-map #agHintsSec .gh{margin-bottom:10px}
 #tab-map #agHintsSec .gh .sci{width:32px;height:32px;border-radius:10px}
 #tab-map #agHintsSec .gh .gt b{font-size:16px}
@@ -1765,6 +1809,12 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #buyList .mk,#soldList .mk{border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.14);transition:border-color .2s,box-shadow .2s}
 #buyList .mk:hover,#soldList .mk:hover{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd))}
 #buyList .mk.open,#soldList .mk.open{border-color:color-mix(in srgb,var(--ac) 55%,var(--bd));box-shadow:0 6px 20px rgba(0,0,0,.18)}
+/* rarity shown as a coloured edge on the row (same as the Epic tracker) instead of a pill */
+#buyList .mk.rr-common,#soldList .mk.rr-common{--rc:#3ddc5a}
+#buyList .mk.rr-uncommon,#soldList .mk.rr-uncommon{--rc:#8b3cf0}
+#buyList .mk.rr-rare,#soldList .mk.rr-rare{--rc:#f08a2c}
+#buyList .mk,#soldList .mk{box-shadow:inset 2px 0 0 var(--rc,transparent),0 1px 2px rgba(0,0,0,.14)}
+#buyList .mk.open,#soldList .mk.open{box-shadow:inset 2px 0 0 var(--rc,transparent),0 6px 20px rgba(0,0,0,.18)}
 #buyList .mkh,#soldList .mkh{padding:14px 16px;gap:14px}
 #buyList .mkc,#soldList .mkc{font-size:18px}
 #soldList .mkc{color:var(--pos)}
@@ -2120,29 +2170,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpReset:hover:not(:disabled){border-color:#ef4444;background:color-mix(in srgb,#ef4444 18%,var(--card))}
 #tab-gempic .gact{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 #tab-gempic .qsub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
-#tab-gempic .gqh{display:flex;align-items:center;gap:8px;width:100%;margin:0;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:500;color:var(--mut);text-align:left;cursor:default}
-#tab-gempic .gqh .gchev{display:none;width:17px;height:17px;margin-left:auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
-#tab-gempic #gpQB{margin-top:10px}
 @media (max-width:820px){
-#tab-gempic .gpan{grid-template-columns:1fr 1fr}
-#tab-gempic .gpan #gpQA{grid-column:1/-1}
-#tab-gempic .gcost{flex-wrap:wrap}
-#tab-gempic .gcost input{flex:1 1 100%}
-#tab-gempic .gcost button{flex:1 1 0;width:auto}
-#tab-gempic .gqh{cursor:pointer;min-height:28px}
-#tab-gempic .gqh .gchev{display:block}
-#tab-gempic .gqh[aria-expanded="false"] .gchev{transform:rotate(180deg)}
-#tab-gempic .gp1>.gqh[aria-expanded="false"]{margin-bottom:0}
-#tab-gempic #gpQB[hidden]{display:none}
-#tab-gempic .qwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-#tab-gempic .qwrap .gact,#tab-gempic .qwrap .qsub{display:contents}
-#tab-gempic .qwrap .gb{min-width:0;width:100%;margin:0;box-sizing:border-box}
-#tab-gempic .qwrap .gb.sm,#tab-gempic .qwrap #gpUndo{min-height:60px;height:auto;padding:10px 12px;gap:8px;font-size:14px;line-height:1.25;white-space:normal;text-wrap:balance}
-#tab-gempic .qwrap #gpRoll{grid-column:1/-1;order:-1}
-#tab-gempic .qwrap #gpUndo{order:1}
-#tab-gempic .qwrap #gpReset{order:2}
-#tab-gempic .qwrap #gpLive{order:3}
-#tab-gempic .qwrap #gpHit{order:4;grid-column:auto}
 }
 /* Daily Games totals: the three stat boxes stay side by side on phones (3x1, compact like the event tracker) */
 @media (max-width:700px){
@@ -2180,8 +2208,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-daily #dyPair .gb.dsboost{min-height:0;height:auto;margin:0;padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700;line-height:1.3;white-space:nowrap}
 @media (max-width:700px){#tab-daily #dyPair .gb.dsboost{padding:4px 10px;font-size:12px}}
 /* Ads watched tile: ad total on the left, estimated money made on the right (no subtext) */
-#tab-daily #dyTotals .scv.dyadv{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
-#tab-daily #dyTotals .dyadm{font-size:.55em;font-weight:700;color:#22c55e}
+#tab-daily #dyTotals .scv.dyadv{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:0 8px;min-width:0;max-width:100%}
+#tab-daily #dyTotals .dyadm{font-size:.55em;font-weight:700;color:#22c55e;white-space:nowrap;max-width:100%}
 /* Ads Watched: custom amount, add button and undo share one line */
 #tab-daily #dyAds .adrow{display:flex;align-items:center;gap:8px;margin-top:10px}
 #tab-daily #dyAds .adrow .qcust{margin:0;flex:0 0 auto}
@@ -2359,6 +2387,379 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpHist th,#tab-gempic #gpHist td{padding:9px 6px}
 #tab-gempic #gpHist .qsubl{white-space:normal}
 }
+/* quest tab redesign test v5 */
+#tab-quest #qtSub{display:flex;gap:10px;margin:4px 0 14px}
+#tab-quest #qtSub button{flex:1;min-width:0;margin:0;height:46px;padding:0 10px;border-radius:12px;font-size:15px;font-weight:700;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tab-quest #qtSub button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-quest #qtSub button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));box-shadow:0 0 0 1px var(--ac),0 4px 16px color-mix(in srgb,var(--ac) 30%,transparent)}
+@media (max-width:520px){#tab-quest #qtSub{gap:6px}#tab-quest #qtSub button{height:42px;font-size:14px}}
+#tab-quest .qtv[hidden]{display:none}
+#tab-quest #qtForm.nbless #qtEpBox{display:none}
+#tab-quest #qtHero{margin-top:0;padding:12px 16px}
+#tab-quest .qh{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#tab-quest #qtQuests{font-size:clamp(34px,9vw,44px);font-weight:800;line-height:1;letter-spacing:-.02em}
+#tab-quest .qhl{margin-top:2px;font-size:12.5px;color:var(--mut)}
+#tab-quest .qhs{display:none}
+#tab-quest .qh2{display:flex;gap:18px;text-align:right}
+#tab-quest .qst{display:grid;gap:0}
+#tab-quest .qst b{font-size:18px;font-weight:700;line-height:1.2}
+#tab-quest .qst span{font-size:12px;color:var(--mut)}
+#tab-quest .qst small{display:none}
+#tab-quest #qtHero .qprog{margin-top:10px}
+#tab-quest #qtHero .qbar{height:8px}
+#tab-quest #qtHero .qbar i{background:linear-gradient(90deg,var(--ac),#34d399)}
+#tab-quest #qtHero #qtBarNote{margin:6px 0 0;font-size:12px}
+#tab-quest .qsrow{position:relative}
+#tab-quest .qdd{position:relative;flex:1;min-width:0}
+#tab-quest #qtSetSel{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
+#tab-quest .qddb{position:relative;width:100%;min-height:46px;margin:0;padding:6px 40px 6px 14px;display:flex;align-items:center;text-align:left;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:15px}
+#tab-quest .qddb svg{position:absolute;right:12px;top:50%;width:18px;height:18px;margin-top:-9px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+#tab-quest .qddb[aria-expanded="true"] svg{transform:rotate(180deg)}
+#tab-quest .qddv,#tab-quest .qddo{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0}
+#tab-quest .qddn{font-weight:700}
+#tab-quest .qddc{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
+#tab-quest .qddm{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;max-height:340px;overflow:auto;padding:6px;background:var(--card);border:1px solid var(--bd);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.4)}
+#tab-quest .qddm[hidden]{display:none}
+#tab-quest .qddo{width:100%;margin:0;padding:10px 12px;text-align:left;border:0;border-radius:8px;background:none;color:var(--tx);font-size:14px}
+#tab-quest .qddo:hover{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+#tab-quest .qddo.on{background:color-mix(in srgb,var(--ac) 18%,transparent)}
+#tab-quest .qddq{margin-left:auto;color:var(--mut);font-variant-numeric:tabular-nums}
+#tab-quest #qtCtl #qtSetInfo:has(.qchips){display:none}
+#tab-quest #qtSetPick{padding:0;border:0;background:none}
+#tab-quest #qtSetPick>.gl{display:none}
+#tab-quest #qtCtl .qchips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+#tab-quest #qtCtl .qchips .qrow{position:relative;margin:0;height:34px;padding:0 14px;gap:0;border:1px solid var(--bd);border-radius:99px;font-size:13.5px;font-weight:600;color:var(--mut)}
+#tab-quest #qtCtl .qrow input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+#tab-quest #qtCtl .qrow:has(input:checked){background:color-mix(in srgb,#10b981 18%,transparent);border-color:#10b981;color:var(--tx)}
+#tab-quest #qtCtl .qrow:has(#qtExLy:checked){background:color-mix(in srgb,#ef4444 18%,transparent);border-color:#ef4444}
+#tab-quest #qtCtl .qrow:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:2px}
+#tab-quest #qtCtl .qrow .qinfo{display:none}
+#tab-quest .qsrow>.qi{flex:none;width:46px;height:46px;margin:0;padding:0;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font-weight:700;font-size:15px}
+#tab-quest .qsrow>.qi:hover{border-color:var(--ac);color:var(--tx)}
+#tab-quest #qtDisc{display:none}
+#tab-quest #qtDisc.on{display:block}
+#tab-quest #qtQA{padding:0;border:0;background:none}
+#tab-quest #qtQAB{display:flex;gap:10px;align-items:stretch;margin-top:12px}
+#tab-quest #qtQAB .gq{gap:10px}
+#tab-quest #qtQAB .gq{flex:1;min-width:0}
+#tab-quest #qtQAB .qcust{flex:0 0 26%;margin:0}
+#tab-quest #qtQAB .qcust>span{display:none}
+#tab-quest #qtQAB .qcust input{width:100%;height:46px;text-align:center}
+@media (max-width:520px){#tab-quest #qtQAB{flex-wrap:wrap}#tab-quest #qtQAB .qcust{flex:1 1 100%}}
+#tab-quest #qtActions .qwrap{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+#tab-quest #qtActions .qwrap .gact{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;margin:0}
+#tab-quest #qtActions .qwrap .gact .gb{order:0;grid-column:auto;height:50px;min-height:50px;margin:0}
+#tab-quest #qtActions .qwrap #qtUndo{padding:0}
+#tab-quest #qtActions #qtUndoT{display:none}
+#tab-quest #qtActions .qwrap #qtAdd{font-size:15px}
+#tab-quest #qtActions .qwrap .qsub{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+#tab-quest #qtActions .qsub .gb{width:100%;height:46px;min-height:46px;grid-column:auto;order:0;margin:0}
+#tab-quest #qtActions .qsub #qtLive{grid-column:1/-1}
+#tab-quest .qstack>.gsec{margin-top:0;margin-bottom:14px}
+#tab-quest #qtSetsBody[hidden]{display:block!important}
+#tab-quest #qtSetsTog{display:none}
+#tab-quest #qtSetsBox .gh{cursor:default}
+#tab-quest #qtHist:not(.all) .gtbl table tr:nth-child(n+7){display:none}
+#tab-quest #qtHistMore{margin-top:10px}
+#tab-quest #qtHistMore[hidden]{display:none}
+@media (max-width:560px){
+#tab-quest .qsrow{flex-wrap:wrap}
+#tab-quest .qdd{flex:1 1 100%}
+#tab-quest .qsrow>.gb{flex:1 1 0}
+#tab-quest .qddb{padding:8px 38px 8px 12px}
+#tab-quest .qddv{flex-direction:column;align-items:flex-start;gap:6px}
+#tab-quest .qddc{gap:5px}
+#tab-quest .qddc .pill,#tab-quest .qddc .qchip{font-size:11.5px;padding:2px 9px}
+#tab-quest .qddo{gap:6px 10px}
+#tab-quest .qddo .qddc{order:3;flex:1 1 100%}
+#tab-quest .gtbl:has(#qtDrop){display:block;overflow:hidden}
+#tab-quest #qtDrop{table-layout:fixed;width:100%;height:auto}
+#tab-quest #qtDrop th,#tab-quest #qtDrop td{padding:9px 3px;font-size:11.5px;text-align:right;white-space:nowrap}
+#tab-quest #qtDrop th:first-child{width:25%}
+#tab-quest #qtDrop th:last-child{width:21%}
+#tab-quest #qtDrop th:first-child,#tab-quest #qtDrop td:first-child{text-align:left;padding-left:10px}
+#tab-quest #qtDrop th:last-child,#tab-quest #qtDrop td:last-child{padding-right:10px;font-weight:700}
+#tab-quest #qtDrop td:first-child{white-space:normal}
+#tab-quest #qtDrop .pill::before,#tab-quest #qtDrop th .pill::before{display:none}
+#tab-quest #qtDrop th .pill{font-size:9px;padding:1px 4px}
+#tab-quest #qtDrop .qpull,#tab-quest #qtDrop .qpull .qpp{flex-direction:column;align-items:flex-start;gap:3px}
+#tab-quest #qtSetForm{padding:12px}
+#tab-quest #qtSetForm .qsft{margin-bottom:8px;font-size:14px}
+#tab-quest #qtSetForm .qfl{margin:10px 0 4px;font-size:12px}
+#tab-quest #qtSetForm input[type=text],#tab-quest #qtSetForm input[type=number]{height:40px}
+#tab-quest #qtSetForm #qtSGen{gap:6px}
+#tab-quest #qtSetForm #qtSGen button{flex:1 1 calc(33.333% - 6px);min-width:0;min-height:34px;padding:2px 4px}
+#tab-quest #qtSetForm #qtSGen button:nth-last-child(-n+2){flex-basis:calc(50% - 6px)}
+#tab-quest #qtSetForm #qtSGen .pill{font-size:11px;padding:1px 8px}
+#tab-quest #qtSetForm .seg{margin:0}
+#tab-quest #qtSetForm .seg button{min-height:36px;font-size:13px}
+#tab-quest #qtSetForm .qrow{margin-top:6px;padding:4px 0}
+#tab-quest #qtSetForm .qfa{margin-top:12px}
+#tab-quest #qtSetForm .qfa .gb{min-height:44px}
+}
+#tab-gempic{max-width:860px;margin:0 auto}
+#tab-gempic{max-width:960px;margin:0 auto}
+#tab-gempic .gpan{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+@media (max-width:820px){
+#tab-gempic .gpan{grid-template-columns:1fr}
+}
+#tab-gempic .qrow{display:flex;align-items:center;gap:12px;margin:0;padding:8px 0;font-size:15px;color:var(--tx);cursor:pointer}
+#tab-gempic .qrow+.qrow{border-top:1px solid color-mix(in srgb,var(--bd) 60%,transparent)}
+#tab-gempic .qrow>span:first-of-type{min-width:0;line-height:1.3}
+#tab-gempic .qrow input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+#tab-gempic .qrow input:hover{border-color:var(--ac)}
+#tab-gempic .qrow input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+#tab-gempic .qrow input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+#tab-gempic .qinfo{display:inline-grid;place-items:center;flex:none;color:var(--mut);cursor:help}
+#tab-gempic .qinfo svg,#tab-gempic .gl svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#tab-gempic .gl{display:flex;align-items:center;gap:8px}
+#tab-gempic .gl svg{color:var(--ac)}
+#tab-gempic .gq{grid-template-columns:repeat(6,minmax(0,1fr))}
+@media (max-width:520px){
+#tab-gempic .gq{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+#tab-gempic .gact{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+@media (max-width:820px){
+#tab-gempic .gact{grid-template-columns:1fr 1fr}
+}
+#tab-gempic .qqh{display:flex;align-items:center;gap:8px;width:100%;margin:0;padding:0;border:0;background:none;font:inherit;font-size:13px;font-weight:500;color:var(--mut);text-align:left;cursor:default}
+#tab-gempic .qqh .qchev{display:none;margin-left:auto;color:var(--mut);transition:transform .2s}
+#tab-gempic #gpQB{margin-top:10px}
+#tab-gempic .qcust{display:flex;align-items:center;gap:10px;margin:8px 0 0;font-size:13px;font-weight:500;color:var(--mut)}
+#tab-gempic .qcust input{flex:1}
+@media (max-width:520px){
+#tab-gempic .qqh{cursor:pointer;min-height:28px}
+#tab-gempic .qqh .qchev{display:block}
+#tab-gempic .qqh[aria-expanded="false"] .qchev{transform:rotate(180deg)}
+#tab-gempic #gpQB[hidden]{display:none}
+}
+#tab-gempic #gpAmt{box-sizing:border-box;width:100%;min-width:0;min-height:48px;margin:0;padding:0 8px;border-radius:12px;text-align:center;font-size:18px;font-weight:600}
+#tab-gempic #gpReset{color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,var(--card))}
+#tab-gempic #gpReset:hover:not(:disabled){border-color:#ef4444;background:color-mix(in srgb,#ef4444 18%,var(--card))}
+@media (min-width:821px){
+#tab-gempic #gpLive{display:none}
+}
+@media (max-width:820px){
+#tab-gempic .qwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+#tab-gempic .qwrap .gact,#tab-gempic .qwrap .qsub{display:contents}
+#tab-gempic .qwrap .gb{min-width:0;width:100%;margin:0;box-sizing:border-box}
+#tab-gempic .qwrap .gb.sm,#tab-gempic .qwrap #gpUndo{min-height:60px;height:auto;padding:10px 12px;gap:8px;font-size:14px;line-height:1.25;white-space:normal;text-wrap:balance}
+#tab-gempic .qwrap .qlog:empty{display:none}
+#tab-gempic .qwrap .qlog{align-self:start}
+#tab-gempic .gp1>.qqh[aria-expanded="false"]{margin-bottom:0}
+#tab-gempic .qwrap #gpRoll{grid-column:1/-1;order:-1}
+#tab-gempic .qwrap #gpUndo{order:1}
+#tab-gempic .qwrap #gpReset{order:2}
+#tab-gempic .qwrap #gpLive{order:3}
+#tab-gempic .qwrap #gpHit{order:4;grid-column:auto}
+#tab-gempic .qwrap .qlog{order:5;grid-column:1/-1;margin:0;text-align:right}
+}
+#tab-gempic .qsub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
+#tab-gempic .qlog{margin-left:auto;font-size:13px;color:var(--mut)}
+#tab-gempic #gpDisc{margin:12px 0 0;font-size:12.5px}
+#tab-gempic .qcrow{display:flex;align-items:center;gap:8px}
+#tab-gempic .qcrow+.qcrow{margin-top:8px}
+#tab-gempic .qcrow input{flex:1;box-sizing:border-box;width:auto;min-width:0;height:40px;margin:0;padding:0 10px;font-size:16px;font-weight:600;border-radius:10px;text-align:center}
+#tab-gempic .qcx{flex:none;color:var(--mut);font-weight:600}
+#tab-gempic tr.qtot td{background:color-mix(in srgb,#34d399 8%,transparent)}
+#tab-gempic .qpull{display:inline-flex;align-items:center;gap:4px 8px;flex-wrap:wrap}
+#tab-gempic .qpull .qpl{font-weight:700}
+#tab-gempic .qpull .qpp{display:inline-flex;align-items:center;gap:4px;flex-wrap:nowrap}
+#tab-gempic .qpull .pill{margin:0}
+@media (max-width:520px){
+#tab-gempic .qpull{flex-direction:column;align-items:flex-start;gap:4px}
+#tab-gempic .qpull .qpl{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+#tab-gempic .qpull .qpp{gap:4px}
+}
+#tab-gempic .qprog{display:flex;align-items:center;gap:16px;margin-top:4px}
+#tab-gempic .qbar{flex:1;height:12px;border-radius:999px;background:color-mix(in srgb,#a78bfa 16%,var(--bd));overflow:hidden}
+#tab-gempic .qbar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#3b82f6,#a78bfa);transition:width .4s ease}
+#tab-gempic .qprog b{font-size:26px;font-weight:700;min-width:64px;text-align:right}
+#tab-gempic #gpBarNote{margin:14px 0 0;font-size:13.5px;color:var(--mut);line-height:1.5}
+#tab-gempic td.qpc{white-space:normal;min-width:190px}
+#tab-gempic .qpt{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
+#tab-gempic .qpt strong{overflow-wrap:anywhere}
+#tab-gempic .qsubl{font-size:12px;color:var(--mut);margin-top:3px}
+#tab-gempic .qact{display:inline-flex;gap:6px}
+#tab-gempic #gpForm .lbl,#tab-gempic #gpForm label{font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
+#tab-gempic #gpForm input{height:44px;padding:0 12px;border-radius:10px}
+#tab-gempic #gpForm .seg{margin:0 0 4px}
+#tab-gempic #gpForm .seg button{min-height:42px;border-radius:10px}
+#tab-gempic #gpForm .note{margin:8px 0 0}
+#tab-gempic .qfa{display:flex;gap:10px;margin-top:18px}
+#tab-gempic .qfa .gb{flex:1}
+#tab-gempic .qfa .gb.go{flex:2}
+#tab-gempic .qacm{display:none}
+#tab-gempic #gpSetPick{margin-bottom:12px}
+#tab-gempic .qsrow{display:flex;gap:8px;align-items:center}
+#tab-gempic #gpSetSel{flex:1;min-width:0;width:auto;height:46px;margin:0;padding:0 40px 0 14px;font-size:15px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 14px center/16px}
+#tab-gempic .qsrow .gb{margin:0;flex:none;min-height:46px}
+#tab-gempic .qchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+#tab-gempic .qchip{display:inline-flex;align-items:center;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.5;border:1px solid color-mix(in srgb,var(--c,var(--mut)) 45%,var(--bd));background:color-mix(in srgb,var(--c,var(--mut)) 12%,transparent);color:var(--c,var(--mut))}
+#tab-gempic .qsline{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.5}
+#tab-gempic .qsline b{color:var(--tx)}
+#tab-gempic #gpSetsBox .gh{cursor:pointer;-webkit-user-select:none;user-select:none}
+#tab-gempic #gpSetsBox .gh .gx{cursor:default}
+#tab-gempic #gpSetsBox.shut .gh{margin-bottom:0}
+#tab-gempic #gpSetsBody[hidden]{display:none}
+#tab-gempic #gpSetForm{margin:0 0 14px;padding:14px;border:1px solid var(--bd);border-radius:12px;background:color-mix(in srgb,var(--bg) 60%,var(--card))}
+#tab-gempic .qsft{font-size:15px;font-weight:600;margin-bottom:12px}
+#tab-gempic #gpSetForm .qfl{display:block;font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
+#tab-gempic #gpSetForm input[type=text],#tab-gempic #gpSetForm input[type=number]{height:44px;padding:0 12px;border-radius:10px}
+#tab-gempic #gpSetForm .seg{margin:0 0 4px}
+#tab-gempic #gpSetForm .seg button{min-height:42px;border-radius:10px}
+#tab-gempic #gpSetForm .qrow{margin-top:10px}
+#tab-gempic .qfa .gb[hidden],#tab-gempic #gpFTyp button[hidden],#tab-gempic #gpFSet[hidden]{display:none}
+#tab-gempic #gpSetList tr.on td{background:color-mix(in srgb,#34d399 10%,transparent)}
+#tab-gempic #gpSetList td.qpc{min-width:150px}
+#tab-gempic #gpSetForm #gpSGen{display:flex;flex-wrap:wrap;gap:8px}
+#tab-gempic #gpSetForm #gpSGen button{flex:1 1 100px;min-width:100px;margin:0}
+#tab-gempic .qchips .pill,#tab-gempic .qpt .pill{margin:0}
+@media (max-width:520px){
+#tab-gempic #gpSetList td.qpc{min-width:0}
+#tab-gempic #gpSetList th,#tab-gempic #gpSetList td{padding-left:10px;padding-right:10px}
+}
+@media (max-width:520px){
+#tab-gempic #gpExp th,#tab-gempic #gpExp td{padding:9px 4px;font-size:11.5px}
+#tab-gempic #gpExp th{white-space:normal;letter-spacing:.03em;font-size:10px;vertical-align:bottom}
+#tab-gempic #gpExp td:first-child{white-space:normal}
+#tab-gempic #gpExp .pill{font-size:10px;padding:1px 6px;margin:1px 2px 1px 0}
+#tab-gempic #gpExp .pill::before{display:none}
+#tab-gempic #gpExp th:first-child,#tab-gempic #gpExp td:first-child{padding-left:12px}
+#tab-gempic #gpExp th:last-child,#tab-gempic #gpExp td:last-child{padding-right:12px}
+#tab-gempic #gpHist th:nth-child(3),#tab-gempic #gpHist td:nth-child(3){display:none}
+#tab-gempic .qacm{display:block}
+#tab-gempic td.qpc{min-width:0}
+#tab-gempic #gpHist th,#tab-gempic #gpHist td{padding:9px 6px}
+#tab-gempic #gpHist .qsubl{white-space:normal}
+}
+#tab-gempic #gpForm.nbless #gpEpBox{display:none}
+#tab-gempic #gpHero{margin-top:0;padding:12px 16px}
+#tab-gempic .qh{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#tab-gempic #gpRolls{font-size:clamp(34px,9vw,44px);font-weight:800;line-height:1;letter-spacing:-.02em}
+#tab-gempic .qhl{margin-top:2px;font-size:12.5px;color:var(--mut)}
+#tab-gempic .qhs{display:none}
+#tab-gempic .qh2{display:flex;gap:18px;text-align:right}
+#tab-gempic .qst{display:grid;gap:0}
+#tab-gempic .qst b{font-size:18px;font-weight:700;line-height:1.2}
+#tab-gempic .qst span{font-size:12px;color:var(--mut)}
+#tab-gempic .qst small{display:none}
+#tab-gempic #gpHero .qprog{margin-top:10px}
+#tab-gempic #gpHero .qbar{height:8px}
+#tab-gempic #gpHero .qbar i{background:linear-gradient(90deg,var(--ac),#34d399)}
+#tab-gempic #gpHero #gpBarNote{margin:6px 0 0;font-size:12px}
+#tab-gempic .qsrow{position:relative}
+#tab-gempic .qdd{position:relative;flex:1;min-width:0}
+#tab-gempic #gpSetSel{position:absolute!important;left:0;top:0;width:1px!important;height:1px!important;min-height:0!important;padding:0!important;opacity:0;pointer-events:none}
+#tab-gempic .qddb{position:relative;width:100%;min-height:46px;margin:0;padding:6px 40px 6px 14px;display:flex;align-items:center;text-align:left;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:15px}
+#tab-gempic .qddb svg{position:absolute;right:12px;top:50%;width:18px;height:18px;margin-top:-9px;fill:none;stroke:var(--mut);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+#tab-gempic .qddb[aria-expanded="true"] svg{transform:rotate(180deg)}
+#tab-gempic .qddv,#tab-gempic .qddo{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0}
+#tab-gempic .qddn{font-weight:700}
+#tab-gempic .qddc{display:inline-flex;flex-wrap:wrap;align-items:center;gap:6px}
+#tab-gempic .qddm{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:20;max-height:340px;overflow:auto;padding:6px;background:var(--card);border:1px solid var(--bd);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.4)}
+#tab-gempic .qddm[hidden]{display:none}
+#tab-gempic .qddo{width:100%;margin:0;padding:10px 12px;text-align:left;border:0;border-radius:8px;background:none;color:var(--tx);font-size:14px}
+#tab-gempic .qddo:hover{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+#tab-gempic .qddo.on{background:color-mix(in srgb,var(--ac) 18%,transparent)}
+#tab-gempic .qddq{margin-left:auto;color:var(--mut);font-variant-numeric:tabular-nums}
+#tab-gempic #gpCtl #gpSetInfo:has(.qchips){display:none}
+#tab-gempic #gpSetPick{padding:0;border:0;background:none}
+#tab-gempic #gpSetPick>.gl{display:none}
+#tab-gempic #gpCtl .qchips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+#tab-gempic #gpCtl .qchips .qrow{position:relative;margin:0;height:34px;padding:0 14px;gap:0;border:1px solid var(--bd);border-radius:99px;font-size:13.5px;font-weight:600;color:var(--mut)}
+#tab-gempic #gpCtl .qrow input{position:absolute;opacity:0;width:0;height:0;pointer-events:none}
+#tab-gempic #gpCtl .qrow:has(input:checked){background:color-mix(in srgb,#10b981 18%,transparent);border-color:#10b981;color:var(--tx)}
+#tab-gempic #gpCtl .qrow:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:2px}
+#tab-gempic #gpCtl .qrow .qinfo{display:none}
+#tab-gempic .qsrow>.qi{flex:none;width:46px;height:46px;margin:0;padding:0;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font-weight:700;font-size:15px}
+#tab-gempic .qsrow>.qi:hover{border-color:var(--ac);color:var(--tx)}
+#tab-gempic #gpDisc{display:none}
+#tab-gempic #gpDisc.on{display:block}
+#tab-gempic #gpQA{padding:0;border:0;background:none}
+#tab-gempic #gpQB{display:flex;gap:10px;align-items:stretch;margin-top:12px}
+#tab-gempic #gpQB .gq{gap:10px}
+#tab-gempic #gpQB .gq{flex:1;min-width:0}
+#tab-gempic #gpQB .qcust{flex:0 0 26%;margin:0}
+#tab-gempic #gpQB .qcust>span{display:none}
+#tab-gempic #gpQB .qcust input{width:100%;height:46px;text-align:center}
+@media (max-width:520px){
+#tab-gempic #gpQB{flex-wrap:wrap}
+#tab-gempic #gpQB .qcust{flex:1 1 100%}
+}
+#tab-gempic #gpActions .qwrap{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+#tab-gempic #gpActions .qwrap .gact{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;margin:0}
+#tab-gempic #gpActions .qwrap .gact .gb{order:0;grid-column:auto;height:50px;min-height:50px;margin:0}
+#tab-gempic #gpActions .qwrap #gpUndo{padding:0}
+#tab-gempic #gpActions #gpUndoT{display:none}
+#tab-gempic #gpActions .qwrap #gpRoll{font-size:15px}
+#tab-gempic #gpActions .qwrap .qsub{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+#tab-gempic #gpActions .qsub .gb{width:100%;height:46px;min-height:46px;grid-column:auto;order:0;margin:0}
+#tab-gempic #gpActions .qsub #gpLive{grid-column:1/-1}
+#tab-gempic #gpSetsBody[hidden]{display:block!important}
+#tab-gempic #gpSetsBox .gh{cursor:default}
+#tab-gempic #gpHist:not(.all) .gtbl table tr:nth-child(n+7){display:none}
+#tab-gempic #gpHistMore{margin-top:10px}
+#tab-gempic #gpHistMore[hidden]{display:none}
+@media (max-width:560px){
+#tab-gempic .qsrow{flex-wrap:wrap}
+#tab-gempic .qdd{flex:1 1 100%}
+#tab-gempic .qsrow>.gb{flex:1 1 0}
+#tab-gempic .qddb{padding:8px 38px 8px 12px}
+#tab-gempic .qddv{flex-direction:column;align-items:flex-start;gap:6px}
+#tab-gempic .qddc{gap:5px}
+#tab-gempic .qddc .pill,#tab-gempic .qddc .qchip{font-size:11.5px;padding:2px 9px}
+#tab-gempic .qddo{gap:6px 10px}
+#tab-gempic .qddo .qddc{order:3;flex:1 1 100%}
+#tab-gempic #gpSetForm{padding:12px}
+#tab-gempic #gpSetForm .qsft{margin-bottom:8px;font-size:14px}
+#tab-gempic #gpSetForm .qfl{margin:10px 0 4px;font-size:12px}
+#tab-gempic #gpSetForm input[type=text],#tab-gempic #gpSetForm input[type=number]{height:40px}
+#tab-gempic #gpSetForm #gpSGen{gap:6px}
+#tab-gempic #gpSetForm #gpSGen button{flex:1 1 calc(33.333% - 6px);min-width:0;min-height:34px;padding:2px 4px}
+#tab-gempic #gpSetForm #gpSGen button:nth-last-child(-n+2){flex-basis:calc(50% - 6px)}
+#tab-gempic #gpSetForm #gpSGen .pill{font-size:11px;padding:1px 8px}
+#tab-gempic #gpSetForm .seg{margin:0}
+#tab-gempic #gpSetForm .seg button{min-height:36px;font-size:13px}
+#tab-gempic #gpSetForm .qrow{margin-top:6px;padding:4px 0}
+#tab-gempic #gpSetForm .qfa{margin-top:12px}
+#tab-gempic #gpSetForm .qfa .gb{min-height:44px}
+}
+
+/* ---------- gempic tracker: quest-style single page (hero, set picker, quick add, sets, history, odds) ---------- */
+#tab-gempic .qhg{margin-top:3px;font-size:12.5px;color:var(--mut)}
+#tab-gempic .qhg .val{font-weight:700;color:var(--tx)}
+#tab-gempic #gpCostBox{padding:0;border:0;background:none;margin-top:14px}
+#tab-gempic #gpCostBox .gcost input{height:46px}
+#tab-gempic #gpFNb button{min-height:42px}
+#tab-gempic #gpFTyp button[hidden],#tab-gempic #gpFSet[hidden],#tab-gempic .qfa .gb[hidden]{display:none}
+#tab-gempic #gpForm.nbless #gpEpBox{display:none}
+#tab-gempic #gpDay .gpan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#tab-gempic .gsec{min-width:0}
+#tab-gempic #gpSetsBox .gh .sci{--c:#c084fc}
+
+/* hero cards (Gempic + Quest): tinted gradient card like the stat tiles, bigger glowing numbers */
+:is(#tab-gempic #gpHero,#tab-quest #qtHero){--c:#34d399;padding:18px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);box-shadow:0 4px 18px color-mix(in srgb,var(--c) 10%,transparent)}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qh{gap:16px}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qbig{font-size:clamp(46px,13vw,68px);font-weight:800;line-height:1;letter-spacing:-.03em;color:var(--pos);text-shadow:0 0 26px color-mix(in srgb,var(--c) 45%,transparent)}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qhl{margin-top:6px;font-size:14px;font-weight:500;color:var(--tx)}
+#tab-gempic #gpHero .qhg{display:flex;align-items:baseline;gap:8px;margin-top:12px;font-size:14px;font-weight:500;color:var(--tx)}
+#tab-gempic #gpHero .qhg .val{font-size:clamp(26px,7.5vw,36px);font-weight:800;line-height:1;letter-spacing:-.02em;color:#c084fc;text-shadow:0 0 20px color-mix(in srgb,#c084fc 45%,transparent)}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qh2{gap:22px}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qst b{font-size:clamp(22px,6vw,30px);font-weight:800;line-height:1.1;letter-spacing:-.02em;color:#60a5fa;text-shadow:0 0 18px color-mix(in srgb,#60a5fa 40%,transparent)}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qst:last-child b{color:var(--pos);text-shadow:0 0 18px color-mix(in srgb,var(--c) 40%,transparent)}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qst span{font-size:12.5px;margin-top:2px}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qprog{margin-top:16px}
+:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qbar{height:10px}
+@media (max-width:520px){:is(#tab-gempic #gpHero,#tab-quest #qtHero){padding:14px}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qh{flex-wrap:nowrap;align-items:center;gap:12px}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qh>div:first-child{min-width:0}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qh2{flex:none;flex-direction:column;gap:10px;text-align:right}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qst b{font-size:clamp(20px,5.8vw,26px)}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qst span{font-size:12px}:is(#tab-gempic #gpHero,#tab-quest #qtHero) .qbig{font-size:clamp(44px,14vw,60px)}}
+#tab-gempic #gpSetForm .gpQtOnly{display:none!important}
+#tab-gempic #gpSub{display:flex;gap:10px;margin:4px 0 14px}
+#tab-gempic #gpSub button{flex:1;min-width:0;margin:0;height:46px;padding:0 10px;border-radius:12px;font-size:15px;font-weight:700;background:var(--card);border:1px solid var(--bd);color:var(--tx)}
+#tab-gempic #gpSub button:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#tab-gempic #gpSub button.on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 22%,var(--card));box-shadow:0 0 0 1px var(--ac),0 4px 16px color-mix(in srgb,var(--ac) 30%,transparent)}
+@media (max-width:520px){#tab-gempic #gpSub{gap:6px}#tab-gempic #gpSub button{height:42px;font-size:14px}}
+#tab-gempic .gpv[hidden]{display:none}
+#tab-gempic .gpv>.gsec:first-child{margin-top:0}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -2446,23 +2847,32 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-gempic" hidden>
-<div id="gpTop">
-<div class="gc" style="--c:#c084fc"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="scl">Gems spent since last gempic</div><div class="scv val" id="gpGems">0</div><div class="scs" id="gpGemsNote">Total gems spent</div></div>
-<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></span><div class="scl">Times gem box rolled</div><div class="scv val" id="gpRolls">0</div><div class="scs" id="gpRollsNote">Total rolls</div></div>
-<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><div class="scl">Odds of a gempic next roll</div><div class="scv val" id="gpOdds">0.4%</div><div class="scs" id="gpOddsNote"></div></div>
+<div id="gpSub" role="tablist" aria-label="Gempic sections"><button type="button" role="tab" data-gv="track" aria-selected="true" class="on"><span>Track</span></button><button type="button" role="tab" data-gv="sets" aria-selected="false"><span>Sets</span></button><button type="button" role="tab" data-gv="history" aria-selected="false"><span>History</span></button><button type="button" role="tab" data-gv="odds" aria-selected="false"><span>Odds</span></button></div>
+<div class="gpv" id="gpv-track">
+<section class="card gsec" id="gpHero">
+<div class="qh">
+<div><div class="val qbig" id="gpRolls">0</div><div class="qhl">rolls since last gempic</div><div class="qhg"><b class="val" id="gpGems">0</b> gems spent</div><div class="qhs" id="gpRollsNote"></div><span id="gpGemsNote" hidden></span></div>
+<div class="qh2"><div class="qst"><b class="val" id="gpOdds">0.4%</b><span>chance next roll</span><small id="gpOddsNote"></small></div><div class="qst"><b class="val" id="gpSoFar">0%</b><span>chance so far</span></div></div>
 </div>
-
+<div class="qprog"><div class="qbar"><i id="gpBarFill" style="width:0%"></i></div></div>
+<p id="gpBarNote"></p>
+</section>
 <section class="card gsec" id="gpCtl">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Roll Settings</b></div></div>
-<div class="gpan">
-<div class="gp1"><div class="gl">Gems spent per roll (this box)</div><div class="gcost"><input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" aria-label="Gems spent per roll"><button type="button" id="gpCostDn" aria-label="Decrease gem cost">&minus;</button><button type="button" id="gpCostUp" class="gplus" aria-label="Increase gem cost">+</button></div></div>
-<label class="gp1 grr" for="gpReroll"><input type="checkbox" id="gpReroll"><span><b>Reroll (second chance on every roll)</b><small id="gpRrSub"></small></span></label>
-<div class="gp1" id="gpQA"><button type="button" class="gl gqh" id="gpQAH" aria-expanded="true" aria-controls="gpQB"><span>Quick Add Rolls</span><svg class="gchev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="gpQB"><div class="gq" id="gpQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div></div></div>
+<div class="gp1" id="gpSetPick">
+<div class="gl"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Gempic Set</span></div>
+<div class="qsrow"><div class="qdd" id="gpDD"><button type="button" class="qddb" id="gpDDB" aria-haspopup="listbox" aria-expanded="false" aria-label="Gempic set"><span class="qddv" id="gpDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="gpDDM" role="listbox" hidden></div></div><button type="button" class="gb sm" id="gpSetEditB">Edit</button><button type="button" class="gb sm" id="gpSetNew">New set</button><button type="button" class="qi" id="gpInfoB" aria-label="How the odds work">i</button></div>
+<div id="gpSetInfo"></div>
 </div>
+<div class="qchips"><label class="qrow" for="gpReroll"><input type="checkbox" id="gpReroll"><span>Reroll (second chance on every roll)</span><span class="qinfo" title="Each roll gets a second chance at the gempic."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
+<div class="gp1" id="gpCostBox"><div class="gl">Gems spent per roll (this box)</div><div class="gcost"><input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" aria-label="Gems spent per roll"><button type="button" id="gpCostDn" aria-label="Decrease gem cost">&minus;</button><button type="button" id="gpCostUp" class="gplus" aria-label="Increase gem cost">+</button></div></div>
+<div class="note" id="gpDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong. <span id="gpRrSub"></span></div>
+</section>
+<section class="card gsec" id="gpActions">
+<div class="gp1" id="gpQA"><button type="button" class="gl qqh" id="gpQAH" aria-expanded="true" aria-controls="gpQB"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Quick Add</span><svg class="qchev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="gpQB"><div class="gq" id="gpQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="25">25</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div><label class="qcust" for="gpAmt"><span>Custom</span><input id="gpAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of rolls to add" placeholder="Custom amount"></label></div></div>
 <div class="qwrap">
 <div class="gact">
-<button type="button" class="gb" id="gpUndo"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>Undo Last Roll</button>
-<button type="button" class="gb go" id="gpRoll"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="gpRollT">Roll</span></button>
+<button type="button" class="gb" id="gpUndo" aria-label="Undo roll" title="Undo last roll"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg><span id="gpUndoT">Undo Last Roll</span></button>
+<button type="button" class="gb go" id="gpRoll" aria-label="Add rolls"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="gpRollT">Roll</span></button>
 </div>
 <div class="qsub">
 <button type="button" class="gb hit sm" id="gpHit"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg>Got a gempic? Save and reset</button>
@@ -2471,13 +2881,17 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 </div>
 </section>
-
 <section class="card gsec" id="gpForm" hidden>
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="gt"><b id="gpFormTitle">Log your gempic</b><span>Record what you got and how many rolls and gems it took.</span></div></div>
+<div class="note" id="gpFSet" hidden style="margin:0 0 10px"></div>
 <label for="gpArtist">What you got</label><input id="gpArtist" maxlength="120" type="text" placeholder="Artist name" autocomplete="off" style="margin-bottom:8px"><input id="gpSong" maxlength="120" type="text" placeholder="Song name" autocomplete="off">
 <div class="lbl" style="margin:8px 0 0">Type</div>
 <div class="seg" id="gpFTyp"><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
-<div id="gpEpBox" hidden><label for="gpFNum">Epic #</label><input id="gpFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
+<div id="gpEpBox" hidden>
+<div class="lbl" style="margin:8px 0 0">Epic style</div>
+<div class="seg" id="gpFNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
+<div id="gpNumBox" hidden><label for="gpFNum">Epic #</label><input id="gpFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
+</div>
 <div class="lbl" style="margin:8px 0 0">Rarity</div>
 <div class="seg" id="gpFRar"><button type="button" data-q="c"><span class="pill r r-common">Common</span></button><button type="button" data-q="u"><span class="pill r r-uncommon">Uncommon</span></button><button type="button" data-q="r"><span class="pill r r-rare">Rare</span></button></div>
 <label for="gpFR">Rolls it took</label><input id="gpFR" type="number" min="0" step="1" inputmode="numeric" placeholder="Rolls it took">
@@ -2485,44 +2899,73 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="note" id="gpFNote">Saving adds it to your history and resets your roll counters.</div>
 <div class="qfa"><button type="button" class="gb go" id="gpFSave">Save</button><button type="button" class="gb" id="gpFCancel">Cancel</button></div>
 </section>
-
-<section class="card gsec">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Average to Get 1 Gempic</b><span id="gpExpNote"></span></div></div>
-<div class="gtbl"><table id="gpExp"></table></div>
-</section>
-
 <section class="card gsec" id="gpDayBox">
 <div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="gpDaySub"></span></div></div>
 <div id="gpDay"></div>
 </section>
-
-
+</div>
+<div class="gpv" id="gpv-sets" hidden>
+<section class="card gsec" id="gpSetsBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="gpSetsSum">Gempic Sets</b><span>Artists and genres are shared with the Quest Tracker. The gem price is only used here. Epic style and lyrics are set in the Quest Tracker.</span></div><div class="gx"><button type="button" class="gb sm" id="gpSetAdd">New set</button></div></div>
+<div id="gpSetsBody">
+<div id="gpSetForm" hidden>
+<div class="qsft" id="gpSFT">New set</div>
+<div class="note" style="margin:0 0 10px">Shared with the Quest Tracker: changing the artist or genre updates both. Gem price is only used here.</div>
+<label class="qfl" for="gpSName" style="margin-top:0">Artist</label><input id="gpSName" type="text" maxlength="60" placeholder="e.g. EDEN" autocomplete="off">
+<div class="qfl">Genre</div>
+<div class="seg" id="gpSGen"><button type="button" data-g="Pop"><span class="pill g g-pop">Pop</span></button><button type="button" data-g="Hip-hop"><span class="pill g g-hiphop">Hip-hop</span></button><button type="button" data-g="Indie"><span class="pill g g-indie">Indie</span></button><button type="button" data-g="K-pop"><span class="pill g g-kpop">K-pop</span></button><button type="button" data-g="Rock"><span class="pill g g-rock">Rock</span></button><button type="button" data-g="R&amp;B"><span class="pill g g-rnb">R&amp;B</span></button><button type="button" data-g="Latin"><span class="pill g g-latin">Latin</span></button><button type="button" data-g="Country"><span class="pill g g-country">Country</span></button><button type="button" data-g="Metal"><span class="pill g g-metal">Metal</span></button><button type="button" data-g="Electronic"><span class="pill g g-electronic">Electronic</span></button><button type="button" data-g="Classical &amp; Jazz"><span class="pill g g-classical">Classical &amp; Jazz</span></button></div>
+<div class="qfl gpQtOnly">Epic style</div>
+<div class="seg gpQtOnly" id="gpSNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
+<label class="qfl" for="gpSGems">Gem price per roll</label><input id="gpSGems" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" autocomplete="off">
+<label class="qrow gpQtOnly" for="gpSLy"><input type="checkbox" id="gpSLy"><span>Has lyrics</span><span class="qinfo" title="Turn off if this artist has no lyric drops."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<div class="qfa"><button type="button" class="gb" id="gpSDel" hidden style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))">Delete</button><button type="button" class="gb" id="gpSCancel">Cancel</button><button type="button" class="gb go" id="gpSSave">Save set</button></div>
+</div>
+<div class="gtbl"><table id="gpSetList"></table></div>
+</div>
+</section>
+</div>
+<div class="gpv" id="gpv-history" hidden>
 <section class="card gsec" id="gpHistBox">
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="gt"><b id="gpHistSum">Gempic History</b><span id="gpAvg"></span></div></div>
-<div id="gpHist"></div>
+<div id="gpHist"></div><button type="button" class="gb sm" id="gpHistMore" hidden>Show all</button>
+</section>
+</div>
+<div class="gpv" id="gpv-odds" hidden>
+<section class="card gsec" id="gpAvgBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Average to Get 1 Gempic</b><span id="gpExpNote"></span></div></div>
+<div class="gtbl"><table id="gpExp"></table></div>
 </section>
 </div>
 
-<div id="tab-quest" hidden>
-<div id="qtTop">
-<div class="gc" style="--c:#34d399"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><div class="scl">Quests since last pull</div><div class="scv val" id="qtQuests">0</div><div class="scs" id="qtQuestsNote"></div></div>
-<div class="gc" style="--c:#3b82f6"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><div class="scl">Odds of a pull next quest</div><div class="scv val" id="qtOdds">0.225%</div><div class="scs" id="qtOddsNote"></div></div>
-<div class="gc" style="--c:#a78bfa"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span><div class="scl">Chance of at least one so far</div><div class="scv val" id="qtSoFar">0%</div><div class="scs" id="qtSoFarNote">Across all quests logged</div></div>
 </div>
 
+<div id="tab-quest" hidden>
+<div id="qtSub" role="tablist" aria-label="Quest sections"><button type="button" role="tab" data-qv="track" aria-selected="true" class="on"><span>Track</span></button><button type="button" role="tab" data-qv="sets" aria-selected="false"><span>Sets</span></button><button type="button" role="tab" data-qv="history" aria-selected="false"><span>History</span></button><button type="button" role="tab" data-qv="odds" aria-selected="false"><span>Odds</span></button></div>
+<div class="qtv" id="qtv-track">
+<section class="card gsec" id="qtHero">
+<div class="qh">
+<div><div class="val qbig" id="qtQuests">0</div><div class="qhl">quests since last pull</div><div class="qhs" id="qtQuestsNote"></div></div>
+<div class="qh2"><div class="qst"><b class="val" id="qtOdds">0.225%</b><span>chance next quest</span><small id="qtOddsNote"></small></div><div class="qst"><b class="val" id="qtSoFar">0%</b><span>chance so far</span></div></div>
+</div>
+<div class="qprog"><div class="qbar"><i id="qtBarFill" style="width:0%"></i></div><b id="qtBarPct" hidden>0%</b></div>
+<p id="qtBarNote"></p><span id="qtSoFarNote" hidden></span>
+</section>
 <section class="card gsec" id="qtCtl">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Quest Settings &amp; Controls</b></div></div>
-<div class="gpan">
-<div class="gp1">
-<label class="qrow" for="qtReroll"><input type="checkbox" id="qtReroll"><span>Reroll (second chance on every quest)</span><span class="qinfo" title="Each quest gets a second chance at every drop."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<div class="gp1" id="qtSetPick">
+<div class="gl"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Quest Set</span></div>
+<div class="qsrow"><select id="qtSetSel" aria-label="Quest set"></select><button type="button" class="gb sm" id="qtSetEditB">Edit</button><button type="button" class="gb sm" id="qtSetNew">New set</button><button type="button" class="qi" id="qtInfoB" aria-label="How the odds work">i</button></div>
+<div id="qtSetInfo"></div>
+</div>
+<div class="qchips"><label class="qrow" for="qtReroll"><input type="checkbox" id="qtReroll"><span>Reroll (second chance on every quest)</span><span class="qinfo" title="Each quest gets a second chance at every drop."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
 <label class="qrow" for="qtExLy"><input type="checkbox" id="qtExLy"><span>Exclude lyrics from calculations</span><span class="qinfo" title="Only epics count as a pull. Lyric odds are left out of the math."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
-<label class="qrow" for="qtBoost"><input type="checkbox" id="qtBoost"><span>Rate boost</span><span class="qinfo" title="Shiny, lyric, and epic rates are 50% higher than usual."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
-</div>
+<label class="qrow" for="qtBoost"><input type="checkbox" id="qtBoost"><span>Rate boost</span><span class="qinfo" title="Shiny, lyric, and epic rates are 50% higher than usual."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
+<div class="note" id="qtDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong.</div>
+</section>
+<section class="card gsec" id="qtActions">
 <div class="gp1" id="qtQA"><button type="button" class="gl qqh" id="qtQAH" aria-expanded="true" aria-controls="qtQAB"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Quick Add</span><svg class="qchev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="qtQAB"><div class="gq" id="qtQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="25">25</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div><label class="qcust" for="qtAmt"><span>Custom</span><input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add" placeholder="Custom amount"></label></div></div>
-</div>
 <div class="qwrap">
 <div class="gact">
-<button type="button" class="gb" id="qtUndo" aria-label="Undo quests"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg><span id="qtUndoT">Undo Last Quest</span></button>
+<button type="button" class="gb" id="qtUndo" aria-label="Undo quests" title="Undo last quest"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg><span id="qtUndoT">Undo Last Quest</span></button>
 <button type="button" class="gb go" id="qtAdd" aria-label="Add quests"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="qtAddT">Add Quest</span></button>
 </div>
 <div class="qsub">
@@ -2531,11 +2974,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <button type="button" class="gb sm" id="qtLive"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="7" height="5" rx="1"/></svg><span id="qtLiveT">Live counter (PiP)</span></button>
 </div>
 </div>
-<div class="note" id="qtDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong.</div>
 </section>
-
 <section class="card gsec" id="qtForm" hidden>
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><div class="gt"><b id="qtFormTitle">Log your pull</b><span>Record what you pulled and how many quests it took.</span></div></div>
+<div class="note" id="qtFSet" hidden style="margin:0 0 10px"></div>
 <label for="qtArtist">What you pulled</label><input id="qtArtist" maxlength="120" type="text" placeholder="Artist name" autocomplete="off" style="margin-bottom:8px"><input id="qtSong" maxlength="120" type="text" placeholder="Song name" autocomplete="off">
 <div class="lbl" style="margin:8px 0 0">Type</div>
 <div class="seg" id="qtFTyp"><button type="button" data-t="s"><span class="pill r r-shiny">Shiny</span></button><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
@@ -2553,8 +2995,40 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="note" style="margin:4px 0 0">After fills in as before + quests, but you can edit both (for example if rerolls count differently).</div>
 <div class="qfa"><button type="button" class="gb go" id="qtFSave">Save</button><button type="button" class="gb" id="qtFCancel">Cancel</button></div>
 </section>
-
-<div class="qtwo qtwo2">
+<section class="card gsec" id="qtCoinBox">
+<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.8 0 2.5 5 1.3 5 3.9 0 1.1-1.1 1.8-2.5 1.8-1.1 0-2.1-.5-2.6-1.3M12 6.5V8m0 8v1.5"/></svg></span><div class="gt"><b>Quicksell Coins</b></div><div class="gx"><div class="pTot"><b id="qtCoinTot">0</b></div></div></div>
+<div class="qcrow"><input id="qtCoinV" type="number" min="0" step="1" inputmode="numeric" placeholder="Value" aria-label="Coin value of one rare"><span class="qcx">&times;</span><input id="qtCoinN" type="number" min="1" step="1" inputmode="numeric" placeholder="Times" aria-label="Number of rares quicksold"></div>
+<div class="qcrow qcbt"><button type="button" class="gb go" id="qtCoinAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="qtCoinAddT">Add Coins</span></button><button type="button" class="gb sq" id="qtCoinUndo" aria-label="Undo last add" title="Undo last add"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button><button type="button" class="gb sq" id="qtCoinReset" aria-label="Reset coins" title="Reset coins" style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div>
+<div class="note" id="qtCoinNote"></div>
+</section>
+</div>
+<div class="qtv" id="qtv-sets" hidden>
+<section class="card gsec" id="qtSetsBox">
+<div class="gh"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="qtSetsSum">Quest Sets</b><span>Track quests per artist. Saving a pull adds its quests to the selected set. Artists and genres are shared with the Gempic Tracker.</span></div><div class="gx"><button type="button" class="gb sm" id="qtSetAdd">New set</button><button type="button" class="gb sq" id="qtSetsTog" aria-expanded="true" aria-controls="qtSetsBody" aria-label="Collapse quest sets" title="Collapse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="qtSetsBody">
+<div id="qtSetForm" hidden>
+<div class="qsft" id="qtSFT">New set</div>
+<label class="qfl" for="qtSName" style="margin-top:0">Artist</label><input id="qtSName" type="text" maxlength="60" placeholder="e.g. EDEN" autocomplete="off">
+<div class="qfl">Genre</div>
+<div class="seg" id="qtSGen"><button type="button" data-g="Pop"><span class="pill g g-pop">Pop</span></button><button type="button" data-g="Hip-hop"><span class="pill g g-hiphop">Hip-hop</span></button><button type="button" data-g="Indie"><span class="pill g g-indie">Indie</span></button><button type="button" data-g="K-pop"><span class="pill g g-kpop">K-pop</span></button><button type="button" data-g="Rock"><span class="pill g g-rock">Rock</span></button><button type="button" data-g="R&amp;B"><span class="pill g g-rnb">R&amp;B</span></button><button type="button" data-g="Latin"><span class="pill g g-latin">Latin</span></button><button type="button" data-g="Country"><span class="pill g g-country">Country</span></button><button type="button" data-g="Metal"><span class="pill g g-metal">Metal</span></button><button type="button" data-g="Electronic"><span class="pill g g-electronic">Electronic</span></button><button type="button" data-g="Classical &amp; Jazz"><span class="pill g g-classical">Classical &amp; Jazz</span></button></div>
+<div class="qfl">Epic style</div>
+<div class="seg" id="qtSNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
+<label class="qrow" for="qtSLy"><input type="checkbox" id="qtSLy"><span>Has lyrics</span><span class="qinfo" title="Turn off if this artist has no lyric drops. Selecting the set then excludes lyrics from the odds."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<label class="qfl" for="qtSCnt">Current quest amount</label><input id="qtSCnt" type="number" min="0" step="1" inputmode="numeric" placeholder="Quests already done on this artist">
+<div class="qfa"><button type="button" class="gb" id="qtSDel" hidden style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))">Delete</button><button type="button" class="gb" id="qtSCancel">Cancel</button><button type="button" class="gb go" id="qtSSave">Save set</button></div>
+</div>
+<div class="gtbl"><table id="qtSetList"></table></div>
+</div>
+</section>
+</div>
+<div class="qtv" id="qtv-history" hidden>
+<section class="card gsec" id="qtHistBox">
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="gt"><b id="qtHistSum">Pull History</b><span id="qtAvg"></span></div></div>
+<div id="qtHist"></div><button type="button" class="gb sm" id="qtHistMore" hidden>Show all</button>
+</section>
+</div>
+<div class="qtv" id="qtv-odds" hidden>
+<div class="qstack">
 <section class="card gsec" id="qtOddsBox">
 <div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="gt"><b>Rarity Odds Per Quest</b><span>Each quest rolls every drop at once. Percentages account for your reroll setting.</span></div></div>
 <div class="gtbl"><table id="qtDrop"></table></div>
@@ -2564,26 +3038,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="gtbl"><table id="qtExp"></table></div>
 </section>
 </div>
-
-<div class="qtwo">
-<section class="card gsec" id="qtCoinBox">
-<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.2c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.8 0 2.5 5 1.3 5 3.9 0 1.1-1.1 1.8-2.5 1.8-1.1 0-2.1-.5-2.6-1.3M12 6.5V8m0 8v1.5"/></svg></span><div class="gt"><b>Quicksell Coins</b></div><div class="gx"><div class="pTot"><b id="qtCoinTot">0</b></div></div></div>
-<div class="qcrow"><input id="qtCoinV" type="number" min="0" step="1" inputmode="numeric" placeholder="Value" aria-label="Coin value of one rare"><span class="qcx">&times;</span><input id="qtCoinN" type="number" min="1" step="1" inputmode="numeric" placeholder="Times" aria-label="Number of rares quicksold"></div>
-<div class="qcrow qcbt"><button type="button" class="gb go" id="qtCoinAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="qtCoinAddT">Add Coins</span></button><button type="button" class="gb sq" id="qtCoinUndo" aria-label="Undo last add" title="Undo last add"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button><button type="button" class="gb sq" id="qtCoinReset" aria-label="Reset coins" title="Reset coins" style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div>
-<div class="note" id="qtCoinNote"></div>
-</section>
-
-<section class="card gsec">
-<div class="gh"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg></span><div class="gt"><b>Progress to Next Pull</b><span>Based on the odds of at least one pull so far.</span></div></div>
-<div class="qprog"><div class="qbar"><i id="qtBarFill" style="width:0%"></i></div><b id="qtBarPct">0%</b></div>
-<p id="qtBarNote"></p>
-</section>
 </div>
-
-<section class="card gsec" id="qtHistBox">
-<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg></span><div class="gt"><b id="qtHistSum">Pull History</b><span id="qtAvg"></span></div></div>
-<div id="qtHist"></div>
-</section>
 </div>
 
 <div id="tab-pass" hidden>
@@ -2853,8 +3308,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 
 <div id="tab-map" hidden>
 <div style="text-align:right"><button type="button" class="gb sm" id="gsOpen" style="display:none;margin:0 0 10px">Sound Guesser &rarr;</button></div>
-<section class="card gsec" id="agHintsSec">
-<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div><div class="gx"><button type="button" class="gb sm" id="agClear" aria-label="Clear all"><svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v5M14 11v5"/></svg><span class="gtxt">Clear all</span></button></div></div>
+<div id="agResetSec"><button type="button" class="gb sm" id="agClear" aria-label="Reset all" title="Reset all hints and guesses"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg><span class="gtxt">Reset all</span></button></div><section class="card gsec" id="agHintsSec">
+<div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div></div>
 <div id="agHints"></div>
 <button type="button" class="gb go" id="agAddHint"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Add hint</button>
 </section>
@@ -4244,8 +4699,16 @@ function agResults(keep){
   if(!keep)$("agList").scrollTop=0;
 }
 function agRender(){agHintsHtml();agGuessHtml();agResults()}
-$("agAddHint").onclick=()=>{const f=agFree()[0];if(!f)return;AG.hints.push({f:f,v:AF.find(x=>x[0]===f)[2]==="n"?"":AVALS[f][0]});agSave();agHintsHtml();agResults();const r=$("agHints").lastElementChild,i=r&&r.querySelector("input,select[data-k=v]");if(i)i.focus()};
-$("agClear").onclick=()=>{if(!AG.hints.length&&!AG.guesses.length)return;ask("Clear all hints and guesses?",()=>{AG.hints=[];AG.guesses=[];agShow=60;agSave();agRender()})};
+/* Each hint added in the Artist Guesser counts as one ad watched (you watch an ad to get a hint). Removing a hint later does not take the ad back.
+   Guests aren't counted. If the ads record hasn't loaded yet, the ad is held and added the moment it does, so the saved count is never overwritten. */
+let agAdPend=0;
+function agHintAd(){
+  if(isGuest())return;
+  if(!wLoaded.has(9)){agAdPend++;return}
+  adBump(AD_PER_ENTRY);saveDailyGems();try{dailyGemsRender()}catch(e){}
+}
+$("agAddHint").onclick=()=>{const f=agFree()[0];if(!f)return;AG.hints.push({f:f,v:AF.find(x=>x[0]===f)[2]==="n"?"":AVALS[f][0]});agSave();agHintsHtml();agResults();agHintAd();const r=$("agHints").lastElementChild,i=r&&r.querySelector("input,select[data-k=v]");if(i)i.focus()};
+$("agClear").onclick=()=>{if(!AG.hints.length&&!AG.guesses.length)return;ask("Reset all hints and guesses?",()=>{AG.hints=[];AG.guesses=[];agShow=60;agSave();agRender()})};
 function agPick(name){
   if(!AG.guesses.some(g=>g.n===name)){
     const blank=AG.guesses.find(g=>!g.n);
@@ -5769,11 +6232,11 @@ function dailyGames(){
     {id:"map",name:"Artist Guesser",desc:"Narrow down the mystery artist from your hints and guesses.",c:"#38bdf8",
      ic:'<path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/>',
      open:()=>showTab("map"),locked:()=>false,
-     stat:()=>[nfmt((AG.guesses||[]).length),"guesses logged"]},
+     stat:null},
     {id:"sound",name:"Sound Guesser",desc:"Match a song from a short clip.",c:"#2dd4bf",
      ic:'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/>',
      open:()=>sdOpen(),locked:()=>!canSound(),
-     stat:()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):[soundSoonText(),""]}
+     stat:()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:null):[soundSoonText(),""]}
   ];
 }
 function dailyRender(){
@@ -5781,8 +6244,8 @@ function dailyRender(){
   const safe=f=>{try{return f()}catch(e){return["\u2013",""]}};
   const cards=dailyGames().map(x=>{
     let lock=false;try{lock=!!x.locked()}catch(e){}
-    const v=safe(x.stat);
-    return `<div class="card tile${lock?" soon":""}" style="--c:${x.c}" data-dy="${x.id}" role="button" tabindex="${lock?-1:0}"${lock?' aria-disabled="true"':""}><span class="ti"><svg viewBox="0 0 24 24">${x.ic}</svg></span><div class="tb"><div class="tn">${x.name}</div><div class="tl">${x.desc}</div><div class="tv">${v[0]}</div><div class="tl">${v[1]}</div></div></div>`;
+    const v=x.stat?safe(x.stat):null;
+    return `<div class="card tile${lock?" soon":""}" style="--c:${x.c}" data-dy="${x.id}" role="button" tabindex="${lock?-1:0}"${lock?' aria-disabled="true"':""}><span class="ti"><svg viewBox="0 0 24 24">${x.ic}</svg></span><div class="tb"><div class="tn">${x.name}</div><div class="tl">${x.desc}</div>${v?`<div class="tv">${v[0]}</div><div class="tl">${v[1]}</div>`:""}</div></div>`;
   });
   g.innerHTML=cards.join("");
 }
@@ -5836,7 +6299,9 @@ async function loadDailyGems(){
   let local=null;try{local=JSON.parse(LS("tracker.dailyGems")||"null")}catch(e){}
   if(!dgDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:9,data:dgNorm(local)},{onConflict:"user_id,id"}))}
-  dg=dgNorm(d);dailyGemsRender();try{agClaimRefresh();sdClaimRefresh()}catch(e){}
+  dg=dgNorm(d);
+  if(agAdPend){const k=agAdPend;agAdPend=0;for(let q=0;q<k;q++)adBump(AD_PER_ENTRY);saveDailyGems()}
+  dailyGemsRender();try{agClaimRefresh();sdClaimRefresh()}catch(e){}
 }
 function dailyGemsRender(){
   const pill=$("dgPill");if(!pill)return;
@@ -6344,6 +6809,7 @@ async function badSession(msg){
 }
 async function loadAll(quiet){
   if(!quiet)setStatus("Loading...");
+  const hp=loadHome(); /* home layout starts loading right away, in parallel with everything else */
   const [st,lg,ss,ep,sl]=await Promise.all([
     sb.from("shiny_state").select("*").eq("id",1).maybeSingle(),
     sb.from("shiny_log").select("*").order("at",{ascending:false}).limit(500),
@@ -6352,7 +6818,7 @@ async function loadAll(quiet){
     fetchAll("epic_slots")
   ]);
   const err=st.error||lg.error||ss.error||ep.error||sl.error;
-  if(err){if(isAuthErr(err)){badSession();return false}setStatus("Load failed: "+err.message,true);return false}
+  if(err){if(isAuthErr(err)){badSession();return false}ovReady=true;setStatus("Load failed: "+err.message,true);return false}
   if(!st.data)await sb.from("shiny_state").insert({id:1});
   const r=st.data||{};
   s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
@@ -6381,20 +6847,10 @@ async function loadAll(quiet){
   applySet();
   calc();renderLog();renderSets();renderEpics();renderMeta();
   epArtPull().then(epArtPush).catch(()=>{});
-  await loadPass();
-  await loadEvent();
-  await loadGempic();
-  await loadQuest();
-  await loadBuys();
-  await loadNotes();
-  await loadNav();
-  await loadHome();
-  await loadArPresets();
-  await loadDailyGems();
-  await loadStreak();
-  await loadMisc();
-  await loadAgPref();
-    renderOverview();
+  /* every loader reads its own pass_state row and fills its own variables, so they run together instead of one after another */
+  await Promise.all([hp,loadPass(),loadEvent(),loadGempic(),loadQuest(),loadBuys(),loadNotes(),loadNav(),loadArPresets(),loadDailyGems(),loadStreak(),loadMisc(),loadAgPref()]);
+  ovReady=true;
+  renderOverview();
   if(!quiet)setStatus("Saved");
   return true;
 }
@@ -7033,20 +7489,20 @@ $("evHist").addEventListener("click",ev2=>{
 });
 
 /* ---------- gempic tracker ---------- */
-const GP=0.004,GP_LOG_MAX=3000,GP_DAY=864e5,GP_QUICK=[1,5,10,50,100],GP_COSTSTEP=5;
+const GP=0.004,GP_LOG_MAX=3000,GP_DAY=864e5,GP_QUICK=[1,5,10,25,50,100],GP_COSTSTEP=5;
 const gpNum=v=>Math.max(0,Math.floor(Number(v))||0);
 const gpP=x=>x?1-(1-GP)*(1-GP):GP;
 const gpPct=(p,d)=>Number((p*100).toFixed(d))+"%";
 const gpWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
-function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,start:+d.start||0,seq:gpNum(d.seq),
+function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,setId:String(d.setId||"").slice(0,24),start:+d.start||0,seq:gpNum(d.seq),
   r:Array.isArray(d.r)?d.r.map(e=>({c:gpNum(e&&e.c),x:e&&e.x?1:0})):[],
   log:Array.isArray(d.log)?d.log.map(e=>({i:gpNum(e&&e.i),t:+(e&&e.t)||0,c:gpNum(e&&e.c),x:e&&e.x?1:0,h:e&&e.h?1:0})).filter(e=>e.t>=Date.now()-GP_DAY).slice(0,GP_LOG_MAX):[],
-  history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr),artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),rar:["c","u","r"].includes(h.rar)?h.rar:"",typ:h.typ==="e"||h.typ==="l"?h.typ:"",nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?gpNum(h.num):0})):[]}}
+  history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,rolls:gpNum(h.rolls),gems:gpNum(h.gems),rr:gpNum(h.rr),artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),rar:["c","u","r"].includes(h.rar)?h.rar:"",typ:h.typ==="e"||h.typ==="l"?h.typ:"",nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?gpNum(h.num):0,sid:String(h.sid||"").slice(0,24)})):[]}}
 function gpTitle(h){return h.song&&h.artist?h.song+" \u2013 "+h.artist:(h.song||h.artist||"")}
 const GPRAR={c:["common","Common"],u:["uncommon","Uncommon"],r:["rare","Rare"]};
 let gp=gpNorm(),gpDB=true,gpT=null;
 const gpSum=()=>({n:gp.r.length,gems:gp.r.reduce((a,e)=>a+e.c,0),rr:gp.r.filter(e=>e.x).length});
-let gpStep=(()=>{const v=gpNum(LS("tracker.step.gempic"));return GP_QUICK.includes(v)?v:1})();
+let gpStep=(()=>{const v=gpNum(LS("tracker.step.gempic"));return v>=1&&v<=1000?v:1})();
 function gpDayWhen(t){
   const d=new Date(t),n=new Date(),tm=d.toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"});
   return d.toDateString()===n.toDateString()?"Today, "+tm:"Yesterday, "+tm;
@@ -7060,22 +7516,28 @@ function gpRenderDay(){
 setInterval(()=>{const t=$("tab-gempic");if(t&&!t.hidden)renderGempic()},60000);
 function renderGempic(){
   if(window.gpLiveDraw)gpLiveDraw();
+  if(typeof gpSetRender==="function")gpSetRender();
   const q=gpSum(),next=gpP(gp.reroll),ex=1/next;
   let miss=1;gp.r.forEach(e=>miss*=1-gpP(e.x));
+  const pct=(1-miss)*100;
+  $("gpRolls").textContent=nfmt(q.n);
+  $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?nfmt(q.rr)+" with reroll":"";
   $("gpGems").textContent=nfmt(q.gems);
   $("gpGemsNote").textContent="Total gems spent";
-  $("gpRolls").textContent=nfmt(q.n);
-  $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?"Total rolls \u00b7 "+nfmt(q.rr)+" with reroll":"Total rolls";
   $("gpOdds").textContent=gpPct(next,3);
-  $("gpOddsNote").textContent="About 1 in "+nfmt(Math.round(ex))+" rolls"+(q.n?" \u00b7 "+gpPct(1-miss,1)+" so far":"");
+  $("gpOddsNote").textContent="About 1 in "+nfmt(Math.round(ex))+" rolls";
+  $("gpSoFar").textContent=Number(pct.toFixed(1))+"%";
+  $("gpBarFill").style.width=Math.min(100,pct).toFixed(1)+"%";
+  $("gpBarNote").textContent=q.n?"There is a "+Number(pct.toFixed(1))+"% chance you have gotten at least one gempic in your "+nfmt(q.n)+" roll"+(q.n===1?"":"s")+".":"Add rolls to see your chance of a gempic build up.";
   const two="each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll.";
   $("gpRrSub").textContent=gp.reroll?"Reroll is on: "+two:"Reroll is off: each roll has one chance at "+gpPct(GP,1)+".";
   $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+", about "+nfmt(Math.round(ex))+" rolls per gempic.";
   $("gpExp").innerHTML='<tr><th>Box</th><th class="c">Pulls</th><th class="r">Gems</th></tr>'+[5,10,20,30,40,50,60].map(c=>`<tr><td class="b">${c} gem artist</td><td class="c">${nfmt(Math.round(ex))}</td><td class="r b">${nfmt(Math.round(ex*c))}</td></tr>`).join("");
   if(document.activeElement!==$("gpCost"))$("gpCost").value=gp.cost||"";
+  if(document.activeElement!==$("gpAmt"))$("gpAmt").value=gpStep;
   $("gpReroll").checked=gp.reroll;
   $("gpQuick").querySelectorAll("button").forEach(b=>b.classList.toggle("on",+b.dataset.q===gpStep));
-  $("gpRollT").textContent=gpStep>1?"Roll \u00d7"+gpStep:"Roll";
+  $("gpRollT").textContent=gpStep>1?"Add Roll \u00d7"+gpStep:"Add Roll";
   $("gpUndo").disabled=!q.n;$("gpHit").disabled=!q.n;$("gpReset").disabled=!q.n;
   gpRenderDay();
   const H=gp.history;
@@ -7083,10 +7545,12 @@ function renderGempic(){
   $("gpAvg").textContent=H.length?"Average per gempic: "+nfmt(Math.round(H.reduce((a,h)=>a+h.rolls,0)/H.length))+" rolls, "+nfmt(Math.round(H.reduce((a,h)=>a+h.gems,0)/H.length))+" gems":"No gempics saved yet.";
   $("gpHist").innerHTML=H.length?'<div class="gtbl"><table><tr><th>Gempic</th><th class="c">Rolls</th><th class="c">Gems spent</th><th></th></tr>'+H.map((h,i)=>{
     const ttl=gpTitle(h),head=ttl?esc(ttl):(h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t));
-    const ep=h.typ==="e"&&h.num?"Epic #"+nfmt(h.num):"";
-    const sub=(ttl?"Saved "+fmtD(h.t):"")+(ttl&&ep?" \u00b7 ":"")+ep;
+    const ep=h.typ==="e"?(h.nb==="n"?(h.num?"Epic #"+nfmt(h.num):"Numbered"):h.nb==="l"?"Numberless":""):"";
+    const hs=h.sid&&typeof qtSetBy==="function"?qtSetBy(h.sid):null;
+    const sub=[ttl?"Saved "+fmtD(h.t):"",ep,hs?"Set: "+esc(hs.name):""].filter(Boolean).join(" \u00b7 ");
     const pl=(c,l)=>`<span class="pill r r-${c}">${l}</span>`;
-    return `<tr><td class="qpc"><div class="qpt"><strong>${head}</strong>${h.typ?pl(h.typ==="e"?"epic":"lyrics",h.typ==="e"?"Epic":"Lyric"):""}${h.rar?pl(GPRAR[h.rar][0],GPRAR[h.rar][1]):""}</div>${sub?`<div class="qsubl">${sub}</div>`:""}</td><td class="c b">${nfmt(h.rolls)}${h.rr?`<div class="qsubl">${nfmt(h.rr)} with reroll</div>`:""}</td><td class="c">${nfmt(h.gems)}</td><td class="r"><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></td></tr>`}).join("")+'</table></div>':"";
+    return `<tr><td class="qpc"><div class="qpt"><strong>${head}</strong>${h.typ?pl(h.typ==="e"?"epic":"lyrics",h.typ==="e"?"Epic":"Lyric"):""}${h.rar?pl(GPRAR[h.rar][0],GPRAR[h.rar][1]):""}</div>${sub?`<div class="qsubl">${sub}</div>`:""}</td><td class="c b">${nfmt(h.rolls)}${h.rr?`<div class="qsubl">${nfmt(h.rr)} with reroll</div>`:""}<div class="qsubl qacm">${nfmt(h.gems)} gems</div></td><td class="c">${nfmt(h.gems)}</td><td class="r"><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry">Edit</button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></td></tr>`}).join("")+'</table></div>':"";
+  const hm=$("gpHistMore");hm.hidden=H.length<=5;hm.textContent=$("gpHist").classList.contains("all")?"Show fewer":"Show all "+H.length;
 }
 function saveGempic(){
   clearTimeout(gpT);dirty.delete("gp");
@@ -7108,8 +7572,11 @@ async function loadGempic(){
 }
 $("gpQuick").addEventListener("click",e=>{
   const b=e.target.closest("button[data-q]");if(!b)return;
-  gpStep=+b.dataset.q;LS("tracker.step.gempic",String(gpStep));renderGempic();
+  gpStep=+b.dataset.q;$("gpAmt").value=gpStep;LS("tracker.step.gempic",String(gpStep));renderGempic();
 });
+const gpAmtV=()=>Math.min(1000,Math.max(1,Math.floor(Number($("gpAmt").value))||1));
+$("gpAmt").addEventListener("input",()=>{gpStep=gpAmtV();renderGempic()});
+$("gpAmt").addEventListener("change",()=>{gpStep=gpAmtV();$("gpAmt").value=gpStep;LS("tracker.step.gempic",String(gpStep));renderGempic()});
 $("gpCost").addEventListener("input",()=>{gp.cost=gpNum($("gpCost").value);schedGempic()});
 $("gpCostDn").onclick=()=>{gp.cost=Math.max(0,gp.cost-GP_COSTSTEP);$("gpCost").value=gp.cost||"";saveGempic();renderGempic()};
 $("gpCostUp").onclick=()=>{gp.cost+=GP_COSTSTEP;$("gpCost").value=gp.cost;saveGempic();renderGempic()};
@@ -7127,7 +7594,7 @@ function gpDoRoll(n){
 $("gpRoll").onclick=()=>gpDoRoll(gpStep);
 /* Quick Add Rolls is collapsible on mobile (remembered) */
 (function(){
-  const h=$("gpQAH"),b=$("gpQB"),mq=window.matchMedia("(max-width:820px)");
+  const h=$("gpQAH"),b=$("gpQB"),mq=window.matchMedia("(max-width:520px)");
   const set=o=>{h.setAttribute("aria-expanded",o?"true":"false");b.hidden=!o};
   const sync=()=>set(!mq.matches||LS("tracker.gpQuickOpen")!=="0");
   h.addEventListener("click",()=>{if(!mq.matches)return;const o=b.hidden;LS("tracker.gpQuickOpen",o?"1":"0");set(o)});
@@ -7288,17 +7755,26 @@ $("gpUndo").onclick=()=>{
   if(!gp.r.length)gp.start=0;
   saveGempic();renderGempic();
 };
-let gpEdit=-1,gpFRar="",gpFTyp="";
-function gpSyncEp(){$("gpEpBox").hidden=gpFTyp!=="e"}
+let gpEdit=-1,gpFRar="",gpFTyp="",gpFNb="",gpFSid="";
+function gpSyncEp(){
+  $("gpEpBox").hidden=gpFTyp!=="e";
+  $("gpNumBox").hidden=gpFTyp!=="e"||gpFNb!=="n";
+  [...$("gpFNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===gpFNb));
+}
 function gpOpenForm(i){
   gpEdit=i;const h=i>=0?gp.history[i]:null,q=gpSum();
+  const S=h?null:gpSetCur();gpFSid=S?S.id:"";
+  const hs=h&&h.sid?qtSetBy(h.sid):null,ns=S||hs;
   $("gpFormTitle").textContent=h?"Edit gempic":"Log your gempic";
-  $("gpArtist").value=h?h.artist:"";$("gpSong").value=h?h.song:"";
+  $("gpArtist").value=h?h.artist:(S?S.name:"");$("gpSong").value=h?h.song:"";
   $("gpFNum").value=h&&h.num?h.num:"";
-  gpFRar=h?h.rar:"";gpFTyp=h?h.typ:"";
+  gpFRar=h?h.rar:"";gpFTyp=h?h.typ:"";gpFNb=h?h.nb:(S?S.nb:"");
   [...$("gpFTyp").children].forEach(b=>b.classList.toggle("on",b.dataset.t===gpFTyp));
   [...$("gpFRar").children].forEach(b=>b.classList.toggle("on",b.dataset.q===gpFRar));
   gpSyncEp();
+  $("gpForm").classList.toggle("nbless",!!(ns&&ns.nb==="l"));
+  const fs=$("gpFSet");fs.hidden=!hs;if(hs)fs.innerHTML="Set: <b>"+esc(hs.name)+"</b>.";
+  $("gpFTyp").querySelector('[data-t="l"]').hidden=!!(S&&!S.ly);
   $("gpFR").value=h?h.rolls:(q.n||"");$("gpFG").value=h?h.gems:(q.gems||"");
   $("gpFNote").hidden=!!h;
   $("gpForm").hidden=false;$("gpForm").scrollIntoView({block:"nearest",behavior:"smooth"});$("gpArtist").focus();
@@ -7307,25 +7783,27 @@ const gpCloseForm=()=>{$("gpForm").hidden=true;gpEdit=-1};
 $("gpHit").onclick=()=>{if(!gp.r.length)return;gpOpenForm(-1)};
 $("gpFRar").addEventListener("click",e2=>{const b=e2.target.closest("button[data-q]");if(!b)return;gpFRar=gpFRar===b.dataset.q?"":b.dataset.q;[...$("gpFRar").children].forEach(x=>x.classList.toggle("on",x.dataset.q===gpFRar))});
 $("gpFTyp").addEventListener("click",e2=>{const b=e2.target.closest("button[data-t]");if(!b)return;gpFTyp=gpFTyp===b.dataset.t?"":b.dataset.t;[...$("gpFTyp").children].forEach(x=>x.classList.toggle("on",x.dataset.t===gpFTyp));gpSyncEp()});
+$("gpFNb").addEventListener("click",e2=>{const b=e2.target.closest("button[data-n]");if(!b)return;gpFNb=gpFNb===b.dataset.n?"":b.dataset.n;gpSyncEp()});
 $("gpFCancel").onclick=gpCloseForm;
 $("gpFSave").onclick=()=>{
-  const artist=$("gpArtist").value.trim().slice(0,120),song=$("gpSong").value.trim().slice(0,120),nb=gpFTyp==="e"?"n":"",num=nb==="n"?gpNum($("gpFNum").value):0,rolls=gpNum($("gpFR").value),gems=gpNum($("gpFG").value);
+  const artist=$("gpArtist").value.trim().slice(0,120),song=$("gpSong").value.trim().slice(0,120),nb=gpFTyp==="e"?gpFNb:"",num=nb==="n"?gpNum($("gpFNum").value):0,rolls=gpNum($("gpFR").value),gems=gpNum($("gpFG").value);
   if(gpEdit>=0){
     const h=gp.history[gpEdit];if(h){h.artist=artist;h.song=song;h.typ=gpFTyp;h.nb=nb;h.num=num;h.rar=gpFRar;h.rolls=rolls;h.gems=gems}
   }else{
-    const q=gpSum(),e={t:Date.now(),start:gp.start,rolls:rolls,gems:gems,rr:q.rr,artist:artist,song:song,typ:gpFTyp,nb:nb,num:num,rar:gpFRar};
+    const q=gpSum(),FS=gpSetBy(gpFSid),e={t:Date.now(),start:gp.start,rolls:rolls,gems:gems,rr:q.rr,artist:artist,song:song,typ:gpFTyp,nb:nb,num:num,rar:gpFRar,sid:FS?FS.id:""};
     if(gp.log.length)gp.log[0].h=1;
-    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,seq:gp.seq,log:gp.log,history:[e,...gp.history]});
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,setId:gp.setId,seq:gp.seq,log:gp.log,history:[e,...gp.history]});
   }
   gpCloseForm();saveGempic();renderGempic();
 };
 $("gpReset").onclick=()=>{
   if(!gp.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,seq:gp.seq,log:gp.log,history:gp.history});
+    gp=gpNorm({cost:gp.cost,reroll:gp.reroll,setId:gp.setId,seq:gp.seq,log:gp.log,history:gp.history});
     saveGempic();renderGempic();
   });
 };
+$("gpHistMore").addEventListener("click",()=>{$("gpHist").classList.toggle("all");renderGempic()});
 $("gpHist").addEventListener("click",e2=>{
   const ed=e2.target.closest("button[data-hedit]");
   if(ed){gpOpenForm(+ed.dataset.hedit);return}
@@ -7333,7 +7811,6 @@ $("gpHist").addEventListener("click",e2=>{
   const i=+b.dataset.hdel;
   ask("Delete this history entry?",()=>{gp.history.splice(i,1);saveGempic();renderGempic()});
 });
-renderGempic();
 
 /* ---------- artist overview ---------- */
 const AR={tok:"",exp:0,q:[],busy:0,warned:0,io:null};
@@ -8052,11 +8529,102 @@ const qtPullIdx=()=>qt.exLy?[1]:[1,2];
 const qtP=(x,b)=>qtPd(qtPullIdx(),x,b);
 const qtPct=p=>Number((p*100).toFixed(4))+"%";
 const qtN=v=>Math.max(0,Math.floor(+v||0));
-function qtNorm(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,boost:!!d.boost,total:qtN(d.total),run:(d.run==null?qtN(d.total):Math.max(qtN(d.run),qtN(d.total))),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),coins:Math.min(1e15,qtN(d.coins)),clog:Array.isArray(d.clog)?d.clog.slice(0,QT_LOG_MAX).map(e=>({t:+(e&&e.t)||0,v:qtN(e&&e.v),n:qtN(e&&e.n),c:qtN(e&&e.c)})).filter(e=>e.c>0):[],log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0,b:e.b?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta)})):[]}}
+const qtSetNorm=s=>({id:String(s.id).slice(0,24),name:String(s.name||"").trim().slice(0,60)||"Untitled",genre:String(s.genre||"").trim().slice(0,40),nb:s.nb==="n"||s.nb==="l"?s.nb:"",ly:s.ly!==false,cnt:Math.min(1e9,qtN(s.cnt)),gems:Math.min(1e6,qtN(s.gems))});
+function qtNorm(d){d=d||{};const o=qtNorm0(d),seen=new Set();
+  o.sets=Array.isArray(d.sets)?d.sets.filter(s=>s&&s.id&&!seen.has(String(s.id))&&seen.add(String(s.id))).slice(0,200).map(qtSetNorm):[];
+  o.setId=o.sets.some(s=>s.id===d.setId)?d.setId:"";return o}
+function qtNorm0(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,boost:!!d.boost,total:qtN(d.total),run:(d.run==null?qtN(d.total):Math.max(qtN(d.run),qtN(d.total))),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),coins:Math.min(1e15,qtN(d.coins)),clog:Array.isArray(d.clog)?d.clog.slice(0,QT_LOG_MAX).map(e=>({t:+(e&&e.t)||0,v:qtN(e&&e.v),n:qtN(e&&e.n),c:qtN(e&&e.c)})).filter(e=>e.c>0):[],log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0,b:e.b?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta),sid:String(h.sid||"").slice(0,24)})):[]}}
 let qt=qtNorm(),qtDB=true;
 function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
 function qtUndoInfo(){const lg=qt.log[0],n=qt.r.length;return lg&&lg.n>0&&lg.n<=n&&lg.tot===n?lg:null}
+/* ---------- quest sets: per-artist settings + running quest count ---------- */
+const QT_SETS_MAX=200,QT_SET_NB={n:"Numbered epics",l:"Numberless epics"};
+const qtSetBy=id=>id?(qt.sets.find(s=>s.id===id)||null):null;
+const qtSetCur=()=>qtSetBy(qt.setId);
+/* quests this run that no set has counted yet (a saved shiny already added its share) */
+const qtRunN=()=>Math.max(0,qt.r.length-qt.cnt);
+/* a set without lyrics turns on "exclude lyrics" so the odds match that artist */
+const qtApplySet=()=>{const s=qtSetCur();if(s)qt.exLy=!s.ly};
+const QT_GEN=[["Pop","pop"],["Hip-hop","hiphop"],["Indie","indie"],["K-pop","kpop"],["Rock","rock"],["R&B","rnb"],["Latin","latin"],["Country","country"],["Metal","metal"],["Electronic","electronic"],["Classical & Jazz","classical"]];
+const qtGK=g=>String(g||"").toLowerCase().replace(/[^a-z0-9]/g,"");
+/* wiki genre pill; a genre typed before the picker existed falls back to a plain chip */
+const qtGenPill=g=>{if(!g)return"";const m=QT_GEN.find(x=>qtGK(x[0])===qtGK(g));return m?'<span class="pill g g-'+m[1]+'">'+esc(m[0])+'</span>':'<span class="qchip" style="--c:#3b82f6">'+esc(g)+'</span>'};
+const qtSetChips=s=>qtGenPill(s.genre)+(s.nb?'<span class="qchip" style="--c:#f59e0b">'+QT_SET_NB[s.nb]+'</span>':"")+'<span class="qchip" style="--c:'+(s.ly?"#c084fc":"#9a9a94")+'">'+(s.ly?"Lyrics on":"No lyrics")+'</span>';
+function qtSetRender(){
+  const sel=$("qtSetSel"),cur=qtSetCur();
+  const L=[...qt.sets].sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}));
+  const sig=L.map(s=>s.id+"\u0001"+s.name).join("\u0002");
+  if(sel.dataset.sig!==sig){sel.dataset.sig=sig;sel.innerHTML='<option value="">No set</option>'+L.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name)+'</option>').join("")}
+  sel.value=cur?cur.id:"";
+  $("qtSetEditB").disabled=!cur;
+  const run=qtRunN();
+  $("qtSetInfo").innerHTML=cur
+    ?'<div class="qchips">'+qtSetChips(cur)+'</div><div class="qsline"><b>'+esc(cur.name)+'</b>: '+nfmt(cur.cnt)+' saved'+(run?' + '+nfmt(run)+' this run = <b>'+nfmt(cur.cnt+run)+'</b> after your pull':'')+'.</div>'
+    :'<div class="qsline">'+(qt.sets.length?"No set selected, so a saved pull won't add to any artist's count.":"Make a set to track the quest count, genre, epic style and lyrics for each artist.")+'</div>';
+  $("qtSetsSum").textContent="Quest Sets"+(qt.sets.length?" ("+qt.sets.length+")":"");
+  $("qtSetList").innerHTML=qt.sets.length?'<tr><th>Set</th><th class="c">Quests</th><th></th></tr>'+L.map(s=>{
+    const on=s.id===qt.setId,sub=[s.nb?QT_SET_NB[s.nb]:"",s.ly?"Lyrics":"No lyrics"].filter(Boolean).join(" \u00b7 ");
+    return '<tr class="'+(on?"on":"")+'"><td class="qpc"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+(on?'<span class="qchip" style="--c:#34d399">Active</span>':"")+'</div><div class="qsubl">'+sub+'</div></td><td class="c b">'+nfmt(s.cnt)+'</td><td class="r"><span class="qact">'+(on?"":'<button type="button" class="x" data-suse="'+esc(s.id)+'">Use</button>')+'<button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
+  }).join(""):'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>';
+}
+let qtSetEdit="",qtSNb="",qtSGen="";
+/* Quest Sets box can be collapsed; the choice is remembered on this device */
+function qtSetsShow(open,save){
+  $("qtSetsBody").hidden=!open;$("qtSetsBox").classList.toggle("shut",!open);
+  const t=$("qtSetsTog");t.setAttribute("aria-expanded",String(open));
+  t.setAttribute("aria-label",open?"Collapse quest sets":"Expand quest sets");t.title=open?"Collapse":"Expand";
+  if(save)LS("tracker.qtSetsOpen",open?"1":"0");
+}
+qtSetsShow(LS("tracker.qtSetsOpen")!=="0");
+$("qtSetsTog").addEventListener("click",()=>qtSetsShow($("qtSetsBody").hidden,true));
+$("qtSetsBox").querySelector(".gh").addEventListener("click",e=>{if(e.target.closest(".gx"))return;qtSetsShow($("qtSetsBody").hidden,true)});
+const qtSGenSync=()=>[...$("qtSGen").children].forEach(b=>b.classList.toggle("on",!!qtSGen&&qtGK(b.dataset.g)===qtGK(qtSGen)));
+$("qtSGen").addEventListener("click",e=>{const b=e.target.closest("button[data-g]");if(!b)return;qtSGen=qtGK(qtSGen)===qtGK(b.dataset.g)?"":b.dataset.g;qtSGenSync()});
+const qtSNbSync=()=>[...$("qtSNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===qtSNb));
+function qtSetOpen(id){
+  const s=id==="new"?null:qtSetBy(id);if(id!=="new"&&!s)return;
+  qtSetEdit=id;
+  $("qtSFT").textContent=s?"Edit set":"New set";
+  $("qtSName").value=s?s.name:"";qtSGen=s?s.genre:"";qtSGenSync();qtSNb=s?s.nb:"";
+  $("qtSLy").checked=s?s.ly:true;$("qtSCnt").value=s?s.cnt:"";
+  qtSNbSync();$("qtSDel").hidden=!s;
+  qtSetsShow(true);$("qtSetForm").hidden=false;$("qtSetsBox").scrollIntoView({block:"nearest",behavior:"smooth"});$("qtSName").focus();
+}
+const qtSetClose=()=>{$("qtSetForm").hidden=true;qtSetEdit=""};
+$("qtSetNew").onclick=$("qtSetAdd").onclick=()=>qtSetOpen("new");
+$("qtSetEditB").onclick=()=>{const s=qtSetCur();if(s)qtSetOpen(s.id)};
+$("qtSetSel").addEventListener("change",()=>{qt.setId=$("qtSetSel").value;qtApplySet();saveQuest();renderQuest()});
+$("qtSNb").addEventListener("click",e=>{const b=e.target.closest("button[data-n]");if(!b)return;qtSNb=qtSNb===b.dataset.n?"":b.dataset.n;qtSNbSync();if(qtSNb==="l")$("qtSLy").checked=false /* numberless artists have no lyrics */});
+$("qtSetList").addEventListener("click",e=>{
+  const u=e.target.closest("button[data-suse]"),d=e.target.closest("button[data-sedit]");
+  if(u){qt.setId=u.dataset.suse;qtApplySet();saveQuest();renderQuest();return}
+  if(d)qtSetOpen(d.dataset.sedit);
+});
+$("qtSCancel").onclick=qtSetClose;
+$("qtSSave").onclick=()=>{
+  const name=$("qtSName").value.trim().slice(0,60);
+  if(!name){$("qtSName").focus();return}
+  const o={name:name,genre:qtSGen,nb:qtSNb,ly:$("qtSLy").checked,cnt:qtN($("qtSCnt").value)};
+  let s=qtSetEdit==="new"?null:qtSetBy(qtSetEdit);
+  if(s)Object.assign(s,qtSetNorm(Object.assign({},o,{id:s.id,gems:s.gems})));
+  else{
+    if(qt.sets.length>=QT_SETS_MAX)return;
+    s=qtSetNorm(Object.assign({},o,{id:"s"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));
+    qt.sets.push(s);qt.setId=s.id; /* a new set becomes the active one */
+  }
+  if(s.id===qt.setId)qtApplySet();
+  qtSetClose();saveQuest();renderQuest();
+};
+$("qtSDel").onclick=()=>{
+  const s=qtSetBy(qtSetEdit);if(!s)return;
+  ask("Delete the set \u201c"+s.name+"\u201d? Your pull history keeps its entries.",()=>{
+    qt.sets=qt.sets.filter(x=>x.id!==s.id);if(qt.setId===s.id)qt.setId="";
+    qtSetClose();saveQuest();renderQuest();
+  });
+};
+["qtSName","qtSCnt"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("qtSSave").click()}));
 function renderQuest(){
+  qtSetRender();
   const q=qtSum(),next=qtP(qt.reroll,qt.boost);
   let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x,e.b));
   const pct=(1-miss)*100;
@@ -8107,7 +8675,7 @@ async function loadQuest(){
   let local=null;try{local=JSON.parse(LS("tracker.quest")||"null")}catch(e){}
   if(!qtDB)d=local;
   else if(!d&&local){d=local;track(sb.from("pass_state").upsert({id:6,data:qtNorm(local)},{onConflict:"user_id,id"}))}
-  qt=qtNorm(d);renderQuest();
+  qt=qtNorm(d);renderQuest();if(typeof renderGempic==="function")renderGempic();
 }
 $("qtAmt").value=LS("tracker.step.quest")||"1";
 const qtAmt=()=>Math.min(1000,Math.max(1,Math.floor(Number($("qtAmt").value))||1));
@@ -8118,7 +8686,7 @@ $("qtQuick").addEventListener("click",e=>{
   $("qtAmt").value=b.dataset.q;LS("tracker.step.quest",b.dataset.q);renderQuest();
 });
 $("qtReroll").addEventListener("change",()=>{qt.reroll=$("qtReroll").checked;saveQuest();renderQuest()});
-$("qtExLy").addEventListener("change",()=>{qt.exLy=$("qtExLy").checked;saveQuest();renderQuest()});
+$("qtExLy").addEventListener("change",()=>{qt.exLy=$("qtExLy").checked;const s=qtSetCur();if(s)s.ly=!qt.exLy;saveQuest();renderQuest()});
 $("qtBoost").addEventListener("change",()=>{qt.boost=$("qtBoost").checked;saveQuest();renderQuest()});
 function qtDoAdd(){
   const n=qtAmt(),now=Date.now();if(!qt.start)qt.start=now;
@@ -8391,11 +8959,11 @@ $("msUndo").onclick=()=>{
 /* artist count before the current streak of shinies: the first shiny since the last epic/lyric remembers it */
 function qtBase(){let b=qt.total;for(const h of qt.history){if(h.typ!=="s")break;if(h.ta)b=h.tb}return b}
 const qtRun=()=>Math.max(qt.run||0,qt.total);
-let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false;
+let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false,qtFSid="";
 function qtAutoTA(){
   if(qtTAman)return;
   const n=Math.max(0,Math.floor(Number($("qtFN").value))||0),tb=Math.max(0,Math.floor(Number($("qtTB").value))||0);
-  $("qtTA").value=tb+Math.max(0,qtRun()-qtBase())+Math.max(0,n-qt.cnt);
+  $("qtTA").value=qtSetBy(qtFSid)?tb+Math.max(0,n-qt.cnt):tb+Math.max(0,qtRun()-qtBase())+Math.max(0,n-qt.cnt);
 }
 $("qtFN").addEventListener("input",qtAutoTA);
 $("qtTB").addEventListener("input",qtAutoTA);
@@ -8407,13 +8975,14 @@ function qtSyncEp(){
 }
 function qtOpenForm(i){
   qtEdit=i;const h=i>=0?qt.history[i]:null;
+  const S=h?null:qtSetCur();qtFSid=S?S.id:"";
   $("qtFormTitle").textContent=h?"Edit pull":"Log your pull";
-  $("qtArtist").value=h?(h.artist||(h.song?"":h.name)):"";
+  $("qtArtist").value=h?(h.artist||(h.song?"":h.name)):(S?S.name:"");
   $("qtSong").value=h?h.song:"";
-  qtFNb=h?h.nb:"";
+  qtFNb=h?h.nb:(S?S.nb:"");
   $("qtFNum").value=h&&h.num?h.num:"";
   qtTAman=!!h;
-  $("qtTB").value=h?(h.ta?h.tb:""):qtBase();
+  $("qtTB").value=h?(h.ta?h.tb:""):(S?S.cnt:qtBase());
   $("qtTA").value=h?(h.ta||""):"";
   qtFRar=h?h.rar:"";
   qtFTyp=h?h.typ:"";
@@ -8422,6 +8991,11 @@ function qtOpenForm(i){
   $("qtFN").value=h?h.n:(qt.r.length||"");
   qtAutoTA();
   [...$("qtFRar").children].forEach(b=>b.classList.toggle("on",b.dataset.q===qtFRar));
+  const fs=$("qtFSet"),hs=h&&h.sid?qtSetBy(h.sid):null;
+  fs.hidden=!(S||hs);
+  if(S)fs.innerHTML="Adding to <b>"+esc(S.name)+"</b> ("+nfmt(S.cnt)+" saved). Saving updates its quest count.";
+  else if(hs)fs.innerHTML="Set: <b>"+esc(hs.name)+"</b>. If this is its latest pull, the set's count follows your edit.";
+  $("qtFTyp").querySelector('[data-t="l"]').hidden=!!(S&&!S.ly);
   $("qtForm").hidden=false;$("qtForm").scrollIntoView({block:"nearest",behavior:"smooth"});$("qtArtist").focus();
 }
 const qtCloseForm=()=>{$("qtForm").hidden=true;qtEdit=-1};
@@ -8432,20 +9006,21 @@ $("qtFNb").addEventListener("click",e2=>{const b=e2.target.closest("button[data-
 $("qtFCancel").onclick=qtCloseForm;
 $("qtFSave").onclick=()=>{
   const artist=$("qtArtist").value.trim().slice(0,120),song=$("qtSong").value.trim().slice(0,120),nb=qtFTyp==="e"?qtFNb:"",num=nb==="n"?Math.max(0,Math.floor(Number($("qtFNum").value))||0):0,n=Math.max(0,Math.floor(Number($("qtFN").value))||0);
-  const tb=qtN($("qtTB").value),ta=$("qtTA").value===""?(tb?tb+(qtEdit>=0?0:Math.max(0,qtRun()-qtBase()))+Math.max(0,n-(qtEdit>=0?0:qt.cnt)):0):qtN($("qtTA").value);
+  const FS=qtEdit>=0?null:qtSetBy(qtFSid);
+  const tb=qtN($("qtTB").value),ta=$("qtTA").value===""?(FS?tb+Math.max(0,n-qt.cnt):tb?tb+(qtEdit>=0?0:Math.max(0,qtRun()-qtBase()))+Math.max(0,n-(qtEdit>=0?0:qt.cnt)):0):qtN($("qtTA").value);
   if(qtEdit>=0){
-    const h=qt.history[qtEdit];if(h){h.name="";h.artist=artist;h.song=song;h.nb=nb;h.num=num;h.rar=qtFRar;h.typ=qtFTyp;h.n=n;h.tb=tb;h.ta=ta;if(qtEdit===0&&ta){if(qtFTyp==="s")qt.run=Math.max(ta,qt.total);else{qt.total=ta;qt.run=ta}}}
+    const h=qt.history[qtEdit],hs=h&&h.sid?qtSetBy(h.sid):null,oldTa=h?h.ta:0;if(h){h.name="";h.artist=artist;h.song=song;h.nb=nb;h.num=num;h.rar=qtFRar;h.typ=qtFTyp;h.n=n;h.tb=tb;h.ta=ta;if(hs&&oldTa&&hs.cnt===oldTa)hs.cnt=Math.min(1e9,ta);if(qtEdit===0&&ta&&!hs){if(qtFTyp==="s")qt.run=Math.max(ta,qt.total);else{qt.total=ta;qt.run=ta}}}
   }else{
-    const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta};
-    if(qtFTyp==="s"){qt.history.unshift(e);if(ta)qt.run=Math.max(ta,qtRun());qt.cnt=n} /* shiny: log it but keep the quest count going */
-    else qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,boost:qt.boost,total:ta||qt.total,cnt:0,seq:qt.seq,coins:qt.coins,clog:qt.clog,log:qt.log,history:[e,...qt.history]});
+    const q=qtSum(),e={t:Date.now(),start:qt.start,n:n,rr:q.rr,name:"",artist:artist,song:song,nb:nb,num:num,rar:qtFRar,typ:qtFTyp,tb:tb,ta:ta,sid:FS?FS.id:""};
+    if(qtFTyp==="s"){qt.history.unshift(e);if(FS)FS.cnt=Math.min(1e9,ta);else if(ta)qt.run=Math.max(ta,qtRun());qt.cnt=n} /* shiny: log it but keep the quest count going */
+    else{if(FS)FS.cnt=Math.min(1e9,ta);qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,boost:qt.boost,total:FS?qt.total:(ta||qt.total),cnt:0,sets:qt.sets,setId:qt.setId,seq:qt.seq,coins:qt.coins,clog:qt.clog,log:qt.log,history:[e,...qt.history]})}
   }
   qtCloseForm();saveQuest();renderQuest();
 };
 $("qtReset").onclick=()=>{
   if(!qt.r.length)return;
   ask("Reset the counters without saving to history?",()=>{
-    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,boost:qt.boost,total:qt.total,run:qt.run,cnt:0,seq:qt.seq,coins:qt.coins,clog:qt.clog,log:qt.log,history:qt.history});
+    qt=qtNorm({reroll:qt.reroll,exLy:qt.exLy,boost:qt.boost,total:qt.total,run:qt.run,cnt:0,sets:qt.sets,setId:qt.setId,seq:qt.seq,coins:qt.coins,clog:qt.clog,log:qt.log,history:qt.history});
     saveQuest();renderQuest();
   });
 };
@@ -8454,22 +9029,113 @@ $("qtHist").addEventListener("click",e2=>{
   if(ed){qtOpenForm(+ed.dataset.hedit);return}
   const b=e2.target.closest("button[data-hdel]");if(!b)return;
   const i=+b.dataset.hdel;
-  ask("Delete this history entry?",()=>{qt.history.splice(i,1);saveQuest();renderQuest()});
+  const hh=qt.history[i],hs=hh&&hh.sid?qtSetBy(hh.sid):null,rev=!!(hs&&hh.ta&&hs.cnt===hh.ta);
+  ask("Delete this history entry?"+(rev?" "+hs.name+"'s quest count goes back to "+nfmt(hh.tb)+".":""),()=>{if(rev&&hs.cnt===hh.ta)hs.cnt=hh.tb;qt.history.splice(i,1);saveQuest();renderQuest()});
 });
 renderQuest();
 
+/* ---------- gempic sets: the very same sets as the quest tracker (shared through qt.sets) ---------- */
+const gpSetBy=id=>id?qtSetBy(id):null;
+const gpSetChips=s=>qtGenPill(s.genre)+(s.gems?'<span class="qchip" style="--c:#c084fc">'+nfmt(s.gems)+' gems/roll</span>':"");
+const gpSetCur=()=>gpSetBy(gp.setId);
+/* picking a set fills the gems spent per roll with the set's gem price (a set with no price leaves the current cost alone) */
+const gpApplySetCost=()=>{const s=gpSetCur();if(s&&s.gems>0)gp.cost=s.gems};
+const gpSetN=id=>gp.history.reduce((a,h)=>a+(h.sid===id?1:0),0);
+/* sets live in the quest record, so saving one saves both trackers */
+const gpSetsChanged=()=>{saveQuest();renderQuest();saveGempic();renderGempic()};
+function gpSetRender(){
+  const cur=gpSetCur();
+  const L=[...qt.sets].sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}));
+  $("gpDDV").innerHTML=cur?'<b class="qddn">'+esc(cur.name)+'</b><span class="qddc">'+gpSetChips(cur)+'</span>':'<span class="qddn" style="color:var(--mut)">No set</span>';
+  $("gpDDM").innerHTML='<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>'+L.map(s=>'<button type="button" role="option" data-id="'+esc(s.id)+'" class="qddo'+(cur&&s.id===cur.id?" on":"")+'"><b class="qddn">'+esc(s.name)+'</b><span class="qddc">'+gpSetChips(s)+'</span><span class="qddq">'+nfmt(gpSetN(s.id))+'</span></button>').join("");
+  $("gpSetEditB").disabled=!cur;
+  $("gpSetInfo").innerHTML=cur?'<div class="qchips">'+gpSetChips(cur)+'</div>':'<div class="qsline">'+(qt.sets.length?"No set selected. Pick one to fill in the artist and gem price per roll.":"Make a set to save an artist's genre and gem price once. Artists are shared with the Quest Tracker.")+'</div>';
+  $("gpSetsSum").textContent="Gempic Sets"+(qt.sets.length?" ("+qt.sets.length+")":"");
+  const L2=cur?[cur,...L.filter(s=>s.id!==cur.id)]:L;
+  $("gpSetList").innerHTML=qt.sets.length?'<tr><th>Set</th><th class="c">Gempics</th><th></th></tr>'+L2.map(s=>{
+    const on=!!cur&&s.id===cur.id,sub=s.gems?nfmt(s.gems)+" gems per roll":"No gem price set";
+    return '<tr class="'+(on?"on":"")+'"><td class="qpc"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+(on?'<span class="qchip" style="--c:#34d399">Active</span>':"")+'</div><div class="qsubl">'+sub+'</div></td><td class="c b">'+nfmt(gpSetN(s.id))+'</td><td class="r"><span class="qact">'+(on?"":'<button type="button" class="x" data-suse="'+esc(s.id)+'">Use</button>')+'<button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
+  }).join(""):'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>';
+}
+/* set picker (custom dropdown, same look as the quest tracker) */
+(function(){
+  const dd=$("gpDD"),b=$("gpDDB"),m=$("gpDDM");
+  const close=()=>{m.hidden=true;b.setAttribute("aria-expanded","false")};
+  b.addEventListener("click",e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute("aria-expanded",String(!m.hidden));if(!m.hidden){const o=m.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
+  m.addEventListener("click",e=>{const o=e.target.closest(".qddo");if(!o)return;gp.setId=o.dataset.id;gpApplySetCost();close();saveGempic();renderGempic()});
+  document.addEventListener("click",e=>{if(!m.hidden&&!dd.contains(e.target))close()});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden){close();b.focus()}});
+  $("gpInfoB").addEventListener("click",()=>$("gpDisc").classList.toggle("on"));
+})();
+let gpSetEdit="",gpSNb="",gpSGen="";
+const gpSGenSync=()=>[...$("gpSGen").children].forEach(b=>b.classList.toggle("on",!!gpSGen&&qtGK(b.dataset.g)===qtGK(gpSGen)));
+const gpSNbSync=()=>[...$("gpSNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===gpSNb));
+function gpSetOpen(id){
+  const s=id==="new"?null:qtSetBy(id);if(id!=="new"&&!s)return;
+  gpSetEdit=id;
+  $("gpSFT").textContent=s?"Edit set":"New set";
+  $("gpSName").value=s?s.name:"";gpSGen=s?s.genre:"";gpSGenSync();gpSNb=s?s.nb:"";gpSNbSync();
+  $("gpSLy").checked=s?s.ly:true;$("gpSGems").value=s&&s.gems?s.gems:"";$("gpSDel").hidden=!s;
+  $("gpSetForm").hidden=false;$("gpSetsBox").scrollIntoView({block:"nearest",behavior:"smooth"});$("gpSName").focus();
+}
+const gpSetClose=()=>{$("gpSetForm").hidden=true;gpSetEdit=""};
+$("gpSetNew").onclick=$("gpSetAdd").onclick=()=>gpSetOpen("new");
+$("gpSetEditB").onclick=()=>{const s=gpSetCur();if(s)gpSetOpen(s.id)};
+$("gpSGen").addEventListener("click",e=>{const b=e.target.closest("button[data-g]");if(!b)return;gpSGen=qtGK(gpSGen)===qtGK(b.dataset.g)?"":b.dataset.g;gpSGenSync()});
+$("gpSNb").addEventListener("click",e=>{const b=e.target.closest("button[data-n]");if(!b)return;gpSNb=gpSNb===b.dataset.n?"":b.dataset.n;gpSNbSync();if(gpSNb==="l")$("gpSLy").checked=false /* numberless artists have no lyrics */});
+$("gpSetList").addEventListener("click",e=>{
+  const u=e.target.closest("button[data-suse]"),d=e.target.closest("button[data-sedit]");
+  if(u){gp.setId=u.dataset.suse;gpApplySetCost();saveGempic();renderGempic();return}
+  if(d)gpSetOpen(d.dataset.sedit);
+});
+$("gpSCancel").onclick=gpSetClose;
+$("gpSSave").onclick=()=>{
+  const name=$("gpSName").value.trim().slice(0,60);
+  if(!name){$("gpSName").focus();return}
+  const o={name:name,genre:gpSGen,nb:gpSNb,ly:$("gpSLy").checked,gems:gpNum($("gpSGems").value)};
+  let s=gpSetEdit==="new"?null:qtSetBy(gpSetEdit);
+  if(s)Object.assign(s,qtSetNorm(Object.assign({},o,{id:s.id,cnt:s.cnt})));
+  else{
+    if(qt.sets.length>=QT_SETS_MAX)return;
+    s=qtSetNorm(Object.assign({},o,{id:"s"+Date.now().toString(36)+Math.random().toString(36).slice(2,6),cnt:0}));
+    qt.sets.push(s);gp.setId=s.id; /* a new set becomes the active gempic set */
+  }
+  if(s.id===qt.setId)qtApplySet();
+  if(s.id===gp.setId)gpApplySetCost();
+  gpSetClose();gpSetsChanged();
+};
+$("gpSDel").onclick=()=>{
+  const s=qtSetBy(gpSetEdit);if(!s)return;
+  ask("Delete the set \u201c"+s.name+"\u201d? It is shared with the Quest Tracker. Your history keeps its entries.",()=>{
+    qt.sets=qt.sets.filter(x=>x.id!==s.id);if(qt.setId===s.id)qt.setId="";if(gp.setId===s.id)gp.setId="";
+    gpSetClose();gpSetsChanged();
+  });
+};
+["gpSName"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("gpSSave").click()}));
+renderGempic();
+
 /* ---------- purchases ---------- */
 /* ---------- market: purchases + sold items (both stored in one saved record) ---------- */
-const MCAT=[["epic","Epic","epic"],["lyric","Lyric","lyrics"],["shiny","Shiny","shiny"],["moment","Moment","moment"],["other","Other","other"]];
-const mcat=c=>MCAT.find(x=>x[0]===c)||MCAT[4];
+/* [key, label, pill class, emoji (editions only), group heading]; saved keys epic/lyric/shiny/moment/other are unchanged */
+const MED=[["lucky","Lucky","\ud83c\udf40"],["coachella","Coachella","\ud83c\udf34"],["mayflower","May Flower","\ud83c\udf38"],["pridemap","PrideMap","\ud83c\udf08"],["summersplash","Summer Splash","\ud83d\udc1a"],["soundfall","Soundfall","\ud83c\udf41"],["freshman","Freshman","\ud83e\udd6b"],["day1","Day 1","\u2600\ufe0f"],["week1","Week 1","\ud83c\udf19"],["halloween","Halloween","\ud83c\udf83"],["grammys","Grammys","\ud83c\udfc6"],["lovers","Lovers","\ud83d\udc96"],["aprilfools","April Fools","\ud83e\udd21"],["worldtour","World Tour","\u2708\ufe0f"]];
+/* an item has one type/edition (cat) plus an optional rarity tier, so a "rare epic" is possible */
+const MTIER=["common","uncommon","rare"];
+const MCAT=[["common","Common","common",0,"Rarity"],["uncommon","Uncommon","uncommon",0,"Rarity"],["rare","Rare","rare",0,"Rarity"],["shiny","Shiny","shiny",0,"Type"],["epic","Epic","epic",0,"Type"],["radiant","Radiant","radiant",0,"Type"],["moment","Moment","moment",0,"Type"],["lyric","Lyric","lyrics",0,"Type"],["exclusive","Exclusive","exclusive",0,"Type"]]
+  .concat(MED.map(e=>[e[0],e[1],"ed",e[2],"Edition"]),[["other","Other","other",0,""]]);
+const mcat=c=>MCAT.find(x=>x[0]===c)||MCAT[MCAT.length-1];
+const mkPl=c=>{const m=mcat(c);return m[3]?'<span class="pill ed"><i>'+m[3]+'</i>'+esc(m[1])+'</span>':'<span class="pill r r-'+m[2]+'">'+m[1]+'</span>'};
+/* buttons with a small heading each time the group changes (Rarity / Edition) */
+const mkGrouped=(cats,fn,cls)=>{let g="",o="";cats.forEach(c=>{const gr=c[4]||"";if(gr&&gr!==g)o+='<div class="'+cls+'">'+gr+'</div>';g=gr;o+=fn(c)});return o};
 /* first guess for items saved before categories existed; editable on each item */
-const mcatGuess=t=>/lyric/i.test(t)?"lyric":/shiny/i.test(t)?"shiny":/moment/i.test(t)?"moment":/epic|#\s*\d/i.test(t)?"epic":"other";
+const mcatGuess=t=>/lyric/i.test(t)?"lyric":/shiny/i.test(t)?"shiny":/moment/i.test(t)?"moment":/radiant/i.test(t)?"radiant":/exclusive/i.test(t)?"exclusive":/epic|#\s*\d/i.test(t)?"epic":(MED.find(e=>new RegExp("\\b"+e[1].toLowerCase().replace(/\s+/g,"\\s*")+"\\b","i").test(t))||["other"])[0];
+const mtierGuess=t=>/\buncommon\b/i.test(t)?"uncommon":/\bcommon\b/i.test(t)?"common":/\brare\b/i.test(t)?"rare":"";
+const mkMatch=(b,f)=>MTIER.includes(f)?b.tier===f:b.cat===f;
 const MK={
   buy:{key:"items",list:"buyList",sum:"buySum",search:"buySearch",sort:"buySort",bar:"buyCatM",btn:"buyCat",wrap:"buyCatW",tog:"buyToggle",inp:"newBuy",add:"addBuy",noun:"purchase",nounP:"purchases",total:"total cost",amt:["cost"],who:["seller"],def:()=>[{k:"Seller",v:""},{k:"Cost",v:""}],q:"",f:"all",o:"new",open:new Set()},
   sold:{key:"sold",list:"soldList",sum:"soldSum",search:"soldSearch",sort:"soldSort",bar:"soldCatM",btn:"soldCat",wrap:"soldCatW",tog:"soldToggle",inp:"newSold",add:"addSold",noun:"sold item",nounP:"sold items",total:"total earned",amt:["price","sold for","sale price"],who:["buyer"],def:()=>[{k:"Buyer",v:""},{k:"Price",v:""}],q:"",f:"all",o:"new",open:new Set()}
 };
 const MSORT=[["new","Newest first"],["old","Oldest first"],["hi","Amount: high to low"],["lo","Amount: low to high"],["az","Title A\u2013Z"]];
-const bitems=(a,def)=>Array.isArray(a)?a.map(x=>{const title=String(x.title||"");return{id:String(x.id||Date.now()+Math.random()),title:title,t:+x.t||0,cat:MCAT.some(c=>c[0]===x.cat)?x.cat:mcatGuess(title),fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):def()}}):[];
+const bitems=(a,def)=>Array.isArray(a)?a.map(x=>{const title=String(x.title||"");return{id:String(x.id||Date.now()+Math.random()),title:title,t:+x.t||0,cat:MCAT.some(c=>c[0]===x.cat&&!MTIER.includes(c[0]))?x.cat:mcatGuess(title),tier:MTIER.includes(x.tier)?x.tier:(MTIER.includes(x.cat)?x.cat:""),fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):def()}}):[];
 const bnorm=d=>{d=d||{};return{items:bitems(d.items,MK.buy.def),sold:bitems(d.sold,MK.sold.def)}};
 let buys=bnorm(),buyDB=true,buyT=null,mkMode=LS("tracker.mk")==="sold"?"sold":"buy";
 /* use only the first amount in the field, ignoring "#1"-style numbers, so notes like "12 + Bocchi #1" don't add digits */
@@ -8482,7 +9148,7 @@ function mkView(k){
   const M=MK[k],q=M.q.toLowerCase();
   let list=buys[M.key].map((b,i)=>[b,i]);
   if(q)list=list.filter(([b])=>b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
-  if(M.f!=="all")list=list.filter(([b])=>b.cat===M.f);
+  if(M.f!=="all")list=list.filter(([b])=>mkMatch(b,M.f));
   if(M.o==="old")list.reverse();
   else if(M.o==="hi")list.sort((x,y)=>mkAmt(k,y[0])-mkAmt(k,x[0]));
   else if(M.o==="lo")list.sort((x,y)=>mkAmt(k,x[0])-mkAmt(k,y[0]));
@@ -8502,19 +9168,19 @@ function renderBuySum(){
   $("mkNet").textContent=(net<0?"-":"")+nfmt(Math.abs(net));
   $("mkNet").classList.toggle("pos",net>0);$("mkNet").classList.toggle("neg",net<0);
 }
-const mkPill=c=>`<span class="pill r r-${mcat(c)[2]}">${mcat(c)[1]}</span>`;
-const mkHead=(k,b)=>{const a=mkAmt(k,b),w=mkWho(k,b);return mkPill(b.cat)+`<div style="min-width:0"><div class="mkt">${esc(b.title)||"Untitled"}</div>${w?`<div class="mks">${esc(w)}</div>`:""}</div><div class="mkc">${a?nfmt(a):"\u2014"}</div><span class="mkv" aria-hidden="true">\u25B8</span>`};
+const mkPill=mkPl;
+const mkHead=(k,b)=>{const a=mkAmt(k,b),w=mkWho(k,b);return '<span class="mkpls">'+mkPill(b.cat)+'</span>'+`<div style="min-width:0"><div class="mkt">${esc(b.title)||"Untitled"}</div>${w?`<div class="mks">${esc(w)}</div>`:""}</div><div class="mkc">${a?nfmt(a):"\u2014"}</div><span class="mkv" aria-hidden="true">\u25B8</span>`};
 function renderMk(k){
   const M=MK[k],arr=buys[M.key],v=mkView(k);
   /* filter chips with counts (counts ignore the category filter but respect search) */
   const q=M.q.toLowerCase();
   const base=arr.filter(b=>!q||b.title.toLowerCase().includes(q)||b.fields.some(f=>f.v.toLowerCase().includes(q)||f.k.toLowerCase().includes(q)));
-  const mkLbl=f=>f==="all"?"All categories":`<span class="pill r r-${mcat(f)[2]}">${mcat(f)[1]}</span>`;
-  const mkCnt=f=>f==="all"?base.length:base.filter(b=>b.cat===f).length;
+  const mkLbl=f=>f==="all"?"All categories":mkPl(f);
+  const mkCnt=f=>f==="all"?base.length:base.filter(b=>mkMatch(b,f)).length;
   $(M.btn).innerHTML=`<span class="mkDDt">${mkLbl(M.f)}</span><span class="mkn">${mkCnt(M.f)}</span>`;
-  $(M.bar).innerHTML=[["all"]].concat(MCAT).map(c=>`<button type="button" role="option" class="mkDDo${M.f===c[0]?" on":""}" data-f="${c[0]}" aria-selected="${M.f===c[0]}">${mkLbl(c[0])}<span class="mkn">${mkCnt(c[0])}</span></button>`).join("");
+  $(M.bar).innerHTML=mkGrouped([["all"]].concat(MCAT),c=>`<button type="button" role="option" class="mkDDo${M.f===c[0]?" on":""}" data-f="${c[0]}" aria-selected="${M.f===c[0]}">${mkLbl(c[0])}<span class="mkn">${mkCnt(c[0])}</span></button>`,"mkDDg");
   $(M.sort).innerHTML=MSORT.map(o=>`<option value="${o[0]}"${M.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
-  $(M.list).innerHTML=v.map(([b,i])=>{const open=M.open.has(b.id);return `<div class="card by mk${open?" open":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${open}">${mkHead(k,b)}</div><div class="mkb"><input maxlength="300" class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><div class="mkcats" role="group" aria-label="Category">${MCAT.map(c=>`<button type="button" data-act="cat" data-c="${c[0]}" class="${b.cat===c[0]?"on":""}"><span class="pill r r-${c[2]}">${c[1]}</span></button>`).join("")}</div>${b.fields.map((f,j)=>`<div class="fld"><input maxlength="300" class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input maxlength="300" class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div><button type="button" class="small mkdel" data-act="del" aria-label="Delete ${M.noun}">Delete ${M.noun}</button></div></div>`}).join("")||'<div class="empty">'+(arr.length?"Nothing matches your search or filter.":"No "+M.nounP+" yet.")+'</div>';
+  $(M.list).innerHTML=v.map(([b,i])=>{const open=M.open.has(b.id);return `<div class="card by mk${open?" open":""}${b.tier?" rr-"+b.tier:""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${open}">${mkHead(k,b)}</div><div class="mkb"><input maxlength="300" class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><div class="mkcats" role="group" aria-label="Category">${mkGrouped(MCAT,c=>{const t=MTIER.includes(c[0]);return `<button type="button" data-act="${t?"tier":"cat"}" data-c="${c[0]}" class="${(t?b.tier:b.cat)===c[0]?"on":""}">${mkPl(c[0])}</button>`},"mkcg")}</div>${b.fields.map((f,j)=>`<div class="fld"><input maxlength="300" class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input maxlength="300" class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div><button type="button" class="small mkdel" data-act="del" aria-label="Delete ${M.noun}">Delete ${M.noun}</button></div></div>`}).join("")||'<div class="empty">'+(arr.length?"Nothing matches your search or filter.":"No "+M.nounP+" yet.")+'</div>';
   $(M.tog).textContent=v.length&&v.every(([b])=>M.open.has(b.id))?"Collapse all":"Expand all";
   $(M.tog).hidden=!v.length;
   renderBuySum();
@@ -8563,6 +9229,7 @@ Object.keys(MK).forEach(k=>{
     if(!btn){const h=e2.target.closest(".mkh");if(h)toggleRow(h.closest(".by"));return}
     const arr=buys[M.key],b=arr[+btn.closest(".by").dataset.i],a=btn.dataset.act;
     if(a==="cat"){b.cat=btn.dataset.c;saveBuys();renderMk(k)}
+    else if(a==="tier"){b.tier=b.tier===btn.dataset.c?"":btn.dataset.c;saveBuys();renderMk(k)}
     else if(a==="add"){b.fields.push({k:"",v:""});saveBuys();renderMk(k)}
     else if(a==="rem"){
       if(b.fields.length<=1)return;
@@ -8590,10 +9257,10 @@ Object.keys(MK).forEach(k=>{
   $(M.search).addEventListener("input",e2=>{M.q=e2.target.value.trim();renderMk(k)});
   $(M.add).onclick=()=>{
     const n=$(M.inp).value.trim().slice(0,300);if(!n)return;
-    const g=mcatGuess(n),it={id:String(Date.now()),title:n,t:Date.now(),cat:g==="other"&&M.f!=="all"?M.f:g,fields:M.def()};
+    const g=mcatGuess(n),fT=MTIER.includes(M.f),it={id:String(Date.now()),title:n,t:Date.now(),cat:g==="other"&&M.f!=="all"&&!fT?M.f:g,tier:mtierGuess(n)||(fT?M.f:""),fields:M.def()};
     buys[M.key].unshift(it);M.open.add(it.id);
     $(M.inp).value="";M.q="";$(M.search).value="";
-    if(M.f!=="all"&&M.f!==it.cat)M.f="all";
+    if(M.f!=="all"&&!mkMatch(it,M.f))M.f="all";
     saveBuys();renderMk(k);
   };
   $(M.inp).addEventListener("keydown",e2=>{if(e2.key==="Enter")$(M.add).click()});
@@ -8808,6 +9475,8 @@ window.addEventListener("online",()=>scheduleRefresh(200));
 })();
 
 /* ---------- overview (landing page) ---------- */
+let ovReady=false;
+const OVC=(()=>{try{return JSON.parse(LS("tracker.ovc")||"{}")||{}}catch(e){return{}}})();
 function renderOverview(){
   if(homeEditing&&!homeSelf)return; /* background refreshes must not rebuild the tiles under your finger while you edit */
   const g=$("ovGrid");if(!g)return;
@@ -8820,8 +9489,8 @@ function renderOverview(){
     ["pass","Pass Tracker","Pass rewards and ultra pass results.",()=>[nfmt(PASS.reduce((a,[k])=>a+pass.c[k],0)),"pass rewards logged"]],
     ["event","Event Tracker","Event rewards and collectables.",()=>{const c=evCfg(),t=evSum(c,evS().c);return[nfmt(t.n),"rewards \u00b7 "+c.name]}],
     ["daily","Daily Games","Artist Guesser, Sound Guesser, free gems and streak.",null],
-    ["map","Artist Guesser","Narrow down the mystery artist from hints.",()=>[nfmt((AG.guesses||[]).length),"guesses logged"]],
-    ["sound","Sound Guesser","Guess a song from its sound.",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:["Open",SOUND_API_URL?"upload a clip to match":"load an index to start"]):[soundSoonText(),""]],
+    ["map","Artist Guesser","Narrow down the mystery artist from hints.",null],
+    ["sound","Sound Guesser","Guess a song from its sound.",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:null):[soundSoonText(),""]],
     ["artist","Artist Overview","Browse an artist's releases and songs.",null],
     ["buys","Market","What you've bought and sold.",()=>{const n=mkTotal("sold")-mkTotal("buy");return[(n<0?"-":"")+nfmt(Math.abs(n)),"net"]}],
     ["info","Wiki","Drop rates, eligibility and reference tables.",null],
@@ -8830,12 +9499,14 @@ function renderOverview(){
   g.classList.toggle("hedit",homeEditing);
   const TO=home.order.map(id=>T.find(t=>t[0]===id)).filter(Boolean).filter(t=>homeEditing||!home.hidden.includes(t[0]));
   g.innerHTML=TO.map(([id,name,desc,f])=>{
-    const lock=id==="sound"&&!canSound(),v=f?safe(f):null;
+    const lock=id==="sound"&&!canSound(),v=f?(ovReady?safe(f):(id in OVC?OVC[id]:["\u2026",""])):null;
+    if(ovReady&&f)OVC[id]=v;
     const TB={shiny:"tbShiny",epic:"tbEpic",gempic:"tbGempic",quest:"tbQuest",pass:"tbPass",event:"tbEvent",map:"tbMap",sound:"tbSound",buys:"tbBuys",info:"tbInfo",artist:"tbArtist",daily:"tbDaily",misc:"tbMisc"};
     const ic=$(TB[id])&&$(TB[id]).querySelector(".ti svg");
     const hid=home.hidden.includes(id),oi=home.order.indexOf(id),sz=homeSize(id),nmo=!!home.nm[id],cd=!!home.cond[id]&&!nmo;
     return `<div class="card tile sz${sz}${cd?" cd":""}${nmo?" nm":""}${homeEditing&&id===homeSel?" hsel":""}${hid?" nhid":""}${lock?" soon":""}${v?"":" nov"}"${homeEditing?' draggable="true"':""} data-go="${id}" role="button" tabindex="${lock?-1:0}"${lock?' aria-disabled="true"':""}><span class="ti">${ic?ic.outerHTML:""}</span><div class="tb"><div class="tn">${name}</div><div class="tl">${desc}</div>${v?`<div class="tv">${v[0]}</div><div class="tl">${v[1]}</div>`:""}</div></div>`;
   }).join("");
+  if(ovReady)try{LS("tracker.ovc",JSON.stringify(OVC))}catch(e){}
   const w=$("who").textContent;$("ovHello").innerHTML=w?"Hi, <b>"+esc(w)+"</b>":"Welcome";
 }
 $("ovGrid").addEventListener("click",e=>{
@@ -8854,13 +9525,14 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8","2026-10-26",["Added set tracking to quest & epic trackers.","Revamped quest tracker UI.","Other minor UI updates.","Minor bug fixes."]],
 ["0.7.2","2026-10-25",["Profile overhaul: new layout with stats, preferences, tracker toggles, backup to file and a What's new section.","Dark mode is now the default theme.","Updated various UIs."]],
 ["0.7.1","2026-10-25",["Added Pop category in Sound Guesser.","Added Icon view for home page modules.","Updated various UIs.","Event Tracker: added a Last 2 Hours history (rewards, coins and gems from the last 2 hours) with its own reset button."]],
 ["0.7","2026-10-23",["Home page is now modular: tap Edit layout to move, resize and hide each box.","Gempic Tracker: saving a gempic now records the artist, song, type, rarity, rolls and gems, like the Quest Tracker, and entries can be edited."]],
 ["0.6.5","2026-10-21",["Gempic Tracker: added a Last 24 Hours summary of rolls and gems spent."]],
 ["0.6.4","2026-10-20",["Updated Artist Guesser UI.","Various bugs fixed."]],
 ["0.6.3","2026-10-19",["Removed the recent log from various pages.","Added Lyrics collection to Epic Tracker.","Small UI refinements throughout."]],
-["0.6.2","2026-10-19",["Epic Tracker: More UI enchancements."]],
+["0.6.2","2026-10-19",["Epic Tracker: More UI enhancements."]],
 ["0.6.1","2026-10-19",["Epic Tracker Overhaul. Export discogs directly from Artist Overview. More to come."]],
 ["0.6","2026-10-17",["Introducing Daily Games: one place to log your daily routine and watch your totals grow, with running counts of every gem and coin you earn and every ad you watch"]],
 ["0.5.1","2026-10-15",["Small UI refinements throughout"]],
@@ -9153,6 +9825,64 @@ $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);
     t.classList.remove('tapfx');void t.offsetWidth;t.classList.add('tapfx');
     t.addEventListener('animationend',()=>t.classList.remove('tapfx'),{once:true});
   },{passive:true});
+})();
+</script>
+<script>
+/* quest tab redesign test v5: sub-tabs, overflow menu, info toggle, history trim */
+(function(){
+const g=id=>document.getElementById(id);
+const tabs=[...document.querySelectorAll("#qtSub button")];
+function show(v){tabs.forEach(b=>{const on=b.dataset.qv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-quest .qtv").forEach(s=>{s.hidden=s.id!=="qtv-"+v});try{localStorage.setItem("tracker.qtSub",v)}catch(e){}}
+tabs.forEach(b=>b.addEventListener("click",()=>show(b.dataset.qv)));
+let v="track";try{v=localStorage.getItem("tracker.qtSub")||"track"}catch(e){}
+show(tabs.some(b=>b.dataset.qv===v)?v:"track");
+const f=g("qtForm");
+function formTweaks(){const fs=g("qtFSet"),adding=/^Adding to/.test(fs.textContent);fs.style.display=adding?"none":"";const b=fs.querySelector("b"),name=!fs.hidden&&b?b.textContent:"";const r=rows().find(x=>x.name===name);f.classList.toggle("nbless",!!(r&&r.sub.indexOf("Numberless epics")>-1))}
+new MutationObserver(()=>{if(!f.hidden){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"});formTweaks()}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
+new MutationObserver(formTweaks).observe(g("qtFSet"),{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]});
+["qtSetEditB","qtSetNew"].forEach(id=>g(id).addEventListener("click",()=>show("sets")));
+g("qtInfoB").addEventListener("click",()=>g("qtDisc").classList.toggle("on"));
+document.querySelectorAll("#qtCtl .qrow").forEach(l=>{const i=l.querySelector(".qinfo");if(i&&i.title)l.title=i.title});
+const h=g("qtHist"),hb=g("qtHistMore");
+function sync(){const n=Math.max(0,h.querySelectorAll("tr").length-1);hb.hidden=n<=5;hb.textContent=h.classList.contains("all")?"Show fewer":"Show all "+n}
+hb.addEventListener("click",()=>{h.classList.toggle("all");sync()});
+new MutationObserver(sync).observe(h,{childList:true});sync();
+const sel=g("qtSetSel"),list=g("qtSetList");
+const escH=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const dd=document.createElement("div");dd.className="qdd";dd.id="qtDD";
+dd.innerHTML='<button type="button" class="qddb" id="qtDDB" aria-haspopup="listbox" aria-expanded="false"><span class="qddv" id="qtDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="qtDDM" role="listbox" hidden></div>';
+sel.parentNode.insertBefore(dd,sel);
+function rows(){return [...list.querySelectorAll("tr")].filter(tr=>tr.querySelector("[data-sedit]")).map(tr=>{
+ const gen=[...tr.querySelectorAll(".qpt > :not(strong)")].filter(e=>e.textContent!=="Active")[0];
+ const sub=(tr.querySelector(".qsubl")||{textContent:""}).textContent.split(" · ").filter(Boolean);
+ return {id:tr.querySelector("[data-sedit]").dataset.sedit,name:tr.querySelector("strong").textContent,gen:gen?gen.outerHTML:"",sub:sub,n:(tr.querySelector("td.c.b")||{textContent:""}).textContent,on:tr.classList.contains("on")}}).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}))}
+function chips(r){return r.gen+r.sub.map(t=>'<span class="qchip" style="--c:'+(/^Numb/.test(t)?"#f59e0b":t==="Lyrics"?"#c084fc":"#9a9a94")+'">'+(t==="Lyrics"?"Lyrics on":escH(t))+'</span>').join("")}
+function renderDD(){const R=rows(),cur=R.find(r=>r.on);
+ g("qtDDV").innerHTML=cur?'<b class="qddn">'+escH(cur.name)+'</b><span class="qddc">'+chips(cur)+'</span>':'<span class="qddn" style="color:var(--mut)">No set</span>';
+ g("qtDDM").innerHTML='<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>'+R.map(r=>'<button type="button" role="option" data-id="'+escH(r.id)+'" class="qddo'+(r.on?" on":"")+'"><b class="qddn">'+escH(r.name)+'</b><span class="qddc">'+chips(r)+'</span><span class="qddq">'+escH(r.n)+'</span></button>').join("")}
+const ddb=g("qtDDB"),ddm=g("qtDDM");
+function ddClose(){ddm.hidden=true;ddb.setAttribute("aria-expanded","false")}
+ddb.addEventListener("click",e=>{e.stopPropagation();ddm.hidden=!ddm.hidden;ddb.setAttribute("aria-expanded",String(!ddm.hidden));if(!ddm.hidden){const o=ddm.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
+ddm.addEventListener("click",e=>{const o=e.target.closest(".qddo");if(!o)return;sel.value=o.dataset.id;sel.dispatchEvent(new Event("change",{bubbles:true}));ddClose()});
+document.addEventListener("click",e=>{if(!ddm.hidden&&!dd.contains(e.target))ddClose()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!ddm.hidden){ddClose();ddb.focus()}});
+new MutationObserver(renderDD).observe(list,{childList:true,subtree:true});renderDD();
+function floatActive(){const on=list.querySelector("tr.on"),hdr=list.querySelector("tr th")&&list.querySelector("tr th").closest("tr");if(!on||!hdr)return;if(hdr.nextElementSibling!==on)hdr.after(on)}
+new MutationObserver(floatActive).observe(list,{childList:true,subtree:true});floatActive();
+})();
+</script>
+<script>
+/* gempic sub-tabs: Track / Sets / History / Odds (same as the quest tracker) */
+(function(){
+const g=id=>document.getElementById(id);
+const tabs=[...document.querySelectorAll("#gpSub button")];
+function show(v){tabs.forEach(b=>{const on=b.dataset.gv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-gempic .gpv").forEach(s=>{s.hidden=s.id!=="gpv-"+v});try{localStorage.setItem("tracker.gpSub",v)}catch(e){}}
+tabs.forEach(b=>b.addEventListener("click",()=>show(b.dataset.gv)));
+let v="track";try{v=localStorage.getItem("tracker.gpSub")||"track"}catch(e){}
+show(tabs.some(b=>b.dataset.gv===v)?v:"track");
+const f=g("gpForm");
+new MutationObserver(()=>{if(!f.hidden){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"})}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
+["gpSetEditB","gpSetNew","gpSetAdd"].forEach(id=>{const b=g(id);if(b)b.addEventListener("click",()=>show("sets"))});
 })();
 </script>
 </body></html>
