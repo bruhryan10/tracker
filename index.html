@@ -2804,6 +2804,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 :is(#tab-quest,#tab-gempic) #hubFilter{flex-wrap:nowrap}
 :is(#tab-quest,#tab-gempic) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
 :is(#tab-quest,#tab-gempic) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+/* Gempic main box is purple (matches its icon) so it is easy to tell apart from the green Quest box */
+#tab-gempic #gpHero{--c:#c084fc}
+#tab-gempic #gpHero .qbig,#tab-gempic #gpHero .qst:last-child b{color:#c084fc}
+#tab-gempic #gpHero .qbar i{background:linear-gradient(90deg,#a855f7,#c084fc)}
 /* set search + sort (Quest + Gempic trackers) */
 :is(#tab-quest,#tab-gempic) .qtool{display:flex;gap:8px;margin:0 0 10px}
 :is(#tab-quest,#tab-gempic) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
@@ -9759,24 +9763,33 @@ const PF_TR=[["daily","Daily Games"],["shiny","Shiny Tracker"],["epic","Epic Tra
 const pfTb=id=>"tb"+id[0].toUpperCase()+id.slice(1);
 function pfApplyTheme(m){const r=document.documentElement;if(m==="light"||m==="dark")r.setAttribute("data-theme",m);else r.removeAttribute("data-theme")}
 function pfAgo(t){const d=Math.floor((Date.now()-t)/864e5);return d<=0?"today":d===1?"yesterday":d+" days ago"}
-function pfRender(){
-  const nm=($("profWho").textContent||"").trim();
-  $("pfAv").textContent=nm?nm[0]:"?";
-  $("pfVer").textContent="v"+VERSIONS[0][0];
-  /* stats */
+/* Your stats: totals across everything you have logged. Rebuilt whenever Profile opens and
+   again while it stays open, so it fills in once the trackers finish loading. */
+function pfStatsRender(){
   const safe=f=>{try{const v=f();return v==null?"\u2013":v}catch(e){return"\u2013"}};
   const days=Math.max(1,Math.floor((Date.now()-(+LS("tracker.firstSeen")||Date.now()))/864e5)+1);
+  /* gempic rolls and quests reset after every logged pull, so add the saved history to the current run */
+  const gpTot=()=>gp.history.reduce((a,h)=>a+h.rolls,0)+gpSum().n;
+  const qtTot=()=>qt.history.reduce((a,h)=>a+(h.typ==="s"?0:h.n),0)+qtSum().n; /* shiny entries keep the quest count going, so they are not added twice */
   const st=[
     ["Days using the app",nfmt(days)],
     ["Ads watched",safe(()=>nfmt(dg.ads.n))],
     ["Epics tracked",safe(()=>nfmt(allEpics.length))],
     ["Shiny boxes opened",safe(()=>nfmt(s.bought))],
-    ["Gempic rolls",safe(()=>nfmt(gpSum().n))],
-    ["Quests logged",safe(()=>nfmt(qtSum().n))],
+    ["Gempic rolls",safe(()=>nfmt(gpTot()))],
+    ["Quests logged",safe(()=>nfmt(qtTot()))],
     ["Pass entries",safe(()=>nfmt(passTot()+pass.u.filter(Boolean).length))],
     ["Market net",safe(()=>{const n=mkTotal("sold")-mkTotal("buy");return(n<0?"-":"")+nfmt(Math.abs(n))})]
   ];
-  $("pfStats").innerHTML=st.map(([l,v])=>`<div class="pfS"><b>${v}</b><span>${l}</span></div>`).join("");
+  const html=st.map(([l,v])=>`<div class="pfS"><b>${v}</b><span>${l}</span></div>`).join("");
+  const el=$("pfStats");if(el&&el.innerHTML!==html)el.innerHTML=html;
+}
+setInterval(()=>{const t=$("tab-profile");if(t&&!t.hidden)pfStatsRender()},1500);
+function pfRender(){
+  const nm=($("profWho").textContent||"").trim();
+  $("pfAv").textContent=nm?nm[0]:"?";
+  $("pfVer").textContent="v"+VERSIONS[0][0];
+  pfStatsRender();
   /* preferences */
   const th=LS("tracker.theme");const cur=th==="light"||th==="auto"?th:"dark";
   $("pfTheme").querySelectorAll("button").forEach(b=>{const on=b.dataset.t===cur;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on?"true":"false")});
