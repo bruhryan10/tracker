@@ -1473,7 +1473,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-quest .qsline{margin-top:10px;font-size:13.5px;color:var(--mut);line-height:1.5}
 #tab-quest .qsline b{color:var(--tx)}
 /* Quest Sets: collapsible (header is clickable, state remembered) */
-#tab-quest #qtSetsBox .gh{cursor:pointer;-webkit-user-select:none;user-select:none}
+#tab-quest #qtSetsBox .gh{cursor:default}
 #tab-quest #qtSetsBox .gh .gx{cursor:default}
 #tab-quest #qtSetsBox.shut .gh{margin-bottom:0}
 #tab-quest #qtSetsBody[hidden]{display:none}
@@ -2633,7 +2633,6 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpHist th,#tab-gempic #gpHist td{padding:9px 6px}
 #tab-gempic #gpHist .qsubl{white-space:normal}
 }
-#tab-gempic #gpForm.nbless #gpEpBox{display:none}
 #tab-gempic #gpHero{margin-top:0;padding:12px 16px}
 #tab-gempic .qh{display:flex;align-items:center;justify-content:space-between;gap:12px}
 #tab-gempic #gpRolls{font-size:clamp(34px,9vw,44px);font-weight:800;line-height:1;letter-spacing:-.02em}
@@ -2731,9 +2730,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic .qhg .val{font-weight:700;color:var(--tx)}
 #tab-gempic #gpCostBox{padding:0;border:0;background:none;margin-top:14px}
 #tab-gempic #gpCostBox .gcost input{height:46px}
-#tab-gempic #gpFNb button{min-height:42px}
 #tab-gempic #gpFTyp button[hidden],#tab-gempic #gpFSet[hidden],#tab-gempic .qfa .gb[hidden]{display:none}
-#tab-gempic #gpForm.nbless #gpEpBox{display:none}
 #tab-gempic #gpDay .gpan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 #tab-gempic .gsec{min-width:0}
 #tab-gempic #gpSetsBox .gh .sci{--c:#c084fc}
@@ -2760,6 +2757,84 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 @media (max-width:520px){#tab-gempic #gpSub{gap:6px}#tab-gempic #gpSub button{height:42px;font-size:14px}}
 #tab-gempic .gpv[hidden]{display:none}
 #tab-gempic .gpv>.gsec:first-child{margin-top:0}
+/* Sets hub: the shared Sets box also works when it sits inside the Gempic tracker */
+#tab-gempic #qtSetsBox .gh{cursor:default}
+#tab-gempic #qtSetsBox .gh .gx{cursor:default}
+#tab-gempic #qtSetsBox.shut .gh{margin-bottom:0}
+#tab-gempic #qtSetsBody[hidden]{display:none}
+#tab-gempic #qtSetsTog{margin:0;flex:none;height:38px;display:grid;place-items:center}
+#tab-gempic #qtSetForm{margin:0 0 14px;padding:14px;border:1px solid var(--bd);border-radius:12px;background:color-mix(in srgb,var(--bg) 60%,var(--card))}
+#tab-gempic #qtSetForm .qfl{display:block;font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
+#tab-gempic #qtSetForm input[type=text],#tab-gempic #qtSetForm input[type=number]{height:44px;padding:0 12px;border-radius:10px}
+#tab-gempic #qtSetForm .seg{margin:0 0 4px}
+#tab-gempic #qtSetForm .seg button{min-height:42px;border-radius:10px}
+#tab-gempic #qtSetForm .qrow{margin-top:10px}
+#tab-gempic #qtSetList tr.on td{background:color-mix(in srgb,#34d399 10%,transparent)}
+#tab-gempic #qtSetList td.qpc{min-width:150px}
+#tab-gempic #qtSetForm #qtSGen{display:flex;flex-wrap:wrap;gap:8px}
+#tab-gempic #qtSetForm #qtSGen button{flex:1 1 100px;min-width:100px;margin:0}
+#tab-gempic #qtSetsBody[hidden]{display:block!important}
+#tab-gempic #qtSetsTog{display:none}
+#tab-gempic #qtSetsBox .gh{cursor:default}
+@media (max-width:520px){#tab-gempic #qtSetList td.qpc{min-width:0}#tab-gempic #qtSetList th,#tab-gempic #qtSetList td{padding-left:10px;padding-right:10px}}
+@media (max-width:560px){
+#tab-gempic #qtSetForm{padding:12px}
+#tab-gempic #qtSetForm .qsft{margin-bottom:8px;font-size:14px}
+#tab-gempic #qtSetForm .qfl{margin:10px 0 4px;font-size:12px}
+#tab-gempic #qtSetForm input[type=text],#tab-gempic #qtSetForm input[type=number]{height:40px}
+#tab-gempic #qtSetForm #qtSGen{gap:6px}
+#tab-gempic #qtSetForm #qtSGen button{flex:1 1 calc(33.333% - 6px);min-width:0;min-height:34px;padding:2px 4px}
+#tab-gempic #qtSetForm #qtSGen button:nth-last-child(-n+2){flex-basis:calc(50% - 6px)}
+#tab-gempic #qtSetForm #qtSGen .pill{font-size:11px;padding:1px 8px}
+#tab-gempic #qtSetForm .seg{margin:0}
+#tab-gempic #qtSetForm .seg button{min-height:36px;font-size:13px}
+#tab-gempic #qtSetForm .qrow{margin-top:6px;padding:4px 0}
+#tab-gempic #qtSetForm .qfa{margin-top:12px}
+#tab-gempic #qtSetForm .qfa .gb{min-height:44px}
+}
+#gpSetsBox{display:none!important}
+#qtSetsTog{display:none!important}
+/* Show in: one switch per tracker */
+:is(#tab-quest,#tab-gempic) #qtSetList .tgc{white-space:normal}
+:is(#tab-quest,#tab-gempic) #qtSetList .tg{display:block;width:100%;height:30px;margin:4px 0;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
+:is(#tab-quest,#tab-gempic) #qtSetList .tg.on::before{content:"\2713\00a0"}
+:is(#tab-quest,#tab-gempic) #qtSetList .tg.on[data-stog="q"]{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
+:is(#tab-quest,#tab-gempic) #qtSetList .tg.on[data-stog="g"]{color:#c084fc;border-color:#c084fc;background:color-mix(in srgb,#c084fc 14%,transparent)}
+:is(#tab-quest,#tab-gempic) #hubFilter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic) #hubFilter{flex-wrap:nowrap}
+:is(#tab-quest,#tab-gempic) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
+:is(#tab-quest,#tab-gempic) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+/* set search + sort (Quest + Gempic trackers) */
+:is(#tab-quest,#tab-gempic) .qtool{display:flex;gap:8px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
+:is(#tab-quest,#tab-gempic) .qtool select{flex:0 0 auto;width:auto;min-width:0;max-width:46%;height:42px;margin:0;padding:0 36px 0 14px;font-size:14px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
+:is(#tab-quest,#tab-gempic) .qtool select:focus,:is(#tab-quest,#tab-gempic) .qtool input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 30%,transparent)}
+:is(#tab-quest,#tab-gempic) .qtool select option{background:var(--card);color:var(--tx)}
+@media (min-width:521px){#qtSetsInfoB,#gpSetsInfoB,.setsInfo{display:none!important}}
+@media (max-width:520px){
+:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh{align-items:center;gap:10px;margin-bottom:12px}
+:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .sci{width:36px;height:36px;border-radius:10px}
+:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .gt span{display:none}
+:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .gt b{font-size:16px}
+:is(#tab-quest,#tab-gempic) .qtool{gap:8px}
+:is(#tab-quest,#tab-gempic) .qtool select{width:122px;max-width:122px;padding-left:12px}
+}
+:is(#tab-quest,#tab-gempic) .qddsw{position:sticky;top:-6px;z-index:2;margin:-6px -6px 4px;padding:8px 8px 6px;background:var(--card);border-radius:12px 12px 0 0}
+:is(#tab-quest,#tab-gempic) .qddsw input{width:100%;box-sizing:border-box;height:38px;margin:0;padding:0 12px;font-size:14px;border-radius:8px}
+:is(#tab-quest,#tab-gempic) .qddno{padding:12px;color:var(--mut);font-size:13px;text-align:center}
+:is(#tab-quest,#tab-gempic) .mvbar{display:grid;grid-template-columns:repeat(2,auto);justify-content:start;gap:6px;margin-top:10px;white-space:normal}
+:is(#tab-quest,#tab-gempic) .mvbar .mv{min-width:40px;height:34px;padding:0 12px;margin:0}
+/* narrow screens: the sets tables fit the card, no sideways scrolling */
+@media (max-width:820px){
+:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList){table-layout:fixed;width:100%}
+:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(2){width:92px;padding-left:4px;padding-right:4px}
+:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(3){width:72px;padding-left:4px;padding-right:10px}
+:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) td.qpc{min-width:0;white-space:normal}
+:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) .qact{display:flex;justify-content:flex-end;gap:6px}
+}
+:is(#tab-quest,#tab-gempic) .mvbar .mv:disabled{opacity:.35;cursor:not-allowed}
+:is(#tab-quest,#tab-gempic) .mvmode td.qpc{cursor:pointer}
+:is(#tab-quest,#tab-gempic) tr.mvsel td{background:color-mix(in srgb,var(--ac) 10%,transparent)}
 </style></head><body><main>
 
 <div id="login" class="card" hidden>
@@ -2860,7 +2935,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card gsec" id="gpCtl">
 <div class="gp1" id="gpSetPick">
 <div class="gl"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Gempic Set</span></div>
-<div class="qsrow"><div class="qdd" id="gpDD"><button type="button" class="qddb" id="gpDDB" aria-haspopup="listbox" aria-expanded="false" aria-label="Gempic set"><span class="qddv" id="gpDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="gpDDM" role="listbox" hidden></div></div><button type="button" class="gb sm" id="gpSetEditB">Edit</button><button type="button" class="gb sm" id="gpSetNew">New set</button><button type="button" class="qi" id="gpInfoB" aria-label="How the odds work">i</button></div>
+<div class="qsrow"><div class="qdd" id="gpDD"><button type="button" class="qddb" id="gpDDB" aria-haspopup="listbox" aria-expanded="false" aria-label="Gempic set"><span class="qddv" id="gpDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="gpDDM" role="listbox" hidden><div class="qddsw"><input id="gpDDQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"></div><div id="gpDDL"></div></div></div><button type="button" class="gb sm" id="gpSetEditB">Edit</button><button type="button" class="gb sm" id="gpSetNew">New set</button><button type="button" class="qi" id="gpInfoB" aria-label="How the odds work">i</button></div>
 <div id="gpSetInfo"></div>
 </div>
 <div class="qchips"><label class="qrow" for="gpReroll"><input type="checkbox" id="gpReroll"><span>Reroll (second chance on every roll)</span><span class="qinfo" title="Each roll gets a second chance at the gempic."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
@@ -2888,9 +2963,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="lbl" style="margin:8px 0 0">Type</div>
 <div class="seg" id="gpFTyp"><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
 <div id="gpEpBox" hidden>
-<div class="lbl" style="margin:8px 0 0">Epic style</div>
-<div class="seg" id="gpFNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
-<div id="gpNumBox" hidden><label for="gpFNum">Epic #</label><input id="gpFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
+<div id="gpNumBox"><label for="gpFNum">Epic #</label><input id="gpFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
 </div>
 <div class="lbl" style="margin:8px 0 0">Rarity</div>
 <div class="seg" id="gpFRar"><button type="button" data-q="c"><span class="pill r r-common">Common</span></button><button type="button" data-q="u"><span class="pill r r-uncommon">Uncommon</span></button><button type="button" data-q="r"><span class="pill r r-rare">Rare</span></button></div>
@@ -2905,8 +2978,9 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </section>
 </div>
 <div class="gpv" id="gpv-sets" hidden>
-<section class="card gsec" id="gpSetsBox">
-<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="gpSetsSum">Gempic Sets</b><span>Artists and genres are shared with the Quest Tracker. The gem price is only used here. Epic style and lyrics are set in the Quest Tracker.</span></div><div class="gx"><button type="button" class="gb sm" id="gpSetAdd">New set</button></div></div>
+<section class="card gsec" id="gpSetsBox" hidden>
+<div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="gpSetsSum">Gempic Sets</b><span>Artists and genres are shared with the Quest Tracker. The gem price is only used here. Epic style and lyrics are set in the Quest Tracker.</span></div><div class="gx"><button type="button" class="gb sm sq" id="gpSetsInfoB" aria-label="About sets" aria-expanded="false" title="About sets" style="font-weight:700;font-size:15px">i</button><button type="button" class="gb sm" id="gpSetAdd">New set</button></div></div>
+<div class="note setsInfo" id="gpSetsDisc" hidden style="margin:0 0 12px">Artists and genres are shared with the Quest Tracker. The gem price is only used here. Epic style and lyrics are set in the Quest Tracker. Pick &ldquo;My order&rdquo; in the sort menu, then tap a set to show its move buttons.</div>
 <div id="gpSetsBody">
 <div id="gpSetForm" hidden>
 <div class="qsft" id="gpSFT">New set</div>
@@ -2920,6 +2994,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <label class="qrow gpQtOnly" for="gpSLy"><input type="checkbox" id="gpSLy"><span>Has lyrics</span><span class="qinfo" title="Turn off if this artist has no lyric drops."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
 <div class="qfa"><button type="button" class="gb" id="gpSDel" hidden style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))">Delete</button><button type="button" class="gb" id="gpSCancel">Cancel</button><button type="button" class="gb go" id="gpSSave">Save set</button></div>
 </div>
+<div class="qtool"><input id="gpSetQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"><select id="gpSetSort" aria-label="Sort sets"></select></div>
 <div class="gtbl"><table id="gpSetList"></table></div>
 </div>
 </section>
@@ -2983,8 +3058,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="seg" id="qtFTyp"><button type="button" data-t="s"><span class="pill r r-shiny">Shiny</span></button><button type="button" data-t="e"><span class="pill r r-epic">Epic</span></button><button type="button" data-t="l"><span class="pill r r-lyrics">Lyric</span></button></div>
 <div class="note" style="margin:0 0 6px">Saving a shiny keeps your quest count going. Epic or lyric resets it.</div>
 <div id="qtEpBox" hidden>
-<div class="lbl" style="margin:8px 0 0">Epic style</div>
-<div class="seg" id="qtFNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
+<div id="qtNbBox"><div class="lbl" style="margin:8px 0 0">Epic style</div>
+<div class="seg" id="qtFNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div></div>
 <div id="qtNumBox" hidden><label for="qtFNum">Epic #</label><input id="qtFNum" type="number" min="0" step="1" inputmode="numeric" placeholder="Epic number"></div>
 </div>
 <div class="lbl" style="margin:8px 0 0">Rarity</div>
@@ -3004,7 +3079,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 <div class="qtv" id="qtv-sets" hidden>
 <section class="card gsec" id="qtSetsBox">
-<div class="gh"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="qtSetsSum">Quest Sets</b><span>Track quests per artist. Saving a pull adds its quests to the selected set. Artists and genres are shared with the Gempic Tracker.</span></div><div class="gx"><button type="button" class="gb sm" id="qtSetAdd">New set</button><button type="button" class="gb sq" id="qtSetsTog" aria-expanded="true" aria-controls="qtSetsBody" aria-label="Collapse quest sets" title="Collapse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="gh"><span class="sci" style="--c:#34d399"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><div class="gt"><b id="qtSetsSum">Sets</b><span>One list for the Quest and Gempic trackers. Set each artist&rsquo;s genre, gem price, epic style, lyrics and quest count here, and choose which tracker shows it.</span></div><div class="gx"><button type="button" class="gb sm sq" id="qtSetsInfoB" aria-label="About sets" aria-expanded="false" title="About sets" style="font-weight:700;font-size:15px">i</button><button type="button" class="gb sm" id="qtSetAdd">New set</button><button type="button" class="gb sq" id="qtSetsTog" aria-expanded="true" aria-controls="qtSetsBody" aria-label="Collapse quest sets" title="Collapse"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="note setsInfo" id="qtSetsDisc" hidden style="margin:0 0 12px">This is the one place to manage sets for both the Quest and Gempic trackers. Use the Quest / Gempic buttons on a set to show or hide it in that tracker (nothing is deleted). Pick &ldquo;My order&rdquo; in the sort menu, then tap a set to show its move buttons.</div>
 <div id="qtSetsBody">
 <div id="qtSetForm" hidden>
 <div class="qsft" id="qtSFT">New set</div>
@@ -3014,9 +3090,15 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="qfl">Epic style</div>
 <div class="seg" id="qtSNb"><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button></div>
 <label class="qrow" for="qtSLy"><input type="checkbox" id="qtSLy"><span>Has lyrics</span><span class="qinfo" title="Turn off if this artist has no lyric drops. Selecting the set then excludes lyrics from the odds."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<label class="qfl" for="qtSGems">Gem price per roll</label><input id="qtSGems" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" autocomplete="off">
 <label class="qfl" for="qtSCnt">Current quest amount</label><input id="qtSCnt" type="number" min="0" step="1" inputmode="numeric" placeholder="Quests already done on this artist">
+<div class="qfl">Show this set in</div>
+<label class="qrow" for="qtSInQ"><input type="checkbox" id="qtSInQ"><span>Quest tracker</span></label>
+<label class="qrow" for="qtSInG"><input type="checkbox" id="qtSInG"><span>Gempic tracker</span></label>
 <div class="qfa"><button type="button" class="gb" id="qtSDel" hidden style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))">Delete</button><button type="button" class="gb" id="qtSCancel">Cancel</button><button type="button" class="gb go" id="qtSSave">Save set</button></div>
 </div>
+<div class="qtool"><input id="qtSetQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"><select id="qtSetSort" aria-label="Sort sets"></select></div>
+<div class="seg" id="hubFilter"><button type="button" data-f="all">All</button><button type="button" data-f="q">Quest</button><button type="button" data-f="g">Gempic</button><button type="button" data-f="x">Hidden</button></div>
 <div class="gtbl"><table id="qtSetList"></table></div>
 </div>
 </section>
@@ -4891,7 +4973,7 @@ async function evLog(type,tab,data){
 }
 function evPV(n){if(n&&n!==evLastTab){evLastTab=n;evLog("page_view",n)}}
 function evErr(kind,msg){if(evErrN++<5)evLog("client_error",evLastTab||"",{kind:kind,msg:String(msg||"").slice(0,200)})}
-window.addEventListener("error",function(e){evErr("js",(e&&e.message)||"error")});
+window.addEventListener("error",function(e){evErr("js",((e&&e.message)||"error")+" @"+(e&&e.lineno)+":"+(e&&e.colno)+" "+String((e&&e.error&&e.error.stack)||"").split("\n").slice(0,3).join(" | "))});
 window.addEventListener("unhandledrejection",function(e){evErr("promise",(e&&e.reason&&e.reason.message)||e&&e.reason||"rejection")});
 const SD_MAX_BYTES=10*1024*1024,SD_MAX_SECS=30,SD_COOLDOWN=5000,SD_DAY_MAX=30,SD_GUEST_DAY=15;
 let soundMode="ryan";
@@ -7755,24 +7837,21 @@ $("gpUndo").onclick=()=>{
   if(!gp.r.length)gp.start=0;
   saveGempic();renderGempic();
 };
-let gpEdit=-1,gpFRar="",gpFTyp="",gpFNb="",gpFSid="";
+let gpEdit=-1,gpFRar="",gpFTyp="",gpFSid="";
 function gpSyncEp(){
   $("gpEpBox").hidden=gpFTyp!=="e";
-  $("gpNumBox").hidden=gpFTyp!=="e"||gpFNb!=="n";
-  [...$("gpFNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===gpFNb));
 }
 function gpOpenForm(i){
   gpEdit=i;const h=i>=0?gp.history[i]:null,q=gpSum();
   const S=h?null:gpSetCur();gpFSid=S?S.id:"";
-  const hs=h&&h.sid?qtSetBy(h.sid):null,ns=S||hs;
+  const hs=h&&h.sid?qtSetBy(h.sid):null;
   $("gpFormTitle").textContent=h?"Edit gempic":"Log your gempic";
   $("gpArtist").value=h?h.artist:(S?S.name:"");$("gpSong").value=h?h.song:"";
   $("gpFNum").value=h&&h.num?h.num:"";
-  gpFRar=h?h.rar:"";gpFTyp=h?h.typ:"";gpFNb=h?h.nb:(S?S.nb:"");
+  gpFRar=h?h.rar:"";gpFTyp=h?h.typ:"";
   [...$("gpFTyp").children].forEach(b=>b.classList.toggle("on",b.dataset.t===gpFTyp));
   [...$("gpFRar").children].forEach(b=>b.classList.toggle("on",b.dataset.q===gpFRar));
   gpSyncEp();
-  $("gpForm").classList.toggle("nbless",!!(ns&&ns.nb==="l"));
   const fs=$("gpFSet");fs.hidden=!hs;if(hs)fs.innerHTML="Set: <b>"+esc(hs.name)+"</b>.";
   $("gpFTyp").querySelector('[data-t="l"]').hidden=!!(S&&!S.ly);
   $("gpFR").value=h?h.rolls:(q.n||"");$("gpFG").value=h?h.gems:(q.gems||"");
@@ -7783,10 +7862,9 @@ const gpCloseForm=()=>{$("gpForm").hidden=true;gpEdit=-1};
 $("gpHit").onclick=()=>{if(!gp.r.length)return;gpOpenForm(-1)};
 $("gpFRar").addEventListener("click",e2=>{const b=e2.target.closest("button[data-q]");if(!b)return;gpFRar=gpFRar===b.dataset.q?"":b.dataset.q;[...$("gpFRar").children].forEach(x=>x.classList.toggle("on",x.dataset.q===gpFRar))});
 $("gpFTyp").addEventListener("click",e2=>{const b=e2.target.closest("button[data-t]");if(!b)return;gpFTyp=gpFTyp===b.dataset.t?"":b.dataset.t;[...$("gpFTyp").children].forEach(x=>x.classList.toggle("on",x.dataset.t===gpFTyp));gpSyncEp()});
-$("gpFNb").addEventListener("click",e2=>{const b=e2.target.closest("button[data-n]");if(!b)return;gpFNb=gpFNb===b.dataset.n?"":b.dataset.n;gpSyncEp()});
 $("gpFCancel").onclick=gpCloseForm;
 $("gpFSave").onclick=()=>{
-  const artist=$("gpArtist").value.trim().slice(0,120),song=$("gpSong").value.trim().slice(0,120),nb=gpFTyp==="e"?gpFNb:"",num=nb==="n"?gpNum($("gpFNum").value):0,rolls=gpNum($("gpFR").value),gems=gpNum($("gpFG").value);
+  const artist=$("gpArtist").value.trim().slice(0,120),song=$("gpSong").value.trim().slice(0,120),nb=gpFTyp==="e"?"n":"",num=nb==="n"?gpNum($("gpFNum").value):0,rolls=gpNum($("gpFR").value),gems=gpNum($("gpFG").value);
   if(gpEdit>=0){
     const h=gp.history[gpEdit];if(h){h.artist=artist;h.song=song;h.typ=gpFTyp;h.nb=nb;h.num=num;h.rar=gpFRar;h.rolls=rolls;h.gems=gems}
   }else{
@@ -8529,7 +8607,7 @@ const qtPullIdx=()=>qt.exLy?[1]:[1,2];
 const qtP=(x,b)=>qtPd(qtPullIdx(),x,b);
 const qtPct=p=>Number((p*100).toFixed(4))+"%";
 const qtN=v=>Math.max(0,Math.floor(+v||0));
-const qtSetNorm=s=>({id:String(s.id).slice(0,24),name:String(s.name||"").trim().slice(0,60)||"Untitled",genre:String(s.genre||"").trim().slice(0,40),nb:s.nb==="n"||s.nb==="l"?s.nb:"",ly:s.ly!==false,cnt:Math.min(1e9,qtN(s.cnt)),gems:Math.min(1e6,qtN(s.gems))});
+const qtSetNorm=s=>({id:String(s.id).slice(0,24),name:String(s.name||"").trim().slice(0,60)||"Untitled",genre:String(s.genre||"").trim().slice(0,40),nb:s.nb==="n"||s.nb==="l"?s.nb:"",ly:s.ly!==false,cnt:Math.min(1e9,qtN(s.cnt)),gems:Math.min(1e6,qtN(s.gems)),q:s.q!==false,g:s.g!==false});
 function qtNorm(d){d=d||{};const o=qtNorm0(d),seen=new Set();
   o.sets=Array.isArray(d.sets)?d.sets.filter(s=>s&&s.id&&!seen.has(String(s.id))&&seen.add(String(s.id))).slice(0,200).map(qtSetNorm):[];
   o.setId=o.sets.some(s=>s.id===d.setId)?d.setId:"";return o}
@@ -8550,9 +8628,69 @@ const qtGK=g=>String(g||"").toLowerCase().replace(/[^a-z0-9]/g,"");
 /* wiki genre pill; a genre typed before the picker existed falls back to a plain chip */
 const qtGenPill=g=>{if(!g)return"";const m=QT_GEN.find(x=>qtGK(x[0])===qtGK(g));return m?'<span class="pill g g-'+m[1]+'">'+esc(m[0])+'</span>':'<span class="qchip" style="--c:#3b82f6">'+esc(g)+'</span>'};
 const qtSetChips=s=>qtGenPill(s.genre)+(s.nb?'<span class="qchip" style="--c:#f59e0b">'+QT_SET_NB[s.nb]+'</span>':"")+'<span class="qchip" style="--c:'+(s.ly?"#c084fc":"#9a9a94")+'">'+(s.ly?"Lyrics on":"No lyrics")+'</span>';
+/* ---------- set search + sort order (shared by the Quest and Gempic trackers) ---------- */
+/* "My order" is simply the order of qt.sets, so it is saved (and synced) with the sets themselves */
+const SET_SORTS=[["az","A to Z"],["za","Z to A"],["custom","My order"],["most","Most first"],["genre","Genre"]];
+let setSort=(()=>{const v=LS("tracker.setSort");return SET_SORTS.some(x=>x[0]===v)?v:"az"})();
+let qtSetQv="",gpSetQv="",gpDDq="";
+const setNameCmp=(a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"});
+function setsSorted(list,cnt){
+  const pos=new Map(qt.sets.map((x,i)=>[x.id,i])),c=cnt||(x=>x.cnt),L=[...list];
+  if(setSort==="za")L.sort((a,b)=>setNameCmp(b,a));
+  else if(setSort==="custom")L.sort((a,b)=>pos.get(a.id)-pos.get(b.id));
+  else if(setSort==="most")L.sort((a,b)=>c(b)-c(a)||setNameCmp(a,b));
+  else if(setSort==="genre")L.sort((a,b)=>(a.genre?0:1)-(b.genre?0:1)||String(a.genre).localeCompare(String(b.genre),undefined,{sensitivity:"base"})||setNameCmp(a,b));
+  else L.sort(setNameCmp);
+  return L;
+}
+const setMatch=(x,q)=>{q=String(q||"").trim().toLowerCase();return !q||(x.name+" "+x.genre).toLowerCase().includes(q)};
+/* up / down / top buttons, only shown in "My order" */
+let setMvSel="";
+const setMvBtns=(id,i,n)=>setSort!=="custom"||id!==setMvSel?"":'<div class="mvbar"><button type="button" class="x mv" data-smv="up" data-sid="'+esc(id)+'" title="Move up" aria-label="Move up"'+(i===0?" disabled":"")+'>&uarr;</button><button type="button" class="x mv" data-smv="down" data-sid="'+esc(id)+'" title="Move down" aria-label="Move down"'+(i===n-1?" disabled":"")+'>&darr;</button><button type="button" class="x mv" data-smv="top" data-sid="'+esc(id)+'" title="Move to top" aria-label="Move to top"'+(i===0?" disabled":"")+'>Top</button><button type="button" class="x mv done" data-smv="done" data-sid="'+esc(id)+'">Done</button></div>';
+/* My order: tap a set's name to show its move buttons (only one set at a time) */
+function setRowTap(e,table){
+  const c=e.target.closest("td.qpc");if(!c||setSort!=="custom"||e.target.closest("button")||!c.dataset.sid)return false;
+  setMvSel=setMvSel===c.dataset.sid?"":c.dataset.sid;renderQuest();renderGempic();return true;
+}
+function setMoveClick(b,table){
+  const id=b.dataset.sid,d=b.dataset.smv,a=qt.sets,i=a.findIndex(x=>x.id===id);
+  if(d==="done"){setMvSel="";renderQuest();renderGempic();return}
+  if(i<0)return;
+  if(d==="top"){const [x]=a.splice(i,1);a.unshift(x)}
+  else{
+    const ids=[...table.querySelectorAll("button[data-sedit]")].map(x=>x.dataset.sedit),v=ids.indexOf(id),nid=ids[v+(d==="up"?-1:1)];
+    const j=nid==null?-1:a.findIndex(x=>x.id===nid);if(j<0)return;
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  saveQuest();renderQuest();renderGempic();
+  requestAnimationFrame(()=>{const m=table.querySelector(".mvbar");if(m)m.scrollIntoView({block:"nearest"})});
+}
+$("qtSetSort").innerHTML=$("gpSetSort").innerHTML=SET_SORTS.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join("");
+$("qtSetSort").value=$("gpSetSort").value=setSort;
+const setSortPick=e=>{setSort=e.target.value;setMvSel="";LS("tracker.setSort",setSort);renderQuest();renderGempic()};
+$("qtSetSort").addEventListener("change",setSortPick);$("gpSetSort").addEventListener("change",setSortPick);
+[["qtSetsInfoB","qtSetsDisc"],["gpSetsInfoB","gpSetsDisc"]].forEach(([b,d])=>$(b).addEventListener("click",()=>{const o=$(d).hidden;$(d).hidden=!o;$(b).setAttribute("aria-expanded",String(o))}));
+$("hubFilter").addEventListener("click",e=>{const b=e.target.closest("button[data-f]");if(!b)return;hubFilter=b.dataset.f;qtSetRender()});
+$("qtSetQ").addEventListener("input",e=>{qtSetQv=e.target.value;qtSetRender()});
+$("gpSetQ").addEventListener("input",e=>{gpSetQv=e.target.value;gpSetRender()});
+/* ---------- Sets hub: one list, shown in both trackers' Sets tabs ---------- */
+let hubFilter="all";
+const hubPass=x=>hubFilter==="q"?x.q!==false:hubFilter==="g"?x.g!==false:hubFilter==="x"?(x.q===false||x.g===false):true;
+const hubGN=id=>{try{return gpSetN(id)}catch(e){return 0}};
+const hubTg=(x,k)=>'<button type="button" class="tg'+(x[k]!==false?" on":"")+'" data-stog="'+k+'" data-sid="'+esc(x.id)+'" aria-pressed="'+(x[k]!==false)+'">'+(k==="q"?"Quest":"Gempic")+'</button>';
+/* the one Sets box lives inside whichever tracker's Sets tab is open */
+function hubMount(w){const b=$("qtSetsBox"),d=$(w==="gp"?"gpv-sets":"qtv-sets");if(b&&d&&b.parentNode!==d)d.appendChild(b)}
+/* switching between the Quest and Gempic trackers while both are on their Sets tab: move the box to the tracker you just opened */
+function hubSync(){
+  const q=$("tab-quest"),g=$("tab-gempic");if(!q||!g)return;
+  if(!g.hidden&&!$("gpv-sets").hidden)hubMount("gp");
+  else if(!q.hidden&&!$("qtv-sets").hidden)hubMount("qt");
+}
+["tab-quest","tab-gempic"].forEach(id=>new MutationObserver(hubSync).observe($(id),{attributes:true,attributeFilter:["hidden"]}));
+const hubWhere=()=>{const b=$("qtSetsBox");return b&&b.parentNode&&b.parentNode.id==="gpv-sets"?"gp":"qt"};
 function qtSetRender(){
   const sel=$("qtSetSel"),cur=qtSetCur();
-  const L=[...qt.sets].sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}));
+  const L=setsSorted(qt.sets.filter(x=>x.q!==false)),LV=setsSorted(qt.sets.filter(x=>hubPass(x)&&setMatch(x,qtSetQv)));
   const sig=L.map(s=>s.id+"\u0001"+s.name).join("\u0002");
   if(sel.dataset.sig!==sig){sel.dataset.sig=sig;sel.innerHTML='<option value="">No set</option>'+L.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name)+'</option>').join("")}
   sel.value=cur?cur.id:"";
@@ -8561,11 +8699,15 @@ function qtSetRender(){
   $("qtSetInfo").innerHTML=cur
     ?'<div class="qchips">'+qtSetChips(cur)+'</div><div class="qsline"><b>'+esc(cur.name)+'</b>: '+nfmt(cur.cnt)+' saved'+(run?' + '+nfmt(run)+' this run = <b>'+nfmt(cur.cnt+run)+'</b> after your pull':'')+'.</div>'
     :'<div class="qsline">'+(qt.sets.length?"No set selected, so a saved pull won't add to any artist's count.":"Make a set to track the quest count, genre, epic style and lyrics for each artist.")+'</div>';
-  $("qtSetsSum").textContent="Quest Sets"+(qt.sets.length?" ("+qt.sets.length+")":"");
-  $("qtSetList").innerHTML=qt.sets.length?'<tr><th>Set</th><th class="c">Quests</th><th></th></tr>'+L.map(s=>{
-    const on=s.id===qt.setId,sub=[s.nb?QT_SET_NB[s.nb]:"",s.ly?"Lyrics":"No lyrics"].filter(Boolean).join(" \u00b7 ");
-    return '<tr class="'+(on?"on":"")+'"><td class="qpc"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+(on?'<span class="qchip" style="--c:#34d399">Active</span>':"")+'</div><div class="qsubl">'+sub+'</div></td><td class="c b">'+nfmt(s.cnt)+'</td><td class="r"><span class="qact">'+(on?"":'<button type="button" class="x" data-suse="'+esc(s.id)+'">Use</button>')+'<button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
-  }).join(""):'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>';
+  $("qtSetsSum").textContent="Sets"+(qt.sets.length?" ("+qt.sets.length+")":"");
+  {const n=f=>qt.sets.filter(x=>f==="q"?x.q!==false:f==="g"?x.g!==false:f==="x"?(x.q===false||x.g===false):true).length,lb={all:"All",q:"Quest",g:"Gempic",x:"Hidden"};
+   [...$("hubFilter").children].forEach(b=>{b.textContent=lb[b.dataset.f]+" ("+n(b.dataset.f)+")";b.classList.toggle("on",b.dataset.f===hubFilter)})}
+  $("qtSetList").innerHTML=!qt.sets.length?'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>':!LV.length?'<tr><td class="gempty">No sets match &ldquo;'+esc(qtSetQv.trim())+'&rdquo;.</td></tr>':'<tr><th>Set</th><th class="c">Show in</th><th></th></tr>'+LV.map((s,i)=>{
+    const sub=[s.nb?QT_SET_NB[s.nb]:"",s.ly?"Lyrics":"No lyrics",s.gems?nfmt(s.gems)+" gems/roll":"No gem price"].filter(Boolean).join(" \u00b7 "),
+      stat=nfmt(s.cnt)+" quests \u00b7 "+nfmt(hubGN(s.id))+" gempics";
+    return '<tr class="'+(setSort==="custom"&&s.id===setMvSel?"mvsel":"")+'"><td class="qpc" data-sid="'+esc(s.id)+'"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+'</div><div class="qsubl">'+sub+'</div><div class="qsubl">'+stat+'</div>'+setMvBtns(s.id,i,LV.length)+'</td><td class="c tgc">'+hubTg(s,"q")+hubTg(s,"g")+'</td><td class="r"><span class="qact"><button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
+  }).join("");
+  $("qtSetSort").value=setSort;$("qtSetList").classList.toggle("mvmode",setSort==="custom");
 }
 let qtSetEdit="",qtSNb="",qtSGen="";
 /* Quest Sets box can be collapsed; the choice is remembered on this device */
@@ -8575,9 +8717,8 @@ function qtSetsShow(open,save){
   t.setAttribute("aria-label",open?"Collapse quest sets":"Expand quest sets");t.title=open?"Collapse":"Expand";
   if(save)LS("tracker.qtSetsOpen",open?"1":"0");
 }
-qtSetsShow(LS("tracker.qtSetsOpen")!=="0");
+qtSetsShow(true); /* the header is no longer a toggle, so the list is always open */
 $("qtSetsTog").addEventListener("click",()=>qtSetsShow($("qtSetsBody").hidden,true));
-$("qtSetsBox").querySelector(".gh").addEventListener("click",e=>{if(e.target.closest(".gx"))return;qtSetsShow($("qtSetsBody").hidden,true)});
 const qtSGenSync=()=>[...$("qtSGen").children].forEach(b=>b.classList.toggle("on",!!qtSGen&&qtGK(b.dataset.g)===qtGK(qtSGen)));
 $("qtSGen").addEventListener("click",e=>{const b=e.target.closest("button[data-g]");if(!b)return;qtSGen=qtGK(qtSGen)===qtGK(b.dataset.g)?"":b.dataset.g;qtSGenSync()});
 const qtSNbSync=()=>[...$("qtSNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===qtSNb));
@@ -8587,8 +8728,10 @@ function qtSetOpen(id){
   $("qtSFT").textContent=s?"Edit set":"New set";
   $("qtSName").value=s?s.name:"";qtSGen=s?s.genre:"";qtSGenSync();qtSNb=s?s.nb:"";
   $("qtSLy").checked=s?s.ly:true;$("qtSCnt").value=s?s.cnt:"";
+  $("qtSGems").value=s&&s.gems?s.gems:"";$("qtSInQ").checked=s?s.q!==false:true;$("qtSInG").checked=s?s.g!==false:true;
   qtSNbSync();$("qtSDel").hidden=!s;
-  qtSetsShow(true);$("qtSetForm").hidden=false;$("qtSetsBox").scrollIntoView({block:"nearest",behavior:"smooth"});$("qtSName").focus();
+  qtSetsShow(true);$("qtSetForm").hidden=false;
+  setTimeout(()=>{$("qtSetsBox").scrollIntoView({block:"nearest",behavior:"smooth"});$("qtSName").focus()},60);
 }
 const qtSetClose=()=>{$("qtSetForm").hidden=true;qtSetEdit=""};
 $("qtSetNew").onclick=$("qtSetAdd").onclick=()=>qtSetOpen("new");
@@ -8596,6 +8739,17 @@ $("qtSetEditB").onclick=()=>{const s=qtSetCur();if(s)qtSetOpen(s.id)};
 $("qtSetSel").addEventListener("change",()=>{qt.setId=$("qtSetSel").value;qtApplySet();saveQuest();renderQuest()});
 $("qtSNb").addEventListener("click",e=>{const b=e.target.closest("button[data-n]");if(!b)return;qtSNb=qtSNb===b.dataset.n?"":b.dataset.n;qtSNbSync();if(qtSNb==="l")$("qtSLy").checked=false /* numberless artists have no lyrics */});
 $("qtSetList").addEventListener("click",e=>{
+  const tg=e.target.closest("button[data-stog]");
+  if(tg){
+    const x=qtSetBy(tg.dataset.sid),k=tg.dataset.stog;if(!x)return;
+    x[k]=x[k]===false; /* on becomes off, off becomes on */
+    let gch=false;
+    if(k==="q"&&x.q===false&&qt.setId===x.id)qt.setId="";
+    if(k==="g"&&x.g===false&&gp.setId===x.id){gp.setId="";gch=true}
+    saveQuest();renderQuest();if(gch)saveGempic();renderGempic();return;
+  }
+  const mv=e.target.closest("button[data-smv]");if(mv){setMoveClick(mv,$("qtSetList"));return}
+  if(setRowTap(e,$("qtSetList")))return;
   const u=e.target.closest("button[data-suse]"),d=e.target.closest("button[data-sedit]");
   if(u){qt.setId=u.dataset.suse;qtApplySet();saveQuest();renderQuest();return}
   if(d)qtSetOpen(d.dataset.sedit);
@@ -8604,25 +8758,33 @@ $("qtSCancel").onclick=qtSetClose;
 $("qtSSave").onclick=()=>{
   const name=$("qtSName").value.trim().slice(0,60);
   if(!name){$("qtSName").focus();return}
-  const o={name:name,genre:qtSGen,nb:qtSNb,ly:$("qtSLy").checked,cnt:qtN($("qtSCnt").value)};
+  const o={name:name,genre:qtSGen,nb:qtSNb,ly:$("qtSLy").checked,cnt:qtN($("qtSCnt").value),gems:qtN($("qtSGems").value),q:$("qtSInQ").checked,g:$("qtSInG").checked};
   let s=qtSetEdit==="new"?null:qtSetBy(qtSetEdit);
-  if(s)Object.assign(s,qtSetNorm(Object.assign({},o,{id:s.id,gems:s.gems})));
+  if(s)Object.assign(s,qtSetNorm(Object.assign({},o,{id:s.id})));
   else{
     if(qt.sets.length>=QT_SETS_MAX)return;
     s=qtSetNorm(Object.assign({},o,{id:"s"+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}));
-    qt.sets.push(s);qt.setId=s.id; /* a new set becomes the active one */
+    qt.sets.push(s);
+    /* a new set becomes the active one in the tracker whose Sets tab you are in */
+    if(hubWhere()==="gp"){if(s.g!==false)gp.setId=s.id}else if(s.q!==false)qt.setId=s.id;
   }
+  /* hidden from a tracker: it can't stay selected there */
+  let gch=false;
+  if(s.q===false&&qt.setId===s.id)qt.setId="";
+  if(s.g===false&&gp.setId===s.id){gp.setId="";gch=true}
   if(s.id===qt.setId)qtApplySet();
-  qtSetClose();saveQuest();renderQuest();
+  if(s.id===gp.setId){gpApplySetCost();gch=true}
+  qtSetClose();saveQuest();renderQuest();if(gch)saveGempic();renderGempic();
 };
 $("qtSDel").onclick=()=>{
   const s=qtSetBy(qtSetEdit);if(!s)return;
   ask("Delete the set \u201c"+s.name+"\u201d? Your pull history keeps its entries.",()=>{
     qt.sets=qt.sets.filter(x=>x.id!==s.id);if(qt.setId===s.id)qt.setId="";
-    qtSetClose();saveQuest();renderQuest();
+    const gch=gp.setId===s.id;if(gch)gp.setId="";
+    qtSetClose();saveQuest();renderQuest();if(gch)saveGempic();renderGempic();
   });
 };
-["qtSName","qtSCnt"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("qtSSave").click()}));
+["qtSName","qtSCnt","qtSGems"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("qtSSave").click()}));
 function renderQuest(){
   qtSetRender();
   const q=qtSum(),next=qtP(qt.reroll,qt.boost);
@@ -8959,17 +9121,24 @@ $("msUndo").onclick=()=>{
 /* artist count before the current streak of shinies: the first shiny since the last epic/lyric remembers it */
 function qtBase(){let b=qt.total;for(const h of qt.history){if(h.typ!=="s")break;if(h.ta)b=h.tb}return b}
 const qtRun=()=>Math.max(qt.run||0,qt.total);
-let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtTAman=false,qtFSid="";
+let qtEdit=-1,qtFRar="",qtFTyp="",qtFNb="",qtFLock="",qtTAman=false,qtTAuser=false,qtFSid="";
 function qtAutoTA(){
   if(qtTAman)return;
   const n=Math.max(0,Math.floor(Number($("qtFN").value))||0),tb=Math.max(0,Math.floor(Number($("qtTB").value))||0);
   $("qtTA").value=qtSetBy(qtFSid)?tb+Math.max(0,n-qt.cnt):tb+Math.max(0,qtRun()-qtBase())+Math.max(0,n-qt.cnt);
 }
 $("qtFN").addEventListener("input",qtAutoTA);
-$("qtTB").addEventListener("input",qtAutoTA);
-$("qtTA").addEventListener("input",()=>{qtTAman=true});
+/* math also works backwards: type the final artist quest count (After) and "Quests it took" fills in, using the same rules as the forward calculation */
+function qtBackN(){
+  const FS=qtSetBy(qtFSid),c=qtEdit>=0?0:qt.cnt,x=qtEdit>=0||FS?0:Math.max(0,qtRun()-qtBase());
+  const tb=Math.max(0,Math.floor(Number($("qtTB").value))||0),ta=Math.max(0,Math.floor(Number($("qtTA").value))||0);
+  $("qtFN").value=c+Math.max(0,ta-tb-x);
+}
+$("qtTB").addEventListener("input",()=>{if(qtTAuser)qtBackN();else qtAutoTA()});
+$("qtTA").addEventListener("input",()=>{qtTAman=true;if($("qtTA").value===""){qtTAuser=false;return}qtTAuser=true;qtBackN()});
 function qtSyncEp(){
-  $("qtEpBox").hidden=qtFTyp!=="e";
+  $("qtEpBox").hidden=qtFTyp!=="e"||qtFLock==="l";
+  $("qtNbBox").hidden=!!qtFLock; /* the set already says numbered / numberless: no style buttons */
   $("qtNumBox").hidden=qtFTyp!=="e"||qtFNb!=="n";
   [...$("qtFNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===qtFNb));
 }
@@ -8979,9 +9148,11 @@ function qtOpenForm(i){
   $("qtFormTitle").textContent=h?"Edit pull":"Log your pull";
   $("qtArtist").value=h?(h.artist||(h.song?"":h.name)):(S?S.name:"");
   $("qtSong").value=h?h.song:"";
-  qtFNb=h?h.nb:(S?S.nb:"");
+  const ns=S||(h&&h.sid?qtSetBy(h.sid):null);
+  qtFLock=ns&&(ns.nb==="n"||ns.nb==="l")?ns.nb:"";
+  qtFNb=qtFLock||(h?h.nb:"");
   $("qtFNum").value=h&&h.num?h.num:"";
-  qtTAman=!!h;
+  qtTAman=!!h;qtTAuser=false;
   $("qtTB").value=h?(h.ta?h.tb:""):(S?S.cnt:qtBase());
   $("qtTA").value=h?(h.ta||""):"";
   qtFRar=h?h.rar:"";
@@ -9045,23 +9216,27 @@ const gpSetN=id=>gp.history.reduce((a,h)=>a+(h.sid===id?1:0),0);
 const gpSetsChanged=()=>{saveQuest();renderQuest();saveGempic();renderGempic()};
 function gpSetRender(){
   const cur=gpSetCur();
-  const L=[...qt.sets].sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}));
+  const L=setsSorted(qt.sets,x=>gpSetN(x.id));
   $("gpDDV").innerHTML=cur?'<b class="qddn">'+esc(cur.name)+'</b><span class="qddc">'+gpSetChips(cur)+'</span>':'<span class="qddn" style="color:var(--mut)">No set</span>';
-  $("gpDDM").innerHTML='<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>'+L.map(s=>'<button type="button" role="option" data-id="'+esc(s.id)+'" class="qddo'+(cur&&s.id===cur.id?" on":"")+'"><b class="qddn">'+esc(s.name)+'</b><span class="qddc">'+gpSetChips(s)+'</span><span class="qddq">'+nfmt(gpSetN(s.id))+'</span></button>').join("");
+  const LD=L.filter(x=>x.g!==false&&setMatch(x,gpDDq)),dq=gpDDq.trim();
+  $("gpDDL").innerHTML=(dq?"":'<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>')+(dq&&!LD.length?'<div class="qddno">No sets match</div>':"")+LD.map(s=>'<button type="button" role="option" data-id="'+esc(s.id)+'" class="qddo'+(cur&&s.id===cur.id?" on":"")+'"><b class="qddn">'+esc(s.name)+'</b><span class="qddc">'+gpSetChips(s)+'</span><span class="qddq">'+nfmt(gpSetN(s.id))+'</span></button>').join("");
   $("gpSetEditB").disabled=!cur;
   $("gpSetInfo").innerHTML=cur?'<div class="qchips">'+gpSetChips(cur)+'</div>':'<div class="qsline">'+(qt.sets.length?"No set selected. Pick one to fill in the artist and gem price per roll.":"Make a set to save an artist's genre and gem price once. Artists are shared with the Quest Tracker.")+'</div>';
   $("gpSetsSum").textContent="Gempic Sets"+(qt.sets.length?" ("+qt.sets.length+")":"");
-  const L2=cur?[cur,...L.filter(s=>s.id!==cur.id)]:L;
-  $("gpSetList").innerHTML=qt.sets.length?'<tr><th>Set</th><th class="c">Gempics</th><th></th></tr>'+L2.map(s=>{
+  const LV=L.filter(x=>setMatch(x,gpSetQv)),L2=cur&&setSort!=="custom"&&LV.includes(cur)?[cur,...LV.filter(s=>s.id!==cur.id)]:LV;
+  $("gpSetList").innerHTML=!qt.sets.length?'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>':!L2.length?'<tr><td class="gempty">No sets match &ldquo;'+esc(gpSetQv.trim())+'&rdquo;.</td></tr>':'<tr><th>Set</th><th class="c">Gempics</th><th></th></tr>'+L2.map((s,i)=>{
     const on=!!cur&&s.id===cur.id,sub=s.gems?nfmt(s.gems)+" gems per roll":"No gem price set";
-    return '<tr class="'+(on?"on":"")+'"><td class="qpc"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+(on?'<span class="qchip" style="--c:#34d399">Active</span>':"")+'</div><div class="qsubl">'+sub+'</div></td><td class="c b">'+nfmt(gpSetN(s.id))+'</td><td class="r"><span class="qact">'+(on?"":'<button type="button" class="x" data-suse="'+esc(s.id)+'">Use</button>')+'<button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
-  }).join(""):'<tr><td class="gempty">No sets yet. Press New set to add an artist.</td></tr>';
+    return '<tr class="'+(on?"on":"")+(setSort==="custom"&&s.id===setMvSel?" mvsel":"")+'"><td class="qpc" data-sid="'+esc(s.id)+'"><div class="qpt"><strong>'+esc(s.name)+'</strong>'+qtGenPill(s.genre)+(on?'<span class="qchip" style="--c:#34d399">Active</span>':"")+'</div><div class="qsubl">'+sub+'</div>'+setMvBtns(s.id,i,L2.length)+'</td><td class="c b">'+nfmt(gpSetN(s.id))+'</td><td class="r"><span class="qact">'+(on?"":'<button type="button" class="x" data-suse="'+esc(s.id)+'">Use</button>')+'<button type="button" class="x" data-sedit="'+esc(s.id)+'">Edit</button></span></td></tr>';
+  }).join("");
+  $("gpSetSort").value=setSort;$("gpSetList").classList.toggle("mvmode",setSort==="custom");
 }
 /* set picker (custom dropdown, same look as the quest tracker) */
 (function(){
   const dd=$("gpDD"),b=$("gpDDB"),m=$("gpDDM");
   const close=()=>{m.hidden=true;b.setAttribute("aria-expanded","false")};
-  b.addEventListener("click",e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute("aria-expanded",String(!m.hidden));if(!m.hidden){const o=m.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
+  b.addEventListener("click",e=>{e.stopPropagation();m.hidden=!m.hidden;b.setAttribute("aria-expanded",String(!m.hidden));if(!m.hidden){gpDDq="";$("gpDDQ").value="";gpSetRender();if(matchMedia("(hover:hover)").matches)$("gpDDQ").focus();const o=m.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
+  $("gpDDQ").addEventListener("input",e=>{gpDDq=e.target.value;gpSetRender()});
+  $("gpDDQ").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const o=$("gpDDL").querySelector(".qddo");if(o)o.click()}});
   m.addEventListener("click",e=>{const o=e.target.closest(".qddo");if(!o)return;gp.setId=o.dataset.id;gpApplySetCost();close();saveGempic();renderGempic()});
   document.addEventListener("click",e=>{if(!m.hidden&&!dd.contains(e.target))close()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden){close();b.focus()}});
@@ -9071,6 +9246,7 @@ let gpSetEdit="",gpSNb="",gpSGen="";
 const gpSGenSync=()=>[...$("gpSGen").children].forEach(b=>b.classList.toggle("on",!!gpSGen&&qtGK(b.dataset.g)===qtGK(gpSGen)));
 const gpSNbSync=()=>[...$("gpSNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===gpSNb));
 function gpSetOpen(id){
+  hubMount("gp");qtSetOpen(id);return; /* one shared set editor for both trackers */
   const s=id==="new"?null:qtSetBy(id);if(id!=="new"&&!s)return;
   gpSetEdit=id;
   $("gpSFT").textContent=s?"Edit set":"New set";
@@ -9084,6 +9260,8 @@ $("gpSetEditB").onclick=()=>{const s=gpSetCur();if(s)gpSetOpen(s.id)};
 $("gpSGen").addEventListener("click",e=>{const b=e.target.closest("button[data-g]");if(!b)return;gpSGen=qtGK(gpSGen)===qtGK(b.dataset.g)?"":b.dataset.g;gpSGenSync()});
 $("gpSNb").addEventListener("click",e=>{const b=e.target.closest("button[data-n]");if(!b)return;gpSNb=gpSNb===b.dataset.n?"":b.dataset.n;gpSNbSync();if(gpSNb==="l")$("gpSLy").checked=false /* numberless artists have no lyrics */});
 $("gpSetList").addEventListener("click",e=>{
+  const mv=e.target.closest("button[data-smv]");if(mv){setMoveClick(mv,$("gpSetList"));return}
+  if(setRowTap(e,$("gpSetList")))return;
   const u=e.target.closest("button[data-suse]"),d=e.target.closest("button[data-sedit]");
   if(u){gp.setId=u.dataset.suse;gpApplySetCost();saveGempic();renderGempic();return}
   if(d)gpSetOpen(d.dataset.sedit);
@@ -9525,6 +9703,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.1","2026-10-28",["Quest & Gempic Sets are now one shared list: manage artist, genre, gem price, epic style, lyrics and quest count in one place, from either tracker.","Choose which tracker shows each set (Quest and/or Gempic) without deleting it, with an All / Quest / Gempic / Hidden filter.","Search sets (in the lists and the set dropdowns) and sort them A to Z, Z to A, Most first, by Genre, or in your own order with move buttons.","Quest Tracker: type the final artist quest count and Quests it took fills in automatically.","Gempic Tracker: Epic # is always shown for epics. Quest Tracker: Epic style is hidden when the set already has it chosen.","Sets now fit on mobile without sideways scrolling, with an info button for the details.","Minor bug fixes."]],
 ["0.8","2026-10-26",["Added set tracking to quest & epic trackers.","Revamped quest tracker UI.","Other minor UI updates.","Minor bug fixes."]],
 ["0.7.2","2026-10-25",["Profile overhaul: new layout with stats, preferences, tracker toggles, backup to file and a What's new section.","Dark mode is now the default theme.","Updated various UIs."]],
 ["0.7.1","2026-10-25",["Added Pop category in Sound Guesser.","Added Icon view for home page modules.","Updated various UIs.","Event Tracker: added a Last 2 Hours history (rewards, coins and gems from the last 2 hours) with its own reset button."]],
@@ -9832,12 +10011,12 @@ $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);
 (function(){
 const g=id=>document.getElementById(id);
 const tabs=[...document.querySelectorAll("#qtSub button")];
-function show(v){tabs.forEach(b=>{const on=b.dataset.qv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-quest .qtv").forEach(s=>{s.hidden=s.id!=="qtv-"+v});try{localStorage.setItem("tracker.qtSub",v)}catch(e){}}
+function show(v){tabs.forEach(b=>{const on=b.dataset.qv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-quest .qtv").forEach(s=>{s.hidden=s.id!=="qtv-"+v});if(v==="sets")hubMount("qt");try{localStorage.setItem("tracker.qtSub",v)}catch(e){}}
 tabs.forEach(b=>b.addEventListener("click",()=>show(b.dataset.qv)));
 let v="track";try{v=localStorage.getItem("tracker.qtSub")||"track"}catch(e){}
 show(tabs.some(b=>b.dataset.qv===v)?v:"track");
 const f=g("qtForm");
-function formTweaks(){const fs=g("qtFSet"),adding=/^Adding to/.test(fs.textContent);fs.style.display=adding?"none":"";const b=fs.querySelector("b"),name=!fs.hidden&&b?b.textContent:"";const r=rows().find(x=>x.name===name);f.classList.toggle("nbless",!!(r&&r.sub.indexOf("Numberless epics")>-1))}
+function formTweaks(){const fs=g("qtFSet"),adding=/^Adding to/.test(fs.textContent);fs.style.display=adding?"none":"";const b=fs.querySelector("b"),name=!fs.hidden&&b?b.textContent:"";const r=qt.sets.find(x=>x.name===name);f.classList.toggle("nbless",!!(r&&r.nb==="l"))}
 new MutationObserver(()=>{if(!f.hidden){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"});formTweaks()}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
 new MutationObserver(formTweaks).observe(g("qtFSet"),{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]});
 ["qtSetEditB","qtSetNew"].forEach(id=>g(id).addEventListener("click",()=>show("sets")));
@@ -9850,24 +10029,23 @@ new MutationObserver(sync).observe(h,{childList:true});sync();
 const sel=g("qtSetSel"),list=g("qtSetList");
 const escH=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const dd=document.createElement("div");dd.className="qdd";dd.id="qtDD";
-dd.innerHTML='<button type="button" class="qddb" id="qtDDB" aria-haspopup="listbox" aria-expanded="false"><span class="qddv" id="qtDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="qtDDM" role="listbox" hidden></div>';
+dd.innerHTML='<button type="button" class="qddb" id="qtDDB" aria-haspopup="listbox" aria-expanded="false"><span class="qddv" id="qtDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="qtDDM" role="listbox" hidden><div class="qddsw"><input id="qtDDQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"></div><div id="qtDDL"></div></div>';
 sel.parentNode.insertBefore(dd,sel);
-function rows(){return [...list.querySelectorAll("tr")].filter(tr=>tr.querySelector("[data-sedit]")).map(tr=>{
- const gen=[...tr.querySelectorAll(".qpt > :not(strong)")].filter(e=>e.textContent!=="Active")[0];
- const sub=(tr.querySelector(".qsubl")||{textContent:""}).textContent.split(" · ").filter(Boolean);
- return {id:tr.querySelector("[data-sedit]").dataset.sedit,name:tr.querySelector("strong").textContent,gen:gen?gen.outerHTML:"",sub:sub,n:(tr.querySelector("td.c.b")||{textContent:""}).textContent,on:tr.classList.contains("on")}}).sort((a,b)=>a.name.localeCompare(b.name,undefined,{sensitivity:"base"}))}
-function chips(r){return r.gen+r.sub.map(t=>'<span class="qchip" style="--c:'+(/^Numb/.test(t)?"#f59e0b":t==="Lyrics"?"#c084fc":"#9a9a94")+'">'+(t==="Lyrics"?"Lyrics on":escH(t))+'</span>').join("")}
-function renderDD(){const R=rows(),cur=R.find(r=>r.on);
- g("qtDDV").innerHTML=cur?'<b class="qddn">'+escH(cur.name)+'</b><span class="qddc">'+chips(cur)+'</span>':'<span class="qddn" style="color:var(--mut)">No set</span>';
- g("qtDDM").innerHTML='<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>'+R.map(r=>'<button type="button" role="option" data-id="'+escH(r.id)+'" class="qddo'+(r.on?" on":"")+'"><b class="qddn">'+escH(r.name)+'</b><span class="qddc">'+chips(r)+'</span><span class="qddq">'+escH(r.n)+'</span></button>').join("")}
+let ddq="";
+function renderDD(){
+ const cur=qtSetCur(),dq=ddq.trim(),L=setsSorted(qt.sets).filter(x=>x.q!==false&&setMatch(x,ddq));
+ g("qtDDV").innerHTML=cur?'<b class="qddn">'+escH(cur.name)+'</b><span class="qddc">'+qtSetChips(cur)+'</span>':'<span class="qddn" style="color:var(--mut)">No set</span>';
+ g("qtDDL").innerHTML=(dq?"":'<button type="button" role="option" data-id="" class="qddo'+(cur?"":" on")+'"><b class="qddn">No set</b></button>')+(dq&&!L.length?'<div class="qddno">No sets match</div>':"")+L.map(r=>'<button type="button" role="option" data-id="'+escH(r.id)+'" class="qddo'+(cur&&r.id===cur.id?" on":"")+'"><b class="qddn">'+escH(r.name)+'</b><span class="qddc">'+qtSetChips(r)+'</span><span class="qddq">'+escH(nfmt(r.cnt))+'</span></button>').join("")}
 const ddb=g("qtDDB"),ddm=g("qtDDM");
 function ddClose(){ddm.hidden=true;ddb.setAttribute("aria-expanded","false")}
-ddb.addEventListener("click",e=>{e.stopPropagation();ddm.hidden=!ddm.hidden;ddb.setAttribute("aria-expanded",String(!ddm.hidden));if(!ddm.hidden){const o=ddm.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
+g("qtDDQ").addEventListener("input",e=>{ddq=e.target.value;renderDD()});
+g("qtDDQ").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();const o=g("qtDDL").querySelector(".qddo");if(o)o.click()}});
+ddb.addEventListener("click",e=>{e.stopPropagation();ddm.hidden=!ddm.hidden;ddb.setAttribute("aria-expanded",String(!ddm.hidden));if(!ddm.hidden){ddq="";g("qtDDQ").value="";renderDD();if(matchMedia("(hover:hover)").matches)g("qtDDQ").focus();const o=ddm.querySelector(".on");if(o)o.scrollIntoView({block:"nearest"})}});
 ddm.addEventListener("click",e=>{const o=e.target.closest(".qddo");if(!o)return;sel.value=o.dataset.id;sel.dispatchEvent(new Event("change",{bubbles:true}));ddClose()});
 document.addEventListener("click",e=>{if(!ddm.hidden&&!dd.contains(e.target))ddClose()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!ddm.hidden){ddClose();ddb.focus()}});
 new MutationObserver(renderDD).observe(list,{childList:true,subtree:true});renderDD();
-function floatActive(){const on=list.querySelector("tr.on"),hdr=list.querySelector("tr th")&&list.querySelector("tr th").closest("tr");if(!on||!hdr)return;if(hdr.nextElementSibling!==on)hdr.after(on)}
+function floatActive(){return;const on=list.querySelector("tr.on"),hdr=list.querySelector("tr th")&&list.querySelector("tr th").closest("tr");if(!on||!hdr)return;if(hdr.nextElementSibling!==on)hdr.after(on)}
 new MutationObserver(floatActive).observe(list,{childList:true,subtree:true});floatActive();
 })();
 </script>
@@ -9876,7 +10054,7 @@ new MutationObserver(floatActive).observe(list,{childList:true,subtree:true});fl
 (function(){
 const g=id=>document.getElementById(id);
 const tabs=[...document.querySelectorAll("#gpSub button")];
-function show(v){tabs.forEach(b=>{const on=b.dataset.gv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-gempic .gpv").forEach(s=>{s.hidden=s.id!=="gpv-"+v});try{localStorage.setItem("tracker.gpSub",v)}catch(e){}}
+function show(v){tabs.forEach(b=>{const on=b.dataset.gv===v;b.classList.toggle("on",on);b.setAttribute("aria-selected",String(on))});document.querySelectorAll("#tab-gempic .gpv").forEach(s=>{s.hidden=s.id!=="gpv-"+v});if(v==="sets")hubMount("gp");try{localStorage.setItem("tracker.gpSub",v)}catch(e){}}
 tabs.forEach(b=>b.addEventListener("click",()=>show(b.dataset.gv)));
 let v="track";try{v=localStorage.getItem("tracker.gpSub")||"track"}catch(e){}
 show(tabs.some(b=>b.dataset.gv===v)?v:"track");
