@@ -471,6 +471,32 @@ body.guest .brand{pointer-events:none}
 .evcf .evonly{display:flex;align-items:center;gap:6px;flex:none;font-size:13px;color:var(--tx);cursor:pointer;white-space:nowrap}
 .evcf .evonly input{width:18px;height:18px;margin:0;padding:0}
 #evColNote{margin:6px 0 0}#evColNote:empty{display:none}
+/* Halloween-style collectables: one check mark per version of each song */
+.evc.evv{display:flex;flex-wrap:wrap;align-items:center;row-gap:10px}
+.evc.evv .evt{flex:1 1 200px}
+.evc.evv.full{border-color:#34d399;box-shadow:0 0 0 1px color-mix(in srgb,#34d399 40%,transparent)}
+.evvs{flex:1 0 100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.evvs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.evx{--c:#94a3b8;display:flex;align-items:center;gap:8px;min-width:0;margin:0;padding:8px 10px;border-radius:10px;border:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 70%,var(--card));font-size:13px;font-weight:600;color:var(--mut);cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.evx:hover{border-color:color-mix(in srgb,var(--c) 60%,var(--bd))}
+.evx input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.evx .evxb{flex:none;width:22px;height:22px;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--c) 55%,var(--bd));background:var(--bg);display:grid;place-items:center;transition:background .15s,border-color .15s}
+.evx .evxb::after{content:"";width:12px;height:12px;background:#fff;opacity:0;transform:scale(.6);transition:opacity .15s,transform .15s;-webkit-mask:var(--ck) center/contain no-repeat;mask:var(--ck) center/contain no-repeat}
+.evx .evxn{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.evx:has(input:checked){border-color:var(--c);background:color-mix(in srgb,var(--c) 16%,var(--card));color:var(--tx)}
+.evx:has(input:checked) .evxb{background:var(--c);border-color:var(--c)}
+.evx:has(input:checked) .evxb::after{opacity:1;transform:none}
+.evx:has(input:focus-visible){outline:2px solid var(--c);outline-offset:2px}
+/* a different check mark shape for each version */
+.evv-n{--c:#34d399;--ck:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 12.5l5 5L19.5 6.5'/%3E%3C/svg%3E")}
+.evv-s{--c:#eab308;--ck:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 1.5l2.6 7.9 7.9 2.6-7.9 2.6L12 22.5l-2.6-7.9L1.5 12l7.9-2.6z'/%3E%3C/svg%3E")}
+.evv-nl{--c:#38bdf8;--ck:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.6' stroke-linecap='round'%3E%3Cpath d='M5 12h14'/%3E%3C/svg%3E")}
+.evv-nu{--c:#c084fc;--ck:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 3L7 21M17 3l-2 18M4 9h17M3 15h17'/%3E%3C/svg%3E")}
+.evvsum{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 2px}
+.evvsum[hidden]{display:none}
+.evvc{--c:var(--mut);display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:12.5px;font-weight:500;background:color-mix(in srgb,var(--c) 14%,var(--bg));color:var(--tx)}
+.evvc i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.evvc b{font-weight:700}
 /* compact rows for long lists (World Tour) */
 .evc.sm{margin:3px 0;padding:4px 8px;gap:8px;border-radius:7px}
 .evc.sm input{width:16px;height:16px}
@@ -3384,6 +3410,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card gsec" id="evColBox">
 <div class="gh"><span class="sci" style="--c:#f59e0b"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7-6.3-3.6-6.3 3.6 1.5-7L2 9.3l7-.8z"/></svg></span><div class="gt"><b id="evColHead">Collectables</b></div></div>
 <div class="evcf"><input id="evSearch" maxlength="300" type="search" placeholder="Search song, artist, country or genre..." aria-label="Search collectables" autocomplete="off"><label class="evonly"><input type="checkbox" id="evOnly"><span>Collected only</span></label></div>
+<div class="evvsum" id="evColVars" hidden></div>
 <div class="note" id="evColNote"></div>
 <div id="evCol"></div>
 </section>
@@ -7305,7 +7332,7 @@ $("passHist").addEventListener("click",ev=>{
 
 /* ---------- event tracker ---------- */
 /* One entry per event. big = the three large reward buttons, small = the smaller ones below; col = collectable epics [title, artist, genre]. */
-const EVTS=[{id:"halloween",name:"Halloween",res:["candies","candy"],order:["c100","c200","g2","c2k","c20k","c100k","g100"],
+const EVTS=[{id:"halloween",name:"Halloween",vars:[["n","Normal"],["s","Shiny"],["nl","Numberless"],["nu","Numbered"]],res:["candies","candy"],order:["c100","c200","g2","c2k","c20k","c100k","g100"],
  note:"Open any map drop (the 70c genre drop works too) for a 3% chance at a Candy. Collecting a Candy gives you coins or gems. Candy goes into your inventory and can be redeemed for 4 types of rewards in the Halloween shop.\n\nNew this event: the Halloween Drop appears in your map circle and refreshes every 2 hours. All 20 Halloween epics are also obtainable in other versions with a 2026 Halloween Edition tag.\n\nOther details:\n\u2022 20 day event: Oct 30, 2026 to Nov 19, 2026.\n\u2022 Cosmetic items rotate every 5 days.\n\u2022 Each day a new Halloween epic is chosen as the Epic of the Day. 10 numbered versions of it drop at a random time and in a random order that day when opening a Halloween Drop.\n\u2022 The Shiny Artist Drop shop reward is normal shinies only (no epics, lyrics or editions).\n\u2022 Cooldown does not apply to the event.\n\u2022 Event days run noon ET to noon ET.\n\u2022 More detail is in the Event Rules section below the in-game Halloween shop.\n\nHalloween Wheel: 40% 1,000 \u00b7 25% 3,000 \u00b7 14% 5,000 \u00b7 8% 10,000 \u00b7 5.5% 20,000 \u00b7 1% 50,000 \u00b7 0.5% 100 \u00b7 2.5% Map Boost \u00b7 1.5% Cooldown Boost \u00b7 1% Gem Boost \u00b7 1% Random Numbered Epic.\n\nPumpkin Map Drop: 70% Normal Song \u00b7 15% Shiny Song \u00b7 5% Moment \u00b7 5% Numberless Epic \u00b7 2.5% Halloween Theme \u00b7 2.5% Halloween Frame.",
  info:{"chips": ["3% Candy per drop", "20 days \u00b7 Oct 30\u2013Nov 19", "No cooldown"], "rows": [["Candy gives", "Coins or gems"], ["Where", "Any map drop, incl. the 70c genre drop"], ["Halloween Drop", "New. Shows in your map circle, refreshes every 2 hours. Numbered & numberless Halloween epics"], ["Epic of the Day", "New one daily. 10 numbered versions drop at random times and order from the Halloween Drop"], ["Wheel", "Candy Wheel (10 candy). 40% 1,000 coins up to 1% for 50,000, plus boosts and a 1% Random Numbered Epic"], ["Pumpkin map drop", "70% song \u00b7 15% shiny \u00b7 5% moment \u00b7 5% numberless epic \u00b7 5% theme/frame"], ["Cosmetics", "4 frames & 4 themes, rotate every 5 days"], ["Shiny drop", "Normal shinies only (no epics, lyrics or editions)"], ["Day", "Noon ET to noon ET"]]},
  shop:[["Candy Wheel", 10], ["Halloween Theme", 15], ["Halloween Frame", 5], ["Shiny Artist Drop", 15]],
@@ -7347,7 +7374,7 @@ const evCnt=(cfg,c)=>{const o={};evRw(cfg).forEach(([k])=>o[k]=Math.max(0,parseI
 const evSum=(cfg,c)=>evRw(cfg).reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0);a.gems+=c[k]*(v.gems||0);a.n+=c[k];return a},{coins:0,gems:0,n:0});
 function evNormS(cfg,d){
   d=d||{};
-  const got={};if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{if(d.got[i]&&+i>=0&&+i<cfg.col.length)got[i]=1});
+  const got={},vm=cfg.vars?(1<<cfg.vars.length)-1:1;if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{const b=(parseInt(d.got[i])||0)&vm;if(b&&+i>=0&&+i<cfg.col.length)got[i]=b});
   const ks=new Set(evRw(cfg).map(r=>r[0])),log=Array.isArray(d.log)?d.log.filter(e=>e&&(ks.has(e.k)||e.k==="_x")&&Math.trunc(+e.n)).slice(0,5000).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
   return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),sp:evSp(cfg,d.sp),start:+d.start||0,got,log,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),rcut:+d.rcut||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0),sp:evSp(cfg,h.sp)})):[]};
 }
@@ -7385,10 +7412,27 @@ function evRenderShop(cfg,s,t,rs){
 }
 let evV="trk"; /* always opens on Tracker (events without one fall back to their first view) */
 let evOnly={};try{evOnly=JSON.parse(LS("tracker.evonly")||"{}")||{}}catch(e){}
+/* events with "vars" (e.g. Halloween) track several versions of each song: got[i] is a bitmask, one bit per version */
+const evPc=x=>{let n=0;while(x){n+=x&1;x>>=1}return n};
+function evColCount(cfg,s){
+  const v=cfg.vars,songs=cfg.col.length;
+  if(!v)return{n:Object.keys(s.got).length,total:songs,per:null};
+  const per=v.map((_,j)=>cfg.col.reduce((a,_c,i)=>a+((s.got[i]||0)>>j&1),0));
+  return{n:per.reduce((a,b)=>a+b,0),total:songs*v.length,per};
+}
+function evColHeadText(cfg,s){
+  const c=evColCount(cfg,s);
+  return "Collectables ("+c.n+"/"+c.total+")"+(c.total?" \u00b7 "+Math.round(c.n/c.total*100)+"%":"");
+}
+function evColSum(cfg,s){
+  const c=evColCount(cfg,s);
+  $("evColVars").hidden=!c.per;
+  if(c.per)$("evColVars").innerHTML=cfg.vars.map(([k,n],j)=>`<span class="evvc evv-${k}"><i></i>${esc(n)} <b>${c.per[j]}/${cfg.col.length}</b></span>`).join("");
+}
 function evRenderCol(cfg,s){
-  const total=cfg.col.length,gn=Object.keys(s.got).length;
+  const total=cfg.col.length;
   $("evColBox").hidden=!total;
-  $("evColHead").textContent="Collectables ("+gn+"/"+total+")"+(total?" \u00b7 "+Math.round(gn/total*100)+"%":"");
+  $("evColHead").textContent=evColHeadText(cfg,s);evColSum(cfg,s);
   const only=!!evOnly[cfg.id],q=$("evSearch").value.trim().toLowerCase(),sm=total>50?" sm":"";
   $("evOnly").checked=only;$("evCol").classList.toggle("cols3",total>50);
   let shown=0;
@@ -7396,6 +7440,10 @@ function evRenderCol(cfg,s){
     if(only&&!s.got[i])return"";
     if(q&&!c.filter(Boolean).join(" ").toLowerCase().includes(q))return"";
     shown++;
+    if(cfg.vars){
+      const b=s.got[i]||0,full=b===(1<<cfg.vars.length)-1;
+      return `<div class="evc evv${b?" on":""}${full?" full":""}"><span class="evt"><b title="${esc(c[0])}">${esc(c[0])}</b><span>${esc(c[1])}${c[3]?" \u00b7 "+esc(c[3]):""}</span></span><span class="pill g g-${EVG[c[2]]||"pop"}">${esc(c[2])}</span><div class="evvs">${cfg.vars.map(([k,n],j)=>`<label class="evx evv-${k}"><input type="checkbox" data-ci="${i}" data-vb="${j}"${b>>j&1?" checked":""} aria-label="${esc(c[0])} \u2013 ${esc(n)}"><span class="evxb"></span><span class="evxn">${esc(n)}</span></label>`).join("")}</div></div>`;
+    }
     return `<label class="chk evc${sm}${s.got[i]?" on":""}"><input type="checkbox" data-ci="${i}"${s.got[i]?" checked":""}><span class="evt"><b title="${esc(c[0])}">${esc(c[0])}</b><span>${esc(c[1])}${c[3]?" \u00b7 "+esc(c[3]):""}</span></span><span class="pill g g-${EVG[c[2]]||"pop"}">${esc(c[2])}</span></label>`;
   }).join("");
   $("evCol").innerHTML=html||'<div class="empty">'+(only&&!q?"Nothing collected yet.":"No matches.")+'</div>';
@@ -7790,15 +7838,20 @@ $("evLeafSub").onclick=()=>{if(evCfg().ended)return;const s=evS();if(s.extra<=0)
 })();
 $("evCol").addEventListener("change",ev2=>{
   const el=ev2.target.closest("input[data-ci]");if(!el)return;
-  const s=evS();
-  if(el.checked)s.got[el.dataset.ci]=1;else delete s.got[el.dataset.ci];
+  const s=evS(),cfg=evCfg(),i=el.dataset.ci;
+  if(el.dataset.vb!=null){
+    const bit=1<<(+el.dataset.vb);
+    let b=(s.got[i]||0);b=el.checked?b|bit:b&~bit;
+    if(b)s.got[i]=b;else delete s.got[i];
+  }else{
+    if(el.checked)s.got[i]=1;else delete s.got[i];
+  }
   saveEvent();
-  const cfg=evCfg();
   if(evOnly[cfg.id]){renderEvent();return}
   /* update just this row and the counter instead of redrawing the whole page */
-  const row=el.closest("label");if(row)row.classList.toggle("on",!!el.checked);
-  const total=cfg.col.length,gn=Object.keys(s.got).length;
-  $("evColHead").textContent="Collectables ("+gn+"/"+total+")"+(total?" \u00b7 "+Math.round(gn/total*100)+"%":"");
+  const row=el.closest(".evc");
+  if(row){const b=s.got[i]||0;row.classList.toggle("on",!!b);if(cfg.vars)row.classList.toggle("full",b===(1<<cfg.vars.length)-1)}
+  $("evColHead").textContent=evColHeadText(cfg,s);evColSum(cfg,s);
 });
 $("evReset").onclick=()=>{
   if(evCfg().ended)return;
