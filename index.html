@@ -269,6 +269,10 @@ button{margin-top:18px;padding:8px 14px;border:1px solid var(--bd);border-radius
 #who{flex:1 1 auto;min-width:0;max-width:none}
 }
 #sync{font-size:12px;color:var(--mut)}#sync.bad{color:var(--neg)}
+/* the name now shows on the Profile button, so the separate name label is hidden (its text is still used elsewhere) */
+#who{display:none}
+.top .r #sync{margin-right:auto}
+#tbProfileName{max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #login{max-width:340px;margin:12vh auto 0}
 #login input{margin-bottom:10px}
 #login button{width:100%;margin-top:4px;background:var(--ac);color:var(--bg);border-color:var(--ac);font-size:16px;padding:10px}
@@ -831,6 +835,29 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-shiny .shr .shp{background:var(--ac);color:#fff;border-color:var(--ac)}
 #tab-shiny .shr .shm:active{background:var(--bd)}
 #tab-shiny .shr .shp:active{filter:brightness(.85)}
+/* Shiny tracker categories: one row per item with a joined [ - count + ] stepper */
+#tab-shiny #inputs.grid{grid-template-columns:1fr;gap:8px}
+@media (min-width:760px){#tab-shiny #inputs.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+#tab-shiny #inputs .shcat{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:10px;padding:10px 12px;border-radius:14px}
+#tab-shiny #inputs .shcat>:not(.shh):not(.shr){grid-column:1/-1}
+#tab-shiny #inputs .shcat .shh{align-items:center;gap:10px;min-width:0}
+#tab-shiny #inputs .shcat .shh .sci{width:34px;height:34px;border-radius:10px;flex:none}
+#tab-shiny #inputs .shcat .shh .sci svg{width:19px;height:19px}
+#tab-shiny #inputs .shcat label{font-size:14px;line-height:1.25}
+#tab-shiny #inputs .shcat .shr{flex-wrap:nowrap;gap:0;margin:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:var(--card)}
+#tab-shiny #inputs .shcat .shr button{order:1;flex:none;width:42px;height:42px;border:0;border-radius:0;background:transparent;color:var(--tx);font-size:22px}
+#tab-shiny #inputs .shcat .shr input{order:2;flex:none;width:64px;height:42px;padding:0 2px;border:0;border-radius:0;background:transparent;text-align:center;font-size:18px;font-weight:700;-moz-appearance:textfield}
+#tab-shiny #inputs .shcat .shr input::-webkit-outer-spin-button,#tab-shiny #inputs .shcat .shr input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tab-shiny #inputs .shcat .shr button.shp{order:3;background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac);border:0}
+/* misc: [ Remove | amount | Add ] in the same joined pill style as the steppers */
+#tab-shiny #inputs .shcat:has(.shmx) .shr input{width:104px}
+#tab-shiny #inputs .shcat .shmx{display:flex;gap:0;margin-top:8px;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:var(--card)}
+#tab-shiny #inputs .shcat .shmx input{order:2;flex:1 1 auto;width:auto;min-width:0;height:42px;padding:0 8px;border:0;border-radius:0;background:transparent;text-align:center;font-size:18px;font-weight:700;-moz-appearance:textfield}
+#tab-shiny #inputs .shcat .shmx input::placeholder{font-size:14px;font-weight:500}
+#tab-shiny #inputs .shcat .shmx input::-webkit-outer-spin-button,#tab-shiny #inputs .shcat .shmx input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tab-shiny #inputs .shcat .shmx button{flex:none;width:auto;height:42px;margin:0;padding:0 18px;border:0;border-radius:0;font-size:14px;font-weight:700}
+#tab-shiny #inputs .shcat .shmx .shmr{order:1;background:transparent;color:var(--tx)}
+#tab-shiny #inputs .shcat .shmx .shma{order:3;background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}
 .shs{display:flex;align-items:center;gap:6px;margin-top:8px;font-size:11px;color:var(--mut)}
 #tab-shiny .shs input{width:56px;flex:none;font-size:13px;padding:3px 4px;text-align:center}
 #tab-shiny>details{--c:var(--ac);margin-top:10px;padding:0;border-radius:14px;overflow:hidden}
@@ -938,28 +965,17 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-epic .epSearchW{position:relative;display:block;flex:3 1 0;min-width:0;margin:0}
 #tab-epic .epSearchW svg{position:absolute;left:15px;top:16px;color:var(--mut);pointer-events:none}
 #tab-epic .epSearchW input{height:50px;padding:0 14px 0 44px;font-size:16px;border-radius:12px;background:var(--card)}
-#tab-epic #epSort,#tab-epic .epDDb{height:50px;min-width:0;max-width:none;margin:0;padding:0 34px 0 14px;font-size:15px;text-overflow:ellipsis;border-radius:12px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
+#tab-epic #epSort{height:50px;min-width:0;max-width:none;margin:0;padding:0 34px 0 14px;font-size:15px;text-overflow:ellipsis;border-radius:12px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
 #tab-epic #nfBar{flex:1 1 100%}
 #tab-epic #nfBar .epb{flex:1 1 0;height:54px;font-size:16px;font-weight:700}
 #tab-epic .epFind{flex:1 1 100%;display:flex;gap:10px;min-width:0}
 #tab-epic #epSort{flex:.8 1 0}
-#tab-epic #epRarW{flex:1 1 0;min-width:0;position:relative}
-#tab-epic .epDDt{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#tab-epic .epDDb{width:100%;padding-right:38px;display:flex;align-items:center;text-align:left;background-color:var(--card);white-space:nowrap;overflow:hidden}
-#tab-epic .epDDb:hover,#tab-epic .epDDb[aria-expanded="true"]{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
-#tab-epic .epDDm{position:absolute;top:calc(100% + 6px);left:0;min-width:100%;z-index:40;padding:6px;border-radius:12px;border:1px solid var(--bd);background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:2px}
-#tab-epic .epDDo{margin:0;width:100%;height:42px;padding:0 12px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--tx);display:flex;align-items:center;justify-content:flex-start;font-size:15px;cursor:pointer;white-space:nowrap}
-#tab-epic .epDDo:hover{background:color-mix(in srgb,var(--ac) 14%,var(--card))}
-#tab-epic .epDDo.on{background:color-mix(in srgb,var(--ac) 22%,var(--card));border-color:var(--ac)}
-#tab-epic .epDDb .pill,#tab-epic .epDDo .pill{margin:0;cursor:inherit;font-size:14px}
 #tab-epic #vHolder{flex:1 1 0;min-width:0;height:50px;padding:0 10px}
 @media (max-width:700px){
 #tab-epic #nfBar .epb{padding:0 8px;font-size:15px}
 #tab-epic .epFind{flex-wrap:wrap}
 #tab-epic .epSearchW{flex:1 1 100%}
 #tab-epic #epSort{flex:.7 1 0;font-size:14px;padding-left:12px}
-#tab-epic #epRarW{flex:1.25 1 0;font-size:14px}
-#tab-epic .epDDb{padding-left:12px}
 #tab-epic #vHolder{flex:1 1 0;font-size:14px}
 }
 
@@ -978,6 +994,14 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-epic #epTop.three .sc.side .scl{font-size:11.5px}
 #tab-epic #epTop.three .sc.side .scv{margin-top:4px;font-size:24px}
 #tab-epic #epTop.three .sc.side .scs{font-size:10px;margin-top:2px}
+/* phones: the three stat boxes and the Numbered / Numberless / Lyrics buttons share one height and three equal columns */
+#tab-epic #epTop.three{gap:8px}
+#tab-epic #epTop.three .sc.side{min-height:54px;padding:4px 10px;box-sizing:border-box;align-content:center}
+#tab-epic #epTop.three .sc.side .scl{line-height:1.15}
+#tab-epic #epTop.three .sc.side .scv{margin-top:0;font-size:22px;line-height:1.1}
+#tab-epic .epGrp{gap:8px}
+#tab-epic #nfBar .epb{min-width:0;height:54px;padding:0 6px;gap:5px;font-size:14px}
+#tab-epic #nfBar .epb svg{width:16px;height:16px}
 }
 /* rarity chips + summary */
 #tab-epic .epMeta{display:flex;align-items:center;justify-content:space-between;gap:8px 14px;flex-wrap:wrap;margin:0 0 12px}
@@ -1021,6 +1045,33 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #epicList .mk:not(.open):hover,#holderList .mk:not(.open):hover{border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));background:color-mix(in srgb,var(--ac) 6%,var(--card))}
 }
 
+/* ---------- holder view ---------- */
+#holderList .mk{border-radius:14px}
+#holderList .hh{grid-template-columns:46px minmax(0,1fr) auto 14px;gap:14px;padding:13px 16px}
+#holderList .hav{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:19px;font-weight:800;color:#fff;background:linear-gradient(145deg,hsl(var(--hu) 62% 54%),hsl(calc(var(--hu) + 32) 62% 36%));box-shadow:0 2px 8px rgba(0,0,0,.35)}
+#holderList .hav.medal{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--md)}
+#holderList .hrk{position:absolute;right:-6px;bottom:-6px;min-width:20px;height:20px;padding:0 4px;box-sizing:border-box;border-radius:10px;display:grid;place-items:center;font-size:11px;font-weight:800;color:#1b1b1b;background:var(--md);border:2px solid var(--card)}
+#holderList .hmid{min-width:0}
+#holderList .hn{font-size:16px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#holderList .hm{font-size:12.5px;color:var(--mut);margin-top:1px}
+#holderList .hbar{height:5px;border-radius:999px;margin-top:8px;overflow:hidden;background:color-mix(in srgb,var(--mut) 18%,var(--bd))}
+#holderList .hbar i{display:block;height:100%;border-radius:999px;background:var(--hc,var(--ac));transition:width .4s ease}
+#holderList .hct{font-size:24px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums}
+#holderList .mk.open .mkb{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 8px;padding:10px 14px 14px}
+#holderList .hg{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;padding:8px 10px;border-radius:10px;background:var(--bg);border:1px solid var(--bd)}
+#holderList .hg.hit{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--bg))}
+#holderList .hgn{display:flex;align-items:center;gap:8px;min-width:0;font-size:14px;font-weight:600}
+#holderList .hgn span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#holderList .hgn i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--rc,color-mix(in srgb,var(--mut) 55%,transparent))}
+#holderList .hgs{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;flex:none}
+#holderList .hgs b{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:color-mix(in srgb,var(--ac) 18%,var(--card))}
+@media (max-width:520px){
+#holderList .hh{grid-template-columns:42px minmax(0,1fr) auto 12px;gap:12px;padding:12px 14px}
+#holderList .hav{width:42px;height:42px;font-size:17px}
+#holderList .hct{font-size:22px}
+#holderList .mk.open .mkb{grid-template-columns:1fr}
+}
+
 /* epic image uploader */
 #epicList .epart.ph{border:1.5px dashed color-mix(in srgb,var(--mut) 45%,var(--bd));box-shadow:none;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='3'/%3E%3Ccircle cx='9' cy='10' r='1.6'/%3E%3Cpath d='m21 16-5-5-8 9'/%3E%3C/svg%3E") center/46% no-repeat;opacity:.8}
 #epicList .eparow{display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px;margin:0 0 10px}
@@ -1049,6 +1100,10 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #epicList .epcn{font-size:12px;padding:0 8px;border-radius:999px;background:var(--bg);border:1px solid var(--bd);color:var(--tx)}
 #epicList .epstep{margin-left:auto;display:inline-flex;gap:6px}
 #epicList .epstep button{margin:0;width:32px;height:32px;padding:0;border-radius:9px;font-size:18px;line-height:1;font-weight:600}
+#epicList .epstep{gap:0;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:var(--bg)}
+#epicList .epstep button{width:36px;border:0;border-radius:0;background:transparent;color:var(--tx)}
+#epicList .epstep button[data-act="add"]{background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}
+#epicList .epstep button:disabled{opacity:.35}
 #epicList .mkb .slots{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px 10px;margin:0}
 #epicList .slot{position:relative;display:block;margin:0!important}
 #epicList .slot span{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:auto;font-size:12px;font-weight:600;pointer-events:none}
@@ -1088,7 +1143,7 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 @media (max-width:820px){
 #tab-epic .epFind{flex-wrap:wrap;gap:8px}
 #tab-epic .epSearchW{flex:1 1 100%}
-#tab-epic #epSort,#tab-epic #epRarW{flex:1 1 calc(50% - 4px);min-width:0;font-size:14px}
+#tab-epic #epSort{flex:1 1 100%;min-width:0;font-size:14px}
 #tab-epic #vHolder,#tab-epic #epNoHold,#tab-epic #epCopyNum,#tab-epic #epCompOpt{flex:1 1 auto;height:46px;justify-content:center}
 }
 
@@ -1413,7 +1468,6 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 }
 #tab-quest .qsub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 #tab-quest .qlog{margin-left:auto;font-size:13px;color:var(--mut)}
-#tab-quest #qtDisc{margin:12px 0 0;font-size:12.5px}
 #tab-quest #qtCoinBox{padding:12px 14px}
 #tab-quest #qtCoinBox .gh{margin-bottom:10px}
 #tab-quest #qtCoinBox .gh .sci{width:32px;height:32px;border-radius:10px}
@@ -1566,6 +1620,17 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 :is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scl{font-size:10.5px;font-weight:600;line-height:1.15;align-self:center;overflow-wrap:anywhere}
 :is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scv{margin-top:4px;font-size:clamp(17px,5.6vw,24px);line-height:1.1;overflow-wrap:anywhere}
 :is(#tab-gempic,#tab-quest) :is(#gpTop,#qtTop) .gc .scs{margin-top:3px;font-size:9.5px;line-height:1.2;overflow-wrap:anywhere}
+/* pass tracker: three stat boxes stay on one line on phones */
+@media (max-width:700px){
+#tab-pass #passTop:has(.gc:nth-child(3):last-child){grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:10px}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc:nth-child(odd):last-child{grid-column:auto}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc{padding:8px 9px;grid-template-areas:"i l" "v v" "s s";column-gap:6px;align-content:start;align-items:center;border-radius:12px}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc .sci{width:22px;height:22px;border-radius:7px}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc .sci svg{width:13px;height:13px}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc .scl{font-size:10.5px;font-weight:600;line-height:1.15;overflow-wrap:anywhere}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc .scv{margin-top:4px;font-size:clamp(17px,5.6vw,24px);line-height:1.1;overflow-wrap:anywhere}
+#tab-pass #passTop:has(.gc:nth-child(3):last-child) .gc .scs{margin-top:3px;font-size:9.5px;line-height:1.2}
+}
 }
 #tab-event #evRewards{margin-top:0}
 #tab-event #evRewards .gh{margin-bottom:10px}
@@ -1574,18 +1639,25 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-event #evWheel .gh{margin-bottom:10px}
 #tab-event #evWheel .gh .sci{width:34px;height:34px;border-radius:10px}
 #tab-event #evWheel .gh .gt b{font-size:16px}
-#tab-event #evGrid{grid-template-columns:1fr;gap:6px}
-#tab-event #evGrid .pcat{display:flex;align-items:center;gap:8px;padding:7px 8px}
-#tab-event #evGrid .pch{flex:1;min-width:0;align-items:center;gap:8px}
-#tab-event #evGrid .pcat .sci{width:30px;height:30px;border-radius:9px}
-#tab-event #evGrid .pcn{flex-direction:column;align-items:flex-start;gap:1px}
-#tab-event #evGrid .pcn b{font-size:13px}
-#tab-event #evGrid .pco{font-size:11.5px}
-#tab-event #evGrid .pcp{display:inline}
-#tab-event #evGrid .ps{display:none}
-#tab-event #evGrid .gcost{margin:0;flex:none;gap:6px}
-#tab-event #evGrid .gcost input{flex:none;width:52px;height:38px;padding:0 4px;font-size:16px;text-align:center;border-radius:9px}
-#tab-event #evGrid .gcost button{width:38px;height:38px;font-size:20px;border-radius:9px}
+/* + / - rows (Pass tracker, event rewards, Candy Wheel, event shop): one row per item with a joined [ - count + ] stepper */
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd){grid-template-columns:1fr;gap:8px}
+@media (min-width:760px){:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd){grid-template-columns:repeat(2,minmax(0,1fr))}}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcat{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"h c" "p c";align-items:center;column-gap:10px;padding:10px 12px;border-radius:14px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pch{grid-area:h;min-width:0;align-items:center;gap:10px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcat .sci{width:34px;height:34px;border-radius:10px;flex:none}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcat .sci svg{width:19px;height:19px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcn{flex-direction:column;align-items:flex-start;gap:1px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcn b{font-size:14px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pco{font-size:12px}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .pcp{display:inline}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .ps{grid-area:p;margin:3px 0 0 44px;font-size:12px}
+:is(#evGrid,#evWGrid) .ps{display:none}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost{grid-area:c;flex-wrap:nowrap;gap:0;margin:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:var(--bg)}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost button{order:1;flex:none;width:42px;height:42px;margin:0;border:0;border-radius:0;font-size:22px;background:transparent;color:var(--tx)}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost input{order:2;flex:none;width:52px;height:42px;padding:0 2px;border:0;border-radius:0;background:transparent;text-align:center;font-size:18px;font-weight:700;-moz-appearance:textfield}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost input::-webkit-outer-spin-button,:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost button.gplus{order:3;background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}
+:is(#tab-event,#tab-pass) :is(#evGrid,#evWGrid,#evShopGrid,#passAdd) .gcost button:disabled{opacity:.35}
 #tab-event .pTot{margin-top:10px}
 #tab-pass .gh .pTot{margin:0;white-space:nowrap}
 #tab-event .evTotTop{margin:0 2px 0 auto;flex:none;white-space:nowrap;font-size:15px}
@@ -2199,6 +2271,16 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-shiny .shLive svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 @media (max-width:820px){#tab-shiny .shLive{display:flex}}
 @media (min-width:821px){#tab-gempic #gpLive{display:none}}
+/* Live counter (PiP) buttons: tinted with each tracker's color; solid while the counter is running */
+#tab-shiny #shLive{--lc:#60a5fa}
+#tab-gempic #gpLive{--lc:#c084fc}
+#tab-quest #qtLive{--lc:#34d399}
+#tab-event #evLive{--lc:#fb923c}
+#tab-shiny #shLive,#tab-gempic #gpLive,#tab-quest #qtLive,#tab-event #evLive{background:color-mix(in srgb,var(--lc) 16%,var(--bg));border:1px solid color-mix(in srgb,var(--lc) 60%,var(--bd));color:var(--tx)}
+#tab-shiny #shLive svg,#tab-gempic #gpLive svg,#tab-quest #qtLive svg,#tab-event #evLive svg{color:var(--lc)}
+#tab-shiny #shLive:hover,#tab-gempic #gpLive:hover,#tab-quest #qtLive:hover,#tab-event #evLive:hover{background:color-mix(in srgb,var(--lc) 24%,var(--bg))}
+#tab-shiny #shLive.lvOn,#tab-gempic #gpLive.lvOn,#tab-quest #qtLive.lvOn,#tab-event #evLive.lvOn{background:var(--lc);border-color:var(--lc);color:#16171a}
+#tab-shiny #shLive.lvOn svg,#tab-gempic #gpLive.lvOn svg,#tab-quest #qtLive.lvOn svg,#tab-event #evLive.lvOn svg{color:#16171a}
 #tab-gempic #gpReset{color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,var(--card))}
 #tab-gempic #gpReset:hover:not(:disabled){border-color:#ef4444;background:color-mix(in srgb,#ef4444 18%,var(--card))}
 #tab-gempic .gact{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
@@ -2467,10 +2549,14 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-quest #qtCtl .qrow:has(#qtExLy:checked){background:color-mix(in srgb,#ef4444 18%,transparent);border-color:#ef4444}
 #tab-quest #qtCtl .qrow:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:2px}
 #tab-quest #qtCtl .qrow .qinfo{display:none}
-#tab-quest .qsrow>.qi{flex:none;width:46px;height:46px;margin:0;padding:0;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font-weight:700;font-size:15px}
-#tab-quest .qsrow>.qi:hover{border-color:var(--ac);color:var(--tx)}
-#tab-quest #qtDisc{display:none}
-#tab-quest #qtDisc.on{display:block}
+#tab-quest #qtDD .qddb{min-height:48px;padding:8px 124px 8px 14px;border-radius:12px}
+#tab-quest #qtDD .qddb svg{top:15px;right:12px;margin-top:0}
+#tab-quest #qtDD .gicw{position:absolute;top:8px;right:40px;z-index:2;display:flex;gap:6px}
+#tab-quest #qtDD .gicw>.gic{flex:none;width:32px;height:32px;min-height:0;margin:0;padding:0;display:grid;place-items:center;border-radius:9px;border:1px solid var(--bd);background:var(--card);color:var(--mut)}
+#tab-quest #qtDD .gicw>.gic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+#tab-quest #qtDD .gicw>.gic:hover:not(:disabled){border-color:var(--ac);color:var(--tx);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+#tab-quest #qtDD .gicw>#qtSetNew{color:var(--ac)}
+#tab-quest #qtDD .gicw>.gic:disabled{opacity:.4;cursor:default}
 #tab-quest #qtQA{padding:0;border:0;background:none}
 #tab-quest #qtQAB{display:flex;gap:10px;align-items:stretch;margin-top:12px}
 #tab-quest #qtQAB .gq{gap:10px}
@@ -2485,9 +2571,20 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-quest #qtActions .qwrap #qtUndo{padding:0}
 #tab-quest #qtActions #qtUndoT{display:none}
 #tab-quest #qtActions .qwrap #qtAdd{font-size:15px}
-#tab-quest #qtActions .qwrap .qsub{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+#tab-quest #qtActions .qwrap .qsub{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;margin:0}
 #tab-quest #qtActions .qsub .gb{width:100%;height:46px;min-height:46px;grid-column:auto;order:0;margin:0}
-#tab-quest #qtActions .qsub #qtLive{grid-column:1/-1}
+#tab-quest #qtActions .qsub #qtHit{grid-column:1/-1;order:0;border-color:color-mix(in srgb,var(--ac) 45%,var(--bd));background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+#tab-quest #qtActions .qsub #qtHit:hover:not(:disabled){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 18%,var(--card))}
+/* reset: red icon button (same width as undo) to the left of the live counter */
+#tab-quest #qtActions .qsub #qtReset{grid-column:1;order:1;width:100%;height:46px;min-height:46px;margin:0;padding:0;border:1px solid color-mix(in srgb,#ef4444 55%,var(--bd));border-radius:10px;background:color-mix(in srgb,#ef4444 12%,var(--card));color:#f87171}
+#tab-quest #qtActions .qsub #qtReset:hover:not(:disabled){border-color:#ef4444;background:color-mix(in srgb,#ef4444 22%,var(--card))}
+#tab-quest #qtActions .qsub #qtReset svg{width:20px;height:20px}
+#tab-quest #qtActions .qsub #qtReset .gprt{display:none}
+#tab-quest #qtActions .qsub #qtLive{grid-column:2;order:2}
+@media (min-width:821px){
+#tab-quest #qtActions .qsub #qtReset{grid-column:1/-1;font-size:14px;font-weight:600}
+#tab-quest #qtActions .qsub #qtReset .gprt{display:inline;margin-left:8px}
+}
 #tab-quest .qstack>.gsec{margin-top:0;margin-bottom:14px}
 #tab-quest #qtSetsBody[hidden]{display:block!important}
 #tab-quest #qtSetsTog{display:none}
@@ -2495,104 +2592,104 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-quest #qtHist:not(.all) .gtbl table tr:nth-child(n+7){display:none}
 #tab-quest #qtHistMore{margin-top:10px}
 /* ---- pull history cards ---- */
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum:empty{display:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk{flex:1 1 92px;min-width:0;padding:9px 12px;border-radius:12px;border:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 60%,var(--card))}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk b{display:block;font-size:20px;font-weight:800;line-height:1.15;color:var(--tx)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk span{display:block;margin-top:2px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk.g b{color:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .qhk.b b{color:#f87171}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb{flex:1 1 100%;display:grid;gap:6px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--bd)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar i{display:block;min-width:4px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg b{color:var(--tx)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo{display:flex;align-items:center;gap:10px;margin:16px 2px 2px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo::after{content:"";flex:1;height:1px;background:var(--bd)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo:first-child{margin-top:2px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{--rc:var(--mut);position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-areas:"b s d a";align-items:center;gap:6px 16px;margin-top:8px;padding:12px 14px 12px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--rc) 30%,var(--bd));background:linear-gradient(90deg,color-mix(in srgb,var(--rc) 12%,var(--card)),var(--card) 60%)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--rc)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="c"]{--rc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="u"]{--rc:#a066ff}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="r"]{--rc:#f08a2c;box-shadow:0 0 20px color-mix(in srgb,#f08a2c 20%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="e"]{--rc:#e88ab0}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="l"]{--rc:#f0d8b0}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="s"]{--rc:#7c7cff}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.sh{border-color:#7c7cff}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb{grid-area:b;min-width:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb strong{font-size:15.5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qha{margin-top:3px;font-size:13.5px;font-weight:600;color:var(--mut);overflow-wrap:anywhere}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qhb{align-self:start}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt.qp2{display:flex;align-items:center;gap:10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt.qp2 .pill.qhrp{flex:none;margin:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qht{min-width:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qpt .pill.qhrp{font-size:14px;padding:3px 13px 3px 10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qsubl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhn{font-weight:700;color:var(--rc);padding:1px 8px;border-radius:99px;font-size:11.5px;background:color-mix(in srgb,var(--rc) 14%,transparent);border:1px solid color-mix(in srgb,var(--rc) 35%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs{grid-area:s;min-width:104px;text-align:center}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{display:block;font-size:30px;font-weight:800;line-height:1;color:var(--tx);font-variant-numeric:tabular-nums}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{display:block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl{margin:7px auto 0;max-width:110px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr{position:relative;height:5px;border-radius:99px;background:color-mix(in srgb,var(--mut) 25%,var(--bg))}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr i{display:block;height:100%;border-radius:99px;background:var(--lc)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--tx);opacity:.45}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl small{display:block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--lc);white-space:nowrap}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl.lk{--lc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .phl.av{--lc:#eab308}:is(#tab-quest,#tab-gempic,#tab-buys) .phl.bd{--lc:#f87171}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhd{grid-area:d;min-width:92px;text-align:right}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhd span{display:block;font-size:17px;font-weight:700;color:var(--tx);white-space:nowrap;font-variant-numeric:tabular-nums}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qact{grid-area:a;display:inline-flex;gap:6px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x{margin:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x[data-hedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px!important}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x[data-hdel]{color:#ef4444;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 12%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhsum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhsum:empty{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk{flex:1 1 92px;min-width:0;padding:9px 12px;border-radius:12px;border:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 60%,var(--card))}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk b{display:block;font-size:20px;font-weight:800;line-height:1.15;color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk span{display:block;margin-top:2px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk.g b{color:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk.b b{color:#f87171}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb{flex:1 1 100%;display:grid;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--bd)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .bar i{display:block;min-width:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .lg b{color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhmo{display:flex;align-items:center;gap:10px;margin:16px 2px 2px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhmo::after{content:"";flex:1;height:1px;background:var(--bd)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhmo:first-child{margin-top:2px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc{--rc:var(--mut);position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-areas:"b s d a";align-items:center;gap:6px 16px;margin-top:8px;padding:12px 14px 12px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--rc) 30%,var(--bd));background:linear-gradient(90deg,color-mix(in srgb,var(--rc) 12%,var(--card)),var(--card) 60%)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--rc)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc[data-r="c"]{--rc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc[data-r="u"]{--rc:#a066ff}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc[data-r="r"]{--rc:#f08a2c;box-shadow:0 0 20px color-mix(in srgb,#f08a2c 20%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc.nr[data-t="e"]{--rc:#e88ab0}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc.nr[data-t="l"]{--rc:#f0d8b0}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc.nr[data-t="s"]{--rc:#7c7cff}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc.sh{border-color:#7c7cff}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb{grid-area:b;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb strong{font-size:15.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qha{margin-top:3px;font-size:13.5px;font-weight:600;color:var(--mut);overflow-wrap:anywhere}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .qhb{align-self:start}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qpt.qp2{display:flex;align-items:center;gap:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qpt.qp2 .pill.qhrp{flex:none;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qht{min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qpt .pill.qhrp{font-size:14px;padding:3px 13px 3px 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qsubl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhn{font-weight:700;color:var(--rc);padding:1px 8px;border-radius:99px;font-size:11.5px;background:color-mix(in srgb,var(--rc) 14%,transparent);border:1px solid color-mix(in srgb,var(--rc) 35%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs{grid-area:s;min-width:104px;text-align:center}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .qhv{display:block;font-size:30px;font-weight:800;line-height:1;color:var(--tx);font-variant-numeric:tabular-nums}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .u{display:block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl{margin:7px auto 0;max-width:110px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl .tr{position:relative;height:5px;border-radius:99px;background:color-mix(in srgb,var(--mut) 25%,var(--bg))}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl .tr i{display:block;height:100%;border-radius:99px;background:var(--lc)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl .tr::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--tx);opacity:.45}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl small{display:block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--lc);white-space:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl.lk{--lc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl.av{--lc:#eab308}:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl.bd{--lc:#f87171}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhd{grid-area:d;min-width:92px;text-align:right}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhd span{display:block;font-size:17px;font-weight:700;color:var(--tx);white-space:nowrap;font-variant-numeric:tabular-nums}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .qact{grid-area:a;display:inline-flex;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .x{margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .x[data-hedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px!important}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .x[data-hdel]{color:#ef4444;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 12%,transparent)}
 #tab-quest #qtHist:not(.all) .qhx{display:none}
 @media (max-width:640px){
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b a" "s d";gap:8px 12px;padding:12px 12px 12px 18px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qact{align-self:start;justify-self:end}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;min-width:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{font-size:26px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{margin-top:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl{margin:0;flex:1 1 90px;max-width:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhd{min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b a" "s d";gap:8px 12px;padding:12px 12px 12px 18px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .qact{align-self:start;justify-self:end}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .qhv{font-size:26px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .u{margin-top:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl{margin:0;flex:1 1 90px;max-width:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhd{min-width:0}
 }
 @media (max-width:640px){
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk{padding:6px 9px;border-radius:10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk b{font-size:16px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhk span{margin-top:1px;font-size:9.5px;letter-spacing:.04em}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb{grid-column:1/-1;gap:5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar{height:6px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg{font-size:11px;gap:2px 10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{row-gap:6px;margin:0 0 6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk{padding:6px 9px;border-radius:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk b{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhk span{margin-top:1px;font-size:9.5px;letter-spacing:.04em}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb{grid-column:1/-1;gap:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .bar{height:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhrb .lg{font-size:11px;gap:2px 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhf{row-gap:6px;margin:0 0 6px}
 #qtHT button,#gpHT button,#qtHR button,#gpHR button{height:30px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo{margin:10px 2px 0;font-size:10.5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{gap:10px 10px;margin-top:6px;padding:9px 10px 9px 15px;border-radius:12px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc::before{width:4px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb strong{font-size:14px;line-height:1.25}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qha{margin-top:2px;font-size:12.5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt{display:block}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt .pill.qhrp{display:inline-flex;vertical-align:middle;margin:0 6px 2px 0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qpt .pill.qhrp{font-size:12.5px;padding:2px 10px 2px 8px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qsubl{margin-top:3px;font-size:11px;gap:3px 6px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhn{font-size:10.5px;padding:0 7px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs{gap:4px 8px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{font-size:22px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{font-size:9.5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .phl small{margin-top:2px;font-size:10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhd span{font-size:14.5px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x{padding:3px 8px;font-size:12px;min-height:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhmo{margin:10px 2px 0;font-size:10.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc{gap:10px 10px;margin-top:6px;padding:9px 10px 9px 15px;border-radius:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc::before{width:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb strong{font-size:14px;line-height:1.25}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qha{margin-top:2px;font-size:12.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qpt{display:block}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qpt .pill.qhrp{display:inline-flex;vertical-align:middle;margin:0 6px 2px 0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qpt .pill.qhrp{font-size:12.5px;padding:2px 10px 2px 8px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhb .qsubl{margin-top:3px;font-size:11px;gap:3px 6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhn{font-size:10.5px;padding:0 7px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs{gap:4px 8px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .qhv{font-size:22px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phs .u{font-size:9.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .phl small{margin-top:2px;font-size:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhd span{font-size:14.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhc .x{padding:3px 8px;font-size:12px;min-height:0}
 }
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{display:grid;grid-template-columns:max-content repeat(3,max-content);justify-content:start;column-gap:8px;row-gap:10px;margin:0 0 12px;align-items:center}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhf[hidden]{display:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfr{display:contents}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfl{margin-right:4px;font-size:11.5px;font-weight:600;color:var(--mut)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfr .seg{display:contents}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhf{display:grid;grid-template-columns:max-content repeat(3,max-content);justify-content:start;column-gap:8px;row-gap:10px;margin:0 0 12px;align-items:center}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhf[hidden]{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfr{display:contents}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfl{margin-right:4px;font-size:11.5px;font-weight:600;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfr .seg{display:contents}
 #qtHT button,#gpHT button,#qtHR button,#gpHR button{flex:1 1 auto;min-width:0;min-height:0;height:36px;padding:0 14px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;box-shadow:none;outline:0;transition:background .15s,border-color .15s}
 #qtHT button .pill,#gpHT button .pill,#qtHR button .pill,#gpHR button .pill{max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;padding:0 6px;line-height:1.4}
 #qtHT button[aria-pressed="true"],#gpHT button[aria-pressed="true"],#qtHR button[aria-pressed="true"],#gpHR button[aria-pressed="true"]{background:color-mix(in srgb,#22c55e 22%,var(--card));border-color:#22c55e;box-shadow:none;color:var(--tx)}
 #qtHT button[aria-pressed="false"],#gpHT button[aria-pressed="false"],#qtHR button[aria-pressed="false"],#gpHR button[aria-pressed="false"]{background:color-mix(in srgb,#ef4444 20%,var(--card));border-color:#ef4444;box-shadow:none;color:var(--tx)}
 #qtHT button[aria-pressed="false"] .pill,#gpHT button[aria-pressed="false"] .pill,#qtHR button[aria-pressed="false"] .pill,#gpHR button[aria-pressed="false"] .pill{opacity:.6;text-decoration:line-through}
 #qtHT button:focus-visible,#gpHT button:focus-visible,#qtHR button:focus-visible,#gpHR button:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
-@media (max-width:520px){:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{grid-template-columns:max-content repeat(3,minmax(0,1fr));column-gap:6px}}
+@media (max-width:520px){:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhf{grid-template-columns:max-content repeat(3,minmax(0,1fr));column-gap:6px}}
 @media (max-width:420px){#qtHT button,#gpHT button,#qtHR button,#gpHR button{padding:0 4px}#qtHT button .pill,#gpHT button .pill,#qtHR button .pill,#gpHR button .pill{font-size:10.5px;padding:0 4px;gap:2px}}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);min-height:24px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs .x{margin:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs .x[hidden]{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);min-height:24px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs .x{margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs .x[hidden]{display:none}
 #tab-quest #qtHistMore[hidden]{display:none}
 #tab-gempic #gpHist:not(.all) .qhx{display:none}
 #tab-gempic #gpHistMore[hidden]{display:none}
@@ -2601,10 +2698,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpHT{display:grid;grid-column:2/-1;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:8px}
 @media (max-width:520px){#tab-gempic #gpHT{column-gap:6px}}
 @media (max-width:560px){
-#tab-quest .qsrow{flex-wrap:wrap}
-#tab-quest .qdd{flex:1 1 100%}
-#tab-quest .qsrow>.gb{flex:1 1 0}
-#tab-quest .qddb{padding:8px 38px 8px 12px}
+#tab-quest .qsrow{flex-wrap:nowrap}
+#tab-quest .qdd{flex:1 1 0}
+#tab-quest #qtDD .qddb{padding:8px 14px 10px;align-items:flex-start}
+#tab-quest #qtDD .qddb .qddn{min-height:32px;display:flex;align-items:center;padding-right:112px}
 #tab-quest .qddv{flex-direction:column;align-items:flex-start;gap:6px}
 #tab-quest .qddc{gap:5px}
 #tab-quest .qddc .pill,#tab-quest .qddc .qchip{font-size:11.5px;padding:2px 9px}
@@ -2692,7 +2789,6 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 }
 #tab-gempic .qsub{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:12px}
 #tab-gempic .qlog{margin-left:auto;font-size:13px;color:var(--mut)}
-#tab-gempic #gpDisc{margin:12px 0 0;font-size:12.5px}
 #tab-gempic .qcrow{display:flex;align-items:center;gap:8px}
 #tab-gempic .qcrow+.qcrow{margin-top:8px}
 #tab-gempic .qcrow input{flex:1;box-sizing:border-box;width:auto;min-width:0;height:40px;margin:0;padding:0 10px;font-size:16px;font-weight:600;border-radius:10px;text-align:center}
@@ -2807,10 +2903,14 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpCtl .qrow:has(input:checked){background:color-mix(in srgb,#10b981 18%,transparent);border-color:#10b981;color:var(--tx)}
 #tab-gempic #gpCtl .qrow:has(input:focus-visible){outline:2px solid var(--ac);outline-offset:2px}
 #tab-gempic #gpCtl .qrow .qinfo{display:none}
-#tab-gempic .qsrow>.qi{flex:none;width:46px;height:46px;margin:0;padding:0;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--mut);font-weight:700;font-size:15px}
-#tab-gempic .qsrow>.qi:hover{border-color:var(--ac);color:var(--tx)}
-#tab-gempic #gpDisc{display:none}
-#tab-gempic #gpDisc.on{display:block}
+#tab-gempic #gpDD .qddb{min-height:48px;padding:8px 124px 8px 14px;border-radius:12px}
+#tab-gempic #gpDD .qddb svg{top:15px;right:12px;margin-top:0}
+#tab-gempic #gpDD .gicw{position:absolute;top:8px;right:40px;z-index:2;display:flex;gap:6px}
+#tab-gempic #gpDD .gicw>.gic{flex:none;width:32px;height:32px;min-height:0;margin:0;padding:0;display:grid;place-items:center;border-radius:9px;border:1px solid var(--bd);background:var(--card);color:var(--mut)}
+#tab-gempic #gpDD .gicw>.gic svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+#tab-gempic #gpDD .gicw>.gic:hover:not(:disabled){border-color:var(--ac);color:var(--tx);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+#tab-gempic #gpDD .gicw>#gpSetNew{color:var(--ac)}
+#tab-gempic #gpDD .gicw>.gic:disabled{opacity:.4;cursor:default}
 #tab-gempic #gpQA{padding:0;border:0;background:none}
 #tab-gempic #gpQB{display:flex;gap:10px;align-items:stretch;margin-top:12px}
 #tab-gempic #gpQB .gq{gap:10px}
@@ -2828,18 +2928,31 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic #gpActions .qwrap #gpUndo{padding:0}
 #tab-gempic #gpActions #gpUndoT{display:none}
 #tab-gempic #gpActions .qwrap #gpRoll{font-size:15px}
-#tab-gempic #gpActions .qwrap .qsub{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0}
+#tab-gempic #gpActions .qwrap .qsub{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;margin:0}
 #tab-gempic #gpActions .qsub .gb{width:100%;height:46px;min-height:46px;grid-column:auto;order:0;margin:0}
-#tab-gempic #gpActions .qsub #gpLive{grid-column:1/-1}
+#tab-gempic #gpActions .qsub #gpHit{grid-column:1/-1;order:0;border-color:color-mix(in srgb,#f5b83d 50%,var(--bd));background:color-mix(in srgb,#f5b83d 12%,var(--card))}
+#tab-gempic #gpActions .qsub #gpHit:hover:not(:disabled){border-color:#f5b83d;background:color-mix(in srgb,#f5b83d 20%,var(--card))}
+#tab-gempic #gpHit svg{color:#f5b83d}
+#tab-gempic #gpActions .qsub #gpLive{grid-column:1/-1;order:1}
+/* reset: red icon button (same width as undo) to the left of the live counter */
+#tab-gempic #gpActions .qsub #gpReset{grid-column:1;order:1;width:100%;height:46px;min-height:46px;margin:0;padding:0;border:1px solid color-mix(in srgb,#ef4444 55%,var(--bd));border-radius:10px;background:color-mix(in srgb,#ef4444 12%,var(--card));color:#f87171}
+#tab-gempic #gpActions .qsub #gpReset:hover:not(:disabled){border-color:#ef4444;background:color-mix(in srgb,#ef4444 22%,var(--card))}
+#tab-gempic #gpActions .qsub #gpReset svg{width:20px;height:20px}
+#tab-gempic #gpActions .qsub #gpReset .gprt{display:none}
+#tab-gempic #gpActions .qsub #gpLive{grid-column:2;order:2}
+@media (min-width:821px){
+#tab-gempic #gpActions .qsub #gpReset{grid-column:1/-1;font-size:14px;font-weight:600}
+#tab-gempic #gpActions .qsub #gpReset .gprt{display:inline;margin-left:8px}
+}
 #tab-gempic #gpSetsBody[hidden]{display:block!important}
 #tab-gempic #gpSetsBox .gh{cursor:default}
 #tab-gempic #gpHistMore{margin-top:10px}
 #tab-gempic #gpHistMore[hidden]{display:none}
 @media (max-width:560px){
-#tab-gempic .qsrow{flex-wrap:wrap}
-#tab-gempic .qdd{flex:1 1 100%}
-#tab-gempic .qsrow>.gb{flex:1 1 0}
-#tab-gempic .qddb{padding:8px 38px 8px 12px}
+#tab-gempic .qsrow{flex-wrap:nowrap}
+#tab-gempic .qdd{flex:1 1 0}
+#tab-gempic #gpDD .qddb{padding:8px 14px 10px;align-items:flex-start}
+#tab-gempic #gpDD .qddb .qddn{min-height:32px;display:flex;align-items:center;padding-right:112px}
 #tab-gempic .qddv{flex-direction:column;align-items:flex-start;gap:6px}
 #tab-gempic .qddc{gap:5px}
 #tab-gempic .qddc .pill,#tab-gempic .qddc .qchip{font-size:11.5px;padding:2px 9px}
@@ -2865,6 +2978,22 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-gempic .qhg .val{font-weight:700;color:var(--tx)}
 #tab-gempic #gpCostBox{padding:0;border:0;background:none;margin-top:14px}
 #tab-gempic #gpCostBox .gcost input{height:46px}
+#tab-gempic .gcico{display:none}
+@media (max-width:560px){
+#tab-gempic .gpopts{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px}
+#tab-gempic #gpCtl .gpopts .qchips{margin:0;flex:none}
+#tab-gempic #gpCtl .gpopts .qchips .qrow{height:38px;padding:0 16px}
+#tab-gempic .gpopts #gpCostBox{margin:0;flex:0 1 auto;min-width:0}
+#tab-gempic .gpopts #gpCostBox>.gl{display:none}
+#tab-gempic .gpopts #gpCostBox .gcost{display:flex;align-items:center;justify-content:center;gap:0;height:38px;padding:0 4px;border:1px solid var(--bd);border-radius:99px;background:var(--bg)}
+#tab-gempic .gpopts #gpCostBox .gcico{display:block;order:2;flex:none;width:17px;height:17px;margin:0 2px 0 6px;color:#c084fc;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+#tab-gempic .gpopts #gpCostBox .gcost input{order:3;flex:none;width:44px;height:32px;padding:0;border:0;background:transparent;box-shadow:none;border-radius:0;text-align:center;font-size:16px;font-weight:700;-moz-appearance:textfield}
+#tab-gempic .gpopts #gpCostBox .gcost input::placeholder{font-size:12px;font-weight:500}
+#tab-gempic .gpopts #gpCostBox .gcost input::-webkit-outer-spin-button,#tab-gempic .gpopts #gpCostBox .gcost input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tab-gempic .gpopts #gpCostBox .gcost button{width:30px;height:30px;border-radius:50%;font-size:19px}
+#tab-gempic .gpopts #gpCostBox #gpCostDn{order:1;background:color-mix(in srgb,var(--mut) 16%,transparent);border:0;color:var(--tx)}
+#tab-gempic .gpopts #gpCostBox #gpCostUp{order:4}
+}
 #tab-gempic #gpFTyp button[hidden],#tab-gempic #gpFSet[hidden],#tab-gempic .qfa .gb[hidden]{display:none}
 #tab-gempic #gpDay .gpan{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 #tab-gempic .gsec{min-width:0}
@@ -2930,84 +3059,84 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #gpSetsBox{display:none!important}
 #qtSetsTog{display:none!important}
 /* Show in: one switch per tracker */
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tgc{white-space:normal}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{display:block;width:100%;height:30px;margin:4px 0;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on::before{content:"\2713\00a0"}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on[data-stog="q"]{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on[data-stog="g"]{color:#c084fc;border-color:#c084fc;background:color-mix(in srgb,#c084fc 14%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter{flex-wrap:nowrap}
-:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
-:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tgc{white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg{display:block;width:100%;height:30px;margin:4px 0;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg.on::before{content:"\2713\00a0"}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg.on[data-stog="q"]{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg.on[data-stog="g"]{color:#c084fc;border-color:#c084fc;background:color-mix(in srgb,#c084fc 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #hubFilter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #hubFilter{flex-wrap:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
 /* Gempic main box is purple (matches its icon) so it is easy to tell apart from the green Quest box */
 #tab-gempic #gpHero{--c:#c084fc}
 #tab-gempic #gpHero .qbig,#tab-gempic #gpHero .qst:last-child b{color:#c084fc}
 #tab-gempic #gpHero .qbar i{background:linear-gradient(90deg,#a855f7,#c084fc)}
 /* set search + sort (Quest + Gempic trackers) */
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool{display:flex;gap:8px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select{flex:0 0 auto;width:auto;min-width:0;max-width:46%;height:42px;margin:0;padding:0 36px 0 14px;font-size:14px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select:focus,:is(#tab-quest,#tab-gempic,#tab-buys) .qtool input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 30%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select option{background:var(--card);color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool{display:flex;gap:8px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool select{flex:0 0 auto;width:auto;min-width:0;max-width:46%;height:42px;margin:0;padding:0 36px 0 14px;font-size:14px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool select:focus,:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 30%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool select option{background:var(--card);color:var(--tx)}
 @media (min-width:521px){#qtSetsInfoB,#gpSetsInfoB,.setsInfo{display:none!important}}
 @media (max-width:520px){
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh{align-items:center;gap:10px;margin-bottom:12px}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .sci{width:36px;height:36px;border-radius:10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .gt span{display:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .gt b{font-size:16px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool{gap:8px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select{width:122px;max-width:122px;padding-left:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetsBox,#gpSetsBox) .gh{align-items:center;gap:10px;margin-bottom:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetsBox,#gpSetsBox) .gh .sci{width:36px;height:36px;border-radius:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetsBox,#gpSetsBox) .gh .gt span{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetsBox,#gpSetsBox) .gh .gt b{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool{gap:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qtool select{width:122px;max-width:122px;padding-left:12px}
 }
-:is(#tab-quest,#tab-gempic,#tab-buys) .qddsw{position:sticky;top:-6px;z-index:2;margin:-6px -6px 4px;padding:8px 8px 6px;background:var(--card);border-radius:12px 12px 0 0}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qddsw input{width:100%;box-sizing:border-box;height:38px;margin:0;padding:0 12px;font-size:14px;border-radius:8px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .qddno{padding:12px;color:var(--mut);font-size:13px;text-align:center}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin-top:10px;white-space:normal}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv{min-width:40px;height:34px;padding:0 12px;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qddsw{position:sticky;top:-6px;z-index:2;margin:-6px -6px 4px;padding:8px 8px 6px;background:var(--card);border-radius:12px 12px 0 0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qddsw input{width:100%;box-sizing:border-box;height:38px;margin:0;padding:0 12px;font-size:14px;border-radius:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qddno{padding:12px;color:var(--mut);font-size:13px;text-align:center}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin-top:10px;white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar .mv{min-width:40px;height:34px;padding:0 12px;margin:0}
 /* narrow screens: the sets tables fit the card, no sideways scrolling */
 @media (max-width:820px){
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList){table-layout:fixed;width:100%}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(2){width:92px;padding-left:4px;padding-right:4px}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(3){width:72px;padding-left:4px;padding-right:10px}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) td.qpc{min-width:0;white-space:normal}
-:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) .qact{display:flex;justify-content:flex-end;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetList,#gpSetList){table-layout:fixed;width:100%}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(2){width:92px;padding-left:4px;padding-right:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(3){width:72px;padding-left:4px;padding-right:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetList,#gpSetList) td.qpc{min-width:0;white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) :is(#qtSetList,#gpSetList) .qact{display:flex;justify-content:flex-end;gap:6px}
 }
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv:disabled{opacity:.35;cursor:not-allowed}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv{display:inline-flex;align-items:center;justify-content:center;min-width:46px}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv.done{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) .mvmode td.qpc{cursor:pointer}
-:is(#tab-quest,#tab-gempic,#tab-buys) tr.mvsel td{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar .mv:disabled{opacity:.35;cursor:not-allowed}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar .mv{display:inline-flex;align-items:center;justify-content:center;min-width:46px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar .mv svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvbar .mv.done{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .mvmode td.qpc{cursor:pointer}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) tr.mvsel td{background:color-mix(in srgb,var(--ac) 10%,transparent)}
 
 /* ---- sets hub: cards instead of a table ---- */
-:is(#tab-quest,#tab-gempic,#tab-buys) .gtbl:has(#qtSetList){border:0;background:transparent;box-shadow:none;overflow:visible;padding:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList,:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tbody{display:block;width:100%}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr:has(th){display:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"p a" "t t";gap:10px 12px;align-items:start;margin:0 0 10px;padding:14px 14px 14px 18px;border:1px solid var(--bd);border-left:4px solid var(--mut);border-radius:14px;background:var(--card)}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vb,:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vq{border-left-color:#34d399}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vg{border-left-color:#c084fc}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vx{border-left-color:var(--bd);opacity:.8}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.mvsel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td{display:block;width:auto;padding:0;border:0;background:none!important}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.qpc{grid-area:p;min-width:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.r{grid-area:a;align-self:start}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.tgc{grid-area:t;display:flex;gap:8px}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{flex:1 1 0;width:auto;height:34px;margin:0}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .qpt strong{font-size:16px}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .sst{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .sst b{font-size:20px;font-weight:700;color:var(--tx);letter-spacing:0;font-variant-numeric:tabular-nums;margin-right:3px}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .x[data-sedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .gtbl:has(#qtSetList){border:0;background:transparent;box-shadow:none;overflow:visible;padding:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList,:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tbody{display:block;width:100%}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr:has(th){display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"p a" "t t";gap:10px 12px;align-items:start;margin:0 0 10px;padding:14px 14px 14px 18px;border:1px solid var(--bd);border-left:4px solid var(--mut);border-radius:14px;background:var(--card)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc.vb,:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc.vq{border-left-color:#34d399}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc.vg{border-left-color:#c084fc}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc.vx{border-left-color:var(--bd);opacity:.8}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc.mvsel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc td{display:block;width:auto;padding:0;border:0;background:none!important}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc td.qpc{grid-area:p;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc td.r{grid-area:a;align-self:start}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList tr.sc td.tgc{grid-area:t;display:flex;gap:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg{flex:1 1 0;width:auto;height:34px;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .qpt strong{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .sst{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .sst b{font-size:20px;font-weight:700;color:var(--tx);letter-spacing:0;font-variant-numeric:tabular-nums;margin-right:3px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .x[data-sedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px}
 
 /* sets hub: coloured Quest / Gempic toggles with their tracker icons */
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on::before{content:none}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg[data-stog="q"]{--tc:#34d399}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg[data-stog="g"]{--tc:#c084fc}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{color:color-mix(in srgb,var(--tc) 60%,var(--mut));border-color:color-mix(in srgb,var(--tc) 30%,var(--bd))}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on{color:var(--tc);border-color:var(--tc);background:color-mix(in srgb,var(--tc) 16%,transparent);font-weight:700}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg:not(.on){color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,transparent)}
-:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg:not(.on) svg{opacity:1}
-:is(#tab-quest,#tab-gempic,#tab-buys) .gx #qtSetAdd,:is(#tab-quest,#tab-gempic,#tab-buys) .gx #gpSetAdd{display:inline-flex;align-items:center;justify-content:center}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg.on::before{content:none}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg[data-stog="q"]{--tc:#34d399}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg[data-stog="g"]{--tc:#c084fc}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg{color:color-mix(in srgb,var(--tc) 60%,var(--mut));border-color:color-mix(in srgb,var(--tc) 30%,var(--bd))}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg.on{color:var(--tc);border-color:var(--tc);background:color-mix(in srgb,var(--tc) 16%,transparent);font-weight:700}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg:not(.on){color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) #qtSetList .tg:not(.on) svg{opacity:1}
+:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .gx #qtSetAdd,:is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .gx #gpSetAdd{display:inline-flex;align-items:center;justify-content:center}
 
 /* sets hub: filter buttons carry the tracker icon and colour */
 #hubFilter button{display:flex;align-items:center;justify-content:center;gap:7px}
@@ -3082,6 +3211,218 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
  #tab-buys .mkDDw{flex:1 1 50%;min-width:0}
 }
 </style>
+<style>
+/* epic tracker: Market-style cards, one per row, and one tidy search bar */
+#epicList{display:block;margin-top:4px}
+#epicList .lcol{display:block}
+#epicList .qhc.ep{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"b s a";padding:14px 24px 14px 32px!important;gap:8px 28px;margin-top:10px;box-shadow:none;border-radius:14px;container-type:normal}
+#epicList .qhc.ep:not(.open):hover{border-color:color-mix(in srgb,var(--rc) 55%,var(--bd))}
+#epicList .qhc .mkh{display:contents!important}
+#epicList .qhc .qpt.qp2{gap:14px;display:flex;align-items:center;flex-wrap:nowrap}
+#epicList .qhc .epart{width:54px;height:54px;border-radius:10px;flex:none}
+#epicList .qhc .qht{min-width:0}
+#epicList .qhc .qha{margin-top:2px;font-size:13.5px}
+#epicList .qhc .qhb .qsubl{margin-top:8px;gap:6px 10px}
+#epicList .qhc .phs .qhv.pos{color:var(--pos)}
+#epicList .qhc .qact{gap:12px;align-items:center}
+#epicList .qhc.ep .mkb{grid-column:1/-1;border-top:1px solid var(--bd);margin-top:4px;padding:12px 2px 4px}
+#epicList .qhc .mkact{display:flex;gap:10px;margin-top:14px;justify-content:stretch}
+#epicList .qhc .mkact button{flex:1;margin:0;height:46px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
+#epicList .qhc .mkact .mksave{background:linear-gradient(135deg,#059669,#10b981);border:1px solid #10b981;color:#fff}
+#epicList .qhc .mkact .epdel{color:#f87171;border:1px solid color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,var(--card))}
+@media (max-width:700px){
+ #epicList .qhc.ep{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b s" "b a";align-items:center;padding:12px 14px 12px 24px!important;gap:6px 12px}
+ #epicList .qhc .phs{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;min-width:0;text-align:right}
+ #epicList .qhc .phs .qhv{font-size:24px}
+ #epicList .qhc .qact{align-self:end;justify-self:end}
+ #epicList .qhc .epart{width:44px;height:44px}
+}
+/* search / sort / rarity / toggles as one bar */
+#tab-epic .epFind{flex-wrap:nowrap;gap:0;align-items:stretch;background:var(--card);border:1px solid var(--bd);border-radius:14px;transition:border-color .15s}
+#tab-epic .epFind:focus-within{border-color:color-mix(in srgb,var(--ac) 60%,var(--bd))}
+#tab-epic .epSearchW{flex:1 1 auto;min-width:0}
+#tab-epic .epSearchW svg{top:14px}
+#tab-epic .epSearchW input{height:46px;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:14px 0 0 14px;font-size:15px}
+#tab-epic #epSort{height:46px;border:0;border-left:1px solid var(--bd);border-radius:0;background-color:transparent;font-size:14px;font-weight:600}
+#tab-epic #epSort{flex:0 0 auto;min-width:150px}
+#tab-epic #epSort:hover{border-color:var(--bd);color:var(--ac)}
+#tab-epic #epSort option{background:var(--card);color:var(--tx)}
+#tab-epic .epFind>.epb,#tab-epic .epFind>.epOpt{height:46px;margin:0;border:0;border-left:1px solid var(--bd);border-radius:0;background:transparent;box-shadow:none;padding:0 16px;font-size:14px}
+#tab-epic .epFind>.epb:hover{color:var(--ac);border-color:var(--bd)}
+#tab-epic .epFind>.epb.on{color:var(--ac);background:transparent;box-shadow:none;border-color:var(--bd)}
+#tab-epic .epFind>.epOpt{flex:0 0 auto;justify-content:center}
+#tab-epic .epFind>#epNoHold,#tab-epic .epFind>#epCompOpt,#tab-epic .epFind>#epCopyNum,#tab-epic .epFind>#vHolder{height:46px;border-radius:0}
+@media (max-width:640px){
+ #tab-epic .epFind{flex-wrap:wrap}
+ #tab-epic .epSearchW{flex:1 1 100%;border-bottom:1px solid var(--bd)}
+ #tab-epic .epSearchW input{border-radius:14px 14px 0 0}
+ #tab-epic .epFind{overflow:hidden}
+ #tab-epic .epFind>#epSort{flex:1 1 0;min-width:0;border-left:0;padding:0 26px 0 12px;background-position:right 8px center;background-size:14px;font-size:13px}
+ #tab-epic .epFind>#vHolder,#tab-epic .epFind>#epNoHold{flex:0 0 auto;border-left:1px solid var(--bd);padding:0 10px;gap:6px;font-size:13px}
+ #tab-epic .epFind>#vHolder svg{width:15px;height:15px}
+ #tab-epic .epFind:has(#epSort[hidden])>#vHolder{flex:1 1 auto;border-left:0}
+ #tab-epic .epFind>#epCompOpt,#tab-epic .epFind>#epCopyNum{flex:1 1 auto;border-top:1px solid var(--bd);border-left:0}
+}
+</style>
+<style>
+/* whole card is clickable to edit */
+#qtHist .qhc,#gpHist .qhc,#buyList .qhc,#soldList .qhc{cursor:pointer}
+#qtHist .qhc button,#gpHist .qhc button,#buyList .qhc button,#buyList .qhc input,#soldList .qhc button,#soldList .qhc input,#buyList .mkb,#soldList .mkb{cursor:auto}
+#qtHist .qhc button,#gpHist .qhc button,#buyList .qhc button,#soldList .qhc button{cursor:pointer}
+#qtHist .qhc:hover,#gpHist .qhc:hover,#buyList .qhc:not(.open):hover,#soldList .qhc:not(.open):hover{border-color:color-mix(in srgb,var(--rc,var(--ac)) 55%,var(--bd))}
+</style>
+<style>#qtHist>.gsec,#gpHist>.gsec{margin:8px 0 14px}</style>
+<style id="mobileBottomNav">
+/* ---------- MOBILE: bottom tab bar, always stuck to the bottom, scrolls sideways ---------- */
+@media (max-width:700px){
+#mainNav,#mainNav.icons,#mainNav.many,#mainNav.editing,#mainNav.open{
+position:fixed!important;left:0;right:0;bottom:0;top:auto;z-index:900;
+display:flex!important;flex-wrap:nowrap!important;align-items:stretch;justify-content:flex-start!important;gap:2px!important;
+width:auto!important;max-width:none!important;margin:0!important;
+padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))!important;
+border:0!important;border-top:1px solid var(--bd)!important;border-radius:0!important;
+background:color-mix(in srgb,var(--bg) 93%,transparent)!important;
+-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+box-shadow:0 -6px 20px rgba(0,0,0,.25);
+overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#mainNav::-webkit-scrollbar{display:none}
+#mainNav .navbtns{display:contents!important}
+/* hide-menu does not make sense on a pinned bar; edit pencil and the labels/icons toggle sit at the far end */
+#mainNav #navCur,#mainNav #navHide,#navShow{display:none!important}
+#mainNav .navctl{order:99;display:flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center;align-self:center;gap:4px!important;margin:0!important;padding:0 6px!important;border:0!important}
+#mainNav .navctl button{width:32px!important;height:32px!important}
+#mainNav #navCollapse svg{display:none}
+#mainNav #navCollapse::before{content:"Aa";font-size:12px;font-weight:700;letter-spacing:-.3px}
+#mainNav #navCollapse[aria-pressed="true"]{color:var(--ac);border-color:var(--ac)}
+#mainNav #navCollapse[aria-pressed="true"]::before{content:"\25A3";font-size:15px}
+/* tab buttons: icon over label */
+#mainNav .navbtns>button{
+flex:0 0 max(62px,18.5vw)!important;width:auto!important;min-width:0!important;margin:0!important;
+padding:6px 2px 5px!important;display:flex;flex-direction:column;align-items:center;justify-content:flex-start!important;
+gap:3px!important;font-size:10px!important;line-height:1.1!important;text-align:center;
+border-radius:12px;border:1px solid transparent;background:transparent;box-shadow:none}
+#mainNav .navbtns>button[hidden]{display:none!important}
+#mainNav .navbtns>button .ti{width:30px!important;height:30px!important;border-radius:10px}
+#mainNav .navbtns>button .ti svg{width:18px;height:18px}
+#mainNav .navbtns>button .tx{display:block!important;font-size:10px;font-weight:600;color:var(--mut)}
+#mainNav .navbtns>button small{font-size:8px}
+#mainNav .navbtns>button.on{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 30%,transparent);box-shadow:none}
+#mainNav .navbtns>button.on .tx{color:var(--tx)}
+#mainNav .navbtns>button.on::after{left:30%;right:30%;top:-6px;bottom:auto;height:3px;border-radius:0 0 3px 3px}
+/* icons-only mode: no text, smaller buttons, more icons on screen */
+#mainNav.icons .navbtns>button{flex:0 0 44px!important;padding:8px 0!important;justify-content:center!important}
+#mainNav.icons .navbtns>button .tx{display:none!important}
+#mainNav.icons .navbtns>button .ti{width:32px!important;height:32px!important}
+#mainNav.icons .navbtns>button .ti svg{width:20px;height:20px}
+#mainNav.editing .navbtns>button{padding-top:26px!important}
+.navsep{display:none}
+/* keep page content and the error toast clear of the bar */
+body:not(.guest) #app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+#sdKickNote{bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+}
+</style>
+<style id="eventCompact">
+/* Event tracker: one slim row per reward, several columns on wide screens, small joined [ count - + ] stepper */
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid){grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:8px}
+#tab-event #evGrid .pcat:last-child:nth-child(odd){grid-column:auto}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"h c";align-items:center;column-gap:8px;padding:7px 10px;border-radius:12px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pch{grid-area:h;min-width:0;align-items:center;gap:8px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat .sci{width:28px;height:28px;border-radius:8px;flex:none}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat .sci svg{width:16px;height:16px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcn{flex-direction:column;align-items:flex-start;justify-content:center;gap:1px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcn b{font-size:13px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pco{font-size:11px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcp{display:inline}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .ps{display:none}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost{grid-area:c;flex-wrap:nowrap;gap:0;margin:0;border:1px solid var(--bd);border-radius:10px;overflow:hidden;background:var(--bg)}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost button{order:1;flex:none;width:34px;height:34px;margin:0;border:0;border-radius:0;font-size:18px;background:transparent;color:var(--tx)}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost input{order:2;flex:none;width:44px;height:34px;padding:0 2px;border:0;border-radius:0;background:transparent;text-align:center;font-size:15px;font-weight:700;-moz-appearance:textfield}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost input::-webkit-outer-spin-button,#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost button.gplus{order:3;background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost button:disabled{opacity:.35}
+#tab-event #evRewards .gh,#tab-event #evWheel .gh{margin-bottom:10px}
+#tab-event #evRewards .gh .sci,#tab-event #evWheel .gh .sci{width:34px;height:34px;border-radius:10px}
+#tab-event #evRewards .gh .gt b{font-size:16px}
+/* desktop: action buttons in one slim row instead of huge stacked buttons */
+@media (min-width:821px){
+#tab-event .pact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+#tab-event .pact .gb{white-space:nowrap}
+#tab-event #evGrid>#evLeafAdd{grid-column:auto;order:0;margin:0;height:auto;min-height:0;align-self:stretch;font-size:15px;border-radius:14px}
+#tab-event .pact .gb{min-height:40px;padding:6px 10px;font-size:13px;gap:6px;border-radius:10px}
+#tab-event .pact .gb svg{width:15px;height:15px}
+#tab-event .pact #evLeafAdd{font-size:14px}
+#tab-event #evWheel .pact{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* a step up in size on tablets and desktops (phones keep the smaller size) */
+@media (min-width:521px){
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid){grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat{padding:10px 12px;column-gap:10px;border-radius:14px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pch{gap:10px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat .sci{width:34px;height:34px;border-radius:10px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcat .sci svg{width:19px;height:19px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pcn b{font-size:14.5px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .pco{font-size:12px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost{border-radius:12px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost button{width:40px;height:40px;font-size:21px}
+#tab-event :is(#evGrid,#evWGrid,#evShopGrid) .gcost input{width:52px;height:40px;font-size:17px}
+}
+</style>
+<style id="passCompact">
+/* Pass tracker: same slim rows as the Event tracker on tablets and desktops (phones keep their own layout) */
+@media (min-width:521px){
+#tab-pass #passAdd{grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:10px}
+#tab-pass #passAdd .pcat{display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;grid-template-areas:"i b b c" "i o s c";align-items:center;column-gap:10px;row-gap:1px;padding:10px 12px;border-radius:14px}
+#tab-pass #passAdd .pch,#tab-pass #passAdd .pcn{display:contents}
+#tab-pass #passAdd .pcat .sci{grid-area:i;width:34px;height:34px;border-radius:10px;flex:none}
+#tab-pass #passAdd .pcat .sci svg{width:19px;height:19px}
+#tab-pass #passAdd .pcn b{grid-area:b;min-width:0;font-size:14.5px;line-height:1.2}
+#tab-pass #passAdd .pco{grid-area:o;font-size:12px}
+#tab-pass #passAdd .ps{grid-area:s;margin:0;font-size:12px;min-width:0}
+#tab-pass #passAdd .ps:not(:empty)::before{content:"\00b7";margin:0 6px 0 0}
+#tab-pass #passAdd .gcost{grid-area:c;flex-wrap:nowrap;gap:0;margin:0;border:1px solid var(--bd);border-radius:12px;overflow:hidden;background:var(--bg)}
+#tab-pass #passAdd .gcost button{order:1;flex:none;width:40px;height:40px;margin:0;border:0;border-radius:0;font-size:21px;background:transparent;color:var(--tx)}
+#tab-pass #passAdd .gcost input{order:2;flex:none;width:52px;height:40px;padding:0 2px;border:0;border-radius:0;background:transparent;text-align:center;font-size:17px;font-weight:700;-moz-appearance:textfield}
+#tab-pass #passAdd .gcost input::-webkit-outer-spin-button,#tab-pass #passAdd .gcost input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+#tab-pass #passAdd .gcost button.gplus{order:3;background:color-mix(in srgb,var(--ac) 22%,transparent);color:var(--ac)}
+#tab-pass #passAdd .gcost button:disabled{opacity:.35}
+#tab-pass #passReg .gh{margin-bottom:10px}
+#tab-pass #passReg .gh .sci{width:34px;height:34px;border-radius:10px}
+#tab-pass #passReg .gh .gt b{font-size:16px}
+}
+@media (min-width:821px){
+#tab-pass #passReg .pact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+#tab-pass #passReg .pact .gb{min-height:40px;padding:6px 10px;font-size:13px;gap:6px;border-radius:10px;white-space:nowrap}
+#tab-pass #passReg .pact .gb svg{width:15px;height:15px}
+}
+/* phones: same small size as the Event tracker rows */
+@media (max-width:520px){
+#tab-pass #passAdd{gap:6px}
+#tab-pass #passAdd .pcat{padding:7px 10px;column-gap:8px;border-radius:12px}
+#tab-pass #passAdd .pch{gap:8px}
+#tab-pass #passAdd .pcat .sci{width:28px;height:28px;border-radius:8px}
+#tab-pass #passAdd .pcat .sci svg{width:16px;height:16px}
+#tab-pass #passAdd .pcn b{font-size:13px}
+#tab-pass #passAdd .pco{font-size:11px}
+#tab-pass #passAdd .ps{margin:2px 0 0 36px;font-size:11px}
+#tab-pass #passAdd .gcost{border-radius:10px}
+#tab-pass #passAdd .gcost button{width:34px;height:34px;font-size:18px}
+#tab-pass #passAdd .gcost input{width:44px;height:34px;font-size:15px}
+}
+</style>
+<style id="subTabIcons">
+/* icons on the sub-tabs: Pass (Regular / Ultra), Gempic and Quest (Track / Sets / History / Odds) */
+#tab-pass #passSub button,#tab-gempic #gpSub button,#tab-quest #qtSub button{display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.stI{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+:is(#passSub,#gpSub,#qtSub) button.on .stI{color:var(--ac);opacity:1}
+@media (max-width:520px){
+#tab-pass #passSub button,#tab-gempic #gpSub button,#tab-quest #qtSub button{gap:5px;padding:0 4px}
+.stI{width:16px;height:16px}
+}
+@media (max-width:400px){
+#tab-gempic #gpSub button,#tab-quest #qtSub button{flex-direction:column;gap:2px;height:52px;font-size:12.5px}
+}
+</style>
 </head><body><main>
 
 <div id="login" class="card" hidden>
@@ -3095,8 +3436,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="app" hidden>
-<div class="top"><div class="brand" id="homeLink" role="link" tabindex="0" title="Back to home"><span class="logo"><img src="data:image/png;base64,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" alt="" width="44" height="44"></span><div><h1>Soundmap <b>Helper</b></h1></div></div><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="guestBack"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to login</button><button type="button" id="tbProfile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button></div></div>
-<div class="tabs"><span class="navctl"><button type="button" id="navEdit" title="Edit menu" aria-label="Edit menu" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" id="navCollapse" title="Icons only" aria-label="Show icons only" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" id="navHide" title="Hide menu" aria-label="Hide menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></span><button type="button" id="navCur" aria-expanded="false" aria-controls="navBtns"><span class="ti"></span><span class="nl">Home</span><svg class="nc" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="navbtns" id="navBtns"><button type="button" id="tbHome"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="tx">Home</span></button><button type="button" id="tbShiny"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><span class="tx">Shiny<br>Tracker</span></button><button type="button" id="tbEpic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span class="tx">Epic<br>Tracker</span></button><button type="button" id="tbGempic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/></svg></span><span class="tx">Gempic<br>Tracker</span></button><button type="button" id="tbQuest"><span class="ti"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tx">Quest<br>Tracker</span></button><button type="button" id="tbPass"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-6z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg></span><span class="tx">Pass<br>Tracker</span></button><button type="button" id="tbEvent"><span class="ti"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="tx">Event<br>Tracker</span></button><button type="button" id="tbDaily"><span class="ti"><svg viewBox="0 0 24 24"><path d="M7 7h10a4 4 0 0 1 4 4v3a3 3 0 0 1-5.2 2L14.5 14h-5l-1.3 2A3 3 0 0 1 3 14v-3a4 4 0 0 1 4-4z"/><path d="M8 10v3M6.5 11.5h3"/><circle cx="15.5" cy="11" r=".7"/><circle cx="17.5" cy="12.8" r=".7"/></svg></span><span class="tx">Daily<br>Games</span></button><button type="button" id="tbMap"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/></svg></span><span class="tx">Artist<br>Guesser</span></button><button type="button" id="tbSound" class="soon" aria-disabled="true"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><span class="tx">Song<br>Guesser<small id="tbSoundSoon">Disabled</small></span></button><button type="button" id="tbReports" hidden><span class="ti"><svg viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><span class="tx">Admin</span></button><button type="button" id="tbBuys"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/></svg></span><span class="tx">Market</span></button><button type="button" id="tbInfo"><span class="ti"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></svg></span><span class="tx">Wiki</span></button><button type="button" id="tbMisc"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 3L8 21M16 3l-2 18"/></svg></span><span class="tx">Misc</span></button><button type="button" id="tbArtist"><span class="ti"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><span class="tx">Artist<br>Overview<small id="tbArtistSoon" hidden>Coming Soon</small></span></button></div></div>
+<div class="top"><div class="brand" id="homeLink" role="link" tabindex="0" title="Back to home"><span class="logo"><img src="data:image/png;base64,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" alt="" width="44" height="44"></span><div><h1>Soundmap <b>Helper</b></h1></div></div><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="guestBack"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to login</button><button type="button" id="tbProfile" title="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span id="tbProfileName">Profile</span></button></div></div>
+<div class="tabs" id="mainNav"><span class="navctl"><button type="button" id="navEdit" title="Edit menu" aria-label="Edit menu" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" id="navCollapse" title="Icons only" aria-label="Show icons only" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" id="navHide" title="Hide menu" aria-label="Hide menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></span><button type="button" id="navCur" aria-expanded="false" aria-controls="navBtns"><span class="ti"></span><span class="nl">Home</span><svg class="nc" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="navbtns" id="navBtns"><button type="button" id="tbHome"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="tx">Home</span></button><button type="button" id="tbShiny"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><span class="tx">Shiny<br>Tracker</span></button><button type="button" id="tbEpic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span class="tx">Epic<br>Tracker</span></button><button type="button" id="tbGempic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/></svg></span><span class="tx">Gempic<br>Tracker</span></button><button type="button" id="tbQuest"><span class="ti"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tx">Quest<br>Tracker</span></button><button type="button" id="tbPass"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-6z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg></span><span class="tx">Pass<br>Tracker</span></button><button type="button" id="tbEvent"><span class="ti"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="tx">Event<br>Tracker</span></button><button type="button" id="tbDaily"><span class="ti"><svg viewBox="0 0 24 24"><path d="M7 7h10a4 4 0 0 1 4 4v3a3 3 0 0 1-5.2 2L14.5 14h-5l-1.3 2A3 3 0 0 1 3 14v-3a4 4 0 0 1 4-4z"/><path d="M8 10v3M6.5 11.5h3"/><circle cx="15.5" cy="11" r=".7"/><circle cx="17.5" cy="12.8" r=".7"/></svg></span><span class="tx">Daily<br>Games</span></button><button type="button" id="tbMap"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/></svg></span><span class="tx">Artist<br>Guesser</span></button><button type="button" id="tbSound" class="soon" aria-disabled="true"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><span class="tx">Song<br>Guesser<small id="tbSoundSoon">Disabled</small></span></button><button type="button" id="tbReports" hidden><span class="ti"><svg viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><span class="tx">Admin</span></button><button type="button" id="tbBuys"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/></svg></span><span class="tx">Market</span></button><button type="button" id="tbInfo"><span class="ti"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></svg></span><span class="tx">Wiki</span></button><button type="button" id="tbMisc"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 3L8 21M16 3l-2 18"/></svg></span><span class="tx">Misc</span></button><button type="button" id="tbArtist"><span class="ti"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><span class="tx">Artist<br>Overview<small id="tbArtistSoon" hidden>Coming Soon</small></span></button></div></div>
 <button type="button" id="navShow" hidden title="Show menu" aria-label="Show menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Show menu</span></button>
 <div id="navEditBar" hidden><span>Editing menu: use the arrows on each icon to move it, and ✕ to hide it. Hidden icons can be brought back with +. Artist Guesser and Song Guesser are hidden by default and are always available under Daily Games. Every tool is also available from Home.</span><button type="button" id="navReset">Reset to default</button><button type="button" id="navDone" class="on">Done</button></div>
 <div class="navsep" role="separator"></div>
@@ -3156,7 +3497,6 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="epFind">
 <label class="epSearchW"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="epSearch" maxlength="300" type="search" placeholder="Search epic or holder..."></label>
 <select id="epSort" aria-label="Sort"></select>
-<div id="epRarW"><button type="button" id="epRar" class="epDDb" aria-haspopup="listbox" aria-expanded="false" aria-label="Rarity"></button><div class="epDDm" id="epRarM" role="listbox" hidden></div></div>
 <button type="button" id="vHolder" class="epb" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.4c2 .8 3.5 2.6 3.5 5.6"/></svg>By holder</button>
 <button type="button" id="epNoHold" class="epOpt" role="switch" aria-checked="true" title="Show or hide epics that have no holders yet"><span class="sw" aria-hidden="true"></span>No holders</button>
 <button type="button" id="epCompOpt" class="epOpt" role="switch" aria-checked="true" title="Show or hide the Completion card"><span class="sw" aria-hidden="true"></span>Completion</button>
@@ -3169,7 +3509,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-gempic" hidden>
-<div id="gpSub" role="tablist" aria-label="Gempic sections"><button type="button" role="tab" data-gv="track" aria-selected="true" class="on"><span>Track</span></button><button type="button" role="tab" data-gv="sets" aria-selected="false"><span>Sets</span></button><button type="button" role="tab" data-gv="history" aria-selected="false"><span>History</span></button><button type="button" role="tab" data-gv="odds" aria-selected="false"><span>Odds</span></button></div>
+<div id="gpSub" role="tablist" aria-label="Gempic sections"><button type="button" role="tab" data-gv="track" aria-selected="true" class="on"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span>Track</span></button><button type="button" role="tab" data-gv="sets" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Sets</span></button><button type="button" role="tab" data-gv="history" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>History</span></button><button type="button" role="tab" data-gv="odds" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V11M12 21V4M19 21v-7"/></svg><span>Odds</span></button></div>
 <div class="gpv" id="gpv-track">
 <section class="card gsec" id="gpHero">
 <div class="qh">
@@ -3182,12 +3522,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card gsec" id="gpCtl">
 <div class="gp1" id="gpSetPick">
 <div class="gl"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Gempic Set</span></div>
-<div class="qsrow"><div class="qdd" id="gpDD"><button type="button" class="qddb" id="gpDDB" aria-haspopup="listbox" aria-expanded="false" aria-label="Gempic set"><span class="qddv" id="gpDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="gpDDM" role="listbox" hidden><div class="qddsw"><input id="gpDDQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"></div><div id="gpDDL"></div></div></div><button type="button" class="gb sm" id="gpSetEditB">Edit</button><button type="button" class="gb sm" id="gpSetNew">New set</button><button type="button" class="qi" id="gpInfoB" aria-label="How the odds work">i</button></div>
+<div class="qsrow"><div class="qdd" id="gpDD"><button type="button" class="qddb" id="gpDDB" aria-haspopup="listbox" aria-expanded="false" aria-label="Gempic set"><span class="qddv" id="gpDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="gicw"><button type="button" class="gb sm gic" id="gpSetEditB" aria-label="Edit set" title="Edit set"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button type="button" class="gb sm gic" id="gpSetNew" aria-label="New set" title="New set"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div><div class="qddm" id="gpDDM" role="listbox" hidden><div class="qddsw"><input id="gpDDQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"></div><div id="gpDDL"></div></div></div></div>
 <div id="gpSetInfo"></div>
 </div>
-<div class="qchips"><label class="qrow" for="gpReroll"><input type="checkbox" id="gpReroll"><span>Reroll (second chance on every roll)</span><span class="qinfo" title="Each roll gets a second chance at the gempic."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
-<div class="gp1" id="gpCostBox"><div class="gl">Gems spent per roll (this box)</div><div class="gcost"><input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" aria-label="Gems spent per roll"><button type="button" id="gpCostDn" aria-label="Decrease gem cost">&minus;</button><button type="button" id="gpCostUp" class="gplus" aria-label="Increase gem cost">+</button></div></div>
-<div class="note" id="gpDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong. <span id="gpRrSub"></span></div>
+<div class="gpopts"><div class="qchips"><label class="qrow" for="gpReroll"><input type="checkbox" id="gpReroll"><span>Reroll</span><span class="qinfo" title="Each roll gets a second chance at the gempic."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
+<div class="gp1" id="gpCostBox"><div class="gl">Gems spent per roll (this box)</div><div class="gcost" title="Gems spent per roll (this box)"><svg class="gcico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l3 6 3-6M12 21L9 9M12 21l3-12"/></svg><input id="gpCost" type="number" inputmode="numeric" min="0" step="1" placeholder="e.g. 50" aria-label="Gems spent per roll"><button type="button" id="gpCostDn" aria-label="Decrease gem cost">&minus;</button><button type="button" id="gpCostUp" class="gplus" aria-label="Increase gem cost">+</button></div></div></div>
 </section>
 <section class="card gsec" id="gpActions">
 <div class="gp1" id="gpQA"><button type="button" class="gl qqh" id="gpQAH" aria-expanded="true" aria-controls="gpQB"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Quick Add</span><svg class="qchev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="gpQB"><div class="gq" id="gpQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="25">25</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div><label class="qcust" for="gpAmt"><span>Custom</span><input id="gpAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of rolls to add" placeholder="Custom amount"></label></div></div>
@@ -3198,7 +3537,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 <div class="qsub">
 <button type="button" class="gb hit sm" id="gpHit"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg>Got a gempic? Save and reset</button>
-<button type="button" class="gb sm" id="gpReset"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
+<button type="button" class="gb sm" id="gpReset" aria-label="Reset without saving" title="Reset without saving"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span class="gprt">Reset without saving</span></button>
 <button type="button" class="gb sm" id="gpLive"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="7" height="5" rx="1"/></svg><span id="gpLiveT">Live counter (PiP)</span></button>
 </div>
 </div>
@@ -3268,7 +3607,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-quest" hidden>
-<div id="qtSub" role="tablist" aria-label="Quest sections"><button type="button" role="tab" data-qv="track" aria-selected="true" class="on"><span>Track</span></button><button type="button" role="tab" data-qv="sets" aria-selected="false"><span>Sets</span></button><button type="button" role="tab" data-qv="history" aria-selected="false"><span>History</span></button><button type="button" role="tab" data-qv="odds" aria-selected="false"><span>Odds</span></button></div>
+<div id="qtSub" role="tablist" aria-label="Quest sections"><button type="button" role="tab" data-qv="track" aria-selected="true" class="on"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span>Track</span></button><button type="button" role="tab" data-qv="sets" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>Sets</span></button><button type="button" role="tab" data-qv="history" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>History</span></button><button type="button" role="tab" data-qv="odds" aria-selected="false"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V11M12 21V4M19 21v-7"/></svg><span>Odds</span></button></div>
 <div class="qtv" id="qtv-track">
 <section class="card gsec" id="qtHero">
 <div class="qh">
@@ -3281,13 +3620,12 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <section class="card gsec" id="qtCtl">
 <div class="gp1" id="qtSetPick">
 <div class="gl"><svg viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></svg><span>Quest Set</span></div>
-<div class="qsrow"><select id="qtSetSel" aria-label="Quest set"></select><button type="button" class="gb sm" id="qtSetEditB">Edit</button><button type="button" class="gb sm" id="qtSetNew">New set</button><button type="button" class="qi" id="qtInfoB" aria-label="How the odds work">i</button></div>
+<div class="qsrow"><select id="qtSetSel" aria-label="Quest set"></select><button type="button" class="gb sm gic" id="qtSetEditB" aria-label="Edit set" title="Edit set"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button><button type="button" class="gb sm gic" id="qtSetNew" aria-label="New set" title="New set"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button></div>
 <div id="qtSetInfo"></div>
 </div>
-<div class="qchips"><label class="qrow" for="qtReroll"><input type="checkbox" id="qtReroll"><span>Reroll (second chance on every quest)</span><span class="qinfo" title="Each quest gets a second chance at every drop."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
-<label class="qrow" for="qtExLy"><input type="checkbox" id="qtExLy"><span>Exclude lyrics from calculations</span><span class="qinfo" title="Only epics count as a pull. Lyric odds are left out of the math."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<div class="qchips"><label class="qrow" for="qtReroll"><input type="checkbox" id="qtReroll"><span>Reroll</span><span class="qinfo" title="Each quest gets a second chance at every drop."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
+<label class="qrow" for="qtExLy"><input type="checkbox" id="qtExLy"><span>Exclude lyrics</span><span class="qinfo" title="Only epics count as a pull. Lyric odds are left out of the math."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label>
 <label class="qrow" for="qtBoost"><input type="checkbox" id="qtBoost"><span>Rate boost</span><span class="qinfo" title="Shiny, lyric, and epic rates are 50% higher than usual."><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span></label></div>
-<div class="note" id="qtDisc"><b>Heads up:</b> I believe this is how the odds work, but I may be wrong.</div>
 </section>
 <section class="card gsec" id="qtActions">
 <div class="gp1" id="qtQA"><button type="button" class="gl qqh" id="qtQAH" aria-expanded="true" aria-controls="qtQAB"><svg viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Quick Add</span><svg class="qchev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div id="qtQAB"><div class="gq" id="qtQuick"><button type="button" data-q="1">1</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button><button type="button" data-q="25">25</button><button type="button" data-q="50">50</button><button type="button" data-q="100">100</button></div><label class="qcust" for="qtAmt"><span>Custom</span><input id="qtAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of quests to add" placeholder="Custom amount"></label></div></div>
@@ -3298,7 +3636,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 <div class="qsub">
 <button type="button" class="gb hit sm" id="qtHit"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M9 3l-2 6 5 12M15 3l2 6-5 12"/></svg>Got a pull? Save and reset</button>
-<button type="button" class="gb sm" id="qtReset"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>Reset without saving</button>
+<button type="button" class="gb sm" id="qtReset" aria-label="Reset without saving" title="Reset without saving"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span class="gprt">Reset without saving</span></button>
 <button type="button" class="gb sm" id="qtLive"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><rect x="12" y="11" width="7" height="5" rx="1"/></svg><span id="qtLiveT">Live counter (PiP)</span></button>
 </div>
 </div>
@@ -3384,7 +3722,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-pass" hidden>
-<div class="pTabs" id="passSub" hidden><button type="button" data-sub="reg" class="on">Regular</button><button type="button" data-sub="ultra">Ultra</button></div>
+<div class="pTabs" id="passSub" hidden><button type="button" data-sub="reg" class="on"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-6z"/></svg>Regular</button><button type="button" data-sub="ultra"><svg class="stI" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>Ultra</button></div>
 <div id="passTop"></div>
 
 <div id="passReg">
@@ -3423,7 +3761,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <section class="card gsec" id="passCtl">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Pass Tracker Settings</b><span>Track your Regular and Ultra Pass entries. Add what you receive from each entry to keep an accurate count.</span></div><div class="gx"><button type="button" class="gb sm sq" id="passCtlToggle" aria-expanded="true" aria-label="Minimize settings"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Pass Tracker Settings</b></div><div class="gx"><button type="button" class="gb sm sq" id="passCtlToggle" aria-expanded="true" aria-label="Minimize settings"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
 <div id="passCtlBody"><div class="gpan pset">
 <label class="gp1 pSw" for="passPlus"><input type="checkbox" id="passPlus"><span class="sw"></span><span class="pst"><b>I have Plus Pass</b><small>+10 gems each time an item is added</small></span></label>
 <label class="gp1 pSw" for="passUltra"><input type="checkbox" id="passUltra"><span class="sw"></span><span class="pst"><b>I have Ultra Pass</b><small>Adds an Ultra tab to log its 25 entries</small></span></label>
@@ -3469,8 +3807,8 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="pTot" id="evShopTot"></div>
 </section>
 <section class="card gsec" id="evRecentBox">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 3 Hours</b><span id="evRecentSub"></span></div><div class="gx"><button type="button" class="gb sm" id="evRecentReset" aria-label="Clear the last 3 hours history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button></div></div>
-<div id="evRecent"></div>
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 3 Hours</b><span id="evRecentSub"></span></div><div class="gx"><button type="button" class="gb sm" id="evRecentReset" aria-label="Clear the last 3 hours history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button><button type="button" class="gb sm sq" id="evRecentToggle" aria-expanded="true" aria-label="Collapse last 3 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div id="evRecentBody"><div id="evRecent"></div></div>
 </section>
 <section class="card gsec" id="evHistBox">
 <div class="gh"><span class="sci" style="--c:#c084fc"><svg viewBox="0 0 24 24"><path d="M3 4h18v4H3z"/><path d="M5 8v12h14V8M10 12h4"/></svg></span><div class="gt"><b id="evHistSum">History</b></div></div>
@@ -4055,7 +4393,22 @@ fields.forEach(([k,l])=>{
   const el=d.querySelector("input");els[k]=el;
   el.addEventListener("input",()=>{s[k]=el.value;calc();queueSave(k);autoStart(k)});
   el.addEventListener("change",()=>{logChange(k,committed[k],s[k]);committed[k]=s[k]});
-  if(meta){
+  if(meta&&k==="misc"){
+    /* misc: no +/- buttons; a separate entry box adds or removes whatever amount is typed */
+    const bx=document.createElement("div");bx.className="shmx";
+    bx.innerHTML='<input type="number" inputmode="numeric" min="0" step="1" placeholder="Amount" aria-label="Amount to add or remove from misc"><button type="button" class="shma">Add</button><button type="button" class="shmr">Remove</button>';
+    const ai=bx.querySelector("input");
+    ai.addEventListener("focus",()=>ai.select());
+    const apply=dlt=>{
+      const amt=Math.trunc(Number(ai.value));if(!amt||amt<0){ai.focus();return}
+      const o=num(k);s[k]=Math.max(0,o+dlt*amt);el.value=s[k];calc();logChange(k,o,s[k]);committed[k]=s[k];queueDelta(k,s[k]-o);autoStart(k);
+      ai.value="";
+    };
+    bx.querySelector(".shma").onclick=()=>apply(1);
+    bx.querySelector(".shmr").onclick=()=>apply(-1);
+    ai.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();apply(1)}});
+    d.appendChild(bx);
+  }else if(meta){
     const row=d.querySelector(".shr");
     [["\u2212",-1,"shm"],["+",1,"shp"]].forEach(([txt,dlt,cls])=>{
       const bt=document.createElement("button");bt.type="button";bt.textContent=txt;bt.className=cls;
@@ -4208,7 +4561,7 @@ fields.forEach(([k,l])=>{
     ["pause","play","nexttrack","previoustrack","seekbackward","seekforward"].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
     try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
   }
-  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)"}
+  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)";btn.classList.toggle("lvOn",on)}
   function end(){if(!on)return;on=false;tapN=0;clearTimeout(tapT);release();ui()}
   async function stop(){
     try{
@@ -4488,7 +4841,7 @@ function switchSet(id){
 }
 function holderMap(only){
   const m={};
-  epics.forEach(e=>{const k0=eKind(e);if(k0==="nl"||(only&&k0!==only))return;e.holders.forEach((h,i)=>{h=h.trim();if(!h)return;const k=h.toLowerCase();(m[k]=m[k]||{n:h,items:[]}).items.push(k0==="ly"?e.name+" (lyric)":e.name+" #"+(i+1))})});
+  epics.forEach(e=>{const k0=eKind(e);if(k0==="nl"||(only&&k0!==only))return;e.holders.forEach((h,i)=>{h=h.trim();if(!h)return;const k=h.toLowerCase();const o=(m[k]=m[k]||{n:h,items:[],list:[]});o.items.push(k0==="ly"?e.name+" (lyric)":e.name+" #"+(i+1));o.list.push({name:e.name,n:i+1,r:e.rarity||"",ly:k0==="ly"})})});
   return Object.values(m).sort((a,b)=>b.items.length-a.items.length||a.n.localeCompare(b.n));
 }
 const got=e=>e.holders.some(h=>h.trim());
@@ -4497,19 +4850,18 @@ function matches(e){
   if(!eq)return true;const t=eq.toLowerCase();
   return e.name.toLowerCase().includes(t)||(!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
 }
-const EP={open:new Set(),hopen:new Set(),f:"all",o:"az",comp:LS("tracker.epcomp")!=="0",nh:LS("tracker.epnh")!=="0",all:true};
+const EP={open:new Set(),hopen:new Set(),o:"az",comp:LS("tracker.epcomp")!=="0",nh:LS("tracker.epnh")!=="0",all:true};
 const ESORT=[["az","A\u2013Z"],["unk","Most unknown"],["fill","Most known"],["col","Collected first"]];
-const EFILT=[["all","All rarities"],["none","No rarity"],["common","Common"],["uncommon","Uncommon"],["rare","Rare"]];
 const eCount=e=>{if(e.numberless)return[got(e)?1:0,1];let k=0;e.holders.forEach(h=>{if(h.trim())k++});return[k,e.holders.length]};
-const noRar='<span class="pill rt none" style="cursor:inherit">No rarity</span>';
+const epRC=e=>e.rarity?({common:"#3ddc5a",uncommon:"#a066ff",rare:"#f08a2c"})[e.rarity]:(e.lyric?"#d9b57a":"var(--mut)");
 function epHead(e){
   const [k,n]=eCount(e),d=isDone(e);
   let sub;
   if(e.numberless)sub=k?"Obtained":"Not obtained";
-  else{const ly=!!e.lyric,hs=e.holders.map((h,j)=>h.trim()?(ly?"":"#"+(j+1)+" ")+h.trim():"").filter(Boolean);sub=hs.length?(hs.length>2?hs.slice(0,2).join(" \u00b7 ")+" \u00b7 +"+(hs.length-2)+" more":hs.join(" \u00b7 ")):"No holders yet"}
-  const cnt=e.numberless?(k?"\u2713":"\u2014"):k+"/"+n;
+  else{const ly=!!e.lyric,hs=e.holders.map((h,j)=>h.trim()?(ly?"":"#"+(j+1)+" ")+h.trim():"").filter(Boolean);sub=hs.length?hs.join(" \u00b7 "):"No holders yet"}
+  const cnt=e.numberless?(k?"\u2713":"\u2014"):k+"/"+n,lbl=e.numberless?(k?"Obtained":"Missing"):(e.lyric?"Lyric holders":"Holders");
   const art=epArtOf(e);
-  return `${art?`<img class="epart" src="${art}" alt="">`:`<span class="epart ph" aria-hidden="true"></span>`}<div class="epm"><div class="epn"><span class="mkt">${esc(e.name)}</span></div><div class="mks all">${esc(sub)}</div></div><div class="mkc${k===n&&n>0?" pos":""}">${cnt}</div><label class="epck" title="${e.numberless?"Obtained":"Mark as done"}"><input type="checkbox" data-act="${e.numberless?"chk":"done"}" aria-label="${e.numberless?"Obtained: ":"Mark "}${esc(e.name)}${e.numberless?"":" as done"}"${d?" checked":""}></label><span class="mkv" aria-hidden="true">\u25B8</span>`;
+  return `<div class="qhb"><div class="qpt qp2">${art?`<img class="epart" src="${art}" alt="">`:`<span class="epart ph" aria-hidden="true"></span>`}<div class="qht"><strong>${esc(e.name)}</strong><div class="qha">${esc(sub)}</div></div></div></div><div class="phs"><span class="qhv${k===n&&n>0?" pos":""}">${cnt}</span><span class="u">${lbl}</span></div><span class="qact"><label class="epck" title="${e.numberless?"Obtained":"Mark as done"}"><input type="checkbox" data-act="${e.numberless?"chk":"done"}" aria-label="${e.numberless?"Obtained: ":"Mark "}${esc(e.name)}${e.numberless?"":" as done"}"${d?" checked":""}></label><button type="button" class="x" data-act="edit" aria-label="Edit ${esc(e.name)}" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button></span>`;
 }
 function epBody(e){
   const t=eq.toLowerCase();
@@ -4522,13 +4874,12 @@ function epBody(e){
   const slots=e.numberless
     ?`<label class="chk"><input type="checkbox" data-act="chk"${got(e)?" checked":""}> Obtained</label>`
     :`<div class="epsh"><span>${e.lyric?"Lyric holders":"Holders"}</span><span class="epcn">${e.lyric?e.holders.length+"/"+LY_MAX:e.holders.length}</span><span class="epstep"><button type="button" data-act="rem" aria-label="Remove a slot">\u2212</button><button type="button" data-act="add" aria-label="Add a slot"${e.lyric&&e.holders.length>=LY_MAX?" disabled":""}>+</button></span></div><div class="slots">${e.holders.map((h,j)=>`<div class="slot${t&&h.toLowerCase().includes(t)?" hit":""}"><span>${e.lyric?"\u266a":"#"+(j+1)}</span><input maxlength="300" data-j="${j}" list="holderDL" placeholder="unknown" value="${esc(h)}"></div>`).join("")}</div>`;
-  return `<div class="epbar2">${rar}${up}</div>`+slots+`<div class="epfoot"><button type="button" class="epdel" data-act="del" aria-label="Delete ${e.lyric?"lyric":"epic"}">Delete ${e.lyric?"lyric":"epic"}</button></div>`;
+  return `<div class="epbar2">${rar}${up}</div>`+slots+`<div class="epfoot mkact"><button type="button" class="mksave" data-act="save">Save</button><button type="button" class="epdel" data-act="del" aria-label="Delete ${e.lyric?"lyric":"epic"}">Delete ${e.lyric?"lyric":"epic"}</button></div>`;
 }
 function epView(){
   let list=epics.map((e,i)=>[e,i]).filter(([e])=>matches(e));
   const base=list;
   if(!EP.nh&&!eq.trim())list=list.filter(([e])=>e.numberless||eCount(e)[0]>0||EP.open.has(e.id));
-  if(EP.f==="none")list=list.filter(([e])=>!e.rarity);else if(EP.f!=="all")list=list.filter(([e])=>e.rarity===EP.f);
   const gap=e=>{const c=eCount(e);return c[1]-c[0]};
   if(EP.o==="unk")list=list.slice().sort((x,y)=>gap(y[0])-gap(x[0]));
   else if(EP.o==="fill")list=list.slice().sort((x,y)=>eCount(y[0])[0]-eCount(x[0])[0]);
@@ -4544,13 +4895,10 @@ function renderEpics(){
   $("epNoHold").setAttribute("aria-checked",EP.nh);
   const t=eq.toLowerCase();
   const {list}=epView();
-  const rl=r=>r==="all"?"All rarities":r==="none"?noRar:`<span class="pill r r-${r}">${RLBL[r]}</span>`;
-  $("epRar").innerHTML=`<span class="epDDt">${rl(EP.f)}</span>`;
-  $("epRarM").innerHTML=EFILT.map(o=>`<button type="button" role="option" class="epDDo${EP.f===o[0]?" on":""}" data-f="${o[0]}" aria-selected="${EP.f===o[0]}">${rl(o[0])}</button>`).join("");
   $("epSort").innerHTML=ESORT.map(o=>`<option value="${o[0]}"${EP.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
   $("epicList").innerHTML=lcols(list.map(([e,i])=>{
     const open=EP.open.has(e.id)||(t&&!e.numberless&&e.holders.some(h=>h.toLowerCase().includes(t)));
-    return `<div class="card ep mk${open?" open":""}${isDone(e)?" done":""}${e.rarity?" rr-"+e.rarity:""}${e.lyric?" ly":""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
+    return `<div class="qhc ep mk${open?" open":""}${isDone(e)?" done":""}${e.rarity?" rr-"+e.rarity:""}${e.lyric?" ly":""}" style="--rc:${epRC(e)}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${!!open}">${epHead(e)}</div><div class="mkb">${epBody(e)}</div></div>`;
   }))||'<div class="empty">'+(epics.length?"Nothing matches your search or filter.":"No epics yet.")+'</div>';
   $("newEpic").placeholder=nf==="ly"?"New lyric name":"New epic name";$("addEpic").textContent=nf==="ly"?"Add lyric":"Add epic";
 }
@@ -4568,11 +4916,11 @@ function epStats(){
     frame:'<svg viewBox="0 0 24 24"><path d="M4 9V5h4M20 9V5h-4M4 15v4h4M20 15v4h-4"/><path d="M9 12h6"/></svg>'
   };
   const C=[
-    ...(nl?[]:[[nf==="ly"?"Total Lyrics":"Total Epics",nm,"#f59e0b",IC.crown,nf==="ly"?"Lyrics in this collection":"Numbered epics in this collection"]]),
-    [nl?"Obtained":nf==="ly"?"Lyric Holders":"Known Holders",nl?ng:known,"#3b82f6",IC.users,nl?"Numberless epics you have":"Slots with a known holder"],
-    [nl?"Missing":"Unknown Slots",nl?nn-ng:unk,"#94a3b8",IC.frame,nl?"Numberless epics still missing":nf==="ly"?"Open slots on lyrics that have holders":"Open slots on epics that have holders"]
+    ...(nl?[]:[[nf==="ly"?"Total Lyrics":"Total Epics",nm,"#f59e0b",IC.crown]]),
+    [nl?"Obtained":nf==="ly"?"Lyric Holders":"Known Holders",nl?ng:known,"#3b82f6",IC.users],
+    [nl?"Missing":"Unknown Slots",nl?nn-ng:unk,"#94a3b8",IC.frame]
   ];
-  $("epTop").innerHTML=C.map(([l,v,c,ic,sub])=>`<div class="sc side" style="--c:${c}"><span class="sci">${ic}</span><div class="scl">${l}</div><div class="scv">${v}</div><div class="scs">${sub}</div></div>`).join("")+(!showComp?"":
+  $("epTop").innerHTML=C.map(([l,v,c,ic])=>`<div class="sc side" style="--c:${c}"><span class="sci">${ic}</span><div class="scl">${l}</div><div class="scv">${v}</div></div>`).join("")+(!showComp?"":
    `<div class="sc side epComp" style="--c:#a78bfa"><span class="sci">${IC.spark}</span><div class="scl">Completion</div><div class="scv">${pct.toFixed(1)}%</div><div class="epbar"><i style="width:${pct}%"></i></div><div class="scs">${dn} / ${tot} ${nf==="ly"?"lyrics":"epics"}</div></div>`);
 }
 function renderMeta(){
@@ -4580,17 +4928,30 @@ function renderMeta(){
   renderSets();epStats();
   $("holderDL").innerHTML=hm.map(h=>`<option value="${esc(h.n)}">`).join("");
   const hl=holderView();
+  const hAll=holderMap(nf),hRank=new Map();{let last=-1,rk=0;hAll.forEach((h,i)=>{if(h.items.length!==last){rk=i+1;last=h.items.length}hRank.set(h.n.toLowerCase(),rk)})}
+  const hTop=hAll.length?hAll[0].items.length:1,hq=eq.toLowerCase();
+  const hue=x=>{let v=0;for(let i=0;i<x.length;i++)v=(v*31+x.charCodeAt(i))%360;return v};
+  const MED={1:"#f5b942",2:"#c3cad5",3:"#d08a4a"},RCOL={common:"#3ddc5a",uncommon:"#a066ff",rare:"#f08a2c"};
+  const unit=nf==="ly"?["lyric","lyrics"]:["epic","epics"];
   $("holderList").innerHTML=lcols(hl.map(h=>{
-    const k=h.n.toLowerCase(),open=EP.hopen.has(k);
-    const sub=h.items.join(" \u00b7 ");
-    return `<div class="card mk${open?" open":""}" data-h="${esc(k)}"><div class="mkh nop" role="button" tabindex="0" aria-expanded="${open}"><div style="min-width:0"><div class="mkt">${esc(h.n)}</div><div class="mks all">${esc(sub)}</div></div><div class="mkc">${h.items.length}</div><span class="mkv" aria-hidden="true">\u25B8</span></div><div class="mkb chips">${h.items.map(x=>`<span class="chip">${esc(x)}</span>`).join("")}</div></div>`;
+    const k=h.n.toLowerCase(),rk=hRank.get(k)||0,med=MED[rk],n=h.items.length;
+    const itemHit=!!hq&&!k.includes(hq)&&h.items.some(x=>x.toLowerCase().includes(hq));
+    const open=EP.hopen.has(k)||itemHit;
+    const groups=new Map();
+    h.list.forEach(x=>{const g=groups.get(x.name)||{name:x.name,r:x.r,ly:x.ly,ns:[]};g.ns.push(x.n);groups.set(x.name,g)});
+    const body=[...groups.values()].sort((a,b)=>a.name.localeCompare(b.name)).map(g=>{
+      const col=RCOL[g.r]||(g.ly?"#d9b57a":"");
+      return `<div class="hg${hq&&g.name.toLowerCase().includes(hq)?" hit":""}"><span class="hgn"><i${col?` style="--rc:${col}"`:""}></i><span>${esc(g.name)}</span></span>${g.ly?"":`<span class="hgs">${g.ns.sort((a,b)=>a-b).map(x=>`<b>#${x}</b>`).join("")}</span>`}</div>`;
+    }).join("");
+    const ini=esc((h.n.match(/[\p{L}\p{N}]/u)||["?"])[0].toUpperCase());
+    return `<div class="card mk${open?" open":""}" data-h="${esc(k)}"><div class="mkh nop hh" role="button" tabindex="0" aria-expanded="${open}"><span class="hav${med?" medal":""}" style="--hu:${hue(k)}${med?";--md:"+med:""}">${ini}${med?`<span class="hrk">${rk}</span>`:""}</span><div class="hmid"><div class="hn">${esc(h.n)}</div><div class="hm">${n} ${unit[n===1?0:1]}${rk>3?` \u00b7 #${rk}`:""}</div><div class="hbar"><i style="width:${Math.max(4,Math.round(n/hTop*100))}%${med?";--hc:"+med:""}"></i></div></div><div class="hct">${n}</div><span class="mkv" aria-hidden="true">\u25B8</span></div><div class="mkb hbody">${body}</div></div>`;
   }))||'<div class="empty">No matches.</div>';
 }
 function setView(v){
   curView=v;const nl=nf==="nl",hv=!nl&&v==="holder";
   $("epicList").hidden=hv;$("holderList").hidden=!hv;
   $("vHolder").hidden=nl;{const ks=setKinds(curSet);$("nfBar").hidden=ks.length<2;[...$("nfBar").children].forEach(b=>{b.style.display=ks.includes(b.dataset.nf)?"":"none"})}
-  $("epRarW").hidden=hv;$("epSort").hidden=hv;if(hv)epRarClose();
+  $("epSort").hidden=hv;
   $("vHolder").classList.toggle("on",hv);$("vHolder").setAttribute("aria-pressed",hv);
   $("epCompOpt").hidden=!nl;$("epNoHold").hidden=nl||hv;
 }
@@ -4638,6 +4999,8 @@ epicList.addEventListener("click",ev=>{
   if(!b){const h=ev.target.closest(".mkh");if(h)epToggleRow(card);return}
   const e=epics[+card.dataset.i],a=b.dataset.act;
   const done=()=>{renderEpics();renderMeta()};
+  if(a==="edit"){epToggleRow(card);return}
+  if(a==="save"){EP.open.delete(e.id);renderEpics();return}
   if(a==="artup"){const fi=card.querySelector('.eparow input[type="file"]');if(fi)fi.click();return}
   if(a==="artrm"){epArtRemoveCustom(e);return}
   if(a==="rar"){
@@ -4679,11 +5042,6 @@ holderList.addEventListener("keydown",ev=>{
   const h=ev.target.closest(".mkh");
   if(h&&ev.target===h&&(ev.key==="Enter"||ev.key===" ")){ev.preventDefault();hToggle(h.closest(".mk"))}
 });
-function epRarClose(){$("epRarM").hidden=true;$("epRar").setAttribute("aria-expanded","false")}
-$("epRar").addEventListener("click",()=>{const o=$("epRarM").hidden;$("epRarM").hidden=!o;$("epRar").setAttribute("aria-expanded",o)});
-$("epRarM").addEventListener("click",ev=>{const b=ev.target.closest("button[data-f]");if(!b)return;EP.f=b.dataset.f;epRarClose();renderEpics()});
-document.addEventListener("click",ev=>{if(!ev.target.closest("#epRarW"))epRarClose()});
-document.addEventListener("keydown",ev=>{if(ev.key==="Escape")epRarClose()});
 $("epNoHold").onclick=()=>{EP.nh=!EP.nh;LS("tracker.epnh",EP.nh?"1":"0");renderEpics()};
 $("epSort").addEventListener("change",()=>{EP.o=$("epSort").value;renderEpics()});
 $("epSearch").addEventListener("input",ev=>{eq=ev.target.value.trim();renderEpics();renderMeta()});
@@ -4712,7 +5070,7 @@ async function addEpicNew(kind){
   if(!r||!r.data)return;
   await track(sb.from("epic_slots").insert({epic_id:r.data.id,slot:1,holder:""}));
   const ne={id:r.data.id,set_id:curSet,name:n,rarity:null,numberless:newNL,lyric:newLY,holders:[""]};
-  allEpics.push(ne);EP.f="all";EP.open.add(ne.id);if(newNL&&!useNum)nlSave(ne);if(newLY&&!useLy)lySave(ne);setNF(kind);applySet();
+  allEpics.push(ne);EP.open.add(ne.id);if(newNL&&!useNum)nlSave(ne);if(newLY&&!useLy)lySave(ne);setNF(kind);applySet();
   $("newEpic").value="";eq=n;$("epSearch").value=n;setView("epic");renderEpics();renderMeta();
 }
 $("addEpic").onclick=()=>addEpicNew(nf);
@@ -6921,6 +7279,7 @@ function applyNav(){
   $("navCollapse").title=ic?"Show labels":"Icons only";
   $("navCollapse").setAttribute("aria-label",$("navCollapse").title);
   navTitles();
+  setTimeout(navCenter,0);
 }
 $("navCollapse").onclick=()=>{LS("tracker.navIcons",LS("tracker.navIcons")==="1"?"0":"1");applyNav()};
 $("navHide").onclick=()=>{LS("tracker.navHide","1");applyNav()};
@@ -7058,6 +7417,14 @@ function navOpen(o){
   document.querySelector("div.tabs").classList.toggle("open",!!o);
   $("navCur").setAttribute("aria-expanded",o?"true":"false");
 }
+/* mobile bottom bar: keep the active tab centred in the scrolling strip */
+function navCenter(){
+  try{
+    const bar=$("mainNav"),b=bar&&bar.querySelector(".navbtns>button.on");
+    if(b&&matchMedia("(max-width:700px)").matches)
+      bar.scrollTo({left:b.offsetLeft-(bar.clientWidth-b.offsetWidth)/2,behavior:"smooth"});
+  }catch(e){}
+}
 function navCurSet(id){
   const b=$(id),c=$("navCur");if(!c)return;
   const ic=c.querySelector(".ti"),lb=c.querySelector(".nl"),src=b&&b.querySelector(".ti");
@@ -7066,6 +7433,7 @@ function navCurSet(id){
     ic.innerHTML='<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';ic.style.setProperty("--c","#3b82f6");ic.hidden=false}
   else ic.hidden=true;
   lb.textContent=(b&&(b.title||b.textContent.trim()))||"Menu";
+  navCenter();
 }
 /* the menu stays open when you pick a tab; only the V button (or edit mode) changes it, and it is remembered per device */
 $("navCur").addEventListener("click",()=>{const o=!document.querySelector("div.tabs").classList.contains("open");LS("tracker.navOpen",o?"1":"0");navOpen(o)});
@@ -7277,7 +7645,7 @@ function renderPass(){
   const ul=psub==="ultra";
   $("passSub").hidden=!pass.ultra;
   [...$("passSub").children].forEach(b=>{const on=b.dataset.sub===psub;b.classList.toggle("on",on);b.setAttribute("aria-pressed",on)});
-  $("passReg").hidden=ul;$("passUl").hidden=!ul;
+  $("passReg").hidden=ul;$("passUl").hidden=!ul;$("passCtl").hidden=ul;
   /* top stat cards */
   const q=ulSum(pass.u),pc=n=>tot?(n/tot*100).toFixed(1)+"% of entries":"No entries yet";
 
@@ -7474,6 +7842,13 @@ const nfmt=n=>n.toLocaleString();
 const evMeta=v=>v.coins?["#eab308","coin"]:v.gems?["#c084fc","gem"]:["#a78bfa","spark"];
 const evFind=(cfg,k)=>evRw(cfg).find(r=>r[0]===k);
 const evpit=(r,n)=>{const m=evMeta(r[3]||{});return `<span class="pit" style="--c:${m[0]}"><i>${pIco(m[1])}</i>${esc(r[1])}${n==null?"":` <b>${n}</b>`}</span>`};
+/* desktop: the "no reward" button sits in the grid, in the free cell after the last reward; on phones it stays in the button row */
+const EV_LEAF=document.getElementById("evLeafAdd"),EV_HOME=EV_LEAF.parentNode,EVMQ=matchMedia("(min-width:821px)");
+function evPlaceLeaf(){
+  if(EVMQ.matches)document.getElementById("evGrid").appendChild(EV_LEAF);
+  else if(EV_LEAF.parentNode!==EV_HOME)EV_HOME.insertBefore(EV_LEAF,EV_HOME.firstChild);
+}
+if(EVMQ.addEventListener)EVMQ.addEventListener("change",evPlaceLeaf);
 function evCard(cfg,s,t,[k,n,o,v]){
   const m=evMeta(v||{}),c=s.c[k];
   return `<div class="pcat" style="--c:${m[0]}"><div class="pch"><span class="sci">${pIco(m[1])}</span><div class="pcn"><b>${esc(n)}</b><span class="pco">${o}<span class="pcp"> \u00b7 ${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</span></span></div></div><div class="gcost"><input type="number" inputmode="numeric" min="0" step="1" value="${c}" data-k="${k}" aria-label="${esc(n)} count"><button type="button" data-k="${k}" data-d="-1"${c<=0?" disabled":""} aria-label="Remove one">\u2212</button><button type="button" class="gplus" data-k="${k}" data-d="1" aria-label="Add one">+</button></div><div class="ps">${t.n?(c/t.n*100).toFixed(1)+"% of total":"\u2013"}</div></div>`;
@@ -7554,6 +7929,9 @@ function evRenderRecent(){
     (L.length?`<div class="gtbl evRl"><table><thead><tr><th>Time</th><th>Reward</th><th class="r">Change</th></tr></thead><tbody>${rows}</tbody></table></div>`+(L.length>MAXR?`<div class="note">Showing the latest ${MAXR} of ${nfmt(L.length)} entries. Totals above include all of them.</div>`:""):`<div class="empty" style="margin-top:12px">No entries in the last 3 hours.</div>`);
 }
 setInterval(()=>{const t=$("tab-event");if(t&&!t.hidden&&evV==="trk")evRenderRecent()},30000);
+function evRecentSet(open){const b=$("evRecentToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse last 3 hours":"Expand last 3 hours");$("evRecentBody").hidden=!open;$("evRecentBox").querySelector(".gh").style.marginBottom=open?"":"0"}
+$("evRecentToggle").onclick=()=>{const open=$("evRecentToggle").getAttribute("aria-expanded")!=="true";LS("tracker.evrecent",open?"1":"0");evRecentSet(open)};
+evRecentSet(LS("tracker.evrecent")!=="0");
 $("evRecentReset").onclick=()=>{
   const b=$("evRecentReset");if(b.disabled)return;
   ask("Clear the last 3 hours history? Your counts and Undo are not affected.",()=>{const s=evS();s.rcut=Date.now();saveEvent();renderEvent()});
@@ -7567,7 +7945,9 @@ function renderEvent(){
   $("evOldTabs").hidden=!(hasOld&&cfg.old);
   $("evOldTabs").innerHTML=EVTS.filter(x=>x.old&&!x.hidden).map(x=>`<button type="button" data-ev="${x.id}"${x.id===cfg.id?' class="on"':""}><span class="ei" aria-hidden="true">${EVICO[x.id]||"\u2728"}</span>${esc(x.name)}</button>`).join("");
     $("evOdds").innerHTML=evRw(cfg).map(r=>{const m=evMeta(r[3]||{});return `<div class="uo" style="--c:${m[0]}" title="${esc(r[1])}"><i>${pIco(m[1])}</i><span class="un">${esc(r[1])}</span><b>${r[2]}</b></div>`}).join("");
+  EV_HOME.insertBefore(EV_LEAF,EV_HOME.firstChild); /* park the candy button so the grid rebuild cannot delete it */
   $("evGrid").innerHTML=evRw(cfg).map(r=>evCard(cfg,s,t,r)).join("");
+  evPlaceLeaf();
   $("evTot").innerHTML="Total:<b>"+nfmt(t.n)+"</b>";
   const rs=cfg.res||["leaves","leaf"],cap=x=>x[0].toUpperCase()+x.slice(1);
   const wc=cfg.id==="halloween"&&evWCfg(),wt=wc?evSum(wc,ev.e[wc.id].c):{coins:0,gems:0,n:0};
@@ -7887,7 +8267,7 @@ $("evLeafSub").onclick=()=>{if(evCfg().ended)return;const s=evS();if(s.extra<=0)
     ["pause","play","nexttrack","previoustrack","seekbackward","seekforward"].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
     try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
   }
-  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)"}
+  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)";btn.classList.toggle("lvOn",on)}
   function end(){if(!on)return;on=false;tapN=0;clearTimeout(tapT);release();ui()}
   async function stop(){
     try{
@@ -7996,7 +8376,6 @@ function renderGempic(){
   $("gpBarFill").style.width=Math.min(100,pct).toFixed(1)+"%";
   $("gpBarNote").textContent=q.n?"There is a "+Number(pct.toFixed(1))+"% chance you have gotten at least one gempic in your "+nfmt(q.n)+" roll"+(q.n===1?"":"s")+".":"Add rolls to see your chance of a gempic build up.";
   const two="each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll.";
-  $("gpRrSub").textContent=gp.reroll?"Reroll is on: "+two:"Reroll is off: each roll has one chance at "+gpPct(GP,1)+".";
   $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+", about "+nfmt(Math.round(ex))+" rolls per gempic.";
   $("gpExp").innerHTML='<tr><th>Box</th><th class="c">Pulls</th><th class="r">Gems</th></tr>'+[5,10,20,30,40,50,60].map(c=>`<tr><td class="b">${c} gem artist</td><td class="c">${nfmt(Math.round(ex))}</td><td class="r b">${nfmt(Math.round(ex*c))}</td></tr>`).join("");
   if(document.activeElement!==$("gpCost"))$("gpCost").value=gp.cost||"";
@@ -8037,7 +8416,7 @@ function renderGempic(){
     const tp=h.typ?pl(h.typ==="e"?"epic":"lyrics",h.typ==="e"?"Epic":"Lyric").replace('class="pill r','class="pill r qhrp'):"";
     const sub=(ttl?"<span>Saved "+fmtD(h.t)+"</span>":"")+(ep?'<span class="qhn">'+ep+"</span>":"");
     return out+`<div class="qhc${h.rar?"":" nr"}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${tp}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div>${sub?`<div class="qsubl">${sub}</div>`:""}</div><div class="phs"><span class="qhv">${nfmt(h.rolls)}</span><span class="u">rolls</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}${lk}</div><div class="qhd"><span>${nfmt(h.gems)} gems</span></div><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
-  $("gpHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No gempics match these filters.</div>':ghCards;
+  formRescue("gpForm");$("gpHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No gempics match these filters.</div>':ghCards;try{formReinsert("gpForm","gpHist",gpEdit)}catch(e0){};
   const hm=$("gpHistMore");hm.hidden=HV.length<=5;hm.textContent=$("gpHist").classList.contains("all")?"Show fewer":"Show all "+HV.length;
 }
 function saveGempic(){
@@ -8207,7 +8586,7 @@ $("gpRoll").onclick=()=>gpDoRoll(gpStep);
     ["pause","play","nexttrack","previoustrack","seekbackward","seekforward"].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
     try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
   }
-  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)"}
+  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)";btn.classList.toggle("lvOn",on)}
   function end(){if(!on)return;on=false;release();ui()}
   async function stop(){
     try{
@@ -8247,7 +8626,13 @@ let gpEdit=-1,gpFRar="",gpFTyp="",gpFSid="";
 function gpSyncEp(){
   $("gpEpBox").hidden=gpFTyp!=="e";
 }
+/* edit a history entry in place: the log form moves under the clicked card, and goes back to the Track tab when closed */
+function formHome(f){if(f&&f._ph&&f.dataset.inl){f._ph.after(f);delete f.dataset.inl}}
+function formInline(id,card){const f=$(id);if(!f||!card)return;if(!f._ph){f._ph=document.createComment("form-home");f.before(f._ph)}f.dataset.inl="1";card.after(f)}
+function formRescue(id){const f=$(id);if(f&&f.dataset.inl&&f._ph&&f.parentNode&&f.parentNode!==f._ph.parentNode)f._ph.after(f)}
+function formReinsert(id,histId,idx){const f=$(id);if(!f||!f.dataset.inl)return;const b=idx>=0&&!f.hidden?$(histId).querySelector('[data-hedit="'+idx+'"]'):null,c=b&&b.closest(".qhc");if(c)c.after(f);else delete f.dataset.inl}
 function gpOpenForm(i){
+  if(i<0)formHome($("gpForm"));
   gpEdit=i;const h=i>=0?gp.history[i]:null,q=gpSum();
   const S=h?null:gpSetCur();gpFSid=S?S.id:"";
   const hs=h&&h.sid?qtSetBy(h.sid):null;
@@ -8295,7 +8680,7 @@ $("gpHFr").addEventListener("click",()=>{gpHF={t:[],r:[]};gpHFSave()});
 $("gpHistMore").addEventListener("click",()=>{$("gpHist").classList.toggle("all");renderGempic()});
 $("gpHist").addEventListener("click",e2=>{
   const ed=e2.target.closest("button[data-hedit]");
-  if(ed){gpOpenForm(+ed.dataset.hedit);return}
+  if(ed){formInline("gpForm",ed.closest(".qhc"));gpOpenForm(+ed.dataset.hedit);return}
   const b=e2.target.closest("button[data-hdel]");if(!b)return;
   const i=+b.dataset.hdel;
   ask("Delete this history entry?",()=>{gp.history.splice(i,1);saveGempic();renderGempic()});
@@ -9264,7 +9649,7 @@ function renderQuest(){
       lk='<div class="phl '+c+'"><div class="tr"><i style="width:'+w+'%"></i></div><small>'+(c==="lk"?"Lucky":c==="bd"?"Unlucky":"Average")+" \u00b7 "+(r<1?Math.round((1-r)*100)+"% under":Math.round((r-1)*100)+"% over")+'</small></div>'}
     const d=h.ta-h.tb,mark=(ttl||"\u266a").trim().charAt(0).toUpperCase()||"\u266a";
     return out+`<div class="qhc${h.rar?"":" nr"}${h.typ==="s"?" sh":""}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]).replace('class="pill r','class="pill r qhrp'):""}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div><div class="qsubl">${ttl?"<span>Saved "+fmtD(h.t)+"</span>":""}${ep?'<span class="qhn">'+ep+"</span>":""}</div></div><div class="phs"><span class="qhv">${nfmt(h.n)}</span><span class="u">quests</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}${lk}</div>${h.ta?`<div class="qhd"><span>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</span></div>`:""}<span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
-  $("qtHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No pulls match these filters.</div>':qhCards;
+  formRescue("qtForm");$("qtHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No pulls match these filters.</div>':qhCards;try{formReinsert("qtForm","qtHist",qtEdit)}catch(e0){};
 }
 function saveQuest(){
   LS("tracker.quest",JSON.stringify(qt));
@@ -9531,7 +9916,7 @@ $("msUndo").onclick=()=>{
     ["pause","play","nexttrack","previoustrack","seekbackward","seekforward"].forEach(a=>{try{navigator.mediaSession.setActionHandler(a,null)}catch(e){}});
     try{navigator.mediaSession.metadata=null;navigator.mediaSession.playbackState="none"}catch(e){}
   }
-  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)"}
+  function ui(){lbl.textContent=on?"Stop live counter":"Live counter (PiP)";btn.classList.toggle("lvOn",on)}
   function end(){if(!on)return;on=false;release();ui();note("Live counter stopped")}
   async function stop(){
     try{
@@ -9585,7 +9970,7 @@ function qtSyncEp(){
   $("qtNumBox").hidden=qtFTyp!=="e"||qtFNb!=="n";
   [...$("qtFNb").children].forEach(b=>b.classList.toggle("on",b.dataset.n===qtFNb));
 }
-function qtOpenForm(i){
+function qtOpenForm(i){if(i<0)formHome($("qtForm"));
   qtEdit=i;const h=i>=0?qt.history[i]:null;
   const S=h?null:qtSetCur();qtFSid=S?S.id:"";
   $("qtFormTitle").textContent=h?"Edit pull":"Log your pull";
@@ -9645,7 +10030,7 @@ $("qtHR").addEventListener("click",e=>{const b=e.target.closest("button[data-fr]
 $("qtHFr").addEventListener("click",()=>{qtHF={t:[],r:[]};qtHFSave()});
 $("qtHist").addEventListener("click",e2=>{
   const ed=e2.target.closest("button[data-hedit]");
-  if(ed){qtOpenForm(+ed.dataset.hedit);return}
+  if(ed){formInline("qtForm",ed.closest(".qhc"));qtOpenForm(+ed.dataset.hedit);return}
   const b=e2.target.closest("button[data-hdel]");if(!b)return;
   const i=+b.dataset.hdel;
   const hh=qt.history[i],hs=hh&&hh.sid?qtSetBy(hh.sid):null,rev=!!(hs&&hh.ta&&hs.cnt===hh.ta);
@@ -9688,7 +10073,6 @@ function gpSetRender(){
   m.addEventListener("click",e=>{const o=e.target.closest(".qddo");if(!o)return;gp.setId=o.dataset.id;gpApplySetCost();close();saveGempic();renderGempic()});
   document.addEventListener("click",e=>{if(!m.hidden&&!dd.contains(e.target))close()});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!m.hidden){close();b.focus()}});
-  $("gpInfoB").addEventListener("click",()=>$("gpDisc").classList.toggle("on"));
 })();
 let gpSetEdit="",gpSNb="",gpSGen="";
 const gpSGenSync=()=>[...$("gpSGen").children].forEach(b=>b.classList.toggle("on",!!gpSGen&&qtGK(b.dataset.g)===qtGK(gpSGen)));
@@ -9931,6 +10315,17 @@ $("mkfSave").onclick=()=>{
   M.q="";$(M.search).value="";if(M.f!=="all"&&!mkMatch(it,M.f))M.f="all";
   saveBuys();renderMk(k);mkfClose();
 };
+
+/* ---------- click anywhere on a history / market card to edit it (like the epic cards) ---------- */
+[["qtHist","[data-hedit]"],["gpHist","[data-hedit]"],["buyList",'[data-act="edit"]'],["soldList",'[data-act="edit"]']].forEach(([id,sel])=>{
+  const box=$(id);if(!box)return;
+  box.addEventListener("click",ev=>{
+    if(ev.target.closest("button,a,input,select,textarea,label,.mkb"))return;
+    if(window.getSelection&&String(window.getSelection()).trim())return;
+    const c=ev.target.closest(".qhc");if(!c||!box.contains(c))return;
+    const b=c.querySelector(sel);if(b)b.click();
+  });
+});
 
 /* ---------- notes (small rich text: bold, italic, underline, title, list, colors, highlight) ---------- */
 let notes="",notesHtml="",notesDB=true,notesT=null;
@@ -10191,7 +10586,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
-["0.8.4","2026-10-29",["Market UI refresh.","Minor bug fixes."]],
+["0.8.5","2026-11-01",["Mobile navigation bar UI refresh.","Epic tracker UI refresh.","Many more UI updates.","Minor bug fixes."]],
 ["0.8.3","2026-10-30",["Event Tracker: Last 3 Hours (was 2) now counts every entry and every candy added without a reward, no longer cut off after 100 entries.","Event Tracker: added the new Halloween event as the first tab, with candy tracker, shop tracker, a Candy Wheel tracker under the main tracker, pumpkin drop info and all 20 Halloween epics."]],
 ["0.8.2","2026-10-29",["Quest & Gempic Sets & History UI refresh.","Other Minor UI updates.","Minor bug fixes."]],
 ["0.8.1","2026-10-28",["Quest & Gempic Sets are now one shared list: manage artist, genre, gem price, epic style, lyrics and quest count in one place, from either tracker.","Choose which tracker shows each set (Quest and/or Gempic) without deleting it, with an All / Quest / Gempic / Hidden filter.","Search sets (in the lists and the set dropdowns) and sort them A to Z, Z to A, Most first, by Genre, or in your own order with move buttons.","Quest Tracker: type the final artist quest count and Quests it took fills in automatically.","Gempic Tracker: Epic # is always shown for epics. Quest Tracker: Epic style is hidden when the set already has it chosen.","Sets now fit on mobile without sideways scrolling, with an info button for the details.","Minor bug fixes."]],
@@ -10341,7 +10736,7 @@ async function checkUser(){
     const uid=data&&data.session&&data.session.user&&data.session.user.id;
     if(!uid)return;
     const em=data.session.user.email||"";
-    $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];
+    $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];$("tbProfileName").textContent=em.split("@")[0]||"Profile";
     isRyan=em.split("@")[0].toLowerCase()==="ryan";bkVis();await loadSoundMode();applyArtistLock();
     const prev=LS("tracker.uid");
     if(prev&&prev!==uid)["pass","event","gempic","quest","misc","buys","notes","notesHtml","nav","rarity","numberless","set","startTab"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
@@ -10517,10 +10912,9 @@ let v="track";try{v=localStorage.getItem("tracker.qtSub")||"track"}catch(e){}
 show(tabs.some(b=>b.dataset.qv===v)?v:"track");
 const f=g("qtForm");
 function formTweaks(){const fs=g("qtFSet"),adding=/^Adding to/.test(fs.textContent);fs.style.display=adding?"none":"";const b=fs.querySelector("b"),name=!fs.hidden&&b?b.textContent:"";const r=qt.sets.find(x=>x.name===name);f.classList.toggle("nbless",!!(r&&r.nb==="l"))}
-new MutationObserver(()=>{if(!f.hidden){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"});formTweaks()}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
+new MutationObserver(()=>{if(f.hidden){formHome(f);return}if(!f.dataset.inl){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"})}formTweaks()}).observe(f,{attributes:true,attributeFilter:["hidden"]});
 new MutationObserver(formTweaks).observe(g("qtFSet"),{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]});
 ["qtSetEditB","qtSetNew"].forEach(id=>g(id).addEventListener("click",()=>show("sets")));
-g("qtInfoB").addEventListener("click",()=>g("qtDisc").classList.toggle("on"));
 document.querySelectorAll("#qtCtl .qrow").forEach(l=>{const i=l.querySelector(".qinfo");if(i&&i.title)l.title=i.title});
 const h=g("qtHist"),hb=g("qtHistMore");
 function sync(){const n=h.querySelectorAll(".qhc").length;hb.hidden=n<=5;hb.textContent=h.classList.contains("all")?"Show fewer":"Show all "+n}
@@ -10530,6 +10924,7 @@ const sel=g("qtSetSel"),list=g("qtSetList");
 const escH=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const dd=document.createElement("div");dd.className="qdd";dd.id="qtDD";
 dd.innerHTML='<button type="button" class="qddb" id="qtDDB" aria-haspopup="listbox" aria-expanded="false"><span class="qddv" id="qtDDV"></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="qddm" id="qtDDM" role="listbox" hidden><div class="qddsw"><input id="qtDDQ" type="search" placeholder="Search sets" aria-label="Search sets" autocomplete="off"></div><div id="qtDDL"></div></div>';
+{const w=document.createElement("div");w.className="gicw";w.append(g("qtSetEditB"),g("qtSetNew"));dd.insertBefore(w,dd.querySelector(".qddm"))}
 sel.parentNode.insertBefore(dd,sel);
 let ddq="";
 function renderDD(){
@@ -10559,7 +10954,7 @@ tabs.forEach(b=>b.addEventListener("click",()=>show(b.dataset.gv)));
 let v="track";try{v=localStorage.getItem("tracker.gpSub")||"track"}catch(e){}
 show(tabs.some(b=>b.dataset.gv===v)?v:"track");
 const f=g("gpForm");
-new MutationObserver(()=>{if(!f.hidden){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"})}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
+new MutationObserver(()=>{if(f.hidden){formHome(f);return}if(!f.dataset.inl){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"})}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
 ["gpSetEditB","gpSetNew","gpSetAdd"].forEach(id=>{const b=g(id);if(b)b.addEventListener("click",()=>show("sets"))});
 })();
 </script>
