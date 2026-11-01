@@ -440,6 +440,12 @@ body.guest .brand{pointer-events:none}
 .pill.ed{background:#3a3a3a;color:#fff;padding:1px 10px 1px 7px}
 .pill.ed::before{display:none}
 .pill.ed i{font-style:normal;font-size:1.05em;line-height:1}
+/* market: history-style cards (like the Quest Tracker history) */
+.mkep{display:inline-block;margin-right:6px;padding:0 8px;border-radius:99px;font-size:11.5px;font-weight:700;color:#f59e0b;background:color-mix(in srgb,#f59e0b 14%,transparent);border:1px solid color-mix(in srgb,#f59e0b 35%,transparent)}
+.mknb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 2px}
+.mknb button{margin:0;padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;background:transparent;border:1.5px solid var(--bd);color:var(--tx);cursor:pointer}
+.mknb button.on{border-color:#f59e0b;color:#f59e0b;background:color-mix(in srgb,#f59e0b 12%,var(--card))}
+.mknb .mknum{width:110px;height:34px;margin:0;text-align:center}
 #tab-buys .mkDDm{max-height:min(62vh,440px);overflow-y:auto;overscroll-behavior:contain}
 #tab-buys .mkDDg{padding:10px 12px 4px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
 .mkn{color:var(--mut);font-weight:600;pointer-events:none}
@@ -1470,8 +1476,11 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-quest td.qpc{white-space:normal;min-width:190px}
 #tab-quest .qpt{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
 #tab-quest .qpt strong{overflow-wrap:anywhere}
-#tab-quest .qsubl{font-size:12px;color:var(--mut);margin-top:3px}
-#tab-quest .qact{display:inline-flex;gap:6px}
+#tab-quest .qsubl,#tab-buys .qsubl{font-size:12px;color:var(--mut);margin-top:3px}
+#tab-quest .qact,#tab-buys .qact{display:inline-flex;gap:6px}
+#tab-buys .qpt{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}#tab-buys .qpt strong{overflow-wrap:anywhere}#tab-buys .qpt .pill{margin:0}
+#tab-buys .qhc{grid-template-areas:"b s a"}#tab-buys .qhc.mk .mkb{grid-column:1/-1;border-top:1px solid var(--bd);margin-top:4px;padding:2px 2px 4px}
+@media (max-width:700px){#tab-buys .qhc{grid-template-areas:"b a" "s s"}}
 #tab-quest #qtForm .lbl,#tab-quest #qtForm label{font-size:13px;font-weight:500;color:var(--mut);margin:14px 0 6px}
 #tab-quest #qtForm input{height:44px;padding:0 12px;border-radius:10px}
 #tab-quest #qtForm .seg{margin:0 0 4px}
@@ -1878,7 +1887,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 .tabs button,.tabs button:active,.tabs button.pressing,.tabs button.tapfx{animation:none!important;-webkit-tap-highlight-color:initial}
 .tabs button:active:not(.on),.tabs button.pressing:not(.on){box-shadow:none!important}
 @media (prefers-reduced-motion:reduce){.tapfx{animation:none}}
-/* ---------- Sound Guesser (owner only) ---------- */
+/* ---------- Song Guesser (owner only) ---------- */
 #tab-sound .gb.go{border-color:#14b8a6;background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 4px 16px color-mix(in srgb,#14b8a6 38%,transparent)}
 #tab-sound label.gb{cursor:pointer;position:relative}
 #tab-sound label.gb:focus-within{outline:2px solid var(--ac);outline-offset:2px}
@@ -2169,7 +2178,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #admPip #pipLog b{color:var(--tx)}
 }
 
-/* ---------- Sound Guesser report form ---------- */
+/* ---------- Song Guesser report form ---------- */
 #tab-sound #sdRpForm{display:grid;gap:10px;margin-top:12px}
 #tab-sound #sdRpForm label{margin-bottom:4px}
 #tab-sound #sdRpForm input[type=text],#tab-sound #sdRpForm select,#tab-sound #sdRpForm textarea{width:100%;box-sizing:border-box;height:40px;font:inherit;font-size:15px;padding:0 10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx)}
@@ -2486,104 +2495,104 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-quest #qtHist:not(.all) .gtbl table tr:nth-child(n+7){display:none}
 #tab-quest #qtHistMore{margin-top:10px}
 /* ---- pull history cards ---- */
-:is(#tab-quest,#tab-gempic) .qhsum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-:is(#tab-quest,#tab-gempic) .qhsum:empty{display:none}
-:is(#tab-quest,#tab-gempic) .qhk{flex:1 1 92px;min-width:0;padding:9px 12px;border-radius:12px;border:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 60%,var(--card))}
-:is(#tab-quest,#tab-gempic) .qhk b{display:block;font-size:20px;font-weight:800;line-height:1.15;color:var(--tx)}
-:is(#tab-quest,#tab-gempic) .qhk span{display:block;margin-top:2px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic) .qhk.g b{color:#3ddc5a}:is(#tab-quest,#tab-gempic) .qhk.b b{color:#f87171}
-:is(#tab-quest,#tab-gempic) .qhrb{flex:1 1 100%;display:grid;gap:6px}
-:is(#tab-quest,#tab-gempic) .qhrb .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--bd)}
-:is(#tab-quest,#tab-gempic) .qhrb .bar i{display:block;min-width:4px}
-:is(#tab-quest,#tab-gempic) .qhrb .lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}
-:is(#tab-quest,#tab-gempic) .qhrb .lg b{color:var(--tx)}
-:is(#tab-quest,#tab-gempic) .qhrb .lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
-:is(#tab-quest,#tab-gempic) .qhmo{display:flex;align-items:center;gap:10px;margin:16px 2px 2px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic) .qhmo::after{content:"";flex:1;height:1px;background:var(--bd)}
-:is(#tab-quest,#tab-gempic) .qhmo:first-child{margin-top:2px}
-:is(#tab-quest,#tab-gempic) .qhc{--rc:var(--mut);position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-areas:"b s d a";align-items:center;gap:6px 16px;margin-top:8px;padding:12px 14px 12px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--rc) 30%,var(--bd));background:linear-gradient(90deg,color-mix(in srgb,var(--rc) 12%,var(--card)),var(--card) 60%)}
-:is(#tab-quest,#tab-gempic) .qhc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--rc)}
-:is(#tab-quest,#tab-gempic) .qhc[data-r="c"]{--rc:#3ddc5a}:is(#tab-quest,#tab-gempic) .qhc[data-r="u"]{--rc:#a066ff}:is(#tab-quest,#tab-gempic) .qhc[data-r="r"]{--rc:#f08a2c;box-shadow:0 0 20px color-mix(in srgb,#f08a2c 20%,transparent)}
-:is(#tab-quest,#tab-gempic) .qhc.nr[data-t="e"]{--rc:#e88ab0}:is(#tab-quest,#tab-gempic) .qhc.nr[data-t="l"]{--rc:#f0d8b0}:is(#tab-quest,#tab-gempic) .qhc.nr[data-t="s"]{--rc:#7c7cff}
-:is(#tab-quest,#tab-gempic) .qhc.sh{border-color:#7c7cff}
-:is(#tab-quest,#tab-gempic) .qhb{grid-area:b;min-width:0}
-:is(#tab-quest,#tab-gempic) .qhb strong{font-size:15.5px}
-:is(#tab-quest,#tab-gempic) .qha{margin-top:3px;font-size:13.5px;font-weight:600;color:var(--mut);overflow-wrap:anywhere}
-:is(#tab-quest,#tab-gempic) .qhc .qhb{align-self:start}
-:is(#tab-quest,#tab-gempic) .qhb .qpt.qp2{display:flex;align-items:center;gap:10px}
-:is(#tab-quest,#tab-gempic) .qhb .qpt.qp2 .pill.qhrp{flex:none;margin:0}
-:is(#tab-quest,#tab-gempic) .qht{min-width:0}
-:is(#tab-quest,#tab-gempic) .qpt .pill.qhrp{font-size:14px;padding:3px 13px 3px 10px}
-:is(#tab-quest,#tab-gempic) .qhb .qsubl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:5px}
-:is(#tab-quest,#tab-gempic) .qhn{font-weight:700;color:var(--rc);padding:1px 8px;border-radius:99px;font-size:11.5px;background:color-mix(in srgb,var(--rc) 14%,transparent);border:1px solid color-mix(in srgb,var(--rc) 35%,transparent)}
-:is(#tab-quest,#tab-gempic) .phs{grid-area:s;min-width:104px;text-align:center}
-:is(#tab-quest,#tab-gempic) .phs .qhv{display:block;font-size:30px;font-weight:800;line-height:1;color:var(--tx);font-variant-numeric:tabular-nums}
-:is(#tab-quest,#tab-gempic) .phs .u{display:block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
-:is(#tab-quest,#tab-gempic) .phl{margin:7px auto 0;max-width:110px}
-:is(#tab-quest,#tab-gempic) .phl .tr{position:relative;height:5px;border-radius:99px;background:color-mix(in srgb,var(--mut) 25%,var(--bg))}
-:is(#tab-quest,#tab-gempic) .phl .tr i{display:block;height:100%;border-radius:99px;background:var(--lc)}
-:is(#tab-quest,#tab-gempic) .phl .tr::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--tx);opacity:.45}
-:is(#tab-quest,#tab-gempic) .phl small{display:block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--lc);white-space:nowrap}
-:is(#tab-quest,#tab-gempic) .phl.lk{--lc:#3ddc5a}:is(#tab-quest,#tab-gempic) .phl.av{--lc:#eab308}:is(#tab-quest,#tab-gempic) .phl.bd{--lc:#f87171}
-:is(#tab-quest,#tab-gempic) .qhd{grid-area:d;min-width:92px;text-align:right}
-:is(#tab-quest,#tab-gempic) .qhd span{display:block;font-size:17px;font-weight:700;color:var(--tx);white-space:nowrap;font-variant-numeric:tabular-nums}
-:is(#tab-quest,#tab-gempic) .qhc .qact{grid-area:a;display:inline-flex;gap:6px}
-:is(#tab-quest,#tab-gempic) .qhc .x{margin:0}
-:is(#tab-quest,#tab-gempic) .qhc .x[data-hedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px!important}
-:is(#tab-quest,#tab-gempic) .qhc .x[data-hdel]{color:#ef4444;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 12%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum:empty{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk{flex:1 1 92px;min-width:0;padding:9px 12px;border-radius:12px;border:1px solid var(--bd);background:color-mix(in srgb,var(--bg) 60%,var(--card))}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk b{display:block;font-size:20px;font-weight:800;line-height:1.15;color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk span{display:block;margin-top:2px;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk.g b{color:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .qhk.b b{color:#f87171}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb{flex:1 1 100%;display:grid;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--bd)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar i{display:block;min-width:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg b{color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo{display:flex;align-items:center;gap:10px;margin:16px 2px 2px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo::after{content:"";flex:1;height:1px;background:var(--bd)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo:first-child{margin-top:2px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{--rc:var(--mut);position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-areas:"b s d a";align-items:center;gap:6px 16px;margin-top:8px;padding:12px 14px 12px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--rc) 30%,var(--bd));background:linear-gradient(90deg,color-mix(in srgb,var(--rc) 12%,var(--card)),var(--card) 60%)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--rc)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="c"]{--rc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="u"]{--rc:#a066ff}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc[data-r="r"]{--rc:#f08a2c;box-shadow:0 0 20px color-mix(in srgb,#f08a2c 20%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="e"]{--rc:#e88ab0}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="l"]{--rc:#f0d8b0}:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.nr[data-t="s"]{--rc:#7c7cff}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc.sh{border-color:#7c7cff}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb{grid-area:b;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb strong{font-size:15.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qha{margin-top:3px;font-size:13.5px;font-weight:600;color:var(--mut);overflow-wrap:anywhere}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qhb{align-self:start}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt.qp2{display:flex;align-items:center;gap:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt.qp2 .pill.qhrp{flex:none;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qht{min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qpt .pill.qhrp{font-size:14px;padding:3px 13px 3px 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qsubl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhn{font-weight:700;color:var(--rc);padding:1px 8px;border-radius:99px;font-size:11.5px;background:color-mix(in srgb,var(--rc) 14%,transparent);border:1px solid color-mix(in srgb,var(--rc) 35%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs{grid-area:s;min-width:104px;text-align:center}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{display:block;font-size:30px;font-weight:800;line-height:1;color:var(--tx);font-variant-numeric:tabular-nums}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{display:block;margin-top:3px;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl{margin:7px auto 0;max-width:110px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr{position:relative;height:5px;border-radius:99px;background:color-mix(in srgb,var(--mut) 25%,var(--bg))}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr i{display:block;height:100%;border-radius:99px;background:var(--lc)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl .tr::after{content:"";position:absolute;left:50%;top:-2px;bottom:-2px;width:2px;background:var(--tx);opacity:.45}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl small{display:block;margin-top:4px;font-size:10.5px;font-weight:700;color:var(--lc);white-space:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl.lk{--lc:#3ddc5a}:is(#tab-quest,#tab-gempic,#tab-buys) .phl.av{--lc:#eab308}:is(#tab-quest,#tab-gempic,#tab-buys) .phl.bd{--lc:#f87171}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhd{grid-area:d;min-width:92px;text-align:right}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhd span{display:block;font-size:17px;font-weight:700;color:var(--tx);white-space:nowrap;font-variant-numeric:tabular-nums}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qact{grid-area:a;display:inline-flex;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x{margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x[data-hedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px!important}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x[data-hdel]{color:#ef4444;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 12%,transparent)}
 #tab-quest #qtHist:not(.all) .qhx{display:none}
 @media (max-width:640px){
-:is(#tab-quest,#tab-gempic) .qhc{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b a" "s d";gap:8px 12px;padding:12px 12px 12px 18px}
-:is(#tab-quest,#tab-gempic) .qhc .qact{align-self:start;justify-self:end}
-:is(#tab-quest,#tab-gempic) .phs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;min-width:0}
-:is(#tab-quest,#tab-gempic) .phs .qhv{font-size:26px}
-:is(#tab-quest,#tab-gempic) .phs .u{margin-top:0}
-:is(#tab-quest,#tab-gempic) .phl{margin:0;flex:1 1 90px;max-width:none}
-:is(#tab-quest,#tab-gempic) .qhd{min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b a" "s d";gap:8px 12px;padding:12px 12px 12px 18px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .qact{align-self:start;justify-self:end}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs{display:flex;align-items:center;gap:10px;flex-wrap:wrap;text-align:left;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{font-size:26px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{margin-top:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl{margin:0;flex:1 1 90px;max-width:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhd{min-width:0}
 }
 @media (max-width:640px){
-:is(#tab-quest,#tab-gempic) .qhsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic) .qhk{padding:6px 9px;border-radius:10px}
-:is(#tab-quest,#tab-gempic) .qhk b{font-size:16px}
-:is(#tab-quest,#tab-gempic) .qhk span{margin-top:1px;font-size:9.5px;letter-spacing:.04em}
-:is(#tab-quest,#tab-gempic) .qhrb{grid-column:1/-1;gap:5px}
-:is(#tab-quest,#tab-gempic) .qhrb .bar{height:6px}
-:is(#tab-quest,#tab-gempic) .qhrb .lg{font-size:11px;gap:2px 10px}
-:is(#tab-quest,#tab-gempic) .qhf{row-gap:6px;margin:0 0 6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhsum{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk{padding:6px 9px;border-radius:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk b{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhk span{margin-top:1px;font-size:9.5px;letter-spacing:.04em}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb{grid-column:1/-1;gap:5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .bar{height:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhrb .lg{font-size:11px;gap:2px 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{row-gap:6px;margin:0 0 6px}
 #qtHT button,#gpHT button,#qtHR button,#gpHR button{height:30px}
-:is(#tab-quest,#tab-gempic) .qhmo{margin:10px 2px 0;font-size:10.5px}
-:is(#tab-quest,#tab-gempic) .qhc{gap:10px 10px;margin-top:6px;padding:9px 10px 9px 15px;border-radius:12px}
-:is(#tab-quest,#tab-gempic) .qhc::before{width:4px}
-:is(#tab-quest,#tab-gempic) .qhb strong{font-size:14px;line-height:1.25}
-:is(#tab-quest,#tab-gempic) .qha{margin-top:2px;font-size:12.5px}
-:is(#tab-quest,#tab-gempic) .qhb .qpt{display:block}
-:is(#tab-quest,#tab-gempic) .qhb .qpt .pill.qhrp{display:inline-flex;vertical-align:middle;margin:0 6px 2px 0}
-:is(#tab-quest,#tab-gempic) .qpt .pill.qhrp{font-size:12.5px;padding:2px 10px 2px 8px}
-:is(#tab-quest,#tab-gempic) .qhb .qsubl{margin-top:3px;font-size:11px;gap:3px 6px}
-:is(#tab-quest,#tab-gempic) .qhn{font-size:10.5px;padding:0 7px}
-:is(#tab-quest,#tab-gempic) .phs{gap:4px 8px}
-:is(#tab-quest,#tab-gempic) .phs .qhv{font-size:22px}
-:is(#tab-quest,#tab-gempic) .phs .u{font-size:9.5px}
-:is(#tab-quest,#tab-gempic) .phl small{margin-top:2px;font-size:10px}
-:is(#tab-quest,#tab-gempic) .qhd span{font-size:14.5px}
-:is(#tab-quest,#tab-gempic) .qhc .x{padding:3px 8px;font-size:12px;min-height:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhmo{margin:10px 2px 0;font-size:10.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc{gap:10px 10px;margin-top:6px;padding:9px 10px 9px 15px;border-radius:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc::before{width:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb strong{font-size:14px;line-height:1.25}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qha{margin-top:2px;font-size:12.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt{display:block}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qpt .pill.qhrp{display:inline-flex;vertical-align:middle;margin:0 6px 2px 0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qpt .pill.qhrp{font-size:12.5px;padding:2px 10px 2px 8px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhb .qsubl{margin-top:3px;font-size:11px;gap:3px 6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhn{font-size:10.5px;padding:0 7px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs{gap:4px 8px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .qhv{font-size:22px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phs .u{font-size:9.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .phl small{margin-top:2px;font-size:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhd span{font-size:14.5px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhc .x{padding:3px 8px;font-size:12px;min-height:0}
 }
-:is(#tab-quest,#tab-gempic) .qhf{display:grid;grid-template-columns:max-content repeat(3,max-content);justify-content:start;column-gap:8px;row-gap:10px;margin:0 0 12px;align-items:center}
-:is(#tab-quest,#tab-gempic) .qhf[hidden]{display:none}
-:is(#tab-quest,#tab-gempic) .qhfr{display:contents}
-:is(#tab-quest,#tab-gempic) .qhfl{margin-right:4px;font-size:11.5px;font-weight:600;color:var(--mut)}
-:is(#tab-quest,#tab-gempic) .qhfr .seg{display:contents}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{display:grid;grid-template-columns:max-content repeat(3,max-content);justify-content:start;column-gap:8px;row-gap:10px;margin:0 0 12px;align-items:center}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhf[hidden]{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfr{display:contents}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfl{margin-right:4px;font-size:11.5px;font-weight:600;color:var(--mut)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfr .seg{display:contents}
 #qtHT button,#gpHT button,#qtHR button,#gpHR button{flex:1 1 auto;min-width:0;min-height:0;height:36px;padding:0 14px;border-radius:8px;display:flex;align-items:center;justify-content:center;border:1.5px solid transparent;box-shadow:none;outline:0;transition:background .15s,border-color .15s}
 #qtHT button .pill,#gpHT button .pill,#qtHR button .pill,#gpHR button .pill{max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:11.5px;padding:0 6px;line-height:1.4}
 #qtHT button[aria-pressed="true"],#gpHT button[aria-pressed="true"],#qtHR button[aria-pressed="true"],#gpHR button[aria-pressed="true"]{background:color-mix(in srgb,#22c55e 22%,var(--card));border-color:#22c55e;box-shadow:none;color:var(--tx)}
 #qtHT button[aria-pressed="false"],#gpHT button[aria-pressed="false"],#qtHR button[aria-pressed="false"],#gpHR button[aria-pressed="false"]{background:color-mix(in srgb,#ef4444 20%,var(--card));border-color:#ef4444;box-shadow:none;color:var(--tx)}
 #qtHT button[aria-pressed="false"] .pill,#gpHT button[aria-pressed="false"] .pill,#qtHR button[aria-pressed="false"] .pill,#gpHR button[aria-pressed="false"] .pill{opacity:.6;text-decoration:line-through}
 #qtHT button:focus-visible,#gpHT button:focus-visible,#qtHR button:focus-visible,#gpHR button:focus-visible{outline:2px solid var(--tx);outline-offset:2px}
-@media (max-width:520px){:is(#tab-quest,#tab-gempic) .qhf{grid-template-columns:max-content repeat(3,minmax(0,1fr));column-gap:6px}}
+@media (max-width:520px){:is(#tab-quest,#tab-gempic,#tab-buys) .qhf{grid-template-columns:max-content repeat(3,minmax(0,1fr));column-gap:6px}}
 @media (max-width:420px){#qtHT button,#gpHT button,#qtHR button,#gpHR button{padding:0 4px}#qtHT button .pill,#gpHT button .pill,#qtHR button .pill,#gpHR button .pill{font-size:10.5px;padding:0 4px;gap:2px}}
-:is(#tab-quest,#tab-gempic) .qhfs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);min-height:24px}
-:is(#tab-quest,#tab-gempic) .qhfs .x{margin:0}
-:is(#tab-quest,#tab-gempic) .qhfs .x[hidden]{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);min-height:24px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs .x{margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qhfs .x[hidden]{display:none}
 #tab-quest #qtHistMore[hidden]{display:none}
 #tab-gempic #gpHist:not(.all) .qhx{display:none}
 #tab-gempic #gpHistMore[hidden]{display:none}
@@ -2921,84 +2930,84 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #gpSetsBox{display:none!important}
 #qtSetsTog{display:none!important}
 /* Show in: one switch per tracker */
-:is(#tab-quest,#tab-gempic) #qtSetList .tgc{white-space:normal}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg{display:block;width:100%;height:30px;margin:4px 0;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg.on::before{content:"\2713\00a0"}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg.on[data-stog="q"]{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg.on[data-stog="g"]{color:#c084fc;border-color:#c084fc;background:color-mix(in srgb,#c084fc 14%,transparent)}
-:is(#tab-quest,#tab-gempic) #hubFilter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic) #hubFilter{flex-wrap:nowrap}
-:is(#tab-quest,#tab-gempic) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
-:is(#tab-quest,#tab-gempic) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tgc{white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{display:block;width:100%;height:30px;margin:4px 0;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid var(--bd);background:transparent;color:var(--mut);cursor:pointer}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on::before{content:"\2713\00a0"}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on[data-stog="q"]{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on[data-stog="g"]{color:#c084fc;border-color:#c084fc;background:color-mix(in srgb,#c084fc 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter{flex-wrap:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter button{flex:1 1 0;min-width:0;min-height:36px;margin:0;padding:0 4px;font-size:12.5px;border-radius:10px;white-space:nowrap}
+:is(#tab-quest,#tab-gempic,#tab-buys) #hubFilter button.on{background:var(--card);color:var(--tx);border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
 /* Gempic main box is purple (matches its icon) so it is easy to tell apart from the green Quest box */
 #tab-gempic #gpHero{--c:#c084fc}
 #tab-gempic #gpHero .qbig,#tab-gempic #gpHero .qst:last-child b{color:#c084fc}
 #tab-gempic #gpHero .qbar i{background:linear-gradient(90deg,#a855f7,#c084fc)}
 /* set search + sort (Quest + Gempic trackers) */
-:is(#tab-quest,#tab-gempic) .qtool{display:flex;gap:8px;margin:0 0 10px}
-:is(#tab-quest,#tab-gempic) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
-:is(#tab-quest,#tab-gempic) .qtool select{flex:0 0 auto;width:auto;min-width:0;max-width:46%;height:42px;margin:0;padding:0 36px 0 14px;font-size:14px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
-:is(#tab-quest,#tab-gempic) .qtool select:focus,:is(#tab-quest,#tab-gempic) .qtool input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 30%,transparent)}
-:is(#tab-quest,#tab-gempic) .qtool select option{background:var(--card);color:var(--tx)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool{display:flex;gap:8px;margin:0 0 10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool input{flex:1 1 auto;min-width:0;width:auto;height:42px;margin:0;padding:0 12px;font-size:14px;border-radius:10px;box-sizing:border-box}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select{flex:0 0 auto;width:auto;min-width:0;max-width:46%;height:42px;margin:0;padding:0 36px 0 14px;font-size:14px;font-weight:600;border-radius:10px;border:1px solid var(--bd);color:var(--tx);cursor:pointer;box-sizing:border-box;-webkit-appearance:none;appearance:none;text-overflow:ellipsis;background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center/16px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select:focus,:is(#tab-quest,#tab-gempic,#tab-buys) .qtool input:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 2px color-mix(in srgb,var(--ac) 30%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select option{background:var(--card);color:var(--tx)}
 @media (min-width:521px){#qtSetsInfoB,#gpSetsInfoB,.setsInfo{display:none!important}}
 @media (max-width:520px){
-:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh{align-items:center;gap:10px;margin-bottom:12px}
-:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .sci{width:36px;height:36px;border-radius:10px}
-:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .gt span{display:none}
-:is(#tab-quest,#tab-gempic) :is(#qtSetsBox,#gpSetsBox) .gh .gt b{font-size:16px}
-:is(#tab-quest,#tab-gempic) .qtool{gap:8px}
-:is(#tab-quest,#tab-gempic) .qtool select{width:122px;max-width:122px;padding-left:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh{align-items:center;gap:10px;margin-bottom:12px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .sci{width:36px;height:36px;border-radius:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .gt span{display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetsBox,#gpSetsBox) .gh .gt b{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool{gap:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qtool select{width:122px;max-width:122px;padding-left:12px}
 }
-:is(#tab-quest,#tab-gempic) .qddsw{position:sticky;top:-6px;z-index:2;margin:-6px -6px 4px;padding:8px 8px 6px;background:var(--card);border-radius:12px 12px 0 0}
-:is(#tab-quest,#tab-gempic) .qddsw input{width:100%;box-sizing:border-box;height:38px;margin:0;padding:0 12px;font-size:14px;border-radius:8px}
-:is(#tab-quest,#tab-gempic) .qddno{padding:12px;color:var(--mut);font-size:13px;text-align:center}
-:is(#tab-quest,#tab-gempic) .mvbar{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin-top:10px;white-space:normal}
-:is(#tab-quest,#tab-gempic) .mvbar .mv{min-width:40px;height:34px;padding:0 12px;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qddsw{position:sticky;top:-6px;z-index:2;margin:-6px -6px 4px;padding:8px 8px 6px;background:var(--card);border-radius:12px 12px 0 0}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qddsw input{width:100%;box-sizing:border-box;height:38px;margin:0;padding:0 12px;font-size:14px;border-radius:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .qddno{padding:12px;color:var(--mut);font-size:13px;text-align:center}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:6px;margin-top:10px;white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv{min-width:40px;height:34px;padding:0 12px;margin:0}
 /* narrow screens: the sets tables fit the card, no sideways scrolling */
 @media (max-width:820px){
-:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList){table-layout:fixed;width:100%}
-:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(2){width:92px;padding-left:4px;padding-right:4px}
-:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(3){width:72px;padding-left:4px;padding-right:10px}
-:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) td.qpc{min-width:0;white-space:normal}
-:is(#tab-quest,#tab-gempic) :is(#qtSetList,#gpSetList) .qact{display:flex;justify-content:flex-end;gap:6px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList){table-layout:fixed;width:100%}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(2){width:92px;padding-left:4px;padding-right:4px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) :is(th,td):nth-child(3){width:72px;padding-left:4px;padding-right:10px}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) td.qpc{min-width:0;white-space:normal}
+:is(#tab-quest,#tab-gempic,#tab-buys) :is(#qtSetList,#gpSetList) .qact{display:flex;justify-content:flex-end;gap:6px}
 }
-:is(#tab-quest,#tab-gempic) .mvbar .mv:disabled{opacity:.35;cursor:not-allowed}
-:is(#tab-quest,#tab-gempic) .mvbar .mv{display:inline-flex;align-items:center;justify-content:center;min-width:46px}
-:is(#tab-quest,#tab-gempic) .mvbar .mv svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-quest,#tab-gempic) .mvbar .mv.done{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
-:is(#tab-quest,#tab-gempic) .mvmode td.qpc{cursor:pointer}
-:is(#tab-quest,#tab-gempic) tr.mvsel td{background:color-mix(in srgb,var(--ac) 10%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv:disabled{opacity:.35;cursor:not-allowed}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv{display:inline-flex;align-items:center;justify-content:center;min-width:46px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvbar .mv.done{color:#34d399;border-color:#34d399;background:color-mix(in srgb,#34d399 14%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) .mvmode td.qpc{cursor:pointer}
+:is(#tab-quest,#tab-gempic,#tab-buys) tr.mvsel td{background:color-mix(in srgb,var(--ac) 10%,transparent)}
 
 /* ---- sets hub: cards instead of a table ---- */
-:is(#tab-quest,#tab-gempic) .gtbl:has(#qtSetList){border:0;background:transparent;box-shadow:none;overflow:visible;padding:0}
-:is(#tab-quest,#tab-gempic) #qtSetList,:is(#tab-quest,#tab-gempic) #qtSetList tbody{display:block;width:100%}
-:is(#tab-quest,#tab-gempic) #qtSetList tr:has(th){display:none}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"p a" "t t";gap:10px 12px;align-items:start;margin:0 0 10px;padding:14px 14px 14px 18px;border:1px solid var(--bd);border-left:4px solid var(--mut);border-radius:14px;background:var(--card)}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc.vb,:is(#tab-quest,#tab-gempic) #qtSetList tr.sc.vq{border-left-color:#34d399}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc.vg{border-left-color:#c084fc}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc.vx{border-left-color:var(--bd);opacity:.8}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc.mvsel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc td{display:block;width:auto;padding:0;border:0;background:none!important}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc td.qpc{grid-area:p;min-width:0}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc td.r{grid-area:a;align-self:start}
-:is(#tab-quest,#tab-gempic) #qtSetList tr.sc td.tgc{grid-area:t;display:flex;gap:8px}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg{flex:1 1 0;width:auto;height:34px;margin:0}
-:is(#tab-quest,#tab-gempic) #qtSetList .qpt strong{font-size:16px}
-:is(#tab-quest,#tab-gempic) #qtSetList .sst{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-:is(#tab-quest,#tab-gempic) #qtSetList .sst b{font-size:20px;font-weight:700;color:var(--tx);letter-spacing:0;font-variant-numeric:tabular-nums;margin-right:3px}
-:is(#tab-quest,#tab-gempic) #qtSetList .x[data-sedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px}
+:is(#tab-quest,#tab-gempic,#tab-buys) .gtbl:has(#qtSetList){border:0;background:transparent;box-shadow:none;overflow:visible;padding:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList,:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tbody{display:block;width:100%}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr:has(th){display:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"p a" "t t";gap:10px 12px;align-items:start;margin:0 0 10px;padding:14px 14px 14px 18px;border:1px solid var(--bd);border-left:4px solid var(--mut);border-radius:14px;background:var(--card)}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vb,:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vq{border-left-color:#34d399}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vg{border-left-color:#c084fc}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.vx{border-left-color:var(--bd);opacity:.8}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc.mvsel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td{display:block;width:auto;padding:0;border:0;background:none!important}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.qpc{grid-area:p;min-width:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.r{grid-area:a;align-self:start}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList tr.sc td.tgc{grid-area:t;display:flex;gap:8px}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{flex:1 1 0;width:auto;height:34px;margin:0}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .qpt strong{font-size:16px}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .sst{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;color:var(--mut);font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .sst b{font-size:20px;font-weight:700;color:var(--tx);letter-spacing:0;font-variant-numeric:tabular-nums;margin-right:3px}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .x[data-sedit]{display:inline-flex;align-items:center;justify-content:center;padding:6px 9px}
 
 /* sets hub: coloured Quest / Gempic toggles with their tracker icons */
-:is(#tab-quest,#tab-gempic) #qtSetList .tg{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg.on::before{content:none}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg[data-stog="q"]{--tc:#34d399}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg[data-stog="g"]{--tc:#c084fc}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg{color:color-mix(in srgb,var(--tc) 60%,var(--mut));border-color:color-mix(in srgb,var(--tc) 30%,var(--bd))}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg.on{color:var(--tc);border-color:var(--tc);background:color-mix(in srgb,var(--tc) 16%,transparent);font-weight:700}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg:not(.on){color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,transparent)}
-:is(#tab-quest,#tab-gempic) #qtSetList .tg:not(.on) svg{opacity:1}
-:is(#tab-quest,#tab-gempic) .gx #qtSetAdd,:is(#tab-quest,#tab-gempic) .gx #gpSetAdd{display:inline-flex;align-items:center;justify-content:center}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{display:flex;align-items:center;justify-content:center;gap:7px;font-size:13px}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg svg{width:16px;height:16px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on::before{content:none}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg[data-stog="q"]{--tc:#34d399}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg[data-stog="g"]{--tc:#c084fc}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg{color:color-mix(in srgb,var(--tc) 60%,var(--mut));border-color:color-mix(in srgb,var(--tc) 30%,var(--bd))}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg.on{color:var(--tc);border-color:var(--tc);background:color-mix(in srgb,var(--tc) 16%,transparent);font-weight:700}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg:not(.on){color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,transparent)}
+:is(#tab-quest,#tab-gempic,#tab-buys) #qtSetList .tg:not(.on) svg{opacity:1}
+:is(#tab-quest,#tab-gempic,#tab-buys) .gx #qtSetAdd,:is(#tab-quest,#tab-gempic,#tab-buys) .gx #gpSetAdd{display:inline-flex;align-items:center;justify-content:center}
 
 /* sets hub: filter buttons carry the tracker icon and colour */
 #hubFilter button{display:flex;align-items:center;justify-content:center;gap:7px}
@@ -3011,7 +3020,69 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 @media (max-width:420px){#hubFilter button{gap:5px;padding-left:6px;padding-right:6px}}
 /* one content width for every tab */
 #tab-home,#tab-shiny,#tab-epic,#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-buys,#tab-artist,#tab-profile,#tab-daily,#tab-map,#tab-reports,#tab-sound,#tab-misc,#tab-info{max-width:960px;margin:0 auto}
-</style></head><body><main>
+</style><style>
+/* market: same card as the Quest Tracker history, one per row */
+#tab-buys #buyList,#tab-buys #soldList{display:block;margin-top:4px}
+#tab-buys .qhc.mk{grid-template-columns:minmax(0,1fr) auto auto;grid-template-areas:"b s a";padding:14px 24px 14px 32px!important;gap:8px 28px;margin-top:10px}
+#tab-buys .qhc .qhb .qpt.qp2{gap:14px}
+#tab-buys .qhc .qhb .qsubl{margin-top:6px;gap:6px 12px}
+#tab-buys .qhc .qha{margin-top:2px}
+#tab-buys .qhc .qact{gap:10px}
+#tab-buys .qhc .qhn{font-size:15px;font-weight:800;padding:3px 14px;letter-spacing:.01em;border-width:1.5px;background:color-mix(in srgb,var(--rc) 22%,transparent)}
+#tab-buys .qhc .mkact{display:flex;gap:10px;margin-top:14px}
+#tab-buys .qhc .mkact button{flex:1;margin:0!important;width:auto;height:46px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
+#tab-buys .qhc .mkact .mksave{background:linear-gradient(135deg,#059669,#10b981);border:1px solid #10b981;color:#fff}
+#tab-buys .qhc .mkact .mkdel{color:#f87171;border:1px solid color-mix(in srgb,#ef4444 55%,var(--bd));background:color-mix(in srgb,#ef4444 10%,var(--card))}
+#tab-buys #buyList .phs .qhv{color:#ef4444}
+#tab-buys #soldList .phs .qhv{color:#34d399}
+@media (max-width:700px){
+ #tab-buys .qhc.mk{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"b s" "b a";align-items:center;padding:12px 14px 12px 24px!important;gap:6px 12px}
+ #tab-buys .qhc .phs{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:2px;min-width:0;text-align:right}
+ #tab-buys .qhc .phs .qhv{font-size:24px}
+ #tab-buys .qhc .qact{align-self:end;justify-self:end}
+ #tab-buys .qhc .qhb{align-self:center}
+}
+</style>
+<style>
+/* market: toolbar + add form */
+#tab-buys .mkAdd{display:block;margin:0 0 10px}
+#tab-buys .mkAdd button{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:50px;margin:0;border-radius:12px;font-size:16px}
+#mkForm{margin-top:12px;padding:18px 20px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ac) 40%,var(--bd))}
+#mkForm .mkfh{display:flex;flex-direction:column;gap:2px;margin-bottom:4px}
+#mkForm .mkfh b{font-size:17px}#mkForm .mkfh span{font-size:13px;color:var(--mut)}
+#mkForm .mkfl{display:block;margin:14px 0 6px;font-size:13px;font-weight:500;color:var(--mut)}
+#mkForm input{width:100%;box-sizing:border-box;height:44px;padding:0 12px;border-radius:10px;font-size:15px;margin:0}
+#mkForm .mkfr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#mkForm .mknb{margin-top:12px}#mkForm .mknb .mknum{width:130px;height:40px}
+#mkForm .mkact{display:flex;gap:10px;margin-top:18px}
+#mkForm .mkact button{flex:1;margin:0;height:46px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
+#mkForm .mkact .mksave{flex:2;background:linear-gradient(135deg,#059669,#10b981);border:1px solid #10b981;color:#fff}
+#mkForm [hidden]{display:none!important}
+@media (max-width:520px){#mkForm .mkfr{grid-template-columns:1fr}}
+</style>
+<style>
+/* market: search / sort / category as one tidy bar (Expand all removed; entries open with their pencil) */
+#tab-buys .mkrow{flex-wrap:nowrap;gap:0;align-items:stretch;margin:0 0 12px;padding:0;background:var(--card);border:1px solid var(--bd);border-radius:14px;transition:border-color .15s}
+#tab-buys .mkrow:focus-within{border-color:color-mix(in srgb,var(--ac) 60%,var(--bd))}
+#tab-buys .mkrow .mkSrch{flex:1 1 auto;min-width:0}
+#tab-buys .mkrow .mkSrch input{height:46px;border:0!important;background:transparent!important;box-shadow:none!important;border-radius:14px 0 0 14px}
+#tab-buys .mkrow select,#tab-buys .mkDDb{height:46px;border:0;border-left:1px solid var(--bd);border-radius:0;background-color:transparent;font-size:14px;font-weight:600;color:var(--tx)}
+#tab-buys .mkrow select{padding:0 34px 0 16px;min-width:150px}
+#tab-buys .mkDDw{flex:none;min-width:190px;align-self:stretch}
+#tab-buys .mkDDb{padding:0 34px 0 16px;border-radius:0 14px 14px 0}
+#tab-buys .mkrow select:hover,#tab-buys .mkDDb:hover,#tab-buys .mkDDb[aria-expanded="true"]{background-color:color-mix(in srgb,var(--ac) 8%,transparent);border-color:var(--bd)}
+#tab-buys #buyToggle,#tab-buys #soldToggle{display:none!important}
+#tab-buys .mkrow select option{background:var(--card);color:var(--tx)}
+#tab-buys .mkrow select option:checked{background:color-mix(in srgb,var(--ac) 35%,var(--card));color:var(--tx)}
+@media (max-width:640px){
+ #tab-buys .mkrow{flex-wrap:wrap}
+ #tab-buys .mkrow .mkSrch{flex:1 1 100%;border-bottom:1px solid var(--bd)}
+ #tab-buys .mkrow .mkSrch input{border-radius:14px 14px 0 0}
+ #tab-buys .mkrow select{flex:1 1 50%;min-width:0;border-left:0;border-radius:0 0 0 14px}
+ #tab-buys .mkDDw{flex:1 1 50%;min-width:0}
+}
+</style>
+</head><body><main>
 
 <div id="login" class="card" hidden>
 <h1>Soundmap Helper</h1>
@@ -3019,15 +3090,15 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <label for="lgPass">Password</label><input id="lgPass" type="password" autocomplete="current-password">
 <button type="button" id="lgGo">Log in</button>
 <button type="button" id="lgGuest" class="guestbtn">Try the Artist Guesser (no login)</button>
-<button type="button" id="lgGuestSound" class="guestbtn">Try the Sound Guesser (no login)</button>
+<button type="button" id="lgGuestSound" class="guestbtn">Try the Song Guesser (no login)</button>
 <div class="err" id="lgErr"></div>
 </div>
 
 <div id="app" hidden>
 <div class="top"><div class="brand" id="homeLink" role="link" tabindex="0" title="Back to home"><span class="logo"><img src="data:image/png;base64,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" alt="" width="44" height="44"></span><div><h1>Soundmap <b>Helper</b></h1></div></div><div class="r"><span id="sync"></span><span id="who"></span><button type="button" id="guestBack"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>Back to login</button><button type="button" id="tbProfile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Profile</button></div></div>
-<div class="tabs"><span class="navctl"><button type="button" id="navEdit" title="Edit menu" aria-label="Edit menu" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" id="navCollapse" title="Icons only" aria-label="Show icons only" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" id="navHide" title="Hide menu" aria-label="Hide menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></span><button type="button" id="navCur" aria-expanded="false" aria-controls="navBtns"><span class="ti"></span><span class="nl">Home</span><svg class="nc" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="navbtns" id="navBtns"><button type="button" id="tbHome"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="tx">Home</span></button><button type="button" id="tbShiny"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><span class="tx">Shiny<br>Tracker</span></button><button type="button" id="tbEpic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span class="tx">Epic<br>Tracker</span></button><button type="button" id="tbGempic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/></svg></span><span class="tx">Gempic<br>Tracker</span></button><button type="button" id="tbQuest"><span class="ti"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tx">Quest<br>Tracker</span></button><button type="button" id="tbPass"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-6z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg></span><span class="tx">Pass<br>Tracker</span></button><button type="button" id="tbEvent"><span class="ti"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="tx">Event<br>Tracker</span></button><button type="button" id="tbDaily"><span class="ti"><svg viewBox="0 0 24 24"><path d="M7 7h10a4 4 0 0 1 4 4v3a3 3 0 0 1-5.2 2L14.5 14h-5l-1.3 2A3 3 0 0 1 3 14v-3a4 4 0 0 1 4-4z"/><path d="M8 10v3M6.5 11.5h3"/><circle cx="15.5" cy="11" r=".7"/><circle cx="17.5" cy="12.8" r=".7"/></svg></span><span class="tx">Daily<br>Games</span></button><button type="button" id="tbMap"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/></svg></span><span class="tx">Artist<br>Guesser</span></button><button type="button" id="tbSound" class="soon" aria-disabled="true"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><span class="tx">Sound<br>Guesser<small id="tbSoundSoon">Disabled</small></span></button><button type="button" id="tbReports" hidden><span class="ti"><svg viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><span class="tx">Admin</span></button><button type="button" id="tbBuys"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/></svg></span><span class="tx">Market</span></button><button type="button" id="tbInfo"><span class="ti"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></svg></span><span class="tx">Wiki</span></button><button type="button" id="tbMisc"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 3L8 21M16 3l-2 18"/></svg></span><span class="tx">Misc</span></button><button type="button" id="tbArtist"><span class="ti"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><span class="tx">Artist<br>Overview<small id="tbArtistSoon" hidden>Coming Soon</small></span></button></div></div>
+<div class="tabs"><span class="navctl"><button type="button" id="navEdit" title="Edit menu" aria-label="Edit menu" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" id="navCollapse" title="Icons only" aria-label="Show icons only" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" id="navHide" title="Hide menu" aria-label="Hide menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path class="sl" d="M3 3l18 18"/></svg></button></span><button type="button" id="navCur" aria-expanded="false" aria-controls="navBtns"><span class="ti"></span><span class="nl">Home</span><svg class="nc" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="navbtns" id="navBtns"><button type="button" id="tbHome"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span><span class="tx">Home</span></button><button type="button" id="tbShiny"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 3l1.8 5.2L18 10l-5.2 1.8L11 17l-1.8-5.2L4 10l5.2-1.8z"/><path d="M19 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/></svg></span><span class="tx">Shiny<br>Tracker</span></button><button type="button" id="tbEpic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z"/></svg></span><span class="tx">Epic<br>Tracker</span></button><button type="button" id="tbGempic"><span class="ti"><svg viewBox="0 0 24 24"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20"/></svg></span><span class="tx">Gempic<br>Tracker</span></button><button type="button" id="tbQuest"><span class="ti"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span><span class="tx">Quest<br>Tracker</span></button><button type="button" id="tbPass"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 6v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-6z"/><path d="M13 6v12" stroke-dasharray="2 2"/></svg></span><span class="tx">Pass<br>Tracker</span></button><button type="button" id="tbEvent"><span class="ti"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span><span class="tx">Event<br>Tracker</span></button><button type="button" id="tbDaily"><span class="ti"><svg viewBox="0 0 24 24"><path d="M7 7h10a4 4 0 0 1 4 4v3a3 3 0 0 1-5.2 2L14.5 14h-5l-1.3 2A3 3 0 0 1 3 14v-3a4 4 0 0 1 4-4z"/><path d="M8 10v3M6.5 11.5h3"/><circle cx="15.5" cy="11" r=".7"/><circle cx="17.5" cy="12.8" r=".7"/></svg></span><span class="tx">Daily<br>Games</span></button><button type="button" id="tbMap"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/></svg></span><span class="tx">Artist<br>Guesser</span></button><button type="button" id="tbSound" class="soon" aria-disabled="true"><span class="ti"><svg viewBox="0 0 24 24"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/></svg></span><span class="tx">Song<br>Guesser<small id="tbSoundSoon">Disabled</small></span></button><button type="button" id="tbReports" hidden><span class="ti"><svg viewBox="0 0 24 24"><path d="M4 21V4"/><path d="M4 4h12l-2 4 2 4H4"/></svg></span><span class="tx">Admin</span></button><button type="button" id="tbBuys"><span class="ti"><svg viewBox="0 0 24 24"><path d="M3 9l2-5h14l2 5"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M10 20v-6h4v6"/></svg></span><span class="tx">Market</span></button><button type="button" id="tbInfo"><span class="ti"><svg viewBox="0 0 24 24"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z"/><path d="M12 6v14"/></svg></span><span class="tx">Wiki</span></button><button type="button" id="tbMisc"><span class="ti"><svg viewBox="0 0 24 24"><path d="M5 9h14M5 15h14M10 3L8 21M16 3l-2 18"/></svg></span><span class="tx">Misc</span></button><button type="button" id="tbArtist"><span class="ti"><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span><span class="tx">Artist<br>Overview<small id="tbArtistSoon" hidden>Coming Soon</small></span></button></div></div>
 <button type="button" id="navShow" hidden title="Show menu" aria-label="Show menu"><svg viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><span>Show menu</span></button>
-<div id="navEditBar" hidden><span>Editing menu: use the arrows on each icon to move it, and ✕ to hide it. Hidden icons can be brought back with +. Artist Guesser and Sound Guesser are hidden by default and are always available under Daily Games. Every tool is also available from Home.</span><button type="button" id="navReset">Reset to default</button><button type="button" id="navDone" class="on">Done</button></div>
+<div id="navEditBar" hidden><span>Editing menu: use the arrows on each icon to move it, and ✕ to hide it. Hidden icons can be brought back with +. Artist Guesser and Song Guesser are hidden by default and are always available under Daily Games. Every tool is also available from Home.</span><button type="button" id="navReset">Reset to default</button><button type="button" id="navDone" class="on">Done</button></div>
 <div class="navsep" role="separator"></div>
 <div id="tab-home" hidden>
 <div id="ovHello">Welcome</div>
@@ -3437,14 +3508,23 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div class="sc" style="--c:#34d399"><div class="sct"><span class="sci"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><div class="scl">Earned</div></div><div class="scv" id="mkEarned">0</div></div>
 <div class="sc" style="--c:#60a5fa"><div class="sct"><span class="sci"><svg viewBox="0 0 24 24"><path d="M5 21V11M12 21V4M19 21v-7"/></svg></span><div class="scl">Net</div></div><div class="scv" id="mkNet">0</div></div>
 </div>
+<section class="card" id="mkForm" hidden>
+<div class="mkfh"><b id="mkfTitle">Add purchase</b><span id="mkfSub">Fill in what you want to record.</span></div>
+<label class="mkfl" for="mkfT">Title</label><input id="mkfT" maxlength="300" type="text" placeholder="e.g. Jeff Williams #1" autocomplete="off">
+<div class="mkfl">Type</div><div class="mkcats" id="mkfCats" role="group" aria-label="Type"></div>
+<div id="mkfEp" class="mknb" hidden><button type="button" data-n="n">Numbered</button><button type="button" data-n="l">Numberless</button><input class="mknum" id="mkfNum" type="text" inputmode="numeric" maxlength="9" placeholder="Epic #" hidden></div>
+<div class="mkfr"><div><label class="mkfl" for="mkfW" id="mkfWL">Seller</label><input id="mkfW" maxlength="300" type="text" autocomplete="off"></div><div><label class="mkfl" for="mkfA" id="mkfAL">Cost</label><input id="mkfA" maxlength="300" type="text" inputmode="decimal" placeholder="0" autocomplete="off"></div></div>
+<label class="mkfl" for="mkfD">Date</label><input id="mkfD" type="date">
+<div class="mkact mkfa"><button type="button" class="mksave" id="mkfSave">Save</button><button type="button" class="mkcancel" id="mkfCancel">Cancel</button></div>
+</section>
 <div id="mkBuy">
-<div class="addrow mkAdd"><label class="mkIn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><input id="newBuy" maxlength="300" placeholder="New purchase title"></label><button type="button" id="addBuy">Add purchase</button></div>
+<div class="addrow mkAdd"><button type="button" id="addBuy"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add purchase</button></div>
 <div class="mkrow"><label class="mkIn mkSrch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="buySearch" maxlength="300" type="search" placeholder="Search purchases..."></label><select id="buySort" aria-label="Sort"></select><div class="mkDDw" id="buyCatW"><button type="button" id="buyCat" class="mkDDb" aria-haspopup="listbox" aria-expanded="false" aria-label="Category"></button><div class="mkDDm" id="buyCatM" role="listbox" hidden></div></div><button class="small" id="buyToggle" type="button" style="margin:0">Expand all</button></div>
 <div class="note" id="buySum"></div>
 <div id="buyList"></div>
 </div>
 <div id="mkSold" hidden>
-<div class="addrow mkAdd"><label class="mkIn"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><input id="newSold" maxlength="300" placeholder="New sold item title"></label><button type="button" id="addSold">Add sold item</button></div>
+<div class="addrow mkAdd"><button type="button" id="addSold"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add sold item</button></div>
 <div class="mkrow"><label class="mkIn mkSrch"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><input id="soldSearch" maxlength="300" type="search" placeholder="Search sold items..."></label><select id="soldSort" aria-label="Sort"></select><div class="mkDDw" id="soldCatW"><button type="button" id="soldCat" class="mkDDb" aria-haspopup="listbox" aria-expanded="false" aria-label="Category"></button><div class="mkDDm" id="soldCatM" role="listbox" hidden></div></div><button class="small" id="soldToggle" type="button" style="margin:0">Expand all</button></div>
 <div class="note" id="soldSum"></div>
 <div id="soldList"></div>
@@ -3588,7 +3668,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </div>
 
 <div id="tab-map" hidden>
-<div style="text-align:right"><button type="button" class="gb sm" id="gsOpen" style="display:none;margin:0 0 10px">Sound Guesser &rarr;</button></div>
+<div style="text-align:right"><button type="button" class="gb sm" id="gsOpen" style="display:none;margin:0 0 10px">Song Guesser &rarr;</button></div>
 <div id="agResetSec"><button type="button" class="gb sm" id="agClear" aria-label="Reset all" title="Reset all hints and guesses"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"/></svg><span class="gtxt">Reset all</span></button></div><section class="card gsec" id="agHintsSec">
 <div class="gh"><span class="sci" style="--c:#eab308"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg></span><div class="gt"><b>Hints</b></div></div>
 <div id="agHints"></div>
@@ -3638,7 +3718,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div id="tab-reports" hidden>
 <section class="card rptHead">
 <div class="rptTitle"><b>Admin</b><span class="note" id="rptMsg" role="status"></span></div>
-<div class="note admSub">Usage analytics and user reports for the Sound Guesser and Artist Guesser.</div>
+<div class="note admSub">Usage analytics and user reports for the Song Guesser and Artist Guesser.</div>
 <div class="rptRow"><div class="rptSeg" id="admSeg"><button type="button" data-v="an" class="on">Analytics</button><button type="button" data-v="rp">Reports</button><button type="button" data-v="pip">Controls Test</button></div></div>
 </section>
 <div id="admAn">
@@ -3656,7 +3736,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 <div id="admRp" hidden>
 <section class="card rptHead">
 <div class="rptRow">
-<div class="rptSeg" id="rptType"><button type="button" data-t="artist" class="on">Artist Guesser <i id="rptNA">0</i></button><button type="button" data-t="sound">Sound Guesser <i id="rptNS">0</i></button></div>
+<div class="rptSeg" id="rptType"><button type="button" data-t="artist" class="on">Artist Guesser <i id="rptNA">0</i></button><button type="button" data-t="sound">Song Guesser <i id="rptNS">0</i></button></div>
 <div class="rptSeg" id="rptStat"><button type="button" data-s="new" class="on">New</button><button type="button" data-s="done">Done</button><button type="button" data-s="all">All</button></div>
 </div>
 <div class="rptRow"><button type="button" class="rb" id="rptRefresh">Refresh</button><button type="button" class="rb bad" id="rptClear">Clear all done</button></div>
@@ -3720,7 +3800,7 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 
 <section class="card gsec" id="sdAccSec">
 <div class="gh"><span class="sci" style="--c:#a78bfa"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div class="gt"><b>Access</b><span>Who can use the matching server</span></div></div>
-<select id="sdAccSel" aria-label="Who can use Sound Guesser"><option value="off">Off (nobody)</option><option value="ryan">Only ryan</option><option value="users">Signed-in users</option><option value="everyone">Everyone (including guests)</option></select>
+<select id="sdAccSel" aria-label="Who can use Song Guesser"><option value="off">Off (nobody)</option><option value="ryan">Only ryan</option><option value="users">Signed-in users</option><option value="everyone">Everyone (including guests)</option></select>
 <div class="note" id="sdAccMsg" role="status">The server enforces this setting. Off blocks everyone, including you.</div>
 </section>
 
@@ -4899,7 +4979,7 @@ function dgAgClaim(i){
   saveDailyGems();dailyGemsRender();agClaimRefresh();
 }
 
-/* "This was my song" (Sound Guesser): signed-in players log the song that was right and pick how many gems
+/* "This was my song" (Song Guesser): signed-in players log the song that was right and pick how many gems
    to add (SD_PICKS). Clip length does not matter. Up to SD_DAILY claims a day, one per recording. */
 const SD_DAILY=2,SD_PICKS=[1,2,3];
 function sdClaimState(){try{const t=dgDay(Date.now()),l=dg.sg.claims.filter(c=>c.d===t);return{list:l,full:l.length>=SD_DAILY}}catch(e){return{list:[],full:false}}}
@@ -5142,13 +5222,13 @@ $("agMore").onclick=()=>{agShow+=60;agResults(true)};
 $("agList").addEventListener("scroll",()=>{const l=$("agList");if(!$("agMore").hidden&&l.scrollTop+l.clientHeight>=l.scrollHeight-160){agShow+=60;agResults(true)}},{passive:true});
 agRender();
 
-/* ---------- Sound Guesser (owner only) ----------
+/* ---------- Song Guesser (owner only) ----------
    Matches a short audio clip against a prebuilt index (.bin made by export_index.py) entirely in the browser.
    Ported from the song match test page; everything lives inside this function so it cannot clash with the rest of the site. */
 const SDSTAT={count:0};
-/* Sound Guesser settings.
+/* Song Guesser settings.
    SOUND_API_URL: base URL of the matching server (e.g. "https://your-app.up.railway.app"). Empty = use the local index file (owner only).
-   Who may use it is the "sound_mode" row in the Supabase app_settings table, changed from the Access box on the Sound Guesser tab (owner only):
+   Who may use it is the "sound_mode" row in the Supabase app_settings table, changed from the Access box on the Song Guesser tab (owner only):
      off = nobody (the server refuses everyone), ryan = only ryan, users = every signed-in user, everyone = signed-in users and guests.
    Server contract: POST {SOUND_API_URL}/match with header Authorization: Bearer <Supabase access token> (guests send no header),
    multipart form: audio (16-bit mono WAV), sr, hintA, hintS, whole ("1"/"0").
@@ -5178,7 +5258,7 @@ const SD_MAX_BYTES=10*1024*1024,SD_MAX_SECS=30,SD_COOLDOWN=5000,SD_DAY_MAX=30,SD
 let soundMode="ryan";
 const isGuest=()=>document.body.classList.contains("guest");
 const canSound=()=>isRyan||(!!SOUND_API_URL&&(soundMode==="everyone"||(soundMode==="users"&&!isGuest())));
-/* label shown instead of the open Sound Guesser: "Disabled" when access is switched off, otherwise "Coming Soon" */
+/* label shown instead of the open Song Guesser: "Disabled" when access is switched off, otherwise "Coming Soon" */
 const soundSoonText=()=>"Disabled";
 async function loadSoundMode(){
   let ok=false;
@@ -5189,11 +5269,11 @@ async function loadSoundMode(){
   const sel=$("sdAccSel");if(sel)sel.value=soundMode;
   return ok;
 }
-/* guests only: show a Sound Guesser arrow at the top of the Artist Guesser page when the mode allows it */
+/* guests only: show a Song Guesser arrow at the top of the Artist Guesser page when the mode allows it */
 function guestSoundLink(){
   const e=$("gsOpen");if(e)e.style.display=(isGuest()&&canSound())?"":"none";
 }
-/* Live access check. soundMode used to be read once when the page opened, so someone already on the Sound Guesser kept using it after access was
+/* Live access check. soundMode used to be read once when the page opened, so someone already on the Song Guesser kept using it after access was
    switched off. Now the setting is re-read before every match, every 10s while the tab is open, when the window regains focus, and whenever the
    server answers 403/503. If access is gone the person is moved off the page. (The server still has the final say on every request.) */
 function sdNotice(msg){
@@ -5206,7 +5286,7 @@ function sdNotice(msg){
 function sdKickOut(){
   const o=$("sdOut");if(o)o.innerHTML="";
   showTab(isGuest()?"map":"home");window.scrollTo(0,0);
-  sdNotice(soundMode==="off"?"Sound Guesser was just switched off.":"Sound Guesser isn't open to your account anymore.");
+  sdNotice(soundMode==="off"?"Song Guesser was just switched off.":"Song Guesser isn't open to your account anymore.");
 }
 let sdAccBusy=null;
 function refreshSoundAccess(){
@@ -5223,7 +5303,7 @@ function refreshSoundAccess(){
 }
 async function sdOpen(){
   await refreshSoundAccess();
-  if(!canSound()){sdNotice(soundMode==="off"?"Sound Guesser is switched off right now.":"Sound Guesser isn't open to your account right now.");return}
+  if(!canSound()){sdNotice(soundMode==="off"?"Song Guesser is switched off right now.":"Song Guesser isn't open to your account right now.");return}
   showTab("sound");
 }
 setInterval(function(){const t=$("tab-sound");if(!document.hidden&&t&&!t.hidden)refreshSoundAccess()},10000);
@@ -5701,10 +5781,10 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
     try{r=await fetch(SOUND_API_URL.replace(/\/+$/,"")+"/match",{method:"POST",body:fd,signal:ac.signal,headers:tok?{Authorization:"Bearer "+tok}:{}})}
     catch(e){clearTimeout(to);try{evLog("client_error","sound",{kind:e.name==="AbortError"?"match_timeout":"match_network",msg:String(e&&e.message||e)})}catch(x){}setMsg("sdMsg",e.name==="AbortError"?"The server took too long. Please try again.":"Can't reach the matching server right now. Please try again later.","bad");return}
     clearTimeout(to);
-    if(r.status===401){setMsg("sdMsg","Please sign in again to use Sound Guesser.","bad");return}
+    if(r.status===401){setMsg("sdMsg","Please sign in again to use Song Guesser.","bad");return}
     if(r.status===403){
       let em="";try{em=String((await r.clone().json()).error||"")}catch(e){}
-      setMsg("sdMsg",/human/i.test(em)?"The human check failed. Please reload the page and try again.":"Sound Guesser isn't open to your account right now.","bad");
+      setMsg("sdMsg",/human/i.test(em)?"The human check failed. Please reload the page and try again.":"Song Guesser isn't open to your account right now.","bad");
       if(!/human/i.test(em))refreshSoundAccess();
       return;
     }
@@ -5973,7 +6053,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   $("sdDbgQ").addEventListener("keydown",function(e){if(e.key==="Enter")dbgSearch()});
 })();
 
-/* ---------- Sound Guesser access switch (owner only) ---------- */
+/* ---------- Song Guesser access switch (owner only) ---------- */
 (function(){
   const sel=$("sdAccSel"),note=$("sdAccMsg");
   sel.value=soundMode;
@@ -5987,7 +6067,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   };
 })();
 
-/* ---------- Sound Guesser: report a wrong or missing song ---------- */
+/* ---------- Song Guesser: report a wrong or missing song ---------- */
 (function(){
   function msg(t,k){const m=$("sdRpMsg");m.textContent=t;m.className="note"+(k?" "+k:"")}
   $("sdRpToggle").onclick=function(){
@@ -6143,10 +6223,10 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
         (few?'':'<div class="admAx"><span>'+esc(bd[0].day)+'</span><span>'+esc(bd[bd.length-1].day)+'</span></div>')+
         table(["Day","Visits","Sessions","Matches","Errors"],bd.slice().reverse().map(x=>[esc(x.day),n0(x.visits),n0(x.sessions),n0(x.matches),x.errors?'<span class="admBad">'+n0(x.errors)+'</span>':'0']),[1,2,3,4])));
     }
-    /* 2) Sound Guesser */
-    h+=group("sound","Sound Guesser","Song matching from uploaded clips","#34d399",
+    /* 2) Song Guesser */
+    h+=group("sound","Song Guesser","Song matching from uploaded clips","#34d399",
       '<div class="admGrid">'+
-        card("Page views",n0(snd.visits),"Sound Guesser tab",false,"#38bdf8")+
+        card("Page views",n0(snd.visits),"Song Guesser tab",false,"#38bdf8")+
         card("Sessions",n0(snd.sessions),"opened the tool",false,"#a78bfa")+
         card("Matches",n0(d.matches),"guests "+n0(d.guest_matches)+" / signed in "+n0(d.user_matches),false,"#3b82f6")+
         card("Hit rate",pct(d.hits,d.matches),n0(d.hits)+" hit, "+n0(d.close)+" close",false,"#22c55e")+
@@ -6479,7 +6559,7 @@ function applyArtistLock(){
   arSetVis();
   navTitles();renderOverview();
 }
-/* Sound Guesser is only usable by ryan; everyone else keeps seeing "Coming Soon" (or "Disabled" when access is switched off) */
+/* Song Guesser is only usable by ryan; everyone else keeps seeing "Coming Soon" (or "Disabled" when access is switched off) */
 function applySoundLock(){
   const ok=canSound(),b=$("tbSound");b.classList.toggle("soon",!ok);
   if(ok)b.removeAttribute("aria-disabled");else b.setAttribute("aria-disabled","true");
@@ -6488,7 +6568,7 @@ function applySoundLock(){
   applySoundOwnerUI();
   try{const dt=$("tab-daily");if(dt&&!dt.hidden)dailyRender()}catch(e){}
 }
-/* owner-only tools inside Sound Guesser: temp index loader (the index card itself is for everyone), index check, matching settings */
+/* owner-only tools inside Song Guesser: temp index loader (the index card itself is for everyone), index check, matching settings */
 function applySoundOwnerUI(){
   const o=isRyan;
   ["sdSetSec","sdChkSec","sdAccSec"].forEach(id=>{const e=$(id);if(e)e.style.display=o?"":"none"});
@@ -6514,7 +6594,7 @@ function dailyGames(){
      ic:'<path d="M5 20v-7M12 20V6M19 20v-10" stroke-width="3"/>',
      open:()=>showTab("map"),locked:()=>false,
      stat:null},
-    {id:"sound",name:"Sound Guesser",desc:"Match a song from a short clip.",c:"#2dd4bf",
+    {id:"sound",name:"Song Guesser",desc:"Match a song from a short clip.",c:"#2dd4bf",
      ic:'<path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/>',
      open:()=>sdOpen(),locked:()=>!canSound(),
      stat:()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:null):[soundSoonText(),""]}
@@ -6859,7 +6939,7 @@ function homeNorm(d){
   HOMEIDS.forEach(id=>{if(!seen.has(id))o.push(id)});
   const h=(Array.isArray(d.hidden)?d.hidden:[]).filter((id,i,a)=>HOMEIDS.includes(id)&&a.indexOf(id)===i);
   const z={};if(d.size&&typeof d.size==="object")HOMEIDS.forEach(id=>{const n=+d.size[id];if(n>=1&&n<=4)z[id]=Math.round(n)});
-  /* v2 (applied once): Daily Games first; Artist Guesser and Sound Guesser start hidden (they live inside Daily Games) */
+  /* v2 (applied once): Daily Games first; Artist Guesser and Song Guesser start hidden (they live inside Daily Games) */
   if(!(d.v>=2)){
     const r=o.filter(id=>id!=="daily");r.unshift("daily");o.length=0;r.forEach(x=>o.push(x));
     ["map","sound"].forEach(id=>{if(!h.includes(id))h.push(id)});
@@ -6947,7 +7027,7 @@ function navNorm(d){
   d=d||{};const seen=new Set(),o=[];
   (Array.isArray(d.order)?d.order:[]).forEach(id=>{if(NAVBTN.includes(id)&&!seen.has(id)){seen.add(id);o.push(id)}});
   NAVBTN.forEach((id,i)=>{if(!seen.has(id)){const at=i?o.indexOf(NAVBTN[i-1]):-1;o.splice(at+1,0,id)}});
-  /* v4: Sound Guesser sits right after Artist Guesser, Artist Overview next (also for menus saved earlier, applied once) */
+  /* v4: Song Guesser sits right after Artist Guesser, Artist Overview next (also for menus saved earlier, applied once) */
   if(d.v!==4&&!(d.v>=5)){
     let r=o.filter(id=>id!=="tbSound");
     if(!(d.v>=3)){r=r.filter(id=>id!=="tbArtist");const a=r.indexOf("tbMap");r.splice(a>=0?a+1:r.length,0,"tbArtist")}
@@ -6955,7 +7035,7 @@ function navNorm(d){
     o.length=0;r.forEach(x=>o.push(x));
   }
   const h=(Array.isArray(d.hidden)?d.hidden:[]).filter((id,i,a)=>NAVBTN.includes(id)&&a.indexOf(id)===i);
-  /* v5 (applied once): Daily Games sits right after Home, and Artist Guesser / Sound Guesser live inside it,
+  /* v5 (applied once): Daily Games sits right after Home, and Artist Guesser / Song Guesser live inside it,
      so they start hidden from the menu. They can be brought back with + in edit mode (which saves as v5, so it sticks). */
   if(!(d.v>=5)){
     const r=o.filter(id=>id!=="tbDaily"),hm=r.indexOf("tbHome");r.splice(hm>=0?hm+1:0,0,"tbDaily");
@@ -9681,7 +9761,7 @@ const MK={
   sold:{key:"sold",list:"soldList",sum:"soldSum",search:"soldSearch",sort:"soldSort",bar:"soldCatM",btn:"soldCat",wrap:"soldCatW",tog:"soldToggle",inp:"newSold",add:"addSold",noun:"sold item",nounP:"sold items",total:"total earned",amt:["price","sold for","sale price"],who:["buyer"],def:()=>[{k:"Buyer",v:""},{k:"Price",v:""}],q:"",f:"all",o:"new",open:new Set()}
 };
 const MSORT=[["new","Newest first"],["old","Oldest first"],["hi","Amount: high to low"],["lo","Amount: low to high"],["az","Title A\u2013Z"]];
-const bitems=(a,def)=>Array.isArray(a)?a.map(x=>{const title=String(x.title||"");return{id:String(x.id||Date.now()+Math.random()),title:title,t:+x.t||0,cat:MCAT.some(c=>c[0]===x.cat&&!MTIER.includes(c[0]))?x.cat:mcatGuess(title),tier:MTIER.includes(x.tier)?x.tier:(MTIER.includes(x.cat)?x.cat:""),fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):def()}}):[];
+const bitems=(a,def)=>Array.isArray(a)?a.map(x=>{const title=String(x.title||"");return{id:String(x.id||Date.now()+Math.random()),title:title,t:+x.t||0,cat:MCAT.some(c=>c[0]===x.cat&&!MTIER.includes(c[0]))?x.cat:mcatGuess(title),tier:MTIER.includes(x.tier)?x.tier:(MTIER.includes(x.cat)?x.cat:""),nb:x.nb==="n"||x.nb==="l"?x.nb:"",num:String(x.num||"").replace(/\D/g,"").slice(0,9),fields:Array.isArray(x.fields)&&x.fields.length?x.fields.map(f=>({k:String(f.k||""),v:String(f.v||"")})):def()}}):[];
 const bnorm=d=>{d=d||{};return{items:bitems(d.items,MK.buy.def),sold:bitems(d.sold,MK.sold.def)}};
 let buys=bnorm(),buyDB=true,buyT=null,mkMode=LS("tracker.mk")==="sold"?"sold":"buy";
 /* use only the first amount in the field, ignoring "#1"-style numbers, so notes like "12 + Bocchi #1" don't add digits */
@@ -9715,7 +9795,11 @@ function renderBuySum(){
   $("mkNet").classList.toggle("pos",net>0);$("mkNet").classList.toggle("neg",net<0);
 }
 const mkPill=mkPl;
-const mkHead=(k,b)=>{const a=mkAmt(k,b),w=mkWho(k,b);return '<span class="mkpls">'+mkPill(b.cat)+'</span>'+`<div style="min-width:0"><div class="mkt">${esc(b.title)||"Untitled"}</div>${w?`<div class="mks">${esc(w)}</div>`:""}</div><div class="mkc">${a?nfmt(a):"\u2014"}</div><span class="mkv" aria-hidden="true">\u25B8</span>`};
+const mkRC=b=>({common:"#3ddc5a",uncommon:"#a066ff",rare:"#f08a2c"})[b.tier]||({epic:"#e88ab0",lyric:"#f0d8b0",shiny:"#7c7cff",radiant:"#fbbf24",moment:"#60a5fa",exclusive:"#f472b6"})[b.cat]||"var(--mut)";
+const mkEp=b=>b.cat==="epic"?(b.nb==="n"?(b.num?"Epic #"+nfmt(+b.num):"Numbered"):b.nb==="l"?"Numberless":""):"";
+const mkTop=(k,b)=>{const w=mkWho(k,b),ep=mkEp(b),t=esc(b.title)||"Untitled",pl=mkPill(b.cat).replace('class="pill','class="pill qhrp');
+  return '<div class="qpt qp2">'+pl+(w?'<div class="qht"><strong>'+t+'</strong><div class="qha">'+esc(w)+'</div></div>':'<strong>'+t+'</strong>')+'</div><div class="qsubl"><span>Saved '+fmtD(b.t)+'</span>'+(ep?'<span class="qhn">'+ep+'</span>':'')+'</div>'};
+const mkNum=(k,b)=>{const a=mkAmt(k,b);return '<span class="qhv">'+(a?nfmt(a):"\u2014")+'</span><span class="u">'+(k==="sold"?"Sold for":"Cost")+'</span>'};
 function renderMk(k){
   const M=MK[k],arr=buys[M.key],v=mkView(k);
   /* filter chips with counts (counts ignore the category filter but respect search) */
@@ -9726,13 +9810,15 @@ function renderMk(k){
   $(M.btn).innerHTML=`<span class="mkDDt">${mkLbl(M.f)}</span><span class="mkn">${mkCnt(M.f)}</span>`;
   $(M.bar).innerHTML=mkGrouped([["all"]].concat(MCAT),c=>`<button type="button" role="option" class="mkDDo${M.f===c[0]?" on":""}" data-f="${c[0]}" aria-selected="${M.f===c[0]}">${mkLbl(c[0])}<span class="mkn">${mkCnt(c[0])}</span></button>`,"mkDDg");
   $(M.sort).innerHTML=MSORT.map(o=>`<option value="${o[0]}"${M.o===o[0]?" selected":""}>${o[1]}</option>`).join("");
-  $(M.list).innerHTML=v.map(([b,i])=>{const open=M.open.has(b.id);return `<div class="card by mk${open?" open":""}${b.tier?" rr-"+b.tier:""}" data-i="${i}"><div class="mkh" role="button" tabindex="0" aria-expanded="${open}">${mkHead(k,b)}</div><div class="mkb"><input maxlength="300" class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}"><div class="mkcats" role="group" aria-label="Category">${mkGrouped(MCAT,c=>{const t=MTIER.includes(c[0]);return `<button type="button" data-act="${t?"tier":"cat"}" data-c="${c[0]}" class="${(t?b.tier:b.cat)===c[0]?"on":""}">${mkPl(c[0])}</button>`},"mkcg")}</div>${b.fields.map((f,j)=>`<div class="fld"><input maxlength="300" class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input maxlength="300" class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div><button type="button" class="small mkdel" data-act="del" aria-label="Delete ${M.noun}">Delete ${M.noun}</button></div></div>`}).join("")||'<div class="empty">'+(arr.length?"Nothing matches your search or filter.":"No "+M.nounP+" yet.")+'</div>';
+  let mo="";const byDate=M.o==="new"||M.o==="old";
+  $(M.list).innerHTML=v.map(([b,i])=>{const open=M.open.has(b.id);let h="";if(byDate&&b.t){const m=new Date(b.t).toLocaleDateString(undefined,{month:"long",year:"numeric"});if(m!==mo){mo=m;h='<div class="qhmo">'+esc(m)+'</div>'}}return h+`<div class="qhc by mk${open?" open":""}" style="--rc:${mkRC(b)}" data-i="${i}"><div class="qhb">${mkTop(k,b)}</div><div class="phs">${mkNum(k,b)}</div><span class="qact"><button type="button" class="x" data-act="edit" aria-label="Edit ${M.noun}" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-act="del" data-hdel aria-label="Delete ${M.noun}">\u2715</button></span><div class="mkb"><input maxlength="300" class="bt" data-f="t" placeholder="Title" value="${esc(b.title)}">${b.cat==="epic"?`<div class="mknb"><button type="button" data-act="nb" data-c="n" class="${b.nb==="n"?"on":""}">Numbered</button><button type="button" data-act="nb" data-c="l" class="${b.nb==="l"?"on":""}">Numberless</button>${b.nb==="n"?`<input class="mknum" data-f="num" type="text" inputmode="numeric" maxlength="9" placeholder="Epic #" value="${esc(b.num)}">`:""}</div>`:""}<div class="mkcats" role="group" aria-label="Category">${mkGrouped(MCAT,c=>{const t=MTIER.includes(c[0]);return `<button type="button" data-act="${t?"tier":"cat"}" data-c="${c[0]}" class="${(t?b.tier:b.cat)===c[0]?"on":""}">${mkPl(c[0])}</button>`},"mkcg")}</div>${b.fields.map((f,j)=>`<div class="fld"><input maxlength="300" class="fk" data-f="k" data-j="${j}" placeholder="Label" value="${esc(f.k)}"><input maxlength="300" class="fv" data-f="v" data-j="${j}" placeholder="Enter value" value="${esc(f.v)}"></div>`).join("")}<div class="steps"><button type="button" data-act="add">+ field</button><button type="button" data-act="rem">\u2212 field</button></div><div class="mkact"><button type="button" class="mksave" data-act="save">Save</button><button type="button" class="small mkdel" data-act="del" aria-label="Delete ${M.noun}">Delete ${M.noun}</button></div></div></div>`}).join("")||'<div class="empty">'+(arr.length?"Nothing matches your search or filter.":"No "+M.nounP+" yet.")+'</div>';
   $(M.tog).textContent=v.length&&v.every(([b])=>M.open.has(b.id))?"Collapse all":"Expand all";
   $(M.tog).hidden=!v.length;
   renderBuySum();
 }
 function renderBuys(){renderMk("buy");renderMk("sold");mkShow(mkMode)}
 function mkShow(m){
+  if(m!==mkMode)mkfClose();
   mkMode=m;LS("tracker.mk",m);
   $("mkBuy").hidden=m!=="buy";$("mkSold").hidden=m!=="sold";
   [...$("mkSeg").children].forEach(b=>b.classList.toggle("on",b.dataset.m===m));
@@ -9759,22 +9845,25 @@ Object.keys(MK).forEach(k=>{
   const M=MK[k];
   const toggleRow=card=>{
     const b=buys[M.key][+card.dataset.i],open=!card.classList.contains("open");
-    card.classList.toggle("open",open);card.querySelector(".mkh").setAttribute("aria-expanded",open);
+    card.classList.toggle("open",open);
     if(open)M.open.add(b.id);else M.open.delete(b.id);
     const v=mkView(k);$(M.tog).textContent=v.length&&v.every(([x])=>M.open.has(x.id))?"Collapse all":"Expand all";
   };
   $(M.list).addEventListener("input",e2=>{
     const inp=e2.target.closest("input");if(!inp)return;
     const card=inp.closest(".by"),b=buys[M.key][+card.dataset.i],f=inp.dataset.f;
-    if(f==="t")b.title=inp.value.slice(0,300);else{const fl=b.fields[+inp.dataset.j];fl[f]=inp.value.slice(0,300)}
-    card.querySelector(".mkh").innerHTML=mkHead(k,b);
+    if(f==="t")b.title=inp.value.slice(0,300);else if(f==="num"){inp.value=b.num=inp.value.replace(/\D/g,"").slice(0,9)}else{const fl=b.fields[+inp.dataset.j];fl[f]=inp.value.slice(0,300)}
+    card.querySelector(".qhb").innerHTML=mkTop(k,b);card.querySelector(".phs").innerHTML=mkNum(k,b);
     schedBuy();renderBuySum();
   });
   $(M.list).addEventListener("click",e2=>{
     const btn=e2.target.closest("button");
-    if(!btn){const h=e2.target.closest(".mkh");if(h)toggleRow(h.closest(".by"));return}
+    if(!btn)return;
     const arr=buys[M.key],b=arr[+btn.closest(".by").dataset.i],a=btn.dataset.act;
+    if(a==="edit"){toggleRow(btn.closest(".by"));return}
+    if(a==="save"){clearTimeout(buyT);dirty.delete("buy");saveBuys();M.open.delete(b.id);renderMk(k);return}
     if(a==="cat"){b.cat=btn.dataset.c;saveBuys();renderMk(k)}
+    else if(a==="nb"){b.nb=b.nb===btn.dataset.c?"":btn.dataset.c;if(b.nb!=="n")b.num="";saveBuys();renderMk(k)}
     else if(a==="tier"){b.tier=b.tier===btn.dataset.c?"":btn.dataset.c;saveBuys();renderMk(k)}
     else if(a==="add"){b.fields.push({k:"",v:""});saveBuys();renderMk(k)}
     else if(a==="rem"){
@@ -9801,16 +9890,47 @@ Object.keys(MK).forEach(k=>{
     v.forEach(([b])=>all?M.open.delete(b.id):M.open.add(b.id));renderMk(k);
   };
   $(M.search).addEventListener("input",e2=>{M.q=e2.target.value.trim();renderMk(k)});
-  $(M.add).onclick=()=>{
-    const n=$(M.inp).value.trim().slice(0,300);if(!n)return;
-    const g=mcatGuess(n),fT=MTIER.includes(M.f),it={id:String(Date.now()),title:n,t:Date.now(),cat:g==="other"&&M.f!=="all"&&!fT?M.f:g,tier:mtierGuess(n)||(fT?M.f:""),fields:M.def()};
-    buys[M.key].unshift(it);M.open.add(it.id);
-    $(M.inp).value="";M.q="";$(M.search).value="";
-    if(M.f!=="all"&&!mkMatch(it,M.f))M.f="all";
-    saveBuys();renderMk(k);
-  };
-  $(M.inp).addEventListener("keydown",e2=>{if(e2.key==="Enter")$(M.add).click()});
+  $(M.add).onclick=()=>mkfOpen(k);
 });
+
+/* ---------- market: add form (one form for Purchases and Sold) ---------- */
+let mkfK="buy",mkfCat="",mkfTier="",mkfNb="";
+const mkfDate=t=>{const d=new Date(t);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")};
+function mkfCats(){
+  $("mkfCats").innerHTML=mkGrouped(MCAT,c=>{const t=MTIER.includes(c[0]);return `<button type="button" data-fc="${t?"tier":"cat"}" data-c="${c[0]}" class="${(t?mkfTier:mkfCat)===c[0]?"on":""}">${mkPl(c[0])}</button>`},"mkcg");
+  const ep=mkfCat==="epic";$("mkfEp").hidden=!ep;
+  [...$("mkfEp").querySelectorAll("button")].forEach(b=>b.classList.toggle("on",b.dataset.n===mkfNb));
+  $("mkfNum").hidden=!(ep&&mkfNb==="n");
+}
+function mkfOpen(k){
+  mkfK=k;const M=MK[k];mkfCat="";mkfTier="";mkfNb="";
+  if(M.f!=="all"){if(MTIER.includes(M.f))mkfTier=M.f;else mkfCat=M.f}
+  $("mkfTitle").textContent=k==="sold"?"Add sold item":"Add purchase";
+  $("mkfSub").textContent=k==="sold"?"Record what you sold and what it sold for.":"Record what you bought and what it cost.";
+  $("mkfWL").textContent=k==="sold"?"Buyer":"Seller";$("mkfAL").textContent=k==="sold"?"Sold for":"Cost";
+  $("mkfT").value="";$("mkfW").value="";$("mkfA").value="";$("mkfNum").value="";$("mkfD").value=mkfDate(Date.now());
+  mkfCats();$("mkForm").hidden=false;$("mkForm").scrollIntoView({block:"nearest",behavior:"smooth"});$("mkfT").focus();
+}
+function mkfClose(){const f=$("mkForm");if(f)f.hidden=true}
+$("mkfCats").addEventListener("click",e2=>{
+  const b=e2.target.closest("button[data-fc]");if(!b)return;
+  if(b.dataset.fc==="tier")mkfTier=mkfTier===b.dataset.c?"":b.dataset.c;
+  else{mkfCat=mkfCat===b.dataset.c?"":b.dataset.c;if(mkfCat!=="epic")mkfNb=""}
+  mkfCats();
+});
+$("mkfEp").addEventListener("click",e2=>{const b=e2.target.closest("button[data-n]");if(!b)return;mkfNb=mkfNb===b.dataset.n?"":b.dataset.n;mkfCats();if(mkfNb==="n")$("mkfNum").focus()});
+$("mkfNum").addEventListener("input",()=>{$("mkfNum").value=$("mkfNum").value.replace(/\D/g,"").slice(0,9)});
+$("mkfCancel").onclick=mkfClose;
+$("mkfSave").onclick=()=>{
+  const k=mkfK,M=MK[k],title=$("mkfT").value.trim().slice(0,300);
+  if(!title){$("mkfT").focus();return}
+  const fl=M.def();fl[0].v=$("mkfW").value.trim().slice(0,300);fl[1].v=$("mkfA").value.trim().slice(0,300);
+  const g=mcatGuess(title),cat=mkfCat||g,d=$("mkfD").value,t=d?new Date(d+"T12:00:00").getTime():Date.now();
+  const it={id:String(Date.now()),title:title,t:isNaN(t)?Date.now():t,cat:cat,tier:mkfTier||mtierGuess(title),nb:cat==="epic"?mkfNb:"",num:cat==="epic"&&mkfNb==="n"?$("mkfNum").value.replace(/\D/g,"").slice(0,9):"",fields:fl};
+  buys[M.key].unshift(it);
+  M.q="";$(M.search).value="";if(M.f!=="all"&&!mkMatch(it,M.f))M.f="all";
+  saveBuys();renderMk(k);mkfClose();
+};
 
 /* ---------- notes (small rich text: bold, italic, underline, title, list, colors, highlight) ---------- */
 let notes="",notesHtml="",notesDB=true,notesT=null;
@@ -10034,9 +10154,9 @@ function renderOverview(){
     ["quest","Quest Tracker","Quests since your last pull and the chance of one next.",()=>[nfmt(qtSum().n),"quests since last pull \u00b7 "+qtPct(qtP(qt.reroll,qt.boost))+" next"]],
     ["pass","Pass Tracker","Pass rewards and ultra pass results.",()=>[nfmt(PASS.reduce((a,[k])=>a+pass.c[k],0)),"pass rewards logged"]],
     ["event","Event Tracker","Event rewards and collectables.",()=>{const c=evCfg(),t=evSum(c,evS().c);return[nfmt(t.n),"rewards \u00b7 "+c.name]}],
-    ["daily","Daily Games","Artist Guesser, Sound Guesser, free gems and streak.",null],
+    ["daily","Daily Games","Artist Guesser, Song Guesser, free gems and streak.",null],
     ["map","Artist Guesser","Narrow down the mystery artist from hints.",null],
-    ["sound","Sound Guesser","Guess a song from its sound.",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:null):[soundSoonText(),""]],
+    ["sound","Song Guesser","Guess a song from its sound.",()=>canSound()?(SDSTAT.count?[nfmt(SDSTAT.count),"songs in the index"]:null):[soundSoonText(),""]],
     ["artist","Artist Overview","Browse an artist's releases and songs.",null],
     ["buys","Market","What you've bought and sold.",()=>{const n=mkTotal("sold")-mkTotal("buy");return[(n<0?"-":"")+nfmt(Math.abs(n)),"net"]}],
     ["info","Wiki","Drop rates, eligibility and reference tables.",null],
@@ -10071,12 +10191,13 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.4","2026-10-29",["Market UI refresh.","Minor bug fixes."]],
 ["0.8.3","2026-10-30",["Event Tracker: Last 3 Hours (was 2) now counts every entry and every candy added without a reward, no longer cut off after 100 entries.","Event Tracker: added the new Halloween event as the first tab, with candy tracker, shop tracker, a Candy Wheel tracker under the main tracker, pumpkin drop info and all 20 Halloween epics."]],
 ["0.8.2","2026-10-29",["Quest & Gempic Sets & History UI refresh.","Other Minor UI updates.","Minor bug fixes."]],
 ["0.8.1","2026-10-28",["Quest & Gempic Sets are now one shared list: manage artist, genre, gem price, epic style, lyrics and quest count in one place, from either tracker.","Choose which tracker shows each set (Quest and/or Gempic) without deleting it, with an All / Quest / Gempic / Hidden filter.","Search sets (in the lists and the set dropdowns) and sort them A to Z, Z to A, Most first, by Genre, or in your own order with move buttons.","Quest Tracker: type the final artist quest count and Quests it took fills in automatically.","Gempic Tracker: Epic # is always shown for epics. Quest Tracker: Epic style is hidden when the set already has it chosen.","Sets now fit on mobile without sideways scrolling, with an info button for the details.","Minor bug fixes."]],
 ["0.8","2026-10-26",["Added set tracking to quest & epic trackers.","Revamped quest tracker UI.","Other minor UI updates.","Minor bug fixes."]],
 ["0.7.2","2026-10-25",["Profile overhaul: new layout with stats, preferences, tracker toggles, backup to file and a What's new section.","Dark mode is now the default theme.","Updated various UIs."]],
-["0.7.1","2026-10-25",["Added Pop category in Sound Guesser.","Added Icon view for home page modules.","Updated various UIs.","Event Tracker: added a Last 2 Hours history (rewards, coins and gems from the last 2 hours) with its own reset button."]],
+["0.7.1","2026-10-25",["Added Pop category in Song Guesser.","Added Icon view for home page modules.","Updated various UIs.","Event Tracker: added a Last 2 Hours history (rewards, coins and gems from the last 2 hours) with its own reset button."]],
 ["0.7","2026-10-23",["Home page is now modular: tap Edit layout to move, resize and hide each box.","Gempic Tracker: saving a gempic now records the artist, song, type, rarity, rolls and gems, like the Quest Tracker, and entries can be edited."]],
 ["0.6.5","2026-10-21",["Gempic Tracker: added a Last 24 Hours summary of rolls and gems spent."]],
 ["0.6.4","2026-10-20",["Updated Artist Guesser UI.","Various bugs fixed."]],
@@ -10089,13 +10210,13 @@ const VERSIONS=[
 ["0.4.4","2026-10-13",["Mobile quality-of-life update: the menu bar now stays open between tabs, and the home, Gempic and Quest pages are more compact"]],
 ["0.4.3","2026-10-12",["Artist Guesser: if your clues include an exact popularity rank and nothing matches, it now suggests the closest artists within 5 spots of that rank","Improved Artist Guesser matching so slightly outdated rankings no longer leave you with zero results"]],
 ["0.4.2","2026-10-11",["More tracking tools & various bug fixes","Updated artist guesser","Added shop tracker to soundfall event"]],
-["0.4.1","2026-10-10",["Updated Sound Guesser position & admin toggles","Added Rate boost toggle to the Quest Tracker: shiny, lyric, and epic rates are 50% higher than usual"]],
-["0.4","2026-10-10",["Added Sound Guesser"]],
-["0.3.6","2026-10-10",["Sound Guesser: the rock-only notice has a red outline, a faded red background and larger bold text"]],
-["0.3.3","2026-10-10",["Artist Overview: after an artist finishes loading, loading a new artist is paused for 3 minutes (already-loaded artists still open instantly)","Added report system for Artist Guesser & Sound Guesser"]],
+["0.4.1","2026-10-10",["Updated Song Guesser position & admin toggles","Added Rate boost toggle to the Quest Tracker: shiny, lyric, and epic rates are 50% higher than usual"]],
+["0.4","2026-10-10",["Added Song Guesser"]],
+["0.3.6","2026-10-10",["Song Guesser: the rock-only notice has a red outline, a faded red background and larger bold text"]],
+["0.3.3","2026-10-10",["Artist Overview: after an artist finishes loading, loading a new artist is paused for 3 minutes (already-loaded artists still open instantly)","Added report system for Artist Guesser & Song Guesser"]],
 ["0.3.2","2026-10-10",["Fixed various bugs","Updated button press feedback","Added last update date on artist guesser"]],
 ["0.3.1","2026-10-09",["Artist Guesser can be tried without logging in: use the button on the login page, and Back to login to return"]],
-["0.3","2026-10-09",["Artist Overview is now available to everyone","Artist Overview now sits next to Artist Guesser in the menu, and Sound Guesser moved to the end"]],
+["0.3","2026-10-09",["Artist Overview is now available to everyone","Artist Overview now sits next to Artist Guesser in the menu, and Song Guesser moved to the end"]],
 ["0.2","2026-10-09",["Every tab got a UI and interface refresh"]],
 ["0.1.14","2026-10-08",["Redesigned the Epic Tracker to match the Shiny Tracker and home page: collection tabs with counts, stat cards, icon controls, rarity chips and card rows with a done checkbox","Completion card is now a toggle: it tracks epics you check off and, when switched on, shows only the ones left","Added pagination (25 / 50 / 100 per page)"]],
 ["0.1.13","2026-10-08",["Redesigned the Shiny Tracker to look better and match the new home page: stat cards, an Inventory & Sales section with icon cards, and Results Breakdown, Inventory & Totals, Prices and Recent Activity sections","On mobile, all 6 Inventory & Sales categories now show at once in a compact 2-column grid"]],
@@ -10106,7 +10227,7 @@ const VERSIONS=[
 ["0.1.8","Earlier",["Added versions"]],
 ["0.1.7","Earlier",["Added update log"]],
 ["0.1.6","Earlier",["Small bug fixes and quality-of-life changes"]],
-["0.1.5","Earlier",["Sound guesser coming soon"]],
+["0.1.5","Earlier",["Song guesser coming soon"]],
 ["0.1.4","Earlier",["Updated various events in the event tracker"]],
 ["0.1.3","Earlier",["Added home page"]],
 ["0.1.2","Earlier",["Edit which icons are in the top bar and their order"]],
@@ -10125,7 +10246,7 @@ const VERSIONS=[
 
 /* ---------- profile page ---------- */
 if(!LS("tracker.firstSeen"))LS("tracker.firstSeen",String(Date.now()));
-const PF_TR=[["daily","Daily Games"],["shiny","Shiny Tracker"],["epic","Epic Tracker"],["gempic","Gempic Tracker"],["quest","Quest Tracker"],["pass","Pass Tracker"],["event","Event Tracker"],["map","Artist Guesser"],["sound","Sound Guesser"],["artist","Artist Overview"],["buys","Market"],["info","Wiki"],["misc","Misc"]];
+const PF_TR=[["daily","Daily Games"],["shiny","Shiny Tracker"],["epic","Epic Tracker"],["gempic","Gempic Tracker"],["quest","Quest Tracker"],["pass","Pass Tracker"],["event","Event Tracker"],["map","Artist Guesser"],["sound","Song Guesser"],["artist","Artist Overview"],["buys","Market"],["info","Wiki"],["misc","Misc"]];
 const pfTb=id=>"tb"+id[0].toUpperCase()+id.slice(1);
 function pfApplyTheme(m){const r=document.documentElement;if(m==="light"||m==="dark")r.setAttribute("data-theme",m);else r.removeAttribute("data-theme")}
 function pfAgo(t){const d=Math.floor((Date.now()-t)/864e5);return d<=0?"today":d===1?"yesterday":d+" days ago"}
@@ -10228,7 +10349,7 @@ async function checkUser(){
   }catch(e){}
 }
 /* Home only on the first load of a browser session (or right after logging in); a refresh keeps the tab you were on. */
-const DEEP={"artist-guesser":"map","sound-guesser":"sound"};
+const DEEP={"artist-guesser":"map","song-guesser":"sound","sound-guesser":"sound"};
 function startTab(restore){
   let t="home";
   try{
@@ -10238,12 +10359,12 @@ function startTab(restore){
   }catch(e){}
   /* deep link from the Discord report message: open the site with #reports */
   if(location.hash==="#reports"&&isRyan&&$("tab-reports"))t="reports";
-  /* deep links from shared URLs: /tracker/artist-guesser/ and /tracker/sound-guesser/ land here with #artist-guesser / #sound-guesser */
+  /* deep links from shared URLs: /tracker/artist-guesser/ and /tracker/song-guesser/ land here with #artist-guesser / #song-guesser (#sound-guesser still works) */
   const dl=DEEP[location.hash.slice(1)];
   if(dl&&(dl!=="sound"||canSound())&&$("tab-"+dl))t=dl;
   return t;
 }
-const START_OPTS=[["home","Home (default)"],["last","The last tab I used"],["shiny","ShinyTracker"],["epic","EpicTracker"],["gempic","GempicTracker"],["quest","QuestTracker"],["pass","PassTracker"],["event","EventTracker"],["daily","Daily Games"],["map","ArtistGuesser"],["artist","Artist Overview"],["sound","Sound Guesser"],["buys","Market"],["info","Wiki"],["misc","Misc"]];
+const START_OPTS=[["home","Home (default)"],["last","The last tab I used"],["shiny","ShinyTracker"],["epic","EpicTracker"],["gempic","GempicTracker"],["quest","QuestTracker"],["pass","PassTracker"],["event","EventTracker"],["daily","Daily Games"],["map","ArtistGuesser"],["artist","Artist Overview"],["sound","Song Guesser"],["buys","Market"],["info","Wiki"],["misc","Misc"]];
 function initStartSel(){
   const sel=$("startSel");if(!sel)return;
   let cur=LS("tracker.startTab")||"home";
@@ -10294,7 +10415,7 @@ $("lgGuestSound").onclick=async()=>{
   await loadSoundMode();
   if(!canSound()){
     document.body.classList.remove("guest");
-    $("lgErr").textContent=soundMode==="off"?"Sound Guesser is switched off right now.":"Sound Guesser needs a login right now.";
+    $("lgErr").textContent=soundMode==="off"?"Song Guesser is switched off right now.":"Song Guesser needs a login right now.";
     return;
   }
   $("login").hidden=true;$("app").hidden=false;
