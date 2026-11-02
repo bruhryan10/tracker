@@ -1959,6 +1959,10 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 .tabs button,.tabs button:active,.tabs button.pressing,.tabs button.tapfx{animation:none!important;-webkit-tap-highlight-color:initial}
 .tabs button:active:not(.on),.tabs button.pressing:not(.on){box-shadow:none!important}
 @media (prefers-reduced-motion:reduce){.tapfx{animation:none}}
+/* joined steppers clip anything outside their border (overflow:hidden), so flash inside the button instead of a ring */
+@keyframes stepflash{from{background-color:color-mix(in srgb,var(--ac,#8b5cf6) 55%,transparent)}}
+:is(.shr,.gcost,.shmx) button.tapfx{animation:stepflash .38s ease-out}
+@media (prefers-reduced-motion:reduce){:is(.shr,.gcost,.shmx) button.tapfx{animation:none}}
 /* ---------- Song Guesser (owner only) ---------- */
 #tab-sound .gb.go{border-color:#14b8a6;background:linear-gradient(135deg,#0f766e,#14b8a6);box-shadow:0 4px 16px color-mix(in srgb,#14b8a6 38%,transparent)}
 #tab-sound label.gb{cursor:pointer;position:relative}
@@ -3321,6 +3325,10 @@ body:not(.guest) #app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px)
 body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
 #sdKickNote{bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
 }
+</style>
+<style id="mobileNavKeyboardFix">
+/* hide the pinned bar while the on-screen keyboard is up (iOS leaves fixed bars stranded mid-screen otherwise) */
+@media (max-width:700px){body.kbOpen #mainNav,body.kbOpen #mainNav.icons{display:none!important}}
 </style>
 <style id="eventCompact">
 /* Event tracker: one slim row per reward, several columns on wide screens, small joined [ count - + ] stepper */
@@ -10957,6 +10965,19 @@ show(tabs.some(b=>b.dataset.gv===v)?v:"track");
 const f=g("gpForm");
 new MutationObserver(()=>{if(f.hidden){formHome(f);return}if(!f.dataset.inl){show("track");f.scrollIntoView({block:"nearest",behavior:"smooth"})}}).observe(f,{attributes:true,attributeFilter:["hidden"]});
 ["gpSetEditB","gpSetNew","gpSetAdd"].forEach(id=>{const b=g(id);if(b)b.addEventListener("click",()=>show("sets"))});
+})();
+</script>
+<script>
+/* iOS Safari: after the keyboard closes, a position:fixed bottom bar can stay stuck where the keyboard was. Hide it while typing, then force a re-layout. */
+(function(){
+var nav=document.getElementById("mainNav");if(!nav)return;
+var mq=window.matchMedia("(max-width:700px)"),t,t2;
+var SEL='input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]):not([type=file]),textarea,[contenteditable=""],[contenteditable="true"]';
+function isTxt(el){return !!(el&&el.matches&&el.matches(SEL))}
+function reflow(){var y=window.scrollY,x=window.scrollX;nav.style.transform="translateZ(0)";void nav.offsetHeight;nav.style.transform="";window.scrollTo(x,y)}
+document.addEventListener("focusin",function(e){if(mq.matches&&isTxt(e.target)){clearTimeout(t);clearTimeout(t2);document.body.classList.add("kbOpen")}});
+document.addEventListener("focusout",function(){clearTimeout(t);t=setTimeout(function(){if(isTxt(document.activeElement))return;document.body.classList.remove("kbOpen");reflow();t2=setTimeout(reflow,300)},150)});
+if(window.visualViewport){var vt;visualViewport.addEventListener("resize",function(){clearTimeout(vt);vt=setTimeout(function(){if(!isTxt(document.activeElement)&&mq.matches)reflow()},200)})}
 })();
 </script>
 </body></html>
