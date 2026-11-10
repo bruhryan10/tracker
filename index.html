@@ -3970,7 +3970,12 @@ body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-ar
 <div class="pfBtns"><button type="button" id="pfResetHome">Reset home layout</button><button type="button" id="pfResetNav">Reset menu</button></div>
 </section>
 <section class="card pfc">
-<div class="pfh"><span class="pfi" style="--c:#c084fc"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div class="pft"><b>Account</b><span>Password</span></div></div>
+<div class="pfh"><span class="pfi" style="--c:#c084fc"><svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div class="pft"><b>Account</b><span>Name and password</span></div></div>
+<details id="nmBox" class="pfDet"><summary>Change display name</summary>
+<label for="nmNew">Display name</label><div class="pfPw"><input id="nmNew" type="text" maxlength="30" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" style="padding-right:12px"></div>
+<button type="button" id="nmGo" class="pfGo">Save display name</button>
+<div class="note" id="nmMsg">This only changes the name shown on the website. You still log in with your original name.</div>
+</details>
 <details id="pwBox" class="pfDet"><summary>Change password</summary>
 <label for="pwOld">Current password</label><div class="pfPw"><input id="pwOld" type="password" autocomplete="current-password"><button type="button" class="pfEye" data-for="pwOld" aria-label="Show password">Show</button></div>
 <label for="pwNew">New password</label><div class="pfPw"><input id="pwNew" type="password" autocomplete="new-password"><button type="button" class="pfEye" data-for="pwNew" aria-label="Show password">Show</button></div>
@@ -10772,6 +10777,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.7","2026-11-09",["Profile: you can now change your display name. Your login name stays the same."]],
 ["0.8.6","2026-11-07",["Updated Artist Guesser rankings for R&B, Hip-Hop, Pop, Rock and Indie.","Daily Games: added tracking stats.","Misc: Notes now has multiple tabs, and the Counter supports multiple named counters.","Quest Tracker: pull history luck now uses the odds of the rarity you pulled.","Minor updates and bug fixes."]],
 ["0.8.5","2026-11-01",["Mobile navigation bar UI refresh.","Epic tracker UI refresh.","Many more UI updates.","Minor bug fixes."]],
 ["0.8.3","2026-10-30",["Event Tracker: Last 3 Hours (was 2) now counts every entry and every candy added without a reward, no longer cut off after 100 entries.","Event Tracker: added the new Halloween event as the first tab, with candy tracker, shop tracker, a Candy Wheel tracker under the main tracker, pumpkin drop info and all 20 Halloween epics."]],
@@ -10923,7 +10929,7 @@ async function checkUser(){
     const uid=data&&data.session&&data.session.user&&data.session.user.id;
     if(!uid)return;
     const em=data.session.user.email||"";
-    $("who").textContent=em.split("@")[0];$("profWho").textContent=em.split("@")[0];$("tbProfileName").textContent=em.split("@")[0]||"Profile";
+    showName(dispName(data.session.user));$("nmNew").value=dispName(data.session.user);
     isRyan=em.split("@")[0].toLowerCase()==="ryan";bkVis();await loadSoundMode();applyArtistLock();
     const prev=LS("tracker.uid");
     if(prev&&prev!==uid)["pass","event","gempic","quest","misc","miscActive","buys","notes","notesHtml","notesTabs","notesActive","nav","rarity","numberless","set","startTab"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
@@ -11011,6 +11017,34 @@ $("guestBack").onclick=()=>{
   window.scrollTo(0,0);
 };
 $("lgPass").addEventListener("keydown",e=>{if(e.key==="Enter")doLogin()});
+/* Display name: stored in Supabase user metadata. The login name (email prefix) never changes, and isRyan still uses it. */
+function dispName(u){
+  const m=u&&u.user_metadata&&typeof u.user_metadata.display_name==="string"?u.user_metadata.display_name.trim():"";
+  return m||String((u&&u.email)||"").split("@")[0];
+}
+function showName(n){
+  $("who").textContent=n;$("profWho").textContent=n;$("tbProfileName").textContent=n||"Profile";
+  $("pfAv").textContent=n?Array.from(n)[0]:"?";
+}
+async function changeName(){
+  const m=$("nmMsg"),n=$("nmNew").value.trim().replace(/\s+/g," ");
+  m.style.color="";
+  const bad=t=>{m.style.color="var(--neg)";m.textContent=t};
+  if(!n){bad("Enter a display name.");return}
+  if(n.length>30){bad("Keep it to 30 characters or fewer.");return}
+  $("nmGo").disabled=true;m.textContent="Saving...";
+  try{
+    const {data}=await sb.auth.getSession();
+    if(!(data&&data.session)){bad("You're not signed in. Sign in again first.");$("nmGo").disabled=false;return}
+    const r=await sb.auth.updateUser({data:{display_name:n}});
+    if(r.error){bad(r.error.message);$("nmGo").disabled=false;return}
+    showName(n);$("nmNew").value=n;
+    m.style.color="var(--pos)";m.textContent="Display name saved.";$("nmBox").open=false;
+  }catch(e){bad(e.message||"Something went wrong.")}
+  $("nmGo").disabled=false;
+}
+$("nmGo").onclick=changeName;
+$("nmNew").addEventListener("keydown",e=>{if(e.key==="Enter")changeName()});
 async function changePw(){
   const m=$("pwMsg"),o=$("pwOld").value,n=$("pwNew").value,n2=$("pwNew2").value;
   m.style.color="";
