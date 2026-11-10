@@ -11187,6 +11187,15 @@ new MutationObserver(()=>{if(f.hidden){formHome(f);return}if(!f.dataset.inl){sho
 (function(){
 var nav=document.getElementById("mainNav");if(!nav)return;
 var vv=window.visualViewport,mq=window.matchMedia("(max-width:700px)"),shift=0,bad=0,nudged=false,cal={},t,kt;
+/* While the page is being scrolled or is rubber-banding past the top or bottom, the visual viewport and the bar move on purpose.
+   Repairing the bar then (hide/show flash, viewport nudge, shifting) is what made it jump, so measuring waits until things go quiet. */
+var lastMove=0;
+function stamp(){lastMove=Date.now()}
+function settling(){
+  if(Date.now()-lastMove<600)return true;
+  var de=document.documentElement,y=window.pageYOffset;
+  return y<0||y+window.innerHeight>de.scrollHeight+1;
+}
 var SEL='input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=button]):not([type=submit]):not([type=file]),textarea,[contenteditable=""],[contenteditable="true"]';
 function isTxt(el){return !!(el&&el.matches&&el.matches(SEL))}
 function apply(){nav.style.transform=shift?"translateY("+shift+"px)":""}
@@ -11211,6 +11220,7 @@ function nudge(){
 function measure(){
   if(!mq.matches||!vv||vv.scale>1.02){if(shift){shift=0;apply()}bad=0;nudged=false;return}
   if(!nav.offsetHeight)return;
+  if(settling()){bad=0;clearTimeout(t);t=setTimeout(measure,300);return}
   var vb=vv.offsetTop+vv.height,nb=nav.getBoundingClientRect().bottom,s=scr(),target=vb;
   if(s){
     var gap=s.h-vb;
@@ -11226,7 +11236,8 @@ function measure(){
   shift+=d;apply();
 }
 function burst(){measure();[100,300,800,1500].forEach(function(ms){setTimeout(measure,ms)})}
-["scroll","resize","orientationchange","pageshow","focus","touchend"].forEach(function(e){window.addEventListener(e,function(){measure()},{passive:true})});
+["scroll","touchstart","touchmove","touchend","touchcancel"].forEach(function(e){window.addEventListener(e,function(){stamp();measure()},{passive:true})});
+["resize","orientationchange","pageshow","focus"].forEach(function(e){window.addEventListener(e,function(){measure()},{passive:true})});
 window.addEventListener("pageshow",function(){kick();burst()});
 window.addEventListener("focus",burst);
 document.addEventListener("resume",burst);
