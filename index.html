@@ -3548,7 +3548,7 @@ body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-ar
 <section class="card gsec" id="gpHero">
 <div class="qh">
 <div><div class="val qbig" id="gpRolls">0</div><div class="qhl">rolls since last gempic</div><div class="qhg"><b class="val" id="gpGems">0</b> gems spent</div><div class="qhs" id="gpRollsNote"></div><span id="gpGemsNote" hidden></span></div>
-<div class="qh2"><div class="qst"><b class="val" id="gpOdds">0.4%</b><span>chance next roll</span><small id="gpOddsNote"></small></div><div class="qst"><b class="val" id="gpSoFar">0%</b><span>chance so far</span></div></div>
+<div class="qh2"><div class="qst"><b class="val" id="gpOdds">0.4%</b><span>chance next roll</span><small id="gpOddsNote"></small></div><div class="qst"><b class="val" id="gpSoFar">0%</b><span>progress to average</span></div></div>
 </div>
 <div class="qprog"><div class="qbar"><i id="gpBarFill" style="width:0%"></i></div></div>
 <p id="gpBarNote"></p>
@@ -3646,7 +3646,7 @@ body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-ar
 <section class="card gsec" id="qtHero">
 <div class="qh">
 <div><div class="val qbig" id="qtQuests">0</div><div class="qhl">quests since last pull</div><div class="qhs" id="qtQuestsNote"></div></div>
-<div class="qh2"><div class="qst"><b class="val" id="qtOdds">0.225%</b><span>chance next quest</span><small id="qtOddsNote"></small></div><div class="qst"><b class="val" id="qtSoFar">0%</b><span>chance so far</span></div></div>
+<div class="qh2"><div class="qst"><b class="val" id="qtOdds">0.225%</b><span>chance next quest</span><small id="qtOddsNote"></small></div><div class="qst"><b class="val" id="qtSoFar">0%</b><span>progress to average</span></div></div>
 </div>
 <div class="qprog"><div class="qbar"><i id="qtBarFill" style="width:0%"></i></div><b id="qtBarPct" hidden>0%</b></div>
 <p id="qtBarNote"></p><span id="qtSoFarNote" hidden></span>
@@ -8418,7 +8418,7 @@ $("evHist").addEventListener("click",ev2=>{
 /* ---------- gempic tracker ---------- */
 const GP=0.004,GP_LOG_MAX=3000,GP_DAY=864e5,GP_QUICK=[1,5,10,25,50,100],GP_COSTSTEP=5;
 const gpNum=v=>Math.max(0,Math.floor(Number(v))||0);
-const gpP=x=>x?1-(1-GP)*(1-GP):GP;
+const gpP=x=>x?0.008:GP;
 const gpPct=(p,d)=>Number((p*100).toFixed(d))+"%";
 const gpWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
 function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,setId:String(d.setId||"").slice(0,24),start:+d.start||0,seq:gpNum(d.seq),
@@ -8451,7 +8451,9 @@ function renderGempic(){
   if(typeof gpSetRender==="function")gpSetRender();
   const q=gpSum(),next=gpP(gp.reroll),ex=1/next;
   let miss=1;gp.r.forEach(e=>miss*=1-gpP(e.x));
-  const pct=(1-miss)*100;
+  const real=(1-miss)*100;
+  let sum=0;gp.r.forEach(e=>sum+=gpP(e.x));
+  const pct=sum*100;
   $("gpRolls").textContent=nfmt(q.n);
   $("gpRollsNote").textContent=(q.rr&&q.rr<q.n)?nfmt(q.rr)+" with reroll":"";
   $("gpGems").textContent=nfmt(q.gems);
@@ -8460,7 +8462,7 @@ function renderGempic(){
   $("gpOddsNote").textContent="About 1 in "+nfmt(Math.round(ex))+" rolls";
   $("gpSoFar").textContent=Number(pct.toFixed(1))+"%";
   $("gpBarFill").style.width=Math.min(100,pct).toFixed(1)+"%";
-  $("gpBarNote").textContent=q.n?"There is a "+Number(pct.toFixed(1))+"% chance you have gotten at least one gempic in your "+nfmt(q.n)+" roll"+(q.n===1?"":"s")+".":"Add rolls to see your chance of a gempic build up.";
+  $("gpBarNote").textContent=q.n?"You are "+Number(pct.toFixed(1))+"% of the way to the average of about "+nfmt(Math.round(ex))+" rolls per gempic ("+nfmt(q.n)+" rolls so far)":"Add rolls to see your progress toward the average.";
   const two="each roll gets two chances at "+gpPct(GP,1)+", so "+gpPct(next,3)+" per roll.";
   $("gpExpNote").textContent="Average over many rolls"+(gp.reroll?" with reroll on":"")+", about "+nfmt(Math.round(ex))+" rolls per gempic.";
   $("gpExp").innerHTML='<tr><th>Box</th><th class="c">Pulls</th><th class="r">Gems</th></tr>'+[5,10,20,30,40,50,60].map(c=>`<tr><td class="b">${c} gem artist</td><td class="c">${nfmt(Math.round(ex))}</td><td class="r b">${nfmt(Math.round(ex*c))}</td></tr>`).join("");
@@ -9681,7 +9683,9 @@ function renderQuest(){
   qtSetRender();
   const q=qtSum(),next=qtP(qt.reroll,qt.boost);
   let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x,e.b));
-  const pct=(1-miss)*100;
+  const real=(1-miss)*100;
+  let sum=0;qt.r.forEach(e=>sum+=qtP(e.x,e.b));
+  const pct=sum*100;
   $("qtQuests").textContent=nfmt(q.n);
   const last=qt.history.find(h=>h.typ!=="s"&&!(qt.exLy&&h.typ==="l"));
   $("qtQuestsNote").textContent=last?"Last pull: "+fmtD(last.t):"No pull logged yet";
@@ -9703,7 +9707,7 @@ function renderQuest(){
   /* progress */
   $("qtBarFill").style.width=Math.min(100,pct).toFixed(1)+"%";
   $("qtBarPct").textContent=Number(pct.toFixed(0))+"%";
-  $("qtBarNote").textContent=q.n?"There is a "+Number(pct.toFixed(1))+"% chance you have gotten at least one pull in your "+nfmt(q.n)+" quest"+(q.n===1?"":"s")+".":"Add quests to see your chance of a pull build up.";
+  $("qtBarNote").textContent=q.n?"You are "+Number(pct.toFixed(1))+"% of the way to the average of about "+nfmt(Math.round(1/next))+" quests per pull ("+nfmt(q.n)+" quests so far)":"Add quests to see your progress toward the average.";
   /* saved pulls */
   const H=qt.history;
   $("qtHistSum").textContent="Pull History"+(H.length?" ("+H.length+")":"");
