@@ -6375,7 +6375,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       try{const g=await sb.auth.getSession();tok=(g&&g.data&&g.data.session&&g.data.session.access_token)||""}catch(e){}
       if(!tok){setMsg("sdDbgMsg","Please sign in again to use the index check.","bad");return}
       const ac=new AbortController(),to=setTimeout(function(){ac.abort()},15000);
-      const qs=new URLSearchParams({q:q,hintA:$("sdHintA").value.slice(0,6),hintS:$("sdHintS").value.slice(0,6)});
+      const qs=new URLSearchParams({q:q,hintA:$("sdHintA").value.slice(0,6),hintS:$("sdHintS").value.slice(0,6),genre:$("sdGenre").value||"all"});
       let r;
       try{r=await fetch(SOUND_API_URL.replace(/\/+$/,"")+"/check?"+qs.toString(),{signal:ac.signal,headers:{Authorization:"Bearer "+tok}})}
       catch(e){clearTimeout(to);setMsg("sdDbgMsg",e.name==="AbortError"?"The server took too long.":"Can't reach the server right now.","bad");return}
@@ -6406,7 +6406,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
         const dc=Number(h.dupes)||0;
         if(dc>0)tags+='<span class="sdtag y">shares duplicate key with '+dc+" other"+(dc>1?"s":"")+" (only the best scorer is listed)</span>";
         if(!tags)tags='<span class="sdtag g">will show in results</span>';
-        html+='<div class="sdhit"><b>'+esc(String(h.title||""))+'</b><span class="a">'+esc(String(h.artist||""))+" \u00b7 #"+esc(String(h.id))+"</span>"+tags+"</div>";
+        html+='<div class="sdhit"><b>'+esc(String(h.title||""))+'</b><span class="a">'+esc(String(h.artist||""))+" \u00b7 #"+esc(String(h.id))+(h.genre?" \u00b7 "+esc(h.genre):"")+"</span>"+tags+"</div>";
       });
       out.innerHTML=html;
     }finally{dbgBusy=false}
