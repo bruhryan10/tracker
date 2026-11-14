@@ -4327,7 +4327,99 @@ sb.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="TOKEN_REFRESHE
 const $=id=>document.getElementById(id);
 const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ask=(msg,fn)=>{if(LS("tracker.noConfirm")==="1"&&!/database/i.test(msg)){fn();return}if(confirm(msg))fn()};
-const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}};
+const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);prefTouch(k)}catch(e){return null}};
+/* ---------- synced preferences (account level, saved in pass_state id 14) ----------
+   Personal settings and epic / set view choices follow the account across devices. localStorage stays as the fast local copy.
+   Each key carries a timestamp, so the newest change wins per key (firstSeen keeps the earliest date instead).
+   Filters, limits, Spotify settings, open/closed panels and the current tab/sub-tab stay on this device on purpose. */
+const PREF_KEYS=["theme","startTab","noConfirm","step.shiny","step.ads","step.gempic","step.quest","step.misc","firstSeen","epdone","set","setSort","setMode","nf","epcomp","epnh","hubShowHid"];
+let prefOn=false,prefTimer=null,prefTries=0,prefMeta={};
+const prefLoadMeta=()=>{try{prefMeta=JSON.parse(localStorage.getItem("tracker.prefT")||"{}")||{}}catch(e){prefMeta={}}};
+prefLoadMeta();
+function prefTouch(full){
+  const k=String(full).replace(/^tracker\./,"");
+  if(PREF_KEYS.indexOf(k)<0)return;
+  prefMeta[k]=Date.now();
+  try{localStorage.setItem("tracker.prefT",JSON.stringify(prefMeta))}catch(e){}
+  if(prefOn)prefSchedule(1200);
+}
+/* merge the server copy with this device: newest timestamp wins per key. Returns the map to save, the keys that changed here, and whether the server needs an update. */
+function prefMerge(srv){
+  const map=Object.assign({},srv||{}),changed=[];let push=false;
+  PREF_KEYS.forEach(k=>{
+    const lv=localStorage.getItem("tracker."+k),lt=+prefMeta[k]||0,s=srv&&srv[k];
+    if(k==="firstSeen"){
+      const a=+lv||0,b=s&&+s.v||0,m=a&&b?Math.min(a,b):(a||b);
+      if(!m)return;
+      const mv=String(m);
+      if(mv!==lv){localStorage.setItem("tracker.firstSeen",mv);changed.push(k)}
+      if(!s||s.v!==mv){map[k]={v:mv,t:Math.max(lt,s&&+s.t||0,1)};push=true}
+      return;
+    }
+    if(!s||typeof s!=="object"){
+      if(lv!==null){map[k]={v:lv,t:lt||1};push=true}
+      return;
+    }
+    if(lt>(+s.t||0)){
+      if(lv!==s.v){map[k]={v:lv,t:lt};push=true}
+    }else if(s.v!==lv){
+      if(s.v===null||s.v===undefined)localStorage.removeItem("tracker."+k);else localStorage.setItem("tracker."+k,String(s.v));
+      prefMeta[k]=+s.t||0;changed.push(k);
+    }
+  });
+  if(changed.length){try{localStorage.setItem("tracker.prefT",JSON.stringify(prefMeta))}catch(e){}}
+  return {map,changed,push};
+}
+/* update the in-memory copies that were read once when the page loaded */
+function prefApply(ks){
+  const g=k=>localStorage.getItem("tracker."+k);
+  ks.forEach(k=>{try{switch(k){
+    case "theme":{const t=g("theme");pfApplyTheme(t==="auto"?"auto":t==="light"?"light":"dark");try{pfRender()}catch(e){}break}
+    case "epdone":try{EPD=JSON.parse(g("epdone")||"{}")||{}}catch(e){EPD={}}break;
+    case "setSort":{const v=g("setSort");setSort=SET_SORTS.some(x=>x[0]===v)?v:"az";$("qtSetSort").value=$("gpSetSort").value=setSort;break}
+    case "nf":{const v=g("nf");nf=["nl","ly"].includes(v)?v:"num";[...$("nfBar").children].forEach(x=>x.classList.toggle("on",x.dataset.nf===nf));break}
+    case "epcomp":EP.comp=g("epcomp")!=="0";epCompSync();break;
+    case "epnh":EP.nh=g("epnh")!=="0";$("epNoHold").setAttribute("aria-checked",EP.nh);break;
+    case "hubShowHid":hubShowHid=g("hubShowHid")==="1";$("hubShowHid").checked=hubShowHid;break;
+    case "step.shiny":$("shStep").value=g("step.shiny")||g("step.commons")||"1";break;
+    case "step.ads":$("adAmt").value=g("step.ads")||"1";break;
+    case "step.gempic":{const v=gpNum(g("step.gempic"));gpStep=v>=1&&v<=1000?v:1;$("gpAmt").value=gpStep;break}
+    case "step.quest":$("qtAmt").value=g("step.quest")||"1";break;
+    case "step.misc":$("msAmt").value=g("step.misc")||"1";break;
+  }}catch(e){}});
+  /* if the trackers are already showing (a late pull), redraw them */
+  try{if(ovReady&&ks.length){renderEpics();renderQuest();renderGempic();renderSets()}}catch(e){}
+}
+const prefRead=async()=>{
+  const r=await Promise.race([sb.from("pass_state").select("data").eq("id",14).maybeSingle(),new Promise((_,j)=>setTimeout(()=>j(new Error("timeout")),3000))]);
+  if(r.error)throw r.error;
+  return (r.data&&r.data.data&&r.data.data.p)||{};
+};
+async function prefInit(){
+  prefOn=false;prefLoadMeta();
+  if(!localStorage.getItem("tracker.firstSeen"))LS("tracker.firstSeen",String(Date.now()));
+  let srv;
+  try{srv=await prefRead()}catch(e){
+    /* offline or slow: keep working locally and try again shortly */
+    if(prefTries++<2)setTimeout(()=>{if(!prefOn)prefInit()},10000);
+    return;
+  }
+  const m=prefMerge(srv);
+  if(m.changed.length)prefApply(m.changed);
+  prefOn=true;
+  if(m.push)track(sb.from("pass_state").upsert({id:14,data:{v:1,p:m.map}},{onConflict:"user_id,id"}));
+}
+function prefSchedule(ms){clearTimeout(prefTimer);prefTimer=setTimeout(prefFlush,ms)}
+/* read-merge-write, so a device with older values for keys it did not touch cannot overwrite a newer change made elsewhere */
+async function prefFlush(){
+  if(!prefOn)return;
+  let srv;try{srv=await prefRead()}catch(e){return}
+  const m=prefMerge(srv);
+  if(m.changed.length)prefApply(m.changed);
+  if(m.push)await track(sb.from("pass_state").upsert({id:14,data:{v:1,p:m.map}},{onConflict:"user_id,id"}));
+}
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="hidden"&&prefOn&&prefTimer){clearTimeout(prefTimer);prefTimer=null;prefFlush()}});
+
 
 /* ---------- save status ---------- */
 let inflight=0,hadErr=false;
@@ -10781,6 +10873,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.8","2026-11-14",["Your personal settings now follow your account across devices: theme, start page, confirmation prompts, add-amount steps, epic done checkmarks, and epic and set view options."]],
 ["0.8.7","2026-11-09",["Profile: you can now change your display name. Your login name stays the same."]],
 ["0.8.6","2026-11-07",["Updated Artist Guesser rankings for R&B, Hip-Hop, Pop, Rock and Indie.","Daily Games: added tracking stats.","Misc: Notes now has multiple tabs, and the Counter supports multiple named counters.","Quest Tracker: pull history luck now uses the odds of the rarity you pulled.","Minor updates and bug fixes."]],
 ["0.8.5","2026-11-01",["Mobile navigation bar UI refresh.","Epic tracker UI refresh.","Many more UI updates.","Minor bug fixes."]],
@@ -10936,8 +11029,9 @@ async function checkUser(){
     showName(dispName(data.session.user));$("nmNew").value=dispName(data.session.user);
     isRyan=em.split("@")[0].toLowerCase()==="ryan";bkVis();await loadSoundMode();applyArtistLock();
     const prev=LS("tracker.uid");
-    if(prev&&prev!==uid)["pass","event","gempic","quest","misc","miscActive","buys","notes","notesHtml","notesTabs","notesActive","nav","rarity","numberless","set","startTab"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
+    if(prev&&prev!==uid)["pass","event","gempic","quest","misc","miscActive","buys","notes","notesHtml","notesTabs","notesActive","nav","rarity","numberless","set","startTab","epdone","setSort","setMode","nf","epcomp","epnh","hubShowHid","theme","noConfirm","step.shiny","step.ads","step.gempic","step.quest","step.misc","firstSeen","prefT"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
+    await prefInit();
   }catch(e){}
 }
 /* Home only on the first load of a browser session (or right after logging in); a refresh keeps the tab you were on. */
