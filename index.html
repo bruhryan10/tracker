@@ -6467,7 +6467,7 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
       try{const g=await sb.auth.getSession();tok=(g&&g.data&&g.data.session&&g.data.session.access_token)||""}catch(e){}
       if(!tok){setMsg("sdDbgMsg","Please sign in again to use the index check.","bad");return}
       const ac=new AbortController(),to=setTimeout(function(){ac.abort()},15000);
-      const qs=new URLSearchParams({q:q,hintA:$("sdHintA").value.slice(0,6),hintS:$("sdHintS").value.slice(0,6),genre:$("sdGenre").value||"all"});
+      const qs=new URLSearchParams({q:q,hintA:$("sdHintA").value.slice(0,6),hintS:$("sdHintS").value.slice(0,6),genre:"all"}); /* index check always searches every genre, whatever the Genre dropdown says */
       let r;
       try{r=await fetch(SOUND_API_URL.replace(/\/+$/,"")+"/check?"+qs.toString(),{signal:ac.signal,headers:{Authorization:"Bearer "+tok}})}
       catch(e){clearTimeout(to);setMsg("sdDbgMsg",e.name==="AbortError"?"The server took too long.":"Can't reach the server right now.","bad");return}
