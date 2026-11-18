@@ -6499,7 +6499,9 @@ document.addEventListener("visibilitychange",sdAccWake);window.addEventListener(
   function render(n,total,secs,res,margin){
     const top=res[0];
     window.sdLast={secs:Number(secs.toFixed(2)),top:res.slice(0,3).map(function(r){return {title:r.title,artist:r.artist,score:Number(r.score.toFixed(3))}})};
-    const closeN=res.filter(function(r){return r.score>=top.score-margin}).length;
+    const topArt=String(top.artist||"").trim().toLowerCase();
+    /* near-ties by the same artist (other-language versions, remasters, live cuts) are the same song, so they don't block a clear match */
+    const closeN=res.filter(function(r){return r.score>=top.score-margin&&(r===top||String(r.artist||"").trim().toLowerCase()!==topArt)}).length;
     const clear=top.score>=0.8&&closeN===1;
     if(!clear)sdRptShow(true);
     const head=(total>1?'Best of '+total+' clips (clip '+n+')':'Clip')+' \u00b7 '+secs.toFixed(2)+'s of audio';
