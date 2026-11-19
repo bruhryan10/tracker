@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><title>Soundmap Helper</title>
+<link rel="preconnect" href="https://ukgsgiqajqiymaueokeq.supabase.co" crossorigin><link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <script>try{var _t=localStorage.getItem("tracker.theme");if(_t!=="auto")document.documentElement.setAttribute("data-theme",_t==="light"?"light":"dark")}catch(e){}</script>
 <meta property="og:type" content="website"><meta property="og:site_name" content="Soundmap Helper">
 <meta property="og:title" content="Soundmap Helper"><meta property="og:description" content="Helper for soundmap">
@@ -1149,84 +1150,84 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 
 /* ---------- gempic tracker (redesign: matches home + shiny + epic) ---------- */
 #gpTop,#qtTop{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc{--c:var(--ac);position:relative;box-sizing:border-box;min-width:0;overflow:hidden;padding:16px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i s";column-gap:14px;align-items:center;align-content:center;transition:border-color .2s,box-shadow .2s}
-@media (hover:hover){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc:hover{border-color:var(--c);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .sci{--c:inherit;grid-area:i;width:52px;height:52px;border-radius:14px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .sci svg{width:28px;height:28px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .scv{grid-area:v;margin-top:2px;font-size:clamp(26px,4.4vw,34px);color:var(--tx)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .scs{grid-area:s;margin-top:2px;font-size:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc{--c:var(--ac);position:relative;box-sizing:border-box;min-width:0;overflow:hidden;padding:16px 18px;border-radius:14px;border:1px solid color-mix(in srgb,var(--c) 40%,var(--bd));background:linear-gradient(145deg,color-mix(in srgb,var(--c) 16%,var(--card)),var(--card) 75%);display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"i l" "i v" "i s";column-gap:14px;align-items:center;align-content:center;transition:border-color .2s,box-shadow .2s}
+@media (hover:hover){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc:hover{border-color:var(--c);box-shadow:0 4px 16px color-mix(in srgb,var(--c) 22%,transparent)}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .sci{--c:inherit;grid-area:i;width:52px;height:52px;border-radius:14px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .sci svg{width:28px;height:28px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .scl{grid-area:l;font-size:14px;font-weight:500;color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .scv{grid-area:v;margin-top:2px;font-size:clamp(26px,4.4vw,34px);color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .scs{grid-area:s;margin-top:2px;font-size:12px}
 @media (max-width:700px){#gpTop,#qtTop{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}#gpTop .gc:last-child,#qtTop .gc:last-child{grid-column:1/-1}}
 @media (max-width:520px){
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc{padding:12px;grid-template-areas:"i l" "v v" "s s";column-gap:10px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .sci{width:34px;height:34px;border-radius:10px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .sci svg{width:20px;height:20px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .scl{font-size:12px;font-weight:600;line-height:1.2}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gc .scv{margin-top:8px;font-size:clamp(22px,7vw,28px)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc{padding:12px;grid-template-areas:"i l" "v v" "s s";column-gap:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .sci{width:34px;height:34px;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .sci svg{width:20px;height:20px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .scl{font-size:12px;font-weight:600;line-height:1.2}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gc .scv{margin-top:8px;font-size:clamp(22px,7vw,28px)}
 }
 
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gsec{margin-top:14px;padding:16px;border-radius:14px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px;min-width:0}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .sci{width:42px;height:42px;border-radius:12px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .gt{min-width:0;flex:1}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .gt b{display:block;font-size:17px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .gt span{display:block;font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .gx{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none}
-@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gsec{padding:12px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gh .gx .gtxt{display:none}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gsec{margin-top:14px;padding:16px;border-radius:14px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh{display:flex;align-items:center;gap:12px;margin-bottom:14px;min-width:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .sci{width:42px;height:42px;border-radius:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .gt{min-width:0;flex:1}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .gt b{display:block;font-size:17px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .gt span{display:block;font-size:13px;color:var(--mut);margin-top:2px;line-height:1.35}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .gx{margin-left:auto;display:flex;gap:8px;align-items:center;flex:none}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gsec{padding:12px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gh .gx .gtxt{display:none}}
 
 /* settings panels */
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gpan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.3fr);gap:12px}
-@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gpan{grid-template-columns:1fr}}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gp1{box-sizing:border-box;min-width:0;margin:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,background .15s,box-shadow .15s}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gp1>.gl{font-size:13px;font-weight:500;color:var(--mut);margin-bottom:10px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gcost{display:flex;gap:8px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gcost input{flex:1;width:auto;min-width:0;height:46px;padding:0 14px;font-size:20px;font-weight:600;border-radius:10px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gcost button{margin:0;flex:none;width:46px;height:46px;padding:0;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:600;line-height:1}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gcost .gplus{background:var(--ac);color:#fff;border-color:var(--ac)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gcost .gplus:hover{filter:brightness(1.1)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) label.grr{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--tx);font-size:15px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) label.grr:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) label.grr:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .grr input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .grr input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .grr input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .grr b{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .grr small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gq button{margin:0;height:46px;padding:0;border-radius:10px;font-size:15px;font-weight:600}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gq button.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gpan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr) minmax(0,1.3fr);gap:12px}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gpan{grid-template-columns:1fr}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gp1{box-sizing:border-box;min-width:0;margin:0;padding:14px;border-radius:12px;background:color-mix(in srgb,var(--bg) 70%,var(--card));border:1px solid var(--bd);transition:border-color .15s,background .15s,box-shadow .15s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gp1>.gl{font-size:13px;font-weight:500;color:var(--mut);margin-bottom:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gcost{display:flex;gap:8px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gcost input{flex:1;width:auto;min-width:0;height:46px;padding:0 14px;font-size:20px;font-weight:600;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gcost button{margin:0;flex:none;width:46px;height:46px;padding:0;border-radius:10px;display:grid;place-items:center;font-size:22px;font-weight:600;line-height:1}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gcost .gplus{background:var(--ac);color:#fff;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gcost .gplus:hover{filter:brightness(1.1)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) label.grr{display:flex;gap:12px;align-items:flex-start;cursor:pointer;color:var(--tx);font-size:15px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) label.grr:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) label.grr:has(input:checked){border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card));box-shadow:0 0 0 1px color-mix(in srgb,var(--ac) 45%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .grr input{-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;padding:0;border-radius:7px;border:1.5px solid color-mix(in srgb,var(--mut) 55%,var(--bd));background:var(--bg);cursor:pointer;transition:background .15s,border-color .15s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .grr input:checked{background:var(--ac) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/72% no-repeat;border-color:var(--ac)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .grr input:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .grr b{display:block;font-size:15px;font-weight:600;line-height:1.3;margin-top:2px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .grr small{display:block;font-size:12.5px;color:var(--mut);margin-top:6px;line-height:1.4}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gq{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gq button{margin:0;height:46px;padding:0;border-radius:10px;font-size:15px;font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gq button.on{background:var(--ac);color:#fff;border-color:var(--ac);box-shadow:0 3px 12px color-mix(in srgb,var(--ac) 40%,transparent)}
 
 /* action row */
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:12px;margin-top:12px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb{margin:0;box-sizing:border-box;min-height:48px;padding:8px 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:600;line-height:1.2;text-align:center;background:color-mix(in srgb,var(--bg) 70%,var(--card));color:var(--tx);border:1px solid var(--bd)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.go{font-size:16px;color:#fff;border-color:#8b5cf6;background:linear-gradient(135deg,#8b5cf6,#6d4ae8);box-shadow:0 4px 16px color-mix(in srgb,#8b5cf6 38%,transparent)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.go:hover{filter:brightness(1.12)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.hit svg{color:#c084fc}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb:disabled{opacity:.5;cursor:not-allowed}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.sm{min-height:38px;padding:0 14px;font-size:13px;border-radius:10px}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.sq{width:38px;padding:0}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.sq svg{transition:transform .2s}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.sq[aria-expanded="false"] svg{transform:rotate(180deg)}
-@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gact{grid-template-columns:1fr 1fr}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.go{grid-column:1/-1;order:-1}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gb.hit{grid-column:1/-1;order:3}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:12px;margin-top:12px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb{margin:0;box-sizing:border-box;min-height:48px;padding:8px 14px;border-radius:12px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:600;line-height:1.2;text-align:center;background:color-mix(in srgb,var(--bg) 70%,var(--card));color:var(--tx);border:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb svg{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.go{font-size:16px;color:#fff;border-color:#8b5cf6;background:linear-gradient(135deg,#8b5cf6,#6d4ae8);box-shadow:0 4px 16px color-mix(in srgb,#8b5cf6 38%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.go:hover{filter:brightness(1.12)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.hit svg{color:#c084fc}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb:disabled{opacity:.5;cursor:not-allowed}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.sm{min-height:38px;padding:0 14px;font-size:13px;border-radius:10px}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.sq{width:38px;padding:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.sq svg{transition:transform .2s}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.sq[aria-expanded="false"] svg{transform:rotate(180deg)}
+@media (max-width:820px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gact{grid-template-columns:1fr 1fr}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.go{grid-column:1/-1;order:-1}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gb.hit{grid-column:1/-1;order:3}}
 
 /* tables + pills */
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl{border:1px solid var(--bd);border-radius:12px;overflow:auto;max-width:100%;background:color-mix(in srgb,var(--bg) 70%,var(--card))}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl table{width:100%;border-collapse:collapse}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl th{position:sticky;top:0;z-index:1;padding:11px 16px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;white-space:nowrap;background:color-mix(in srgb,var(--mut) 13%,var(--card));border:0}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl td{padding:10px 16px;font-size:14px;text-align:left;white-space:nowrap;border:0;border-top:1px solid var(--bd)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl .c{text-align:center}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl .r{text-align:right}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl td.b{font-weight:600}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl td.gempty{text-align:center;color:var(--mut);padding:20px 16px;white-space:normal}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl .x{margin:0!important}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .rrm{display:none}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:13px;font-weight:500;background:color-mix(in srgb,var(--mut) 16%,var(--bg));color:var(--tx)}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres.hit{background:color-mix(in srgb,#34d399 18%,var(--bg));color:#34d399;font-weight:600}
-:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres.hit::before{background:#34d399}
-@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl th,:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gtbl td{padding:9px 8px;font-size:12.5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) #gpLog td:nth-child(2){white-space:normal;min-width:84px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) #gpLog .rrc{display:none}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) #gpLog .rrm{display:inline;color:var(--ac)}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) #gpLog th{letter-spacing:.04em}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres{font-size:12px;padding:2px 9px 2px 7px;gap:5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc) .gres::before{width:7px;height:7px}}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl{border:1px solid var(--bd);border-radius:12px;overflow:auto;max-width:100%;background:color-mix(in srgb,var(--bg) 70%,var(--card))}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl table{width:100%;border-collapse:collapse}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl th{position:sticky;top:0;z-index:1;padding:11px 16px;font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);text-align:left;white-space:nowrap;background:color-mix(in srgb,var(--mut) 13%,var(--card));border:0}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl td{padding:10px 16px;font-size:14px;text-align:left;white-space:nowrap;border:0;border-top:1px solid var(--bd)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl .c{text-align:center}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl .r{text-align:right}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl td.b{font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl tr:hover td{background:color-mix(in srgb,var(--ac) 8%,transparent)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl td.gempty{text-align:center;color:var(--mut);padding:20px 16px;white-space:normal}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl .x{margin:0!important}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .rrm{display:none}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres{display:inline-flex;align-items:center;gap:7px;padding:3px 11px 3px 9px;border-radius:999px;font-size:13px;font-weight:500;background:color-mix(in srgb,var(--mut) 16%,var(--bg));color:var(--tx)}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--mut);flex:none}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres.hit{background:color-mix(in srgb,#34d399 18%,var(--bg));color:#34d399;font-weight:600}
+:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres.hit::before{background:#34d399}
+@media (max-width:520px){:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl th,:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gtbl td{padding:9px 8px;font-size:12.5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) #gpLog td:nth-child(2){white-space:normal;min-width:84px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) #gpLog .rrc{display:none}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) #gpLog .rrm{display:inline;color:var(--ac)}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) #gpLog th{letter-spacing:.04em}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres{font-size:12px;padding:2px 9px 2px 7px;gap:5px}:is(#tab-gempic,#tab-quest,#tab-pass,#tab-event,#tab-map,#tab-sound,#tab-daily,#tab-misc,#tab-shiny) .gres::before{width:7px;height:7px}}
 
 /* ---------- pass tracker (redesign: same building blocks as gempic) ---------- */
 :is(#tab-pass,#tab-event,#tab-map){max-width:960px;margin:0 auto}
@@ -1255,10 +1256,10 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 :is(#tab-pass,#tab-event,#tab-map) .pSw .pst small{display:block;font-size:12.5px;color:var(--mut);margin-top:3px;line-height:1.35}
 
 /* item badges */
-:is(#tab-pass,#tab-event,#tab-map) .pit{--c:var(--ac);display:inline-flex;align-items:center;gap:9px;padding:4px 14px 4px 5px;border-radius:999px;font-size:13.5px;font-weight:600;line-height:1.2;color:color-mix(in srgb,var(--c) 72%,var(--tx));background:color-mix(in srgb,var(--c) 16%,var(--bg));border:1px solid color-mix(in srgb,var(--c) 30%,transparent);white-space:nowrap}
-:is(#tab-pass,#tab-event,#tab-map) .pit i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 28%,transparent)}
-:is(#tab-pass,#tab-event,#tab-map) .pit i svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-:is(#tab-pass,#tab-event,#tab-map) .pit b{margin-left:2px;color:var(--tx);font-weight:700}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit{--c:var(--ac);display:inline-flex;align-items:center;gap:9px;padding:4px 14px 4px 5px;border-radius:999px;font-size:13.5px;font-weight:600;line-height:1.2;color:color-mix(in srgb,var(--c) 72%,var(--tx));background:color-mix(in srgb,var(--c) 16%,var(--bg));border:1px solid color-mix(in srgb,var(--c) 30%,transparent);white-space:nowrap}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;flex:none;color:var(--c);background:color-mix(in srgb,var(--c) 28%,transparent)}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit i svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit b{margin-left:2px;color:var(--tx);font-weight:700}
 :is(#tab-pass,#tab-event,#tab-map) .gtbl td .pit{font-size:13px}
 
 /* add entries */
@@ -1360,11 +1361,13 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 #tab-event #evGrid .pcat:last-child:nth-child(odd){grid-column:1/-1}
 #tab-event .pact{grid-template-columns:repeat(2,minmax(0,1fr))}
 #tab-event .pact #evLeafAdd{grid-column:1/-1;order:-1}
-#tab-event .evRs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-#tab-event .evRs .gp1{padding:12px}
-#tab-event .evRs .gp1>b{display:block;font-size:clamp(18px,5.4vw,26px);font-weight:700;line-height:1.15;overflow:hidden;text-overflow:ellipsis}
-#tab-event .evRl{margin-top:12px;max-height:320px}
-#tab-event .evAgo{font-size:12px;color:var(--mut)}
+/* recent activity: the same Last 24 Hours panel in the Pass, Event, Gempic and Quest trackers */
+.actRs{display:grid;grid-template-columns:repeat(var(--n,3),minmax(0,1fr));gap:10px}
+.actRs .gp1{padding:12px}
+.actRs .gp1>b{display:block;font-size:clamp(18px,5.4vw,26px);font-weight:700;line-height:1.15;overflow:hidden;text-overflow:ellipsis}
+.actRl{margin-top:12px;max-height:320px}
+.actAgo{font-size:12px;color:var(--mut)}
+.actRl td .pill{margin-left:6px}
 @media (max-width:820px){#tab-event .pact #evUndo{grid-column:auto}}
 #evShopTot b.neg{color:var(--neg)}
 #tab-event .evsh{margin:14px 0 8px;font-size:13px;font-weight:600;color:var(--mut)}
@@ -1399,8 +1402,8 @@ div.tabs.tabs.editing:not(.icons) .navbtns>button{padding-top:22px}
 :is(#tab-pass,#tab-event,#tab-map) .pcat .gcost input{flex:1 1 100%;width:100%;height:40px;font-size:18px;padding:0 10px}
 :is(#tab-pass,#tab-event,#tab-map) .pcat .gcost button{flex:1 1 0;width:auto;height:36px;font-size:20px}
 :is(#tab-pass,#tab-event,#tab-map) .pact,:is(#tab-pass,#tab-event,#tab-map) .pact2{grid-template-columns:1fr}
-:is(#tab-pass,#tab-event,#tab-map) .pit i{display:none}
-:is(#tab-pass,#tab-event,#tab-map) .pit{padding-left:11px}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit i{display:none}
+:is(#tab-pass,#tab-event,#tab-map,#tab-gempic,#tab-quest) .pit{padding-left:11px}
 :is(#tab-pass,#tab-event,#tab-map) .gtbl .pit{white-space:normal;font-size:12px}
 :is(#tab-pass,#tab-event,#tab-map) .pwy{display:none}
 :is(#tab-pass,#tab-event,#tab-map) #pOdds td:first-child,:is(#tab-pass,#tab-event,#tab-map) #passLog td:nth-child(3){white-space:normal;min-width:0}
@@ -3600,6 +3603,23 @@ body.guest .top #guestBack .lgS{display:inline}
 @media (max-width:400px){
 #tab-gempic #gpSub button,#tab-quest #qtSub button{flex-direction:column;gap:2px;height:52px;font-size:12.5px}
 }
+/* mobile: put the sync status and profile button on the Soundmap Helper line when they fit; if not, they wrap below as before */
+@media (max-width:700px){
+.top .r{flex:1 1 auto;justify-content:flex-end}
+.top .brand{flex:0 1 auto}
+.top .r #sync{margin-right:auto}
+}
+/* mobile: the status dot sits just left of the account button; the "Saved" text only shows briefly after a change */
+@keyframes syncFade{0%,60%{color:var(--mut);font-size:12px}100%{color:transparent;font-size:0}}
+@keyframes syncGap{0%,60%{margin-right:6px}100%{margin-right:0}}
+@media (max-width:700px){
+.top .r #sync{margin-right:0;margin-left:auto}
+#sync.idle,#sync.ok{pointer-events:none}
+#sync.idle{font-size:0;color:transparent}
+#sync.idle::before{margin-right:0}
+#sync.ok{animation:syncFade 3s ease forwards}
+#sync.ok::before{animation:syncGap 3s ease forwards}
+}
 </style>
 </head><body><main>
 
@@ -3648,12 +3668,10 @@ body.guest .top #guestBack .lgS{display:inline}
 <details id="priceBox" style="--c:#f5b83d"><summary><span class="sci"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></span><span class="dsum"><b>Prices</b></span></summary>
 <div class="grid" id="prices"></div>
 </details>
-<details id="histBox" style="--c:#94a3b8"><summary><span class="sci"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></span><span class="dsum"><b id="histTitle">Recent Activity</b></span></summary>
-<div id="reportBody"></div>
-<h2 style="margin:16px 0 0">All changes</h2>
-<ul class="log" id="hist"></ul>
-<button class="small" id="clearLog" type="button">Clear history</button>
-</details>
+<section class="card gsec actBox" id="shActBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b id="histTitle">Last 2 Days</b><span>Older entries drop off automatically</span></div><div class="gx"><button type="button" class="gb sm" id="clearLog" aria-label="Clear the history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button><button type="button" class="gb sm sq actTg" aria-expanded="true" aria-label="Collapse last 2 days"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="actBody"><div id="shAct"></div></div>
+</section>
 <div class="note" id="days"></div>
 
 </div>
@@ -3736,9 +3754,9 @@ body.guest .top #guestBack .lgS{display:inline}
 <div class="note" id="gpFNote">Saving adds it to your history and resets your roll counters.</div>
 <div class="qfa"><button type="button" class="gb go" id="gpFSave">Save</button><button type="button" class="gb" id="gpFCancel">Cancel</button></div>
 </section>
-<section class="card gsec" id="gpDayBox">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="gpDaySub"></span></div></div>
-<div id="gpDay"></div>
+<section class="card gsec actBox" id="gpDayBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="gpDaySub"></span></div><div class="gx"><button type="button" class="gb sm sq actTg" aria-expanded="true" aria-label="Collapse last 24 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="actBody"><div id="gpDay"></div></div>
 </section>
 </div>
 <div class="gpv" id="gpv-sets" hidden>
@@ -3845,6 +3863,10 @@ body.guest .top #guestBack .lgS{display:inline}
 <div class="qcrow qcbt"><button type="button" class="gb go" id="qtCoinAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="qtCoinAddT">Add Coins</span></button><button type="button" class="gb sq" id="qtCoinUndo" aria-label="Undo last add" title="Undo last add"><svg viewBox="0 0 24 24"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></button><button type="button" class="gb sq" id="qtCoinReset" aria-label="Reset coins" title="Reset coins" style="color:#f87171;border-color:color-mix(in srgb,#ef4444 55%,var(--bd))"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg></button></div>
 <div class="note" id="qtCoinNote"></div>
 </section>
+<section class="card gsec actBox" id="qtActBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="qtActSub"></span></div><div class="gx"><button type="button" class="gb sm sq actTg" aria-expanded="true" aria-label="Collapse last 24 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="actBody"><div id="qtAct"></div></div>
+</section>
 </div>
 <div class="qtv" id="qtv-sets" hidden>
 <section class="card gsec" id="qtSetsBox">
@@ -3938,6 +3960,11 @@ body.guest .top #guestBack .lgS{display:inline}
 </section>
 </div>
 
+<section class="card gsec actBox" id="passActBox">
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="passActSub"></span></div><div class="gx"><button type="button" class="gb sm sq actTg" aria-expanded="true" aria-label="Collapse last 24 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="actBody"><div id="passAct"></div></div>
+</section>
+
 <section class="card gsec" id="passCtl">
 <div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></span><div class="gt"><b>Pass Tracker Settings</b></div><div class="gx"><button type="button" class="gb sm sq" id="passCtlToggle" aria-expanded="true" aria-label="Minimize settings"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
 <div id="passCtlBody"><div class="gpan pset">
@@ -3985,7 +4012,7 @@ body.guest .top #guestBack .lgS{display:inline}
 <div class="pTot" id="evShopTot"></div>
 </section>
 <section class="card gsec" id="evRecentBox">
-<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 3 Hours</b><span id="evRecentSub"></span></div><div class="gx"><button type="button" class="gb sm" id="evRecentReset" aria-label="Clear the last 3 hours history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button><button type="button" class="gb sm sq" id="evRecentToggle" aria-expanded="true" aria-label="Collapse last 3 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
+<div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div class="gt"><b>Last 24 Hours</b><span id="evRecentSub"></span></div><div class="gx"><button type="button" class="gb sm" id="evRecentReset" aria-label="Clear the last 24 hours history"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Reset</button><button type="button" class="gb sm sq" id="evRecentToggle" aria-expanded="true" aria-label="Collapse last 24 hours"><svg viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg></button></div></div>
 <div id="evRecentBody"><div id="evRecent"></div></div>
 </section>
 <section class="card gsec" id="evHistBox">
@@ -4467,6 +4494,20 @@ async function sbFetch(url,opts){
 }
 const sb=supabase.createClient(SB_URL,SB_KEY,{global:{fetch:sbFetch}});
 sb.auth.onAuthStateChange(function(ev){if(ev==="SIGNED_IN"||ev==="TOKEN_REFRESHED")sbDeny=0});
+/* pass_state reads: one request for every row instead of one request per tracker.
+   psBegin() starts a shared fetch, each loader calls psGet(id) and reads its row from it, psEnd() drops it so the next refresh fetches fresh data.
+   With no shared fetch running, psGet falls back to the old single-row request. */
+let psP=null;
+const psBegin=()=>{const p=Promise.resolve(sb.from("pass_state").select("id,data")).catch(e=>({data:null,error:e}));psP=p;setTimeout(()=>{if(psP===p)psP=null},8000)};
+const psEnd=()=>{psP=null};
+const psGet=id=>{
+  if(!psP)return sb.from("pass_state").select("data").eq("id",id).maybeSingle();
+  return psP.then(r=>{
+    if(r.error)return{data:null,error:r.error};
+    const row=(r.data||[]).find(x=>x.id===id);
+    return{data:row?{data:row.data}:null,error:null};
+  });
+};
 const $=id=>document.getElementById(id);
 const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const ask=(msg,fn)=>{if(LS("tracker.noConfirm")==="1"&&!/database/i.test(msg)){fn();return}if(confirm(msg))fn()};
@@ -4566,7 +4607,13 @@ document.addEventListener("visibilitychange",()=>{if(document.visibilityState===
 
 /* ---------- save status ---------- */
 let inflight=0,hadErr=false;
-function setStatus(t,bad){const el=$("sync");el.textContent=t;el.className=(bad?"bad":"")+(t==="Saving..."||t==="Loading..."?" busy":"")}
+/* "Saved" is only worth showing after a data change: ok = saved after a change (fades out on mobile), idle = nothing was changed (hidden on mobile) */
+let syncChg=false;
+function setStatus(t,bad){const el=$("sync");el.textContent=t;
+  let c=(bad?"bad":"")+(t==="Saving..."||t==="Loading..."?" busy":"");
+  if(t==="Saving...")syncChg=true;
+  else if(t==="Saved"){c+=syncChg?" ok":" idle";syncChg=false}
+  el.className=c}
 /* wRev counts every save; loaders compare it before/after their fetch so a slow refresh can never overwrite a change made while it was in flight.
    wChain runs saves one at a time, in order, so two quick taps can't reach the database out of order (last write wins with stale data). */
 let wRev=0,wChain=Promise.resolve();const wLoaded=new Set();
@@ -4897,7 +4944,7 @@ function renderStats(){
     ["1:1 Profit",fmt(r.profit11),0,"#a78bfa",SHI.gem,"Estimated profit from 1:1 + 1k shinies"],
     ["Sold Profit",fmt(r.sold),0,"#f5b83d",SHI.coins,"Total from all sold items"]
   ];
-  $("outputs").innerHTML=C.map(([l,v,sg,c,ic,sub])=>`<div class="sc" style="--c:${c}"><div class="sct"><span class="sci">${ic}</span><span class="scl">${l}</span></div><div class="scv${sg<0?" neg":""}">${v}</div></div>`).join("");
+  $("outputs").innerHTML=C.map(([l,v,sg,c,ic,sub])=>`<div class="sc" style="--c:${c}"><div class="sct"><span class="sci">${ic}</span><span class="scl">${l}</span></div><div class="scv val${sg<0?" neg":""}">${v}</div></div>`).join("");
 }
 function calc(){
   updateLabels();
@@ -4906,49 +4953,42 @@ function calc(){
   const card=([l,v,sign])=>`<div class="card"><div class="lbl">${l}</div><div class="val ${sign>0?"pos":sign<0?"neg":""}">${v}</div></div>`;
   renderStats();
   $("invOut").innerHTML=[["Shinies Remaining",remaining,0],["Total Sales",fmt(total)],["Cost",fmt(cost)]].map(card).join("");
+  try{if(typeof shFxScan==="function")shFxScan()}catch(e){}
   $("days").textContent=s.start?`Day ${days} since ${s.start} (updates automatically with today's date)`:"Start date is set automatically when you add your first entry";
 }
 
 /* ---------- history log ---------- */
 let log=[],pend=null,pendTimer=null;
-function renderReport(){
-  const since=Date.now()-864e5;
-  const ents=log.filter(e=>e.t>=since).slice().reverse();
-  const by={};
-  ents.forEach(e=>{const b=by[e.k]=by[e.k]||{from:e.from,to:e.to,n:0};b.to=e.to;b.n++});
-  const keys=fields.map(f=>f[0]).filter(k=>by[k]&&String(by[k].from)!==String(by[k].to));
-  const body=$("reportBody");
-  if(!keys.length){body.innerHTML='<h2 style="margin:4px 0 0">Daily report, last 24 hours</h2><div class="empty">'+(ents.length?"No net changes in the last 24 hours.":"No changes in the last 24 hours.")+'</div>';return}
-  const sg=d=>d>0?"+":d<0?"-":"";
-  const money=v=>(v<0?"-":"")+"$"+Math.abs(Math.round(v)).toLocaleString("en-US");
-  const plain=v=>Number(v).toLocaleString("en-US");
-  const dl=(d,txt)=>d?`<span class="dl ${d>0?"pos":"neg"}">${sg(d)}${txt}</span>`:"";
-  const name=k=>k==="oneOne"?"1:1 + "+short(num("oneOnePrice")):labelOf(k);
-  const rows=keys.map(k=>{
-    const b=by[k],d=Number(b.to)-Number(b.from),ok=b.from!==""&&b.to!==""&&!isNaN(d);
-    return `<div class="rc"><div class="nm">${esc(name(k))}</div><div class="chg"><span>${esc(b.from)} \u2192 ${esc(b.to)}</span>${ok?dl(d,plain(Math.abs(d))):""}</div></div>`;
-  }).join("");
-  const st0=Object.assign({},s);keys.forEach(k=>{st0[k]=by[k].from});
-  const r0=results(st0),r1=results(s);
-  const eff=[["Net Gain",r0.net,r1.net,true],["Shinies Remaining",r0.remaining,r1.remaining,false]]
-    .filter(x=>x[1]!==x[2])
-    .map(([l,a,b,m])=>{
-      const f=m?money:plain,d=b-a;
-      return `<div class="rc"><div class="nm">${l}</div><div class="chg"><span>${f(a)} \u2192 ${f(b)}</span>${dl(d,f(Math.abs(d)))}</div></div>`;
-    }).join("");
-  body.innerHTML=`<h2 style="margin:4px 0 0">Daily report, last 24 hours (${keys.length} changed)</h2><div class="rgrid">${rows}</div><h2 style="margin:14px 0 0">Effect on totals</h2><div class="rgrid w">${eff||'<div class="empty">No effect on totals.</div>'}</div>`;
+/* the shiny history only keeps the past 2 days, in memory and in the database */
+const SHINY_LOG_MS=2*864e5;let shinyPruneAt=0;
+function shinyPrune(force){
+  const now=Date.now(),cut=now-SHINY_LOG_MS;
+  log=log.filter(e=>e===pend||e.t>=cut);
+  if(!force&&now-shinyPruneAt<36e5)return;
+  shinyPruneAt=now;
+  try{Promise.resolve(sb.from("shiny_log").delete().lt("at",new Date(cut).toISOString())).catch(()=>{})}catch(e){}
 }
 function renderLog(){
-  renderReport();renderStats();
-  $("histTitle").textContent="Recent Activity ("+log.length+")";
-  const ul=$("hist");
-  if(!log.length){ul.innerHTML='<li class="empty">No changes logged yet.</li>';return}
-  ul.innerHTML=log.map(e=>{
-    const d=new Date(e.t).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"});
-    const df=Number(e.to)-Number(e.from);
-    const delta=(e.from!==""&&e.to!==""&&!isNaN(df)&&df!==0)?`<span class="dl ${df>0?"pos":"neg"}">${df>0?"+":""}${df.toLocaleString("en-US")}</span>`:"";
-    return `<li><div class="nm">${esc(labelOf(e.k))}</div><div class="chg">${esc(e.from)} \u2192 ${esc(e.to)}${delta}</div><div class="when">${d}</div></li>`;
-  }).join("");
+  shinyPrune();
+  renderStats();
+  const L=log.filter(e=>e&&e.t),since=Date.now()-SHINY_LOG_MS;
+  $("clearLog").disabled=!L.length;
+  /* net change over the window: first "from" and last "to" of each field, then the effect on the totals */
+  const by={};
+  L.slice().reverse().forEach(e=>{const b=by[e.k]=by[e.k]||{from:e.from,to:e.to};b.to=e.to});
+  const keys=fields.map(f=>f[0]).filter(k=>by[k]&&String(by[k].from)!==String(by[k].to));
+  let ng="$0",sr="0";
+  if(keys.length){
+    const st0=Object.assign({},s);keys.forEach(k=>{st0[k]=by[k].from});
+    const r0=results(st0),r1=results(s),dn=r1.net-r0.net,ds=r1.remaining-r0.remaining;
+    ng=(dn>0?"+":dn<0?"\u2212":"")+"$"+Math.abs(Math.round(dn)).toLocaleString("en-US");
+    sr=(ds>0?"+":ds<0?"\u2212":"")+Math.abs(Math.round(ds)).toLocaleString("en-US");
+  }
+  const rows=L.filter(e=>e.t>=since).map(e=>{
+    const df=Number(e.to)-Number(e.from),ok=e.from!==""&&e.to!==""&&!isNaN(df)&&df!==0;
+    return{t:e.t,a:`${esc(labelOf(e.k))}<br><span class="actAgo">${esc(e.from)} \u2192 ${esc(e.to)}</span>`,d:ok?df:null};
+  });
+  actPanel($("shAct"),{stats:[["Changes",rows.length],["Net gain",ng],["Shinies left",sr]],col:"Field",rows,max:200});
 }
 function logChange(k,from,to){
   if(String(from)===String(to))return;
@@ -4967,6 +5007,7 @@ async function flushLog(){
   const e=pend;pend=null;if(!e)return;
   const r=await track(sb.from("shiny_log").insert({at:new Date(e.t).toISOString(),field:e.k,old_value:String(e.from),new_value:String(e.to)}).select("id").single());
   if(r&&r.data)e.id=r.data.id;
+  shinyPrune();
 }
 document.addEventListener("visibilitychange",()=>{if(document.hidden)flushLog()});
 $("clearLog").onclick=()=>ask("Clear the history log?",async()=>{
@@ -5568,7 +5609,7 @@ function agSetPref(n){
 async function loadAgPref(){
   let d=null;const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",12).maybeSingle();
+    const r=await psGet(12);
     if(r.error)agPrefDB=false;else{agPrefDB=true;d=r.data&&r.data.data}
   }catch(e){agPrefDB=false}
   if(wStale(12,g0))return;
@@ -5905,11 +5946,12 @@ const isGuest=()=>document.body.classList.contains("guest");
 const canSound=()=>isRyan||(!!SOUND_API_URL&&(soundMode==="everyone"||(soundMode==="users"&&!isGuest())));
 /* label shown instead of the open Song Guesser: "Disabled" when access is switched off, otherwise "Coming Soon" */
 const soundSoonText=()=>"Disabled";
+function smCached(){try{const c=localStorage.getItem("tracker.soundMode");if(["off","ryan","users","everyone"].includes(c))soundMode=c}catch(e){}}
 async function loadSoundMode(){
   let ok=false;
   try{
     const {data,error}=await sb.from("app_settings").select("value").eq("key","sound_mode").maybeSingle();
-    if(!error&&data&&["off","ryan","users","everyone"].includes(data.value)){soundMode=data.value;ok=true}
+    if(!error&&data&&["off","ryan","users","everyone"].includes(data.value)){soundMode=data.value;ok=true;try{localStorage.setItem("tracker.soundMode",soundMode)}catch(e){}}
   }catch(e){}
   const sel=$("sdAccSel");if(sel)sel.value=soundMode;
   return ok;
@@ -7297,13 +7339,15 @@ const dgDay=t=>{const d=new Date(t);return d.getFullYear()+"-"+d.getMonth()+"-"+
 const dgToday=()=>dg.log.filter(e=>dgDay(e.t)===dgDay(Date.now())).length;
 function saveDailyGems(){
   if(!dg.start){const e=dgEarliest();if(e)dg.start=e}
+  /* the tracking start date is stamped above, so the older entries can go now */
+  actTrim(dg.log);actTrim(dg.ads&&dg.ads.log);actTrim(dg.sp&&dg.sp.log);
   LS("tracker.dailyGems",JSON.stringify(dg));
   if(dgDB)track(sb.from("pass_state").upsert({id:9,data:dg},{onConflict:"user_id,id"}));
 }
 async function loadDailyGems(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",9).maybeSingle();
+    const r=await psGet(9);
     if(r.error)dgDB=false;else{dgDB=true;d=r.data&&r.data.data}
   }catch(e){dgDB=false}
   if(wStale(9,g0))return;
@@ -7466,13 +7510,15 @@ function dsInfo(){
   return{today,y,done,broken,n:done?ds.streak:(broken?1:ds.streak+1)};
 }
 function saveStreak(){
+  if(!dg.start&&dgEarliest())saveDailyGems(); /* stamp the tracking start before the older streak entries go */
+  actTrim(ds.log);
   LS("tracker.dailyStreak",JSON.stringify(ds));
   if(dsDB)track(sb.from("pass_state").upsert({id:10,data:ds},{onConflict:"user_id,id"}));
 }
 async function loadStreak(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",10).maybeSingle();
+    const r=await psGet(10);
     if(r.error)dsDB=false;else{dsDB=true;d=r.data&&r.data.data}
   }catch(e){dsDB=false}
   if(wStale(10,g0))return;
@@ -7640,7 +7686,7 @@ function saveHome(){
 async function loadHome(){
   let d=null;const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",13).maybeSingle();
+    const r=await psGet(13);
     if(r.error)homeDB=false;else{homeDB=true;d=r.data&&r.data.data}
   }catch(e){homeDB=false}
   if(wStale(13,g0))return;
@@ -7779,7 +7825,7 @@ function saveNav(){
 async function loadNav(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",7).maybeSingle();
+    const r=await psGet(7);
     if(r.error)navDB=false;else{navDB=true;d=r.data&&r.data.data}
   }catch(e){navDB=false}
   if(wStale(7,g0))return;
@@ -7863,10 +7909,11 @@ async function badSession(msg){
 }
 async function loadAll(quiet){
   if(!quiet)setStatus("Loading...");
+  if(quiet||!psP)psBegin();
   const hp=loadHome(); /* home layout starts loading right away, in parallel with everything else */
   const [st,lg,ss,ep,sl]=await Promise.all([
     sb.from("shiny_state").select("*").eq("id",1).maybeSingle(),
-    sb.from("shiny_log").select("*").order("at",{ascending:false}).limit(500),
+    sb.from("shiny_log").select("*").gte("at",new Date(Date.now()-2*864e5).toISOString()).order("at",{ascending:false}).limit(500),
     sb.from("epic_sets").select("*").order("position").order("id"),
     fetchAll("epics"),
     fetchAll("epic_slots")
@@ -7878,6 +7925,7 @@ async function loadAll(quiet){
   s={bought:r.bought??0,twoToOne:r.two_to_one??0,oneOne:r.one_one??0,commons:r.commons??0,uncommons:r.uncommons??0,rares:r.rares??0,misc:r.misc??0,start:r.start_date||"",oneOnePrice:r.one_one_price??1000,commonPrice:r.common_price??4000,uncommonPrice:r.uncommon_price??6000,rarePrice:r.rare_price??8000,costEach:r.cost_each??1250};
   fields.forEach(([k])=>{els[k].value=s[k];committed[k]=s[k]});
   log=lg.data.map(x=>({id:x.id,t:Date.parse(x.at),k:x.field,from:x.old_value,to:x.new_value}));
+  shinyPrune(true);
   const bySlot={};
   sl.data.forEach(x=>{(bySlot[x.epic_id]=bySlot[x.epic_id]||[])[x.slot-1]=x.holder});
   sets=ss.data;
@@ -7903,11 +7951,37 @@ async function loadAll(quiet){
   epArtPull().then(epArtPush).catch(()=>{});
   /* every loader reads its own pass_state row and fills its own variables, so they run together instead of one after another */
   await Promise.all([hp,loadPass(),loadEvent(),loadGempic(),loadQuest(),loadBuys(),loadNotes(),loadNav(),loadArPresets(),loadDailyGems(),loadStreak(),loadMisc(),loadAgPref()]);
+  psEnd();
   ovReady=true;
   renderOverview();
   if(!quiet)setStatus("Saved");
   return true;
 }
+
+/* ---------- recent activity: every tracker keeps the last 24 hours of entries and shows them the same way ---------- */
+const ACT_MS=864e5,ACT_MAX=60;
+function actTrim(a){if(!Array.isArray(a))return a;const c=Date.now()-ACT_MS;let j=0;for(let i=0;i<a.length;i++){const e=a[i];if(e&&e.t>=c)a[j++]=e}a.length=j;return a}
+const actFresh=a=>{const c=Date.now()-ACT_MS;return(Array.isArray(a)?a:[]).filter(e=>e&&e.t>=c)};
+const actAgo=ms=>{const m=Math.floor(ms/6e4);return m<1?"just now":m<60?m+"m ago":Math.floor(m/60)+"h "+(m%60?m%60+"m ":"")+"ago"};
+const actClock=t=>{const d=new Date(t),tm=d.toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});return d.toDateString()===new Date().toDateString()?tm:d.toLocaleDateString([],{weekday:"short"})+" "+tm};
+/* o.stats = [[label html, number]], o.col = name of the middle column, o.rows = [{t, a: item html, d: change}] */
+function actPanel(host,o){
+  if(!host)return;
+  const now=Date.now(),S=o.stats||[],MX=o.max||ACT_MAX,R=[];
+  (o.rows||[]).slice().sort((a,b)=>b.t-a.t).forEach(r=>{
+    const k=r.k==null?null:r.k+"|"+(r.d>0),p=R[R.length-1];
+    if(k!==null&&p&&p._k===k&&p._t-r.t<=6e4&&r.d!=null){p.d+=r.d;p.n++;p._t=r.t}
+    else R.push({t:r.t,a:r.a,d:r.d,n:1,_k:k,_t:r.t});
+  });
+  const st=S.map(x=>`<div class="gp1"><div class="gl">${x[0]}</div><b>${typeof x[1]==="string"?x[1]:nfmt(x[1])}</b></div>`).join("");
+  const body=R.slice(0,MX).map(r=>`<tr><td>${actClock(r.t)}<br><span class="actAgo">${actAgo(now-r.t)}</span></td><td>${r.a}${r.n>1?` <span class="actAgo">\u00b7 ${r.n} entries</span>`:""}</td><td class="r b">${r.d==null?"\u2013":(r.d>0?"+":"\u2212")+nfmt(Math.abs(r.d))}</td></tr>`).join("");
+  host.innerHTML=`<div class="actRs" style="--n:${S.length||1}">${st}</div>`+(R.length?`<div class="gtbl actRl"><table><thead><tr><th>Time</th><th>${o.col||"Entry"}</th><th class="r">Change</th></tr></thead><tbody>${body}</tbody></table></div>`+(R.length>MX?`<div class="note">Showing the latest ${MX} of ${nfmt(R.length)} entries. Totals above include all of them.</div>`:""):`<div class="empty" style="margin-top:12px">No entries in the last 24 hours.</div>`);
+}
+/* collapse / expand a Last 24 Hours box (remembered per box) */
+function actBoxSet(box,open){const b=box.querySelector(".actTg"),bd=box.querySelector(".actBody"),h=box.querySelector(".gh");if(!b||!bd)return;b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse last 24 hours":"Expand last 24 hours");bd.hidden=!open;if(h)h.style.marginBottom=open?"":"0"}
+document.querySelectorAll(".actBox").forEach(box=>actBoxSet(box,LS("tracker.act."+box.id)!=="0"));
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest(".actTg");if(!b)return;const box=b.closest(".actBox");if(!box)return;const open=b.getAttribute("aria-expanded")!=="true";LS("tracker.act."+box.id,open?"1":"0");actBoxSet(box,open)});
+setInterval(()=>{if(document.hidden)return;[["tab-pass",()=>typeof passRenderAct==="function"&&passRenderAct()],["tab-gempic",()=>typeof gpRenderDay==="function"&&gpRenderDay()],["tab-quest",()=>typeof qtRenderAct==="function"&&qtRenderAct()]].forEach(([id,f])=>{const t=$(id);if(t&&!t.hidden)try{f()}catch(e){}})},30000);
 
 /* ---------- pass tracker ---------- */
 const PASS=[["srand","Shiny Box (Random Artist)",50],["schoose","Shiny Box (Choose Artist)",45],["nlepic","Random Numberless Epic",3],["nepic","Numbered Epic",2]];
@@ -7923,8 +7997,8 @@ const ULN=25,ULK=new Set(ULT.map(x=>x[0]));
 const ulNorm=u=>{const a=(Array.isArray(u)?u:[]).filter(k=>ULK.has(k)).slice(0,ULN);while(a.length<ULN)a.push("");return a};
 const ulSum=u=>{const r={coins:0,gems:0,n:0,c:{}};ULT.forEach(x=>r.c[x[0]]=0);u.forEach(k=>{if(!k)return;const x=ULT.find(y=>y[0]===k);r.c[k]++;r.coins+=x[3];r.gems+=x[4];r.n++});return r};
 function passNorm(d){d=d||{};
-  const log=Array.isArray(d.log)?d.log.filter(e=>e&&PASS.some(p=>p[0]===e.k)&&Math.trunc(+e.n)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
-  const ulog=Array.isArray(d.ulog)?d.ulog.filter(e=>e&&ULK.has(e.k)).slice(0,100).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  const log=Array.isArray(d.log)?d.log.filter(e=>e&&PASS.some(p=>p[0]===e.k)&&Math.trunc(+e.n)&&(+e.t||0)>=Date.now()-ACT_MS).slice(0,1000).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  const ulog=Array.isArray(d.ulog)?d.ulog.filter(e=>e&&ULK.has(e.k)&&(+e.t||0)>=Date.now()-ACT_MS).slice(0,1000).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,tot:Math.max(0,parseInt(e.tot)||0)})):[];
   return{plus:!!d.plus,ultra:!!d.ultra,gems:Math.max(0,parseInt(d.gems)||0),c:passCnt(d.c),u:ulNorm(d.u),start:+d.start||0,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),log,ulog,useq:Math.max(0,parseInt(d.useq)||0),ufloor:Math.max(0,parseInt(d.ufloor)||0),history:Array.isArray(d.history)?d.history.map(h=>({kind:h.kind==="ultra"?"ultra":h.kind==="reg"?"reg":"",t:+h.t||0,start:+h.start||0,plus:!!h.plus,gems:Math.max(0,parseInt(h.gems)||0),c:passCnt(h.c),u:Array.isArray(h.u)&&h.u.some(Boolean)?ulNorm(h.u):null})):[]}}
 const fmtD=t=>new Date(t).toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
 const pWhen=t=>t?new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",year:"numeric",hour:"numeric",minute:"2-digit"}):"\u2013";
@@ -7974,8 +8048,8 @@ function renderPass(){
   const q=ulSum(pass.u),pc=n=>tot?(n/tot*100).toFixed(1)+"% of entries":"No entries yet";
 
   $("passTop").innerHTML=ul
-    ?pStat("#eab308","coin","Total coins gained",nfmt(q.coins))+pStat("#c084fc","gem","Total gems gained",nfmt(q.gems))+pStat("#34d399","cube","Items opened",q.n+" / "+ULN)
-    :pStat("#a78bfa","spark","Shiny boxes",nfmt(shiny))+pStat("#f59e0b","crown","Epics",nfmt(epics))+pStat("#34d399","cube","Items opened",nfmt(tot))+(pass.plus?pStat("#c084fc","gem","Gems gained",nfmt(pass.gems)):"");
+    ?pStat("#eab308","coin","Total coins gained",nfmt(q.coins))+pStat("#c084fc","gem","Total gems gained",nfmt(q.gems))
+    :pStat("#a78bfa","spark","Shiny box<br>Random artist",nfmt(pass.c.srand))+pStat("#38bdf8","target","Shiny box<br>Choose artist",nfmt(pass.c.schoose))+pStat("#f59e0b","crown","Epics",nfmt(epics))+(pass.plus?pStat("#c084fc","gem","Gems gained",nfmt(pass.gems)):"");
   /* regular */
   $("passAdd").querySelectorAll(".pcat").forEach(el=>{
     const k=el.dataset.k,v=pass.c[k],inp=el.querySelector("input");
@@ -7999,6 +8073,22 @@ function renderPass(){
     let u="";
     if(h.u)u=ulRewards(h.u,true);
     return `<div class="pH"><div class="pHh"><b>${h.start?fmtD(h.start)+" \u2013 "+fmtD(h.t):"Saved "+fmtD(h.t)}</b><span class="pHt">${h.kind==="ultra"?"Ultra \u00b7 "+ulSum(h.u).n+" entries":(h.kind==="reg"?"Regular \u00b7 ":"")+nfmt(total)+" entries"+(h.plus?" \u00b7 "+nfmt(h.gems)+" gems":"")}</span><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></div>${h.kind==="ultra"?"":`<div class="pHc">${PASS.map(([k])=>pit(k,h.c[k])).join("")}</div>`}${u}</div>`}).join("");
+  passRenderAct();
+}
+/* Last 24 Hours for the tab you are on (Regular or Ultra) */
+function passRenderAct(){
+  const host=$("passAct");if(!host)return;
+  if(psub==="ultra"){
+    const L=actFresh(pass.ulog);let coins=0,gems=0;
+    L.forEach(e=>{const x=ULT.find(y=>y[0]===e.k);if(x){coins+=x[3];gems+=x[4]}});
+    actPanel(host,{stats:[["Entries",L.length],["Coins",coins],["Gems",gems]],col:"Item",rows:L.map(e=>({t:e.t,k:e.k,a:upit(e.k)+(uAmt(e.k)?` <span class="actAgo">${uAmt(e.k)}</span>`:""),d:1}))});
+    $("passActSub").textContent="Ultra Pass \u00b7 older entries drop off automatically";
+  }else{
+    const L=actFresh(pass.log);let n=0,sh=0,ep=0;
+    L.forEach(e=>{n+=e.n;if(e.k==="srand"||e.k==="schoose")sh+=e.n;else ep+=e.n});
+    actPanel(host,{stats:[["Entries",Math.max(0,n)],["Shiny boxes",Math.max(0,sh)],["Epics",Math.max(0,ep)]],col:"Item",rows:L.map(e=>({t:e.t,k:e.k,a:pit(e.k),d:e.n}))});
+    $("passActSub").textContent="Regular Pass \u00b7 older entries drop off automatically";
+  }
 }
 function savePass(){
   LS("tracker.pass",JSON.stringify(pass));
@@ -8007,7 +8097,7 @@ function savePass(){
 async function loadPass(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",1).maybeSingle();
+    const r=await psGet(1);
     if(r.error)passDB=false;else{passDB=true;d=r.data&&r.data.data}
   }catch(e){passDB=false}
   if(wStale(1,g0))return;
@@ -8025,7 +8115,7 @@ function passAdd(k,d){
   if(pass.plus)pass.gems=Math.max(0,pass.gems+d*PLUS_GEMS);
   pass.seq++;
   pass.log.unshift({i:pass.seq,t:Date.now(),k,n:d,tot:passTot()});
-  if(pass.log.length>100)pass.log.length=100;
+  actTrim(pass.log);if(pass.log.length>1000)pass.log.length=1000;
   savePass();renderPass();return true;
 }
 function passUndo(){
@@ -8060,7 +8150,7 @@ function ulAdd(k){
   if(!pass.start)pass.start=Date.now();
   pass.u[n]=k;pass.useq++;
   pass.ulog.unshift({i:pass.useq,t:Date.now(),k,tot:n+1});
-  if(pass.ulog.length>100)pass.ulog.length=100;
+  actTrim(pass.ulog);if(pass.ulog.length>1000)pass.ulog.length=1000;
   savePass();renderPass();return true;
 }
 function ulUndo(){
@@ -8147,7 +8237,7 @@ const evSum=(cfg,c)=>evRw(cfg).reduce((a,[k,n,o,v])=>{a.coins+=c[k]*(v.coins||0)
 function evNormS(cfg,d){
   d=d||{};
   const got={},vm=cfg.vars?(1<<cfg.vars.length)-1:1;if(d.got&&typeof d.got==="object")Object.keys(d.got).forEach(i=>{const b=(parseInt(d.got[i])||0)&vm;if(b&&+i>=0&&+i<cfg.col.length)got[i]=b});
-  const ks=new Set(evRw(cfg).map(r=>r[0])),log=Array.isArray(d.log)?d.log.filter(e=>e&&(ks.has(e.k)||e.k==="_x")&&Math.trunc(+e.n)).slice(0,5000).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
+  const ks=new Set(evRw(cfg).map(r=>r[0])),log=Array.isArray(d.log)?d.log.filter(e=>e&&(ks.has(e.k)||e.k==="_x")&&Math.trunc(+e.n)&&(+e.t||0)>=Date.now()-ACT_MS).slice(0,5000).map(e=>({i:Math.max(0,parseInt(e.i)||0),t:+e.t||0,k:e.k,n:Math.trunc(+e.n),tot:Math.max(0,parseInt(e.tot)||0)})):[];
   return{c:evCnt(cfg,d.c),extra:Math.max(0,parseInt(d.extra)||0),sp:evSp(cfg,d.sp),start:+d.start||0,got,log,seq:Math.max(0,parseInt(d.seq)||0),floor:Math.max(0,parseInt(d.floor)||0),rcut:+d.rcut||0,history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,c:evCnt(cfg,h.c),extra:Math.max(0,parseInt(h.extra)||0),sp:evSp(cfg,h.sp)})):[]};
 }
 /* Leaves = one per reward entry (so they follow the + and − buttons) plus "extra" leaves added without a reward.
@@ -8230,11 +8320,10 @@ function evRenderCol(cfg,s){
 }
 $("evSearch").addEventListener("input",()=>evRenderCol(evCfg(),evS()));
 $("evOnly").addEventListener("change",()=>{evOnly[evCfg().id]=$("evOnly").checked?1:0;LS("tracker.evonly",JSON.stringify(evOnly));evRenderCol(evCfg(),evS())});
-const EV_RECENT=108e5; /* 3 hours */
-/* keep every entry inside the recent window (so busy sessions are not cut off), and at least the latest 100 for Undo */
-function evTrim(s){const lim=Date.now()-EV_RECENT;s.log=s.log.filter((e,i)=>i<100||e.t>=lim);if(s.log.length>5000)s.log.length=5000}
-const evAgo=ms=>{const m=Math.floor(ms/6e4);return m<1?"just now":m<60?m+"m ago":Math.floor(m/60)+"h "+(m%60?m%60+"m ":"")+"ago"};
-const evClock=t=>new Date(t).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"});
+const EV_RECENT=ACT_MS; /* 24 hours */
+/* keep every entry from the last 24 hours (so busy sessions are not cut off) */
+function evTrim(s){const lim=Date.now()-EV_RECENT;s.log=s.log.filter(e=>e.t>=lim);if(s.log.length>5000)s.log.length=5000}
+const evAgo=actAgo,evClock=actClock;
 const cap1=x=>x[0].toUpperCase()+x.slice(1);
 function evRenderRecent(){
   const cfg=evCfg(),s=evS(),rs=cfg.res||["leaves","leaf"],now=Date.now();
@@ -8243,22 +8332,19 @@ function evRenderRecent(){
   L.forEach(e=>{const r=evFind(cfg,e.k),v=(r&&r[3])||{};n+=e.n;coins+=e.n*(v.coins||0);gems+=e.n*(v.gems||0)});
   $("evRecentSub").textContent=s.rcut&&s.rcut>now-EV_RECENT?"Since you reset at "+evClock(s.rcut):"Older entries drop off automatically";
   $("evRecentReset").disabled=!L.length;
-  const stat=(l,v)=>`<div class="gp1"><div class="gl">${l}</div><b>${nfmt(v)}</b></div>`;
-  const MAXR=60;
-  const rows=L.slice(0,MAXR).map(e=>{
-    const r=e.k==="_x"?["_x",cap1(rs[1])+" (no reward)","",{}]:evFind(cfg,e.k);if(!r)return"";
-    return `<tr><td>${evClock(e.t)}<br><span class="evAgo">${evAgo(now-e.t)}</span></td><td>${evpit(r)}</td><td class="r b">${e.n>0?"+":"\u2212"}${nfmt(Math.abs(e.n))}</td></tr>`;
-  }).join("");
-  $("evRecent").innerHTML=`<div class="evRs">${stat(esc(rs[0][0].toUpperCase()+rs[0].slice(1)),n)}${stat("Coins",coins)}${stat("Gems",gems)}</div>`+
-    (L.length?`<div class="gtbl evRl"><table><thead><tr><th>Time</th><th>Reward</th><th class="r">Change</th></tr></thead><tbody>${rows}</tbody></table></div>`+(L.length>MAXR?`<div class="note">Showing the latest ${MAXR} of ${nfmt(L.length)} entries. Totals above include all of them.</div>`:""):`<div class="empty" style="margin-top:12px">No entries in the last 3 hours.</div>`);
+  const rows=L.map(e=>{
+    const r=e.k==="_x"?["_x",cap1(rs[1])+" (no reward)","",{}]:evFind(cfg,e.k);if(!r)return null;
+    return{t:e.t,k:e.k,a:evpit(r),d:e.n};
+  }).filter(Boolean);
+  actPanel($("evRecent"),{stats:[[esc(rs[0][0].toUpperCase()+rs[0].slice(1)),n],["Coins",coins],["Gems",gems]],col:"Reward",rows});
 }
 setInterval(()=>{const t=$("tab-event");if(t&&!t.hidden&&evV==="trk")evRenderRecent()},30000);
-function evRecentSet(open){const b=$("evRecentToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse last 3 hours":"Expand last 3 hours");$("evRecentBody").hidden=!open;$("evRecentBox").querySelector(".gh").style.marginBottom=open?"":"0"}
+function evRecentSet(open){const b=$("evRecentToggle");b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Collapse last 24 hours":"Expand last 24 hours");$("evRecentBody").hidden=!open;$("evRecentBox").querySelector(".gh").style.marginBottom=open?"":"0"}
 $("evRecentToggle").onclick=()=>{const open=$("evRecentToggle").getAttribute("aria-expanded")!=="true";LS("tracker.evrecent",open?"1":"0");evRecentSet(open)};
 evRecentSet(LS("tracker.evrecent")!=="0");
 $("evRecentReset").onclick=()=>{
   const b=$("evRecentReset");if(b.disabled)return;
-  ask("Clear the last 3 hours history? Your counts and Undo are not affected.",()=>{const s=evS();s.rcut=Date.now();saveEvent();renderEvent()});
+  ask("Clear the last 24 hours history? Your counts and Undo are not affected.",()=>{const s=evS();s.rcut=Date.now();saveEvent();renderEvent()});
 };
 function renderEvent(){
   if(!EVTS.some(x=>x.id===evSel))evSel=EVTS[0].id;
@@ -8383,7 +8469,7 @@ function saveEvent(){
 async function loadEvent(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",2).maybeSingle();
+    const r=await psGet(2);
     if(r.error)evDB=false;else{evDB=true;d=r.data&&r.data.data}
   }catch(e){evDB=false}
   if(wStale(2,g0))return;
@@ -8679,10 +8765,10 @@ function gpDayWhen(t){
   return d.toDateString()===n.toDateString()?"Today, "+tm:"Yesterday, "+tm;
 }
 function gpRenderDay(){
-  const cut=Date.now()-GP_DAY,L=gp.log.filter(e=>e.t>=cut);
-  const rolls=L.length,gems=L.reduce((a,e)=>a+e.c,0);
-  $("gpDaySub").textContent="";
-  $("gpDay").innerHTML=`<div class="gpan" style="grid-template-columns:1fr 1fr"><div class="gp1"><div class="gl">Rolls</div><div style="font-size:26px;font-weight:700">${nfmt(rolls)}</div></div><div class="gp1"><div class="gl">Gems spent</div><div style="font-size:26px;font-weight:700">${nfmt(gems)}</div></div></div>`;
+  const L=actFresh(gp.log);
+  const rolls=L.length,gems=L.reduce((a,e)=>a+e.c,0),hits=L.filter(e=>e.h).length;
+  $("gpDaySub").textContent="Older entries drop off automatically";
+  actPanel($("gpDay"),{stats:[["Rolls",rolls],["Gems spent",gems],["Gempics",hits]],col:"Roll",rows:L.map(e=>({t:e.t,k:e.c+"|"+e.x+"|"+e.h,a:`<span class="pit" style="--c:#c084fc"><i>${pIco("gem")}</i>Roll${e.c?` <b>${nfmt(e.c)} gems</b>`:""}</span>${e.x?'<span class="pill r r-uncommon">Reroll</span>':""}${e.h?'<span class="pill r r-epic">Gempic</span>':""}`,d:1}))});
 }
 setInterval(()=>{const t=$("tab-gempic");if(t&&!t.hidden)renderGempic()},60000);
 function renderGempic(){
@@ -8755,7 +8841,7 @@ function schedGempic(){dirty.add("gp");clearTimeout(gpT);gpT=setTimeout(saveGemp
 async function loadGempic(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",5).maybeSingle();
+    const r=await psGet(5);
     if(r.error)gpDB=false;else{gpDB=true;d=r.data&&r.data.data}
   }catch(e){gpDB=false}
   if(wStale(5,g0))return;
@@ -9656,7 +9742,7 @@ function arPreSave(){
 async function loadArPresets(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",8).maybeSingle();
+    const r=await psGet(8);
     if(r.error)arPreDB=false;else{arPreDB=true;d=r.data&&r.data.data}
   }catch(e){arPreDB=false}
   if(wStale(8,g0))return;
@@ -9711,7 +9797,7 @@ $("arId").addEventListener("keydown",e=>{if(e.key==="Enter")arGoClick()});
 (function(){const c=arCfg();$("arCid").value=c.id||"";$("arSec").value=c.sec||"";$("arEx").value=LS("tracker.arEx")||"live, remix, remixes";arExPrev();$("arCap").value=arCap();$("arMaxV").value=arMaxV();$("arSkip").checked=LS("tracker.arSkip")!=="0";$("arVoom").checked=LS("tracker.arVoom")!=="0";$("arId").value=LS("tracker.artistId")||"";if((!c.id||!c.sec)&&LS("tracker.arVoom")==="0")$("arSetup").open=true})();
 
 /* ---------- quest tracker ---------- */
-const QT_LOG_MAX=200,QT_QUICK=[1,5,10,25,50,100];
+const QT_LOG_MAX=1000,QT_QUICK=[1,5,10,25,50,100];
 const QK=["c","u","r"];
 const QO={c:["Common",0.00225,0.002,0.00667],u:["Uncommon",0.00056,0.0004,0.00125],r:["Rare",0.000225,0.00022,0.0005]};
 const QD=[["Epic",1,"epic"],["Lyric",2,"lyrics"],["Shiny",3,"shiny"]];
@@ -9739,7 +9825,7 @@ const qtSetNorm=s=>({id:String(s.id).slice(0,24),name:String(s.name||"").trim().
 function qtNorm(d){d=d||{};const o=qtNorm0(d),seen=new Set();
   o.sets=Array.isArray(d.sets)?d.sets.filter(s=>s&&s.id&&!seen.has(String(s.id))&&seen.add(String(s.id))).slice(0,200).map(qtSetNorm):[];
   o.setId=o.sets.some(s=>s.id===d.setId)?d.setId:"";return o}
-function qtNorm0(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,boost:!!d.boost,total:qtN(d.total),run:(d.run==null?qtN(d.total):Math.max(qtN(d.run),qtN(d.total))),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),coins:Math.min(1e15,qtN(d.coins)),clog:Array.isArray(d.clog)?d.clog.slice(0,QT_LOG_MAX).map(e=>({t:+(e&&e.t)||0,v:qtN(e&&e.v),n:qtN(e&&e.n),c:qtN(e&&e.c)})).filter(e=>e.c>0):[],log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0,b:e.b?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta),sid:String(h.sid||"").slice(0,24)})):[]}}
+function qtNorm0(d){d=d||{};return{reroll:!!d.reroll,exLy:!!d.exLy,boost:!!d.boost,total:qtN(d.total),run:(d.run==null?qtN(d.total):Math.max(qtN(d.run),qtN(d.total))),cnt:qtN(d.cnt),start:+d.start||0,seq:qtN(d.seq),coins:Math.min(1e15,qtN(d.coins)),clog:Array.isArray(d.clog)?d.clog.slice(0,QT_LOG_MAX).map(e=>({t:+(e&&e.t)||0,v:qtN(e&&e.v),n:qtN(e&&e.n),c:qtN(e&&e.c)})).filter(e=>e.c>0&&e.t>=Date.now()-ACT_MS):[],log:Array.isArray(d.log)?d.log.slice(0,QT_LOG_MAX).map(e=>({i:qtN(e&&e.i),t:+(e&&e.t)||0,n:qtN(e&&e.n),tot:qtN(e&&e.tot)})).filter(e=>e.t>=Date.now()-ACT_MS):[],r:Array.isArray(d.r)?d.r.filter(e=>e).map(e=>({x:e.x?1:0,b:e.b?1:0})):[],history:Array.isArray(d.history)?d.history.map(h=>({t:+h.t||0,start:+h.start||0,n:gpNum(h.n),rr:gpNum(h.rr),name:String(h.name||"").slice(0,120),rar:QK.includes(h.rar)?h.rar:"",typ:QT[h.typ]?h.typ:"",artist:String(h.artist||"").slice(0,120),song:String(h.song||"").slice(0,120),nb:h.typ==="e"&&(h.nb==="n"||h.nb==="l")?h.nb:"",num:h.typ==="e"&&h.nb==="n"?Math.max(0,Math.floor(+h.num||0)):0,tb:qtN(h.tb),ta:qtN(h.ta),sid:String(h.sid||"").slice(0,24)})):[]}}
 let qt=qtNorm(),qtDB=true;
 function qtSum(){const o={n:qt.r.length,rr:0};qt.r.forEach(e=>{if(e.x)o.rr++});return o}
 function qtUndoInfo(){const lg=qt.log[0],n=qt.r.length;return lg&&lg.n>0&&lg.n<=n&&lg.tot===n?lg:null}
@@ -9918,7 +10004,18 @@ $("qtSDel").onclick=()=>{
   });
 };
 ["qtSName","qtSCnt","qtSGems"].forEach(i=>$(i).addEventListener("keydown",e=>{if(e.key==="Enter")$("qtSSave").click()}));
+/* Last 24 Hours: quests added and coins quicksold */
+function qtRenderAct(){
+  const host=$("qtAct");if(!host)return;
+  const L=actFresh(qt.log),C=actFresh(qt.clog);
+  const quests=L.reduce((a,e)=>a+e.n,0),coins=C.reduce((a,e)=>a+e.c,0);
+  const rows=L.map(e=>({t:e.t,k:"q",a:`<span class="pit" style="--c:#34d399"><i>${pIco("target")}</i>Quest${e.n>1?"s":""}</span>`,d:e.n}))
+    .concat(C.map(e=>({t:e.t,k:"c"+e.v,a:`<span class="pit" style="--c:#eab308"><i>${pIco("coin")}</i>Quicksell <b>${nfmt(e.v)} × ${nfmt(e.n)}</b></span>`,d:e.c})));
+  $("qtActSub").textContent="Older entries drop off automatically";
+  actPanel(host,{stats:[["Quests",quests],["Coins",coins],["Entries",L.length+C.length]],col:"Entry",rows});
+}
 function renderQuest(){
+  qtRenderAct();
   qtSetRender();
   const q=qtSum(),next=qtP(qt.reroll,qt.boost);
   let miss=1;qt.r.forEach(e=>miss*=1-qtP(e.x,e.b));
@@ -9994,7 +10091,7 @@ function saveQuest(){
 async function loadQuest(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",6).maybeSingle();
+    const r=await psGet(6);
     if(r.error)qtDB=false;else{qtDB=true;d=r.data&&r.data.data}
   }catch(e){qtDB=false}
   if(wStale(6,g0))return;
@@ -10018,7 +10115,7 @@ function qtDoAdd(){
   const n=qtAmt(),now=Date.now();if(!qt.start)qt.start=now;
   for(let i=0;i<n;i++)qt.r.push({x:qt.reroll?1:0,b:qt.boost?1:0});
   qt.log.unshift({i:++qt.seq,t:now,n:n,tot:qt.r.length});
-  if(qt.log.length>QT_LOG_MAX)qt.log.length=QT_LOG_MAX;
+  actTrim(qt.log);if(qt.log.length>QT_LOG_MAX)qt.log.length=QT_LOG_MAX;
   saveQuest();renderQuest();
 }
 $("qtAdd").onclick=qtDoAdd;
@@ -10043,6 +10140,7 @@ $("qtUndo").onclick=()=>{
 function qtCV(){return qtN($("qtCoinV").value)}
 function qtCN(){return qtN($("qtCoinN").value)}
 function qtCoinRender(){
+  actTrim(qt.clog);
   $("qtCoinTot").textContent=nfmt(qt.coins);
   const v=qtCV(),n=qtCN(),c=v*n,lg=qt.clog[0];
   $("qtCoinAddT").textContent=c?"Add "+nfmt(v)+" \u00d7 "+nfmt(n)+" = "+nfmt(c):"Add Coins";
@@ -10050,7 +10148,7 @@ function qtCoinRender(){
   $("qtCoinUndo").disabled=!lg;$("qtCoinReset").disabled=!qt.coins&&!lg;
   $("qtCoinUndo").title=lg?"Undo last add (\u2212"+nfmt(lg.c)+")":"Undo last add";
   const sold=qt.clog.reduce((a,e)=>a+e.n,0);
-  $("qtCoinNote").textContent=qt.clog.length?nfmt(sold)+" rare"+(sold===1?"":"s")+" quicksold in "+nfmt(qt.clog.length)+" add"+(qt.clog.length===1?"":"s")+". Last: +"+nfmt(lg.c)+".":"Coins stay when you save a pull or reset quests.";
+  $("qtCoinNote").textContent=qt.clog.length?nfmt(sold)+" rare"+(sold===1?"":"s")+" quicksold in "+nfmt(qt.clog.length)+" add"+(qt.clog.length===1?"":"s")+" in the last 24 hours. Last: +"+nfmt(lg.c)+".":"Coins stay when you save a pull or reset quests.";
 }
 $("qtCoinV").value=LS("tracker.qtCoinV")||"";
 $("qtCoinV").addEventListener("input",()=>{LS("tracker.qtCoinV",$("qtCoinV").value);qtCoinRender()});
@@ -10059,7 +10157,7 @@ function qtCoinDoAdd(){
   const v=qtCV(),n=qtCN(),c=v*n;if(!c)return;
   qt.coins=Math.min(1e15,qt.coins+c);
   qt.clog.unshift({t:Date.now(),v:v,n:n,c:c});
-  if(qt.clog.length>QT_LOG_MAX)qt.clog.length=QT_LOG_MAX;
+  actTrim(qt.clog);if(qt.clog.length>QT_LOG_MAX)qt.clog.length=QT_LOG_MAX;
   $("qtCoinN").value="";
   saveQuest();renderQuest();
 }
@@ -10115,13 +10213,14 @@ function msRender(){
   mtabsRender($("msTabs"),msAll.list.map((c,i)=>({id:c.id,label:msLabel(c,i)+" \u00b7 "+nfmt(c.n)})),ms.id,"Add counter",msAll.list.length<MS_TABS_MAX);
 }
 function saveMisc(){
+  try{(msAll.list||[]).forEach(c=>actTrim(c.log))}catch(e){}
   LS("tracker.misc",JSON.stringify(msAll));
   if(msDB)track(sb.from("pass_state").upsert({id:11,data:msAll},{onConflict:"user_id,id"}));
 }
 async function loadMisc(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",11).maybeSingle();
+    const r=await psGet(11);
     if(r.error)msDB=false;else{msDB=true;d=r.data&&r.data.data}
   }catch(e){msDB=false}
   if(wStale(11,g0))return;
@@ -10597,7 +10696,7 @@ function schedBuy(){dirty.add("buy");clearTimeout(buyT);buyT=setTimeout(()=>{dir
 async function loadBuys(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",3).maybeSingle();
+    const r=await psGet(3);
     if(r.error)buyDB=false;else{buyDB=true;d=r.data&&r.data.data}
   }catch(e){buyDB=false}
   if(wStale(3,g0))return;
@@ -10786,7 +10885,7 @@ function noteShow(){
 async function loadNotes(){
   let d=null; const g0=wRev;
   try{
-    const r=await sb.from("pass_state").select("data").eq("id",4).maybeSingle();
+    const r=await psGet(4);
     if(r.error)notesDB=false;else{notesDB=true;d=r.data&&r.data.data}
   }catch(e){notesDB=false}
   if(wStale(4,g0))return;
@@ -10879,7 +10978,7 @@ $("bkImport").onclick=()=>{
     if(!r){msg.textContent="Import failed at the numbers step.";return}
     r=await track(sb.from("shiny_log").delete().gt("id",0));
     if(!r){msg.textContent="Import failed clearing the log.";return}
-    const lg=(o.log||[]).map(e=>({at:new Date(e.t).toISOString(),field:String(e.k),old_value:String(e.from),new_value:String(e.to)}));
+    const lg=(o.log||[]).filter(e=>+e.t>=Date.now()-2*864e5).map(e=>({at:new Date(e.t).toISOString(),field:String(e.k),old_value:String(e.from),new_value:String(e.to)}));
     for(let i=0;i<lg.length;i+=200){
       r=await track(sb.from("shiny_log").insert(lg.slice(i,i+200)));
       if(!r){msg.textContent="Import failed writing the log.";return}
@@ -10932,7 +11031,7 @@ window.addEventListener("online",()=>scheduleRefresh(200));
 (function(){
   if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
   const re=/^(-?)(\$?)(-?)(\d[\d,]*(?:\.\d+)?)(%?)$/,SEL=".val,.big",last=new Map(),SKIP="#epicList,#holderList,#buyList,#soldList,#arGrid,#hist,#notesText";
-  const key=el=>{const c=el.closest(".card,.gc"),l=c&&c.querySelector(".lbl,.nm,.scl"),t=el.closest('[id^="tab-"]');return(el.id||(c&&c.parentElement&&c.parentElement.id)||"")+"|"+(t?t.id:"")+"|"+(l?l.textContent.trim():"")};
+  const key=el=>{const c=el.closest(".card,.gc")||el.closest(".sc"),l=c&&c.querySelector(".lbl,.nm,.scl"),t=el.closest('[id^="tab-"]');return(el.id||(c&&c.parentElement&&c.parentElement.id)||"")+"|"+(t?t.id:"")+"|"+(l?l.textContent.trim():"")};
   function run(el){
     if(!el.isConnected)return;
     const t=el.textContent.trim();
@@ -11020,6 +11119,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.10","2026-11-18",["Backend optimizations for faster, more reliable saving.","Small UI updates, including a cleaner top bar on mobile.","Added a Last 24 Hours history to the Pass, Gempic and Quest trackers."]],
 ["0.8.9","2026-11-16",["Song Guesser UI refresh: the song index and audio clip are now one card, with a bigger Upload audio file button and the play button right next to it.","Song Guesser: a clear match now shows only the winner. If there is no clear match, no results are shown, with a note to check your genre selection and to make a report.","Song Guesser: cleaner result cards, and the volume bar is hidden on mobile.","Signed out: new top bar that shows which page you are on (Artist Guesser or Song Guesser) with a way back to login, and the bottom navigation is hidden on mobile."]],
 ["0.8.8","2026-11-14",["Your personal settings now follow your account across devices: theme, start page, confirmation prompts, add-amount steps, epic done checkmarks, and epic and set view options."]],
 ["0.8.7","2026-11-09",["Profile: you can now change your display name. Your login name stays the same."]],
@@ -11175,11 +11275,11 @@ async function checkUser(){
     if(!uid)return;
     const em=data.session.user.email||"";
     showName(dispName(data.session.user));$("nmNew").value=dispName(data.session.user);
-    isRyan=em.split("@")[0].toLowerCase()==="ryan";bkVis();await loadSoundMode();applyArtistLock();
+    isRyan=em.split("@")[0].toLowerCase()==="ryan";bkVis();smCached();applyArtistLock();const _sm0=soundMode;loadSoundMode().then(()=>{if(soundMode!==_sm0)applyArtistLock()}).catch(()=>{});
     const prev=LS("tracker.uid");
     if(prev&&prev!==uid)["pass","event","gempic","quest","misc","miscActive","buys","notes","notesHtml","notesTabs","notesActive","nav","rarity","numberless","set","startTab","epdone","setSort","setMode","nf","epcomp","epnh","hubShowHid","theme","noConfirm","step.shiny","step.ads","step.gempic","step.quest","step.misc","firstSeen","prefT"].forEach(k=>{try{localStorage.removeItem("tracker."+k)}catch(e){}});
     LS("tracker.uid",uid);
-    await prefInit();
+    prefInit();
   }catch(e){}
 }
 /* Home only on the first load of a browser session (or right after logging in); a refresh keeps the tab you were on. */
@@ -11213,6 +11313,7 @@ $("startSel").onchange=()=>{
 };
 async function enter(restore){
   document.body.classList.remove("guest");
+  psBegin();
   await checkUser();initStartSel();
   $("login").hidden=true;$("app").hidden=false;
   showTab(startTab(restore));setView("epic");
@@ -11321,10 +11422,10 @@ $("signOut").onclick=async()=>{await flushLog();if(chan){sb.removeChannel(chan);
 (async()=>{
   const {data}=await sb.auth.getSession();
   if(data&&data.session){
-    let bad=false;
-    try{const u=await sb.auth.getUser();if(u.error&&isAuthErr(u.error))bad=true}catch(e){}
-    if(bad){await badSession("Your session expired. Please sign in again.");return}
-    enter(true);return
+    enter(true);
+    /* verify the session in the background instead of making the page wait for it; an expired session is still caught here, or by the first refused request */
+    sb.auth.getUser().then(u=>{if(u.error&&isAuthErr(u.error))badSession("Your session expired. Please sign in again.")}).catch(()=>{});
+    return
   }
   /* shared deep link while signed out: open it as a guest when guests are allowed there, otherwise show the login (the link still opens after signing in) */
   const dl=DEEP[location.hash.slice(1)];
@@ -11498,6 +11599,101 @@ setInterval(function(){if(!document.hidden)measure()},500);
 document.addEventListener("focusin",function(e){if(mq.matches&&isTxt(e.target)){clearTimeout(kt);document.body.classList.add("kbOpen")}});
 document.addEventListener("focusout",function(){clearTimeout(kt);kt=setTimeout(function(){if(isTxt(document.activeElement))return;document.body.classList.remove("kbOpen");kick();burst()},150)});
 measure();
+})();
+</script>
+<style id="stepFx">
+/* ---------- stronger +/- press feedback ---------- */
+button.stepdown.stepdown:not(:disabled):not([aria-expanded]){
+  box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--ac,#8b5cf6) 72%,transparent),inset 0 0 0 2px rgba(255,255,255,.55)!important;
+  color:#fff!important}
+@keyframes stepglow{
+  0%{box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--ac,#8b5cf6) 72%,transparent),0 0 0 0 color-mix(in srgb,var(--ac,#8b5cf6) 85%,transparent)}
+  100%{box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--ac,#8b5cf6) 0%,transparent),0 0 0 14px color-mix(in srgb,var(--ac,#8b5cf6) 0%,transparent)}}
+button.stepfx.stepfx{animation:stepglow .6s ease-out!important}
+/* floating +N / -N next to the pressed button */
+.stepchip{position:fixed;z-index:99999;pointer-events:none;font:800 17px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+  padding:3px 8px;border-radius:999px;color:#fff;background:#16a34a;box-shadow:0 4px 14px rgba(0,0,0,.35);
+  transform:translate(-50%,0);animation:stepchip .75s ease-out forwards}
+.stepchip.neg{background:#dc2626}
+@keyframes stepchip{0%{opacity:0;transform:translate(-50%,6px) scale(.7)}18%{opacity:1;transform:translate(-50%,-6px) scale(1.12)}100%{opacity:0;transform:translate(-50%,-46px) scale(1)}}
+/* shiny counts: pop + glow when the number changes */
+@keyframes numpop{0%{transform:scale(1)}30%{transform:scale(1.28);color:var(--c,var(--ac));text-shadow:0 0 14px var(--c,var(--ac))}100%{transform:scale(1)}}
+input.numpop{animation:numpop .5s ease}
+@keyframes cardpop{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c,var(--ac)) 70%,transparent)}100%{box-shadow:0 0 0 12px color-mix(in srgb,var(--c,var(--ac)) 0%,transparent)}}
+.card.cardpop{animation:cardpop .6s ease-out}
+@media (prefers-reduced-motion:reduce){button.stepfx.stepfx,input.numpop,.card.cardpop{animation:none!important}.stepchip{animation:none;opacity:0}}
+</style>
+<script>
+/* +/- buttons: strong press state, glow on release, floating +N / -N. Shiny: counts pop and count up when they change. */
+(function(){
+  const RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const STEP='.shm,.shp,.shma,.shmr,button[data-d],.gcost button,#gpCostDn,#gpCostUp';
+  const TXT=/^[+\u2212\u2013-]\s?\d[\d,]*$/;
+  const isStep=b=>b&&!b.disabled&&(b.matches(STEP)||TXT.test((b.textContent||"").trim()));
+  const stepOf=e=>{const b=e.target.closest&&e.target.closest("button");return isStep(b)?b:null};
+  let down=null;
+  const up=()=>{if(down){down.classList.remove("stepdown");down=null}};
+  document.addEventListener("pointerdown",e=>{const b=stepOf(e);if(!b)return;up();down=b;b.classList.add("stepdown")},{passive:true});
+  ["pointerup","pointercancel","dragstart"].forEach(ev=>document.addEventListener(ev,()=>setTimeout(up,90),{passive:true}));
+  document.addEventListener("keydown",e=>{if(e.key!==" "&&e.key!=="Enter")return;const b=stepOf(e);if(b){b.classList.add("stepdown");setTimeout(()=>b.classList.remove("stepdown"),140)}},true);
+  /* what a button will change by, read BEFORE the page's own handler runs (capture phase) */
+  function delta(b){
+    if(b.dataset&&b.dataset.d!==undefined&&b.dataset.d!==""){const d=Number(b.dataset.d);if(d)return d}
+    if(b.closest("#tab-shiny")){
+      if(b.matches(".shm,.shp")){const n=(b.closest(".shr")||document).querySelector("input"),k=n&&n.id;const a=k==="misc"?1:(typeof shStep==="function"?shStep():1);return(b.classList.contains("shm")?-1:1)*a}
+      if(b.matches(".shma,.shmr")){const i=b.closest(".shmx")&&b.closest(".shmx").querySelector("input"),a=Math.trunc(Number(i&&i.value));if(!a||a<0)return 0;return(b.classList.contains("shmr")?-1:1)*a}
+    }
+    const t=(b.textContent||"").trim(),m=/^([+\u2212\u2013-])\s?(\d[\d,]*)$/.exec(t);
+    if(m)return(m[1]==="+"?1:-1)*parseInt(m[2].replace(/,/g,""),10);
+    if(/^\+$/.test(t))return 1;if(/^[\u2212\u2013-]$/.test(t))return-1;
+    return 0;
+  }
+  function chip(b,d){
+    if(RM||!d)return;
+    const r=b.getBoundingClientRect(),c=document.createElement("span");
+    c.className="stepchip"+(d<0?" neg":"");c.textContent=(d>0?"+":"\u2212")+Math.abs(d).toLocaleString("en-US");
+    c.style.left=(r.left+r.width/2)+"px";c.style.top=(r.top-6)+"px";
+    document.body.appendChild(c);c.addEventListener("animationend",()=>c.remove(),{once:true});setTimeout(()=>c.remove(),1200);
+  }
+  document.addEventListener("click",e=>{
+    const b=stepOf(e);if(!b)return;
+    const d=delta(b);
+    if((b.matches(".shma,.shmr"))&&!d)return;
+    chip(b,d);
+    b.classList.remove("stepfx");void b.offsetWidth;b.classList.add("stepfx");
+    b.addEventListener("animationend",()=>b.classList.remove("stepfx"),{once:true});
+  },true);
+
+  /* ---- shiny counts: pop + count up/down whenever the stored value changes (buttons, live counter, another device) ---- */
+  const ease=p=>1-Math.pow(1-p,3);
+  window.shFxScan=function(){
+    if(typeof els==="undefined"||typeof s==="undefined")return;
+    Object.keys(els).forEach(k=>{
+      const el=els[k];if(!el||el.type==="date")return;
+      const to=String(s[k]==null?"":s[k]),prev=el._fxLast;
+      el._fxLast=to;
+      if(prev===undefined||prev===to||RM)return;
+      if(typeof ovReady!=="undefined"&&!ovReady)return;                   /* first load: show the saved numbers without animating */
+      if(document.activeElement===el||!el.offsetParent)return;           /* typing into it, or tab hidden: no animation */
+      const card=el.closest(".card");
+      el.classList.remove("numpop");void el.offsetWidth;el.classList.add("numpop");
+      el.addEventListener("animationend",()=>el.classList.remove("numpop"),{once:true});
+      if(card){card.classList.remove("cardpop");void card.offsetWidth;card.classList.add("cardpop");card.addEventListener("animationend",()=>card.classList.remove("cardpop"),{once:true})}
+      const a=Number(prev),b=Number(to);
+      if(prev===""||to===""||!Number.isInteger(a)||!Number.isInteger(b))return;
+      cancelAnimationFrame(el._fxRaf);
+      el.value=String(a);
+      const t0=performance.now(),D=450;
+      const stop=()=>{cancelAnimationFrame(el._fxRaf);el.value=String(s[k]==null?"":s[k])};
+      el.addEventListener("focus",stop,{once:true});
+      const step=now=>{
+        const p=Math.min(1,(now-t0)/D);
+        if(p<1){el.value=String(Math.round(a+(b-a)*ease(p)));el._fxRaf=requestAnimationFrame(step)}
+        else{el.value=String(s[k]==null?"":s[k]);el.removeEventListener("focus",stop)}
+      };
+      el._fxRaf=requestAnimationFrame(step);
+    });
+  };
 })();
 </script>
 </body></html>
