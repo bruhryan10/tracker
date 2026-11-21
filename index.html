@@ -3290,53 +3290,102 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 </style>
 <style>#qtHist>.gsec,#gpHist>.gsec{margin:8px 0 14px}</style>
 <style id="mobileBottomNav">
-/* ---------- MOBILE: bottom tab bar, always stuck to the bottom, scrolls sideways ---------- */
+/* ---------- MOBILE: floating dock ----------
+   Home + your three favourite tools + an "all tools" sheet that unfolds upward from the dock.
+   #mainNav stays the fixed, full-width, bottom-anchored element because the iOS viewport repair script measures
+   its bottom edge; it is only a transparent carrier now. The visible dock (#dock) is built into it by #dockJs.
+   The original tab buttons stay in the DOM (hidden) so every tab keeps its own click handler and state. */
+#dock,#dockScrim{display:none}
 @media (max-width:700px){
 #mainNav,#mainNav.icons,#mainNav.many,#mainNav.editing,#mainNav.open{
 position:fixed!important;left:0;right:0;bottom:0;top:auto;z-index:900;
-display:flex!important;flex-wrap:nowrap!important;align-items:stretch;justify-content:flex-start!important;gap:2px!important;
-width:auto!important;max-width:none!important;margin:0!important;
-padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px))!important;
-border:0!important;border-top:1px solid var(--bd)!important;border-radius:0!important;
-background:color-mix(in srgb,var(--bg) 93%,transparent)!important;
--webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
-box-shadow:0 -6px 20px rgba(0,0,0,.25);
-overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-#mainNav::-webkit-scrollbar{display:none}
-#mainNav .navbtns{display:contents!important}
-/* hide-menu does not make sense on a pinned bar; edit pencil and the labels/icons toggle sit at the far end */
-#mainNav #navCur,#mainNav #navHide,#navShow{display:none!important}
-#mainNav .navctl{order:99;display:flex!important;flex:0 0 auto!important;flex-direction:row!important;align-items:center;align-self:center;gap:4px!important;margin:0!important;padding:0 6px!important;border:0!important}
-#mainNav .navctl button{width:32px!important;height:32px!important}
-#mainNav #navCollapse svg{display:none}
-#mainNav #navCollapse::before{content:"Aa";font-size:12px;font-weight:700;letter-spacing:-.3px}
-#mainNav #navCollapse[aria-pressed="true"]{color:var(--ac);border-color:var(--ac)}
-#mainNav #navCollapse[aria-pressed="true"]::before{content:"\25A3";font-size:15px}
-/* tab buttons: icon over label */
-#mainNav .navbtns>button{
-flex:0 0 max(62px,18.5vw)!important;width:auto!important;min-width:0!important;margin:0!important;
-padding:6px 2px 5px!important;display:flex;flex-direction:column;align-items:center;justify-content:flex-start!important;
-gap:3px!important;font-size:10px!important;line-height:1.1!important;text-align:center;
-border-radius:12px;border:1px solid transparent;background:transparent;box-shadow:none}
-#mainNav .navbtns>button[hidden]{display:none!important}
-#mainNav .navbtns>button .ti{width:30px!important;height:30px!important;border-radius:10px}
-#mainNav .navbtns>button .ti svg{width:18px;height:18px}
-#mainNav .navbtns>button .tx{display:block!important;font-size:10px;font-weight:600;color:var(--mut)}
-#mainNav .navbtns>button small{font-size:8px}
-#mainNav .navbtns>button.on{background:color-mix(in srgb,var(--ac) 14%,transparent);border-color:color-mix(in srgb,var(--ac) 30%,transparent);box-shadow:none}
-#mainNav .navbtns>button.on .tx{color:var(--tx)}
-#mainNav .navbtns>button.on::after{left:30%;right:30%;top:-6px;bottom:auto;height:3px;border-radius:0 0 3px 3px}
-/* icons-only mode: no text, smaller buttons, more icons on screen */
-#mainNav.icons .navbtns>button{flex:0 0 44px!important;padding:8px 0!important;justify-content:center!important}
-#mainNav.icons .navbtns>button .tx{display:none!important}
-#mainNav.icons .navbtns>button .ti{width:32px!important;height:32px!important}
-#mainNav.icons .navbtns>button .ti svg{width:20px;height:20px}
-#mainNav.editing .navbtns>button{padding-top:26px!important}
-.navsep{display:none}
-/* keep page content and the error toast clear of the bar */
-body:not(.guest) #app{padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))}
-body:not(.guest) #app:has(#mainNav.icons){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
-#sdKickNote{bottom:calc(96px + env(safe-area-inset-bottom,0px))!important}
+display:block!important;width:auto!important;max-width:none!important;margin:0!important;
+padding:0 12px calc(10px + env(safe-area-inset-bottom,0px))!important;
+border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;
+overflow:visible!important;pointer-events:none}
+#mainNav>.navctl,#mainNav>#navCur,#mainNav>.navbtns,#navShow,.navsep{display:none!important}
+
+#dock{--w:clamp(42px,12.4vw,52px);display:block;position:relative;max-width:440px;margin:0 auto;pointer-events:auto;font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+#dockRow{display:flex;align-items:center;gap:4px;box-sizing:border-box;height:62px;padding:7px;border-radius:31px;
+background:color-mix(in srgb,var(--card) 86%,transparent);
+-webkit-backdrop-filter:blur(18px) saturate(1.5);backdrop-filter:blur(18px) saturate(1.5);
+border:1px solid color-mix(in srgb,var(--tx) 14%,var(--bd));
+box-shadow:0 12px 32px rgba(0,0,0,.3),0 2px 6px rgba(0,0,0,.16)}
+#dockSlots{display:contents}
+.dkdiv{flex:none;width:1px;height:22px;margin:0 3px;background:color-mix(in srgb,var(--tx) 18%,transparent)}
+
+/* one slot: icon only; the current tool grows into a pill in its own colour with its name */
+#dock .dk{all:unset;box-sizing:border-box;position:relative;display:flex;align-items:center;justify-content:center;gap:8px;
+flex:0 0 var(--w);height:48px;border-radius:24px;overflow:hidden;color:var(--mut);cursor:pointer;
+-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+transition:flex-grow .32s cubic-bezier(.3,.85,.3,1),background-color .22s,color .22s}
+#dock .dk svg{flex:none;width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#dock .dkl{position:absolute;opacity:0;visibility:hidden;pointer-events:none;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+font-size:14px;font-weight:650;letter-spacing:-.1px;transition:opacity .2s}
+#dock .dk.on{flex:1 1 var(--w);padding:0 14px 0 12px;background:var(--c);color:var(--on)}
+#dock .dk.on .dkl{position:static;opacity:1;visibility:visible}
+#dock .dk:active:not(.on){background:color-mix(in srgb,var(--tx) 10%,transparent)}
+#dock .dk.on:active{opacity:.88}
+#dock button::before,#dock button::after{content:none!important}   /* the old tab bar drew an accent underline on the active tab */
+#dock .dk:focus-visible,#dock .dkt:focus-visible,#dock .dkc:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+
+/* all-tools button: the grid icon turns into a close icon while the sheet is open */
+#dock .dkall{flex:0 0 var(--w)}
+#dock .dkall svg{position:absolute;transition:opacity .15s,transform .25s}
+#dock .dkall .x{opacity:0;transform:rotate(-90deg) scale(.6)}
+#dock .dkall[aria-expanded="true"]{background:color-mix(in srgb,var(--tx) 12%,transparent);color:var(--tx)}
+#dock .dkall[aria-expanded="true"] .g{opacity:0;transform:rotate(90deg) scale(.6)}
+#dock .dkall[aria-expanded="true"] .x{opacity:1;transform:none}
+
+/* the sheet: unfolds upward from the dock */
+#dockSheet{position:absolute;left:0;right:0;bottom:calc(100% + 10px);box-sizing:border-box;max-height:min(64vh,470px);overflow-y:auto;overscroll-behavior:contain;
+padding:14px 10px 10px;border-radius:28px;
+background:color-mix(in srgb,var(--card) 94%,transparent);
+-webkit-backdrop-filter:blur(20px) saturate(1.5);backdrop-filter:blur(20px) saturate(1.5);
+border:1px solid color-mix(in srgb,var(--tx) 14%,var(--bd));box-shadow:0 20px 50px rgba(0,0,0,.4);
+transform-origin:50% 100%;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(12px) scale(.97);
+transition:opacity .16s,transform .22s cubic-bezier(.2,.9,.3,1),visibility 0s .22s}
+#dock.open #dockSheet{opacity:1;visibility:visible;pointer-events:auto;transform:none;transition-delay:0s}
+.dkhead{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 6px 8px}
+.dktitle{font-size:15px;font-weight:700;color:var(--tx)}
+#dock .dkc{all:unset;box-sizing:border-box;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:650;color:var(--ac);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#dock .dkc:active{background:color-mix(in srgb,var(--ac) 14%,transparent)}
+#dock .dkc.on{background:var(--ac);color:var(--bg)}
+#dockNote{margin:0 6px 8px;font-size:12.5px;line-height:1.35;color:var(--mut)}
+#dockNote.warn{color:var(--neg)}
+#dockNote[hidden]{display:none}
+.dkgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+#dock .dkt{all:unset;box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:8px 2px 7px;border-radius:16px;
+color:var(--tx);font:600 11.5px/1.15 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#dock .dkt:active{background:color-mix(in srgb,var(--tx) 8%,transparent)}
+#dock .dkt i{all:unset;display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:color-mix(in srgb,var(--c) 17%,transparent);color:var(--c);transition:background .15s,color .15s}
+#dock .dkt svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#dock .dkt.on i{background:var(--c);color:var(--on)}
+#dock .dkt span{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%}
+#dock .dkt small{font-size:10px;font-weight:500;color:var(--mut);margin-top:-3px}
+#dock .dkt.soon{opacity:.55}
+#dock .dkp{position:absolute;top:3px;right:10px;width:18px;height:18px;box-sizing:border-box;border-radius:50%;border:1.5px solid color-mix(in srgb,var(--tx) 38%,transparent);background:var(--card)}
+#dock .dkt.pin .dkp{background:var(--c);border-color:var(--c)}
+#dock .dkt.pin .dkp::after{content:"";position:absolute;left:5px;top:2px;width:4px;height:8px;border:solid var(--on);border-width:0 2px 2px 0;transform:rotate(45deg)}
+
+#dockScrim{display:block;position:fixed;left:0;right:0;top:0;bottom:0;z-index:899;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;touch-action:none;transition:opacity .2s}
+#dockScrim.on{opacity:1;pointer-events:auto}
+@media (prefers-reduced-motion:reduce){
+#dock .dk,#dock .dkl,#dock .dkall svg,#dockSheet,#dockScrim,#dock .dkt i{transition:none!important}
+}
+
+/* small phones: slimmer slots so the current tool's name still fits */
+@media (max-width:360px){
+#mainNav,#mainNav.icons,#mainNav.many,#mainNav.editing,#mainNav.open{padding-left:8px!important;padding-right:8px!important}
+#dock{--w:38px}
+#dockRow{padding:6px;gap:3px}
+#dock .dk.on{padding:0 10px 0 9px;gap:6px}
+#dock .dkl{font-size:13px}
+}
+
+/* keep page content and the error toast clear of the dock */
+body:not(.guest) #app{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
+#sdKickNote{bottom:calc(104px + env(safe-area-inset-bottom,0px))!important}
 }
 </style>
 <style id="dailyStatsCss">
@@ -11603,6 +11652,162 @@ setInterval(function(){if(!document.hidden)measure()},500);
 document.addEventListener("focusin",function(e){if(mq.matches&&isTxt(e.target)){clearTimeout(kt);document.body.classList.add("kbOpen")}});
 document.addEventListener("focusout",function(){clearTimeout(kt);kt=setTimeout(function(){if(isTxt(document.activeElement))return;document.body.classList.remove("kbOpen");kick();burst()},150)});
 measure();
+})();
+</script>
+<script id="dockJs">
+/* ---------- mobile dock (styles live in #mobileBottomNav) ----------
+   Reads the existing tab buttons in #navBtns (name, icon, colour, order, hidden, active) and never changes them, so
+   desktop, the menu editor and every tab's own handler keep working. A tap simply clicks the original button.
+   Favourites: pinned tools first, then the tools opened most (ranked once per app start so slots do not move while
+   you work), then menu order. Saved on this device only. */
+(function(){
+var bar=document.getElementById("mainNav"),btns=document.getElementById("navBtns");
+if(!bar||!btns||!document.body)return;
+var KP="tracker.dockPins",KU="tracker.dockUse",MAX=3;
+function rd(k,d){try{var v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+function wr(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+var SHORT={tbHome:"Home",tbDaily:"Daily",tbShiny:"Shiny",tbEpic:"Epic",tbGempic:"Gempic",tbQuest:"Quest",tbPass:"Pass",tbEvent:"Event",tbMap:"Guesser",tbSound:"Songs",tbArtist:"Overview",tbBuys:"Market",tbInfo:"Wiki",tbMisc:"Misc",tbReports:"Admin"};
+/* text on a tool's colour: whichever of near-black / white has the better contrast */
+function lum(h){h=h.slice(1);if(h.length===3)h=h.replace(/./g,"$&$&");var n=parseInt(h,16);function f(v){v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}return .2126*f(n>>16&255)+.7152*f(n>>8&255)+.0722*f(n&255)}
+function ink(h){return lum(h)>.2?"#14161a":"#fff"}
+
+var pins=rd(KP,[]);if(!Array.isArray(pins))pins=[];
+var use=rd(KU,{});if(!use||typeof use!=="object")use={};
+var rank=Object.keys(use).sort(function(a,b){return use[b]-use[a]});   /* frozen for this session */
+var open=false,editing=false,lastActive,rowKey="",raf=0,warnT=0;
+
+function read(){
+  return Array.prototype.filter.call(btns.children,function(b){return b.id&&b.tagName==="BUTTON"}).map(function(b){
+    var tx=b.querySelector(".tx"),ti=b.querySelector(".ti"),sm=tx&&tx.querySelector("small"),c="";
+    var name=tx?Array.prototype.filter.call(tx.childNodes,function(n){return n.nodeType===3}).map(function(n){return n.textContent}).join(" ").replace(/\s+/g," ").trim():b.id;
+    try{c=ti?getComputedStyle(ti).getPropertyValue("--c").trim():""}catch(e){}
+    if(!/^#[0-9a-f]{3}([0-9a-f]{3})?$/i.test(c))c="#6aa5e8";
+    return{id:b.id,name:name||b.id,short:SHORT[b.id]||name,svg:ti?ti.innerHTML:"",c:c,on:ink(c),
+      sub:sm&&!sm.hidden?sm.textContent.trim():"",soon:b.classList.contains("soon"),active:b.classList.contains("on"),hidden:b.hidden};
+  });
+}
+
+/* the three favourite slots, in dock order */
+function favs(tools){
+  var cand=tools.filter(function(t){return t.id!=="tbHome"&&!t.hidden}),ids=cand.map(function(t){return t.id});
+  var pinned=pins.filter(function(id){return ids.indexOf(id)>=0}).slice(0,MAX),out=pinned.slice();
+  rank.forEach(function(id){if(out.length<MAX&&ids.indexOf(id)>=0&&out.indexOf(id)<0)out.push(id)});
+  ids.forEach(function(id){if(out.length<MAX&&out.indexOf(id)<0)out.push(id)});
+  var slots=ids.filter(function(id){return out.indexOf(id)>=0});            /* menu order keeps positions stable */
+  var act=cand.filter(function(t){return t.active})[0];
+  if(act&&slots.indexOf(act.id)<0){                                         /* current tool is not a favourite: it borrows the weakest slot */
+    var victim=out[out.length-1];
+    for(var i=out.length-1;i>=0;i--){if(pinned.indexOf(out[i])<0){victim=out[i];break}}
+    slots[slots.indexOf(victim)]=act.id;
+  }
+  return slots;
+}
+
+/* ---------- build ---------- */
+var dock=document.createElement("div");dock.id="dock";dock.setAttribute("role","group");dock.setAttribute("aria-label","Tools");
+dock.innerHTML=
+ '<div id="dockSheet" role="group" aria-label="All tools">'+
+   '<div class="dkhead"><span class="dktitle">All tools</span><button type="button" id="dockEdit" class="dkc">Customize</button></div>'+
+   '<p id="dockNote" hidden></p><div class="dkgrid" id="dockGrid"></div>'+
+ '</div>'+
+ '<div id="dockRow"><span id="dockSlots"></span><span class="dkdiv" aria-hidden="true"></span>'+
+   '<button type="button" id="dockAll" class="dk dkall" aria-expanded="false" aria-label="All tools" title="All tools">'+
+     '<svg class="g" viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2"/></svg>'+
+     '<svg class="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>'+
+   '</button></div>';
+bar.appendChild(dock);
+var scrim=document.createElement("div");scrim.id="dockScrim";document.body.appendChild(scrim);
+var slotsEl=dock.querySelector("#dockSlots"),grid=dock.querySelector("#dockGrid"),note=dock.querySelector("#dockNote"),editBtn=dock.querySelector("#dockEdit"),allBtn=dock.querySelector("#dockAll");
+
+function renderRow(tools){
+  var home=tools.filter(function(t){return t.id==="tbHome"})[0];if(!home)return;
+  var by={};tools.forEach(function(t){by[t.id]=t});
+  var ids=["tbHome"].concat(favs(tools.filter(function(t){return !t.hidden||t.id==="tbHome"})));
+  var k=ids.map(function(id){return id+by[id].c}).join(",");
+  if(k!==rowKey){
+    rowKey=k;
+    slotsEl.innerHTML=ids.map(function(id){var t=by[id];
+      return '<button type="button" class="dk" data-id="'+id+'" style="--c:'+t.c+';--on:'+t.on+'" title="'+esc(t.name)+'" aria-label="'+esc(t.name)+'">'+t.svg+'<span class="dkl">'+esc(t.short)+'</span></button>'}).join("");
+  }
+  Array.prototype.forEach.call(slotsEl.children,function(b){
+    var t=by[b.getAttribute("data-id")],on=!!(t&&t.active);
+    b.classList.toggle("on",on);
+    if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");
+  });
+}
+
+function paintSheet(tools){
+  var list=tools.filter(function(t){return t.id!=="tbHome"&&!t.hidden});
+  var ok=list.map(function(t){return t.id}),mine=pins.filter(function(id){return ok.indexOf(id)>=0});
+  editBtn.textContent=editing?"Done":"Customize";editBtn.classList.toggle("on",editing);
+  note.hidden=!editing;note.classList.remove("warn");
+  if(editing)note.textContent="Tap a tool to pin it to the dock ("+Math.min(mine.length,MAX)+" of "+MAX+"). Open slots follow what you use most.";
+  grid.innerHTML=list.map(function(t){
+    var p=mine.indexOf(t.id)>=0;
+    return '<button type="button" class="dkt'+(t.active&&!editing?" on":"")+(t.soon?" soon":"")+(editing&&p?" pin":"")+'" data-id="'+t.id+'" style="--c:'+t.c+';--on:'+t.on+'"'+(editing?' aria-pressed="'+p+'"':"")+'>'+
+      '<i>'+t.svg+'</i><span>'+esc(t.name)+'</span>'+(t.sub?'<small>'+esc(t.sub)+'</small>':"")+(editing?'<b class="dkp"></b>':"")+'</button>';
+  }).join("");
+}
+
+function setOpen(o){
+  o=!!o;if(o===open)return;open=o;
+  dock.classList.toggle("open",o);scrim.classList.toggle("on",o);
+  allBtn.setAttribute("aria-expanded",o?"true":"false");
+  if(o)paintSheet(read());else if(editing){editing=false;paintSheet(read())}
+}
+
+function togglePin(id){
+  var tools=read(),ok=tools.filter(function(t){return t.id!=="tbHome"&&!t.hidden}).map(function(t){return t.id});
+  pins=pins.filter(function(x){return ok.indexOf(x)>=0});
+  var i=pins.indexOf(id);
+  if(i>=0)pins.splice(i,1);
+  else if(pins.length>=MAX){
+    note.textContent="The dock is full. Unpin a tool first.";note.classList.add("warn");
+    clearTimeout(warnT);warnT=setTimeout(function(){note.classList.remove("warn");note.textContent="Tap a tool to pin it to the dock ("+pins.length+" of "+MAX+"). Open slots follow what you use most."},1800);
+    return;
+  }else pins.push(id);
+  wr(KP,pins);renderRow(tools);paintSheet(tools);
+}
+
+function go(id){
+  var src=document.getElementById(id);if(!src)return;
+  if(open)setOpen(false);
+  if(src.classList.contains("on")){window.scrollTo({top:0,behavior:"smooth"});return}   /* tap the current tool again: back to top */
+  src.click();
+}
+
+/* ---------- events ---------- */
+dock.addEventListener("click",function(e){
+  var t=e.target.closest&&e.target.closest("button");if(!t||!dock.contains(t))return;
+  if(t.id==="dockAll"){setOpen(!open);if(open&&e.detail===0){var f=grid.querySelector(".dkt");if(f)f.focus({preventScroll:true})}return}
+  if(t.id==="dockEdit"){editing=!editing;paintSheet(read());return}
+  var id=t.getAttribute("data-id");if(!id)return;
+  if(t.classList.contains("dkt")&&editing){togglePin(id);return}
+  go(id);
+});
+scrim.addEventListener("click",function(){setOpen(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&open){setOpen(false);allBtn.focus()}});
+/* swipe up on the dock opens the sheet, swipe down on the sheet closes it */
+var sx=0,sy=0,sheet=dock.querySelector("#dockSheet");
+dock.querySelector("#dockRow").addEventListener("touchstart",function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+dock.querySelector("#dockRow").addEventListener("touchend",function(e){var t=e.changedTouches[0];if(sy-t.clientY>28&&Math.abs(t.clientX-sx)<40)setOpen(true)},{passive:true});
+sheet.addEventListener("touchstart",function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+sheet.addEventListener("touchend",function(e){var t=e.changedTouches[0];if(t.clientY-sy>60&&Math.abs(t.clientX-sx)<40&&sheet.scrollTop<=0)setOpen(false)},{passive:true});
+
+/* ---------- stay in sync with the original buttons ---------- */
+function sync(){
+  var tools=read(),act=tools.filter(function(t){return t.active})[0],aid=act?act.id:null;
+  if(aid!==lastActive){
+    if(aid&&aid!=="tbHome"){Object.keys(use).forEach(function(k){use[k]*=.97});use[aid]=(use[aid]||0)+1;wr(KU,use)}
+    if(open)setOpen(false);
+    lastActive=aid;
+  }
+  renderRow(tools);
+}
+new MutationObserver(function(){cancelAnimationFrame(raf);raf=requestAnimationFrame(sync)})
+  .observe(btns,{subtree:true,attributes:true,attributeFilter:["class","hidden"],childList:true});
+sync();
 })();
 </script>
 <style id="stepFx">
