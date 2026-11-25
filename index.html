@@ -2707,11 +2707,100 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 :is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--mut);min-height:24px}
 :is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs .x{margin:0}
 :is(#tab-quest,#tab-gempic,#tab-buys,#tab-epic) .qhfs .x[hidden]{display:none}
+#qtHA{grid-column:2/-1;width:100%;min-width:0;height:36px;box-sizing:border-box;margin:0;padding:0 34px 0 12px;font-size:13px;font-weight:600;border-radius:8px;border:1.5px solid var(--bd);color:var(--tx);cursor:pointer;text-overflow:ellipsis;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/14px}
+#qtHA:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#qtHA.on{border-color:#22c55e;background-color:color-mix(in srgb,#22c55e 22%,var(--card))}
+#qtHA option{background:var(--card);color:var(--tx)}
+#qtHA option:checked{background:color-mix(in srgb,var(--ac) 35%,var(--card));color:var(--tx)}
+#gpHA{grid-column:2/-1;width:100%;min-width:0;height:36px;box-sizing:border-box;margin:0;padding:0 34px 0 12px;font-size:13px;font-weight:600;border-radius:8px;border:1.5px solid var(--bd);color:var(--tx);cursor:pointer;text-overflow:ellipsis;-webkit-appearance:none;appearance:none;background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a9a94' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center/14px}
+#gpHA:hover{border-color:color-mix(in srgb,var(--ac) 50%,var(--bd))}
+#gpHA.on{border-color:#22c55e;background-color:color-mix(in srgb,#22c55e 22%,var(--card))}
+#gpHA option{background:var(--card);color:var(--tx)}
+#gpHA option:checked{background:color-mix(in srgb,var(--ac) 35%,var(--card));color:var(--tx)}
+#qtHist .phc{display:contents}
+#qtHF .qhfs:has(#qtHFn:empty):has(#qtHFr[hidden]){display:none}
+@media (max-width:520px){
+#qtHR button,#gpHR button{padding:0 3px}
+#qtHR button .pill,#gpHR button .pill{font-size:10.5px;padding:0 5px;gap:3px;letter-spacing:0;overflow:visible;text-overflow:clip}
+}
+#qtHist .qhc .pill.qhrp{font-weight:800;letter-spacing:.01em}
+#qtHist .qhc .pill.qhrp.r-epic{color:#fff;text-shadow:0 1px 2px rgba(50,8,60,.85),0 0 1px rgba(50,8,60,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 1px 4px rgba(0,0,0,.35)}
+@media (max-width:640px){
+#tab-quest #qtHist .qhc .phs,#tab-quest #qtHist .qhc .qhb{display:contents}
+#tab-quest #qtHist .qhc{grid-template-areas:"t a" "m c" "l d";align-items:center}
+#tab-quest #qtHist .qhc:not(:has(.qhd)){grid-template-areas:"t a" "m c" "l l"}
+#tab-quest #qtHist .qhc:not(:has(.phl)){grid-template-areas:"t a" "m c" "d d"}
+#tab-quest #qtHist .qhc:not(:has(.qhd)):not(:has(.phl)){grid-template-areas:"t a" "m c"}
+#tab-quest #qtHist .qhc .qpt{grid-area:t;align-self:start;min-width:0}
+#tab-quest #qtHist .qhc .qsubl{grid-area:m;min-width:0;margin:0}
+#tab-quest #qtHist .qhc .phc{grid-area:c;display:flex;align-items:baseline;justify-content:flex-end;flex-wrap:wrap;gap:2px 8px;min-width:0;text-align:right}
+#tab-quest #qtHist .qhc .phl{grid-area:l;align-self:center;margin:0;max-width:140px;min-width:0;width:100%;justify-self:start}
+#tab-quest #qtHist .qhc .qhd{grid-area:d}
+/* compact sizing */
+#tab-quest #qtHist .qhc{gap:3px 8px;margin-top:5px;padding:7px 8px 7px 13px;border-radius:11px}
+#tab-quest #qtHist .qhc .qpt{gap:8px}
+#tab-quest #qtHist .qhc .qpt .pill.qhrp{font-size:12.5px;padding:2px 9px 2px 7px;margin:0}
+#tab-quest #qtHist .qhc .qpt strong{font-size:14.5px;line-height:1.2}
+#tab-quest #qtHist .qhc .qha{margin-top:0;font-size:12px;line-height:1.2}
+#tab-quest #qtHist .qhc .qsubl{font-size:11px;gap:4px 6px;line-height:1.2}
+#tab-quest #qtHist .qhc .qhn{font-size:10px;padding:0 6px}
+#tab-quest #qtHist .qhc .phs .qhv{font-size:17px;line-height:1}
+#tab-quest #qtHist .qhc .phs .u{font-size:9px;margin-top:0}
+#tab-quest #qtHist .qhc .phc .u+.u{flex:0 0 100%;text-align:right;line-height:1.1}
+#tab-quest #qtHist .qhc .phl .tr{height:5px}
+#tab-quest #qtHist .qhc .phl small{font-size:9.5px;margin-top:2px;line-height:1.1}
+#tab-quest #qtHist .qhc .qhd span{font-size:12.5px;line-height:1.2}
+#tab-quest #qtHist .qhc .qact{gap:4px}
+#tab-quest #qtHist .qhc .x{padding:2px 6px;font-size:11px}
+#tab-quest #qtHist .qhc .x[data-hedit]{padding:4px 7px!important}
+#tab-quest #qtHist .qhc .x[data-hedit] svg,#tab-quest #qtHist .qhc .x[data-hdel]{font-size:11px}
+#tab-quest #qtHist .qhc .x[data-hedit] svg{width:12px;height:12px}
+}
+#gpHist .phc{display:contents}
+#gpHF .qhfs:has(#gpHFn:empty):has(#gpHFr[hidden]){display:none}
+@media (max-width:520px){
+#gpHR button,#gpHR button{padding:0 3px}
+#gpHR button .pill,#gpHR button .pill{font-size:10.5px;padding:0 5px;gap:3px;letter-spacing:0;overflow:visible;text-overflow:clip}
+}
+#gpHist .qhc .pill.qhrp{font-weight:800;letter-spacing:.01em}
+#gpHist .qhc .pill.qhrp.r-epic{color:#fff;text-shadow:0 1px 2px rgba(50,8,60,.85),0 0 1px rgba(50,8,60,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 1px 4px rgba(0,0,0,.35)}
+@media (max-width:640px){
+#tab-gempic #gpHist .qhc .phs,#tab-gempic #gpHist .qhc .qhb{display:contents}
+#tab-gempic #gpHist .qhc{grid-template-areas:"t a" "m c" "l d";align-items:center}
+#tab-gempic #gpHist .qhc:not(:has(.qhd)){grid-template-areas:"t a" "m c" "l l"}
+#tab-gempic #gpHist .qhc:not(:has(.phl)){grid-template-areas:"t a" "m c" "d d"}
+#tab-gempic #gpHist .qhc:not(:has(.qhd)):not(:has(.phl)){grid-template-areas:"t a" "m c"}
+#tab-gempic #gpHist .qhc .qpt{grid-area:t;align-self:start;min-width:0}
+#tab-gempic #gpHist .qhc .qsubl{grid-area:m;min-width:0;margin:0}
+#tab-gempic #gpHist .qhc .phc{grid-area:c;display:flex;align-items:baseline;justify-content:flex-end;flex-wrap:wrap;gap:2px 8px;min-width:0;text-align:right}
+#tab-gempic #gpHist .qhc .phl{grid-area:l;align-self:center;margin:0;max-width:140px;min-width:0;width:100%;justify-self:start}
+#tab-gempic #gpHist .qhc .qhd{grid-area:d}
+/* compact sizing */
+#tab-gempic #gpHist .qhc{gap:3px 8px;margin-top:5px;padding:7px 8px 7px 13px;border-radius:11px}
+#tab-gempic #gpHist .qhc .qpt{gap:8px}
+#tab-gempic #gpHist .qhc .qpt .pill.qhrp{font-size:12.5px;padding:2px 9px 2px 7px;margin:0}
+#tab-gempic #gpHist .qhc .qpt strong{font-size:14.5px;line-height:1.2}
+#tab-gempic #gpHist .qhc .qha{margin-top:0;font-size:12px;line-height:1.2}
+#tab-gempic #gpHist .qhc .qsubl{font-size:11px;gap:4px 6px;line-height:1.2}
+#tab-gempic #gpHist .qhc .qhn{font-size:10px;padding:0 6px}
+#tab-gempic #gpHist .qhc .phs .qhv{font-size:17px;line-height:1}
+#tab-gempic #gpHist .qhc .phs .u{font-size:9px;margin-top:0}
+#tab-gempic #gpHist .qhc .phc .u+.u{flex:0 0 100%;text-align:right;line-height:1.1}
+#tab-gempic #gpHist .qhc .phl .tr{height:5px}
+#tab-gempic #gpHist .qhc .phl small{font-size:9.5px;margin-top:2px;line-height:1.1}
+#tab-gempic #gpHist .qhc .qhd span{font-size:12.5px;line-height:1.2}
+#tab-gempic #gpHist .qhc .qact{gap:4px}
+#tab-gempic #gpHist .qhc .x{padding:2px 6px;font-size:11px}
+#tab-gempic #gpHist .qhc .x[data-hedit]{padding:4px 7px!important}
+#tab-gempic #gpHist .qhc .x[data-hedit] svg,#tab-gempic #gpHist .qhc .x[data-hdel]{font-size:11px}
+#tab-gempic #gpHist .qhc .x[data-hedit] svg{width:12px;height:12px}
+}
 #tab-quest #qtHistMore[hidden]{display:none}
 #tab-gempic #gpHist:not(.all) .qhx{display:none}
 #tab-gempic #gpHistMore[hidden]{display:none}
 #tab-gempic .qhf .qhfr:nth-child(2) .qhfl{grid-column:1}
 @media (max-width:640px){#tab-gempic .qhsum{grid-template-columns:repeat(6,minmax(0,1fr))}#tab-gempic .qhsum .qhk{grid-column:span 2}#tab-gempic .qhsum .qhk.g,#tab-gempic .qhsum .qhk.b{grid-column:span 3}}
+#gpHF .qhfr:nth-child(3) .qhfl{grid-column:1}
 #tab-gempic #gpHT{display:grid;grid-column:2/-1;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:8px}
 @media (max-width:520px){#tab-gempic #gpHT{column-gap:6px}}
 @media (max-width:560px){
@@ -3841,6 +3930,7 @@ body.guest .top #guestBack .lgS{display:inline}
 <div class="qhf" id="gpHF">
 <div class="qhfr"><span class="qhfl">Type</span><div class="seg" id="gpHT"><button type="button" data-ft="e" aria-pressed="true"><span class="pill r r-epic">Epic</span></button><button type="button" data-ft="l" aria-pressed="true"><span class="pill r r-lyrics">Lyric</span></button></div></div>
 <div class="qhfr"><span class="qhfl">Rarity</span><div class="seg" id="gpHR"><button type="button" data-fr="c" aria-pressed="true"><span class="pill r r-common">Common</span></button><button type="button" data-fr="u" aria-pressed="true"><span class="pill r r-uncommon">Uncommon</span></button><button type="button" data-fr="r" aria-pressed="true"><span class="pill r r-rare">Rare</span></button></div></div>
+<div class="qhfr"><label class="qhfl" for="gpHA">Artist</label><select id="gpHA" aria-label="Filter history by artist or set"><option value="">All</option></select></div>
 <div class="qhfs"><span id="gpHFn"></span><button type="button" class="x" id="gpHFr" hidden>Reset filters</button></div>
 </div>
 <div id="gpHist"></div><button type="button" class="gb sm" id="gpHistMore" hidden>Show all</button>
@@ -3955,6 +4045,7 @@ body.guest .top #guestBack .lgS{display:inline}
 <div class="qhf" id="qtHF">
 <div class="qhfr"><span class="qhfl">Type</span><div class="seg" id="qtHT"><button type="button" data-ft="e" aria-pressed="true"><span class="pill r r-epic">Epic</span></button><button type="button" data-ft="l" aria-pressed="true"><span class="pill r r-lyrics">Lyric</span></button><button type="button" data-ft="s" aria-pressed="true"><span class="pill r r-shiny">Shiny</span></button></div></div>
 <div class="qhfr"><span class="qhfl">Rarity</span><div class="seg" id="qtHR"><button type="button" data-fr="c" aria-pressed="true"><span class="pill r r-common">Common</span></button><button type="button" data-fr="u" aria-pressed="true"><span class="pill r r-uncommon">Uncommon</span></button><button type="button" data-fr="r" aria-pressed="true"><span class="pill r r-rare">Rare</span></button></div></div>
+<div class="qhfr"><label class="qhfl" for="qtHA">Artist</label><select id="qtHA" aria-label="Filter history by artist or set"><option value="">All</option></select></div>
 <div class="qhfs"><span id="qtHFn"></span><button type="button" class="x" id="qtHFr" hidden>Reset filters</button></div>
 </div>
 <div id="qtHist"></div><button type="button" class="gb sm" id="qtHistMore" hidden>Show all</button>
@@ -8806,10 +8897,18 @@ function gpNorm(d){d=d||{};return{cost:gpNum(d.cost),reroll:!!d.reroll,setId:Str
 function gpTitle(h){return h.song&&h.artist?h.song+" \u2013 "+h.artist:(h.song||h.artist||"")}
 const GPRAR={c:["common","Common"],u:["uncommon","Uncommon"],r:["rare","Rare"]};
 /* history filters: keys listed here are hidden. Entries with no type/rarity set are not affected by that row. */
-let gpHF={t:[],r:[]};
-try{const o=JSON.parse(LS("tracker.gempic.hf")||"null");if(o){gpHF.t=(o.t||[]).filter(k=>k==="e"||k==="l");gpHF.r=(o.r||[]).filter(k=>GPRAR[k])}}catch(e){}
-const gpHShow=h=>!(h.typ&&gpHF.t.includes(h.typ))&&!(h.rar&&gpHF.r.includes(h.rar));
-const gpHFOn=()=>gpHF.t.length+gpHF.r.length>0;
+let gpHF={t:[],r:[],a:[]};
+try{const o=JSON.parse(LS("tracker.gempic.hf")||"null");if(o){gpHF.t=(o.t||[]).filter(k=>k==="e"||k==="l");gpHF.r=(o.r||[]).filter(k=>GPRAR[k]);gpHF.a=Array.isArray(o.a)?o.a.filter(k=>typeof k==="string").slice(0,1):[]}}catch(e){}
+const gpHKey=h=>{const hs=h.sid&&typeof qtSetBy==="function"?qtSetBy(h.sid):null,n=((hs&&hs.name)||h.artist||h.name||"").trim().toLowerCase();return n||"~none"};
+const gpHShow=h=>!(h.typ&&gpHF.t.includes(h.typ))&&!(h.rar&&gpHF.r.includes(h.rar))&&(!gpHF.a.length||gpHF.a.includes(gpHKey(h)));
+function gpHARender(){
+  const m=new Map();
+  for(const h of gp.history){const k=gpHKey(h),hs=h.sid&&typeof qtSetBy==="function"?qtSetBy(h.sid):null,nm=k==="~none"?"(No artist)":((hs&&hs.name)||h.artist||h.name||"").trim(),o=m.get(k)||{k:k,nm:nm,c:0};o.c++;m.set(k,o)}
+  const opts=[...m.values()].sort((a,b)=>a.k==="~none"?1:b.k==="~none"?-1:a.nm.localeCompare(b.nm,undefined,{sensitivity:"base"})),sel=$("gpHA");
+  if(gpHF.a.length&&!opts.some(o=>o.k===gpHF.a[0])){gpHF.a=[];LS("tracker.gempic.hf",JSON.stringify(gpHF))}
+  sel.innerHTML='<option value="">All</option>'+opts.map(o=>'<option value="'+esc(o.k)+'">'+esc(o.nm)+" ("+nfmt(o.c)+")</option>").join("");
+  sel.value=gpHF.a[0]||"";sel.classList.toggle("on",gpHF.a.length>0)}
+const gpHFOn=()=>gpHF.t.length+gpHF.r.length+gpHF.a.length>0;
 let gp=gpNorm(),gpDB=true,gpT=null;
 const gpSum=()=>({n:gp.r.length,gems:gp.r.reduce((a,e)=>a+e.c,0),rr:gp.r.filter(e=>e.x).length});
 let gpStep=(()=>{const v=gpNum(LS("tracker.step.gempic"));return v>=1&&v<=1000?v:1})();
@@ -8863,6 +8962,7 @@ function renderGempic(){
   document.querySelectorAll("#gpHR button").forEach(b=>b.setAttribute("aria-pressed",String(!gpHF.r.includes(b.dataset.fr))));
   $("gpHF").hidden=!H.length;
   $("gpHFr").hidden=!gpHFOn();
+  gpHARender();
   $("gpHFn").textContent=gpHFOn()?"Showing "+nfmt(HV.length)+" of "+nfmt(H.length):"";
   let ghV=0,ghMo="";
   const ghCards=H.map((h,i)=>{
@@ -8871,7 +8971,7 @@ function renderGempic(){
     const mon=new Date(h.t).toLocaleDateString(undefined,{month:"long",year:"numeric"}),x=ghV>=5?" qhx":"";
     let out="";if(mon!==ghMo){ghMo=mon;out+='<div class="qhmo'+x+'">'+esc(mon)+'</div>'}
     ghV++;
-    const ep=h.typ==="e"?(h.nb==="n"?(h.num?"Epic #"+nfmt(h.num):"Numbered"):h.nb==="l"?"Numberless":""):"";
+    const epN=h.typ==="e"&&h.nb==="n"&&h.num?" #"+nfmt(h.num):"",ep=h.typ==="e"?(h.nb==="n"?(h.num?"":"Numbered"):h.nb==="l"?"Numberless":""):"";
     const hs=h.sid&&typeof qtSetBy==="function"?qtSetBy(h.sid):null;
     const pl=(c,l)=>`<span class="pill r r-${c}">${l}</span>`;
     /* luck: gems spent vs expected gems, using the entry's set gem price (falls back to its own gems per roll) */
@@ -8879,9 +8979,9 @@ function renderGempic(){
     const pr=hs&&hs.gems>0?hs.gems:(h.rolls>0?h.gems/h.rolls:0),eg=ghEx*pr;
     if(h.rolls>0&&eg>0){const r=h.gems/eg,c=r<=.6?"lk":r>=1.5?"bd":"av",w=Math.max(4,Math.min(100,Math.round(r/2*100)));
       lk='<div class="phl '+c+'" title="Expected about '+nfmt(Math.round(eg))+' gems ('+nfmt(Math.round(ghEx))+' rolls at '+nfmt(Math.round(pr))+' gems per roll)"><div class="tr"><i style="width:'+w+'%"></i></div><small>'+(c==="lk"?"Lucky":c==="bd"?"Unlucky":"Average")+" \u00b7 "+(r<1?Math.round((1-r)*100)+"% under":Math.round((r-1)*100)+"% over")+"</small></div>"}
-    const tp=h.typ?pl(h.typ==="e"?"epic":"lyrics",h.typ==="e"?"Epic":"Lyric").replace('class="pill r','class="pill r qhrp'):"";
+    const tp=h.typ?pl(h.typ==="e"?"epic":"lyrics",h.typ==="e"?"Epic"+epN:"Lyric").replace('class="pill r','class="pill r qhrp'):"";
     const sub=(ttl?"<span>Saved "+fmtD(h.t)+"</span>":"")+(ep?'<span class="qhn">'+ep+"</span>":"");
-    return out+`<div class="qhc${h.rar?"":" nr"}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${tp}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div>${sub?`<div class="qsubl">${sub}</div>`:""}</div><div class="phs"><span class="qhv">${nfmt(h.rolls)}</span><span class="u">rolls</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}${lk}</div><div class="qhd"><span>${nfmt(h.gems)} gems</span></div><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
+    return out+`<div class="qhc${h.rar?"":" nr"}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${tp}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div>${sub?`<div class="qsubl">${sub}</div>`:""}</div><div class="phs"><span class="phc"><span class="qhv">${nfmt(h.rolls)}</span><span class="u">rolls</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}</span>${lk}</div><div class="qhd"><span>${nfmt(h.gems)} gems</span></div><span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
   formRescue("gpForm");$("gpHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No gempics match these filters.</div>':ghCards;try{formReinsert("gpForm","gpHist",gpEdit)}catch(e0){};
   const hm=$("gpHistMore");hm.hidden=HV.length<=5;hm.textContent=$("gpHist").classList.contains("all")?"Show fewer":"Show all "+HV.length;
 }
@@ -9142,7 +9242,8 @@ const gpHFSave=()=>{LS("tracker.gempic.hf",JSON.stringify(gpHF));renderGempic()}
 const gpHFTog=(a,k)=>{const i=a.indexOf(k);if(i<0)a.push(k);else a.splice(i,1);gpHFSave()};
 $("gpHT").addEventListener("click",e=>{const b=e.target.closest("button[data-ft]");if(b)gpHFTog(gpHF.t,b.dataset.ft)});
 $("gpHR").addEventListener("click",e=>{const b=e.target.closest("button[data-fr]");if(b)gpHFTog(gpHF.r,b.dataset.fr)});
-$("gpHFr").addEventListener("click",()=>{gpHF={t:[],r:[]};gpHFSave()});
+$("gpHFr").addEventListener("click",()=>{gpHF={t:[],r:[],a:[]};gpHFSave()});
+$("gpHA").addEventListener("change",e=>{gpHF.a=e.target.value?[e.target.value]:[];gpHFSave()});
 $("gpHistMore").addEventListener("click",()=>{$("gpHist").classList.toggle("all");renderGempic()});
 $("gpHist").addEventListener("click",e2=>{
   const ed=e2.target.closest("button[data-hedit]");
@@ -9857,10 +9958,12 @@ const QD=[["Epic",1,"epic"],["Lyric",2,"lyrics"],["Shiny",3,"shiny"]];
 const QR={c:"common",u:"uncommon",r:"rare"};
 const QT={s:["Shiny","shiny"],e:["Epic","epic"],l:["Lyric","lyrics"]};
 /* history filters: keys listed here are hidden. Entries with no type/rarity set are not affected by that row. */
-let qtHF={t:[],r:[]};
-try{const o=JSON.parse(LS("tracker.quest.hf")||"null");if(o){qtHF.t=(o.t||[]).filter(k=>QT[k]);qtHF.r=(o.r||[]).filter(k=>QK.includes(k))}}catch(e){}
-const qtHShow=h=>!(h.typ&&qtHF.t.includes(h.typ))&&!(h.rar&&qtHF.r.includes(h.rar));
-const qtHFOn=()=>qtHF.t.length+qtHF.r.length>0;
+let qtHF={t:[],r:[],a:[]};
+try{const o=JSON.parse(LS("tracker.quest.hf")||"null");if(o){qtHF.t=(o.t||[]).filter(k=>QT[k]);qtHF.r=(o.r||[]).filter(k=>QK.includes(k));qtHF.a=Array.isArray(o.a)?o.a.filter(k=>typeof k==="string").slice(0,500):[]}}catch(e){}
+/* artist / set filter: an entry belongs to its set's name, else its artist; chosen keys are the only ones shown (none chosen = all) */
+const qtHKey=h=>{const hs=h.sid?qtSetBy(h.sid):null,n=((hs&&hs.name)||h.artist||h.name||"").trim().toLowerCase();return n||"~none"};
+const qtHShow=h=>!(h.typ&&qtHF.t.includes(h.typ))&&!(h.rar&&qtHF.r.includes(h.rar))&&(!qtHF.a.length||qtHF.a.includes(qtHKey(h)));
+const qtHFOn=()=>qtHF.t.length+qtHF.r.length+qtHF.a.length>0;
 const qtTitle=h=>h.song&&h.artist?h.song+" \u2013 "+h.artist:(h.song||h.artist||h.name||"");
 const qpill=(cls,label)=>`<span class="pill r r-${cls}">${label}</span>`;
 const qPullLbl=()=>'<span class="qpull"><span class="qpl">Pull</span><span class="qpp">'+qpill("epic","Epic")+(qt.exLy?"":qpill("lyrics","Lyric"))+"</span></span>";
@@ -10107,6 +10210,7 @@ function renderQuest(){
   document.querySelectorAll("#qtHR button").forEach(b=>b.setAttribute("aria-pressed",String(!qtHF.r.includes(b.dataset.fr))));
   $("qtHF").hidden=!H.length;
   $("qtHFr").hidden=!qtHFOn();
+  qtHARender();
   $("qtHFn").textContent=qtHFOn()?"Showing "+nfmt(HV.length)+" of "+nfmt(H.length):"";
   const qhAvg=HP.length?HP.reduce((x,h)=>x+h.n,0)/HP.length:0,qhCol={c:"#3ddc5a",u:"#a066ff",r:"#f08a2c"};
   /* luck baseline: expected quests per pull from the odds (epic + lyric, with the reroll and boost toggles), not your own average */
@@ -10128,13 +10232,13 @@ function renderQuest(){
     const mon=new Date(h.t).toLocaleDateString(undefined,{month:"long",year:"numeric"}),x=qhV>=5?" qhx":"";
     let out="";if(mon!==qhMo){qhMo=mon;out+='<div class="qhmo'+x+'">'+esc(mon)+'</div>'}
     qhV++;
-    const ep=h.nb==="n"?(h.num?"Epic #"+nfmt(h.num):"Numbered"):h.nb==="l"?"Numberless":"";
+    const epN=h.typ==="e"&&h.nb==="n"&&h.num?" #"+nfmt(h.num):"",ep=h.nb==="n"?(h.num?"":"Numbered"):h.nb==="l"?"Numberless":"";
     let lk="";
     const qhEx=qhExpFor(h);
     if(h.typ!=="s"&&h.n>0&&qhEx>0){const r=h.n/qhEx,c=r<=.6?"lk":r>=1.5?"bd":"av",w=Math.max(4,Math.min(100,Math.round(r/2*100)));
       lk='<div class="phl '+c+'" title="Expected about '+nfmt(Math.round(qhEx))+' quests for '+(h.rar&&h.typ&&QO[h.rar]&&QT[h.typ]?'a '+QO[h.rar][0]+' '+QT[h.typ][0]:'any pull')+'"><div class="tr"><i style="width:'+w+'%"></i></div><small>'+(c==="lk"?"Lucky":c==="bd"?"Unlucky":"Average")+" \u00b7 "+(r<1?Math.round((1-r)*100)+"% under":Math.round((r-1)*100)+"% over")+'</small></div>'}
     const d=h.ta-h.tb,mark=(ttl||"\u266a").trim().charAt(0).toUpperCase()||"\u266a";
-    return out+`<div class="qhc${h.rar?"":" nr"}${h.typ==="s"?" sh":""}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]).replace('class="pill r','class="pill r qhrp'):""}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div><div class="qsubl">${ttl?"<span>Saved "+fmtD(h.t)+"</span>":""}${ep?'<span class="qhn">'+ep+"</span>":""}</div></div><div class="phs"><span class="qhv">${nfmt(h.n)}</span><span class="u">quests</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}${lk}</div>${h.ta?`<div class="qhd"><span>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</span></div>`:""}<span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
+    return out+`<div class="qhc${h.rar?"":" nr"}${h.typ==="s"?" sh":""}${x}" data-r="${h.rar}" data-t="${h.typ}"><div class="qhb"><div class="qpt${art?" qp2":""}">${h.typ?qpill(QT[h.typ][1],QT[h.typ][0]+epN).replace('class="pill r','class="pill r qhrp'):""}${art?`<div class="qht"><strong>${head}</strong><div class="qha">${art}</div></div>`:`<strong>${head}</strong>`}</div><div class="qsubl">${ttl?"<span>Saved "+fmtD(h.t)+"</span>":""}${ep?'<span class="qhn">'+ep+"</span>":""}</div></div><div class="phs"><span class="phc"><span class="qhv">${nfmt(h.n)}</span><span class="u">quests</span>${h.rr?'<span class="u">'+nfmt(h.rr)+" w/ reroll</span>":""}</span>${lk}</div>${h.ta?`<div class="qhd"><span>${nfmt(h.tb)} \u2192 ${nfmt(h.ta)}</span></div>`:""}<span class="qact"><button type="button" class="x" data-hedit="${i}" aria-label="Edit entry" title="Edit"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button><button type="button" class="x" data-hdel="${i}" aria-label="Delete entry">\u2715</button></span></div>`}).join("");
   formRescue("qtForm");$("qtHist").innerHTML=H.length&&!HV.length?'<div class="qsubl" style="padding:14px 4px;color:var(--mut)">No pulls match these filters.</div>':qhCards;try{formReinsert("qtForm","qtHist",qtEdit)}catch(e0){};
 }
 function saveQuest(){
@@ -10560,7 +10664,19 @@ const qtHFSave=()=>{LS("tracker.quest.hf",JSON.stringify(qtHF));renderQuest()};
 const qtHFTog=(a,k)=>{const i=a.indexOf(k);if(i<0)a.push(k);else a.splice(i,1);qtHFSave()};
 $("qtHT").addEventListener("click",e=>{const b=e.target.closest("button[data-ft]");if(b)qtHFTog(qtHF.t,b.dataset.ft)});
 $("qtHR").addEventListener("click",e=>{const b=e.target.closest("button[data-fr]");if(b)qtHFTog(qtHF.r,b.dataset.fr)});
-$("qtHFr").addEventListener("click",()=>{qtHF={t:[],r:[]};qtHFSave()});
+$("qtHFr").addEventListener("click",()=>{qtHF={t:[],r:[],a:[]};qtHFSave()});
+/* artist / set dropdown: All by default, or one artist / set */
+function qtHAOpts(){const m=new Map();
+  for(const h of qt.history){const k=qtHKey(h),hs=h.sid?qtSetBy(h.sid):null,nm=k==="~none"?"(No artist)":((hs&&hs.name)||h.artist||h.name||"").trim(),o=m.get(k)||{k:k,nm:nm,c:0};o.c++;m.set(k,o)}
+  return [...m.values()].sort((a,b)=>a.k==="~none"?1:b.k==="~none"?-1:a.nm.localeCompare(b.nm,undefined,{sensitivity:"base"}))}
+function qtHARender(){
+  const opts=qtHAOpts(),sel=$("qtHA");
+  if(qtHF.a.length&&!opts.some(o=>o.k===qtHF.a[0])){qtHF.a=[];LS("tracker.quest.hf",JSON.stringify(qtHF))}
+  qtHF.a=qtHF.a.slice(0,1);
+  sel.innerHTML='<option value="">All</option>'+opts.map(o=>'<option value="'+esc(o.k)+'">'+esc(o.nm)+" ("+nfmt(o.c)+")</option>").join("");
+  sel.value=qtHF.a[0]||"";
+  sel.classList.toggle("on",qtHF.a.length>0)}
+$("qtHA").addEventListener("change",e=>{qtHF.a=e.target.value?[e.target.value]:[];qtHFSave()});
 $("qtHist").addEventListener("click",e2=>{
   const ed=e2.target.closest("button[data-hedit]");
   if(ed){formInline("qtForm",ed.closest(".qhc"));qtOpenForm(+ed.dataset.hedit);return}
@@ -11172,6 +11288,7 @@ $("ovGrid").addEventListener("keydown",e=>{
    Newest first. To record a new version, add an entry at the top: [version, "YYYY-MM-DD", [changes...]].
    The first entry is shown as the current version in Profile. Releases up to 0.1.14 were 0.1.X; from 0.2 on, add each new version at the top. */
 const VERSIONS=[
+["0.8.11","2026-11-24",["Small UI changes to quest & gempic trackers."]],
 ["0.8.10","2026-11-18",["Backend optimizations for faster, more reliable saving.","Small UI updates, including a cleaner top bar on mobile.","Added a Last 24 Hours history to the Pass, Gempic and Quest trackers."]],
 ["0.8.9","2026-11-16",["Song Guesser UI refresh: the song index and audio clip are now one card, with a bigger Upload audio file button and the play button right next to it.","Song Guesser: a clear match now shows only the winner. If there is no clear match, no results are shown, with a note to check your genre selection and to make a report.","Song Guesser: cleaner result cards, and the volume bar is hidden on mobile.","Signed out: new top bar that shows which page you are on (Artist Guesser or Song Guesser) with a way back to login, and the bottom navigation is hidden on mobile."]],
 ["0.8.8","2026-11-14",["Your personal settings now follow your account across devices: theme, start page, confirmation prompts, add-amount steps, epic done checkmarks, and epic and set view options."]],
