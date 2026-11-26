@@ -2373,6 +2373,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 @media (max-width:700px){
 #tab-daily #dyPair2{grid-template-columns:1fr;gap:10px}
 #tab-daily #dyPair2>.gsec{padding:14px 12px}
+#tab-daily #dyAds .adrow{flex-wrap:wrap}
+#tab-daily #dyAds .adrow .qcust{flex:1 1 100%}
+#tab-daily #dyAds .adrow .qcust input{flex:1;width:auto;min-width:0}
+#tab-daily #dyAds .adrow .dgact{flex:1 1 100%}
+#tab-daily #dyAds .adrow .dgact .gb.go{white-space:nowrap}
 #tab-daily #dySpin .gh{flex-wrap:wrap;gap:8px 10px;margin-bottom:10px}
 #tab-daily #dySpin .gh .gt{flex:1 1 0}
 #tab-daily #dySpin .gh .gx{flex:1 1 100%;margin-left:0;justify-content:flex-start}
@@ -3264,6 +3269,24 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-buys .qhc .qha{margin-top:2px}
 #tab-buys .qhc .qact{gap:10px}
 #tab-buys .qhc .qhn{font-size:15px;font-weight:800;padding:3px 14px;letter-spacing:.01em;border-width:1.5px;background:color-mix(in srgb,var(--rc) 22%,transparent)}
+#tab-buys .qhc .pill.qhrp{font-weight:800;letter-spacing:.01em}
+#tab-buys .qhc .pill.qhrp.r-epic{color:#fff;text-shadow:0 1px 2px rgba(50,8,60,.85),0 0 1px rgba(50,8,60,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 1px 4px rgba(0,0,0,.35)}
+@media (max-width:640px){
+#tab-buys .qhc.mk .qhb{display:contents}
+#tab-buys .qhc.mk{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t a" "m s";gap:3px 8px;margin-top:5px;padding:7px 8px 7px 13px!important;border-radius:11px;align-items:center}
+#tab-buys .qhc.mk .qpt{grid-area:t;align-self:start;min-width:0;gap:8px!important}
+#tab-buys .qhc.mk .qsubl{grid-area:m;min-width:0;margin:0!important;font-size:11px;gap:4px 6px!important;line-height:1.2}
+#tab-buys .qhc.mk .phs{grid-area:s;display:flex;align-items:baseline;justify-content:flex-end;gap:2px 8px;min-width:0;text-align:right}
+#tab-buys .qhc.mk .phs .qhv{font-size:17px;line-height:1}
+#tab-buys .qhc.mk .phs .u{font-size:9px;margin:0}
+#tab-buys .qhc.mk .qpt .pill.qhrp{font-size:12.5px;padding:2px 9px 2px 7px;margin:0}
+#tab-buys .qhc.mk .qpt strong{font-size:14.5px;line-height:1.2}
+#tab-buys .qhc.mk .qha{margin-top:0;font-size:12px;line-height:1.2}
+#tab-buys .qhc.mk .qhn{font-size:10px;padding:0 6px}
+#tab-buys .qhc.mk .qact{gap:4px}
+#tab-buys .qhc.mk .qact .x{padding:4px 7px;font-size:11px}
+#tab-buys .qhc.mk .qact .x svg{width:12px;height:12px}
+}
 #tab-buys .qhc .mkact{display:flex;gap:10px;margin-top:14px}
 #tab-buys .qhc .mkact button{flex:1;margin:0!important;width:auto;height:46px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
 #tab-buys .qhc .mkact .mksave{background:linear-gradient(135deg,#059669,#10b981);border:1px solid #10b981;color:#fff}
@@ -10829,8 +10852,9 @@ function renderBuySum(){
 }
 const mkPill=mkPl;
 const mkRC=b=>({common:"#3ddc5a",uncommon:"#a066ff",rare:"#f08a2c"})[b.tier]||({epic:"#e88ab0",lyric:"#f0d8b0",shiny:"#7c7cff",radiant:"#fbbf24",moment:"#60a5fa",exclusive:"#f472b6"})[b.cat]||"var(--mut)";
-const mkEp=b=>b.cat==="epic"?(b.nb==="n"?(b.num?"Epic #"+nfmt(+b.num):"Numbered"):b.nb==="l"?"Numberless":""):"";
-const mkTop=(k,b)=>{const w=mkWho(k,b),ep=mkEp(b),t=esc(b.title)||"Untitled",pl=mkPill(b.cat).replace('class="pill','class="pill qhrp');
+const mkEpN=b=>b.cat==="epic"&&b.nb==="n"&&b.num?" #"+nfmt(+b.num):"";
+const mkEp=b=>b.cat==="epic"?(b.nb==="n"?(b.num?"":"Numbered"):b.nb==="l"?"Numberless":""):"";
+const mkTop=(k,b)=>{const w=mkWho(k,b),ep=mkEp(b),t=esc(b.title)||"Untitled",pl=mkPill(b.cat).replace('class="pill','class="pill qhrp').replace(/(r-epic">Epic)(<\/span>)/,'$1'+esc(mkEpN(b))+'$2');
   return '<div class="qpt qp2">'+pl+(w?'<div class="qht"><strong>'+t+'</strong><div class="qha">'+esc(w)+'</div></div>':'<strong>'+t+'</strong>')+'</div><div class="qsubl"><span>Saved '+fmtD(b.t)+'</span>'+(ep?'<span class="qhn">'+ep+'</span>':'')+'</div>'};
 const mkNum=(k,b)=>{const a=mkAmt(k,b);return '<span class="qhv">'+(a?nfmt(a):"\u2014")+'</span><span class="u">'+(k==="sold"?"Sold for":"Cost")+'</span>'};
 function renderMk(k){
