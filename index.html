@@ -2333,11 +2333,11 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-daily #dyTotals .scv.dyadv{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:0 8px;min-width:0;max-width:100%}
 #tab-daily #dyTotals .dyadm{font-size:.55em;font-weight:700;color:#22c55e;white-space:nowrap;max-width:100%}
 /* Ads Watched: custom amount, add button and undo share one line */
-#tab-daily #dyAds .adrow{display:flex;align-items:center;gap:8px;margin-top:10px}
-#tab-daily #dyAds .adrow .qcust{margin:0;flex:0 0 auto}
-#tab-daily #dyAds .adrow .qcust input{flex:none;width:84px;min-width:0;box-sizing:border-box}
-#tab-daily #dyAds .adrow .dgact{flex:1 1 0;min-width:0}
-#tab-daily #dyAds .adrow .dgact .gb.go{grid-column:auto;order:0;padding:6px 8px;line-height:1.2}
+#tab-daily #dyAds .wtrow{display:flex;align-items:center;gap:8px;margin-top:10px}
+#tab-daily #dyAds .wtrow .qcust{margin:0;flex:0 0 auto}
+#tab-daily #dyAds .wtrow .qcust input{flex:none;width:84px;min-width:0;box-sizing:border-box}
+#tab-daily #dyAds .wtrow .dgact{flex:1 1 0;min-width:0}
+#tab-daily #dyAds .wtrow .dgact .gb.go{grid-column:auto;order:0;padding:6px 8px;line-height:1.2}
 /* Daily Spin */
 #tab-daily #dySpin{margin-top:12px;padding:20px 12px}
 #tab-daily #dySpin .gh{margin-bottom:12px;gap:10px}
@@ -2365,19 +2365,19 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 /* Daily Spin and Ads Watched sit side by side */
 #tab-daily #dyPair2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;align-items:stretch}
 #tab-daily #dyPair2>.gsec{margin-top:0}
-#tab-daily #dyPair2 .adrow{display:flex;align-items:center;gap:8px;margin-top:10px}
-#tab-daily #dyPair2 .adrow .qcust{display:flex;align-items:center;gap:10px;margin:0;font-size:13px;font-weight:500;color:var(--mut)}
+#tab-daily #dyPair2 .wtrow{display:flex;align-items:center;gap:8px;margin-top:10px}
+#tab-daily #dyPair2 .wtrow .qcust{display:flex;align-items:center;gap:10px;margin:0;font-size:13px;font-weight:500;color:var(--mut)}
 #tab-daily #dyPair2 .gb{min-height:44px}
 #tab-daily #dyPair2 .gh .gx{flex-wrap:wrap}
 /* Phones: Daily Spin and Ads Watched each get a full-width row so the spin chips, icons and buttons have room */
 @media (max-width:700px){
 #tab-daily #dyPair2{grid-template-columns:1fr;gap:10px}
 #tab-daily #dyPair2>.gsec{padding:14px 12px}
-#tab-daily #dyAds .adrow{flex-wrap:wrap}
-#tab-daily #dyAds .adrow .qcust{flex:1 1 100%}
-#tab-daily #dyAds .adrow .qcust input{flex:1;width:auto;min-width:0}
-#tab-daily #dyAds .adrow .dgact{flex:1 1 100%}
-#tab-daily #dyAds .adrow .dgact .gb.go{white-space:nowrap}
+#tab-daily #dyAds .wtrow{flex-wrap:wrap}
+#tab-daily #dyAds .wtrow .qcust{flex:1 1 100%}
+#tab-daily #dyAds .wtrow .qcust input{flex:1;width:auto;min-width:0}
+#tab-daily #dyAds .wtrow .dgact{flex:1 1 100%}
+#tab-daily #dyAds .wtrow .dgact .gb.go{white-space:nowrap}
 #tab-daily #dySpin .gh{flex-wrap:wrap;gap:8px 10px;margin-bottom:10px}
 #tab-daily #dySpin .gh .gt{flex:1 1 0}
 #tab-daily #dySpin .gh .gx{flex:1 1 100%;margin-left:0;justify-content:flex-start}
@@ -3272,20 +3272,20 @@ button:not(:disabled):not([aria-expanded]):active,.tile:active,label.chk:active,
 #tab-buys .qhc .pill.qhrp{font-weight:800;letter-spacing:.01em}
 #tab-buys .qhc .pill.qhrp.r-epic{color:#fff;text-shadow:0 1px 2px rgba(50,8,60,.85),0 0 1px rgba(50,8,60,.9);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25),0 1px 4px rgba(0,0,0,.35)}
 @media (max-width:640px){
-#tab-buys .qhc.mk .qhb{display:contents}
-#tab-buys .qhc.mk{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t a" "m s";gap:3px 8px;margin-top:5px;padding:7px 8px 7px 13px!important;border-radius:11px;align-items:center}
-#tab-buys .qhc.mk .qpt{grid-area:t;align-self:start;min-width:0;gap:8px!important}
-#tab-buys .qhc.mk .qsubl{grid-area:m;min-width:0;margin:0!important;font-size:11px;gap:4px 6px!important;line-height:1.2}
-#tab-buys .qhc.mk .phs{grid-area:s;display:flex;align-items:baseline;justify-content:flex-end;gap:2px 8px;min-width:0;text-align:right}
-#tab-buys .qhc.mk .phs .qhv{font-size:17px;line-height:1}
-#tab-buys .qhc.mk .phs .u{font-size:9px;margin:0}
-#tab-buys .qhc.mk .qpt .pill.qhrp{font-size:12.5px;padding:2px 9px 2px 7px;margin:0}
-#tab-buys .qhc.mk .qpt strong{font-size:14.5px;line-height:1.2}
-#tab-buys .qhc.mk .qha{margin-top:0;font-size:12px;line-height:1.2}
-#tab-buys .qhc.mk .qhn{font-size:10px;padding:0 6px}
-#tab-buys .qhc.mk .qact{gap:4px}
-#tab-buys .qhc.mk .qact .x{padding:4px 7px;font-size:11px}
-#tab-buys .qhc.mk .qact .x svg{width:12px;height:12px}
+#tab-buys .qhc.mk.by .qhb{display:contents}
+#tab-buys .qhc.mk.by{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"t a" "m s";gap:3px 8px;margin-top:5px;padding:7px 8px 7px 13px!important;border-radius:11px;align-items:center}
+#tab-buys .qhc.mk.by .qpt{grid-area:t;align-self:start;min-width:0;gap:8px!important}
+#tab-buys .qhc.mk.by .qsubl{grid-area:m;min-width:0;margin:0!important;font-size:11px;gap:4px 6px!important;line-height:1.2}
+#tab-buys .qhc.mk.by .phs{grid-area:s;display:flex;align-items:baseline;justify-content:flex-end;gap:2px 8px;min-width:0;text-align:right}
+#tab-buys .qhc.mk.by .phs .qhv{font-size:17px;line-height:1}
+#tab-buys .qhc.mk.by .phs .u{font-size:9px;margin:0}
+#tab-buys .qhc.mk.by .qpt .pill.qhrp{font-size:12.5px;padding:2px 9px 2px 7px;margin:0}
+#tab-buys .qhc.mk.by .qpt strong{font-size:14.5px;line-height:1.2}
+#tab-buys .qhc.mk.by .qha{margin-top:0;font-size:12px;line-height:1.2}
+#tab-buys .qhc.mk.by .qhn{font-size:10px;padding:0 6px}
+#tab-buys .qhc.mk.by .qact{gap:4px}
+#tab-buys .qhc.mk.by .qact .x{padding:4px 7px;font-size:11px}
+#tab-buys .qhc.mk.by .qact .x svg{width:12px;height:12px}
 }
 #tab-buys .qhc .mkact{display:flex;gap:10px;margin-top:14px}
 #tab-buys .qhc .mkact button{flex:1;margin:0!important;width:auto;height:46px;padding:0 14px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer}
@@ -4371,7 +4371,7 @@ body.guest .top #guestBack .lgS{display:inline}
 <section class="card gsec" id="dyAds">
 <div class="gh"><span class="sci" style="--c:#3b82f6"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span><div class="gt"><b>Ads Watched</b></div><div class="gx"><span class="dgpill" id="adPill" style="--c:#3b82f6"></span></div></div>
 <div class="gq" id="adQuick"><button type="button" data-q="1">1</button><button type="button" data-q="2">2</button><button type="button" data-q="3">3</button><button type="button" data-q="5">5</button><button type="button" data-q="10">10</button></div>
-<div class="adrow">
+<div class="wtrow">
 <label class="qcust" for="adAmt"><span>Custom</span><input id="adAmt" type="number" min="1" step="1" inputmode="numeric" aria-label="Number of ads watched" placeholder="Custom"></label>
 <div class="dgact">
 <button type="button" class="gb go" id="adAdd"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span id="adAddT">Add ad watched</span></button>
@@ -11770,6 +11770,8 @@ function measure(){
     /* learn how far the app window sits above the screen bottom while everything is healthy (0 normally, or the status-bar height) */
     if(cal[s.key]===undefined&&!shift&&Math.abs(vb-nb)<=3&&gap>=0&&gap<=80)cal[s.key]=gap;
     if(cal[s.key]!==undefined)target=Math.max(vb,s.h-cal[s.key]);
+    /* the bar can never legitimately end below the real screen: if it does (stale viewport on a cold start from Home), pull it back up */
+    if(nb>s.h+3)target=Math.min(target,s.h-(cal[s.key]||0));
   }
   var d=target-nb;
   if(Math.abs(d)<=3){bad=0;nudged=false;return}
@@ -11783,6 +11785,7 @@ function burst(){measure();[100,300,800,1500].forEach(function(ms){setTimeout(me
 ["resize","orientationchange","pageshow","focus"].forEach(function(e){window.addEventListener(e,function(){measure()},{passive:true})});
 window.addEventListener("pageshow",function(){kick();burst()});
 window.addEventListener("focus",burst);
+window.addEventListener("load",function(){burst();[2500,4500].forEach(function(ms){setTimeout(measure,ms)})});
 document.addEventListener("resume",burst);
 document.addEventListener("visibilitychange",function(){if(!document.hidden){kick();burst()}});
 /* coming back from the audio file picker */
